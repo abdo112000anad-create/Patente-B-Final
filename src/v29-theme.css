@@ -226,7 +226,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .mobile-nav button small { font-size: clamp(.60rem, 2.6vw, .69rem); font-weight: 750; line-height: 1.25; }
 .mobile-nav button:active { transform: scale(.97); }
 .mobile-nav button b, .mobile-nav button small { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.wt-word { user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.lesson-it-text, .lesson-it-text *, .lesson-sentence { user-select: none !important; -webkit-user-select: none !important; -webkit-touch-callout: none !important; }
+.wt-word { user-select: none !important; -webkit-user-select: none !important; -webkit-touch-callout: none !important; cursor: pointer; }
 
 /* Skeleton primitives and a compact loading preview in the existing startup screen. */
 .skeleton {

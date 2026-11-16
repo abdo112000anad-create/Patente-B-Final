@@ -173,7 +173,7 @@ test('app shell retains translation, legal, and driving-safety disclaimers', () 
   assert.match(app, /traduzioni in arabo sono state generate dall’IA e non sono state revisionate/u);
 });
 
-test('offline cache includes local lessons, questions, dictionary, and v45 stylesheets', () => {
+test('offline cache includes local lessons, questions, dictionary, and v46 stylesheets', () => {
   const startup = read('src/startup.mjs');
   const serviceWorker = read('public/sw.js');
   assert.match(startup, /questions\.json/u);
@@ -184,8 +184,8 @@ test('offline cache includes local lessons, questions, dictionary, and v45 style
   assert.match(serviceWorker, /v40-audio\.css/u);
   assert.match(serviceWorker, /italian_arabic_dictionary_lookup\.json/u);
   assert.match(read('scripts/build-pwa.cjs'), /italian_arabic_dictionary_lookup\.json/u);
-  assert.match(serviceWorker, /patente-ar-v45/u);
-  assert.match(index, /data-app-version="45"/u);
+  assert.match(serviceWorker, /patente-ar-v46/u);
+  assert.match(index, /data-app-version="46"/u);
 });
 
 test('Home goal and lesson grid retain narrow-phone wrapping rules', () => {
@@ -202,18 +202,18 @@ test('Glossary controls fit the single-column mobile layout', () => {
   assert.match(css, /\.glossary-controls > label \{ min-width: 0; \}/u);
 });
 
-test('Android build script remains debug-only and uses v45 metadata', () => {
+test('Android build script remains debug-only and uses v46 metadata', () => {
   const build = read('scripts/build-android.sh');
   const gradleCommand = build.match(/^\.\/gradlew .*$/mu)?.[0] || '';
   assert.match(gradleCommand, /:app:assembleDebug/u);
   assert.match(gradleCommand, /:app:testDebugUnitTest/u);
   assert.doesNotMatch(gradleCommand, /assembleRelease|bundleRelease|publish|upload/iu);
   const gradle = read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+45/u);
-  assert.match(gradle, /versionName\s+"45\.0\.0"/u);
+  assert.match(gradle, /versionCode\s+46/u);
+  assert.match(gradle, /versionName\s+"46\.0\.0"/u);
   assert.match(gradle, /abiFilters\s+'arm64-v8a',\s*'armeabi-v7a'/u);
   assert.match(read('android/variables.gradle'), /minSdkVersion\s*=\s*24/u);
-  assert.equal(json('package.json').version, '45.0.0');
-  assert.equal(json('package-lock.json').packages[''].version, '45.0.0');
-  assert.equal(json('public/release.json').version, 45);
+  assert.equal(json('package.json').version, '46.0.0');
+  assert.equal(json('package-lock.json').packages[''].version, '46.0.0');
+  assert.equal(json('public/release.json').version, 46);
 });

@@ -43,7 +43,7 @@ test('unknown lesson word falls back to the paired local sentence without a netw
   assert.equal(result.alignment, 'paragraph');
 });
 
-test('v45 UI uses a non-modal bottom sheet, single-tap word lookup, and true pairwise comparison controls', () => {
+test('v46 UI uses a non-modal bottom sheet, single-tap word lookup, and true pairwise comparison controls', () => {
   const index = read('index.html');
   const app = read('src/app.js');
   assert.match(index, /id="wordTranslationTooltip"[^>]*role="dialog"/u);

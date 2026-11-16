@@ -1,6 +1,6 @@
 # Patente B بالعربي
 
-Bilingual Italian–Arabic driving-theory study app. The Android package id is `it.patenteb.sideload.v29`; the public build workflow produces a debug APK for v45.
+Bilingual Italian–Arabic driving-theory study app. The Android package id is `it.patenteb.sideload.v29`; the public build workflow produces a debug APK for v46.
 
 ## Build with GitHub Actions
 

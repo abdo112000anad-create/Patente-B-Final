@@ -2,8 +2,8 @@ const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp
 const pair = (it,ar) => `<span class="language-pair lesson-pair"><span class="pair-it" lang="it" dir="ltr">${esc(it)}</span><span class="pair-ar" lang="ar" dir="rtl">${esc(ar)}</span></span>`;
 
 function pointCards(items=[]){
-  const cards=items.map(item=>`<article class="lesson-key-point-card"><h3 class="lesson-key-point-title"><span lang="it" dir="ltr">${esc(item.title_it)}</span><span lang="ar" dir="rtl">${esc(item.title_ar)}</span></h3><div class="lesson-key-point-rule"><div class="lesson-key-point-rule-label">${pair('Regola da ricordare','القاعدة التي يجب تذكرها')}</div>${pair(item.it,item.ar)}</div></article>`).join('');
-  return `<section class="lesson-key-points" data-lesson-section="points"><h2>${pair('Punti importanti','النقاط المهمة')}</h2><div class="lesson-key-point-list">${cards}</div></section>`;
+  const cards=items.map(item=>`<article class="lesson-key-point-card key-point-card"><div class="lesson-key-point-title" role="heading" aria-level="3"><div class="kp-it" lang="it" dir="ltr">${esc(item.title_it)}</div><div class="kp-ar" lang="ar" dir="rtl">${esc(item.title_ar)}</div></div><div class="lesson-key-point-rule"><div class="lesson-key-point-rule-label">${pair('Regola da ricordare','القاعدة التي يجب تذكرها')}</div>${pair(item.it,item.ar)}</div></article>`).join('');
+  return `<section class="lesson-key-points" data-lesson-section="points"><h2>${pair('Punti importanti','النقاط المهمة')}</h2><div class="lesson-key-point-list key-points-list key-points-grid">${cards}</div></section>`;
 }
 function trapCards(items=[]){
   const body=items.length?items.map(item=>`<article class="lesson-trap-card"><h3><span lang="it" dir="ltr">${esc(item.term_it)}</span><small lang="ar" dir="rtl">${esc(item.meaning_ar)}</small></h3><div>${pair(item.why_it,item.why_ar)}</div>${item.example_it||item.example_ar?`<blockquote>${pair(item.example_it||'',item.example_ar||'')}</blockquote>`:''}</article>`).join(''):`<p class="lesson-empty-note">${pair('No special trap word applies to this lesson.','لا توجد كلمة ملتبسة خاصة بهذا الدرس.')}</p>`;
