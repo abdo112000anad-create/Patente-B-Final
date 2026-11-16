@@ -1,0 +1,1 @@
+The Capacitor wrapper includes `RewardedAdsPlugin.java` and `MainActivity.java` from `src/main/java/it/patenteb/sideload/v29/`. `MainActivity` registers rewarded ads before starting the bridge. Speech uses the browser Web Speech API only; there is no native TTS plugin or bundled speech model. The v29 local wrapper uses application ID `it.patenteb.sideload.v29`.

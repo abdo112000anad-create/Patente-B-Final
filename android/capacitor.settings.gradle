@@ -1,0 +1,5 @@
+// Reproducible paths within the Patente B source bundle. Canonical build: app/scripts/build-android.sh.
+include ':capacitor-android'
+project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android/capacitor')
+include ':capacitor-firebase-authentication'
+project(':capacitor-firebase-authentication').projectDir = new File('../node_modules/@capacitor-firebase/authentication/android')

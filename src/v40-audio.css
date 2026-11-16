@@ -1,0 +1,132 @@
+/* v41: compact local-word tooltip, high-contrast cards and floating audio controls. */
+.word-translation-tooltip[hidden], .speech-playback-bar[hidden] { display: none !important; }
+.word-translation-tooltip {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 10000;
+  width: min(100%, 720px);
+  max-height: min(48dvh, 360px);
+  overflow: auto;
+  margin: 0 auto;
+  padding: 20px max(18px, env(safe-area-inset-right)) max(22px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+  border: 1px solid rgba(148, 163, 184, .55);
+  border-bottom: 0;
+  border-radius: 24px 24px 0 0;
+  background: rgba(20, 20, 20, .97);
+  color: #fff;
+  box-shadow: 0 -14px 38px rgba(15, 23, 42, .32);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: translation-sheet-in .22s ease-out;
+}
+.translation-tooltip-head { display: flex; align-items: center; gap: 9px; padding-inline-start: 32px; }
+.translation-tooltip-head strong { color: #fff; font-size: .96rem; }
+.translation-tooltip-audio {
+  display: grid; place-items: center; width: 32px; height: 32px; min-width: 32px; min-height: 32px;
+  padding: 5px; border: 1px solid #fff; border-radius: 50%; background: #1d5e4e; color: #fff; cursor: pointer;
+}
+.translation-tooltip-audio svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.translation-tooltip-audio:focus-visible, .audio-button:focus-visible, .speech-control-button:focus-visible, .speech-rate-control:focus-within { outline: 3px solid #fbbf24; outline-offset: 3px; }
+.translation-tooltip-close { min-width: 29px; min-height: 29px; width: 29px; height: 29px; color: #fff; }
+#translationTooltipArabic { margin: 7px 0 4px; color: #fff; font-size: 1rem; line-height: 1.5; }
+#translationTooltipNote { color: #e5e7eb; font-size: .72rem; line-height: 1.4; }
+
+/* All yellow warning/notice cards retain dark bold text in light, dark and system modes. */
+#main .recommendation-banner,
+#main .notice-banner,
+#main .lesson-warning-block,
+#main .lesson-core-idea,
+#main .lesson-trap-card blockquote,
+:root[data-theme="dark"] #main .recommendation-banner,
+:root[data-theme="dark"] #main .notice-banner,
+:root[data-theme="dark"] #main .lesson-warning-block,
+:root[data-theme="dark"] #main .lesson-core-idea,
+:root[data-theme="dark"] #main .lesson-trap-card blockquote,
+:root[data-theme="system"] #main .recommendation-banner,
+:root[data-theme="system"] #main .notice-banner,
+:root[data-theme="system"] #main .lesson-warning-block,
+:root[data-theme="system"] #main .lesson-core-idea,
+:root[data-theme="system"] #main .lesson-trap-card blockquote {
+  background: #FFF9C4 !important;
+  border-color: #9a6a06 !important;
+  color: #1A1A1A !important;
+  font-weight: 700 !important;
+}
+#main .recommendation-banner :where(*),
+#main .notice-banner :where(*),
+#main .lesson-warning-block :where(*),
+#main .lesson-core-idea :where(*),
+#main .lesson-trap-card blockquote :where(*),
+:root[data-theme="dark"] #main .recommendation-banner :where(*),
+:root[data-theme="dark"] #main .notice-banner :where(*),
+:root[data-theme="dark"] #main .lesson-warning-block :where(*),
+:root[data-theme="dark"] #main .lesson-core-idea :where(*),
+:root[data-theme="dark"] #main .lesson-trap-card blockquote :where(*),
+:root[data-theme="system"] #main .recommendation-banner :where(*),
+:root[data-theme="system"] #main .notice-banner :where(*),
+:root[data-theme="system"] #main .lesson-warning-block :where(*),
+:root[data-theme="system"] #main .lesson-core-idea :where(*),
+:root[data-theme="system"] #main .lesson-trap-card blockquote :where(*) {
+  color: #1A1A1A !important;
+  font-weight: 700 !important;
+}
+
+/* Published videos remain obvious active links; unpublished lessons are status-only. */
+.lesson-video-cta-link { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 10px 15px; border: 1px solid #064e3b; border-radius: 11px; background: #047857; color: #fff !important; font-weight: 800; line-height: 1.45; text-align: center; text-decoration: none; box-shadow: 0 3px 0 rgba(6,78,59,.22), 0 6px 16px rgba(15,23,42,.12); }
+.lesson-video-cta-link :where(*) { color: inherit !important; }
+.lesson-video-cta-link:hover { background: #065f46; }
+.lesson-video-cta-link:focus-visible { outline: 3px solid #f0b429; outline-offset: 3px; }
+.lesson-video-pending .lesson-video-cta-link, .lesson-video-cta.is-upcoming .lesson-video-cta-link { display: none; }
+.lesson-video-cta.is-upcoming .lesson-video-upcoming-status { color: #475569; font-weight: 750; }
+
+/* One-row glass player: 90% width, max 400 px, 60 px high and SVG-only controls. */
+.speech-playback-bar:not([hidden]) {
+  position: fixed;
+  z-index: 9999;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+  width: 90%;
+  max-width: 400px;
+  height: 60px;
+  min-height: 60px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 30px;
+  background: rgba(20, 20, 20, .85);
+  color: #fff;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, .32);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.speech-control-button {
+  display: grid; place-items: center; flex: 0 0 42px; width: 42px; height: 42px; min-width: 42px; min-height: 42px;
+  padding: 0; border: 0; border-radius: 50%; background: transparent; color: #fff; cursor: pointer;
+}
+.speech-control-button:hover { background: rgba(255, 255, 255, .12); }
+.speech-control-button svg { width: 24px; height: 24px; fill: currentColor; }
+.speech-progress { flex: 1 1 auto; width: min(130px, 28vw); min-width: 42px; height: 5px; accent-color: #fff; }
+.speech-rate-control { position: relative; display: grid; place-items: center; flex: 0 0 42px; width: 42px; height: 42px;
+  color: #fff; border-radius: 50%; cursor: pointer;
+}
+.speech-rate-control svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.speech-rate-control select { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; opacity: .01; border: 0; background: transparent; color: #fff; cursor: pointer; }
+.speech-voice-debug { display: none !important; }
+.audio-button { cursor: pointer; border-color: #08765b; background: #0d765d; color: #fff; }
+.audio-button:hover { background: #095f4b; }
+.audio-button.speaking { box-shadow: 0 0 0 3px rgba(45,212,191,.28); }
+.audio-button.speech-paused { box-shadow: 0 0 0 2px rgba(251,191,36,.38); }
+.translation-tooltip-audio.speaking { background: #0c8265; }
+
+@media (max-width: 380px) {
+  .speech-playback-bar:not([hidden]) { gap: 4px; padding-inline: 7px; }
+  .speech-progress { min-width: 36px; }
+  .speech-control-button, .speech-rate-control { flex-basis: 38px; width: 38px; min-width: 38px; }
+}
+@media (prefers-reduced-motion: reduce) { .lesson-video-cta-link { scroll-behavior: auto; transition: none; } }
