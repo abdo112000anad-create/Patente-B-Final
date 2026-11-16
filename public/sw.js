@@ -1,4 +1,4 @@
-const CACHE_NAME = 'patente-ar-v46-alpha-1';
+const CACHE_NAME = 'patente-ar-v47-alpha-1';
 const FETCH_TIMEOUT_MS = 10000;
 const SHELL = [
   '/',

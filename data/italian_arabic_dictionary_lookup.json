@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-16T16:34:37+00:00",
+    "generated_at_utc": "2026-11-16T20:24:41+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5273,
@@ -9,15 +9,15 @@
     "counts_by_status": {
       "legacy_glossary_needs_review": 62,
       "machine_draft_needs_review": 5199,
-      "reviewed_override": 12
+      "reviewed_override": 13
     },
-    "total_entries": 5273,
-    "translated_entries": 5273,
+    "total_entries": 5274,
+    "translated_entries": 5274,
     "review_required_entries": 5261,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
-    "app_release": 42,
-    "terms_with_lookup_entry": 5273,
-    "entries_with_arabic_translation": 5273,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections and the explicitly requested v47 lemma are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+    "app_release": 47,
+    "terms_with_lookup_entry": 5274,
+    "entries_with_arabic_translation": 5274,
     "entries_without_lexical_translation": 1,
     "entries_with_safe_ui_fallback": 0,
     "owner_approved_corrections": 9,
@@ -29,7 +29,8 @@
       "p",
       "v",
       "x"
-    ]
+    ],
+    "requested_lemma_additions": 1
   },
   "entries": [
     {
@@ -63307,6 +63308,18 @@
       "note": "",
       "translation_kind": "machine_translation",
       "ui_fallback_ar": ""
+    },
+    {
+      "word": "riconoscere",
+      "translation_ar": "يتعرف على",
+      "ui_fallback_ar": "يتعرف على",
+      "translation_kind": "lexical_translation",
+      "source": "user-requested-lemma-v47",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "المعنى المعجمي الذي طلب المستخدم إضافته."
     }
   ]
 }

@@ -54,15 +54,16 @@ export function wordAtOffset(text = '', offset = 0) {
   return words.find(word => position >= word.start && position <= word.end)?.text || '';
 }
 
-export function lookupOfflineWord(word = '', entries = []) {
-  const selected = String(word).trim().replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, '');
+const ATTACHED_PRONOUN_SUFFIXES = Object.freeze(['le', 'lo', 'la', 'ne', 'ci', 'vi', 'li']);
+
+function lookupExactOfflineWord(selected, entries = []) {
   const needle = normalizeDictionaryWord(selected);
   const searchNeedle = normalizeSearchText(selected);
   if (!needle || !searchNeedle) return null;
   const generated = generatedDictionary.get(needle);
   if (generated?.translation_ar) {
     return {
-      word: String(word), italian: generated.word, arabic: String(generated.translation_ar),
+      word: String(selected), italian: generated.word, arabic: String(generated.translation_ar),
       note: generated.note || '', category: generated.category || '',
       source: generated.source || generated.provider || 'local machine dictionary',
       status: generated.status || 'machine_translation_unreviewed',
@@ -70,13 +71,35 @@ export function lookupOfflineWord(word = '', entries = []) {
     };
   }
   const entry = (Array.isArray(entries) ? entries : []).find(item => normalizeSearchText(item?.it || '') === searchNeedle);
-  if (entry) return {word: String(word), italian: entry.it, arabic: entry.ar, note: entry.note || '', category: entry.category || '', source: 'glossary', status: 'legacy_glossary_needs_review', confidence: null};
+  if (entry) return {word: String(selected), italian: entry.it, arabic: entry.ar, note: entry.note || '', category: entry.category || '', source: 'glossary', status: 'legacy_glossary_needs_review', confidence: null};
   return generated ? {
-    word: String(word), italian: generated.word, arabic: '', note: generated.note || '',
+    word: String(selected), italian: generated.word, arabic: '', note: generated.note || '',
     category: '', source: generated.source || generated.provider || 'local machine dictionary',
     status: generated.status || 'needs_translation', confidence: generated.confidence ?? null,
     uiFallback: generated.ui_fallback_ar || '', hasLexicalTranslation: false,
   } : null;
+}
+
+export function lookupOfflineWord(word = '', entries = []) {
+  const selected = String(word).trim().replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, '');
+  const exact = lookupExactOfflineWord(selected, entries);
+  if (exact) return exact;
+
+  const needle = normalizeDictionaryWord(selected);
+  for (const suffix of ATTACHED_PRONOUN_SUFFIXES) {
+    if (!needle.endsWith(suffix) || needle.length <= suffix.length + 3) continue;
+    const base = needle.slice(0, -suffix.length);
+    const directBase = lookupExactOfflineWord(base, entries);
+    if (directBase) return directBase;
+
+    // Italian infinitives commonly drop their final "e" before an attached pronoun
+    // (e.g. riconoscere + lo -> riconoscerlo). Accept only an existing lemma.
+    if (base.endsWith('r')) {
+      const infinitive = lookupExactOfflineWord(`${base}e`, entries);
+      if (infinitive) return infinitive;
+    }
+  }
+  return null;
 }
 
 export function translateTappedWord(word = '', entries = []) {
@@ -88,7 +111,7 @@ export function translateTappedWord(word = '', entries = []) {
     : status === 'legacy_glossary_needs_review'
       ? 'مدخل من القاموس المحلي يحتاج إلى مراجعة.'
       : status === 'reviewed_override'
-        ? 'مصطلح مروري معتمد للمشروع.'
+        ? 'مدخل معجمي معتمد.'
         : 'لم يُسجَّل مقابل عربي مفرد لهذه الكلمة؛ لا تُنسب ترجمة الجملة إليها.';
   return {
     word: selected, italian: match?.italian || selected, arabic: match?.arabic || match?.uiFallback || '',

@@ -52,9 +52,9 @@ test('only project-approved terms are presented as reviewed overrides', () => {
   assert.ok(app.includes('document.querySelector(\'#translationTooltipNote\').textContent=matched.note'));
 });
 
-test('v42 ships the corrected dictionary in JSON and a valid SQLite asset', () => {
+test('v47 ships the corrected dictionary in JSON and a valid SQLite asset', () => {
   const dictionary = JSON.parse(read('data/italian_arabic_dictionary_lookup.json'));
-  assert.equal(dictionary.entries.length, 5273);
+  assert.equal(dictionary.entries.length, 5274);
   assert.ok(dictionary.entries.every(row => row.word && row.translation_ar));
   assert.equal(dictionary.entries.filter(row => row.status === 'fallback_draft_needs_review').length, 0);
   assert.equal(dictionary.entries.filter(row => row.source === 'owner-approved-correction-v42' && row.status === 'reviewed_override' && row.review_required === 0).length, 9);
@@ -63,6 +63,8 @@ test('v42 ships the corrected dictionary in JSON and a valid SQLite asset', () =
   assert.equal(get('corsia').translation_ar, 'حارة سير');
   assert.equal(get('carreggiata').translation_ar, 'الطريق المخصص للمركبات');
   assert.equal(get('prudenza').translation_ar, 'حذر');
+  assert.equal(get('riconoscere').translation_ar, 'يتعرف على');
+  assert.equal(get('riconoscere').status, 'reviewed_override');
   const db = fs.readFileSync(path.join(root, 'android/app/src/main/assets/dictionary.db'));
   assert.equal(db.subarray(0, 16).toString('ascii'), 'SQLite format 3\0');
 });

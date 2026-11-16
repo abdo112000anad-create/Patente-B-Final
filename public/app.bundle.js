@@ -1,16 +1,6 @@
 (() => {
-  var __create = Object.create;
   var __defProp = Object.defineProperty;
-  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
   var __getOwnPropNames = Object.getOwnPropertyNames;
-  var __getProtoOf = Object.getPrototypeOf;
-  var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __require = /* @__PURE__ */ ((x2) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x2, {
-    get: (a, b2) => (typeof require !== "undefined" ? require : a)[b2]
-  }) : x2)(function(x2) {
-    if (typeof require !== "undefined") return require.apply(this, arguments);
-    throw Error('Dynamic require of "' + x2 + '" is not supported');
-  });
   var __esm = (fn2, res, err) => function __init() {
     if (err) throw err[0];
     try {
@@ -23,32 +13,527 @@
     for (var name4 in all)
       __defProp(target, name4, { get: all[name4], enumerable: true });
   };
-  var __copyProps = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames(from))
-        if (!__hasOwnProp.call(to, key) && key !== except)
-          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-    }
-    return to;
-  };
-  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-    // If the importer is in node compatibility mode or this is not an ESM
-    // file that has been converted to a CommonJS file using a Babel-
-    // compatible transform (i.e. "__esModule" has not been set), then set
-    // "default" to the CommonJS "module.exports" for node compatibility.
-    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-    mod
-  ));
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+util@1.15.3/node_modules/@firebase/util/dist/postinstall.mjs
+  // ../PatenteB-v40-working/app/node_modules/@capacitor/core/dist/index.js
+  var ExceptionCode, CapacitorException, getPlatformId, createCapacitor, initCapacitorGlobal, Capacitor, registerPlugin, WebPlugin, encode, decode, CapacitorCookiesPluginWeb, CapacitorCookies, readBlobAsBase64, normalizeHttpHeaders, buildUrlParams, buildRequestInit, CapacitorHttpPluginWeb, CapacitorHttp, SystemBarsStyle, SystemBarType, SystemBarsPluginWeb, SystemBars;
+  var init_dist = __esm({
+    "../PatenteB-v40-working/app/node_modules/@capacitor/core/dist/index.js"() {
+      (function(ExceptionCode2) {
+        ExceptionCode2["Unimplemented"] = "UNIMPLEMENTED";
+        ExceptionCode2["Unavailable"] = "UNAVAILABLE";
+      })(ExceptionCode || (ExceptionCode = {}));
+      CapacitorException = class extends Error {
+        constructor(message, code, data) {
+          super(message);
+          this.message = message;
+          this.code = code;
+          this.data = data;
+        }
+      };
+      getPlatformId = (win) => {
+        var _a14, _b;
+        if (win === null || win === void 0 ? void 0 : win.androidBridge) {
+          return "android";
+        } else if ((_b = (_a14 = win === null || win === void 0 ? void 0 : win.webkit) === null || _a14 === void 0 ? void 0 : _a14.messageHandlers) === null || _b === void 0 ? void 0 : _b.bridge) {
+          return "ios";
+        } else {
+          return "web";
+        }
+      };
+      createCapacitor = (win) => {
+        const capCustomPlatform = win.CapacitorCustomPlatform || null;
+        const cap = win.Capacitor || {};
+        const Plugins = cap.Plugins = cap.Plugins || {};
+        const getPlatform = () => {
+          return capCustomPlatform !== null ? capCustomPlatform.name : getPlatformId(win);
+        };
+        const isNativePlatform = () => getPlatform() !== "web";
+        const isPluginAvailable = (pluginName) => {
+          const plugin = registeredPlugins.get(pluginName);
+          if (plugin === null || plugin === void 0 ? void 0 : plugin.platforms.has(getPlatform())) {
+            return true;
+          }
+          if (getPluginHeader(pluginName)) {
+            return true;
+          }
+          return false;
+        };
+        const getPluginHeader = (pluginName) => {
+          var _a14;
+          return (_a14 = cap.PluginHeaders) === null || _a14 === void 0 ? void 0 : _a14.find((h) => h.name === pluginName);
+        };
+        const handleError = (err) => win.console.error(err);
+        const registeredPlugins = /* @__PURE__ */ new Map();
+        const registerPlugin2 = (pluginName, jsImplementations = {}) => {
+          const registeredPlugin = registeredPlugins.get(pluginName);
+          if (registeredPlugin) {
+            console.warn(`Capacitor plugin "${pluginName}" already registered. Cannot register plugins twice.`);
+            return registeredPlugin.proxy;
+          }
+          const platform = getPlatform();
+          const pluginHeader = getPluginHeader(pluginName);
+          let jsImplementation;
+          const loadPluginImplementation = async () => {
+            if (!jsImplementation && platform in jsImplementations) {
+              jsImplementation = typeof jsImplementations[platform] === "function" ? jsImplementation = await jsImplementations[platform]() : jsImplementation = jsImplementations[platform];
+            } else if (capCustomPlatform !== null && !jsImplementation && "web" in jsImplementations) {
+              jsImplementation = typeof jsImplementations["web"] === "function" ? jsImplementation = await jsImplementations["web"]() : jsImplementation = jsImplementations["web"];
+            }
+            return jsImplementation;
+          };
+          const createPluginMethod = (impl, prop) => {
+            var _a14, _b;
+            if (pluginHeader) {
+              const methodHeader = pluginHeader === null || pluginHeader === void 0 ? void 0 : pluginHeader.methods.find((m2) => prop === m2.name);
+              if (methodHeader) {
+                if (methodHeader.rtype === "promise") {
+                  return (options) => cap.nativePromise(pluginName, prop.toString(), options);
+                } else {
+                  return (options, callback) => cap.nativeCallback(pluginName, prop.toString(), options, callback);
+                }
+              } else if (impl) {
+                return (_a14 = impl[prop]) === null || _a14 === void 0 ? void 0 : _a14.bind(impl);
+              }
+            } else if (impl) {
+              return (_b = impl[prop]) === null || _b === void 0 ? void 0 : _b.bind(impl);
+            } else {
+              throw new CapacitorException(`"${pluginName}" plugin is not implemented on ${platform}`, ExceptionCode.Unimplemented);
+            }
+          };
+          const createPluginMethodWrapper = (prop) => {
+            let remove;
+            const wrapper = (...args) => {
+              const p2 = loadPluginImplementation().then((impl) => {
+                const fn2 = createPluginMethod(impl, prop);
+                if (fn2) {
+                  const p3 = fn2(...args);
+                  remove = p3 === null || p3 === void 0 ? void 0 : p3.remove;
+                  return p3;
+                } else {
+                  throw new CapacitorException(`"${pluginName}.${prop}()" is not implemented on ${platform}`, ExceptionCode.Unimplemented);
+                }
+              });
+              if (prop === "addListener") {
+                p2.remove = async () => remove();
+              }
+              return p2;
+            };
+            wrapper.toString = () => `${prop.toString()}() { [capacitor code] }`;
+            Object.defineProperty(wrapper, "name", {
+              value: prop,
+              writable: false,
+              configurable: false
+            });
+            return wrapper;
+          };
+          const addListener = createPluginMethodWrapper("addListener");
+          const removeListener = createPluginMethodWrapper("removeListener");
+          const addListenerNative = (eventName, callback) => {
+            const call = addListener({ eventName }, callback);
+            const remove = async () => {
+              const callbackId = await call;
+              removeListener({
+                eventName,
+                callbackId
+              }, callback);
+            };
+            const p2 = new Promise((resolve) => call.then(() => resolve({ remove })));
+            p2.remove = async () => {
+              console.warn(`Using addListener() without 'await' is deprecated.`);
+              await remove();
+            };
+            return p2;
+          };
+          const proxy = new Proxy({}, {
+            get(_, prop) {
+              switch (prop) {
+                // https://github.com/facebook/react/issues/20030
+                case "$$typeof":
+                  return void 0;
+                case "toJSON":
+                  return () => ({});
+                case "addListener":
+                  return pluginHeader ? addListenerNative : addListener;
+                case "removeListener":
+                  return removeListener;
+                default:
+                  return createPluginMethodWrapper(prop);
+              }
+            }
+          });
+          Plugins[pluginName] = proxy;
+          registeredPlugins.set(pluginName, {
+            name: pluginName,
+            proxy,
+            platforms: /* @__PURE__ */ new Set([...Object.keys(jsImplementations), ...pluginHeader ? [platform] : []])
+          });
+          return proxy;
+        };
+        if (!cap.convertFileSrc) {
+          cap.convertFileSrc = (filePath) => filePath;
+        }
+        cap.getPlatform = getPlatform;
+        cap.handleError = handleError;
+        cap.isNativePlatform = isNativePlatform;
+        cap.isPluginAvailable = isPluginAvailable;
+        cap.registerPlugin = registerPlugin2;
+        cap.Exception = CapacitorException;
+        cap.DEBUG = !!cap.DEBUG;
+        cap.isLoggingEnabled = !!cap.isLoggingEnabled;
+        return cap;
+      };
+      initCapacitorGlobal = (win) => win.Capacitor = createCapacitor(win);
+      Capacitor = /* @__PURE__ */ initCapacitorGlobal(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {});
+      registerPlugin = Capacitor.registerPlugin;
+      WebPlugin = class {
+        constructor() {
+          this.listeners = {};
+          this.retainedEventArguments = {};
+          this.windowListeners = {};
+        }
+        addListener(eventName, listenerFunc) {
+          let firstListener = false;
+          const listeners = this.listeners[eventName];
+          if (!listeners) {
+            this.listeners[eventName] = [];
+            firstListener = true;
+          }
+          this.listeners[eventName].push(listenerFunc);
+          const windowListener = this.windowListeners[eventName];
+          if (windowListener && !windowListener.registered) {
+            this.addWindowListener(windowListener);
+          }
+          if (firstListener) {
+            this.sendRetainedArgumentsForEvent(eventName);
+          }
+          const remove = async () => this.removeListener(eventName, listenerFunc);
+          const p2 = Promise.resolve({ remove });
+          return p2;
+        }
+        async removeAllListeners() {
+          this.listeners = {};
+          for (const listener in this.windowListeners) {
+            this.removeWindowListener(this.windowListeners[listener]);
+          }
+          this.windowListeners = {};
+        }
+        notifyListeners(eventName, data, retainUntilConsumed) {
+          const listeners = this.listeners[eventName];
+          if (!listeners) {
+            if (retainUntilConsumed) {
+              let args = this.retainedEventArguments[eventName];
+              if (!args) {
+                args = [];
+              }
+              args.push(data);
+              this.retainedEventArguments[eventName] = args;
+            }
+            return;
+          }
+          listeners.forEach((listener) => listener(data));
+        }
+        hasListeners(eventName) {
+          var _a14;
+          return !!((_a14 = this.listeners[eventName]) === null || _a14 === void 0 ? void 0 : _a14.length);
+        }
+        registerWindowListener(windowEventName, pluginEventName) {
+          this.windowListeners[pluginEventName] = {
+            registered: false,
+            windowEventName,
+            pluginEventName,
+            handler: (event) => {
+              this.notifyListeners(pluginEventName, event);
+            }
+          };
+        }
+        unimplemented(msg = "not implemented") {
+          return new Capacitor.Exception(msg, ExceptionCode.Unimplemented);
+        }
+        unavailable(msg = "not available") {
+          return new Capacitor.Exception(msg, ExceptionCode.Unavailable);
+        }
+        async removeListener(eventName, listenerFunc) {
+          const listeners = this.listeners[eventName];
+          if (!listeners) {
+            return;
+          }
+          const index = listeners.indexOf(listenerFunc);
+          if (index !== -1) {
+            this.listeners[eventName].splice(index, 1);
+          }
+          if (!this.listeners[eventName].length) {
+            this.removeWindowListener(this.windowListeners[eventName]);
+          }
+        }
+        addWindowListener(handle) {
+          window.addEventListener(handle.windowEventName, handle.handler);
+          handle.registered = true;
+        }
+        removeWindowListener(handle) {
+          if (!handle) {
+            return;
+          }
+          window.removeEventListener(handle.windowEventName, handle.handler);
+          handle.registered = false;
+        }
+        sendRetainedArgumentsForEvent(eventName) {
+          const args = this.retainedEventArguments[eventName];
+          if (!args) {
+            return;
+          }
+          delete this.retainedEventArguments[eventName];
+          args.forEach((arg) => {
+            this.notifyListeners(eventName, arg);
+          });
+        }
+      };
+      encode = (str) => encodeURIComponent(str).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape);
+      decode = (str) => str.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent);
+      CapacitorCookiesPluginWeb = class extends WebPlugin {
+        async getCookies() {
+          const cookies = document.cookie;
+          const cookieMap = {};
+          cookies.split(";").forEach((cookie) => {
+            if (cookie.length <= 0)
+              return;
+            let [key, value] = cookie.replace(/=/, "CAP_COOKIE").split("CAP_COOKIE");
+            key = decode(key).trim();
+            value = decode(value).trim();
+            cookieMap[key] = value;
+          });
+          return cookieMap;
+        }
+        async setCookie(options) {
+          try {
+            const encodedKey = encode(options.key);
+            const encodedValue = encode(options.value);
+            const expires = options.expires ? `; expires=${options.expires.replace("expires=", "")}` : "";
+            const path = (options.path || "/").replace("path=", "");
+            const domain = options.url != null && options.url.length > 0 ? `domain=${options.url}` : "";
+            document.cookie = `${encodedKey}=${encodedValue || ""}${expires}; path=${path}; ${domain};`;
+          } catch (error) {
+            return Promise.reject(error);
+          }
+        }
+        async deleteCookie(options) {
+          try {
+            document.cookie = `${options.key}=; Max-Age=0`;
+          } catch (error) {
+            return Promise.reject(error);
+          }
+        }
+        async clearCookies() {
+          try {
+            const cookies = document.cookie.split(";") || [];
+            for (const cookie of cookies) {
+              document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, `=;expires=${(/* @__PURE__ */ new Date()).toUTCString()};path=/`);
+            }
+          } catch (error) {
+            return Promise.reject(error);
+          }
+        }
+        async clearAllCookies() {
+          try {
+            await this.clearCookies();
+          } catch (error) {
+            return Promise.reject(error);
+          }
+        }
+      };
+      CapacitorCookies = registerPlugin("CapacitorCookies", {
+        web: () => new CapacitorCookiesPluginWeb()
+      });
+      readBlobAsBase64 = async (blob) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64String = reader.result;
+          resolve(base64String.indexOf(",") >= 0 ? base64String.split(",")[1] : base64String);
+        };
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(blob);
+      });
+      normalizeHttpHeaders = (headers = {}) => {
+        const originalKeys = Object.keys(headers);
+        const loweredKeys = Object.keys(headers).map((k2) => k2.toLocaleLowerCase());
+        const normalized = loweredKeys.reduce((acc, key, index) => {
+          acc[key] = headers[originalKeys[index]];
+          return acc;
+        }, {});
+        return normalized;
+      };
+      buildUrlParams = (params, shouldEncode = true) => {
+        if (!params)
+          return null;
+        const output = Object.entries(params).reduce((accumulator, entry) => {
+          const [key, value] = entry;
+          let encodedValue;
+          let item;
+          if (Array.isArray(value)) {
+            item = "";
+            value.forEach((str) => {
+              encodedValue = shouldEncode ? encodeURIComponent(str) : str;
+              item += `${key}=${encodedValue}&`;
+            });
+            item.slice(0, -1);
+          } else {
+            encodedValue = shouldEncode ? encodeURIComponent(value) : value;
+            item = `${key}=${encodedValue}`;
+          }
+          return `${accumulator}&${item}`;
+        }, "");
+        return output.substr(1);
+      };
+      buildRequestInit = (options, extra = {}) => {
+        const output = Object.assign({ method: options.method || "GET", headers: options.headers }, extra);
+        const headers = normalizeHttpHeaders(options.headers);
+        const type = headers["content-type"] || "";
+        if (typeof options.data === "string") {
+          output.body = options.data;
+        } else if (type.includes("application/x-www-form-urlencoded")) {
+          const params = new URLSearchParams();
+          for (const [key, value] of Object.entries(options.data || {})) {
+            params.set(key, value);
+          }
+          output.body = params.toString();
+        } else if (type.includes("multipart/form-data") || options.data instanceof FormData) {
+          const form = new FormData();
+          if (options.data instanceof FormData) {
+            options.data.forEach((value, key) => {
+              form.append(key, value);
+            });
+          } else {
+            for (const key of Object.keys(options.data)) {
+              form.append(key, options.data[key]);
+            }
+          }
+          output.body = form;
+          const headers2 = new Headers(output.headers);
+          headers2.delete("content-type");
+          output.headers = headers2;
+        } else if (type.includes("application/json") || typeof options.data === "object") {
+          output.body = JSON.stringify(options.data);
+        }
+        return output;
+      };
+      CapacitorHttpPluginWeb = class extends WebPlugin {
+        /**
+         * Perform an Http request given a set of options
+         * @param options Options to build the HTTP request
+         */
+        async request(options) {
+          const requestInit = buildRequestInit(options, options.webFetchExtra);
+          const urlParams = buildUrlParams(options.params, options.shouldEncodeUrlParams);
+          const url = urlParams ? `${options.url}?${urlParams}` : options.url;
+          const response = await fetch(url, requestInit);
+          const contentType = response.headers.get("content-type") || "";
+          let { responseType = "text" } = response.ok ? options : {};
+          if (contentType.includes("application/json")) {
+            responseType = "json";
+          }
+          let data;
+          let blob;
+          switch (responseType) {
+            case "arraybuffer":
+            case "blob":
+              blob = await response.blob();
+              data = await readBlobAsBase64(blob);
+              break;
+            case "json":
+              data = await response.json();
+              break;
+            case "document":
+            case "text":
+            default:
+              data = await response.text();
+          }
+          const headers = {};
+          response.headers.forEach((value, key) => {
+            headers[key] = value;
+          });
+          return {
+            data,
+            headers,
+            status: response.status,
+            url: response.url
+          };
+        }
+        /**
+         * Perform an Http GET request given a set of options
+         * @param options Options to build the HTTP request
+         */
+        async get(options) {
+          return this.request(Object.assign(Object.assign({}, options), { method: "GET" }));
+        }
+        /**
+         * Perform an Http POST request given a set of options
+         * @param options Options to build the HTTP request
+         */
+        async post(options) {
+          return this.request(Object.assign(Object.assign({}, options), { method: "POST" }));
+        }
+        /**
+         * Perform an Http PUT request given a set of options
+         * @param options Options to build the HTTP request
+         */
+        async put(options) {
+          return this.request(Object.assign(Object.assign({}, options), { method: "PUT" }));
+        }
+        /**
+         * Perform an Http PATCH request given a set of options
+         * @param options Options to build the HTTP request
+         */
+        async patch(options) {
+          return this.request(Object.assign(Object.assign({}, options), { method: "PATCH" }));
+        }
+        /**
+         * Perform an Http DELETE request given a set of options
+         * @param options Options to build the HTTP request
+         */
+        async delete(options) {
+          return this.request(Object.assign(Object.assign({}, options), { method: "DELETE" }));
+        }
+      };
+      CapacitorHttp = registerPlugin("CapacitorHttp", {
+        web: () => new CapacitorHttpPluginWeb()
+      });
+      (function(SystemBarsStyle2) {
+        SystemBarsStyle2["Dark"] = "DARK";
+        SystemBarsStyle2["Light"] = "LIGHT";
+        SystemBarsStyle2["Default"] = "DEFAULT";
+      })(SystemBarsStyle || (SystemBarsStyle = {}));
+      (function(SystemBarType2) {
+        SystemBarType2["StatusBar"] = "StatusBar";
+        SystemBarType2["NavigationBar"] = "NavigationBar";
+      })(SystemBarType || (SystemBarType = {}));
+      SystemBarsPluginWeb = class extends WebPlugin {
+        async setStyle() {
+          this.unavailable("not available for web");
+        }
+        async setAnimation() {
+          this.unavailable("not available for web");
+        }
+        async show() {
+          this.unavailable("not available for web");
+        }
+        async hide() {
+          this.unavailable("not available for web");
+        }
+      };
+      SystemBars = registerPlugin("SystemBars", {
+        web: () => new SystemBarsPluginWeb()
+      });
+    }
+  });
+
+  // ../PatenteB-v40-working/app/node_modules/@firebase/util/dist/postinstall.mjs
   var getDefaultsFromPostinstall;
   var init_postinstall = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+util@1.15.3/node_modules/@firebase/util/dist/postinstall.mjs"() {
+    "../PatenteB-v40-working/app/node_modules/@firebase/util/dist/postinstall.mjs"() {
       getDefaultsFromPostinstall = () => void 0;
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+util@1.15.3/node_modules/@firebase/util/dist/index.esm.js
+  // ../PatenteB-v40-working/app/node_modules/@firebase/util/dist/index.esm.js
   function getGlobal() {
     if (typeof self !== "undefined") {
       return self;
@@ -317,7 +802,7 @@
   }
   var stringToByteArray$1, byteArrayToString, base64, DecodeBase64StringError, base64Encode, base64urlEncodeWithoutPadding, base64Decode, getDefaultsFromGlobal, getDefaultsFromEnvVariable, getDefaultsFromCookie, getDefaults, getDefaultEmulatorHost, getDefaultEmulatorHostnameAndPort, getDefaultAppConfig, getExperimentalSetting, Deferred, ERROR_NAME, FirebaseError, ErrorFactory, ObserverProxy, MAX_VALUE_MILLIS;
   var init_index_esm = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+util@1.15.3/node_modules/@firebase/util/dist/index.esm.js"() {
+    "../PatenteB-v40-working/app/node_modules/@firebase/util/dist/index.esm.js"() {
       init_postinstall();
       stringToByteArray$1 = function(str) {
         const out = [];
@@ -830,7 +1315,7 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+component@0.7.5/node_modules/@firebase/component/dist/esm/index.esm.js
+  // ../PatenteB-v40-working/app/node_modules/@firebase/component/dist/esm/index.esm.js
   function normalizeIdentifierForFactory(identifier) {
     return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
   }
@@ -839,7 +1324,7 @@
   }
   var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
   var init_index_esm2 = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+component@0.7.5/node_modules/@firebase/component/dist/esm/index.esm.js"() {
+    "../PatenteB-v40-working/app/node_modules/@firebase/component/dist/esm/index.esm.js"() {
       init_index_esm();
       Component = class {
         /**
@@ -1123,7 +1608,7 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+logger@0.5.2/node_modules/@firebase/logger/dist/esm/index.esm.js
+  // ../PatenteB-v40-working/app/node_modules/@firebase/logger/dist/esm/index.esm.js
   function setLogLevel(level) {
     instances.forEach((inst) => {
       inst.setLogLevel(level);
@@ -1170,7 +1655,7 @@
   }
   var instances, LogLevel, levelStringToEnum, defaultLogLevel, ConsoleMethod, defaultLogHandler, Logger;
   var init_index_esm3 = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+logger@0.5.2/node_modules/@firebase/logger/dist/esm/index.esm.js"() {
+    "../PatenteB-v40-working/app/node_modules/@firebase/logger/dist/esm/index.esm.js"() {
       instances = [];
       (function(LogLevel2) {
         LogLevel2[LogLevel2["DEBUG"] = 0] = "DEBUG";
@@ -1277,7 +1762,7 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/idb@7.1.1/node_modules/idb/build/wrap-idb-value.js
+  // ../PatenteB-v40-working/app/node_modules/idb/build/wrap-idb-value.js
   function getIdbProxyableTypes() {
     return idbProxyableTypes || (idbProxyableTypes = [
       IDBDatabase,
@@ -1387,7 +1872,7 @@
   }
   var instanceOfAny, idbProxyableTypes, cursorAdvanceMethods, cursorRequestMap, transactionDoneMap, transactionStoreNamesMap, transformCache, reverseTransformCache, idbProxyTraps, unwrap;
   var init_wrap_idb_value = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/idb@7.1.1/node_modules/idb/build/wrap-idb-value.js"() {
+    "../PatenteB-v40-working/app/node_modules/idb/build/wrap-idb-value.js"() {
       instanceOfAny = (object, constructors) => constructors.some((c2) => object instanceof c2);
       cursorRequestMap = /* @__PURE__ */ new WeakMap();
       transactionDoneMap = /* @__PURE__ */ new WeakMap();
@@ -1423,7 +1908,7 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/idb@7.1.1/node_modules/idb/build/index.js
+  // ../PatenteB-v40-working/app/node_modules/idb/build/index.js
   function openDB(name4, version4, { blocked, upgrade, blocking, terminated } = {}) {
     const request = indexedDB.open(name4, version4);
     const openPromise = wrap(request);
@@ -1480,7 +1965,7 @@
   }
   var readMethods, writeMethods, cachedMethods;
   var init_build = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/idb@7.1.1/node_modules/idb/build/index.js"() {
+    "../PatenteB-v40-working/app/node_modules/idb/build/index.js"() {
       init_wrap_idb_value();
       init_wrap_idb_value();
       readMethods = ["get", "getKey", "getAll", "getAllKeys", "count"];
@@ -1494,7 +1979,7 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+app@0.16.2/node_modules/@firebase/app/dist/esm/index.esm.js
+  // ../PatenteB-v40-working/app/node_modules/@firebase/app/dist/esm/index.esm.js
   function isVersionServiceProvider(provider) {
     const component = provider.getComponent();
     return (component == null ? void 0 : component.type) === "VERSION";
@@ -1883,7 +2368,7 @@
   }
   var PlatformLoggerServiceImpl, name$q, version$1, logger, name$p, name$o, name$n, name$m, name$l, name$k, name$j, name$i, name$h, name$g, name$f, name$e, name$d, name$c, name$b, name$a, name$9, name$8, name$7, name$6, name$5, name$4, name$3, name$2, name$1, name, version, DEFAULT_ENTRY_NAME2, PLATFORM_LOG_STRING, _apps, _serverApps, _components, ERRORS, ERROR_FACTORY, FirebaseAppImpl, FirebaseServerAppImpl, SDK_VERSION, DB_NAME, DB_VERSION, STORE_NAME, dbPromise, MAX_HEADER_BYTES, MAX_NUM_STORED_HEARTBEATS, HeartbeatServiceImpl, HeartbeatStorageImpl;
   var init_index_esm4 = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+app@0.16.2/node_modules/@firebase/app/dist/esm/index.esm.js"() {
+    "../PatenteB-v40-working/app/node_modules/@firebase/app/dist/esm/index.esm.js"() {
       init_index_esm2();
       init_index_esm3();
       init_index_esm();
@@ -2314,7 +2799,7 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/firebase@12.19.0/node_modules/firebase/app/dist/esm/index.esm.js
+  // ../PatenteB-v40-working/app/node_modules/firebase/app/dist/esm/index.esm.js
   var index_esm_exports = {};
   __export(index_esm_exports, {
     FirebaseError: () => FirebaseError,
@@ -2343,7 +2828,7 @@
   });
   var name2, version2;
   var init_index_esm5 = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/firebase@12.19.0/node_modules/firebase/app/dist/esm/index.esm.js"() {
+    "../PatenteB-v40-working/app/node_modules/firebase/app/dist/esm/index.esm.js"() {
       init_index_esm4();
       init_index_esm4();
       name2 = "firebase";
@@ -2352,7 +2837,7 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+auth@1.13.6_@firebase+app@0.16.2/node_modules/@firebase/auth/dist/esm/index-4NFEPWkC.js
+  // ../PatenteB-v40-working/app/node_modules/@firebase/auth/dist/esm/index-4NFEPWkC.js
   function _debugErrorMap() {
     return {
       [
@@ -5263,7 +5748,7 @@
   }
   var FactorId, ProviderId, SignInMethod, OperationType, ActionCodeOperation, debugErrorMap, prodErrorMap, _DEFAULT_AUTH_ERROR_FACTORY, AUTH_ERROR_CODES_MAP_DO_NOT_USE_INTERNALLY, logClient, Delay, FetchProvider, SERVER_ERROR_MAP, CookieAuthProxiedEndpoints, DEFAULT_API_TIMEOUT_MS, NetworkTimeout, RecaptchaConfig, ProactiveRefresh, UserMetadata, StsTokenManager, UserImpl, instanceCache, InMemoryPersistence, inMemoryPersistence, PersistenceUserManager, AuthMiddlewareQueue, MINIMUM_MIN_PASSWORD_LENGTH, PasswordPolicyImpl, AuthImpl, Subscription, externalJSProvider, _SOLVE_TIME_MS, _EXPIRATION_TIME_MS, _WIDGET_ID_START, MockReCaptcha, MockGreCAPTCHATopLevel, MockGreCAPTCHA, MockWidget, RECAPTCHA_ENTERPRISE_VERIFIER_TYPE, FAKE_TOKEN, RECAPTCHA_ENTERPRISE_ONLOAD_CALLBACK_NAME, RecaptchaEnterpriseVerifier, AuthCredential, EmailAuthCredential, IDP_REQUEST_URI$1, OAuthCredential, VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_, PhoneAuthCredential, ActionCodeURL, EmailAuthProvider, FederatedAuthProvider, BaseOAuthProvider, OAuthProvider, FacebookAuthProvider, GoogleAuthProvider, GithubAuthProvider, IDP_REQUEST_URI, SAMLAuthCredential, SAML_PROVIDER_PREFIX, SAMLAuthProvider, TwitterAuthProvider, UserCredentialImpl, MultiFactorError, MultiFactorInfoImpl, PhoneMultiFactorInfoImpl, TotpMultiFactorInfoImpl, GenericAdditionalUserInfo, FederatedAdditionalUserInfoWithUsername, FacebookAdditionalUserInfo, GithubAdditionalUserInfo, GoogleAdditionalUserInfo, TwitterAdditionalUserInfo, MultiFactorSessionImpl, MultiFactorResolverImpl, MultiFactorUserImpl, multiFactorUserCache, STORAGE_AVAILABLE_KEY, BrowserPersistenceClass, _POLLING_INTERVAL_MS$1, IE10_LOCAL_STORAGE_SYNC_DELAY, BrowserLocalPersistence, browserLocalPersistence, POLLING_INTERVAL_MS, CookiePersistence, browserCookiePersistence, BrowserSessionPersistence, browserSessionPersistence, Receiver, Sender, DB_NAME2, DB_VERSION2, DB_OBJECTSTORE_NAME, DB_DATA_KEYPATH, DBPromise, _POLLING_INTERVAL_MS, _TRANSACTION_RETRY_COUNT, IndexedDBLocalPersistence, indexedDBLocalPersistence, _JSLOAD_CALLBACK, NETWORK_TIMEOUT_DELAY, ReCaptchaLoaderImpl, MockReCaptchaLoaderImpl, RECAPTCHA_VERIFIER_TYPE, DEFAULT_PARAMS, RecaptchaVerifier, ConfirmationResultImpl, PhoneAuthProvider, IdpCredential, AbstractPopupRedirectOperation, _POLL_WINDOW_CLOSE_TIMEOUT, PopupOperation, PENDING_REDIRECT_KEY, redirectOutcomeMap, RedirectAction, EVENT_DUPLICATION_CACHE_DURATION_MS, AuthEventManager, IP_ADDRESS_REGEX, HTTP_REGEX, NETWORK_TIMEOUT, cachedGApiLoader, PING_TIMEOUT, IFRAME_PATH, EMULATED_IFRAME_PATH, IFRAME_ATTRIBUTES, EID_FROM_APIHOST, BASE_POPUP_OPTIONS, DEFAULT_WIDTH, DEFAULT_HEIGHT, TARGET_BLANK, FIREFOX_EMPTY_URL, AuthPopup, WIDGET_PATH, EMULATOR_WIDGET_PATH, FIREBASE_APP_CHECK_FRAGMENT_ID, WEB_STORAGE_SUPPORT_KEY, BrowserPopupRedirectResolver, browserPopupRedirectResolver, MultiFactorAssertionImpl, PhoneMultiFactorAssertionImpl, PhoneMultiFactorGenerator, TotpMultiFactorGenerator, TotpMultiFactorAssertionImpl, TotpSecret, name3, version3, AuthInterop, DEFAULT_ID_TOKEN_MAX_AGE, authIdTokenMaxAge, lastPostedIdToken, mintCookieFactory;
   var init_index_4NFEPWkC = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+auth@1.13.6_@firebase+app@0.16.2/node_modules/@firebase/auth/dist/esm/index-4NFEPWkC.js"() {
+    "../PatenteB-v40-working/app/node_modules/@firebase/auth/dist/esm/index-4NFEPWkC.js"() {
       init_index_esm4();
       init_index_esm();
       init_index_esm3();
@@ -10602,9 +11087,9 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+auth@1.13.6_@firebase+app@0.16.2/node_modules/@firebase/auth/dist/esm/index.js
+  // ../PatenteB-v40-working/app/node_modules/@firebase/auth/dist/esm/index.js
   var init_esm = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+auth@1.13.6_@firebase+app@0.16.2/node_modules/@firebase/auth/dist/esm/index.js"() {
+    "../PatenteB-v40-working/app/node_modules/@firebase/auth/dist/esm/index.js"() {
       init_index_4NFEPWkC();
       init_index_esm4();
       init_index_esm();
@@ -10613,7 +11098,7 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/firebase@12.19.0/node_modules/firebase/auth/dist/esm/index.esm.js
+  // ../PatenteB-v40-working/app/node_modules/firebase/auth/dist/esm/index.esm.js
   var index_esm_exports2 = {};
   __export(index_esm_exports2, {
     ActionCodeOperation: () => ActionCodeOperation,
@@ -10703,15 +11188,15 @@
     verifyPasswordResetCode: () => verifyPasswordResetCode
   });
   var init_index_esm6 = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/firebase@12.19.0/node_modules/firebase/auth/dist/esm/index.esm.js"() {
+    "../PatenteB-v40-working/app/node_modules/firebase/auth/dist/esm/index.esm.js"() {
       init_esm();
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+webchannel-wrapper@1.0.7/node_modules/@firebase/webchannel-wrapper/dist/bloom-blob/esm/bloom_blob_es2018.js
+  // ../PatenteB-v40-working/app/node_modules/@firebase/webchannel-wrapper/dist/bloom-blob/esm/bloom_blob_es2018.js
   var commonjsGlobal, bloom_blob_es2018, Integer, Md5;
   var init_bloom_blob_es2018 = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+webchannel-wrapper@1.0.7/node_modules/@firebase/webchannel-wrapper/dist/bloom-blob/esm/bloom_blob_es2018.js"() {
+    "../PatenteB-v40-working/app/node_modules/@firebase/webchannel-wrapper/dist/bloom-blob/esm/bloom_blob_es2018.js"() {
       commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
       bloom_blob_es2018 = {};
       (function() {
@@ -11141,10 +11626,10 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+webchannel-wrapper@1.0.7/node_modules/@firebase/webchannel-wrapper/dist/webchannel-blob/esm/webchannel_blob_es2018.js
+  // ../PatenteB-v40-working/app/node_modules/@firebase/webchannel-wrapper/dist/webchannel-blob/esm/webchannel_blob_es2018.js
   var commonjsGlobal2, webchannel_blob_es2018, XhrIo, FetchXmlHttpFactory, WebChannel, EventType, ErrorCode, Stat, Event2, getStatEventTarget, createWebChannelTransport;
   var init_webchannel_blob_es2018 = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+webchannel-wrapper@1.0.7/node_modules/@firebase/webchannel-wrapper/dist/webchannel-blob/esm/webchannel_blob_es2018.js"() {
+    "../PatenteB-v40-working/app/node_modules/@firebase/webchannel-wrapper/dist/webchannel-blob/esm/webchannel_blob_es2018.js"() {
       commonjsGlobal2 = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
       webchannel_blob_es2018 = {};
       (function() {
@@ -13192,10 +13677,10 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/re2js@2.9.1/node_modules/re2js/build/index.js
-  var RE2Flags, PublicFlags, ASCII_SIZE, ASCII_TO_UPPER, ASCII_TO_LOWER, MAX_BMP, Codepoint, UnicodeRangeTable, B64, B64_MAP, decodeVLQ, decodeRanges, decodeOrbit, LazyMap, UnicodeTables, Unicode, FAST_PATH_TABLE_SIZE, WORD_RUNE_TABLE, cachedNativeEncoder, cachedNativeDecoder, Utils, createEnum, MatcherInputBase, Utf8MatcherInput, Utf16MatcherInput, MatcherInput, MachineInputBase, MachineUTF8Input, MachineUTF16Input, MachineInput, RE2JSException, RE2JSSyntaxException, RE2JSCompileException, RE2JSGroupException, RE2JSFlagsException, RE2JSInternalException, Matcher, Inst, Queue, LookbehindState, Machine, hashState, arraysEqual, isState, NO_IDS, END_TEXT, DFAState, DFA, VISITED_BITS, MAX_BACKTRACK_PROG, INITIAL_JOB_CAPACITY, MAX_BACKTRACK_VECTOR, BitState, bitStatePool, Backtracker, QueueOnePass, mergeRuneSets, OnePassProg, onePassCopy, makeOnePass, cleanupOnePass, OnePass, Regexp, RegexpWalker, AhoCorasick, Prefilter, PrefilterTree, PatchList, Prog, ANY_RUNE_NOT_NL, ANY_RUNE, Frag, Compiler, Simplify, CharGroup, code1, code2, code3, PERL_GROUPS, code4, code5, code6, code7, code8, code9, code10, code11, code12, code13, code14, code15, code16, code17, POSIX_GROUPS, CharClass, StringIterator, Parser, RE2, RE2Set, TranslateRegExpString, execResult, RE2JS;
+  // ../PatenteB-v40-working/app/node_modules/re2js/build/index.js
+  var RE2Flags, PublicFlags, ASCII_SIZE, ASCII_TO_UPPER, ASCII_TO_LOWER, MAX_BMP, Codepoint, UnicodeRangeTable, B64, B64_MAP, decodeVLQ, decodeRanges, decodeOrbit, LazyMap, UnicodeTables, Unicode, RE2JSException, RE2JSSyntaxException, RE2JSCompileException, RE2JSGroupException, RE2JSFlagsException, RE2JSInternalException, FAST_PATH_TABLE_SIZE, WORD_RUNE_TABLE, cachedNativeEncoder, cachedNativeDecoder, Utils, createEnum, MatcherInputBase, Utf8MatcherInput, Utf16MatcherInput, MatcherInput, MachineInputBase, MachineUTF8Input, MachineUTF16Input, MachineInput, Matcher, Inst, Queue, LookbehindState, Machine, hashState, arraysEqual, isState, NO_IDS, END_TEXT, DFAState, DFA, VISITED_BITS, MAX_BACKTRACK_PROG, INITIAL_JOB_CAPACITY, MAX_BACKTRACK_VECTOR, BitState, bitStatePool, Backtracker, QueueOnePass, mergeRuneSets, OnePassProg, onePassCopy, makeOnePass, cleanupOnePass, OnePass, Regexp, RegexpWalker, AhoCorasick, Prefilter, PrefilterTree, PatchList, Prog, ANY_RUNE_NOT_NL, ANY_RUNE, Frag, Compiler, Simplify, CharGroup, code1, code2, code3, PERL_GROUPS, code4, code5, code6, code7, code8, code9, code10, code11, code12, code13, code14, code15, code16, code17, POSIX_GROUPS, CharClass, StringIterator, Parser, RE2, RE2Set, TranslateRegExpString, execResult, RE2JS;
   var init_build2 = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/re2js@2.9.1/node_modules/re2js/build/index.js"() {
+    "../PatenteB-v40-working/app/node_modules/re2js/build/index.js"() {
       RE2Flags = class RE2Flags2 {
         static FOLD_CASE = 1;
         static LITERAL = 2;
@@ -13391,12 +13876,11 @@
           this.cache = /* @__PURE__ */ new Map();
         }
         has(key) {
-          return key in this.initializer;
+          return Object.hasOwn(this.initializer, key);
         }
         get(key) {
           if (this.cache.has(key)) return this.cache.get(key);
-          const fn2 = this.initializer[key];
-          const val = fn2 ? fn2() : null;
+          const val = this.has(key) ? this.initializer[key]() : null;
           this.cache.set(key, val);
           return val;
         }
@@ -13734,6 +14218,70 @@
           return false;
         }
       };
+      RE2JSException = class extends Error {
+        /** @param {string} message */
+        constructor(message) {
+          super(message);
+          this.name = "RE2JSException";
+        }
+      };
+      RE2JSSyntaxException = class extends RE2JSException {
+        /**
+        * @param {string} error
+        * @param {string|null} [input=null]
+        */
+        constructor(error, input = null) {
+          let message = `error parsing regexp: ${error}`;
+          if (input) message += `: \`${input}\``;
+          super(message);
+          this.name = "RE2JSSyntaxException";
+          this.message = message;
+          this.error = error;
+          this.input = input;
+        }
+        /**
+        * Retrieves the description of the error.
+        * @returns {string}
+        */
+        getDescription() {
+          return this.error;
+        }
+        /**
+        * Retrieves the erroneous regular-expression pattern.
+        * @returns {string|null}
+        */
+        getPattern() {
+          return this.input;
+        }
+      };
+      RE2JSCompileException = class extends RE2JSException {
+        /** @param {string} message */
+        constructor(message) {
+          super(message);
+          this.name = "RE2JSCompileException";
+        }
+      };
+      RE2JSGroupException = class extends RE2JSException {
+        /** @param {string} message */
+        constructor(message) {
+          super(message);
+          this.name = "RE2JSGroupException";
+        }
+      };
+      RE2JSFlagsException = class extends RE2JSException {
+        /** @param {string} message */
+        constructor(message) {
+          super(message);
+          this.name = "RE2JSFlagsException";
+        }
+      };
+      RE2JSInternalException = class extends RE2JSException {
+        /** @param {string} message */
+        constructor(message) {
+          super(message);
+          this.name = "RE2JSInternalException";
+        }
+      };
       FAST_PATH_TABLE_SIZE = 256;
       WORD_RUNE_TABLE = new Uint8Array(FAST_PATH_TABLE_SIZE);
       for (let i2 = 0; i2 < FAST_PATH_TABLE_SIZE; i2++) WORD_RUNE_TABLE[i2] = 97 <= i2 && i2 <= 122 || 65 <= i2 && i2 <= 90 || 48 <= i2 && i2 <= 57 || i2 === 95 ? 1 : 0;
@@ -13750,6 +14298,23 @@
         static EMPTY_ALL = -1;
         static emptyInts() {
           return [];
+        }
+        static isString(value) {
+          return typeof value === "string" || Object.prototype.toString.call(value) === "[object String]";
+        }
+        static typeName(value) {
+          if (value === null || typeof value !== "object" && typeof value !== "function") return value === null ? "null" : typeof value;
+          return Object.prototype.toString.call(value).slice(8, -1);
+        }
+        static checkPattern(pattern) {
+          if (!Utils2.isString(pattern)) throw new TypeError(`The pattern must be a string, not ${Utils2.typeName(pattern)} (RE2JS.translateRegExp() converts a RegExp)`);
+        }
+        static checkInput(input) {
+          if (!Utils2.isString(input) && !Utils2.isByteArray(input)) throw new TypeError(`The input must be a string or a byte array (Uint8Array or number[]), not ${Utils2.typeName(input)}`);
+        }
+        static checkFlags(flags) {
+          const known = PublicFlags.MULTILINE | PublicFlags.DOTALL | PublicFlags.CASE_INSENSITIVE | PublicFlags.DISABLE_UNICODE_GROUPS | PublicFlags.LONGEST_MATCH | PublicFlags.LOOKBEHINDS;
+          if (!Number.isInteger(flags) || (flags & ~known) !== 0) throw new RE2JSFlagsException("Flags should only be a combination of MULTILINE, DOTALL, CASE_INSENSITIVE, DISABLE_UNICODE_GROUPS, LONGEST_MATCH, LOOKBEHINDS");
         }
         static isByteArray(input) {
           return Array.isArray(input) || Object.prototype.toString.call(input) === "[object Uint8Array]";
@@ -14022,6 +14587,7 @@
         * @returns {Utf16MatcherInput}
         */
         static utf16(charSequence) {
+          Utils.checkInput(charSequence);
           return new Utf16MatcherInput(charSequence);
         }
         /**
@@ -14208,72 +14774,9 @@
         static fromUTF8(bytes, start = 0, end = bytes.length) {
           return new MachineUTF8Input(bytes, start, end);
         }
-        static fromUTF16(charSequence, start = 0, end = charSequence.length) {
-          return new MachineUTF16Input(charSequence, start, end);
-        }
-      };
-      RE2JSException = class extends Error {
-        /** @param {string} message */
-        constructor(message) {
-          super(message);
-          this.name = "RE2JSException";
-        }
-      };
-      RE2JSSyntaxException = class extends RE2JSException {
-        /**
-        * @param {string} error
-        * @param {string|null} [input=null]
-        */
-        constructor(error, input = null) {
-          let message = `error parsing regexp: ${error}`;
-          if (input) message += `: \`${input}\``;
-          super(message);
-          this.name = "RE2JSSyntaxException";
-          this.message = message;
-          this.error = error;
-          this.input = input;
-        }
-        /**
-        * Retrieves the description of the error.
-        * @returns {string}
-        */
-        getDescription() {
-          return this.error;
-        }
-        /**
-        * Retrieves the erroneous regular-expression pattern.
-        * @returns {string|null}
-        */
-        getPattern() {
-          return this.input;
-        }
-      };
-      RE2JSCompileException = class extends RE2JSException {
-        /** @param {string} message */
-        constructor(message) {
-          super(message);
-          this.name = "RE2JSCompileException";
-        }
-      };
-      RE2JSGroupException = class extends RE2JSException {
-        /** @param {string} message */
-        constructor(message) {
-          super(message);
-          this.name = "RE2JSGroupException";
-        }
-      };
-      RE2JSFlagsException = class extends RE2JSException {
-        /** @param {string} message */
-        constructor(message) {
-          super(message);
-          this.name = "RE2JSFlagsException";
-        }
-      };
-      RE2JSInternalException = class extends RE2JSException {
-        /** @param {string} message */
-        constructor(message) {
-          super(message);
-          this.name = "RE2JSInternalException";
+        static fromUTF16(charSequence, start = 0, end = void 0) {
+          Utils.checkInput(charSequence);
+          return new MachineUTF16Input(charSequence, start, end ?? charSequence.length);
         }
       };
       Matcher = class Matcher2 {
@@ -14668,7 +15171,7 @@
                 i2 += 2;
               } else {
                 const name4 = replacement.substring(i2 + 2, gt2);
-                if (Object.prototype.hasOwnProperty.call(this.namedGroups, name4)) {
+                if (Object.hasOwn(this.namedGroups, name4)) {
                   const group = this.group(name4);
                   if (group !== null) res += group;
                 }
@@ -19249,6 +19752,12 @@
         * @param {number} [maxMem=8388608] - The maximum memory in bytes to use for the DFA (default 8MB).
         */
         constructor(anchor = RE2Set2.UNANCHORED, flags = 0, maxMem = 8388608) {
+          if (![
+            RE2Set2.UNANCHORED,
+            RE2Set2.ANCHOR_START,
+            RE2Set2.ANCHOR_BOTH
+          ].includes(anchor)) throw new RE2JSFlagsException("The anchor should be RE2Set.UNANCHORED, RE2Set.ANCHOR_START or RE2Set.ANCHOR_BOTH");
+          Utils.checkFlags(flags);
           this.anchor = anchor;
           this.jsFlags = flags;
           this.maxMem = maxMem;
@@ -19270,6 +19779,7 @@
         */
         add(pattern) {
           if (this.prog) throw new RE2JSCompileException("Cannot add patterns after compile");
+          Utils.checkPattern(pattern);
           let fregex = pattern;
           if ((this.jsFlags & PublicFlags.CASE_INSENSITIVE) !== 0) fregex = `(?i)${fregex}`;
           if ((this.jsFlags & PublicFlags.DOTALL) !== 0) fregex = `(?s)${fregex}`;
@@ -19321,7 +19831,7 @@
         }
         static translate(data) {
           let prefixFlags = "";
-          if (data instanceof RegExp) {
+          if (Object.prototype.toString.call(data) === "[object RegExp]") {
             if (data.ignoreCase) prefixFlags += "i";
             if (data.multiline) prefixFlags += "m";
             if (data.dotAll) prefixFlags += "s";
@@ -19599,11 +20109,12 @@
         * @returns {RE2JS}
         */
         static compile(regex, flags = 0) {
+          Utils.checkPattern(regex);
+          Utils.checkFlags(flags);
           let fregex = regex;
           if ((flags & RE2JS2.CASE_INSENSITIVE) !== 0) fregex = `(?i)${fregex}`;
           if ((flags & RE2JS2.DOTALL) !== 0) fregex = `(?s)${fregex}`;
           if ((flags & RE2JS2.MULTILINE) !== 0) fregex = `(?m)${fregex}`;
-          if ((flags & ~(RE2JS2.MULTILINE | RE2JS2.DOTALL | RE2JS2.CASE_INSENSITIVE | RE2JS2.DISABLE_UNICODE_GROUPS | RE2JS2.LONGEST_MATCH | RE2JS2.LOOKBEHINDS)) !== 0) throw new RE2JSFlagsException("Flags should only be a combination of MULTILINE, DOTALL, CASE_INSENSITIVE, DISABLE_UNICODE_GROUPS, LONGEST_MATCH, LOOKBEHINDS");
           let re2Flags = RE2Flags.PERL;
           if ((flags & RE2JS2.DISABLE_UNICODE_GROUPS) !== 0) re2Flags &= ~RE2Flags.UNICODE_GROUPS;
           if ((flags & RE2JS2.LOOKBEHINDS) !== 0) re2Flags |= RE2Flags.LOOKBEHIND;
@@ -19834,7 +20345,7 @@
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+firestore@4.17.2_@firebase+app@0.16.2/node_modules/@firebase/firestore/dist/common-CLMydGSF.esm.js
+  // ../PatenteB-v40-working/app/node_modules/@firebase/firestore/dist/common-CLMydGSF.esm.js
   function __PRIVATE_setSDKVersion(e2) {
     Se = e2;
   }
@@ -24919,7 +25430,7 @@
   }
   var __PRIVATE_AggregateImpl, Se, ve, __PRIVATE_AutoId, De, xe, SortedMap, SortedMapIterator, LLRBNode, SortedSet, SortedSetIterator, ta, e, Ce, BasePath, ResourcePath, Fe, Oe, FieldMask, DocumentKey, Me, Ne, Timestamp, __PRIVATE_Base64DecodeError, ByteString, Le, Be, Ue, ke, qe, DatabaseInfo, $e, DatabaseId, Ke, Qe, We, Ge, ze, je, He, Je, Ye, Ze, ObjectValue, TransformOperation, __PRIVATE_ServerTimestampTransform, __PRIVATE_ArrayUnionTransformOperation, __PRIVATE_ArrayRemoveTransformOperation, __PRIVATE_NumericTransformOperation, __PRIVATE_NumericIncrementTransformOperation, __PRIVATE_NumericMinimumTransformOperation, __PRIVATE_NumericMaximumTransformOperation, FieldTransform, MutationResult, Precondition, Mutation, __PRIVATE_SetMutation, __PRIVATE_PatchMutation, __PRIVATE_DeleteMutation, __PRIVATE_VerifyMutation, Bound, Filter, FieldFilter, CompositeFilter, __PRIVATE_KeyFieldFilter, __PRIVATE_KeyFieldInFilter, __PRIVATE_KeyFieldNotInFilter, __PRIVATE_ArrayContainsFilter, __PRIVATE_InFilter, __PRIVATE_NotInFilter, __PRIVATE_ArrayContainsAnyFilter, OrderBy, SnapshotVersion, MutableDocument, Xe, FieldIndex, IndexSegment, IndexState, IndexOffset, __PRIVATE_TargetImpl, __PRIVATE_QueryImpl, ExistenceFilter, et, tt, ObjectMap, nt, rt, it, st, _t, ot, at, BloomFilter, __PRIVATE_BloomFilterError, RemoteEvent, TargetChange, __PRIVATE_DocumentWatchChange, __PRIVATE_ExistenceFilterChange, __PRIVATE_WatchTargetChange, __PRIVATE_TargetState, ut, __PRIVATE_WatchChangeAggregator, ct, lt, Et, JsonProtoSerializer, Bytes, FieldPath2, FieldValue, GeoPoint, User, __PRIVATE_Deferred, __PRIVATE_OAuthToken, __PRIVATE_EmptyAuthCredentialsProvider, __PRIVATE_EmulatorAuthCredentialsProvider, __PRIVATE_FirebaseAuthCredentialsProvider, __PRIVATE_FirstPartyToken, __PRIVATE_FirstPartyAuthCredentialsProvider, AppCheckToken, __PRIVATE_FirebaseAppCheckTokenProvider, __PRIVATE_EmptyAppCheckTokenProvider, __PRIVATE_NoopConnectivityMonitor, ht, __PRIVATE_BrowserConnectivityMonitor, Tt, Pt, It, __PRIVATE_RestConnection, __PRIVATE_StreamBridge, Rt, __PRIVATE_unguardedEventListen, __PRIVATE_WebChannelConnection, __PRIVATE_ExponentialBackoff, At, __PRIVATE_PersistentStream, __PRIVATE_PersistentListenStream, __PRIVATE_PersistentWriteStream, Datastore, __PRIVATE_DatastoreImpl, Vt, dt, ft, mt, LruParams, __PRIVATE_ListenSequence, pt, PersistenceTransaction, PersistencePromise, gt, __PRIVATE_SimpleDbTransaction, __PRIVATE_SimpleDb, __PRIVATE_IterationController, __PRIVATE_IndexedDbTransactionError, __PRIVATE_SimpleDbStore, yt, wt, bt, __PRIVATE_RollingSequenceNumberBuffer, __PRIVATE_LruScheduler, __PRIVATE_LruGarbageCollectorImpl, St, vt, FirestoreSettingsImpl, Dt, Query, aa, na, n, xt, ParsedSetData, ParsedUpdateData, ParseContextImpl, UserDataReader, __PRIVATE_DeleteFieldValueImpl, __PRIVATE_ServerTimestampFieldValueImpl, __PRIVATE_ArrayUnionFieldValueImpl, __PRIVATE_ArrayRemoveFieldValueImpl, __PRIVATE_NumericIncrementFieldValueImpl, __PRIVATE_NumericMinimumFieldValueImpl, __PRIVATE_NumericMaximumFieldValueImpl, Ct, OptionsUtil, t, k, AliasedAggregate, c, __PRIVATE_ListOfExprs, o, Constant, y, BooleanExpression, __PRIVATE_BooleanFunctionExpression, __PRIVATE_BooleanConstant, __PRIVATE_BooleanField, Ordering, Stage, w, O, M, X, Y, Z, sa, A, v, I, x, L, $, __PRIVATE_RealtimePipeline, CorePipeline, __PRIVATE_EvaluateResult, __PRIVATE_CoreField, __PRIVATE_CoreConstant, __PRIVATE_CoreListOfExprs, Ft, Ot, __PRIVATE_BigIntOrDoubleArithmetics, __PRIVATE_CoreAdd, __PRIVATE_CoreSubtract, __PRIVATE_CoreMultiply, __PRIVATE_CoreDivide, __PRIVATE_CoreMod, __PRIVATE_CoreAnd, __PRIVATE_CoreNot, __PRIVATE_CoreOr, __PRIVATE_CoreXor, __PRIVATE_CoreEqAny, __PRIVATE_CoreNotEqAny, __PRIVATE_CoreIsNan, __PRIVATE_CoreIsNotNan, __PRIVATE_CoreIsNull, __PRIVATE_CoreIsNotNull, __PRIVATE_CoreIsError, __PRIVATE_CoreExists, __PRIVATE_CoreCond, __PRIVATE_CoreLogicalMaximum, __PRIVATE_CoreLogicalMinimum, __PRIVATE_ComparisonBase, __PRIVATE_CoreEq, __PRIVATE_CoreNeq, __PRIVATE_CoreLt, __PRIVATE_CoreLte, __PRIVATE_CoreGt, __PRIVATE_CoreGte, __PRIVATE_CoreArrayConcat, __PRIVATE_CoreArrayReverse, __PRIVATE_CoreArrayContains, __PRIVATE_CoreArrayContainsAll, __PRIVATE_CoreArrayContainsAny, __PRIVATE_CoreArrayLength, __PRIVATE_CoreArrayElement, __PRIVATE_CoreReverse, __PRIVATE_CoreReplaceFirst, __PRIVATE_CoreReplaceAll, __PRIVATE_CoreCharLength, __PRIVATE_CoreByteLength, __PRIVATE_StringSearchFunctionBase, __PRIVATE_CoreLike, __PRIVATE_CoreRegexContains, __PRIVATE_CoreRegexMatch, __PRIVATE_CoreStrContains, __PRIVATE_CoreStartsWith, __PRIVATE_CoreEndsWith, __PRIVATE_CoreToLower, __PRIVATE_CoreToUpper, __PRIVATE_CoreTrim, __PRIVATE_CoreStrConcat, __PRIVATE_CoreMapGet, __PRIVATE_DistanceBase, __PRIVATE_CoreCosineDistance, __PRIVATE_CoreDotProduct, __PRIVATE_CoreEuclideanDistance, __PRIVATE_CoreVectorLength, Mt, Nt, Lt, Bt, Ut, kt, qt, $t, __PRIVATE_UnixToTimestamp, __PRIVATE_CoreUnixMicrosToTimestamp, __PRIVATE_CoreUnixMillisToTimestamp, __PRIVATE_CoreUnixSecondsToTimestamp, __PRIVATE_TimestampToUnix, __PRIVATE_CoreTimestampToUnixMicros, __PRIVATE_CoreTimestampToUnixMillis, __PRIVATE_CoreTimestampToUnixSeconds, __PRIVATE_TimestampArithmetic, __PRIVATE_CoreTimestampAdd, __PRIVATE_CoreTimestampSub, MutationBatch, MutationBatchResult, Kt, Qt, Wt, Gt, zt, jt, Ht, Jt, Yt, Zt, Xt, en, tn, nn, rn, sn, _n, on, an, un, cn, En, hn, Tn, Pn, In, Rn, An, Vn, dn, fn, mn, pn, gn, yn, wn, bn, Sn, vn, Dn, xn, Cn, Fn, On, Mn, Nn, Ln, Bn, Un, kn, qn, $n, Kn, Qn, Wn, Gn, zn, jn, Hn, Jn, Yn, Zn, Xn, er, tr, __PRIVATE_IndexedDbTransaction, Overlay, TargetData, __PRIVATE_LocalSerializer, __PRIVATE_IndexedDbMutationQueue, __PRIVATE_IndexedDbBundleCache, __PRIVATE_IndexedDbDocumentOverlayCache, __PRIVATE_IndexedDbGlobalsCache, __PRIVATE_FirestoreIndexValueWriter, nr, __PRIVATE_OrderedCodeWriter, __PRIVATE_AscendingIndexByteEncoder, __PRIVATE_DescendingIndexByteEncoder, __PRIVATE_IndexByteEncoder, __PRIVATE_IndexEntry, __PRIVATE_TargetIndexMatcher, __PRIVATE_MemoryIndexManager, __PRIVATE_MemoryCollectionParentIndex, rr, ir, __PRIVATE_IndexedDbIndexManager, __PRIVATE_TargetIdGenerator, __PRIVATE_IndexedDbTargetCache, __PRIVATE_IndexedDbLruDelegateImpl, RemoteDocumentChangeBuffer, __PRIVATE_IndexedDbRemoteDocumentCacheImpl, __PRIVATE_IndexedDbRemoteDocumentChangeBuffer, OverlayedDocument, LocalDocumentsView, __PRIVATE_MemoryBundleCache, __PRIVATE_MemoryDocumentOverlayCache, __PRIVATE_MemoryGlobalsCache, __PRIVATE_ReferenceSet, __PRIVATE_DocReference, __PRIVATE_MemoryMutationQueue, __PRIVATE_MemoryRemoteDocumentCacheImpl, __PRIVATE_MemoryRemoteDocumentChangeBuffer, __PRIVATE_MemoryTargetCache, __PRIVATE_MemoryPersistence, __PRIVATE_MemoryTransaction, __PRIVATE_MemoryEagerDelegate, __PRIVATE_MemoryLruDelegate, __PRIVATE_SchemaConverter, sr, _r, ar, ur, cr, __PRIVATE_IndexedDbPersistence, __PRIVATE_LocalViewChanges, QueryContext, __PRIVATE_QueryEngine, lr, Er, __PRIVATE_LocalStoreImpl, __PRIVATE_SizedBundleElement, __PRIVATE_OnlineStateTracker, hr, __PRIVATE_RemoteStoreImpl, __PRIVATE_AsyncObserver, DelayedOperation, __PRIVATE_BundleReaderImpl, __PRIVATE_BundleReaderSyncImpl, Tr, __PRIVATE_IndexBackfillerScheduler, __PRIVATE_IndexBackfiller, Pr, Ir, Rr, Ar, __PRIVATE_MutationMetadata, __PRIVATE_QueryTargetMetadata, __PRIVATE_RemoteClientState, __PRIVATE_SharedOnlineState, __PRIVATE_LocalClientState, __PRIVATE_WebStorageSharedClientState, __PRIVATE_MemorySharedClientState, DocumentSet, __PRIVATE_DocumentChangeSet, ViewSnapshot, __PRIVATE_QueryListenersInfo, __PRIVATE_EventManagerImpl, Vr, __PRIVATE_QueryListener, __PRIVATE_BundleConverterImpl, __PRIVATE_BundleLoader, __PRIVATE_AddedLimboDocument, __PRIVATE_RemovedLimboDocument, __PRIVATE_View, dr, __PRIVATE_QueryView, LimboResolution, __PRIVATE_SyncEngineImpl, __PRIVATE_MemoryOfflineComponentProvider, __PRIVATE_LruGcMemoryOfflineComponentProvider, __PRIVATE_IndexedDbOfflineComponentProvider, __PRIVATE_MultiTabOfflineComponentProvider, OnlineComponentProvider, Transaction, __PRIVATE_TransactionRunner, fr, FirestoreClient, mr, pr, AbstractUserDataWriter, __PRIVATE_LiteUserDataWriter, gr, __PRIVATE_AsyncQueueImpl, LoadBundleTask, yr, da, ua, wr, SnapshotMetadata, DocumentSnapshot2, QueryDocumentSnapshot2, QuerySnapshot;
   var init_common_CLMydGSF_esm = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+firestore@4.17.2_@firebase+app@0.16.2/node_modules/@firebase/firestore/dist/common-CLMydGSF.esm.js"() {
+    "../PatenteB-v40-working/app/node_modules/@firebase/firestore/dist/common-CLMydGSF.esm.js"() {
       init_index_esm4();
       init_index_esm();
       init_bloom_blob_es2018();
@@ -39409,7 +39920,7 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+firestore@4.17.2_@firebase+app@0.16.2/node_modules/@firebase/firestore/dist/index.esm.js
+  // ../PatenteB-v40-working/app/node_modules/@firebase/firestore/dist/index.esm.js
   function __PRIVATE_validateHasExplicitOrderByForLimitToLast(e$1) {
     if ("L" === e$1.limitType && 0 === e$1.explicitOrderBy.length) throw new e(ta.UNIMPLEMENTED, "limitToLast() queries require specifying at least one orderBy() clause");
   }
@@ -39934,7 +40445,7 @@ This typically indicates that your device does not have a healthy Internet conne
   }
   var AggregateField, AggregateQuerySnapshot, AppliableConstraint, QueryConstraint, QueryFieldFilterConstraint, QueryCompositeFilterConstraint, QueryOrderByConstraint, QueryLimitConstraint, QueryStartAtConstraint, QueryEndAtConstraint, __PRIVATE_MemoryLocalCacheImpl, __PRIVATE_PersistentLocalCacheImpl, __PRIVATE_MemoryEagerGarbageCollectorImpl, __PRIVATE_MemoryLruGarbageCollectorImpl, __PRIVATE_SingleTabManagerImpl, __PRIVATE_MultiTabManagerImpl, Qe2, WriteBatch, xe2, Transaction3, PersistentCacheIndexManager, De2, TestingHooks, __PRIVATE_TestingHooksSpiImpl, qe2, Be2, Me2;
   var init_index_esm7 = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/@firebase+firestore@4.17.2_@firebase+app@0.16.2/node_modules/@firebase/firestore/dist/index.esm.js"() {
+    "../PatenteB-v40-working/app/node_modules/@firebase/firestore/dist/index.esm.js"() {
       init_index_esm4();
       init_index_esm2();
       init_common_CLMydGSF_esm();
@@ -40405,7 +40916,7 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   });
 
-  // ../italia-2.7.30-auth-sync/node_modules/.pnpm/firebase@12.19.0/node_modules/firebase/firestore/dist/esm/index.esm.js
+  // ../PatenteB-v40-working/app/node_modules/firebase/firestore/dist/esm/index.esm.js
   var index_esm_exports3 = {};
   __export(index_esm_exports3, {
     AbstractUserDataWriter: () => AbstractUserDataWriter,
@@ -40531,8 +41042,656 @@ This typically indicates that your device does not have a healthy Internet conne
     writeBatch: () => writeBatch
   });
   var init_index_esm8 = __esm({
-    "../italia-2.7.30-auth-sync/node_modules/.pnpm/firebase@12.19.0/node_modules/firebase/firestore/dist/esm/index.esm.js"() {
+    "../PatenteB-v40-working/app/node_modules/firebase/firestore/dist/esm/index.esm.js"() {
       init_index_esm7();
+    }
+  });
+
+  // ../PatenteB-v40-working/app/node_modules/@capacitor-firebase/authentication/dist/esm/definitions.js
+  var Persistence, ProviderId2;
+  var init_definitions = __esm({
+    "../PatenteB-v40-working/app/node_modules/@capacitor-firebase/authentication/dist/esm/definitions.js"() {
+      (function(Persistence2) {
+        Persistence2["IndexedDbLocal"] = "INDEXED_DB_LOCAL";
+        Persistence2["InMemory"] = "IN_MEMORY";
+        Persistence2["BrowserLocal"] = "BROWSER_LOCAL";
+        Persistence2["BrowserSession"] = "BROWSER_SESSION";
+      })(Persistence || (Persistence = {}));
+      (function(ProviderId3) {
+        ProviderId3["APPLE"] = "apple.com";
+        ProviderId3["FACEBOOK"] = "facebook.com";
+        ProviderId3["GAME_CENTER"] = "gc.apple.com";
+        ProviderId3["GITHUB"] = "github.com";
+        ProviderId3["GOOGLE"] = "google.com";
+        ProviderId3["MICROSOFT"] = "microsoft.com";
+        ProviderId3["PLAY_GAMES"] = "playgames.google.com";
+        ProviderId3["TWITTER"] = "twitter.com";
+        ProviderId3["YAHOO"] = "yahoo.com";
+        ProviderId3["PASSWORD"] = "password";
+        ProviderId3["PHONE"] = "phone";
+      })(ProviderId2 || (ProviderId2 = {}));
+    }
+  });
+
+  // ../PatenteB-v40-working/app/node_modules/@capacitor-firebase/authentication/dist/esm/web.js
+  var web_exports = {};
+  __export(web_exports, {
+    FirebaseAuthenticationWeb: () => FirebaseAuthenticationWeb
+  });
+  var FirebaseAuthenticationWeb;
+  var init_web = __esm({
+    "../PatenteB-v40-working/app/node_modules/@capacitor-firebase/authentication/dist/esm/web.js"() {
+      init_dist();
+      init_index_esm6();
+      init_definitions();
+      FirebaseAuthenticationWeb = class _FirebaseAuthenticationWeb extends WebPlugin {
+        constructor() {
+          super();
+          this.lastConfirmationResult = /* @__PURE__ */ new Map();
+          const auth = getAuth();
+          auth.onAuthStateChanged((user) => this.handleAuthStateChange(user));
+          auth.onIdTokenChanged((user) => void this.handleIdTokenChange(user));
+        }
+        async applyActionCode(options) {
+          const auth = getAuth();
+          return applyActionCode(auth, options.oobCode);
+        }
+        async createUserWithEmailAndPassword(options) {
+          const auth = getAuth();
+          const userCredential = await createUserWithEmailAndPassword(auth, options.email, options.password);
+          return this.createSignInResult(userCredential, null);
+        }
+        async confirmPasswordReset(options) {
+          const auth = getAuth();
+          return confirmPasswordReset(auth, options.oobCode, options.newPassword);
+        }
+        async confirmVerificationCode(options) {
+          const { verificationCode, verificationId } = options;
+          const confirmationResult = this.lastConfirmationResult.get(verificationId);
+          if (!confirmationResult) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_CONFIRMATION_RESULT_MISSING);
+          }
+          const userCredential = await confirmationResult.confirm(verificationCode);
+          return this.createSignInResult(userCredential, null);
+        }
+        async deleteUser() {
+          const auth = getAuth();
+          const currentUser = auth.currentUser;
+          if (!currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          return deleteUser(currentUser);
+        }
+        async fetchSignInMethodsForEmail(options) {
+          const auth = getAuth();
+          const signInMethods = await fetchSignInMethodsForEmail(auth, options.email);
+          return {
+            signInMethods
+          };
+        }
+        async getPendingAuthResult() {
+          throw this.unimplemented("Not implemented on web.");
+        }
+        async getCurrentUser() {
+          const auth = getAuth();
+          const userResult = this.createUserResult(auth.currentUser);
+          const result = {
+            user: userResult
+          };
+          return result;
+        }
+        async getIdToken(options) {
+          const auth = getAuth();
+          if (!auth.currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          const idToken = await auth.currentUser.getIdToken(options === null || options === void 0 ? void 0 : options.forceRefresh);
+          const result = {
+            token: idToken || ""
+          };
+          return result;
+        }
+        async getIdTokenResult(options) {
+          const auth = getAuth();
+          if (!auth.currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          const idTokenResult = await auth.currentUser.getIdTokenResult(options === null || options === void 0 ? void 0 : options.forceRefresh);
+          const result = Object.assign(Object.assign({}, idTokenResult), { authTime: Date.parse(idTokenResult.authTime), expirationTime: Date.parse(idTokenResult.expirationTime), issuedAtTime: Date.parse(idTokenResult.issuedAtTime) });
+          return result;
+        }
+        async getRedirectResult() {
+          const auth = getAuth();
+          const userCredential = await getRedirectResult(auth);
+          const authCredential = userCredential ? OAuthProvider.credentialFromResult(userCredential) : null;
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async getTenantId() {
+          const auth = getAuth();
+          return {
+            tenantId: auth.tenantId
+          };
+        }
+        async isSignInWithEmailLink(options) {
+          const auth = getAuth();
+          return {
+            isSignInWithEmailLink: isSignInWithEmailLink(auth, options.emailLink)
+          };
+        }
+        async linkWithApple(options) {
+          const provider = new OAuthProvider(ProviderId2.APPLE);
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.linkCurrentUserWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = OAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async linkWithEmailAndPassword(options) {
+          const authCredential = EmailAuthProvider.credential(options.email, options.password);
+          const userCredential = await this.linkCurrentUserWithCredential(authCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async linkWithEmailLink(options) {
+          const authCredential = EmailAuthProvider.credentialWithLink(options.email, options.emailLink);
+          const userCredential = await this.linkCurrentUserWithCredential(authCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async linkWithFacebook(options) {
+          const provider = new FacebookAuthProvider();
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.linkCurrentUserWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = FacebookAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async linkWithGameCenter() {
+          throw this.unimplemented("Not implemented on web.");
+        }
+        async linkWithGithub(options) {
+          const provider = new GithubAuthProvider();
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.linkCurrentUserWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = GithubAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async linkWithGoogle(options) {
+          const provider = new GoogleAuthProvider();
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.linkCurrentUserWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = GoogleAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async linkWithMicrosoft(options) {
+          const provider = new OAuthProvider(ProviderId2.MICROSOFT);
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.linkCurrentUserWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = OAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async linkWithOpenIdConnect(options) {
+          const provider = new OAuthProvider(options.providerId);
+          this.applySignInOptions(options, provider);
+          const userCredential = await this.linkCurrentUserWithPopupOrRedirect(provider, options.mode);
+          const authCredential = OAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async linkWithPhoneNumber(options) {
+          const auth = getAuth();
+          const currentUser = auth.currentUser;
+          if (!currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          if (!options.phoneNumber) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_PHONE_NUMBER_MISSING);
+          }
+          if (!options.recaptchaVerifier || !(options.recaptchaVerifier instanceof RecaptchaVerifier)) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_RECAPTCHA_VERIFIER_MISSING);
+          }
+          try {
+            const confirmationResult = await linkWithPhoneNumber(currentUser, options.phoneNumber, options.recaptchaVerifier);
+            const { verificationId } = confirmationResult;
+            this.lastConfirmationResult.set(verificationId, confirmationResult);
+            const event = {
+              verificationId
+            };
+            this.notifyListeners(_FirebaseAuthenticationWeb.PHONE_CODE_SENT_EVENT, event);
+          } catch (error) {
+            const event = {
+              message: this.getErrorMessage(error),
+              code: this.getErrorCode(error)
+            };
+            this.notifyListeners(_FirebaseAuthenticationWeb.PHONE_VERIFICATION_FAILED_EVENT, event);
+          }
+        }
+        async linkWithPlayGames() {
+          throw this.unimplemented("Not implemented on web.");
+        }
+        async linkWithTwitter(options) {
+          const provider = new TwitterAuthProvider();
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.linkCurrentUserWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = TwitterAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async linkWithYahoo(options) {
+          const provider = new OAuthProvider(ProviderId2.YAHOO);
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.linkCurrentUserWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = OAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async reload() {
+          const auth = getAuth();
+          const currentUser = auth.currentUser;
+          if (!currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          return reload(currentUser);
+        }
+        async revokeAccessToken(options) {
+          const auth = getAuth();
+          return revokeAccessToken(auth, options.token);
+        }
+        async sendEmailVerification(options) {
+          const auth = getAuth();
+          const currentUser = auth.currentUser;
+          if (!currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          return sendEmailVerification(currentUser, options === null || options === void 0 ? void 0 : options.actionCodeSettings);
+        }
+        async sendPasswordResetEmail(options) {
+          const auth = getAuth();
+          return sendPasswordResetEmail(auth, options.email, options.actionCodeSettings);
+        }
+        async sendSignInLinkToEmail(options) {
+          const auth = getAuth();
+          return sendSignInLinkToEmail(auth, options.email, options.actionCodeSettings);
+        }
+        async setLanguageCode(options) {
+          const auth = getAuth();
+          auth.languageCode = options.languageCode;
+        }
+        async setPersistence(options) {
+          const auth = getAuth();
+          switch (options.persistence) {
+            case Persistence.BrowserLocal:
+              await setPersistence(auth, browserLocalPersistence);
+              break;
+            case Persistence.BrowserSession:
+              await setPersistence(auth, browserSessionPersistence);
+              break;
+            case Persistence.IndexedDbLocal:
+              await setPersistence(auth, indexedDBLocalPersistence);
+              break;
+            case Persistence.InMemory:
+              await setPersistence(auth, inMemoryPersistence);
+              break;
+          }
+        }
+        async setTenantId(options) {
+          const auth = getAuth();
+          auth.tenantId = options.tenantId;
+        }
+        async signInAnonymously() {
+          const auth = getAuth();
+          const userCredential = await signInAnonymously(auth);
+          return this.createSignInResult(userCredential, null);
+        }
+        async signInWithApple(options) {
+          const provider = new OAuthProvider(ProviderId2.APPLE);
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.signInWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = OAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async signInWithCustomToken(options) {
+          const auth = getAuth();
+          const userCredential = await signInWithCustomToken(auth, options.token);
+          return this.createSignInResult(userCredential, null);
+        }
+        async signInWithEmailAndPassword(options) {
+          const auth = getAuth();
+          const userCredential = await signInWithEmailAndPassword(auth, options.email, options.password);
+          return this.createSignInResult(userCredential, null);
+        }
+        async signInWithEmailLink(options) {
+          const auth = getAuth();
+          const userCredential = await signInWithEmailLink(auth, options.email, options.emailLink);
+          return this.createSignInResult(userCredential, null);
+        }
+        async signInWithFacebook(options) {
+          const provider = new FacebookAuthProvider();
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.signInWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = FacebookAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async signInWithGithub(options) {
+          const provider = new GithubAuthProvider();
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.signInWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = GithubAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async signInWithGoogle(options) {
+          const provider = new GoogleAuthProvider();
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.signInWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = GoogleAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async signInWithMicrosoft(options) {
+          const provider = new OAuthProvider(ProviderId2.MICROSOFT);
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.signInWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = OAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async signInWithOpenIdConnect(options) {
+          const provider = new OAuthProvider(options.providerId);
+          this.applySignInOptions(options, provider);
+          const userCredential = await this.signInWithPopupOrRedirect(provider, options.mode);
+          const authCredential = OAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async signInWithPhoneNumber(options) {
+          if (!options.phoneNumber) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_PHONE_NUMBER_MISSING);
+          }
+          if (!options.recaptchaVerifier || !(options.recaptchaVerifier instanceof RecaptchaVerifier)) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_RECAPTCHA_VERIFIER_MISSING);
+          }
+          const auth = getAuth();
+          try {
+            const confirmationResult = await signInWithPhoneNumber(auth, options.phoneNumber, options.recaptchaVerifier);
+            const { verificationId } = confirmationResult;
+            this.lastConfirmationResult.set(verificationId, confirmationResult);
+            const event = {
+              verificationId
+            };
+            this.notifyListeners(_FirebaseAuthenticationWeb.PHONE_CODE_SENT_EVENT, event);
+          } catch (error) {
+            const event = {
+              message: this.getErrorMessage(error),
+              code: this.getErrorCode(error)
+            };
+            this.notifyListeners(_FirebaseAuthenticationWeb.PHONE_VERIFICATION_FAILED_EVENT, event);
+          }
+        }
+        async signInWithPlayGames() {
+          throw this.unimplemented("Not implemented on web.");
+        }
+        async signInWithGameCenter() {
+          throw this.unimplemented("Not implemented on web.");
+        }
+        async signInWithTwitter(options) {
+          const provider = new TwitterAuthProvider();
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.signInWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = TwitterAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async signInWithYahoo(options) {
+          const provider = new OAuthProvider(ProviderId2.YAHOO);
+          this.applySignInOptions(options || {}, provider);
+          const userCredential = await this.signInWithPopupOrRedirect(provider, options === null || options === void 0 ? void 0 : options.mode);
+          const authCredential = OAuthProvider.credentialFromResult(userCredential);
+          return this.createSignInResult(userCredential, authCredential);
+        }
+        async signOut() {
+          const auth = getAuth();
+          await auth.signOut();
+        }
+        async unlink(options) {
+          const auth = getAuth();
+          if (!auth.currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          const user = await unlink(auth.currentUser, options.providerId);
+          const userResult = this.createUserResult(user);
+          const result = {
+            user: userResult
+          };
+          return result;
+        }
+        async updateEmail(options) {
+          const auth = getAuth();
+          const currentUser = auth.currentUser;
+          if (!currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          return updateEmail(currentUser, options.newEmail);
+        }
+        async updatePassword(options) {
+          const auth = getAuth();
+          const currentUser = auth.currentUser;
+          if (!currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          return updatePassword(currentUser, options.newPassword);
+        }
+        async updateProfile(options) {
+          const auth = getAuth();
+          const currentUser = auth.currentUser;
+          if (!currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          return updateProfile(currentUser, {
+            displayName: options.displayName,
+            photoURL: options.photoUrl
+          });
+        }
+        async useAppLanguage() {
+          const auth = getAuth();
+          auth.useDeviceLanguage();
+        }
+        async useEmulator(options) {
+          const auth = getAuth();
+          const port = options.port || 9099;
+          const scheme = options.scheme || "http";
+          const connectOptions = options.disableWarnings === void 0 ? void 0 : { disableWarnings: options.disableWarnings };
+          if (options.host.includes("://")) {
+            connectAuthEmulator(auth, `${options.host}:${port}`, connectOptions);
+          } else {
+            connectAuthEmulator(auth, `${scheme}://${options.host}:${port}`, connectOptions);
+          }
+        }
+        async verifyBeforeUpdateEmail(options) {
+          const auth = getAuth();
+          const currentUser = auth.currentUser;
+          if (!currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          return verifyBeforeUpdateEmail(currentUser, options === null || options === void 0 ? void 0 : options.newEmail, options === null || options === void 0 ? void 0 : options.actionCodeSettings);
+        }
+        handleAuthStateChange(user) {
+          const userResult = this.createUserResult(user);
+          const change = {
+            user: userResult
+          };
+          this.notifyListeners(_FirebaseAuthenticationWeb.AUTH_STATE_CHANGE_EVENT, change, true);
+        }
+        async handleIdTokenChange(user) {
+          if (!user) {
+            return;
+          }
+          const idToken = await user.getIdToken(false);
+          const result = {
+            token: idToken
+          };
+          this.notifyListeners(_FirebaseAuthenticationWeb.ID_TOKEN_CHANGE_EVENT, result, true);
+        }
+        applySignInOptions(options, provider) {
+          if (options.customParameters) {
+            const customParameters = {};
+            options.customParameters.map((parameter) => {
+              customParameters[parameter.key] = parameter.value;
+            });
+            provider.setCustomParameters(customParameters);
+          }
+          if (options.scopes) {
+            for (const scope of options.scopes) {
+              provider.addScope(scope);
+            }
+          }
+        }
+        signInWithPopupOrRedirect(provider, mode) {
+          const auth = getAuth();
+          if (mode === "redirect") {
+            return signInWithRedirect(auth, provider);
+          } else {
+            return signInWithPopup(auth, provider);
+          }
+        }
+        linkCurrentUserWithPopupOrRedirect(provider, mode) {
+          const auth = getAuth();
+          if (!auth.currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          if (mode === "redirect") {
+            return linkWithRedirect(auth.currentUser, provider);
+          } else {
+            return linkWithPopup(auth.currentUser, provider);
+          }
+        }
+        linkCurrentUserWithCredential(credential) {
+          const auth = getAuth();
+          if (!auth.currentUser) {
+            throw new Error(_FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN);
+          }
+          return linkWithCredential(auth.currentUser, credential);
+        }
+        requestAppTrackingTransparencyPermission() {
+          throw this.unimplemented("Not implemented on web.");
+        }
+        checkAppTrackingTransparencyPermission() {
+          throw this.unimplemented("Not implemented on web.");
+        }
+        createSignInResult(userCredential, authCredential) {
+          const userResult = this.createUserResult((userCredential === null || userCredential === void 0 ? void 0 : userCredential.user) || null);
+          const credentialResult = this.createCredentialResult(authCredential);
+          const additionalUserInfoResult = this.createAdditionalUserInfoResult(userCredential);
+          const result = {
+            user: userResult,
+            credential: credentialResult,
+            additionalUserInfo: additionalUserInfoResult
+          };
+          return result;
+        }
+        createCredentialResult(credential) {
+          if (!credential) {
+            return null;
+          }
+          const result = {
+            providerId: credential.providerId
+          };
+          if (credential instanceof OAuthCredential) {
+            result.accessToken = credential.accessToken;
+            result.idToken = credential.idToken;
+            result.secret = credential.secret;
+          }
+          return result;
+        }
+        createUserResult(user) {
+          if (!user) {
+            return null;
+          }
+          const result = {
+            displayName: user.displayName,
+            email: user.email,
+            emailVerified: user.emailVerified,
+            isAnonymous: user.isAnonymous,
+            metadata: this.createUserMetadataResult(user.metadata),
+            phoneNumber: user.phoneNumber,
+            photoUrl: user.photoURL,
+            providerData: this.createUserProviderDataResult(user.providerData),
+            providerId: user.providerId,
+            tenantId: user.tenantId,
+            uid: user.uid
+          };
+          return result;
+        }
+        createUserMetadataResult(metadata) {
+          const result = {};
+          if (metadata.creationTime) {
+            result.creationTime = Date.parse(metadata.creationTime);
+          }
+          if (metadata.lastSignInTime) {
+            result.lastSignInTime = Date.parse(metadata.lastSignInTime);
+          }
+          return result;
+        }
+        createUserProviderDataResult(providerData) {
+          return providerData.map((data) => ({
+            displayName: data.displayName,
+            email: data.email,
+            phoneNumber: data.phoneNumber,
+            photoUrl: data.photoURL,
+            providerId: data.providerId,
+            uid: data.uid
+          }));
+        }
+        createAdditionalUserInfoResult(credential) {
+          if (!credential) {
+            return null;
+          }
+          const additionalUserInfo = getAdditionalUserInfo(credential);
+          if (!additionalUserInfo) {
+            return null;
+          }
+          const { isNewUser, profile, providerId, username } = additionalUserInfo;
+          const result = {
+            isNewUser
+          };
+          if (providerId !== null) {
+            result.providerId = providerId;
+          }
+          if (profile !== null) {
+            result.profile = profile;
+          }
+          if (username !== null && username !== void 0) {
+            result.username = username;
+          }
+          return result;
+        }
+        getErrorCode(error) {
+          if (error instanceof Object && "code" in error && typeof error["code"] === "string") {
+            return error["code"];
+          }
+          return void 0;
+        }
+        getErrorMessage(error) {
+          if (error instanceof Object && "message" in error && typeof error["message"] === "string") {
+            return error["message"];
+          }
+          return JSON.stringify(error);
+        }
+      };
+      FirebaseAuthenticationWeb.AUTH_STATE_CHANGE_EVENT = "authStateChange";
+      FirebaseAuthenticationWeb.ID_TOKEN_CHANGE_EVENT = "idTokenChange";
+      FirebaseAuthenticationWeb.PHONE_CODE_SENT_EVENT = "phoneCodeSent";
+      FirebaseAuthenticationWeb.PHONE_VERIFICATION_FAILED_EVENT = "phoneVerificationFailed";
+      FirebaseAuthenticationWeb.ERROR_NO_USER_SIGNED_IN = "No user is signed in.";
+      FirebaseAuthenticationWeb.ERROR_PHONE_NUMBER_MISSING = "phoneNumber must be provided.";
+      FirebaseAuthenticationWeb.ERROR_RECAPTCHA_VERIFIER_MISSING = "recaptchaVerifier must be provided and must be an instance of RecaptchaVerifier.";
+      FirebaseAuthenticationWeb.ERROR_CONFIRMATION_RESULT_MISSING = "No confirmation result with this verification id was found.";
+    }
+  });
+
+  // ../PatenteB-v40-working/app/node_modules/@capacitor-firebase/authentication/dist/esm/index.js
+  var esm_exports = {};
+  __export(esm_exports, {
+    FirebaseAuthentication: () => FirebaseAuthentication,
+    Persistence: () => Persistence,
+    ProviderId: () => ProviderId2
+  });
+  var FirebaseAuthentication;
+  var init_esm2 = __esm({
+    "../PatenteB-v40-working/app/node_modules/@capacitor-firebase/authentication/dist/esm/index.js"() {
+      init_dist();
+      init_definitions();
+      FirebaseAuthentication = registerPlugin("FirebaseAuthentication", {
+        web: () => Promise.resolve().then(() => (init_web(), web_exports)).then((m2) => new m2.FirebaseAuthenticationWeb())
+      });
     }
   });
 
@@ -40954,514 +42113,8 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   }
 
-  // ../app/node_modules/@capacitor/core/dist/index.js
-  var ExceptionCode;
-  (function(ExceptionCode2) {
-    ExceptionCode2["Unimplemented"] = "UNIMPLEMENTED";
-    ExceptionCode2["Unavailable"] = "UNAVAILABLE";
-  })(ExceptionCode || (ExceptionCode = {}));
-  var CapacitorException = class extends Error {
-    constructor(message, code, data) {
-      super(message);
-      this.message = message;
-      this.code = code;
-      this.data = data;
-    }
-  };
-  var getPlatformId = (win) => {
-    var _a14, _b;
-    if (win === null || win === void 0 ? void 0 : win.androidBridge) {
-      return "android";
-    } else if ((_b = (_a14 = win === null || win === void 0 ? void 0 : win.webkit) === null || _a14 === void 0 ? void 0 : _a14.messageHandlers) === null || _b === void 0 ? void 0 : _b.bridge) {
-      return "ios";
-    } else {
-      return "web";
-    }
-  };
-  var createCapacitor = (win) => {
-    const capCustomPlatform = win.CapacitorCustomPlatform || null;
-    const cap = win.Capacitor || {};
-    const Plugins = cap.Plugins = cap.Plugins || {};
-    const getPlatform = () => {
-      return capCustomPlatform !== null ? capCustomPlatform.name : getPlatformId(win);
-    };
-    const isNativePlatform = () => getPlatform() !== "web";
-    const isPluginAvailable = (pluginName) => {
-      const plugin = registeredPlugins.get(pluginName);
-      if (plugin === null || plugin === void 0 ? void 0 : plugin.platforms.has(getPlatform())) {
-        return true;
-      }
-      if (getPluginHeader(pluginName)) {
-        return true;
-      }
-      return false;
-    };
-    const getPluginHeader = (pluginName) => {
-      var _a14;
-      return (_a14 = cap.PluginHeaders) === null || _a14 === void 0 ? void 0 : _a14.find((h) => h.name === pluginName);
-    };
-    const handleError = (err) => win.console.error(err);
-    const registeredPlugins = /* @__PURE__ */ new Map();
-    const registerPlugin2 = (pluginName, jsImplementations = {}) => {
-      const registeredPlugin = registeredPlugins.get(pluginName);
-      if (registeredPlugin) {
-        console.warn(`Capacitor plugin "${pluginName}" already registered. Cannot register plugins twice.`);
-        return registeredPlugin.proxy;
-      }
-      const platform = getPlatform();
-      const pluginHeader = getPluginHeader(pluginName);
-      let jsImplementation;
-      const loadPluginImplementation = async () => {
-        if (!jsImplementation && platform in jsImplementations) {
-          jsImplementation = typeof jsImplementations[platform] === "function" ? jsImplementation = await jsImplementations[platform]() : jsImplementation = jsImplementations[platform];
-        } else if (capCustomPlatform !== null && !jsImplementation && "web" in jsImplementations) {
-          jsImplementation = typeof jsImplementations["web"] === "function" ? jsImplementation = await jsImplementations["web"]() : jsImplementation = jsImplementations["web"];
-        }
-        return jsImplementation;
-      };
-      const createPluginMethod = (impl, prop) => {
-        var _a14, _b;
-        if (pluginHeader) {
-          const methodHeader = pluginHeader === null || pluginHeader === void 0 ? void 0 : pluginHeader.methods.find((m2) => prop === m2.name);
-          if (methodHeader) {
-            if (methodHeader.rtype === "promise") {
-              return (options) => cap.nativePromise(pluginName, prop.toString(), options);
-            } else {
-              return (options, callback) => cap.nativeCallback(pluginName, prop.toString(), options, callback);
-            }
-          } else if (impl) {
-            return (_a14 = impl[prop]) === null || _a14 === void 0 ? void 0 : _a14.bind(impl);
-          }
-        } else if (impl) {
-          return (_b = impl[prop]) === null || _b === void 0 ? void 0 : _b.bind(impl);
-        } else {
-          throw new CapacitorException(`"${pluginName}" plugin is not implemented on ${platform}`, ExceptionCode.Unimplemented);
-        }
-      };
-      const createPluginMethodWrapper = (prop) => {
-        let remove;
-        const wrapper = (...args) => {
-          const p2 = loadPluginImplementation().then((impl) => {
-            const fn2 = createPluginMethod(impl, prop);
-            if (fn2) {
-              const p3 = fn2(...args);
-              remove = p3 === null || p3 === void 0 ? void 0 : p3.remove;
-              return p3;
-            } else {
-              throw new CapacitorException(`"${pluginName}.${prop}()" is not implemented on ${platform}`, ExceptionCode.Unimplemented);
-            }
-          });
-          if (prop === "addListener") {
-            p2.remove = async () => remove();
-          }
-          return p2;
-        };
-        wrapper.toString = () => `${prop.toString()}() { [capacitor code] }`;
-        Object.defineProperty(wrapper, "name", {
-          value: prop,
-          writable: false,
-          configurable: false
-        });
-        return wrapper;
-      };
-      const addListener = createPluginMethodWrapper("addListener");
-      const removeListener = createPluginMethodWrapper("removeListener");
-      const addListenerNative = (eventName, callback) => {
-        const call = addListener({ eventName }, callback);
-        const remove = async () => {
-          const callbackId = await call;
-          removeListener({
-            eventName,
-            callbackId
-          }, callback);
-        };
-        const p2 = new Promise((resolve) => call.then(() => resolve({ remove })));
-        p2.remove = async () => {
-          console.warn(`Using addListener() without 'await' is deprecated.`);
-          await remove();
-        };
-        return p2;
-      };
-      const proxy = new Proxy({}, {
-        get(_, prop) {
-          switch (prop) {
-            // https://github.com/facebook/react/issues/20030
-            case "$$typeof":
-              return void 0;
-            case "toJSON":
-              return () => ({});
-            case "addListener":
-              return pluginHeader ? addListenerNative : addListener;
-            case "removeListener":
-              return removeListener;
-            default:
-              return createPluginMethodWrapper(prop);
-          }
-        }
-      });
-      Plugins[pluginName] = proxy;
-      registeredPlugins.set(pluginName, {
-        name: pluginName,
-        proxy,
-        platforms: /* @__PURE__ */ new Set([...Object.keys(jsImplementations), ...pluginHeader ? [platform] : []])
-      });
-      return proxy;
-    };
-    if (!cap.convertFileSrc) {
-      cap.convertFileSrc = (filePath) => filePath;
-    }
-    cap.getPlatform = getPlatform;
-    cap.handleError = handleError;
-    cap.isNativePlatform = isNativePlatform;
-    cap.isPluginAvailable = isPluginAvailable;
-    cap.registerPlugin = registerPlugin2;
-    cap.Exception = CapacitorException;
-    cap.DEBUG = !!cap.DEBUG;
-    cap.isLoggingEnabled = !!cap.isLoggingEnabled;
-    return cap;
-  };
-  var initCapacitorGlobal = (win) => win.Capacitor = createCapacitor(win);
-  var Capacitor = /* @__PURE__ */ initCapacitorGlobal(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {});
-  var registerPlugin = Capacitor.registerPlugin;
-  var WebPlugin = class {
-    constructor() {
-      this.listeners = {};
-      this.retainedEventArguments = {};
-      this.windowListeners = {};
-    }
-    addListener(eventName, listenerFunc) {
-      let firstListener = false;
-      const listeners = this.listeners[eventName];
-      if (!listeners) {
-        this.listeners[eventName] = [];
-        firstListener = true;
-      }
-      this.listeners[eventName].push(listenerFunc);
-      const windowListener = this.windowListeners[eventName];
-      if (windowListener && !windowListener.registered) {
-        this.addWindowListener(windowListener);
-      }
-      if (firstListener) {
-        this.sendRetainedArgumentsForEvent(eventName);
-      }
-      const remove = async () => this.removeListener(eventName, listenerFunc);
-      const p2 = Promise.resolve({ remove });
-      return p2;
-    }
-    async removeAllListeners() {
-      this.listeners = {};
-      for (const listener in this.windowListeners) {
-        this.removeWindowListener(this.windowListeners[listener]);
-      }
-      this.windowListeners = {};
-    }
-    notifyListeners(eventName, data, retainUntilConsumed) {
-      const listeners = this.listeners[eventName];
-      if (!listeners) {
-        if (retainUntilConsumed) {
-          let args = this.retainedEventArguments[eventName];
-          if (!args) {
-            args = [];
-          }
-          args.push(data);
-          this.retainedEventArguments[eventName] = args;
-        }
-        return;
-      }
-      listeners.forEach((listener) => listener(data));
-    }
-    hasListeners(eventName) {
-      var _a14;
-      return !!((_a14 = this.listeners[eventName]) === null || _a14 === void 0 ? void 0 : _a14.length);
-    }
-    registerWindowListener(windowEventName, pluginEventName) {
-      this.windowListeners[pluginEventName] = {
-        registered: false,
-        windowEventName,
-        pluginEventName,
-        handler: (event) => {
-          this.notifyListeners(pluginEventName, event);
-        }
-      };
-    }
-    unimplemented(msg = "not implemented") {
-      return new Capacitor.Exception(msg, ExceptionCode.Unimplemented);
-    }
-    unavailable(msg = "not available") {
-      return new Capacitor.Exception(msg, ExceptionCode.Unavailable);
-    }
-    async removeListener(eventName, listenerFunc) {
-      const listeners = this.listeners[eventName];
-      if (!listeners) {
-        return;
-      }
-      const index = listeners.indexOf(listenerFunc);
-      if (index !== -1) {
-        this.listeners[eventName].splice(index, 1);
-      }
-      if (!this.listeners[eventName].length) {
-        this.removeWindowListener(this.windowListeners[eventName]);
-      }
-    }
-    addWindowListener(handle) {
-      window.addEventListener(handle.windowEventName, handle.handler);
-      handle.registered = true;
-    }
-    removeWindowListener(handle) {
-      if (!handle) {
-        return;
-      }
-      window.removeEventListener(handle.windowEventName, handle.handler);
-      handle.registered = false;
-    }
-    sendRetainedArgumentsForEvent(eventName) {
-      const args = this.retainedEventArguments[eventName];
-      if (!args) {
-        return;
-      }
-      delete this.retainedEventArguments[eventName];
-      args.forEach((arg) => {
-        this.notifyListeners(eventName, arg);
-      });
-    }
-  };
-  var encode = (str) => encodeURIComponent(str).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape);
-  var decode = (str) => str.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent);
-  var CapacitorCookiesPluginWeb = class extends WebPlugin {
-    async getCookies() {
-      const cookies = document.cookie;
-      const cookieMap = {};
-      cookies.split(";").forEach((cookie) => {
-        if (cookie.length <= 0)
-          return;
-        let [key, value] = cookie.replace(/=/, "CAP_COOKIE").split("CAP_COOKIE");
-        key = decode(key).trim();
-        value = decode(value).trim();
-        cookieMap[key] = value;
-      });
-      return cookieMap;
-    }
-    async setCookie(options) {
-      try {
-        const encodedKey = encode(options.key);
-        const encodedValue = encode(options.value);
-        const expires = options.expires ? `; expires=${options.expires.replace("expires=", "")}` : "";
-        const path = (options.path || "/").replace("path=", "");
-        const domain = options.url != null && options.url.length > 0 ? `domain=${options.url}` : "";
-        document.cookie = `${encodedKey}=${encodedValue || ""}${expires}; path=${path}; ${domain};`;
-      } catch (error) {
-        return Promise.reject(error);
-      }
-    }
-    async deleteCookie(options) {
-      try {
-        document.cookie = `${options.key}=; Max-Age=0`;
-      } catch (error) {
-        return Promise.reject(error);
-      }
-    }
-    async clearCookies() {
-      try {
-        const cookies = document.cookie.split(";") || [];
-        for (const cookie of cookies) {
-          document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, `=;expires=${(/* @__PURE__ */ new Date()).toUTCString()};path=/`);
-        }
-      } catch (error) {
-        return Promise.reject(error);
-      }
-    }
-    async clearAllCookies() {
-      try {
-        await this.clearCookies();
-      } catch (error) {
-        return Promise.reject(error);
-      }
-    }
-  };
-  var CapacitorCookies = registerPlugin("CapacitorCookies", {
-    web: () => new CapacitorCookiesPluginWeb()
-  });
-  var readBlobAsBase64 = async (blob) => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64String = reader.result;
-      resolve(base64String.indexOf(",") >= 0 ? base64String.split(",")[1] : base64String);
-    };
-    reader.onerror = (error) => reject(error);
-    reader.readAsDataURL(blob);
-  });
-  var normalizeHttpHeaders = (headers = {}) => {
-    const originalKeys = Object.keys(headers);
-    const loweredKeys = Object.keys(headers).map((k2) => k2.toLocaleLowerCase());
-    const normalized = loweredKeys.reduce((acc, key, index) => {
-      acc[key] = headers[originalKeys[index]];
-      return acc;
-    }, {});
-    return normalized;
-  };
-  var buildUrlParams = (params, shouldEncode = true) => {
-    if (!params)
-      return null;
-    const output = Object.entries(params).reduce((accumulator, entry) => {
-      const [key, value] = entry;
-      let encodedValue;
-      let item;
-      if (Array.isArray(value)) {
-        item = "";
-        value.forEach((str) => {
-          encodedValue = shouldEncode ? encodeURIComponent(str) : str;
-          item += `${key}=${encodedValue}&`;
-        });
-        item.slice(0, -1);
-      } else {
-        encodedValue = shouldEncode ? encodeURIComponent(value) : value;
-        item = `${key}=${encodedValue}`;
-      }
-      return `${accumulator}&${item}`;
-    }, "");
-    return output.substr(1);
-  };
-  var buildRequestInit = (options, extra = {}) => {
-    const output = Object.assign({ method: options.method || "GET", headers: options.headers }, extra);
-    const headers = normalizeHttpHeaders(options.headers);
-    const type = headers["content-type"] || "";
-    if (typeof options.data === "string") {
-      output.body = options.data;
-    } else if (type.includes("application/x-www-form-urlencoded")) {
-      const params = new URLSearchParams();
-      for (const [key, value] of Object.entries(options.data || {})) {
-        params.set(key, value);
-      }
-      output.body = params.toString();
-    } else if (type.includes("multipart/form-data") || options.data instanceof FormData) {
-      const form = new FormData();
-      if (options.data instanceof FormData) {
-        options.data.forEach((value, key) => {
-          form.append(key, value);
-        });
-      } else {
-        for (const key of Object.keys(options.data)) {
-          form.append(key, options.data[key]);
-        }
-      }
-      output.body = form;
-      const headers2 = new Headers(output.headers);
-      headers2.delete("content-type");
-      output.headers = headers2;
-    } else if (type.includes("application/json") || typeof options.data === "object") {
-      output.body = JSON.stringify(options.data);
-    }
-    return output;
-  };
-  var CapacitorHttpPluginWeb = class extends WebPlugin {
-    /**
-     * Perform an Http request given a set of options
-     * @param options Options to build the HTTP request
-     */
-    async request(options) {
-      const requestInit = buildRequestInit(options, options.webFetchExtra);
-      const urlParams = buildUrlParams(options.params, options.shouldEncodeUrlParams);
-      const url = urlParams ? `${options.url}?${urlParams}` : options.url;
-      const response = await fetch(url, requestInit);
-      const contentType = response.headers.get("content-type") || "";
-      let { responseType = "text" } = response.ok ? options : {};
-      if (contentType.includes("application/json")) {
-        responseType = "json";
-      }
-      let data;
-      let blob;
-      switch (responseType) {
-        case "arraybuffer":
-        case "blob":
-          blob = await response.blob();
-          data = await readBlobAsBase64(blob);
-          break;
-        case "json":
-          data = await response.json();
-          break;
-        case "document":
-        case "text":
-        default:
-          data = await response.text();
-      }
-      const headers = {};
-      response.headers.forEach((value, key) => {
-        headers[key] = value;
-      });
-      return {
-        data,
-        headers,
-        status: response.status,
-        url: response.url
-      };
-    }
-    /**
-     * Perform an Http GET request given a set of options
-     * @param options Options to build the HTTP request
-     */
-    async get(options) {
-      return this.request(Object.assign(Object.assign({}, options), { method: "GET" }));
-    }
-    /**
-     * Perform an Http POST request given a set of options
-     * @param options Options to build the HTTP request
-     */
-    async post(options) {
-      return this.request(Object.assign(Object.assign({}, options), { method: "POST" }));
-    }
-    /**
-     * Perform an Http PUT request given a set of options
-     * @param options Options to build the HTTP request
-     */
-    async put(options) {
-      return this.request(Object.assign(Object.assign({}, options), { method: "PUT" }));
-    }
-    /**
-     * Perform an Http PATCH request given a set of options
-     * @param options Options to build the HTTP request
-     */
-    async patch(options) {
-      return this.request(Object.assign(Object.assign({}, options), { method: "PATCH" }));
-    }
-    /**
-     * Perform an Http DELETE request given a set of options
-     * @param options Options to build the HTTP request
-     */
-    async delete(options) {
-      return this.request(Object.assign(Object.assign({}, options), { method: "DELETE" }));
-    }
-  };
-  var CapacitorHttp = registerPlugin("CapacitorHttp", {
-    web: () => new CapacitorHttpPluginWeb()
-  });
-  var SystemBarsStyle;
-  (function(SystemBarsStyle2) {
-    SystemBarsStyle2["Dark"] = "DARK";
-    SystemBarsStyle2["Light"] = "LIGHT";
-    SystemBarsStyle2["Default"] = "DEFAULT";
-  })(SystemBarsStyle || (SystemBarsStyle = {}));
-  var SystemBarType;
-  (function(SystemBarType2) {
-    SystemBarType2["StatusBar"] = "StatusBar";
-    SystemBarType2["NavigationBar"] = "NavigationBar";
-  })(SystemBarType || (SystemBarType = {}));
-  var SystemBarsPluginWeb = class extends WebPlugin {
-    async setStyle() {
-      this.unavailable("not available for web");
-    }
-    async setAnimation() {
-      this.unavailable("not available for web");
-    }
-    async show() {
-      this.unavailable("not available for web");
-    }
-    async hide() {
-      this.unavailable("not available for web");
-    }
-  };
-  var SystemBars = registerPlugin("SystemBars", {
-    web: () => new SystemBarsPluginWeb()
-  });
+  // src/app.js
+  init_dist();
 
   // src/speech.mjs
   function splitSpeechText(text, maxLength = 120) {
@@ -44938,15 +45591,15 @@ ${arabic}`;
     const words = lexicalTerms(value);
     return ((_a14 = words.find((word) => position >= word.start && position <= word.end)) == null ? void 0 : _a14.text) || "";
   }
-  function lookupOfflineWord(word = "", entries = []) {
-    const selected = String(word).trim().replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, "");
+  var ATTACHED_PRONOUN_SUFFIXES = Object.freeze(["le", "lo", "la", "ne", "ci", "vi", "li"]);
+  function lookupExactOfflineWord(selected, entries = []) {
     const needle = normalizeDictionaryWord(selected);
     const searchNeedle = normalizeSearchText(selected);
     if (!needle || !searchNeedle) return null;
     const generated = generatedDictionary.get(needle);
     if (generated == null ? void 0 : generated.translation_ar) {
       return {
-        word: String(word),
+        word: String(selected),
         italian: generated.word,
         arabic: String(generated.translation_ar),
         note: generated.note || "",
@@ -44959,9 +45612,9 @@ ${arabic}`;
       };
     }
     const entry = (Array.isArray(entries) ? entries : []).find((item) => normalizeSearchText((item == null ? void 0 : item.it) || "") === searchNeedle);
-    if (entry) return { word: String(word), italian: entry.it, arabic: entry.ar, note: entry.note || "", category: entry.category || "", source: "glossary", status: "legacy_glossary_needs_review", confidence: null };
+    if (entry) return { word: String(selected), italian: entry.it, arabic: entry.ar, note: entry.note || "", category: entry.category || "", source: "glossary", status: "legacy_glossary_needs_review", confidence: null };
     return generated ? {
-      word: String(word),
+      word: String(selected),
       italian: generated.word,
       arabic: "",
       note: generated.note || "",
@@ -44973,11 +45626,28 @@ ${arabic}`;
       hasLexicalTranslation: false
     } : null;
   }
+  function lookupOfflineWord(word = "", entries = []) {
+    const selected = String(word).trim().replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, "");
+    const exact = lookupExactOfflineWord(selected, entries);
+    if (exact) return exact;
+    const needle = normalizeDictionaryWord(selected);
+    for (const suffix of ATTACHED_PRONOUN_SUFFIXES) {
+      if (!needle.endsWith(suffix) || needle.length <= suffix.length + 3) continue;
+      const base = needle.slice(0, -suffix.length);
+      const directBase = lookupExactOfflineWord(base, entries);
+      if (directBase) return directBase;
+      if (base.endsWith("r")) {
+        const infinitive = lookupExactOfflineWord(`${base}e`, entries);
+        if (infinitive) return infinitive;
+      }
+    }
+    return null;
+  }
   function translateTappedWord(word = "", entries = []) {
     const selected = String(word).trim().replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, "");
     const match = lookupOfflineWord(selected, entries);
     const status = (match == null ? void 0 : match.status) || "missing";
-    const fallbackNote = status === "machine_draft_needs_review" ? "مسودة ترجمة آلية غير مراجعة؛ قد يختلف المعنى بحسب السياق." : status === "legacy_glossary_needs_review" ? "مدخل من القاموس المحلي يحتاج إلى مراجعة." : status === "reviewed_override" ? "مصطلح مروري معتمد للمشروع." : "لم يُسجَّل مقابل عربي مفرد لهذه الكلمة؛ لا تُنسب ترجمة الجملة إليها.";
+    const fallbackNote = status === "machine_draft_needs_review" ? "مسودة ترجمة آلية غير مراجعة؛ قد يختلف المعنى بحسب السياق." : status === "legacy_glossary_needs_review" ? "مدخل من القاموس المحلي يحتاج إلى مراجعة." : status === "reviewed_override" ? "مدخل معجمي معتمد." : "لم يُسجَّل مقابل عربي مفرد لهذه الكلمة؛ لا تُنسب ترجمة الجملة إليها.";
     return {
       word: selected,
       italian: (match == null ? void 0 : match.italian) || selected,
@@ -45393,7 +46063,7 @@ ${arabic}`;
               await sdk.setPersistence(auth, sdk.indexedDBLocalPersistence);
             } catch {
             }
-            const plugin = await import("@capacitor-firebase/authentication");
+            const plugin = await Promise.resolve().then(() => (init_esm2(), esm_exports));
             nativeAuth = plugin.FirebaseAuthentication;
           } else {
             try {

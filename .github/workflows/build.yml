@@ -31,8 +31,13 @@ jobs:
           cd android
           chmod +x gradlew
           ./gradlew --no-daemon :app:assembleDebug :app:testDebugUnitTest
+      - name: Verify merged manifest exposes Android speech services
+        run: |
+          merged_manifest="$(find android/app/build/intermediates -type f -name AndroidManifest.xml -path '*/merged_manifest*/debug/*' -print -quit)"
+          test -n "$merged_manifest"
+          grep -Fq 'android.intent.action.TTS_SERVICE' "$merged_manifest"
       - uses: actions/upload-artifact@v4
         with:
-          name: patente-b-v46-debug-apk
+          name: patente-b-v47-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error

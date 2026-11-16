@@ -9,15 +9,15 @@ const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const json = file => JSON.parse(read(file));
 
-test('v42 app dictionary contains auditable rows and excludes isolated letter artifacts', () => {
+test('v47 app dictionary contains auditable rows and excludes isolated letter artifacts', () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const questions = json('data/questions.json');
   assert.equal(dictionary.schema_version, 1);
   assert.equal(dictionary.metadata.source_question_count, questions.questions.length);
-  assert.equal(dictionary.metadata.app_release, 42);
+  assert.equal(dictionary.metadata.app_release, 47);
   assert.equal(dictionary.metadata.unique_question_bank_terms, 5273);
-  assert.equal(dictionary.metadata.total_entries, 5273);
-  assert.equal(dictionary.entries.length, 5273);
+  assert.equal(dictionary.metadata.total_entries, 5274);
+  assert.equal(dictionary.entries.length, 5274);
   assert.equal(new Set(dictionary.entries.map(row => row.word)).size, dictionary.entries.length);
   for (const row of dictionary.entries) {
     assert.ok(row.word);
@@ -29,7 +29,7 @@ test('v42 app dictionary contains auditable rows and excludes isolated letter ar
   }
 });
 
-test('existing and Abdul-approved v42 translations are marked reviewed; model drafts need review', () => {
+test('existing and Abdul-approved v42 corrections plus the v47 lemma are reviewed; model drafts need review', () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const byWord = new Map(dictionary.entries.map(row => [row.word, row]));
   for (const [word, arabic] of [
@@ -63,6 +63,11 @@ test('existing and Abdul-approved v42 translations are marked reviewed; model dr
     assert.equal(row.provider, 'Abdul');
     assert.equal(row.source, 'owner-approved-correction-v42');
   }
+  const requestedLemma = byWord.get('riconoscere');
+  assert.equal(requestedLemma.translation_ar, 'يتعرف على');
+  assert.equal(requestedLemma.source, 'user-requested-lemma-v47');
+  assert.equal(requestedLemma.status, 'reviewed_override');
+  assert.equal(requestedLemma.review_required, 0);
   assert.match(byWord.get('diano').note, /ليست كلمة إيطالية مستقلة/u);
   for (const artifact of ['b', 'f', 'g', 'h', 'p', 'v', 'x']) assert.equal(byWord.has(artifact), false);
   for (const row of dictionary.entries.filter(row => row.status === 'machine_draft_needs_review')) {
@@ -93,7 +98,7 @@ test('local word-lookup loader serves a single isolated word and never presents 
     ok: url === '/data/italian_arabic_dictionary_lookup.json',
     json: async () => dictionary,
   }));
-  assert.equal(loaded, 5273);
+  assert.equal(loaded, 5274);
   assert.equal(translation.wordAtOffset('La corsia è libera.', 4), 'corsia');
   const approved = translation.translateTappedWord('corsia', []);
   assert.equal(approved.word, 'corsia');
