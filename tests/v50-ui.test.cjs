@@ -46,17 +46,26 @@ function isDisallowed(token) {
   return nearWhite || yellow;
 }
 
-test('v51 identity is consistent across the PWA and Android package', () => {
-  assert.match(index, /data-app-version="51"/);
-  assert.match(read('package.json'), /"version": "51\.0\.0"/);
-  assert.match(read('package-lock.json'), /"version": "51\.0\.0"/);
-  assert.match(read('android/app/build.gradle'), /versionCode 51/);
-  assert.match(read('android/app/build.gradle'), /versionName "51\.0\.0"/);
+test('v52 identity is consistent across the PWA and Android package', () => {
+  assert.match(index, /data-app-version="52"/);
+  assert.match(read('package.json'), /"version": "52\.0\.0"/);
+  assert.match(read('package-lock.json'), /"version": "52\.0\.0"/);
+  assert.match(read('android/app/build.gradle'), /versionCode 52/);
+  assert.match(read('android/app/build.gradle'), /versionName "52\.0\.0"/);
   assert.match(read('android/app/build.gradle'), /applicationId "it\.patenteb\.sideload\.v29"/);
   assert.match(read('android/app/build.gradle'), /System\.getenv\('PATENTE_DEBUG_STORE_PASSWORD'\)/);
   assert.match(read('android/app/build.gradle'), /System\.getenv\('PATENTE_DEBUG_KEY_ALIAS'\)/);
   assert.match(read('android/app/build.gradle'), /System\.getenv\('PATENTE_DEBUG_KEY_PASSWORD'\)/);
-  assert.match(read('public/sw.js'), /patente-ar-v51-alpha-1/);
+  assert.match(read('public/sw.js'), /patente-ar-v52-dark-1/);
+});
+
+test('v52 applies the same legible dark palette in every theme preference', () => {
+  const dark = read('src/v52-dark-overhaul.css');
+  assert.match(index, /v52-dark-overhaul\.css\?v=52/);
+  assert.match(dark, /color-scheme:\s*dark/u);
+  assert.match(dark, /background-color:\s*#0b171d\s*!important/u);
+  assert.match(dark, /\.feedback\.good/u);
+  assert.match(dark, /\.feedback\.bad/u);
 });
 
 test('audio bar and rate selector are visible, labelled, and above mobile navigation', () => {

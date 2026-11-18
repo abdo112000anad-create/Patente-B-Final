@@ -84,7 +84,8 @@ test('v51 uses Web Speech only, with Italian lesson audio and no bundled local T
   assert.match(speech, /speechSynthesis|SpeechSynthesisUtterance/u);
   assert.match(speech, /getVoices\(\)/u);
   assert.match(app, /createSpeechController\(\{getRate:/u);
-  assert.match(app, /function playItalianAudio\(text\)/u);
+  assert.ok(app.includes("playItalianAudio} from './speech.mjs'"));
+  assert.match(speech, /export function playItalianAudio\(text\)/u);
   assert.match(mainActivity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);
   assert.match(mainActivity, /registerPlugin\(SpeechSettingsPlugin\.class\)/u);
   assert.doesNotMatch(`${app}\n${speech}\n${gradle}\n${manifest}\n${mainActivity}`, /Piper|piperAlpha|nativeTts|ONNX|sherpa-onnx|piper-phonemize/u);

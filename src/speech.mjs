@@ -24,6 +24,44 @@ export function splitSpeechText(text, maxLength = 120) {
   return chunks;
 }
 
+let isAudioUnlocked = false;
+
+export function playItalianAudio(text) {
+    if (!('speechSynthesis' in window)) {
+        console.log("TTS not supported");
+        return;
+    }
+
+    // حيلة تفعيل الصوت (إجباري في أندرويد)
+    if (!isAudioUnlocked) {
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance(''));
+        isAudioUnlocked = true;
+    }
+
+    window.speechSynthesis.cancel(); // إيقاف أي صوت سابق
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'it-IT';
+    utterance.rate = 0.8; // إبطاء السرعة
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+
+    // انتظار تحميل الأصوات في أندرويد
+    let voices = window.speechSynthesis.getVoices();
+    if (voices.length === 0) {
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = window.speechSynthesis.getVoices();
+            const itVoice = voices.find(v => v.lang.includes('it'));
+            if (itVoice) utterance.voice = itVoice;
+            window.speechSynthesis.speak(utterance);
+        };
+    } else {
+        const itVoice = voices.find(v => v.lang.includes('it'));
+        if (itVoice) utterance.voice = itVoice;
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
 export const ITALIAN_TTS_LOCALE = 'it-IT';
 export const ARABIC_TTS_LOCALE = 'ar-EG';
 const VOICE_WAIT_TIMEOUT_MS = 10_000;

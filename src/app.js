@@ -9,7 +9,7 @@ import {initializeProgressBackup} from './progress-backup.mjs';
 import {restoreActiveQuiz} from './session-recovery.mjs';
 import {loadCourseData} from './startup.mjs';
 import {Capacitor, registerPlugin} from '@capacitor/core';
-import {createSpeechController,buildLessonSpeechTexts,ITALIAN_TTS_LOCALE,ARABIC_TTS_LOCALE} from './speech.mjs';
+import {createSpeechController,buildLessonSpeechTexts,ITALIAN_TTS_LOCALE,ARABIC_TTS_LOCALE,playItalianAudio} from './speech.mjs';
 import {resolveLessonVisual} from './lesson-visual.mjs';
 import {lessonAnimationMarkup} from './lesson-animation.mjs';
 import {normalizeSearchText as norm, matchesSearchText, findRelevantQuestions} from './search.mjs';
@@ -54,35 +54,6 @@ document.querySelector('#speechSettingsButton')?.addEventListener('click',()=>{v
 document.querySelector('#speechRate')?.addEventListener('change',event=>{speechRate=Math.max(.70,Math.min(1.30,Number(event.target.value)||.85));event.target.value=String(speechRate);});
 void loadLocalWordDictionary();
 document.querySelector('#translationTooltipClose')?.addEventListener('click',()=>closeWordTooltip({restoreFocus:true}));
-
-function playItalianAudio(text) {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel(); // إيقاف أي صوت سابق
-
-    const attemptSpeak = () => {
-        const voices = window.speechSynthesis.getVoices();
-        if (voices.length === 0) {
-            setTimeout(attemptSpeak, 100); // انتظار تحميل الأصوات في أندرويد
-            return;
-        }
-
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'it-IT';
-        utterance.rate = 0.8; // إبطاء السرعة (بناءً على طلب المستخدم)
-        utterance.pitch = 1.0;
-
-        const itVoice = voices.find(v => v.lang.startsWith('it'));
-        if (itVoice) utterance.voice = itVoice;
-
-        try {
-            window.speechSynthesis.speak(utterance);
-        } catch (e) {
-            console.error(e);
-        }
-    };
-
-    setTimeout(attemptSpeak, 50); // تأخير بسيط إجباري لمتصفح أندرويد
-}
 
 function loadState(key=stateKey){
   const empty={favorites:new Set(),wrong:new Set(),solved:new Set(),correctCount:0,practiceCount:0,topicCorrect:{},topicTotal:{},completedLessons:new Set(),reviewedLessons:new Set(),sourceChecks:{},lastLessonKey:'',lastStudy:'',streak:0,questionStats:{},sessions:[],activeQuiz:null,fontSize:16,syncSetEdits:{}};
