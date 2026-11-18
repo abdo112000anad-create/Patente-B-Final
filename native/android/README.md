@@ -1,1 +1,3 @@
-The Capacitor wrapper includes `RewardedAdsPlugin.java` and `MainActivity.java` from `src/main/java/it/patenteb/sideload/v29/`. `MainActivity` registers rewarded ads before starting the bridge. Speech uses the browser Web Speech API only; there is no native TTS plugin or bundled speech model. The v29 local wrapper uses application ID `it.patenteb.sideload.v29`.
+مصادر إضافات Android التي ينسخها سكربت البناء إلى `android/app/src/main/java/it/patenteb/sideload/v29/`.
+
+تقتصر الإضافات الأصلية على الإعلانات الاختبارية وفتح إعدادات بيانات الصوت في Android. لا يوجد مشغّل صوت Android أصلي؛ النطق يتم عبر Web Speech في المتصفح باستخدام أصوات النظام المتاحة.

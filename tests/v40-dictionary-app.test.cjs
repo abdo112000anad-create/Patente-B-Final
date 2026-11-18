@@ -9,27 +9,28 @@ const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const json = file => JSON.parse(read(file));
 
-test('v42 app dictionary contains auditable rows and excludes isolated letter artifacts', () => {
+test('v49 app dictionary contains auditable rows and excludes isolated letter artifacts', () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const questions = json('data/questions.json');
   assert.equal(dictionary.schema_version, 1);
   assert.equal(dictionary.metadata.source_question_count, questions.questions.length);
-  assert.equal(dictionary.metadata.app_release, 42);
-  assert.equal(dictionary.metadata.unique_question_bank_terms, 5273);
-  assert.equal(dictionary.metadata.total_entries, 5273);
-  assert.equal(dictionary.entries.length, 5273);
+  assert.equal(dictionary.metadata.app_release, 51);
+  assert.equal(dictionary.metadata.unique_question_bank_terms, 5276);
+  assert.equal(dictionary.metadata.total_entries, 5278);
+  assert.equal(dictionary.entries.length, 5278);
   assert.equal(new Set(dictionary.entries.map(row => row.word)).size, dictionary.entries.length);
   for (const row of dictionary.entries) {
     assert.ok(row.word);
     assert.ok(row.source);
     assert.ok(row.provider);
-    assert.ok(['reviewed_override', 'legacy_glossary_needs_review', 'machine_draft_needs_review'].includes(row.status));
+    assert.ok(['reviewed_override', 'legacy_glossary_needs_review', 'machine_draft_needs_review', 'contextual_override_v49'].includes(row.status));
     assert.ok(row.confidence === null || Number.isFinite(row.confidence));
     assert.ok(row.review_required === 0 || row.review_required === 1);
   }
+  assert.equal(dictionary.metadata.counts_by_status.contextual_override_v49, 9);
 });
 
-test('existing and Abdul-approved v42 translations are marked reviewed; model drafts need review', () => {
+test('existing and Abdul-approved v42 corrections plus the v47 lemma are reviewed; model drafts need review', () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const byWord = new Map(dictionary.entries.map(row => [row.word, row]));
   for (const [word, arabic] of [
@@ -63,12 +64,39 @@ test('existing and Abdul-approved v42 translations are marked reviewed; model dr
     assert.equal(row.provider, 'Abdul');
     assert.equal(row.source, 'owner-approved-correction-v42');
   }
+  const requestedLemma = byWord.get('riconoscere');
+  assert.equal(requestedLemma.translation_ar, 'يتعرف على');
+  assert.equal(requestedLemma.source, 'user-requested-lemma-v47');
+  assert.equal(requestedLemma.status, 'reviewed_override');
+  assert.equal(requestedLemma.review_required, 0);
+  const spellingLemma = byWord.get('spiegazione');
+  assert.equal(spellingLemma.translation_ar, 'شرح / تفسير');
+  assert.equal(spellingLemma.source, 'user-requested-lemma-v51');
+  assert.equal(spellingLemma.status, 'reviewed_override');
+  assert.equal(spellingLemma.review_required, 0);
   assert.match(byWord.get('diano').note, /ليست كلمة إيطالية مستقلة/u);
   for (const artifact of ['b', 'f', 'g', 'h', 'p', 'v', 'x']) assert.equal(byWord.has(artifact), false);
   for (const row of dictionary.entries.filter(row => row.status === 'machine_draft_needs_review')) {
     assert.equal(row.review_required, 1);
     assert.equal(row.confidence, null);
     assert.equal(row.provider, 'opus-mt-local');
+  }
+});
+
+test('v49 contextual lookups cover the video terms and show their context note', async () => {
+  const dictionary = json('data/italian_arabic_dictionary_lookup.json');
+  const translation = await import(path.join(root, 'src/lesson-translation.mjs'));
+  translation.setGeneratedDictionary(dictionary.entries);
+  const expected = {
+    seguite: 'مُتَّبَعة', tra: 'بين', degli: 'مِنَ الـ / لِـ', essere: 'أن يكون / يكون',
+    prevalgono: 'تتقدّم على', senza: 'دون / بدون', questa: 'هذه', sottocategoria: 'فئة فرعية',
+    segnaletica: 'الإشارات المرورية',
+  };
+  for (const [word, arabic] of Object.entries(expected)) {
+    const result = translation.translateTappedWord(word, []);
+    assert.equal(result.arabic, arabic, word);
+    assert.equal(result.status, 'contextual_override_v49', word);
+    assert.match(result.note, /سياق|سياقي|تركيب/u, word);
   }
 });
 
@@ -90,10 +118,10 @@ test('local word-lookup loader serves a single isolated word and never presents 
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const translation = await import(path.join(root, 'src/lesson-translation.mjs'));
   const loaded = await translation.loadLocalWordDictionary('/data/italian_arabic_dictionary_lookup.json', async url => ({
-    ok: url === '/data/italian_arabic_dictionary_lookup.json',
-    json: async () => dictionary,
-  }));
-  assert.equal(loaded, 5273);
+  ok: url === '/data/italian_arabic_dictionary_lookup.json',
+  json: async () => dictionary,
+}));
+  assert.equal(loaded, 5278);
   assert.equal(translation.wordAtOffset('La corsia è libera.', 4), 'corsia');
   const approved = translation.translateTappedWord('corsia', []);
   assert.equal(approved.word, 'corsia');

@@ -43,7 +43,7 @@ test('unknown lesson word falls back to the paired local sentence without a netw
   assert.equal(result.alignment, 'paragraph');
 });
 
-test('v45 UI uses a non-modal bottom sheet, single-tap word lookup, and true pairwise comparison controls', () => {
+test('v46 UI uses a non-modal bottom sheet, single-tap word lookup, and true pairwise comparison controls', () => {
   const index = read('index.html');
   const app = read('src/app.js');
   assert.match(index, /id="wordTranslationTooltip"[^>]*role="dialog"/u);
@@ -67,7 +67,7 @@ test('a single click opens the tapped word card without a long-press timer', () 
   assert.doesNotMatch(app, /wordHoldTimer|heldItalianTarget|setTimeout\(\(\)=>\{openTappedWord/u);
 });
 
-test('v43 keeps audio controls and has no native Piper path', () => {
+test('v51 keeps Web Speech lesson controls and removes native/local TTS paths', () => {
   const index = read('index.html');
   const app = read('src/app.js');
   const speech = read('src/speech.mjs');
@@ -75,13 +75,16 @@ test('v43 keeps audio controls and has no native Piper path', () => {
   assert.match(index, /data-audio-backend="web-speech"/u);
   assert.match(index, /speechPlaybackBar/u);
   assert.match(app, /createSpeechController\(\{getRate:/u);
+  assert.match(app, /playItalianAudio\(lessonItalianAudio\.dataset\.ttsText/u);
   assert.match(speech, /SpeechSynthesisUtterance|speechSynthesis/u);
-  assert.doesNotMatch(`${app}\n${speech}\n${mainActivity}`, /PiperTts|nativeTts|sherpa-onnx|piper-phonemize/u);
+  assert.doesNotMatch(`${app}\n${speech}\n${mainActivity}`, /Piper|nativeTts|nativeEngineDisabled|ONNX/u);
   assert.match(mainActivity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);
+  assert.match(mainActivity, /registerPlugin\(SpeechSettingsPlugin\.class\)/u);
 });
 
-test('old 2D animation is not rendered until real 3D content is available', () => {
+test('lesson renders accessible topic-specific 2D diagrams without claiming 3D', () => {
   const animation = read('src/lesson-animation.mjs');
-  assert.match(animation, /lesson-animation-unavailable/u);
-  assert.doesNotMatch(animation, /\$\{sceneSvg\(type\)\}/u);
+  assert.match(animation, /\$\{sceneSvg\(type\)\}/u);
+  assert.match(animation, /role="img" aria-label="\$\{escapeHtml\(sceneDescription\)\}"/u);
+  assert.doesNotMatch(animation, /lesson-animation-unavailable|3D animation is not available/u);
 });

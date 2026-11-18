@@ -45,15 +45,44 @@ let progressStorageAvailable=true;
 let lessonAccess=null,pendingLessonRequest=null,adConsentPromise=Promise.resolve(null);
 const state=loadState();Object.assign(state,loadUiPreferences());
 const setEditTracker=createSetEditTracker(state);
-let speechRate=1;
-const speechController=createSpeechController({getRate:()=>speechRate,onStateChange:syncSpeechControls});
+let speechRate=.8;
+const speechController=createSpeechController({getRate:()=>speechRate,onStateChange:syncSpeechControls,onWordProgress:syncItalianSpeechHighlight});
 document.body.dataset.audioBackend='web-speech';
 document.querySelector('#speechToggle')?.addEventListener('click',()=>speechController.toggle());
 document.querySelector('#speechStop')?.addEventListener('click',()=>stopSpeech());
 document.querySelector('#speechSettingsButton')?.addEventListener('click',()=>{void openSpeechSettings();});
-document.querySelector('#speechRate')?.addEventListener('change',event=>{speechRate=Math.max(.70,Math.min(1.30,Number(event.target.value)||1));});
+document.querySelector('#speechRate')?.addEventListener('change',event=>{speechRate=Math.max(.70,Math.min(1.30,Number(event.target.value)||.85));event.target.value=String(speechRate);});
 void loadLocalWordDictionary();
 document.querySelector('#translationTooltipClose')?.addEventListener('click',()=>closeWordTooltip({restoreFocus:true}));
+
+function playItalianAudio(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel(); // إيقاف أي صوت سابق
+
+    const attemptSpeak = () => {
+        const voices = window.speechSynthesis.getVoices();
+        if (voices.length === 0) {
+            setTimeout(attemptSpeak, 100); // انتظار تحميل الأصوات في أندرويد
+            return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'it-IT';
+        utterance.rate = 0.8; // إبطاء السرعة (بناءً على طلب المستخدم)
+        utterance.pitch = 1.0;
+
+        const itVoice = voices.find(v => v.lang.startsWith('it'));
+        if (itVoice) utterance.voice = itVoice;
+
+        try {
+            window.speechSynthesis.speak(utterance);
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    setTimeout(attemptSpeak, 50); // تأخير بسيط إجباري لمتصفح أندرويد
+}
 
 function loadState(key=stateKey){
   const empty={favorites:new Set(),wrong:new Set(),solved:new Set(),correctCount:0,practiceCount:0,topicCorrect:{},topicTotal:{},completedLessons:new Set(),reviewedLessons:new Set(),sourceChecks:{},lastLessonKey:'',lastStudy:'',streak:0,questionStats:{},sessions:[],activeQuiz:null,fontSize:16,syncSetEdits:{}};
@@ -97,23 +126,42 @@ function lessonVideoCTA(lesson,moduleId,index){
 }
 function shuffle(array){const out=[...array];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()* (i+1));[out[i],out[j]]=[out[j],out[i]];}return out;}
 function showToast(it,ar){toastNode.innerHTML=pair(it,ar,'toast-pair');toastNode.classList.add('show');clearTimeout(toastHandle);toastHandle=setTimeout(()=>toastNode.classList.remove('show'),3200);}
-function syncSpeechControls({status='idle',button=null,locale='',progress=0,voiceName='',voiceSource='browser',error='',needsSpeechSettings=false}={}){
+function syncSpeechControls({status='idle',button=null,locale='',progress=0,voiceName='',error='',needsSpeechSettings=false}={}){
+  if(status==='idle'||status==='error')clearLessonWordHighlight(button);
   const bar=document.querySelector('#speechPlaybackBar');if(!bar)return;
   const active=status!=='idle',playing=status==='playing',paused=status==='paused',failed=status==='error';
   bar.hidden=!active;
+  document.body.classList.toggle('audio-player-open',active);
   const toggle=document.querySelector('#speechToggle'),playIcon=document.querySelector('#speechIconPlay'),pauseIcon=document.querySelector('#speechIconPause'),progressBar=document.querySelector('#speechProgress'),rate=document.querySelector('#speechRate'),debug=document.querySelector('#speechVoiceDebug'),statusNode=document.querySelector('#speechPlaybackStatus'),notice=document.querySelector('#speechPlaybackNotice'),settingsButton=document.querySelector('#speechSettingsButton');
   if(toggle){toggle.setAttribute('aria-pressed',String(playing));toggle.setAttribute('aria-label',paused?'استئناف الصوت':playing?'إيقاف الصوت مؤقتًا':'تشغيل الصوت');}
   if(playIcon)playIcon.hidden=playing;
   if(pauseIcon)pauseIcon.hidden=!playing;
   if(progressBar){progressBar.value=active?Math.max(0,Math.min(1,Number(progress)||0)):0;progressBar.setAttribute('aria-valuenow',String(Math.round(progressBar.value*100)));}
-  if(rate){rate.value=String(speechRate);rate.setAttribute('aria-label','سرعة الصوت');}
+  if(rate){rate.value=String(speechRate);rate.setAttribute('aria-label','سرعة الصوت الإيطالي');}
   const selectedVoice=voiceName||((String(locale).toLowerCase().startsWith('it'))?'صوت إيطالي على الجهاز':locale?'صوت عربي على الجهاز':'اختر اللغة');
   const browserVoice=String(locale).toLowerCase().startsWith('it')?'نطق إيطالي على الجهاز':'نطق عربي على الجهاز';
   if(debug){debug.textContent=failed?(error||'تعذّر تشغيل الصوت'):`${selectedVoice||browserVoice}`;debug.dataset.qualityHint='device-speech';}
-  if(statusNode)statusNode.textContent=failed?(error||'تعذّر تشغيل الصوت'):status==='preparing'?'جارٍ تجهيز الصوت...':paused?'الصوت متوقف مؤقتًا':playing?'الصوت يعمل':'';
+  if(statusNode)statusNode.textContent=failed?(error||'تعذّر تشغيل الصوت'):status==='preparing'?'جارٍ تجهيز صوت الجهاز...':paused?'الصوت متوقف مؤقتًا':playing?'الصوت يعمل':'';
+
   if(notice)notice.hidden=!statusNode?.textContent;
   if(settingsButton)settingsButton.hidden=!needsSpeechSettings||!Capacitor.isNativePlatform()||typeof NativeSpeechSettings.openVoiceDataSettings!=='function';
   if(button){button.classList.toggle('speaking',playing);button.classList.toggle('speech-paused',paused);button.classList.toggle('speech-error',failed);button.setAttribute('aria-pressed',String(playing));}
+}
+function clearLessonWordHighlight(button=null){
+  const scope=button?.closest?.('.lesson-detail-page')||main;
+  scope?.querySelectorAll('.speech-current-word').forEach(node=>{node.classList.remove('speech-current-word');node.removeAttribute('aria-current');});
+}
+function syncItalianSpeechHighlight({button=null,locale='',charIndex=0,status='progress'}={}){
+  const page=button?.closest?.('.lesson-detail-page');
+  if(!page||button.dataset.lessonItalianAudio!=='true')return;
+  if(status==='clear'||!String(locale).toLowerCase().startsWith('it')){clearLessonWordHighlight(button);return;}
+  const root=page.querySelector('.lesson-it-text');
+  const raw=String(root?.dataset.rawText||'');
+  const offset=Math.floor(Number(charIndex)||0)-Number(button.dataset.lessonBodyOffset||0);
+  if(!root||offset<0||offset>=raw.length){clearLessonWordHighlight(button);return;}
+  const words=[...root.querySelectorAll('[data-speech-start]')];
+  const active=words.find(node=>{const start=Number(node.dataset.speechStart),end=start+node.textContent.length;return offset>=start&&offset<end;})||words.find(node=>Number(node.dataset.speechStart)>=offset);
+  words.forEach(node=>{const selected=node===active;node.classList.toggle('speech-current-word',selected);if(selected)node.setAttribute('aria-current','true');else node.removeAttribute('aria-current');});
 }
 async function openSpeechSettings(){
   if(!Capacitor.isNativePlatform()||typeof NativeSpeechSettings.openVoiceDataSettings!=='function'){showToast('Speech data settings are unavailable here.','إعدادات بيانات النطق غير متاحة هنا.');return;}
@@ -250,6 +298,24 @@ function dashboardIcon(name){
   };
   return `<svg class="tool-svg" viewBox="0 0 24 24" aria-hidden="true">${paths[name]||paths.book}</svg>`;
 }
+function courseUnitIllustration(module){
+  const paths={
+    'road-basics':'<path d="M5 21 9 3h6l4 18M12 4v3m0 4v4m0 4v2"/>',
+    'signs':'<path d="m12 3 9 17H3L12 3Z"/><path d="M12 9v5m0 3h.01"/>',
+    'signals-markings':'<rect x="7" y="3" width="10" height="17" rx="3"/><circle cx="12" cy="8" r="1.7"/><circle cx="12" cy="13" r="1.7"/><path d="M12 20v2"/>',
+    'priority-intersections':'<path d="M3 9h18M9 3v18M15 3v18M3 15h18"/><path d="m15 8 3 1-3 1"/>',
+    'movement-overtaking':'<path d="M4 20 8 4h8l4 16M12 5v4m0 4v5"/><path d="m16 8 3 3-3 3"/>',
+    'speed-stopping-highways':'<path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 14 4-4M7 18h10"/>',
+    'vehicle-safety':'<path d="m3 15 2-6h14l2 6v4H3zM6 9l2-4h8l2 4"/><circle cx="7" cy="17" r="1.5"/><circle cx="17" cy="17" r="1.5"/>',
+    'documents-liability':'<path d="M6 3h9l4 4v14H6zM15 3v5h4M9 12h7m-7 4h7"/>',
+    'driver-health-environment':'<circle cx="12" cy="7" r="3"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M9 15l3 2 3-2"/>',
+    'exam-supplement-driver':'<path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/>',
+    'exam-supplement-vehicle':'<path d="m3 15 2-6h14l2 6v4H3zM6 9l2-4h8l2 4"/><circle cx="7" cy="17" r="1.5"/><circle cx="17" cy="17" r="1.5"/>',
+  };
+  const fallback='<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 6h13M8 10h7M8 14h7"/>';
+  const label=esc(`${module.title_it} / ${module.title_ar}`);
+  return `<span class="course-unit-art"><svg viewBox="0 0 24 24" role="img" aria-label="${label}" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths[module.module_id]||fallback}</svg></span>`;
+}
 function homePage(){
   const prog=courseProgress(),next=nextCourseLesson(),accuracy=state.practiceCount?Math.round(state.correctCount/state.practiceCount*100):0,totalLessons=prog.all.length;
   const reviewAlert=state.wrong.size?`<aside class="recommendation-banner"><div>${pair('A few questions are ready for another look.','لديك أسئلة تستحق مراجعة أخرى.')}</div><button class="small-button" data-action="mistakes">${controlLabel(`Review ${state.wrong.size} mistakes`,`راجع ${state.wrong.size.toLocaleString('ar')} أخطاء`)}</button></aside>`:'';
@@ -267,7 +333,7 @@ function homePage(){
       const accessLabel=!accessible?controlLabel('Locked · test ad','مقفل · إعلان اختباري'):!free?controlLabel('Unlocked this session','مفتوح لهذه الجلسة'):complete?controlLabel('Completed','مكتمل'):controlLabel('Open lesson','افتح الدرس');
       return `<button class="course-lesson-row ${accessible?'':'is-locked'}" type="button" data-open-lesson="${esc(module.module_id)}" data-lesson-index="${li}" data-course-lesson-row data-search="${esc(searchText)}"><span class="lesson-row-mark ${complete?'is-done':''}" aria-hidden="true">${complete?'✓':String(li+1).padStart(2,'0')}</span><span class="course-lesson-copy">${pair(lesson.heading_it,lesson.heading_ar,'course-lesson-heading')}<small>${accessLabel}</small></span><span class="course-row-arrow" aria-hidden="true">›</span></button>`;
     }).join('');
-    return `<details class="course-accordion" data-course-unit><summary><span class="course-unit-number">${String(mi+1).padStart(2,'0')}</span><span class="course-accordion-title">${pair(module.title_it,module.title_ar,'unit-title')}</span><span class="unit-progress"><strong>${done.toLocaleString('ar')}/${module.lessons.length.toLocaleString('ar')}</strong><small>${pair('lezioni','دروس')}</small></span><span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-accordion-lessons"><p class="course-unit-intro">${pair(module.intro_it,module.intro_ar)}</p>${lessons}</div></details>`;
+    return `<details class="course-accordion" data-course-unit><summary><span class="course-unit-number">${String(mi+1).padStart(2,'0')}</span>${courseUnitIllustration(module)}<span class="course-accordion-title">${pair(module.title_it,module.title_ar,'unit-title')}</span><span class="unit-progress"><strong>${done.toLocaleString('ar')}/${module.lessons.length.toLocaleString('ar')}</strong><small>${pair('lezioni','دروس')}</small></span><span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-accordion-lessons"><p class="course-unit-intro">${pair(module.intro_it,module.intro_ar)}</p>${lessons}</div></details>`;
   }).join('');
   return `${resumeBanner}${reviewAlert}
   <details class="home-progress-details"><summary>${pair('Il tuo progresso','تقدمك الدراسي')}<span class="accordion-chevron" aria-hidden="true"></span></summary><section class="study-stats" aria-label="Panoramica dello studio · ملخص الدراسة"><div>${pair('Banca dati dei quiz','بنك الأسئلة')}<strong>${bank.count.toLocaleString('ar')}</strong></div><div>${pair('Precisione negli esercizi','دقة التدريب')}<strong>${accuracy.toLocaleString('ar')}%</strong></div><div>${pair('Lezioni completate','الدروس المكتملة')}<strong>${prog.complete.toLocaleString('ar')} / ${prog.all.length.toLocaleString('ar')}</strong></div><div>${pair('Giorni consecutivi di studio','أيام المذاكرة المتتالية')}<strong>${state.streak.toLocaleString('ar')}</strong></div></section></details>
@@ -283,11 +349,11 @@ function lessonDetailPage(moduleId,index){
   const module=lessonModules.find(m=>m.module_id===moduleId),lesson=module?.lessons[index];
   if(!module||!lesson)return `<div class="empty-state">${pair('Lesson not found','لم نعثر على الدرس')}<button class="quiet-button" data-view="home">${controlLabel('Back to the course','العودة إلى المنهج')}</button></div>`;
   const all=flatLessons(),at=all.findIndex(x=>x.key===lessonKey(moduleId,index)),prev=all[at-1],next=all[at+1],key=lessonKey(moduleId,index),done=state.completedLessons.has(key);
-  const {italian:lessonText,arabic:lessonTextAr}=buildLessonSpeechTexts(lesson);
+  const {italian:lessonText}=buildLessonSpeechTexts(lesson);
   const sourceList=[...(module.sources||[]),...(lesson.sources||[])].filter((item,index,all)=>item?.url&&all.findIndex(other=>other.url===item.url)===index);
   const sources=sourceList.map(source=>{const label=sourceLabel(source);return `<li><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${pair(label.it,label.ar,'source-link')}</a><small>${pair(source.legal_reference_it||'Riferimento normativo ufficiale',source.legal_reference||'مرجع قانوني رسمي')}</small></li>`;}).join('');
   return `<article class="lesson-detail-page" data-lesson-page="${esc(key)}"><header class="lesson-detail-head"><div class="eyebrow" lang="it">UNITÀ ${String(module.order_hint).padStart(2,'0')} · LEZIONE ${String(index+1).padStart(2,'0')}</div><h1>${pair(lesson.heading_it,lesson.heading_ar,'detail-title')}</h1></header>
-  <div class="lesson-audio-row" role="group" aria-label="محتوى الدرس"><button class="audio-button" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc(lessonText)}">${controlLabel('Ascolta in italiano','استمع بالإيطالية')}</button><button class="audio-button" data-tts-locale="${ARABIC_TTS_LOCALE}" data-tts-text="${esc(lessonTextAr)}">${controlLabel('Ascolta in arabo (voce del dispositivo)','استمع بالعربية بصوت الجهاز')}</button>${lessonVideoBlock(lesson,moduleId,index)}</div>
+  <div class="lesson-audio-row" role="group" aria-label="محتوى الدرس"><button class="audio-button" data-lesson-italian-audio="true" data-lesson-body-offset="${String(lesson.heading_it||'').trim().length+(lesson.body_it?2:0)}" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc(lessonText)}">${controlLabel('Ascolta in italiano','استمع بالإيطالية')}</button>${lessonVideoBlock(lesson,moduleId,index)}</div>
   <div class="lesson-detail-copy">${renderLessonSections(lesson,lessonAnimationMarkup(lesson,module.module_id))}</div>
   <details class="lesson-sources" data-lesson-section="sources"><summary>${pair('Fonti ufficiali · apri per consultarle','مصادر رسمية · افتح لعرضها')}<span class="accordion-chevron" aria-hidden="true"></span></summary><ul>${sources}</ul></details>
   ${lessonVideoCTA(lesson,moduleId,index)}
@@ -604,11 +670,11 @@ function playLessonExplainer(button){
   setLessonExplainerStep(0);
   setLessonExplainerPlaybackState(scene,'playing');
   const stages=lesson.visual_script?.stages||[];
-  const intros=['الفكرة الأساسية:','مثال:','انتبه إلى الخطأ الشائع:'];
-  const fallback=[lesson.core_ar||lesson.body_ar,lesson.example_ar,lesson.common_mistakes?.[0]?.mistake_ar||lesson.pitfall_ar];
+  const intros=['Idea principale:','Esempio:','Attenzione all’errore comune:'];
+  const fallback=[lesson.core_it||lesson.body_it,lesson.example_it,lesson.common_mistakes?.[0]?.mistake_it||lesson.pitfall_it];
   const visualStageExcerpt=(text,max=190)=>{const value=String(text||'').trim();if(value.length<=max)return value;const boundary=value.slice(0,max).lastIndexOf(' ');return `${value.slice(0,boundary>max*.55?boundary:max).trim()}…`;};
-  const segments=Array.from({length:3},(_,index)=>({text:`${intros[index]} ${visualStageExcerpt(stages[index]?.text_ar||fallback[index]||'')}`}));
-  void speechController.speakSequence(segments,ARABIC_TTS_LOCALE,button,index=>setLessonExplainerStep(index)).finally(()=>{if(button.isConnected&&!speechController.isActive(button))setLessonExplainerPlaybackState(scene,'idle');});
+  const segments=Array.from({length:3},(_,index)=>({text:`${intros[index]} ${visualStageExcerpt(stages[index]?.text_it||fallback[index]||'')}`}));
+  void speechController.speakSequence(segments,ITALIAN_TTS_LOCALE,button,index=>setLessonExplainerStep(index)).finally(()=>{if(button.isConnected&&!speechController.isActive(button))setLessonExplainerPlaybackState(scene,'idle');});
 }
 const profileControlGroups={
   profileAccountControls:['.account-trigger'],
@@ -703,16 +769,21 @@ function offlineCacheLabel(){if(offlineCacheState==='ready')return 'دون ات�
 function updateConnectivity(){const offline=!navigator.onLine,root=document.querySelector('#connectivityIndicator'),status=document.querySelector('#connectivityStatus'),detail=document.querySelector('#connectivityDetail');root?.classList.toggle('is-offline',offline);if(status)status.textContent=offline?'Offline':'Online';if(detail)detail.textContent=`${offline?'غير متصل':'متصل'} · ${offlineCacheLabel()}`;}
 window.addEventListener('online',updateConnectivity);window.addEventListener('offline',updateConnectivity);updateConnectivity();
 if('serviceWorker'in navigator)navigator.serviceWorker.addEventListener('message',event=>{const data=event.data;if(data?.type!=='OFFLINE_CACHE_STATUS')return;offlineCacheState=data.status==='ready'?'ready':data.status==='partial'?'partial':'unavailable';offlineCacheStats={imageCached:data.imageCached,imageTotal:data.imageTotal,coreCached:data.coreCached,coreTotal:data.coreTotal};updateConnectivity();});
-function vocabularyMarkup(text){
-  const wordMarkup=(value,index=-1,entry=null)=>String(value).replace(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu,word=>index>=0?`<span class="wt-word inline-vocabulary-term" role="button" tabindex="0" data-vocabulary-index="${index}" aria-haspopup="dialog" aria-label="${esc(`${entry.it}: ${entry.ar}`)}">${esc(word)}</span>`:`<span class="wt-word" role="button" tabindex="0" data-tap-word="${esc(word)}" aria-haspopup="dialog" aria-label="${esc(`Traduci ${word} · ترجمة ${word}`)}">${esc(word)}</span>`);
-  const matches=findGlossaryMatches(text);if(!matches.length)return wordMarkup(text);let cursor=0,html='';
-  for(const match of matches){const index=glossaryEntries.indexOf(match.entry);if(index<0||match.start<cursor)continue;html+=wordMarkup(text.slice(cursor,match.start));html+=wordMarkup(text.slice(match.start,match.end),index,match.entry);cursor=match.end;}
-  return html+wordMarkup(text.slice(cursor));
+function vocabularyMarkup(text,baseOffset=0){
+  const value=String(text);
+  const speechWords=(segment,offset)=>{let cursor=0,html='';for(const match of segment.matchAll(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu)){html+=esc(segment.slice(cursor,match.index));html+=`<span class="speech-word" data-speech-start="${offset+match.index}">${esc(match[0])}</span>`;cursor=match.index+match[0].length;}return html+esc(segment.slice(cursor));};
+  const wordMarkup=(segment,index=-1,entry=null,offset=0)=>{
+    if(index>=0)return `<span class="wt-word inline-vocabulary-term" role="button" tabindex="0" data-vocabulary-index="${index}" aria-haspopup="dialog" aria-label="${esc(`${entry.it}: ${entry.ar}`)}">${speechWords(segment,offset)}</span>`;
+    let cursor=0,html='';for(const match of segment.matchAll(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu)){html+=esc(segment.slice(cursor,match.index));const word=match[0];html+=`<span class="wt-word speech-word" data-speech-start="${offset+match.index}" role="button" tabindex="0" data-tap-word="${esc(word)}" aria-haspopup="dialog" aria-label="${esc(`Traduci ${word} · ترجمة ${word}`)}">${esc(word)}</span>`;cursor=match.index+word.length;}return html+esc(segment.slice(cursor));
+  };
+  const matches=findGlossaryMatches(value);if(!matches.length)return wordMarkup(value,-1,null,baseOffset);let cursor=0,html='';
+  for(const match of matches){const index=glossaryEntries.indexOf(match.entry);if(index<0||match.start<cursor)continue;html+=wordMarkup(value.slice(cursor,match.start),-1,null,baseOffset+cursor);html+=wordMarkup(value.slice(match.start,match.end),index,match.entry,baseOffset+match.start);cursor=match.end;}
+  return html+wordMarkup(value.slice(cursor),-1,null,baseOffset+cursor);
 }
 function lessonSentenceMarkup(text){
   const value=String(text),sentences=splitSentences(value);if(!sentences.length)return vocabularyMarkup(value);let cursor=0,html='';
-  for(const sentence of sentences){const start=value.indexOf(sentence,cursor);if(start<0)continue;html+=vocabularyMarkup(value.slice(cursor,start));html+=`<span class="lesson-sentence" data-sentence-tap="true" data-sentence-offset="${start}" data-sentence-end="${start+sentence.length}">${vocabularyMarkup(sentence)}</span><button type="button" class="sentence-translation-trigger" data-sentence-translate="${start}" aria-label="Translate this sentence · ترجم الجملة" title="Translate this sentence · ترجم الجملة">↔</button>`;cursor=start+sentence.length;}
-  return html+vocabularyMarkup(value.slice(cursor));
+  for(const sentence of sentences){const start=value.indexOf(sentence,cursor);if(start<0)continue;html+=vocabularyMarkup(value.slice(cursor,start),cursor);html+=`<span class="lesson-sentence" data-sentence-tap="true" data-sentence-offset="${start}" data-sentence-end="${start+sentence.length}">${vocabularyMarkup(sentence,start)}</span><button type="button" class="sentence-translation-trigger" data-sentence-translate="${start}" aria-label="Translate this sentence · ترجم الجملة" title="Translate this sentence · ترجم الجملة">↔</button>`;cursor=start+sentence.length;}
+  return html+vocabularyMarkup(value.slice(cursor),cursor);
 }
 function translationOffsetAtPoint(root,x,y){
   let point=null;try{point=document.caretPositionFromPoint?.(x,y)||document.caretRangeFromPoint?.(x,y);}catch{}
@@ -754,6 +825,7 @@ function showWordTooltip(node,event,word,entry=null){
   if(event?.detail===0)document.querySelector('#translationTooltipClose')?.focus({preventScroll:true});
 }
 function openTappedWord(node,event={}){
+  closeWordTooltip();
   const indexed=node?.dataset?.vocabularyIndex!==undefined?glossaryEntries[Number(node.dataset.vocabularyIndex)]:null;
   const italianNode=node?.matches?.('.lesson-it-text,.q-it,.italian-question,.pair-it,[lang="it"]')?node:node?.closest?.('.lesson-it-text,.q-it,.italian-question,.pair-it,[lang="it"]')||node;
   const offset=italianNode&&event?translationOffsetAtPoint(italianNode,event.clientX||0,event.clientY||0):0;
@@ -767,9 +839,8 @@ function showInlineSentenceTranslation(trigger,event){
   const placement=selectedSentence||[...italianNode.querySelectorAll('.lesson-sentence[data-sentence-offset]')].find(sentence=>Number(sentence.dataset.sentenceOffset)===offset)||italianNode;
   body?.querySelector('.inline-sentence-translation')?.remove();languagePair?.parentElement?.querySelector('.inline-sentence-translation')?.remove();
   const note=document.createElement('div');note.className='inline-sentence-translation';note.setAttribute('role','status');note.setAttribute('aria-live','polite');
-  const italian=document.createElement('span');italian.lang='it';italian.dir='ltr';italian.textContent=matched.source;
   const arabic=document.createElement('span');arabic.lang='ar';arabic.dir='rtl';arabic.textContent=matched.translation;
-  const detail=document.createElement('small');detail.textContent=`${matched.note} مطابقة محلية بحسب ترتيب النصين، وليست محرك ترجمة سياقيًا.`;note.append(italian,arabic,detail);placement.insertAdjacentElement('afterend',note);
+  note.append(arabic);placement.insertAdjacentElement('afterend',note);
 }
 function openVocabularyCard(rawIndex,event){
   const entry=glossaryEntries[Number(rawIndex)];if(!entry)return;
@@ -777,7 +848,7 @@ function openVocabularyCard(rawIndex,event){
   showWordTooltip(anchor||document.querySelector(`.wt-word[data-vocabulary-index="${Number(rawIndex)}"]`),event,entry.it,entry);
 }function enhanceLessonVocabulary(){
   for(const node of main.querySelectorAll('.lesson-it-text:not([data-vocabulary-ready])')){const text=node.textContent||'';node.dataset.rawText=text;node.innerHTML=lessonSentenceMarkup(text);node.dataset.vocabularyReady='true';node.dataset.translationTappable='true';node.tabIndex=0;node.setAttribute('role','group');node.setAttribute('aria-label','Testo italiano della lezione. Premi Invio per mostrare la traduzione araba · نص الدرس بالإيطالية؛ اضغط Enter لإظهار ترجمته العربية');}
-  const heading=main.querySelector('.lesson-content-block h2');if(heading&&!heading.nextElementSibling?.classList.contains('inline-vocabulary-hint'))heading.insertAdjacentHTML('afterend',`<p class="inline-vocabulary-hint">${pair('Tieni premuta una parola italiana per aprire il suggerimento; la tastiera può attivarlo con Invio o Spazio. Le frasi si traducono sotto il testo.','اضغط مطولًا على كلمة إيطالية لعرض فقاعة ترجمة؛ ولوحة المفاتيح تفتحها بـ Enter أو المسافة. اضغط رمز السهم لترجمة الجملة أسفلها.')}</p>`);
+  const heading=main.querySelector('.lesson-content-block h2');if(heading&&!heading.nextElementSibling?.classList.contains('inline-vocabulary-hint'))heading.insertAdjacentHTML('afterend',`<p class="inline-vocabulary-hint">${pair('Tocca una parola per tradurre','انقر على الكلمة للترجمة')}</p>`);
 }
 function quickStudyGuideMarkup(){
   return `<details class="quick-study-guide" data-quick-guide><summary>${pair('È la prima volta? Inizia con tre semplici passi','جديد هنا؟ ابدأ بثلاث خطوات بسيطة')}<span class="accordion-chevron" aria-hidden="true"></span></summary><div class="quick-study-steps"><article><strong>01</strong><div>${pair('Studia una breve lezione bilingue','تعلّم درسًا ثنائي اللغة')}</div><button class="small-button" data-action="continue-course">${controlLabel('Apri la prossima lezione','افتح الدرس التالي')}</button></article><article><strong>02</strong><div>${pair('Esercitati per argomento e ripassa gli errori','تدرّب حسب الموضوع وراجع أخطاءك')}</div><button class="small-button" data-action="smart-practice">${controlLabel('Inizia con 10 domande','ابدأ 10 أسئلة')}</button></article><article><strong>03</strong><div>${pair('Prova una simulazione d’esame quando ti senti pronto','جرّب المحاكاة عندما تصبح مستعدًا')}</div><button class="small-button" data-action="exam">${controlLabel('Scegli le opzioni dell’esame','اختر إعدادات المحاكاة')}</button></article></div></details>`;
@@ -824,7 +895,7 @@ function requestOfflineContentCache(){if(!('serviceWorker'in navigator)){offline
 main.addEventListener('click',event=>{const shortcut=event.target.closest('[data-action="first-unanswered"]');if(!shortcut)return;const unanswered=quiz?.answers.findIndex(value=>value===null)??-1;if(unanswered>=0){quiz.index=unanswered;quiz.reviewing=false;saveActiveQuiz();renderQuiz();}});
 main.addEventListener('click',event=>{
   const quickAnswer=event.target.closest('[data-quick-check-answer]');if(quickAnswer){const item=quickAnswer.closest('[data-quick-check]');if(!item||item.dataset.answered)return;const chosen=quickAnswer.dataset.quickCheckAnswer,expected=item.dataset.answer,correct=chosen===expected;item.dataset.answered='true';item.querySelectorAll('[data-quick-check-answer]').forEach(button=>{button.disabled=true;button.classList.toggle('is-selected',button===quickAnswer);});const feedback=item.querySelector('.quick-check-feedback'),explanation=item.querySelector('.quick-check-explanation');if(feedback){const answerIt=expected==='VERO'?'Vero':'Falso',answerAr=expected==='VERO'?'صحيح':'خطأ';feedback.innerHTML=pair(correct?'Corretto!':`Risposta corretta: ${answerIt}.`,correct?'إجابة صحيحة!':`الإجابة الصحيحة: ${answerAr}.`);feedback.classList.toggle('is-correct',correct);feedback.hidden=false;}if(explanation)explanation.hidden=false;return;}
-  const tappedWord=event.target.closest('.wt-word[data-tap-word]');if(tappedWord){openTappedWord(tappedWord,event);return;}
+  const tappedWord=event.target.closest('.wt-word[data-tap-word]');if(tappedWord){event.preventDefault();openTappedWord(tappedWord,event);return;}
   const sentenceControl=event.target.closest('[data-sentence-translate]');if(sentenceControl){showInlineSentenceTranslation(sentenceControl,event);return;}
   const tappedSentence=event.target.closest('.lesson-sentence[data-sentence-tap]');if(tappedSentence){showInlineSentenceTranslation(tappedSentence,event);return;}
   const dueReview=event.target.closest('[data-action="due-review"]');if(dueReview){startQuiz('due',null,{count:15});return;}
@@ -840,6 +911,7 @@ main.addEventListener('click',event=>{
   const favoriteToggle=event.target.closest('[data-toggle-favorite]');if(favoriteToggle){const q=questionsById.get(Number(favoriteToggle.dataset.toggleFavorite));if(q){if(state.favorites.has(q.id))state.favorites.delete(q.id);else state.favorites.add(q.id);persistState();const saved=state.favorites.has(q.id);favoriteToggle.classList.toggle('is-saved',saved);favoriteToggle.setAttribute('aria-pressed',String(saved));favoriteToggle.setAttribute('aria-label',saved?'Saved question · سؤال محفوظ':'Save question · احفظ السؤال');favoriteToggle.innerHTML=controlLabel(saved?'Saved':'Save question',saved?'محفوظ':'احفظ السؤال');}return;}
   const openQ=event.target.closest('[data-open-id]');if(openQ){const q=questions.find(x=>Number(x.id)===Number(openQ.dataset.openId));if(q)startQuiz('single',[q]);return;}
   const answer=event.target.closest('[data-answer]');if(answer){answerQuestion(answer.dataset.answer==='true');return;}
+  const lessonItalianAudio=event.target.closest('[data-lesson-italian-audio="true"]');if(lessonItalianAudio){speechController.stop();playItalianAudio(lessonItalianAudio.dataset.ttsText||'');return;}
   const tts=event.target.closest('[data-tts-locale]');if(tts){if(speechController.isActive(tts))speechController.toggle();else speak(tts.dataset.ttsText,tts.dataset.ttsLocale,tts);return;}
   const legacySpeak=event.target.closest('[data-speak]');if(legacySpeak){const q=currentQ();if(q)speak(legacySpeak.dataset.speak==='it'?q.it:q.ar,legacySpeak.dataset.speak==='it'?'it-IT':ARABIC_TTS_LOCALE,legacySpeak);return;}
   const similarPage=event.target.closest('[data-similar-page]');if(similarPage){browsePage=Math.max(0,browsePage+(similarPage.dataset.similarPage==='next'?1:-1));render('similar-groups',{module:document.querySelector('#similarUnitFilter')?.value||'',query:document.querySelector('#searchInput')?.value||''});return;}

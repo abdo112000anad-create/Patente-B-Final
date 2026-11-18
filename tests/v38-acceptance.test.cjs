@@ -119,40 +119,42 @@ test('lesson screen keeps its bilingual vocabulary and sentence-level translatio
   assert.match(app, /inline-sentence-translation/u);
 });
 
-test('v43 keeps the floating player and uses Web Speech without a native TTS plugin', () => {
+test('v51 keeps the floating player and uses Web Speech without bundled TTS', () => {
   const audioCss = read('src/v40-audio.css');
   const speech = read('src/speech.mjs');
   const mainActivity = read('android/app/src/main/java/it/patenteb/sideload/v29/MainActivity.java');
+  const gradle = read('android/app/build.gradle');
+  const manifest = read('android/app/src/main/AndroidManifest.xml');
   assert.match(index, /data-audio-backend="web-speech"/u);
   assert.match(index, /id="speechPlaybackBar"/u);
   assert.match(index, /id="translationTooltipAudio"/u);
   assert.match(app, /createSpeechController\(\{getRate:/u);
+  assert.match(app, /function playItalianAudio\(text\)/u);
   assert.match(speech, /speechSynthesis|SpeechSynthesisUtterance/u);
-  assert.doesNotMatch(`${app}\n${speech}\n${mainActivity}`, /PiperTts|nativeTts|piper-medium|Edge-TTS|ElevenLabs/u);
-  assert.doesNotMatch(mainActivity, /PiperTtsPlugin/u);
+  assert.doesNotMatch(`${app}\n${speech}\n${mainActivity}\n${gradle}\n${manifest}`, /Piper|piperAlpha|nativeTts|ONNX/u);
   assert.match(mainActivity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);
   assert.match(audioCss, /\.speech-playback-bar/u);
 });
 
-test('lesson retains text-stage access and clearly disables flat visuals and unmatched audio', () => {
+test('lesson renders accessible topic-specific 2D visuals and keeps explanatory text stages', () => {
   const animation = read('src/lesson-animation.mjs');
-  assert.match(animation, /lesson-animation-unavailable/u);
-  assert.doesNotMatch(animation, /\$\{sceneSvg\(type\)\}/u);
+  assert.match(animation, /\$\{sceneSvg\(type\)\}/u);
+  assert.match(animation, /role="img" aria-label="\$\{escapeHtml\(sceneDescription\)\}"/u);
   assert.match(animation, /data-explainer-step/u);
-  assert.match(animation, /تم تعطيل الرسم المسطّح الحالي/u);
-  assert.match(animation, /رُفع الرسم المسطّح القديم مؤقتًا/u);
+  assert.match(animation, /sceneDescription=/u);
+  assert.doesNotMatch(animation, /lesson-animation-unavailable|تم تعطيل الرسم المسطّح الحالي|رُفع الرسم المسطّح القديم مؤقتًا/u);
 });
 
-test('dark mode and system dark mode retain readable lesson copy and mobile sizing', () => {
+test('the unified v50 dark palette keeps readable lesson copy and mobile sizing', () => {
   const dark = read('src/theme-dark.css');
   const responsive = read('src/rebuild.css');
-  const updated = read('src/refactor-v38.css');
+  const updated = read('src/v50-contrast.css');
   assert.match(dark, /data-theme="dark"/u);
   assert.match(dark, /prefers-color-scheme: dark/u);
-  assert.match(updated, /#05070a/u);
-  assert.match(updated, /#ffffff/u);
+  assert.match(updated, /--v50-surface: #142733/u);
+  assert.match(updated, /--v50-text: #c8e5ea/u);
   assert.match(responsive, /@media\(max-width:650px\)/u);
-  assert.match(updated, /lesson-animation-unavailable/u);
+  assert.match(updated, /lesson-animation-svg/u);
 });
 
 test('local debug build still avoids real Firebase sign-in credentials', () => {
@@ -173,7 +175,7 @@ test('app shell retains translation, legal, and driving-safety disclaimers', () 
   assert.match(app, /traduzioni in arabo sono state generate dall’IA e non sono state revisionate/u);
 });
 
-test('offline cache includes local lessons, questions, dictionary, and v45 stylesheets', () => {
+test('offline cache includes local lessons, questions, dictionary, and v50 stylesheets', () => {
   const startup = read('src/startup.mjs');
   const serviceWorker = read('public/sw.js');
   assert.match(startup, /questions\.json/u);
@@ -182,10 +184,11 @@ test('offline cache includes local lessons, questions, dictionary, and v45 style
   assert.match(serviceWorker, /lessons\.json/u);
   assert.match(serviceWorker, /refactor-v38\.css/u);
   assert.match(serviceWorker, /v40-audio\.css/u);
+  assert.match(serviceWorker, /v50-contrast\.css/u);
   assert.match(serviceWorker, /italian_arabic_dictionary_lookup\.json/u);
   assert.match(read('scripts/build-pwa.cjs'), /italian_arabic_dictionary_lookup\.json/u);
-  assert.match(serviceWorker, /patente-ar-v45/u);
-  assert.match(index, /data-app-version="45"/u);
+  assert.match(serviceWorker, /patente-ar-v51/u);
+  assert.match(index, /data-app-version="51"/u);
 });
 
 test('Home goal and lesson grid retain narrow-phone wrapping rules', () => {
@@ -202,18 +205,19 @@ test('Glossary controls fit the single-column mobile layout', () => {
   assert.match(css, /\.glossary-controls > label \{ min-width: 0; \}/u);
 });
 
-test('Android build script remains debug-only and uses v45 metadata', () => {
+test('Android build script remains debug-only and uses v51 metadata', () => {
   const build = read('scripts/build-android.sh');
   const gradleCommand = build.match(/^\.\/gradlew .*$/mu)?.[0] || '';
+  assert.match(gradleCommand, /\bclean\b/u);
   assert.match(gradleCommand, /:app:assembleDebug/u);
   assert.match(gradleCommand, /:app:testDebugUnitTest/u);
   assert.doesNotMatch(gradleCommand, /assembleRelease|bundleRelease|publish|upload/iu);
   const gradle = read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+45/u);
-  assert.match(gradle, /versionName\s+"45\.0\.0"/u);
+  assert.match(gradle, /versionCode\s+51/u);
+  assert.match(gradle, /versionName\s+"51\.0\.0"/u);
   assert.match(gradle, /abiFilters\s+'arm64-v8a',\s*'armeabi-v7a'/u);
   assert.match(read('android/variables.gradle'), /minSdkVersion\s*=\s*24/u);
-  assert.equal(json('package.json').version, '45.0.0');
-  assert.equal(json('package-lock.json').packages[''].version, '45.0.0');
-  assert.equal(json('public/release.json').version, 45);
+  assert.equal(json('package.json').version, '51.0.0');
+  assert.equal(json('package-lock.json').packages[''].version, '51.0.0');
+  assert.equal(json('public/release.json').version, 51);
 });

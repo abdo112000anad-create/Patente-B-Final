@@ -27,23 +27,24 @@ test('key points render as vertical bilingual cards without a two-column table',
       it: 'La parte della strada destinata ai veicoli.', ar: 'الجزء من الطريق المخصص للمركبات.'
     }]
   });
-  assert.match(markup, /class="lesson-key-point-card"/u);
+  assert.match(markup, /class="lesson-key-point-card key-point-card"/u);
   assert.doesNotMatch(markup, /<table\b|<tr\b/u);
-  const cardAt = markup.indexOf('class="lesson-key-point-card"');
+  const cardAt = markup.indexOf('class="lesson-key-point-card key-point-card"');
   const italianAt = markup.indexOf('carreggiata', cardAt);
   const arabicAt = markup.indexOf('المسار المخصص للمركبات', cardAt);
   assert.ok(cardAt >= 0 && italianAt > cardAt && arabicAt > italianAt);
   assert.ok(markup.includes('La parte della strada destinata ai veicoli.'));
   assert.ok(markup.includes('الجزء من الطريق المخصص للمركبات.'));
   const css = read('src/rebuild.css');
-  assert.match(css, /\.lesson-key-point-card\{[^}]*border:1px solid var\(--line\)[^}]*background:/u);
-  assert.match(css, /\.lesson-key-point-card\{[^}]*box-shadow:0 2px 8px/u);
+  assert.match(css, /\.lesson-key-point-card,\.key-point-card\{[^}]*border:1px solid var\(--line\)[^}]*background:/u);
+  assert.match(css, /\.lesson-key-point-card,\.key-point-card\{[^}]*box-shadow:0 2px 8px/u);
   assert.match(css, /\.lesson-key-point-title \[lang="it"\][^{]*\{[^}]*direction:ltr/u);
 });
 
 test('voice-loading state displays an Arabic progress message', () => {
   const app = read('src/app.js');
-  assert.match(app, /status==='preparing'\?'جارٍ تجهيز الصوت\.\.\.'/u);
+  assert.match(app, /status==='preparing'\?'جارٍ تجهيز صوت الجهاز\.\.\.'/u);
+  assert.doesNotMatch(app, /الصوت المحلي|Piper|nativeTts/u);
 });
 
 test('voice selection prefers a same-locale name hint or network voice and does not infer quality from names', async () => {

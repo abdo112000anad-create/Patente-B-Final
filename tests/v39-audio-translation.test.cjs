@@ -52,9 +52,9 @@ test('only project-approved terms are presented as reviewed overrides', () => {
   assert.ok(app.includes('document.querySelector(\'#translationTooltipNote\').textContent=matched.note'));
 });
 
-test('v42 ships the corrected dictionary in JSON and a valid SQLite asset', () => {
+test('v49 ships the corrected dictionary in JSON and a valid SQLite asset', () => {
   const dictionary = JSON.parse(read('data/italian_arabic_dictionary_lookup.json'));
-  assert.equal(dictionary.entries.length, 5273);
+  assert.equal(dictionary.entries.length, 5278);
   assert.ok(dictionary.entries.every(row => row.word && row.translation_ar));
   assert.equal(dictionary.entries.filter(row => row.status === 'fallback_draft_needs_review').length, 0);
   assert.equal(dictionary.entries.filter(row => row.source === 'owner-approved-correction-v42' && row.status === 'reviewed_override' && row.review_required === 0).length, 9);
@@ -63,31 +63,36 @@ test('v42 ships the corrected dictionary in JSON and a valid SQLite asset', () =
   assert.equal(get('corsia').translation_ar, 'حارة سير');
   assert.equal(get('carreggiata').translation_ar, 'الطريق المخصص للمركبات');
   assert.equal(get('prudenza').translation_ar, 'حذر');
+  assert.equal(get('riconoscere').translation_ar, 'يتعرف على');
+  assert.equal(get('riconoscere').status, 'reviewed_override');
+  assert.equal(get('spiegazione').translation_ar, 'شرح / تفسير');
+  assert.equal(get('spiegazione').source, 'user-requested-lemma-v51');
+  assert.equal(get('spiegazione').translation_ar, 'شرح / تفسير');
+  assert.equal(get('spiegazione').source, 'user-requested-lemma-v51');
   const db = fs.readFileSync(path.join(root, 'android/app/src/main/assets/dictionary.db'));
   assert.equal(db.subarray(0, 16).toString('ascii'), 'SQLite format 3\0');
 });
 
-test('v44 uses Web Speech as the sole speech route and removes native Piper from the Android build', () => {
+test('v51 uses Web Speech only, with Italian lesson audio and no bundled local TTS', () => {
   const index = read('index.html');
   const app = read('src/app.js');
   const speech = read('src/speech.mjs');
   const mainActivity = read('android/app/src/main/java/it/patenteb/sideload/v29/MainActivity.java');
   const gradle = read('android/app/build.gradle');
-  const pluginRegistry = read('native/android/capacitor.plugins.json');
+  const manifest = read('android/app/src/main/AndroidManifest.xml');
   assert.match(index, /data-audio-backend="web-speech"/u);
   assert.match(speech, /speechSynthesis|SpeechSynthesisUtterance/u);
   assert.match(speech, /getVoices\(\)/u);
   assert.match(app, /createSpeechController\(\{getRate:/u);
-  assert.doesNotMatch(`${app}\n${speech}\n${mainActivity}\n${gradle}\n${pluginRegistry}`, /PiperTts|nativeTts|piper-medium|sherpa-onnx|piper-phonemize/u);
+  assert.match(app, /function playItalianAudio\(text\)/u);
   assert.match(mainActivity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);
-  for (const rel of [
-    'android/app/src/main/java/it/patenteb/sideload/v29/PiperTtsPlugin.java',
-    'native/android/src/main/java/it/patenteb/sideload/v29/PiperTtsPlugin.java',
-    'android/app/src/main/assets/models',
-    'android/app/src/main/assets/piper',
-    'android/app/libs/sherpa-onnx-2.0.1.aar',
-    'android/app/libs/piper-phonemize-v1.5.9.aar',
-  ]) assert.equal(fs.existsSync(path.join(root, rel)), false, `${rel} should be absent`);
+  assert.match(mainActivity, /registerPlugin\(SpeechSettingsPlugin\.class\)/u);
+  assert.doesNotMatch(`${app}\n${speech}\n${gradle}\n${manifest}\n${mainActivity}`, /Piper|piperAlpha|nativeTts|ONNX|sherpa-onnx|piper-phonemize/u);
+  for (const rel of ['android/app/src/piperAlpha', 'android/app/src/main/assets/piper']) {
+    assert.equal(fs.existsSync(path.join(root, rel)), false, `${rel} must remain absent`);
+  }
+  assert.equal(fs.existsSync(path.join(root, 'scripts/build-piper-alpha.sh')), false);
+  assert.equal(fs.existsSync(path.join(root, 'scripts/download_piper_runtime.sh')), false);
   assert.match(app, /Capacitor\.isNativePlatform\(\)/u);
 });
 
@@ -117,8 +122,9 @@ test('Web Speech speaks the selected text and reports device speech for Italian 
   ]);
   assert.equal(utterances[0].voice, voices[0]);
   assert.equal(utterances[1].voice, voices[1]);
+  assert.equal(utterances[0].rate, 0.8);
+  assert.equal(utterances[1].rate, 1.0);
   for (const utterance of utterances) {
-    assert.equal(utterance.rate, 0.9);
     assert.equal(utterance.pitch, 1.0);
     assert.equal(utterance.volume, 1.0);
   }
@@ -235,23 +241,19 @@ test('Web Speech voice-list or synthesis errors fail gracefully without a reject
   assert.equal(controller.state, 'idle');
 });
 
-test('published video links are high-contrast active controls; other lessons are status-only', () => {
+test('published video links remain high-contrast controls and unpublished lessons are status-only', () => {
   const app = read('src/app.js');
-  const css = read('src/v40-audio.css');
+  const css = read('src/v50-contrast.css');
   assert.ok(app.includes('lesson-video-status-link" data-youtube-cta'));
   assert.ok(app.includes('lesson-video-upcoming-status'));
   assert.ok(app.includes('role="status"'));
   assert.ok(!app.includes('Watch the video explanation (coming soon)'));
-  assert.match(css, /\.lesson-video-cta-link[\s\S]*?background: #047857/u);
-  assert.match(css, /\.lesson-video-cta\.is-upcoming \.lesson-video-upcoming-status/u);
+  assert.match(css, /#main \.lesson-video-cta-link \{ background: #145766 !important; color: #c8e5ea !important;/u);
+  assert.match(css, /#main \.lesson-video-upcoming-status/u);
 });
 
-test('yellow warning cards use dark text with WCAG AA contrast in light and dark palettes', () => {
-  const css = read('src/v40-audio.css');
-  assert.match(css, /background: #FFF9C4 !important;[\s\S]*?color: #1A1A1A !important/u);
-  assert.match(css, /#main \.lesson-warning-block/u);
-  assert.match(css, /data-theme="dark"/u);
-  assert.match(css, /data-theme="system"/u);
+test('warning cards use the v50 teal palette with WCAG AA contrast', () => {
+  const css = read('src/v50-contrast.css');
   const luminance = hex => {
     const rgb = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255)
       .map(x => x <= .04045 ? x / 12.92 : ((x + .055) / 1.055) ** 2.4);
@@ -261,15 +263,16 @@ test('yellow warning cards use dark text with WCAG AA contrast in light and dark
     const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
     return (hi + .05) / (lo + .05);
   };
-  assert.ok(contrast('#1A1A1A', '#FFF9C4') >= 4.5);
-  assert.ok(contrast('#ffffff', '#047857') >= 4.5);
+  assert.match(css, /#main \.lesson-warning-block[\s\S]*?background: #173d4a !important/u);
+  assert.ok(contrast('#c8e5ea', '#173d4a') >= 4.5);
+  assert.ok(contrast('#2edbc0', '#173d4a') >= 4.5);
 });
 
 test('floating audio player uses SVG controls and the requested compact dimensions', () => {
   const index = read('index.html');
   const css = read('src/v40-audio.css');
   assert.match(index, /id="speechStop"[^>]*aria-label="إيقاف الصوت"/u);
-  assert.match(index, /class="speech-rate-control"[\s\S]*?id="speechRate" aria-label="سرعة الصوت"/u);
+  assert.match(index, /class="speech-rate-control"[\s\S]*?id="speechRate" aria-label="سرعة الصوت الإيطالي"/u);
   assert.match(css, /bottom: max\(20px, env\(safe-area-inset-bottom\)\)/u);
   assert.match(css, /width: 90%;[\s\S]*?max-width: 400px;[\s\S]*?height: 60px/u);
 });
@@ -281,4 +284,33 @@ test('generated dictionary preserves Italian diacritics instead of merging disti
   ]);
   assert.equal(translation.translateTappedWord('velocita', []).arabic, 'شكل بلا علامة');
   assert.equal(translation.translateTappedWord('velocità', []).arabic, 'شكل بعلامة صوتية');
+});
+
+test('bilingual key-point cards keep readable contrast in the unified v50 palette', () => {
+  const css = read('src/v50-contrast.css');
+  const luminance = color => {
+    const channels = color.match(/[0-9a-f]{2}/giu).map(value => parseInt(value, 16) / 255).map(value => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+  };
+  const contrast = (first, second) => {
+    const values = [luminance(first), luminance(second)].sort((a, b) => b - a);
+    return (values[0] + 0.05) / (values[1] + 0.05);
+  };
+  assert.ok(contrast('#c8e5ea', '#193543') >= 4.5);
+  assert.ok(contrast('#91c4cf', '#193543') >= 4.5);
+  assert.match(css, /#main \.lesson-key-point-card/u);
+  assert.match(css, /:root\[data-theme="dark"\] #main \.lesson-key-point-rule/u);
+  assert.match(css, /:root\[data-theme="system"\] #main \.lesson-key-point-card/u);
+});
+
+test('new word taps dismiss the previous tooltip and touch hover cannot stay on a stale word', () => {
+  const app = read('src/app.js');
+  const css = read('src/v40-audio.css');
+  const v50Css = read('src/v50-contrast.css');
+  const start = app.indexOf('function openTappedWord(');
+  const end = app.indexOf('function showInlineSentenceTranslation(', start);
+  assert.ok(start >= 0 && end > start);
+  assert.match(app.slice(start, end), /^function openTappedWord\(node,event=\{\}\)\{\s*closeWordTooltip\(\);/u);
+  assert.match(css, /@media \(hover: none\) and \(pointer: coarse\)[\s\S]*#main \.lesson-it-text \.wt-word:hover:not\(:focus-visible\)/u);
+  assert.match(v50Css, /#main \.lesson-it-text \.wt-word:active \{ background: #1b5660 !important;/u);
 });

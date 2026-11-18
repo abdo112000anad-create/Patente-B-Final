@@ -42,8 +42,8 @@ export function buildLessonSpeechTexts(lesson = {}) {
 
 function voiceNameFor(locale) {
   return String(locale || '').toLowerCase().startsWith('it')
-    ? 'Italiano · voce del dispositivo'
-    : 'العربية · صوت الجهاز';
+    ? 'صوت إيطالي على الجهاز'
+    : 'صوت عربي على الجهاز';
 }
 
 function normalizedLocale(locale) {
@@ -198,9 +198,10 @@ function voiceMetadataForLog(voice) {
 
 export function createSpeechController({
   webSpeech = null,
-  getRate = () => 1,
+  getRate = () => 0.8,
   onStateChange = () => {},
-  onProgress = () => {}
+  onProgress = () => {},
+  onWordProgress = () => {}
 } = {}) {
   let sequence = 0;
   let activeTask = null;
@@ -231,14 +232,24 @@ export function createSpeechController({
   const reportProgress = (task, value) => {
     task.progress = Math.max(0, Math.min(1, Number(value) || 0));
     try {
-      onProgress({progress: task.progress, locale: task.locale, voiceName: task.voiceName, voiceSource: 'browser'});
+      onProgress({progress: task.progress, locale: task.locale, voiceName: task.voiceName, voiceSource: task.voiceSource || 'browser'});
     } catch {}
   };
-  const rateFor = () => {
-    const base = 0.90;
-    let selected = 1;
-    try { selected = Number(getRate()) || 1; } catch {}
-    return Math.max(0.60, Math.min(1.35, base * Math.max(.70, Math.min(1.30, selected))));
+  const reportWordProgress = (task, index, source, charLength = 0) => {
+    if (task.token !== sequence) return;
+    const text = String(task.currentSegmentText || '');
+    const charIndex = Math.max(0, Math.min(Math.max(0, text.length - 1), Math.floor(Number(index) || 0)));
+    try {
+      onWordProgress({button: task.button, locale: task.locale, kind: task.kind, text, charIndex,
+        charLength: Math.max(0, Number(charLength) || 0), progress: task.progress, source,
+        approximate: source !== 'web-boundary'});
+    } catch {}
+  };
+  const rateFor = (locale = 'it-IT') => {
+    if (!String(locale || '').toLowerCase().startsWith('it')) return 1.0;
+    let selected = 0.8;
+    try { selected = Number(getRate()) || 0.8; } catch {}
+    return Math.max(.70, Math.min(1.30, selected));
   };
 
   function stopBrowserSpeech() {
@@ -316,7 +327,7 @@ export function createSpeechController({
         if (settled) return;
         settled = true;
         if (timeout) clearTimeout(timeout);
-        if (utterance) { utterance.onend = null; utterance.onerror = null; }
+        if (utterance) { utterance.onend = null; utterance.onerror = null; utterance.onboundary = null; }
         callback(value);
       };
       try {
@@ -328,6 +339,12 @@ export function createSpeechController({
         if (!task.selectedVoice) throw new Error('No matching system voice was selected.');
         utterance.voice = task.selectedVoice;
         utterance.onend = () => finish(resolve, task.token === sequence);
+        utterance.onboundary = event => {
+          if (task.token !== sequence || (event?.name && event.name !== 'word')) return;
+          const index = Number(event?.charIndex);
+          if (!Number.isFinite(index)) return;
+          reportWordProgress(task, task.currentChunkOffset + index, 'web-boundary', event?.charLength);
+        };
         utterance.onerror = event => {
           if (task.token !== sequence) finish(resolve, false);
           else finish(reject, new Error(`Web Speech API failed: ${String(event?.error || 'unknown error')}`));
@@ -340,7 +357,26 @@ export function createSpeechController({
     });
   }
 
+  async function prepareWebVoice(task, api = resolveWebSpeech(webSpeech)) {
+    if (!api) throw new Error('Web Speech API is unavailable on this device.');
+    const voices = await waitForVoices(api.synthesis, task, () => task.token === sequence, () => notify('preparing', task));
+    if (task.token !== sequence) return false;
+    if (!voices.length) throw new Error('No system speech voices were available.');
+    const selectedVoice = chooseVoice(voices, task.locale);
+    if (!selectedVoice) {
+      const error = new Error('No matching language voice was found.');
+      error.needsSpeechSettings = true;
+      throw error;
+    }
+    task.selectedVoice = selectedVoice;
+    task.voiceSource = 'browser';
+    task.voiceName = voiceNameFor(task.locale, 'browser');
+    try { console.log('[TTS] selected system voice metadata:', voiceMetadataForLog(selectedVoice)); } catch {}
+    return true;
+  }
+
   async function speakChunk(task, text) {
+    if (!task.selectedVoice && !(await prepareWebVoice(task))) return false;
     await speakWithWebSpeech(task, text, rateFor(task.locale));
     return task.token === sequence;
   }
@@ -356,8 +392,16 @@ export function createSpeechController({
       .filter(segment => String(segment?.text || '').trim());
     if (!prepared.length) return false;
     const api = resolveWebSpeech(webSpeech);
-    const chunksBySegment = prepared.map(segment => splitSpeechText(segment.text));
-    const totalCharacters = chunksBySegment.flat().reduce((sum, chunk) => sum + chunk.length, 0);
+    const chunksBySegment = prepared.map(segment => {
+      let cursor = 0;
+      return splitSpeechText(segment.text).map(text => {
+        const found = String(segment.text).indexOf(text, cursor);
+        const offset = found >= 0 ? found : cursor;
+        cursor = offset + text.length;
+        return {text, offset};
+      });
+    });
+    const totalCharacters = chunksBySegment.flat().reduce((sum, chunk) => sum + chunk.text.length, 0);
     if (!totalCharacters) return false;
     const task = {
       token,
@@ -365,13 +409,17 @@ export function createSpeechController({
       button,
       kind,
       voiceName: voiceNameFor(normalized),
+      voiceSource: 'browser',
       paused: false,
       failed: false,
       resumeWaiters: [],
       progress: 0,
       totalCharacters,
       completedCharacters: 0,
-      currentChunkCharacters: 0
+      currentChunkCharacters: 0,
+      currentChunkOffset: 0,
+      currentSegmentIndex: 0,
+      currentSegmentText: ''
     };
     activeTask = task;
     if (!api) {
@@ -379,35 +427,31 @@ export function createSpeechController({
       return false;
     }
     try {
-      const voices = await waitForVoices(api.synthesis, task, () => task.token === sequence, () => notify('preparing', task));
+      if (!(await prepareWebVoice(task, api))) return false;
       if (task.token !== sequence) return false;
-      if (!voices.length) throw new Error('No system speech voices were available.');
-      const selectedVoice = chooseVoice(voices, task.locale);
-      if (!selectedVoice) {
-        showError(task, 'no-matching-language-voice', voiceInstallMessage(task.locale), true);
-        return false;
-      }
-      task.selectedVoice = selectedVoice;
-      try { console.log('[TTS] selected system voice metadata:', voiceMetadataForLog(selectedVoice)); } catch {}
       setButtonState(button, 'playing');
       notify('playing', task);
 
       for (let segmentIndex = 0; segmentIndex < prepared.length; segmentIndex += 1) {
         if (task.token !== sequence || !(await waitUntilResumed(task))) return false;
+        task.currentSegmentIndex = segmentIndex;
+        task.currentSegmentText = String(prepared[segmentIndex].text || '');
         try { onSegment?.(segmentIndex, prepared[segmentIndex]); } catch {}
         for (const chunk of chunksBySegment[segmentIndex]) {
           if (task.token !== sequence || !(await waitUntilResumed(task))) return false;
-          task.currentChunkCharacters = chunk.length;
+          task.currentChunkCharacters = chunk.text.length;
+          task.currentChunkOffset = chunk.offset;
           try {
-            const completed = await speakChunk(task, chunk);
+            const completed = await speakChunk(task, chunk.text);
             if (!completed || task.token !== sequence) return false;
           } catch (error) {
             if (task.token !== sequence) return false;
-            showError(task, error);
+            const voiceUnavailable = error?.needsSpeechSettings === true || /speech voice list is unavailable|timed out waiting for system speech voices|no system speech voices|no matching language voice/iu.test(String(error?.message || error));
+            showError(task, error, voiceUnavailable ? voiceInstallMessage(task.locale) : 'تعذّر تشغيل الصوت على هذا الجهاز.', voiceUnavailable);
             return false;
           }
           if (task.token !== sequence) return false;
-          task.completedCharacters += chunk.length;
+          task.completedCharacters += chunk.text.length;
           task.currentChunkCharacters = 0;
           reportProgress(task, task.completedCharacters / task.totalCharacters);
         }
@@ -416,7 +460,7 @@ export function createSpeechController({
       return true;
     } catch (error) {
       if (task.token !== sequence) return false;
-      const voiceUnavailable = /speech voice list is unavailable|timed out waiting for system speech voices|no system speech voices/iu.test(String(error?.message || error));
+      const voiceUnavailable = error?.needsSpeechSettings === true || /speech voice list is unavailable|timed out waiting for system speech voices|no system speech voices|no matching language voice/iu.test(String(error?.message || error));
       showError(task, error, voiceUnavailable ? voiceInstallMessage(task.locale) : 'تعذّر تشغيل الصوت على هذا الجهاز.', voiceUnavailable);
       return false;
     } finally {

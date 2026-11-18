@@ -17,3 +17,10 @@ data/.translation-cache.json
 /android/app/src/main/assets/public/
 /android/app/src/main/assets/capacitor.config.json
 /android/app/src/main/assets/capacitor.plugins.json
+/android/app/libs/*.aar
+/.venv-piper-alpha/
+/.gradle-home/
+/.android-user/
+/.npm-cache/
+/.pip-cache/
+/.tmp/

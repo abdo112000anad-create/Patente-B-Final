@@ -1,4 +1,4 @@
-const CACHE_NAME = 'patente-ar-v45-alpha-1';
+const CACHE_NAME = 'patente-ar-v51-alpha-1';
 const FETCH_TIMEOUT_MS = 10000;
 const SHELL = [
   '/',
@@ -13,6 +13,7 @@ const SHELL = [
   '/src/theme-dark.css',
   '/src/refactor-v38.css',
   '/src/v40-audio.css',
+  '/src/v50-contrast.css',
   '/app.bundle.js',
   '/manifest.webmanifest',
   '/favicon.svg',

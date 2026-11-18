@@ -1,23 +1,24 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-16T16:34:37+00:00",
+    "generated_at_utc": "2026-11-18T06:23:01+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
-    "unique_question_bank_terms": 5273,
+    "unique_question_bank_terms": 5276,
     "model": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
     "counts_by_status": {
+      "contextual_override_v49": 9,
       "legacy_glossary_needs_review": 62,
-      "machine_draft_needs_review": 5199,
-      "reviewed_override": 12
+      "machine_draft_needs_review": 5193,
+      "reviewed_override": 14
     },
-    "total_entries": 5273,
-    "translated_entries": 5273,
-    "review_required_entries": 5261,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
-    "app_release": 42,
-    "terms_with_lookup_entry": 5273,
-    "entries_with_arabic_translation": 5273,
+    "total_entries": 5278,
+    "translated_entries": 5278,
+    "review_required_entries": 5264,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections and the explicitly requested v47 and v51 lemmas are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+    "app_release": 51,
+    "terms_with_lookup_entry": 5278,
+    "entries_with_arabic_translation": 5278,
     "entries_without_lexical_translation": 1,
     "entries_with_safe_ui_fallback": 0,
     "owner_approved_corrections": 9,
@@ -29,7 +30,8 @@
       "p",
       "v",
       "x"
-    ]
+    ],
+    "requested_lemma_additions": 2
   },
   "entries": [
     {
@@ -16246,14 +16248,14 @@
     },
     {
       "word": "degli",
-      "translation_ar": "الـ",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "مِنَ الـ / لِـ",
+      "source": "contextual-override-v49",
+      "provider": "patenteb-v49-context",
       "confidence": null,
-      "status": "machine_draft_needs_review",
+      "status": "contextual_override_v49",
       "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
+      "note": "تركيب سياقي: الأداة المدمجة تُترجم مع الاسم الذي يليها.",
+      "translation_kind": "contextual_override",
       "ui_fallback_ar": ""
     },
     {
@@ -21562,14 +21564,14 @@
     },
     {
       "word": "essere",
-      "translation_ar": "كن",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "أن يكون / يكون",
+      "source": "contextual-override-v49",
+      "provider": "patenteb-v49-context",
       "confidence": null,
-      "status": "machine_draft_needs_review",
+      "status": "contextual_override_v49",
       "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
+      "note": "فعل مساعد؛ في سياق «devono essere seguite» يُقرأ مع الأفعال الأخرى: «يجب اتباعها».",
+      "translation_kind": "contextual_override",
       "ui_fallback_ar": ""
     },
     {
@@ -43017,6 +43019,18 @@
       "ui_fallback_ar": ""
     },
     {
+      "word": "prevalgono",
+      "translation_ar": "تتقدّم على",
+      "source": "contextual-override-v49",
+      "provider": "patenteb-v49-context",
+      "confidence": null,
+      "status": "contextual_override_v49",
+      "review_required": 1,
+      "note": "في سياق الأولوية المرورية، فعل جمع يُستكمل بـ«على»: «تتقدّم على التعليمات».",
+      "translation_kind": "contextual_override",
+      "ui_fallback_ar": ""
+    },
+    {
       "word": "prevede",
       "translation_ar": "توقّف",
       "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
@@ -45070,14 +45084,14 @@
     },
     {
       "word": "questa",
-      "translation_ar": "هذا",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "هذه",
+      "source": "contextual-override-v49",
+      "provider": "patenteb-v49-context",
       "confidence": null,
-      "status": "machine_draft_needs_review",
+      "status": "contextual_override_v49",
       "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
+      "note": "في سياق هذا الدرس، «questa» مؤنث مفرد بمعنى «هذه»، لا «هذا».",
+      "translation_kind": "contextual_override",
       "ui_fallback_ar": ""
     },
     {
@@ -46999,6 +47013,18 @@
       "note": "",
       "translation_kind": "machine_translation",
       "ui_fallback_ar": ""
+    },
+    {
+      "word": "riconoscere",
+      "translation_ar": "يتعرف على",
+      "ui_fallback_ar": "يتعرف على",
+      "translation_kind": "lexical_translation",
+      "source": "user-requested-lemma-v47",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "المعنى المعجمي الذي طلب المستخدم إضافته."
     },
     {
       "word": "riconoscimento",
@@ -51178,14 +51204,14 @@
     },
     {
       "word": "segnaletica",
-      "translation_ar": "علامة",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "الإشارات المرورية",
+      "source": "contextual-override-v49",
+      "provider": "patenteb-v49-context",
       "confidence": null,
-      "status": "machine_draft_needs_review",
+      "status": "contextual_override_v49",
       "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
+      "note": "مصطلح مروري؛ بحسب السياق يعني الإشارات أو العلامات، و«segnaletica orizzontale» العلامات الأرضية.",
+      "translation_kind": "contextual_override",
       "ui_fallback_ar": ""
     },
     {
@@ -51318,6 +51344,18 @@
       "review_required": 1,
       "note": "",
       "translation_kind": "machine_translation",
+      "ui_fallback_ar": ""
+    },
+    {
+      "word": "seguite",
+      "translation_ar": "مُتَّبَعة",
+      "source": "contextual-override-v49",
+      "provider": "patenteb-v49-context",
+      "confidence": null,
+      "status": "contextual_override_v49",
+      "review_required": 1,
+      "note": "في سياق الجملة، اسم مفعول مؤنث جمع؛ «devono essere seguite» = «يجب اتباعها».",
+      "translation_kind": "contextual_override",
       "ui_fallback_ar": ""
     },
     {
@@ -51730,14 +51768,14 @@
     },
     {
       "word": "senza",
-      "translation_ar": "بدون",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "دون / بدون",
+      "source": "contextual-override-v49",
+      "provider": "patenteb-v49-context",
       "confidence": null,
-      "status": "machine_draft_needs_review",
+      "status": "contextual_override_v49",
       "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
+      "note": "مقابل سياقي v49؛ في «senza indugio» معناها «دون تأخير».",
+      "translation_kind": "contextual_override",
       "ui_fallback_ar": ""
     },
     {
@@ -54114,6 +54152,18 @@
       "review_required": 1,
       "note": "",
       "translation_kind": "machine_translation",
+      "ui_fallback_ar": ""
+    },
+    {
+      "word": "sottocategoria",
+      "translation_ar": "فئة فرعية",
+      "source": "contextual-override-v49",
+      "provider": "patenteb-v49-context",
+      "confidence": null,
+      "status": "contextual_override_v49",
+      "review_required": 1,
+      "note": "في سياق التصنيف، تعني فئةً تقع ضمن فئة أوسع.",
+      "translation_kind": "contextual_override",
       "ui_fallback_ar": ""
     },
     {
@@ -58751,13 +58801,13 @@
     {
       "word": "tra",
       "translation_ar": "بين",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "source": "contextual-override-v49",
+      "provider": "patenteb-v49-context",
       "confidence": null,
-      "status": "machine_draft_needs_review",
+      "status": "contextual_override_v49",
       "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
+      "note": "مقابل سياقي v49: «بين» في «tra i segnali»؛ وقد يتغير المعنى باختلاف الجملة.",
+      "translation_kind": "contextual_override",
       "ui_fallback_ar": ""
     },
     {
@@ -63307,6 +63357,18 @@
       "note": "",
       "translation_kind": "machine_translation",
       "ui_fallback_ar": ""
+    },
+    {
+      "word": "spiegazione",
+      "translation_ar": "شرح / تفسير",
+      "ui_fallback_ar": "شرح / تفسير",
+      "translation_kind": "lexical_translation",
+      "source": "user-requested-lemma-v51",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "ترجمة معجمية أضافها المستخدم بطلبه."
     }
   ]
 }

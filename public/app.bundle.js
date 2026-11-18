@@ -42163,7 +42163,7 @@ This typically indicates that your device does not have a healthy Internet conne
     };
   }
   function voiceNameFor(locale) {
-    return String(locale || "").toLowerCase().startsWith("it") ? "Italiano · voce del dispositivo" : "العربية · صوت الجهاز";
+    return String(locale || "").toLowerCase().startsWith("it") ? "صوت إيطالي على الجهاز" : "صوت عربي على الجهاز";
   }
   function normalizedLocale(locale) {
     return String(locale || "").toLowerCase().startsWith("it") ? ITALIAN_TTS_LOCALE : ARABIC_TTS_LOCALE;
@@ -42312,10 +42312,12 @@ This typically indicates that your device does not have a healthy Internet conne
   }
   function createSpeechController({
     webSpeech = null,
-    getRate = () => 1,
+    getRate = () => 0.8,
     onStateChange = () => {
     },
     onProgress = () => {
+    },
+    onWordProgress = () => {
     }
   } = {}) {
     let sequence = 0;
@@ -42348,18 +42350,37 @@ This typically indicates that your device does not have a healthy Internet conne
     const reportProgress = (task, value) => {
       task.progress = Math.max(0, Math.min(1, Number(value) || 0));
       try {
-        onProgress({ progress: task.progress, locale: task.locale, voiceName: task.voiceName, voiceSource: "browser" });
+        onProgress({ progress: task.progress, locale: task.locale, voiceName: task.voiceName, voiceSource: task.voiceSource || "browser" });
       } catch {
       }
     };
-    const rateFor = () => {
-      const base = 0.9;
-      let selected = 1;
+    const reportWordProgress = (task, index, source, charLength = 0) => {
+      if (task.token !== sequence) return;
+      const text = String(task.currentSegmentText || "");
+      const charIndex = Math.max(0, Math.min(Math.max(0, text.length - 1), Math.floor(Number(index) || 0)));
       try {
-        selected = Number(getRate()) || 1;
+        onWordProgress({
+          button: task.button,
+          locale: task.locale,
+          kind: task.kind,
+          text,
+          charIndex,
+          charLength: Math.max(0, Number(charLength) || 0),
+          progress: task.progress,
+          source,
+          approximate: source !== "web-boundary"
+        });
       } catch {
       }
-      return Math.max(0.6, Math.min(1.35, base * Math.max(0.7, Math.min(1.3, selected))));
+    };
+    const rateFor = (locale = "it-IT") => {
+      if (!String(locale || "").toLowerCase().startsWith("it")) return 1;
+      let selected = 0.8;
+      try {
+        selected = Number(getRate()) || 0.8;
+      } catch {
+      }
+      return Math.max(0.7, Math.min(1.3, selected));
     };
     function stopBrowserSpeech() {
       var _a14, _b, _c;
@@ -42455,6 +42476,7 @@ This typically indicates that your device does not have a healthy Internet conne
           if (utterance) {
             utterance.onend = null;
             utterance.onerror = null;
+            utterance.onboundary = null;
           }
           callback(value);
         };
@@ -42467,6 +42489,12 @@ This typically indicates that your device does not have a healthy Internet conne
           if (!task.selectedVoice) throw new Error("No matching system voice was selected.");
           utterance.voice = task.selectedVoice;
           utterance.onend = () => finish(resolve, task.token === sequence);
+          utterance.onboundary = (event) => {
+            if (task.token !== sequence || (event == null ? void 0 : event.name) && event.name !== "word") return;
+            const index = Number(event == null ? void 0 : event.charIndex);
+            if (!Number.isFinite(index)) return;
+            reportWordProgress(task, task.currentChunkOffset + index, "web-boundary", event == null ? void 0 : event.charLength);
+          };
           utterance.onerror = (event) => {
             if (task.token !== sequence) finish(resolve, false);
             else finish(reject, new Error(`Web Speech API failed: ${String((event == null ? void 0 : event.error) || "unknown error")}`));
@@ -42478,7 +42506,28 @@ This typically indicates that your device does not have a healthy Internet conne
         }
       });
     }
+    async function prepareWebVoice(task, api = resolveWebSpeech(webSpeech)) {
+      if (!api) throw new Error("Web Speech API is unavailable on this device.");
+      const voices = await waitForVoices(api.synthesis, task, () => task.token === sequence, () => notify("preparing", task));
+      if (task.token !== sequence) return false;
+      if (!voices.length) throw new Error("No system speech voices were available.");
+      const selectedVoice = chooseVoice(voices, task.locale);
+      if (!selectedVoice) {
+        const error = new Error("No matching language voice was found.");
+        error.needsSpeechSettings = true;
+        throw error;
+      }
+      task.selectedVoice = selectedVoice;
+      task.voiceSource = "browser";
+      task.voiceName = voiceNameFor(task.locale, "browser");
+      try {
+        console.log("[TTS] selected system voice metadata:", voiceMetadataForLog(selectedVoice));
+      } catch {
+      }
+      return true;
+    }
     async function speakChunk(task, text) {
+      if (!task.selectedVoice && !await prepareWebVoice(task)) return false;
       await speakWithWebSpeech(task, text, rateFor(task.locale));
       return task.token === sequence;
     }
@@ -42491,8 +42540,16 @@ This typically indicates that your device does not have a healthy Internet conne
       const prepared = (segments || []).map((segment) => typeof segment === "string" ? { text: segment } : segment).filter((segment) => String((segment == null ? void 0 : segment.text) || "").trim());
       if (!prepared.length) return false;
       const api = resolveWebSpeech(webSpeech);
-      const chunksBySegment = prepared.map((segment) => splitSpeechText(segment.text));
-      const totalCharacters = chunksBySegment.flat().reduce((sum2, chunk) => sum2 + chunk.length, 0);
+      const chunksBySegment = prepared.map((segment) => {
+        let cursor = 0;
+        return splitSpeechText(segment.text).map((text) => {
+          const found = String(segment.text).indexOf(text, cursor);
+          const offset = found >= 0 ? found : cursor;
+          cursor = offset + text.length;
+          return { text, offset };
+        });
+      });
+      const totalCharacters = chunksBySegment.flat().reduce((sum2, chunk) => sum2 + chunk.text.length, 0);
       if (!totalCharacters) return false;
       const task = {
         token,
@@ -42500,13 +42557,17 @@ This typically indicates that your device does not have a healthy Internet conne
         button,
         kind,
         voiceName: voiceNameFor(normalized),
+        voiceSource: "browser",
         paused: false,
         failed: false,
         resumeWaiters: [],
         progress: 0,
         totalCharacters,
         completedCharacters: 0,
-        currentChunkCharacters: 0
+        currentChunkCharacters: 0,
+        currentChunkOffset: 0,
+        currentSegmentIndex: 0,
+        currentSegmentText: ""
       };
       activeTask = task;
       if (!api) {
@@ -42514,40 +42575,33 @@ This typically indicates that your device does not have a healthy Internet conne
         return false;
       }
       try {
-        const voices = await waitForVoices(api.synthesis, task, () => task.token === sequence, () => notify("preparing", task));
+        if (!await prepareWebVoice(task, api)) return false;
         if (task.token !== sequence) return false;
-        if (!voices.length) throw new Error("No system speech voices were available.");
-        const selectedVoice = chooseVoice(voices, task.locale);
-        if (!selectedVoice) {
-          showError(task, "no-matching-language-voice", voiceInstallMessage(task.locale), true);
-          return false;
-        }
-        task.selectedVoice = selectedVoice;
-        try {
-          console.log("[TTS] selected system voice metadata:", voiceMetadataForLog(selectedVoice));
-        } catch {
-        }
         setButtonState(button, "playing");
         notify("playing", task);
         for (let segmentIndex = 0; segmentIndex < prepared.length; segmentIndex += 1) {
           if (task.token !== sequence || !await waitUntilResumed(task)) return false;
+          task.currentSegmentIndex = segmentIndex;
+          task.currentSegmentText = String(prepared[segmentIndex].text || "");
           try {
             onSegment == null ? void 0 : onSegment(segmentIndex, prepared[segmentIndex]);
           } catch {
           }
           for (const chunk of chunksBySegment[segmentIndex]) {
             if (task.token !== sequence || !await waitUntilResumed(task)) return false;
-            task.currentChunkCharacters = chunk.length;
+            task.currentChunkCharacters = chunk.text.length;
+            task.currentChunkOffset = chunk.offset;
             try {
-              const completed = await speakChunk(task, chunk);
+              const completed = await speakChunk(task, chunk.text);
               if (!completed || task.token !== sequence) return false;
             } catch (error) {
               if (task.token !== sequence) return false;
-              showError(task, error);
+              const voiceUnavailable = (error == null ? void 0 : error.needsSpeechSettings) === true || /speech voice list is unavailable|timed out waiting for system speech voices|no system speech voices|no matching language voice/iu.test(String((error == null ? void 0 : error.message) || error));
+              showError(task, error, voiceUnavailable ? voiceInstallMessage(task.locale) : "تعذّر تشغيل الصوت على هذا الجهاز.", voiceUnavailable);
               return false;
             }
             if (task.token !== sequence) return false;
-            task.completedCharacters += chunk.length;
+            task.completedCharacters += chunk.text.length;
             task.currentChunkCharacters = 0;
             reportProgress(task, task.completedCharacters / task.totalCharacters);
           }
@@ -42556,7 +42610,7 @@ This typically indicates that your device does not have a healthy Internet conne
         return true;
       } catch (error) {
         if (task.token !== sequence) return false;
-        const voiceUnavailable = /speech voice list is unavailable|timed out waiting for system speech voices|no system speech voices/iu.test(String((error == null ? void 0 : error.message) || error));
+        const voiceUnavailable = (error == null ? void 0 : error.needsSpeechSettings) === true || /speech voice list is unavailable|timed out waiting for system speech voices|no system speech voices|no matching language voice/iu.test(String((error == null ? void 0 : error.message) || error));
         showError(task, error, voiceUnavailable ? voiceInstallMessage(task.locale) : "تعذّر تشغيل الصوت على هذا الجهاز.", voiceUnavailable);
         return false;
       } finally {
@@ -42629,6 +42683,41 @@ This typically indicates that your device does not have a healthy Internet conne
     };
     return byModule[moduleId] || "road-parts";
   }
+  var car = (x2 = 110, y2 = 125, className = "scene-car") => `<g class="${className}" transform="translate(${x2} ${y2})" aria-hidden="true"><rect x="0" y="7" width="86" height="32" rx="13" fill="#2edbc0" stroke="#092a32" stroke-width="3"/><path d="M18 8 29-5h28L68 8" fill="#55bff0" stroke="#092a32" stroke-width="3"/><circle cx="19" cy="40" r="7" fill="#092a32"/><circle cx="67" cy="40" r="7" fill="#092a32"/><path d="M22 12h40" stroke="#73d9e1" stroke-width="2"/></g>`;
+  var road = `<rect x="0" y="116" width="640" height="70" rx="8" fill="#275364"/><path d="M0 151h640" stroke="#73d9e1" stroke-width="3" stroke-dasharray="24 18"/><path d="M0 120h640M0 182h640" stroke="#73d9e1" stroke-width="2" opacity=".7"/>`;
+  var badge = (label, x2, y2, className = "focus-concept") => `<g class="${className}" transform="translate(${x2} ${y2})"><rect width="112" height="44" rx="12" fill="#193543" stroke="#3d7180" stroke-width="2"/><circle cx="22" cy="22" r="9" fill="#2edbc0"/><path d="M18 22h8M22 18v8" stroke="#092a32" stroke-width="2"/><text x="40" y="27" font-size="12" font-family="system-ui,sans-serif" fill="#c8e5ea">${label}</text></g>`;
+  function sceneSvg(type) {
+    const sceneDescription = {
+      "road-parts": "رسم توضيحي لأجزاء الطريق",
+      "traffic-signs": "رسم توضيحي لإشارات المرور",
+      "traffic-light": "رسم توضيحي للإشارة الضوئية",
+      "intersection": "رسم توضيحي لتقاطع الطرق والأولوية",
+      "roundabout": "رسم توضيحي لحركة المرور في الدوار",
+      "maneuver": "رسم توضيحي لتغيير المسار والتجاوز",
+      "stopping": "رسم توضيحي للتوقف ومسافة الأمان",
+      "vehicle-safety": "رسم توضيحي لسلامة المركبة",
+      "documents": "رسم توضيحي لوثائق المركبة",
+      "driver-safety": "رسم توضيحي لسلامة السائق",
+      "visibility": "رسم توضيحي لمجال الرؤية",
+      "trailer": "رسم توضيحي للمركبة والمقطورة"
+    }[type] || "رسم توضيحي مبسط للطريق والمركبات";
+    const shared = `<svg class="lesson-animation-svg" viewBox="0 0 640 210" role="img" aria-label="${escapeHtml(sceneDescription)}"><rect width="640" height="210" rx="18" fill="#102936"/><circle cx="555" cy="41" r="21" fill="#2edbc0" opacity=".75"/>${road}`;
+    const pieces = {
+      "road-parts": `${badge("corsia", 36, 33)}${badge("carreggiata", 184, 33)}${badge("marciapiede", 492, 33)}<path d="M68 83v25M240 83v25M548 83v25" stroke="#092a32" stroke-dasharray="3 4"/>${car(120, 128, "scene-car scene-car-road")}`,
+      "traffic-signs": `<g class="focus-concept" transform="translate(84 30)"><path d="M35 2 69 60H1Z" fill="#73d9e1" stroke="#c8473d" stroke-width="8"/><path d="M28 45h14" stroke="#092a32" stroke-width="5"/></g><g class="focus-example" transform="translate(270 30)"><circle cx="34" cy="34" r="31" fill="#73d9e1" stroke="#c8473d" stroke-width="8"/><path d="M12 34h44" stroke="#c8473d" stroke-width="8"/></g><g class="focus-warning" transform="translate(455 30)"><circle cx="34" cy="34" r="31" fill="#2c6d9d"/><path d="M34 13v25M34 48v2" stroke="#73d9e1" stroke-width="6" stroke-linecap="round"/></g>${car(270, 128, "scene-car scene-car-road")}`,
+      "traffic-light": `<g class="focus-concept" transform="translate(78 18)"><rect x="0" y="0" width="49" height="111" rx="12" fill="#092a32"/><circle cx="24" cy="22" r="13" fill="#d84a43"/><circle cx="24" cy="56" r="13" fill="#2edbc0"/><circle cx="24" cy="89" r="13" fill="#43d9a2"/><path d="M24 111v17" stroke="#092a32" stroke-width="7"/></g><path class="focus-example" d="M135 149h430" stroke="#43d9a2" stroke-width="8" stroke-dasharray="20 12"/><path class="focus-warning" d="M135 149h70" stroke="#d84a43" stroke-width="8"/>${car(300, 128, "scene-car scene-car-road")}`,
+      "intersection": `<rect x="274" y="0" width="92" height="210" fill="#275364"/><path d="M0 151h640" stroke="#275364" stroke-width="70"/><path d="M320 0v70M320 190v20M0 151h205M435 151h205" stroke="#73d9e1" stroke-width="3" stroke-dasharray="20 16"/><g class="focus-concept" transform="translate(60 37)"><path d="M30 0 60 52H0Z" fill="#73d9e1" stroke="#c8473d" stroke-width="7"/><path d="M30 55v28" stroke="#092a32" stroke-width="4"/></g><path class="focus-example" d="M320 35v83h118" fill="none" stroke="#2edbc0" stroke-width="6" stroke-dasharray="10 7"/><path class="focus-warning" d="M250 151h-90" stroke="#2edbc0" stroke-width="6" stroke-dasharray="10 7"/>${car(390, 128, "scene-car scene-car-cross")}`,
+      "roundabout": `<path d="M320 0v68M320 190v20M0 140h244M396 140h244" stroke="#275364" stroke-width="49"/><circle cx="320" cy="140" r="76" fill="#275364" stroke="#73d9e1" stroke-width="3" stroke-dasharray="13 10"/><circle cx="320" cy="140" r="39" fill="#247b70" stroke="#73d9e1" stroke-width="3"/><path class="focus-example" d="M320 61a79 79 0 0 1 79 79" fill="none" stroke="#2edbc0" stroke-width="6" stroke-dasharray="10 7"/><path class="focus-concept" d="M320 10v43m0 0-10-11m10 11 10-11M618 140h-42m0 0 11-10m-11 10 11 10" stroke="#193543" stroke-width="4" fill="none"/><g class="scene-car-roundabout focus-warning" style="transform-origin:320px 140px"><g transform="translate(370 134) rotate(90)"><rect x="-14" y="-7" width="28" height="14" rx="5" fill="#2edbc0" stroke="#092a32" stroke-width="2"/><circle cx="-8" cy="8" r="2.5" fill="#092a32"/><circle cx="8" cy="8" r="2.5" fill="#092a32"/></g></g>${badge("rotatoria", 36, 29)}`,
+      "maneuver": `<path class="focus-concept" d="M88 152h170" stroke="#2edbc0" stroke-width="7" stroke-dasharray="17 13"/><path class="focus-example" d="M168 141c35-65 92-65 142-8" fill="none" stroke="#43d9a2" stroke-width="6" stroke-dasharray="11 7"/><path class="focus-warning" d="M390 141c34-44 77-45 119-15" fill="none" stroke="#d84a43" stroke-width="6" stroke-dasharray="11 7"/><path d="m301 126 13 7-13 7" fill="#43d9a2"/>${car(110, 128, "scene-car scene-car-maneuver")}${car(420, 128, "scene-car scene-car-road")}`,
+      "stopping": `<g class="focus-concept" transform="translate(56 31)"><circle cx="42" cy="42" r="34" fill="#193543" stroke="#092a32" stroke-width="5"/><path d="M42 42 62 25" stroke="#c8473d" stroke-width="5"/><path d="M42 8v8M76 42h-8" stroke="#092a32" stroke-width="3"/></g><path class="focus-example" d="M355 118v69M390 118v69M425 118v69M460 118v69" stroke="#2edbc0" stroke-width="5"/><path class="focus-warning" d="M488 117v70" stroke="#d84a43" stroke-width="7"/>${car(225, 128, "scene-car scene-car-brake")}`,
+      "vehicle-safety": `<g class="focus-concept" transform="translate(70 27)"><rect x="0" y="0" width="94" height="72" rx="16" fill="#193543" stroke="#092a32" stroke-width="3"/><path d="M18 13 75 60M25 62 68 15" stroke="#55bff0" stroke-width="8"/><circle cx="47" cy="36" r="7" fill="#092a32"/></g><path class="focus-example" d="M180 166h350" stroke="#43d9a2" stroke-width="6"/><g class="focus-warning" transform="translate(500 34)"><path d="M25 0 51 47H0Z" fill="#73d9e1" stroke="#c8473d" stroke-width="6"/><path d="M25 14v15M25 37v2" stroke="#c8473d" stroke-width="4"/></g>${car(280, 128, "scene-car scene-car-road")}`,
+      "documents": `<g class="focus-concept" transform="translate(72 26)"><rect x="0" y="0" width="92" height="112" rx="8" fill="#193543" stroke="#092a32" stroke-width="3"/><path d="M17 23h55M17 40h55M17 58h40M17 76h49" stroke="#47bda7" stroke-width="5" stroke-linecap="round"/><circle cx="68" cy="89" r="10" fill="#2edbc0"/></g><path class="focus-example" d="M208 78h300" stroke="#43d9a2" stroke-width="5" stroke-dasharray="10 7"/>${car(290, 128, "scene-car scene-car-road")}${badge("R.C.A.", 456, 34, "focus-warning")}`,
+      "driver-safety": `<g class="focus-concept" transform="translate(70 24)"><circle cx="43" cy="36" r="28" fill="#2edbc0" stroke="#092a32" stroke-width="3"/><path d="M20 100c4-26 19-37 41-37s37 11 41 37" fill="#43d9a2" stroke="#092a32" stroke-width="3"/><circle cx="35" cy="36" r="3" fill="#092a32"/><circle cx="52" cy="36" r="3" fill="#092a32"/><path d="M37 49q7 6 14 0" fill="none" stroke="#092a32" stroke-width="3"/></g><g class="focus-example" transform="translate(485 28)"><path d="M37 0 72 65H2Z" fill="#73d9e1" stroke="#c8473d" stroke-width="6"/><path d="M37 20v20M37 50v2" stroke="#c8473d" stroke-width="5"/></g><path class="focus-warning" d="M182 158h282" stroke="#2edbc0" stroke-width="7" stroke-dasharray="16 9"/>${car(270, 128, "scene-car scene-car-road")}`,
+      "visibility": `<g class="focus-concept" transform="translate(58 31)"><path d="M0 35Q43-2 86 35 43 72 0 35Z" fill="#193543" stroke="#092a32" stroke-width="4"/><circle cx="43" cy="35" r="13" fill="#2c6d9d"/><circle cx="43" cy="35" r="5" fill="#092a32"/></g><path class="focus-example" d="M130 140 270 119 270 181Z" fill="#2edbc0" opacity=".52"/><path class="focus-warning" d="M413 126 552 102 552 188Z" fill="#d84a43" opacity=".3"/>${car(270, 128, "scene-car scene-car-road")}`,
+      "trailer": `${car(168, 128, "scene-car scene-car-road")}<g class="scene-trailer focus-concept"><path d="M257 146h34" stroke="#092a32" stroke-width="5"/><rect x="292" y="131" width="105" height="34" rx="7" fill="#1e4552" stroke="#092a32" stroke-width="3"/><circle cx="315" cy="169" r="6" fill="#092a32"/><circle cx="374" cy="169" r="6" fill="#092a32"/></g>${badge("limiti", 432, 35, "focus-example")}${badge("frenata", 432, 82, "focus-warning")}`
+    };
+    return `${shared}${pieces[type] || pieces["road-parts"]}<path d="M20 199h600" stroke="#2e5c6b" stroke-width="1"/></svg>`;
+  }
   var excerpt = (text, max = 190) => {
     const value = String(text || "").trim();
     if (value.length <= max) return value;
@@ -42659,7 +42748,7 @@ This typically indicates that your device does not have a healthy Internet conne
     const stageCards = stages.map((stage, index) => `<article class="lesson-animation-stage${index === 0 ? " is-active" : ""}" data-explainer-stage="${index}" aria-current="${index === 0 ? "step" : "false"}"><strong><span lang="it">${escapeHtml(stage.it)}</span><small lang="ar" dir="rtl">${escapeHtml(stage.ar)}</small></strong><p class="lesson-animation-stage-it" lang="it" dir="ltr">${escapeHtml(stage.text_it)}</p><p class="lesson-animation-stage-ar" lang="ar" dir="rtl">${escapeHtml(stage.text_ar)}</p></article>`).join("");
     const stageButtons = stages.map((stage, index) => `<button type="button" class="lesson-animation-step${index === 0 ? " is-active" : ""}" data-explainer-step="${index}" aria-pressed="${index === 0 ? "true" : "false"}"><span>${String(index + 1).padStart(2, "0")}</span><small>${escapeHtml(stage.ar)}</small></button>`).join("");
     const visualPath = ((_e = lesson.visual_script) == null ? void 0 : _e.visual_path) || `inline-svg:${type}`;
-    return `<section class="lesson-animation" data-scene="${type}" data-visual-path="${escapeHtml(visualPath)}" data-step="0" aria-labelledby="lessonAnimationTitle"><div class="lesson-animation-heading"><div><div class="eyebrow"><span lang="it">FASI DELLA LEZIONE</span> · <span lang="ar">مراحل الدرس</span></div><h2 id="lessonAnimationTitle"><span lang="it">La lezione in tre fasi</span><small lang="ar" dir="rtl">نصوص الدرس مرتبة في ثلاث مراحل</small></h2></div><span class="offline-badge" lang="ar">يعمل دون إنترنت</span></div><div class="lesson-animation-scene"><div class="lesson-animation-unavailable" role="note"><strong lang="it" dir="ltr">3D animation is not available in this local build.</strong><span lang="ar" dir="rtl">تم تعطيل الرسم المسطّح الحالي. ستظهر هنا رسوم ثلاثية الأبعاد بعد إنشائها واختبارها.</span></div></div><div class="lesson-animation-stages" aria-live="polite">${stageCards}</div><div class="lesson-animation-controls"><div class="lesson-animation-steps" role="group" aria-label="Fasi della spiegazione · مراحل الشرح">${stageButtons}</div></div><p class="lesson-animation-note" lang="ar" dir="rtl">رُفع الرسم المسطّح القديم مؤقتًا بدلًا من تقديمه على أنه ثلاثي الأبعاد. تبقى المراحل نصية حتى تُجهّز رسوم 3D فعلية.</p></section>`;
+    return `<section class="lesson-animation" data-scene="${type}" data-visual-path="${escapeHtml(visualPath)}" data-step="0" aria-labelledby="lessonAnimationTitle"><div class="lesson-animation-heading"><div><div class="eyebrow"><span lang="it">FASI DELLA LEZIONE</span> · <span lang="ar">مراحل الدرس</span></div><h2 id="lessonAnimationTitle"><span lang="it">La lezione in tre fasi</span><small lang="ar" dir="rtl">نصوص الدرس مرتبة في ثلاث مراحل</small></h2></div><span class="offline-badge" lang="ar">يعمل دون إنترنت</span></div><div class="lesson-animation-scene">${sceneSvg(type)}</div><div class="lesson-animation-stages" aria-live="polite">${stageCards}</div><div class="lesson-animation-controls"><div class="lesson-animation-steps" role="group" aria-label="Fasi della spiegazione · مراحل الشرح">${stageButtons}</div></div></section>`;
   }
 
   // src/search.mjs
@@ -45591,15 +45680,15 @@ ${arabic}`;
     const words = lexicalTerms(value);
     return ((_a14 = words.find((word) => position >= word.start && position <= word.end)) == null ? void 0 : _a14.text) || "";
   }
-  function lookupOfflineWord(word = "", entries = []) {
-    const selected = String(word).trim().replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, "");
+  var ATTACHED_PRONOUN_SUFFIXES = Object.freeze(["le", "lo", "la", "ne", "ci", "vi", "li"]);
+  function lookupExactOfflineWord(selected, entries = []) {
     const needle = normalizeDictionaryWord(selected);
     const searchNeedle = normalizeSearchText(selected);
     if (!needle || !searchNeedle) return null;
     const generated = generatedDictionary.get(needle);
     if (generated == null ? void 0 : generated.translation_ar) {
       return {
-        word: String(word),
+        word: String(selected),
         italian: generated.word,
         arabic: String(generated.translation_ar),
         note: generated.note || "",
@@ -45612,9 +45701,9 @@ ${arabic}`;
       };
     }
     const entry = (Array.isArray(entries) ? entries : []).find((item) => normalizeSearchText((item == null ? void 0 : item.it) || "") === searchNeedle);
-    if (entry) return { word: String(word), italian: entry.it, arabic: entry.ar, note: entry.note || "", category: entry.category || "", source: "glossary", status: "legacy_glossary_needs_review", confidence: null };
+    if (entry) return { word: String(selected), italian: entry.it, arabic: entry.ar, note: entry.note || "", category: entry.category || "", source: "glossary", status: "legacy_glossary_needs_review", confidence: null };
     return generated ? {
-      word: String(word),
+      word: String(selected),
       italian: generated.word,
       arabic: "",
       note: generated.note || "",
@@ -45626,11 +45715,28 @@ ${arabic}`;
       hasLexicalTranslation: false
     } : null;
   }
+  function lookupOfflineWord(word = "", entries = []) {
+    const selected = String(word).trim().replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, "");
+    const exact = lookupExactOfflineWord(selected, entries);
+    if (exact) return exact;
+    const needle = normalizeDictionaryWord(selected);
+    for (const suffix of ATTACHED_PRONOUN_SUFFIXES) {
+      if (!needle.endsWith(suffix) || needle.length <= suffix.length + 3) continue;
+      const base = needle.slice(0, -suffix.length);
+      const directBase = lookupExactOfflineWord(base, entries);
+      if (directBase) return directBase;
+      if (base.endsWith("r")) {
+        const infinitive = lookupExactOfflineWord(`${base}e`, entries);
+        if (infinitive) return infinitive;
+      }
+    }
+    return null;
+  }
   function translateTappedWord(word = "", entries = []) {
     const selected = String(word).trim().replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, "");
     const match = lookupOfflineWord(selected, entries);
     const status = (match == null ? void 0 : match.status) || "missing";
-    const fallbackNote = status === "machine_draft_needs_review" ? "مسودة ترجمة آلية غير مراجعة؛ قد يختلف المعنى بحسب السياق." : status === "legacy_glossary_needs_review" ? "مدخل من القاموس المحلي يحتاج إلى مراجعة." : status === "reviewed_override" ? "مصطلح مروري معتمد للمشروع." : "لم يُسجَّل مقابل عربي مفرد لهذه الكلمة؛ لا تُنسب ترجمة الجملة إليها.";
+    const fallbackNote = status === "machine_draft_needs_review" ? "مسودة ترجمة آلية غير مراجعة؛ قد يختلف المعنى بحسب السياق." : status === "legacy_glossary_needs_review" ? "مدخل من القاموس المحلي يحتاج إلى مراجعة." : status === "contextual_override_v49" ? "مقابل سياقي أُضيف في v49؛ قد يتغير مع تركيب الجملة." : status === "reviewed_override" ? "مدخل معجمي معتمد." : "لم يُسجَّل مقابل عربي مفرد لهذه الكلمة؛ لا تُنسب ترجمة الجملة إليها.";
     return {
       word: selected,
       italian: (match == null ? void 0 : match.italian) || selected,
@@ -46528,8 +46634,8 @@ ${arabic}`;
   var esc2 = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   var pair = (it2, ar2) => `<span class="language-pair lesson-pair"><span class="pair-it" lang="it" dir="ltr">${esc2(it2)}</span><span class="pair-ar" lang="ar" dir="rtl">${esc2(ar2)}</span></span>`;
   function pointCards(items = []) {
-    const cards = items.map((item) => `<article class="lesson-key-point-card"><h3 class="lesson-key-point-title"><span lang="it" dir="ltr">${esc2(item.title_it)}</span><span lang="ar" dir="rtl">${esc2(item.title_ar)}</span></h3><div class="lesson-key-point-rule"><div class="lesson-key-point-rule-label">${pair("Regola da ricordare", "القاعدة التي يجب تذكرها")}</div>${pair(item.it, item.ar)}</div></article>`).join("");
-    return `<section class="lesson-key-points" data-lesson-section="points"><h2>${pair("Punti importanti", "النقاط المهمة")}</h2><div class="lesson-key-point-list">${cards}</div></section>`;
+    const cards = items.map((item) => `<article class="lesson-key-point-card key-point-card"><div class="lesson-key-point-title" role="heading" aria-level="3"><div class="kp-it" lang="it" dir="ltr">${esc2(item.title_it)}</div><div class="kp-ar" lang="ar" dir="rtl">${esc2(item.title_ar)}</div></div><div class="lesson-key-point-rule"><div class="lesson-key-point-rule-label">${pair("Regola da ricordare", "القاعدة التي يجب تذكرها")}</div>${pair(item.it, item.ar)}</div></article>`).join("");
+    return `<section class="lesson-key-points" data-lesson-section="points"><h2>${pair("Punti importanti", "النقاط المهمة")}</h2><div class="lesson-key-point-list key-points-list key-points-grid">${cards}</div></section>`;
   }
   function trapCards(items = []) {
     const body = items.length ? items.map((item) => `<article class="lesson-trap-card"><h3><span lang="it" dir="ltr">${esc2(item.term_it)}</span><small lang="ar" dir="rtl">${esc2(item.meaning_ar)}</small></h3><div>${pair(item.why_it, item.why_ar)}</div>${item.example_it || item.example_ar ? `<blockquote>${pair(item.example_it || "", item.example_ar || "")}</blockquote>` : ""}</article>`).join("") : `<p class="lesson-empty-note">${pair("No special trap word applies to this lesson.", "لا توجد كلمة ملتبسة خاصة بهذا الدرس.")}</p>`;
@@ -46650,8 +46756,8 @@ ${arabic}`;
   var state = loadState();
   Object.assign(state, loadUiPreferences());
   var setEditTracker = createSetEditTracker(state);
-  var speechRate = 1;
-  var speechController = createSpeechController({ getRate: () => speechRate, onStateChange: syncSpeechControls });
+  var speechRate = 0.8;
+  var speechController = createSpeechController({ getRate: () => speechRate, onStateChange: syncSpeechControls, onWordProgress: syncItalianSpeechHighlight });
   document.body.dataset.audioBackend = "web-speech";
   var _a2;
   (_a2 = document.querySelector("#speechToggle")) == null ? void 0 : _a2.addEventListener("click", () => speechController.toggle());
@@ -46663,11 +46769,35 @@ ${arabic}`;
   });
   var _a5;
   (_a5 = document.querySelector("#speechRate")) == null ? void 0 : _a5.addEventListener("change", (event) => {
-    speechRate = Math.max(0.7, Math.min(1.3, Number(event.target.value) || 1));
+    speechRate = Math.max(0.7, Math.min(1.3, Number(event.target.value) || 0.85));
+    event.target.value = String(speechRate);
   });
   void loadLocalWordDictionary();
   var _a6;
   (_a6 = document.querySelector("#translationTooltipClose")) == null ? void 0 : _a6.addEventListener("click", () => closeWordTooltip({ restoreFocus: true }));
+  function playItalianAudio(text) {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const attemptSpeak = () => {
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length === 0) {
+        setTimeout(attemptSpeak, 100);
+        return;
+      }
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "it-IT";
+      utterance.rate = 0.8;
+      utterance.pitch = 1;
+      const itVoice = voices.find((v2) => v2.lang.startsWith("it"));
+      if (itVoice) utterance.voice = itVoice;
+      try {
+        window.speechSynthesis.speak(utterance);
+      } catch (e2) {
+        console.error(e2);
+      }
+    };
+    setTimeout(attemptSpeak, 50);
+  }
   function loadState(key = stateKey) {
     const empty = { favorites: /* @__PURE__ */ new Set(), wrong: /* @__PURE__ */ new Set(), solved: /* @__PURE__ */ new Set(), correctCount: 0, practiceCount: 0, topicCorrect: {}, topicTotal: {}, completedLessons: /* @__PURE__ */ new Set(), reviewedLessons: /* @__PURE__ */ new Set(), sourceChecks: {}, lastLessonKey: "", lastStudy: "", streak: 0, questionStats: {}, sessions: [], activeQuiz: null, fontSize: 16, syncSetEdits: {} };
     try {
@@ -46774,11 +46904,13 @@ ${arabic}`;
     clearTimeout(toastHandle);
     toastHandle = setTimeout(() => toastNode.classList.remove("show"), 3200);
   }
-  function syncSpeechControls({ status = "idle", button = null, locale = "", progress = 0, voiceName = "", voiceSource = "browser", error = "", needsSpeechSettings = false } = {}) {
+  function syncSpeechControls({ status = "idle", button = null, locale = "", progress = 0, voiceName = "", error = "", needsSpeechSettings = false } = {}) {
+    if (status === "idle" || status === "error") clearLessonWordHighlight(button);
     const bar = document.querySelector("#speechPlaybackBar");
     if (!bar) return;
     const active = status !== "idle", playing = status === "playing", paused = status === "paused", failed = status === "error";
     bar.hidden = !active;
+    document.body.classList.toggle("audio-player-open", active);
     const toggle = document.querySelector("#speechToggle"), playIcon = document.querySelector("#speechIconPlay"), pauseIcon = document.querySelector("#speechIconPause"), progressBar = document.querySelector("#speechProgress"), rate = document.querySelector("#speechRate"), debug = document.querySelector("#speechVoiceDebug"), statusNode = document.querySelector("#speechPlaybackStatus"), notice = document.querySelector("#speechPlaybackNotice"), settingsButton = document.querySelector("#speechSettingsButton");
     if (toggle) {
       toggle.setAttribute("aria-pressed", String(playing));
@@ -46792,7 +46924,7 @@ ${arabic}`;
     }
     if (rate) {
       rate.value = String(speechRate);
-      rate.setAttribute("aria-label", "سرعة الصوت");
+      rate.setAttribute("aria-label", "سرعة الصوت الإيطالي");
     }
     const selectedVoice = voiceName || (String(locale).toLowerCase().startsWith("it") ? "صوت إيطالي على الجهاز" : locale ? "صوت عربي على الجهاز" : "اختر اللغة");
     const browserVoice = String(locale).toLowerCase().startsWith("it") ? "نطق إيطالي على الجهاز" : "نطق عربي على الجهاز";
@@ -46800,7 +46932,7 @@ ${arabic}`;
       debug.textContent = failed ? error || "تعذّر تشغيل الصوت" : `${selectedVoice || browserVoice}`;
       debug.dataset.qualityHint = "device-speech";
     }
-    if (statusNode) statusNode.textContent = failed ? error || "تعذّر تشغيل الصوت" : status === "preparing" ? "جارٍ تجهيز الصوت..." : paused ? "الصوت متوقف مؤقتًا" : playing ? "الصوت يعمل" : "";
+    if (statusNode) statusNode.textContent = failed ? error || "تعذّر تشغيل الصوت" : status === "preparing" ? "جارٍ تجهيز صوت الجهاز..." : paused ? "الصوت متوقف مؤقتًا" : playing ? "الصوت يعمل" : "";
     if (notice) notice.hidden = !(statusNode == null ? void 0 : statusNode.textContent);
     if (settingsButton) settingsButton.hidden = !needsSpeechSettings || !Capacitor.isNativePlatform() || typeof NativeSpeechSettings.openVoiceDataSettings !== "function";
     if (button) {
@@ -46809,6 +46941,41 @@ ${arabic}`;
       button.classList.toggle("speech-error", failed);
       button.setAttribute("aria-pressed", String(playing));
     }
+  }
+  function clearLessonWordHighlight(button = null) {
+    var _a14;
+    const scope = ((_a14 = button == null ? void 0 : button.closest) == null ? void 0 : _a14.call(button, ".lesson-detail-page")) || main;
+    scope == null ? void 0 : scope.querySelectorAll(".speech-current-word").forEach((node) => {
+      node.classList.remove("speech-current-word");
+      node.removeAttribute("aria-current");
+    });
+  }
+  function syncItalianSpeechHighlight({ button = null, locale = "", charIndex = 0, status = "progress" } = {}) {
+    var _a14;
+    const page = (_a14 = button == null ? void 0 : button.closest) == null ? void 0 : _a14.call(button, ".lesson-detail-page");
+    if (!page || button.dataset.lessonItalianAudio !== "true") return;
+    if (status === "clear" || !String(locale).toLowerCase().startsWith("it")) {
+      clearLessonWordHighlight(button);
+      return;
+    }
+    const root = page.querySelector(".lesson-it-text");
+    const raw = String((root == null ? void 0 : root.dataset.rawText) || "");
+    const offset = Math.floor(Number(charIndex) || 0) - Number(button.dataset.lessonBodyOffset || 0);
+    if (!root || offset < 0 || offset >= raw.length) {
+      clearLessonWordHighlight(button);
+      return;
+    }
+    const words = [...root.querySelectorAll("[data-speech-start]")];
+    const active = words.find((node) => {
+      const start = Number(node.dataset.speechStart), end = start + node.textContent.length;
+      return offset >= start && offset < end;
+    }) || words.find((node) => Number(node.dataset.speechStart) >= offset);
+    words.forEach((node) => {
+      const selected = node === active;
+      node.classList.toggle("speech-current-word", selected);
+      if (selected) node.setAttribute("aria-current", "true");
+      else node.removeAttribute("aria-current");
+    });
   }
   async function openSpeechSettings() {
     if (!Capacitor.isNativePlatform() || typeof NativeSpeechSettings.openVoiceDataSettings !== "function") {
@@ -47164,6 +47331,24 @@ ${arabic}`;
     };
     return `<svg class="tool-svg" viewBox="0 0 24 24" aria-hidden="true">${paths[name4] || paths.book}</svg>`;
   }
+  function courseUnitIllustration(module) {
+    const paths = {
+      "road-basics": '<path d="M5 21 9 3h6l4 18M12 4v3m0 4v4m0 4v2"/>',
+      "signs": '<path d="m12 3 9 17H3L12 3Z"/><path d="M12 9v5m0 3h.01"/>',
+      "signals-markings": '<rect x="7" y="3" width="10" height="17" rx="3"/><circle cx="12" cy="8" r="1.7"/><circle cx="12" cy="13" r="1.7"/><path d="M12 20v2"/>',
+      "priority-intersections": '<path d="M3 9h18M9 3v18M15 3v18M3 15h18"/><path d="m15 8 3 1-3 1"/>',
+      "movement-overtaking": '<path d="M4 20 8 4h8l4 16M12 5v4m0 4v5"/><path d="m16 8 3 3-3 3"/>',
+      "speed-stopping-highways": '<path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 14 4-4M7 18h10"/>',
+      "vehicle-safety": '<path d="m3 15 2-6h14l2 6v4H3zM6 9l2-4h8l2 4"/><circle cx="7" cy="17" r="1.5"/><circle cx="17" cy="17" r="1.5"/>',
+      "documents-liability": '<path d="M6 3h9l4 4v14H6zM15 3v5h4M9 12h7m-7 4h7"/>',
+      "driver-health-environment": '<circle cx="12" cy="7" r="3"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M9 15l3 2 3-2"/>',
+      "exam-supplement-driver": '<path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/>',
+      "exam-supplement-vehicle": '<path d="m3 15 2-6h14l2 6v4H3zM6 9l2-4h8l2 4"/><circle cx="7" cy="17" r="1.5"/><circle cx="17" cy="17" r="1.5"/>'
+    };
+    const fallback = '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 6h13M8 10h7M8 14h7"/>';
+    const label = esc3(`${module.title_it} / ${module.title_ar}`);
+    return `<span class="course-unit-art"><svg viewBox="0 0 24 24" role="img" aria-label="${label}" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths[module.module_id] || fallback}</svg></span>`;
+  }
   function homePage() {
     const prog = courseProgress(), next = nextCourseLesson(), accuracy = state.practiceCount ? Math.round(state.correctCount / state.practiceCount * 100) : 0, totalLessons = prog.all.length;
     const reviewAlert = state.wrong.size ? `<aside class="recommendation-banner"><div>${pair2("A few questions are ready for another look.", "لديك أسئلة تستحق مراجعة أخرى.")}</div><button class="small-button" data-action="mistakes">${controlLabel(`Review ${state.wrong.size} mistakes`, `راجع ${state.wrong.size.toLocaleString("ar")} أخطاء`)}</button></aside>` : "";
@@ -47181,7 +47366,7 @@ ${arabic}`;
         const accessLabel = !accessible ? controlLabel("Locked · test ad", "مقفل · إعلان اختباري") : !free ? controlLabel("Unlocked this session", "مفتوح لهذه الجلسة") : complete ? controlLabel("Completed", "مكتمل") : controlLabel("Open lesson", "افتح الدرس");
         return `<button class="course-lesson-row ${accessible ? "" : "is-locked"}" type="button" data-open-lesson="${esc3(module.module_id)}" data-lesson-index="${li}" data-course-lesson-row data-search="${esc3(searchText)}"><span class="lesson-row-mark ${complete ? "is-done" : ""}" aria-hidden="true">${complete ? "✓" : String(li + 1).padStart(2, "0")}</span><span class="course-lesson-copy">${pair2(lesson.heading_it, lesson.heading_ar, "course-lesson-heading")}<small>${accessLabel}</small></span><span class="course-row-arrow" aria-hidden="true">›</span></button>`;
       }).join("");
-      return `<details class="course-accordion" data-course-unit><summary><span class="course-unit-number">${String(mi + 1).padStart(2, "0")}</span><span class="course-accordion-title">${pair2(module.title_it, module.title_ar, "unit-title")}</span><span class="unit-progress"><strong>${done.toLocaleString("ar")}/${module.lessons.length.toLocaleString("ar")}</strong><small>${pair2("lezioni", "دروس")}</small></span><span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-accordion-lessons"><p class="course-unit-intro">${pair2(module.intro_it, module.intro_ar)}</p>${lessons}</div></details>`;
+      return `<details class="course-accordion" data-course-unit><summary><span class="course-unit-number">${String(mi + 1).padStart(2, "0")}</span>${courseUnitIllustration(module)}<span class="course-accordion-title">${pair2(module.title_it, module.title_ar, "unit-title")}</span><span class="unit-progress"><strong>${done.toLocaleString("ar")}/${module.lessons.length.toLocaleString("ar")}</strong><small>${pair2("lezioni", "دروس")}</small></span><span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-accordion-lessons"><p class="course-unit-intro">${pair2(module.intro_it, module.intro_ar)}</p>${lessons}</div></details>`;
     }).join("");
     return `${resumeBanner}${reviewAlert}
   <details class="home-progress-details"><summary>${pair2("Il tuo progresso", "تقدمك الدراسي")}<span class="accordion-chevron" aria-hidden="true"></span></summary><section class="study-stats" aria-label="Panoramica dello studio · ملخص الدراسة"><div>${pair2("Banca dati dei quiz", "بنك الأسئلة")}<strong>${bank.count.toLocaleString("ar")}</strong></div><div>${pair2("Precisione negli esercizi", "دقة التدريب")}<strong>${accuracy.toLocaleString("ar")}%</strong></div><div>${pair2("Lezioni completate", "الدروس المكتملة")}<strong>${prog.complete.toLocaleString("ar")} / ${prog.all.length.toLocaleString("ar")}</strong></div><div>${pair2("Giorni consecutivi di studio", "أيام المذاكرة المتتالية")}<strong>${state.streak.toLocaleString("ar")}</strong></div></section></details>
@@ -47197,14 +47382,14 @@ ${arabic}`;
     const module = lessonModules.find((m2) => m2.module_id === moduleId), lesson = module == null ? void 0 : module.lessons[index];
     if (!module || !lesson) return `<div class="empty-state">${pair2("Lesson not found", "لم نعثر على الدرس")}<button class="quiet-button" data-view="home">${controlLabel("Back to the course", "العودة إلى المنهج")}</button></div>`;
     const all = flatLessons(), at2 = all.findIndex((x2) => x2.key === lessonKey(moduleId, index)), prev = all[at2 - 1], next = all[at2 + 1], key = lessonKey(moduleId, index), done = state.completedLessons.has(key);
-    const { italian: lessonText, arabic: lessonTextAr } = buildLessonSpeechTexts(lesson);
+    const { italian: lessonText } = buildLessonSpeechTexts(lesson);
     const sourceList = [...module.sources || [], ...lesson.sources || []].filter((item, index2, all2) => (item == null ? void 0 : item.url) && all2.findIndex((other) => other.url === item.url) === index2);
     const sources = sourceList.map((source) => {
       const label = sourceLabel(source);
       return `<li><a href="${esc3(source.url)}" target="_blank" rel="noopener noreferrer">${pair2(label.it, label.ar, "source-link")}</a><small>${pair2(source.legal_reference_it || "Riferimento normativo ufficiale", source.legal_reference || "مرجع قانوني رسمي")}</small></li>`;
     }).join("");
     return `<article class="lesson-detail-page" data-lesson-page="${esc3(key)}"><header class="lesson-detail-head"><div class="eyebrow" lang="it">UNITÀ ${String(module.order_hint).padStart(2, "0")} · LEZIONE ${String(index + 1).padStart(2, "0")}</div><h1>${pair2(lesson.heading_it, lesson.heading_ar, "detail-title")}</h1></header>
-  <div class="lesson-audio-row" role="group" aria-label="محتوى الدرس"><button class="audio-button" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc3(lessonText)}">${controlLabel("Ascolta in italiano", "استمع بالإيطالية")}</button><button class="audio-button" data-tts-locale="${ARABIC_TTS_LOCALE}" data-tts-text="${esc3(lessonTextAr)}">${controlLabel("Ascolta in arabo (voce del dispositivo)", "استمع بالعربية بصوت الجهاز")}</button>${lessonVideoBlock(lesson, moduleId, index)}</div>
+  <div class="lesson-audio-row" role="group" aria-label="محتوى الدرس"><button class="audio-button" data-lesson-italian-audio="true" data-lesson-body-offset="${String(lesson.heading_it || "").trim().length + (lesson.body_it ? 2 : 0)}" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc3(lessonText)}">${controlLabel("Ascolta in italiano", "استمع بالإيطالية")}</button>${lessonVideoBlock(lesson, moduleId, index)}</div>
   <div class="lesson-detail-copy">${renderLessonSections(lesson, lessonAnimationMarkup(lesson, module.module_id))}</div>
   <details class="lesson-sources" data-lesson-section="sources"><summary>${pair2("Fonti ufficiali · apri per consultarle", "مصادر رسمية · افتح لعرضها")}<span class="accordion-chevron" aria-hidden="true"></span></summary><ul>${sources}</ul></details>
   ${lessonVideoCTA(lesson, moduleId, index)}
@@ -47745,8 +47930,8 @@ ${arabic}`;
     setLessonExplainerStep(0);
     setLessonExplainerPlaybackState(scene, "playing");
     const stages = ((_a14 = lesson.visual_script) == null ? void 0 : _a14.stages) || [];
-    const intros = ["الفكرة الأساسية:", "مثال:", "انتبه إلى الخطأ الشائع:"];
-    const fallback = [lesson.core_ar || lesson.body_ar, lesson.example_ar, ((_c = (_b = lesson.common_mistakes) == null ? void 0 : _b[0]) == null ? void 0 : _c.mistake_ar) || lesson.pitfall_ar];
+    const intros = ["Idea principale:", "Esempio:", "Attenzione all’errore comune:"];
+    const fallback = [lesson.core_it || lesson.body_it, lesson.example_it, ((_c = (_b = lesson.common_mistakes) == null ? void 0 : _b[0]) == null ? void 0 : _c.mistake_it) || lesson.pitfall_it];
     const visualStageExcerpt = (text, max = 190) => {
       const value = String(text || "").trim();
       if (value.length <= max) return value;
@@ -47755,9 +47940,9 @@ ${arabic}`;
     };
     const segments = Array.from({ length: 3 }, (_, index) => {
       var _a15;
-      return { text: `${intros[index]} ${visualStageExcerpt(((_a15 = stages[index]) == null ? void 0 : _a15.text_ar) || fallback[index] || "")}` };
+      return { text: `${intros[index]} ${visualStageExcerpt(((_a15 = stages[index]) == null ? void 0 : _a15.text_it) || fallback[index] || "")}` };
     });
-    void speechController.speakSequence(segments, ARABIC_TTS_LOCALE, button, (index) => setLessonExplainerStep(index)).finally(() => {
+    void speechController.speakSequence(segments, ITALIAN_TTS_LOCALE, button, (index) => setLessonExplainerStep(index)).finally(() => {
       if (button.isConnected && !speechController.isActive(button)) setLessonExplainerPlaybackState(scene, "idle");
     });
   }
@@ -47930,19 +48115,39 @@ Topic: ${q.topic}`;
     offlineCacheStats = { imageCached: data.imageCached, imageTotal: data.imageTotal, coreCached: data.coreCached, coreTotal: data.coreTotal };
     updateConnectivity();
   });
-  function vocabularyMarkup(text) {
-    const wordMarkup = (value, index = -1, entry = null) => String(value).replace(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu, (word) => index >= 0 ? `<span class="wt-word inline-vocabulary-term" role="button" tabindex="0" data-vocabulary-index="${index}" aria-haspopup="dialog" aria-label="${esc3(`${entry.it}: ${entry.ar}`)}">${esc3(word)}</span>` : `<span class="wt-word" role="button" tabindex="0" data-tap-word="${esc3(word)}" aria-haspopup="dialog" aria-label="${esc3(`Traduci ${word} · ترجمة ${word}`)}">${esc3(word)}</span>`);
-    const matches = findGlossaryMatches(text);
-    if (!matches.length) return wordMarkup(text);
+  function vocabularyMarkup(text, baseOffset = 0) {
+    const value = String(text);
+    const speechWords = (segment, offset) => {
+      let cursor2 = 0, html2 = "";
+      for (const match of segment.matchAll(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu)) {
+        html2 += esc3(segment.slice(cursor2, match.index));
+        html2 += `<span class="speech-word" data-speech-start="${offset + match.index}">${esc3(match[0])}</span>`;
+        cursor2 = match.index + match[0].length;
+      }
+      return html2 + esc3(segment.slice(cursor2));
+    };
+    const wordMarkup = (segment, index = -1, entry = null, offset = 0) => {
+      if (index >= 0) return `<span class="wt-word inline-vocabulary-term" role="button" tabindex="0" data-vocabulary-index="${index}" aria-haspopup="dialog" aria-label="${esc3(`${entry.it}: ${entry.ar}`)}">${speechWords(segment, offset)}</span>`;
+      let cursor2 = 0, html2 = "";
+      for (const match of segment.matchAll(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu)) {
+        html2 += esc3(segment.slice(cursor2, match.index));
+        const word = match[0];
+        html2 += `<span class="wt-word speech-word" data-speech-start="${offset + match.index}" role="button" tabindex="0" data-tap-word="${esc3(word)}" aria-haspopup="dialog" aria-label="${esc3(`Traduci ${word} · ترجمة ${word}`)}">${esc3(word)}</span>`;
+        cursor2 = match.index + word.length;
+      }
+      return html2 + esc3(segment.slice(cursor2));
+    };
+    const matches = findGlossaryMatches(value);
+    if (!matches.length) return wordMarkup(value, -1, null, baseOffset);
     let cursor = 0, html = "";
     for (const match of matches) {
       const index = glossaryEntries.indexOf(match.entry);
       if (index < 0 || match.start < cursor) continue;
-      html += wordMarkup(text.slice(cursor, match.start));
-      html += wordMarkup(text.slice(match.start, match.end), index, match.entry);
+      html += wordMarkup(value.slice(cursor, match.start), -1, null, baseOffset + cursor);
+      html += wordMarkup(value.slice(match.start, match.end), index, match.entry, baseOffset + match.start);
       cursor = match.end;
     }
-    return html + wordMarkup(text.slice(cursor));
+    return html + wordMarkup(value.slice(cursor), -1, null, baseOffset + cursor);
   }
   function lessonSentenceMarkup(text) {
     const value = String(text), sentences = splitSentences(value);
@@ -47951,11 +48156,11 @@ Topic: ${q.topic}`;
     for (const sentence of sentences) {
       const start = value.indexOf(sentence, cursor);
       if (start < 0) continue;
-      html += vocabularyMarkup(value.slice(cursor, start));
-      html += `<span class="lesson-sentence" data-sentence-tap="true" data-sentence-offset="${start}" data-sentence-end="${start + sentence.length}">${vocabularyMarkup(sentence)}</span><button type="button" class="sentence-translation-trigger" data-sentence-translate="${start}" aria-label="Translate this sentence · ترجم الجملة" title="Translate this sentence · ترجم الجملة">↔</button>`;
+      html += vocabularyMarkup(value.slice(cursor, start), cursor);
+      html += `<span class="lesson-sentence" data-sentence-tap="true" data-sentence-offset="${start}" data-sentence-end="${start + sentence.length}">${vocabularyMarkup(sentence, start)}</span><button type="button" class="sentence-translation-trigger" data-sentence-translate="${start}" aria-label="Translate this sentence · ترجم الجملة" title="Translate this sentence · ترجم الجملة">↔</button>`;
       cursor = start + sentence.length;
     }
-    return html + vocabularyMarkup(value.slice(cursor));
+    return html + vocabularyMarkup(value.slice(cursor), cursor);
   }
   function translationOffsetAtPoint(root, x2, y2) {
     var _a14, _b, _c;
@@ -48012,6 +48217,7 @@ Topic: ${q.topic}`;
   }
   function openTappedWord(node, event = {}) {
     var _a14, _b, _c, _d, _e;
+    closeWordTooltip();
     const indexed = ((_a14 = node == null ? void 0 : node.dataset) == null ? void 0 : _a14.vocabularyIndex) !== void 0 ? glossaryEntries[Number(node.dataset.vocabularyIndex)] : null;
     const italianNode = ((_b = node == null ? void 0 : node.matches) == null ? void 0 : _b.call(node, '.lesson-it-text,.q-it,.italian-question,.pair-it,[lang="it"]')) ? node : ((_c = node == null ? void 0 : node.closest) == null ? void 0 : _c.call(node, '.lesson-it-text,.q-it,.italian-question,.pair-it,[lang="it"]')) || node;
     const offset = italianNode && event ? translationOffsetAtPoint(italianNode, event.clientX || 0, event.clientY || 0) : 0;
@@ -48033,17 +48239,11 @@ Topic: ${q.topic}`;
     note.className = "inline-sentence-translation";
     note.setAttribute("role", "status");
     note.setAttribute("aria-live", "polite");
-    const italian = document.createElement("span");
-    italian.lang = "it";
-    italian.dir = "ltr";
-    italian.textContent = matched.source;
     const arabic = document.createElement("span");
     arabic.lang = "ar";
     arabic.dir = "rtl";
     arabic.textContent = matched.translation;
-    const detail = document.createElement("small");
-    detail.textContent = `${matched.note} مطابقة محلية بحسب ترتيب النصين، وليست محرك ترجمة سياقيًا.`;
-    note.append(italian, arabic, detail);
+    note.append(arabic);
     placement.insertAdjacentElement("afterend", note);
   }
   function openVocabularyCard(rawIndex, event) {
@@ -48065,7 +48265,7 @@ Topic: ${q.topic}`;
       node.setAttribute("aria-label", "Testo italiano della lezione. Premi Invio per mostrare la traduzione araba · نص الدرس بالإيطالية؛ اضغط Enter لإظهار ترجمته العربية");
     }
     const heading = main.querySelector(".lesson-content-block h2");
-    if (heading && !((_a14 = heading.nextElementSibling) == null ? void 0 : _a14.classList.contains("inline-vocabulary-hint"))) heading.insertAdjacentHTML("afterend", `<p class="inline-vocabulary-hint">${pair2("Tieni premuta una parola italiana per aprire il suggerimento; la tastiera può attivarlo con Invio o Spazio. Le frasi si traducono sotto il testo.", "اضغط مطولًا على كلمة إيطالية لعرض فقاعة ترجمة؛ ولوحة المفاتيح تفتحها بـ Enter أو المسافة. اضغط رمز السهم لترجمة الجملة أسفلها.")}</p>`);
+    if (heading && !((_a14 = heading.nextElementSibling) == null ? void 0 : _a14.classList.contains("inline-vocabulary-hint"))) heading.insertAdjacentHTML("afterend", `<p class="inline-vocabulary-hint">${pair2("Tocca una parola per tradurre", "انقر على الكلمة للترجمة")}</p>`);
   }
   function quickStudyGuideMarkup() {
     return `<details class="quick-study-guide" data-quick-guide><summary>${pair2("È la prima volta? Inizia con tre semplici passi", "جديد هنا؟ ابدأ بثلاث خطوات بسيطة")}<span class="accordion-chevron" aria-hidden="true"></span></summary><div class="quick-study-steps"><article><strong>01</strong><div>${pair2("Studia una breve lezione bilingue", "تعلّم درسًا ثنائي اللغة")}</div><button class="small-button" data-action="continue-course">${controlLabel("Apri la prossima lezione", "افتح الدرس التالي")}</button></article><article><strong>02</strong><div>${pair2("Esercitati per argomento e ripassa gli errori", "تدرّب حسب الموضوع وراجع أخطاءك")}</div><button class="small-button" data-action="smart-practice">${controlLabel("Inizia con 10 domande", "ابدأ 10 أسئلة")}</button></article><article><strong>03</strong><div>${pair2("Prova una simulazione d’esame quando ti senti pronto", "جرّب المحاكاة عندما تصبح مستعدًا")}</div><button class="small-button" data-action="exam">${controlLabel("Scegli le opzioni dell’esame", "اختر إعدادات المحاكاة")}</button></article></div></details>`;
@@ -48284,6 +48484,7 @@ Topic: ${q.topic}`;
     }
     const tappedWord = event.target.closest(".wt-word[data-tap-word]");
     if (tappedWord) {
+      event.preventDefault();
       openTappedWord(tappedWord, event);
       return;
     }
@@ -48403,6 +48604,12 @@ Topic: ${q.topic}`;
     const answer = event.target.closest("[data-answer]");
     if (answer) {
       answerQuestion(answer.dataset.answer === "true");
+      return;
+    }
+    const lessonItalianAudio = event.target.closest('[data-lesson-italian-audio="true"]');
+    if (lessonItalianAudio) {
+      speechController.stop();
+      playItalianAudio(lessonItalianAudio.dataset.ttsText || "");
       return;
     }
     const tts = event.target.closest("[data-tts-locale]");

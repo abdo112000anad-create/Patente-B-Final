@@ -1,13 +1,19 @@
-# Patente B بالعربي
+# Patente B بالعربي — v51
 
-Bilingual Italian–Arabic driving-theory study app. The Android package id is `it.patenteb.sideload.v29`; the public build workflow produces a debug APK for v45.
+تطبيق Capacitor لتعلّم أسئلة القيادة الإيطالية مع الترجمة العربية. رقم Android لهذه النسخة هو `versionCode 51` (`51.0.0`).
 
-## Build with GitHub Actions
+## الصوت
 
-Push to `main` or select **Build Android APK** under the repository’s Actions tab. The workflow runs the project tests, synchronizes Capacitor, builds the Android debug variant, and uploads `app-debug.apk` as a downloadable artifact.
+يستخدم التطبيق Web Speech المدمج في المتصفح فقط، ولا يضمّ محرك TTS محليًا أو نماذج صوت أو مكتبات Piper/ONNX. زر الاستماع في صفحة الدرس ينطق الإيطالية بصوت النظام الإيطالي وبسرعة 0.8، مع انتظار تحميل الأصوات على Android. كما أن شرح مراحل الدرس يُقرأ بالإيطالية.
 
-The workflow uses GitHub’s generated debug signing key. It is intended for clean installs or reinstalling after uninstalling a build signed with a different key; it is not a Play Store release.
+## البناء والاختبارات
 
-## Local development
+المتطلبات: Node.js 22، Java 21، Android SDK Platform 36. نفّذ:
 
-Requirements: Node.js 22, Java 21, and Android SDK Platform 36. Run `npm ci`, `npm test`, `npx cap sync android`, then `cd android && ./gradlew :app:assembleDebug`.
+```bash
+npm ci
+npm test
+bash ./scripts/build-android.sh
+```
+
+ينتج البناء المحلي APK تشخيصيًا موقّعًا بمفتاح debug، وليس إصدار متجر Play. يدفع سير GitHub Actions الإصدار التالي إلى Artifact باسم `patente-b-v51-debug-apk` بعد نجاح الاختبارات والبناء.

@@ -44,6 +44,7 @@ export ANDROID_HOME="$SDK_DIR"
 
 cd "$SOURCE_ROOT"
 npm ci
+npx cap sync android
 python3 "$SOURCE_ROOT/scripts/build_dictionary_db.py"
 npm run build
 
@@ -75,9 +76,8 @@ if [[ -n "${PATENTE_DEBUG_KEYSTORE:-}" ]]; then
   fi
   GRADLE_ARGS+=("-PpatenteDebugKeystore=$(cd "$(dirname "$PATENTE_DEBUG_KEYSTORE")" && pwd)/$(basename "$PATENTE_DEBUG_KEYSTORE")")
 fi
-
 cd "$ANDROID_ROOT"
-./gradlew "${GRADLE_ARGS[@]}" :app:assembleDebug :app:testDebugUnitTest
+./gradlew "${GRADLE_ARGS[@]}" clean :app:assembleDebug :app:testDebugUnitTest
 
 echo "Debug APK: $ANDROID_APP/build/outputs/apk/debug/app-debug.apk"
 echo "No release variant, release signing, upload, or publication was requested or performed."

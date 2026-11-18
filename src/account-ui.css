@@ -6,16 +6,16 @@
 .account-dialog button,.account-dialog input{min-height:44px;font-size:1rem}
 .account-dialog .account-form{display:grid;gap:12px;margin:16px 0}
 .account-dialog label{display:grid;gap:7px;font-size:1rem;font-weight:700;color:#183453}
-.account-dialog input{width:100%;padding:12px;border:1px solid #adbdcf;border-radius:12px;background:#fff;color:#142b46;font-family:inherit}
+.account-dialog input{width:100%;padding:12px;border:1px solid #adbdcf;border-radius:12px;background:#142733;color:#142b46;font-family:inherit}
 .account-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
 .account-actions button,.account-form button{line-height:1.6;white-space:normal}
-.account-dialog .account-privacy{padding:14px;background:#edf4ff;color:#183453;border-radius:12px;font-size:.95rem;line-height:1.9}
+.account-dialog .account-privacy{padding:14px;background:#142733;color:#183453;border-radius:12px;font-size:.95rem;line-height:1.9}
 .account-email{font:600 1rem/1.8 system-ui,sans-serif;overflow-wrap:anywhere;text-align:left}
 .account-status,.account-error,.account-sync-state{line-height:1.8}
 .account-error:empty,.account-status:empty{display:none}
 .account-error{color:#9b2424;font-weight:700}
-.account-delete-confirm{border:1px solid #cf8b8b;background:#fff4f4;border-radius:12px;padding:14px;margin-top:14px}
-.account-danger{border:1px solid #b33434;border-radius:12px;background:#fff;color:#922424;padding:10px 12px;font-family:inherit;font-weight:700;cursor:pointer}
+.account-delete-confirm{border:1px solid #cf8b8b;background:#142733;border-radius:12px;padding:14px;margin-top:14px}
+.account-danger{border:1px solid #b33434;border-radius:12px;background:#142733;color:#922424;padding:10px 12px;font-family:inherit;font-weight:700;cursor:pointer}
 .account-dialog button:disabled,.account-dialog input:disabled{opacity:.58;cursor:wait}
 .account-dialog button:focus-visible,.account-dialog input:focus-visible{outline:3px solid #155bc8;outline-offset:3px}
 @media(max-width:680px){.account-dialog{max-height:calc(100dvh - 24px);padding:20px;width:calc(100% - 20px)}.account-actions{grid-template-columns:1fr}.topbar-actions .account-trigger{padding:8px 9px}.account-form button{width:100%}}

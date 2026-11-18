@@ -8,6 +8,7 @@ public class MainActivity extends BridgeActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         registerPlugin(RewardedAdsPlugin.class);
+        registerPlugin(SpeechSettingsPlugin.class);
         super.onCreate(savedInstanceState);
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override

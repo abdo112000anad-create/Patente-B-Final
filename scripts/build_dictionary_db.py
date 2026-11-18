@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the v42 SQLite dictionary and its matching JSON lookup."""
+"""Build the v51 SQLite dictionary and its matching JSON lookup."""
 from __future__ import annotations
 import hashlib
 import json
@@ -14,8 +14,26 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 JSON_PATH = ROOT / "data/italian_arabic_dictionary_lookup.json"
 DB_PATH = ROOT / "android/app/src/main/assets/dictionary.db"
-APP_VERSION = 42
-EXPECTED_WORD_COUNT = 5273
+APP_VERSION = 51
+EXPECTED_WORD_COUNT = 5278
+
+# User-requested standalone lemma, kept separate from question-bank extraction.
+REQUESTED_LEMMA_ADDITIONS = {
+    "riconoscere": (
+        "يتعرف على",
+        "lexical_translation",
+        "المعنى المعجمي الذي طلب المستخدم إضافته.",
+    ),
+    "spiegazione": (
+        "شرح / تفسير",
+        "lexical_translation",
+        "ترجمة معجمية أضافها المستخدم بطلبه.",
+    ),
+}
+REQUESTED_LEMMA_SOURCES = {
+    "riconoscere": "user-requested-lemma-v47",
+    "spiegazione": "user-requested-lemma-v51",
+}
 
 # Owner-supplied, explicitly approved corrections from the v42 review.
 # Each tuple is (Arabic display text, translation kind, explanatory note).
@@ -76,7 +94,7 @@ def normalized_word(value: object) -> str:
 
 
 def write_json_atomically(payload: dict) -> None:
-    fd, temp_name = tempfile.mkstemp(prefix="dictionary-v42-", suffix=".json", dir=JSON_PATH.parent)
+    fd, temp_name = tempfile.mkstemp(prefix="dictionary-v51-", suffix=".json", dir=JSON_PATH.parent)
     os.close(fd)
     try:
         Path(temp_name).write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -90,6 +108,21 @@ def main() -> int:
     rows = payload.get("entries")
     if payload.get("schema_version") != 1 or not isinstance(rows, list):
         raise SystemExit("Expected schema_version 1 and an entries array")
+
+    for word, (translation, kind, note) in REQUESTED_LEMMA_ADDITIONS.items():
+        if not any(normalized_word(row.get("word")).casefold() == word.casefold() for row in rows):
+            rows.append({
+                "word": word,
+                "translation_ar": translation,
+                "ui_fallback_ar": translation,
+                "translation_kind": kind,
+                "source": REQUESTED_LEMMA_SOURCES[word],
+                "provider": "project-maintained",
+                "confidence": None,
+                "status": "reviewed_override",
+                "review_required": 0,
+                "note": note,
+            })
 
     filtered_rows = []
     seen: set[str] = set()
@@ -118,6 +151,19 @@ def main() -> int:
                 "review_required": 0,
                 "note": note,
             })
+        elif key in REQUESTED_LEMMA_ADDITIONS:
+            translation, kind, note = REQUESTED_LEMMA_ADDITIONS[key]
+            row.update({
+                "translation_ar": translation,
+                "ui_fallback_ar": translation,
+                "translation_kind": kind,
+                "source": REQUESTED_LEMMA_SOURCES[key],
+                "provider": "project-maintained",
+                "confidence": None,
+                "status": "reviewed_override",
+                "review_required": 0,
+                "note": note,
+            })
         if not str(row.get("translation_ar") or "").strip():
             raise SystemExit(f"Dictionary translation is empty after corrections: {word!r}")
         filtered_rows.append(row)
@@ -127,6 +173,9 @@ def main() -> int:
     missing_corrections = set(OWNER_CORRECTIONS) - {row["word"].casefold() for row in filtered_rows}
     if missing_corrections:
         raise SystemExit(f"Owner correction terms are missing: {sorted(missing_corrections)}")
+    missing_requested_lemmas = set(REQUESTED_LEMMA_ADDITIONS) - {row["word"].casefold() for row in filtered_rows}
+    if missing_requested_lemmas:
+        raise SystemExit(f"Requested lemma terms are missing: {sorted(missing_requested_lemmas)}")
 
     rows = filtered_rows
     statuses = Counter(str(row.get("status") or "needs_review") for row in rows)
@@ -145,14 +194,15 @@ def main() -> int:
         "total_entries": len(rows),
         "translated_entries": translated_rows,
         "review_required_entries": review_required_rows,
-        "unique_question_bank_terms": len(rows),
+        "unique_question_bank_terms": sum(row["word"].casefold() not in REQUESTED_LEMMA_ADDITIONS for row in rows),
         "terms_with_lookup_entry": len(rows),
         "entries_with_arabic_translation": translated_rows,
         "entries_without_lexical_translation": nonlexical_rows,
         "entries_with_safe_ui_fallback": 0,
         "owner_approved_corrections": len(OWNER_CORRECTIONS),
         "excluded_single_letter_artifacts": sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS),
-        "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+        "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections and the explicitly requested v47 and v51 lemmas are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+        "requested_lemma_additions": len(REQUESTED_LEMMA_ADDITIONS),
     })
     payload["entries"] = rows
     write_json_atomically(payload)
@@ -202,9 +252,10 @@ def main() -> int:
             "automatic_translation_rows": str(machine_rows),
             "legacy_glossary_rows": str(legacy_rows),
             "owner_approved_override_rows": str(approved_rows),
+            "requested_lemma_addition_rows": str(len(REQUESTED_LEMMA_ADDITIONS)),
             "unresolved_rows_given_transparent_fallback": "0",
             "excluded_single_letter_artifacts": ",".join(sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS)),
-            "translation_notice": "Automatic translations remain drafts unless status is reviewed_override; Abdul's v42 corrections are owner-approved.",
+            "translation_notice": "Automatic translations remain drafts unless status is reviewed_override; reviewed overrides include the user's requested v47 and v51 lemmas.",
             "fallback_notice": "The v42 lookup excludes isolated single-letter extraction artifacts and includes owner-approved corrections.",
         }
         db.executemany("INSERT INTO Metadata(Key, Value) VALUES (?, ?)", sorted(sqlite_metadata.items()))
@@ -216,6 +267,15 @@ def main() -> int:
         excluded_db_rows = db.execute("SELECT COUNT(*) FROM Dictionary WHERE lower(Italian_Word) IN ('b','f','g','h','p','v','x')").fetchone()[0]
         if integrity != "ok" or count != EXPECTED_WORD_COUNT or empty != 0 or approved_db_rows != len(OWNER_CORRECTIONS) or excluded_db_rows != 0:
             raise SystemExit(f"SQLite validation failed: integrity={integrity}, rows={count}, empty={empty}, approved={approved_db_rows}, excluded={excluded_db_rows}")
+        requested_db_rows = sum(
+            db.execute(
+                "SELECT COUNT(*) FROM Dictionary WHERE Italian_Word = ? AND Arabic_Translation = ? AND Source = ? AND Status = 'reviewed_override' AND Review_Required = 0",
+                (word, translation, REQUESTED_LEMMA_SOURCES[word]),
+            ).fetchone()[0]
+            for word, (translation, _kind, _note) in REQUESTED_LEMMA_ADDITIONS.items()
+        )
+        if requested_db_rows != len(REQUESTED_LEMMA_ADDITIONS):
+            raise SystemExit(f"Requested lemma SQLite validation failed: rows={requested_db_rows}")
     finally:
         db.close()
 
