@@ -75,7 +75,7 @@ test('v51 keeps Web Speech lesson controls and removes native/local TTS paths', 
   assert.match(index, /data-audio-backend="web-speech"/u);
   assert.match(index, /speechPlaybackBar/u);
   assert.match(app, /createSpeechController\(\{getRate:/u);
-  assert.match(app, /playItalianAudio\(lessonItalianAudio\.dataset\.ttsText/u);
+  assert.match(app, /speak\(lessonItalianAudio\.dataset\.ttsText/u);
   assert.match(speech, /SpeechSynthesisUtterance|speechSynthesis/u);
   assert.doesNotMatch(`${app}\n${speech}\n${mainActivity}`, /Piper|nativeTts|nativeEngineDisabled|ONNX/u);
   assert.match(mainActivity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);

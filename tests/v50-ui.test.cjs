@@ -49,7 +49,7 @@ function isDisallowed(token) {
 test('v53 identity is consistent across the PWA and Android package', () => {
   assert.match(index, /data-app-version="53"/);
   assert.match(read('package.json'), /"version": "53\.0\.0"/);
-  assert.match(read('package-lock.json'), /"version": "52\.0\.0"/);
+  assert.match(read('package-lock.json'), /"version": "53\.0\.0"/);
   assert.match(read('android/app/build.gradle'), /versionCode 53/);
   assert.match(read('android/app/build.gradle'), /versionName "53\.0\.0"/);
   assert.match(read('android/app/build.gradle'), /applicationId "it\.patenteb\.sideload\.v29"/);

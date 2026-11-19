@@ -129,8 +129,9 @@ test('v51 keeps the floating player and uses Web Speech without bundled TTS', ()
   assert.match(index, /id="speechPlaybackBar"/u);
   assert.match(index, /id="translationTooltipAudio"/u);
   assert.match(app, /createSpeechController\(\{getRate:/u);
-  assert.ok(app.includes("playItalianAudio} from './speech.mjs'"));
-  assert.match(speech, /export function playItalianAudio\(text\)/u);
+  assert.ok(app.includes("ITALIAN_TTS_LOCALE} from './speech.mjs'"));
+  assert.match(app, /speak\(lessonItalianAudio\.dataset\.ttsText\|\|''/u);
+  assert.doesNotMatch(`${app}\n${speech}`, /playItalianAudio|isAudioUnlocked/u);
   assert.match(speech, /speechSynthesis|SpeechSynthesisUtterance/u);
   assert.doesNotMatch(`${app}\n${speech}\n${mainActivity}\n${gradle}\n${manifest}`, /Piper|piperAlpha|nativeTts|ONNX/u);
   assert.match(mainActivity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);
@@ -189,8 +190,8 @@ test('offline cache includes local lessons, questions, dictionary, and v50 style
   assert.match(serviceWorker, /v52-dark-overhaul\.css/u);
   assert.match(serviceWorker, /italian_arabic_dictionary_lookup\.json/u);
   assert.match(read('scripts/build-pwa.cjs'), /italian_arabic_dictionary_lookup\.json/u);
-  assert.match(serviceWorker, /patente-ar-v52/u);
-  assert.match(index, /data-app-version="52"/u);
+  assert.match(serviceWorker, /patente-ar-v53-mobile-nav/u);
+  assert.match(index, /data-app-version="53"/u);
 });
 
 test('Home goal and lesson grid retain narrow-phone wrapping rules', () => {
@@ -207,7 +208,7 @@ test('Glossary controls fit the single-column mobile layout', () => {
   assert.match(css, /\.glossary-controls > label \{ min-width: 0; \}/u);
 });
 
-test('Android build script remains debug-only and uses v52 metadata', () => {
+test('Android build script remains debug-only and uses v53 metadata', () => {
   const build = read('scripts/build-android.sh');
   const gradleCommand = build.match(/^\.\/gradlew .*$/mu)?.[0] || '';
   assert.match(gradleCommand, /\bclean\b/u);
@@ -215,8 +216,8 @@ test('Android build script remains debug-only and uses v52 metadata', () => {
   assert.match(gradleCommand, /:app:testDebugUnitTest/u);
   assert.doesNotMatch(gradleCommand, /assembleRelease|bundleRelease|publish|upload/iu);
   const gradle = read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+52/u);
-  assert.match(gradle, /versionName\s+"52\.0\.0"/u);
+  assert.match(gradle, /versionCode\s+53/u);
+  assert.match(gradle, /versionName\s+"53\.0\.0"/u);
   assert.match(gradle, /abiFilters\s+'arm64-v8a',\s*'armeabi-v7a'/u);
   assert.match(read('android/variables.gradle'), /minSdkVersion\s*=\s*24/u);
   assert.equal(json('package.json').version, '52.0.0');
