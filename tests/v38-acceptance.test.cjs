@@ -129,7 +129,7 @@ test('v51 keeps the floating player and uses Web Speech without bundled TTS', ()
   assert.match(index, /id="speechPlaybackBar"/u);
   assert.match(index, /id="translationTooltipAudio"/u);
   assert.match(app, /createSpeechController\(\{getRate:/u);
-  assert.ok(app.includes("ITALIAN_TTS_LOCALE} from './speech.mjs'"));
+  assert.ok(app.includes("ITALIAN_TTS_LOCALE,ARABIC_TTS_LOCALE} from './speech.mjs'"));
   assert.match(app, /speak\(lessonItalianAudio\.dataset\.ttsText\|\|''/u);
   assert.doesNotMatch(`${app}\n${speech}`, /playItalianAudio|isAudioUnlocked/u);
   assert.match(speech, /speechSynthesis|SpeechSynthesisUtterance/u);
@@ -220,7 +220,7 @@ test('Android build script remains debug-only and uses v53 metadata', () => {
   assert.match(gradle, /versionName\s+"53\.0\.0"/u);
   assert.match(gradle, /abiFilters\s+'arm64-v8a',\s*'armeabi-v7a'/u);
   assert.match(read('android/variables.gradle'), /minSdkVersion\s*=\s*24/u);
-  assert.equal(json('package.json').version, '52.0.0');
-  assert.equal(json('package-lock.json').packages[''].version, '52.0.0');
-  assert.equal(json('public/release.json').version, 52);
+  assert.equal(json('package.json').version, '53.0.0');
+  assert.equal(json('package-lock.json').packages[''].version, '53.0.0');
+  assert.equal(json('public/release.json').version, 53);
 });

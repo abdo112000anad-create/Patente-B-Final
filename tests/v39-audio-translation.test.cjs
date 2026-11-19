@@ -84,7 +84,7 @@ test('v51 uses Web Speech only, with Italian lesson audio and no bundled local T
   assert.match(speech, /speechSynthesis|SpeechSynthesisUtterance/u);
   assert.match(speech, /getVoices\(\)/u);
   assert.match(app, /createSpeechController\(\{getRate:/u);
-  assert.ok(app.includes("ITALIAN_TTS_LOCALE} from './speech.mjs'"));
+  assert.ok(app.includes("ITALIAN_TTS_LOCALE,ARABIC_TTS_LOCALE} from './speech.mjs'"));
   assert.doesNotMatch(speech, /playItalianAudio|isAudioUnlocked/u);
   assert.match(mainActivity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);
   assert.match(mainActivity, /registerPlugin\(SpeechSettingsPlugin\.class\)/u);
