@@ -1,4 +1,4 @@
-const CACHE_NAME = 'patente-ar-v52-dark-1';
+const CACHE_NAME = 'patente-ar-v53-mobile-nav-1';
 const FETCH_TIMEOUT_MS = 10000;
 const SHELL = [
   '/',
@@ -15,6 +15,7 @@ const SHELL = [
   '/src/v40-audio.css',
   '/src/v50-contrast.css',
   '/src/v52-dark-overhaul.css',
+  '/src/v53-mobile-nav.css',
   '/app.bundle.js',
   '/manifest.webmanifest',
   '/favicon.svg',

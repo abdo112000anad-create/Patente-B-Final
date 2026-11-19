@@ -9,7 +9,7 @@ import {initializeProgressBackup} from './progress-backup.mjs';
 import {restoreActiveQuiz} from './session-recovery.mjs';
 import {loadCourseData} from './startup.mjs';
 import {Capacitor, registerPlugin} from '@capacitor/core';
-import {createSpeechController,buildLessonSpeechTexts,ITALIAN_TTS_LOCALE,ARABIC_TTS_LOCALE,playItalianAudio} from './speech.mjs';
+import {createSpeechController,buildLessonSpeechTexts,ITALIAN_TTS_LOCALE,ARABIC_TTS_LOCALE} from './speech.mjs';
 import {resolveLessonVisual} from './lesson-visual.mjs';
 import {lessonAnimationMarkup} from './lesson-animation.mjs';
 import {normalizeSearchText as norm, matchesSearchText, findRelevantQuestions} from './search.mjs';
@@ -882,7 +882,7 @@ main.addEventListener('click',event=>{
   const favoriteToggle=event.target.closest('[data-toggle-favorite]');if(favoriteToggle){const q=questionsById.get(Number(favoriteToggle.dataset.toggleFavorite));if(q){if(state.favorites.has(q.id))state.favorites.delete(q.id);else state.favorites.add(q.id);persistState();const saved=state.favorites.has(q.id);favoriteToggle.classList.toggle('is-saved',saved);favoriteToggle.setAttribute('aria-pressed',String(saved));favoriteToggle.setAttribute('aria-label',saved?'Saved question · سؤال محفوظ':'Save question · احفظ السؤال');favoriteToggle.innerHTML=controlLabel(saved?'Saved':'Save question',saved?'محفوظ':'احفظ السؤال');}return;}
   const openQ=event.target.closest('[data-open-id]');if(openQ){const q=questions.find(x=>Number(x.id)===Number(openQ.dataset.openId));if(q)startQuiz('single',[q]);return;}
   const answer=event.target.closest('[data-answer]');if(answer){answerQuestion(answer.dataset.answer==='true');return;}
-  const lessonItalianAudio=event.target.closest('[data-lesson-italian-audio="true"]');if(lessonItalianAudio){speechController.stop();playItalianAudio(lessonItalianAudio.dataset.ttsText||'');return;}
+  const lessonItalianAudio=event.target.closest('[data-lesson-italian-audio="true"]');if(lessonItalianAudio){if(speechController.isActive(lessonItalianAudio))speechController.toggle();else speak(lessonItalianAudio.dataset.ttsText||'',ITALIAN_TTS_LOCALE,lessonItalianAudio);return;}
   const tts=event.target.closest('[data-tts-locale]');if(tts){if(speechController.isActive(tts))speechController.toggle();else speak(tts.dataset.ttsText,tts.dataset.ttsLocale,tts);return;}
   const legacySpeak=event.target.closest('[data-speak]');if(legacySpeak){const q=currentQ();if(q)speak(legacySpeak.dataset.speak==='it'?q.it:q.ar,legacySpeak.dataset.speak==='it'?'it-IT':ARABIC_TTS_LOCALE,legacySpeak);return;}
   const similarPage=event.target.closest('[data-similar-page]');if(similarPage){browsePage=Math.max(0,browsePage+(similarPage.dataset.similarPage==='next'?1:-1));render('similar-groups',{module:document.querySelector('#similarUnitFilter')?.value||'',query:document.querySelector('#searchInput')?.value||''});return;}
