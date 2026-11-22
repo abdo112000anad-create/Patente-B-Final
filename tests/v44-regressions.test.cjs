@@ -47,7 +47,7 @@ test('voice-loading state displays an Arabic progress message', () => {
   assert.doesNotMatch(app, /الصوت المحلي|Piper|nativeTts/u);
 });
 
-test('voice selection prefers a same-locale name hint or network voice and does not infer quality from names', async () => {
+test('Italian voice selection prefers an available Italian voice and ignores Arabic voices', async () => {
   const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
   const utterances = [];
   class FakeUtterance { constructor(text) { this.text = text; } }
@@ -63,30 +63,29 @@ test('voice selection prefers a same-locale name hint or network voice and does 
   };
   const controller = createSpeechController({webSpeech});
   assert.equal(await controller.speak('Ciao.', 'it-IT'), true);
-  assert.equal(await controller.speak('مرحبا.', 'ar-EG'), true);
+  assert.equal(await controller.speak('مرحبا.', 'ar-EG'), false);
+  assert.equal(utterances.length, 1);
   assert.equal(utterances[0].voice, voices[1]);
-  assert.equal(utterances[1].voice, voices[3]);
   const speech = read('src/speech.mjs');
   assert.match(speech, /selectionEvidence:.*unverified-name-hint/u);
   assert.doesNotMatch(speech, /nameQualityHint:.*natural voice/u);
 });
 
-test('missing same-language voices report Arabic setup guidance without speaking or crashing', async () => {
+test('an unlisted Italian voice falls back to the system language selector', async () => {
   const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
   const states = [];
   const utterances = [];
   class FakeUtterance { constructor(text) { this.text = text; } }
   const webSpeech = {
     Utterance: FakeUtterance,
-    synthesis: {getVoices: () => [{name: 'Italian voice', lang: 'it-IT'}], speak: utterance => utterances.push(utterance), cancel() {}}
+    synthesis: {getVoices: () => [{name: 'English default', lang: 'en-US'}], speak: utterance => { utterances.push(utterance); queueMicrotask(() => utterance.onend?.()); }, cancel() {}}
   };
   const controller = createSpeechController({webSpeech, onStateChange: state => states.push(state)});
-  assert.equal(await controller.speak('مرحبا.', 'ar-EG'), false);
-  assert.equal(utterances.length, 0);
-  assert.ok(states.some(state => state.status === 'error' && /لا يتوفر صوت عربي مناسب/u.test(state.error)));
-  assert.ok(states.some(state => state.status === 'error' && state.needsSpeechSettings === true));
-  await controller.stop();
-  assert.equal(controller.state, 'idle');
+  assert.equal(await controller.speak('Ciao.', 'it-IT'), true);
+  assert.equal(utterances.length, 1);
+  assert.equal(utterances[0].lang, 'it-IT');
+  assert.equal(utterances[0].voice, undefined);
+  assert.ok(states.some(state => state.status === 'playing' && state.locale === 'it-IT'));
 });
 
 test('Android setup button uses only the standard TTS data installer, not a native speech engine', () => {

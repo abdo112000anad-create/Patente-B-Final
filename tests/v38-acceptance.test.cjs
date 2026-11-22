@@ -87,16 +87,18 @@ test('mobile navigation retains the five requested destinations and order', () =
   assert.deepEqual(destinations, ['home', 'review', 'bank', 'simulation', 'profile']);
 });
 
-test('header stays minimal and course search remains in the course view', () => {
+test('header stays minimal and lesson-title search is removed while question-bank search remains', () => {
   const header = index.match(/<header class="topbar"[\s\S]*?<\/header>/u)?.[0] || '';
   assert.ok(header);
   assert.match(header, /brand/u);
   assert.doesNotMatch(header, /searchInput|searchForm/u);
-  assert.match(app, /course-search-box/u);
+  assert.doesNotMatch(app, /course-finder|courseSearch|course-search-box|data-course-lesson-row/u);
+  assert.match(app, /id="searchForm"/u);
 });
 
-test('Assistant and Glossary remain Home tools while settings stay in Profile', () => {
-  assert.match(app, /assistantPage\(/u);
+test('Glossary remains a Home tool while assistant code is removed and settings stay in Profile', () => {
+  assert.doesNotMatch(app, /assistantPage|assistant\.mjs|data-ask-lesson|data-assistant-prompt/u);
+  assert.equal(fs.existsSync(path.join(root, 'src/assistant.mjs')), false);
   assert.match(app, /glossaryPage\(/u);
   assert.match(app, /profilePage\(/u);
   assert.match(index, /data-view="profile"/u);
@@ -129,7 +131,8 @@ test('v51 keeps the floating player and uses Web Speech without bundled TTS', ()
   assert.match(index, /id="speechPlaybackBar"/u);
   assert.match(index, /id="translationTooltipAudio"/u);
   assert.match(app, /createSpeechController\(\{getRate:/u);
-  assert.ok(app.includes("ITALIAN_TTS_LOCALE,ARABIC_TTS_LOCALE} from './speech.mjs'"));
+  assert.ok(app.includes("ITALIAN_TTS_LOCALE} from './speech.mjs'"));
+  assert.doesNotMatch(`${app}\n${speech}`, /ARABIC_TTS_LOCALE|data-tts-locale=.*ARABIC/u);
   assert.match(app, /speak\(lessonItalianAudio\.dataset\.ttsText\|\|''/u);
   assert.doesNotMatch(`${app}\n${speech}`, /playItalianAudio|isAudioUnlocked/u);
   assert.match(speech, /speechSynthesis|SpeechSynthesisUtterance/u);
@@ -173,7 +176,7 @@ test('Android sample ads and the Firebase placeholder are retained', () => {
 
 test('app shell retains translation, legal, and driving-safety disclaimers', () => {
   assert.match(course.disclaimer_ar, /تعليمي/u);
-  assert.match(app, /لا تستخدم التطبيق أثناء القيادة/u);
+  assert.match(app, /وسيلةً مساعدة للدراسة لا ترجمة قانونية رسمية/u);
   assert.match(app, /traduzioni in arabo sono state generate dall’IA e non sono state revisionate/u);
 });
 
@@ -190,8 +193,8 @@ test('offline cache includes local lessons, questions, dictionary, and v50 style
   assert.match(serviceWorker, /v52-dark-overhaul\.css/u);
   assert.match(serviceWorker, /italian_arabic_dictionary_lookup\.json/u);
   assert.match(read('scripts/build-pwa.cjs'), /italian_arabic_dictionary_lookup\.json/u);
-  assert.match(serviceWorker, /patente-ar-v53-mobile-nav/u);
-  assert.match(index, /data-app-version="53"/u);
+  assert.match(serviceWorker, /patente-ar-v54-italian-audio/u);
+  assert.match(index, /data-app-version="54"/u);
 });
 
 test('Home goal and lesson grid retain narrow-phone wrapping rules', () => {
@@ -208,7 +211,7 @@ test('Glossary controls fit the single-column mobile layout', () => {
   assert.match(css, /\.glossary-controls > label \{ min-width: 0; \}/u);
 });
 
-test('Android build script remains debug-only and uses v53 metadata', () => {
+test('Android build script remains debug-only and uses v54 metadata', () => {
   const build = read('scripts/build-android.sh');
   const gradleCommand = build.match(/^\.\/gradlew .*$/mu)?.[0] || '';
   assert.match(gradleCommand, /\bclean\b/u);
@@ -216,11 +219,11 @@ test('Android build script remains debug-only and uses v53 metadata', () => {
   assert.match(gradleCommand, /:app:testDebugUnitTest/u);
   assert.doesNotMatch(gradleCommand, /assembleRelease|bundleRelease|publish|upload/iu);
   const gradle = read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+53/u);
-  assert.match(gradle, /versionName\s+"53\.0\.0"/u);
+  assert.match(gradle, /versionCode\s+54/u);
+  assert.match(gradle, /versionName\s+"54\.0\.0"/u);
   assert.match(gradle, /abiFilters\s+'arm64-v8a',\s*'armeabi-v7a'/u);
   assert.match(read('android/variables.gradle'), /minSdkVersion\s*=\s*24/u);
-  assert.equal(json('package.json').version, '53.0.0');
-  assert.equal(json('package-lock.json').packages[''].version, '53.0.0');
-  assert.equal(json('public/release.json').version, 53);
+  assert.equal(json('package.json').version, '54.0.0');
+  assert.equal(json('package-lock.json').packages[''].version, '54.0.0');
+  assert.equal(json('public/release.json').version, 54);
 });

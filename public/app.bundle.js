@@ -41971,7 +41971,6 @@ This typically indicates that your device does not have a healthy Internet conne
     "home",
     "review",
     "bank",
-    "assistant",
     "mistakes",
     "favorites",
     "lesson",
@@ -42149,24 +42148,15 @@ This typically indicates that your device does not have a healthy Internet conne
     return chunks;
   }
   var ITALIAN_TTS_LOCALE = "it-IT";
-  var ARABIC_TTS_LOCALE = "ar-EG";
-  var VOICE_WAIT_TIMEOUT_MS = 1e4;
-  var VOICE_POLL_INTERVAL_MS = 250;
+  var VOICE_WAIT_TIMEOUT_MS = 2500;
+  var VOICE_POLL_INTERVAL_MS = 200;
   function buildLessonSpeechTexts(lesson = {}) {
     const headingIt = String(lesson.heading_it || "").trim();
     const bodyIt = String(lesson.body_it || "").trim();
-    const headingAr = String(lesson.heading_ar || "").trim();
-    const bodyAr = String(lesson.body_ar || "").trim();
-    return {
-      italian: [headingIt, bodyIt].filter(Boolean).join("\n\n"),
-      arabic: [headingAr, bodyAr].filter(Boolean).join("\n\n")
-    };
+    return { italian: [headingIt, bodyIt].filter(Boolean).join("\n\n") };
   }
-  function voiceNameFor(locale) {
-    return String(locale || "").toLowerCase().startsWith("it") ? "صوت إيطالي على الجهاز" : "صوت عربي على الجهاز";
-  }
-  function normalizedLocale(locale) {
-    return String(locale || "").toLowerCase().startsWith("it") ? ITALIAN_TTS_LOCALE : ARABIC_TTS_LOCALE;
+  function voiceNameFor() {
+    return "صوت إيطالي على الجهاز";
   }
   function resolveWebSpeech(injected) {
     var _a14, _b;
@@ -42179,20 +42169,25 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   }
   function readAvailableVoices(synthesis) {
-    if (typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") {
-      throw new Error("The system speech voice list is unavailable on this device.");
+    try {
+      if (typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return [];
+      return Array.from(synthesis.getVoices() || []);
+    } catch {
+      return [];
     }
-    return Array.from(synthesis.getVoices() || []);
+  }
+  function hasItalianVoice(voices) {
+    return Array.from(voices || []).some((voice) => String((voice == null ? void 0 : voice.lang) || "").toLowerCase().replace(/_/gu, "-").startsWith("it-") || String((voice == null ? void 0 : voice.lang) || "").toLowerCase() === "it");
   }
   function waitForVoices(synthesis, task, isCurrent, onWaiting) {
     const initialVoices = readAvailableVoices(synthesis);
-    if (initialVoices.length) return Promise.resolve(initialVoices);
+    if (hasItalianVoice(initialVoices) || typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return Promise.resolve(initialVoices);
     try {
-      console.log("[TTS] جارٍ تجهيز الصوت... انتظار تحميل أصوات النظام.");
+      console.log("[TTS] جارٍ تجهيز الصوت الإيطالي... انتظار تحميل أصوات النظام.");
       onWaiting == null ? void 0 : onWaiting();
     } catch {
     }
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       let settled = false;
       let timeout = null;
       let poll = null;
@@ -42208,28 +42203,23 @@ This typically indicates that your device does not have a healthy Internet conne
         }
         if (task.cancelVoiceWait === cancel) task.cancelVoiceWait = null;
       };
-      const finish = (voices, error = null) => {
+      const finish = (voices) => {
         if (settled) return;
         settled = true;
         cleanup();
-        if (error) reject(error);
-        else resolve(voices);
+        resolve(Array.from(voices || []));
       };
       const check = () => {
         if (!isCurrent()) {
           finish([]);
           return;
         }
-        try {
-          const voices = readAvailableVoices(synthesis);
-          if (voices.length) finish(voices);
-        } catch (error) {
-          finish(null, error);
-        }
+        const voices = readAvailableVoices(synthesis);
+        if (hasItalianVoice(voices)) finish(voices);
       };
       const cancel = () => finish([]);
       task.cancelVoiceWait = cancel;
-      timeout = setTimeout(() => finish(null, new Error("Timed out waiting for system speech voices.")), VOICE_WAIT_TIMEOUT_MS);
+      timeout = setTimeout(() => finish(readAvailableVoices(synthesis)), VOICE_WAIT_TIMEOUT_MS);
       poll = setInterval(check, VOICE_POLL_INTERVAL_MS);
       try {
         if (typeof synthesis.addEventListener === "function" && typeof synthesis.removeEventListener === "function") {
@@ -42272,30 +42262,23 @@ This typically indicates that your device does not have a healthy Internet conne
   function bestVoice(voices) {
     return [...voices].sort((left, right) => voiceRank(left) - voiceRank(right))[0] || null;
   }
-  function chooseVoice(voices, locale) {
+  function chooseVoice(voices, locale = ITALIAN_TTS_LOCALE) {
     try {
-      const desired = String(locale || "").toLowerCase().replace(/_/gu, "-");
-      const language = desired.split("-")[0];
-      const matching = Array.from(voices || []).filter((voice) => String((voice == null ? void 0 : voice.lang) || "").toLowerCase().replace(/_/gu, "-").split("-")[0] === language);
+      const desired = String(locale || ITALIAN_TTS_LOCALE).toLowerCase().replace(/_/gu, "-");
+      const matching = Array.from(voices || []).filter((voice) => String((voice == null ? void 0 : voice.lang) || "").toLowerCase().replace(/_/gu, "-").split("-")[0] === "it");
       if (!matching.length) return null;
       const exact = matching.filter((voice) => String((voice == null ? void 0 : voice.lang) || "").toLowerCase().replace(/_/gu, "-") === desired);
       const preferred = (candidates) => candidates.filter((voice) => voiceRank(voice) <= 2);
-      const exactPreferred = bestVoice(preferred(exact));
-      if (exactPreferred) return exactPreferred;
-      if (language === "ar") {
-        const requestedArabicVariants = matching.filter((voice) => ["ar-eg", "ar-sa"].includes(String((voice == null ? void 0 : voice.lang) || "").toLowerCase().replace(/_/gu, "-")));
-        const preferredArabic = bestVoice(preferred(requestedArabicVariants));
-        if (preferredArabic) return preferredArabic;
-        if (requestedArabicVariants.length) return bestVoice(requestedArabicVariants);
-      }
-      return bestVoice(exact) || bestVoice(preferred(matching)) || bestVoice(matching);
+      return bestVoice(preferred(exact)) || bestVoice(exact) || bestVoice(preferred(matching)) || bestVoice(matching);
     } catch {
       return null;
     }
   }
-  function voiceInstallMessage(locale) {
-    const language = String(locale || "").toLowerCase().startsWith("it") ? "إيطالي" : "عربي";
-    return `لا يتوفر صوت ${language} مناسب على هذا الجهاز. ثبّت حزمة النطق من إعدادات الهاتف.`;
+  function voiceInstallMessage() {
+    return "لم يتوفر صوت إيطالي للنطق. فعّل أو نزّل صوت اللغة الإيطالية من إعدادات تحويل النص إلى كلام في الهاتف، ثم أعد المحاولة.";
+  }
+  function speechServiceMessage() {
+    return "خدمة النطق غير متاحة على هذا الجهاز. تأكد من تفعيل محرك تحويل النص إلى كلام في إعدادات الهاتف، ثم أعد المحاولة.";
   }
   function voiceMetadataForLog(voice) {
     const explicitQuality = hasExplicitVoiceQuality(voice);
@@ -42373,8 +42356,7 @@ This typically indicates that your device does not have a healthy Internet conne
       } catch {
       }
     };
-    const rateFor = (locale = "it-IT") => {
-      if (!String(locale || "").toLowerCase().startsWith("it")) return 1;
+    const rateFor = () => {
       let selected = 0.8;
       try {
         selected = Number(getRate()) || 0.8;
@@ -42482,12 +42464,11 @@ This typically indicates that your device does not have a healthy Internet conne
         };
         try {
           utterance = new api.Utterance(text);
-          utterance.lang = task.locale;
+          utterance.lang = ITALIAN_TTS_LOCALE;
           utterance.rate = rate;
           utterance.pitch = 1;
           utterance.volume = 1;
-          if (!task.selectedVoice) throw new Error("No matching system voice was selected.");
-          utterance.voice = task.selectedVoice;
+          if (task.selectedVoice) utterance.voice = task.selectedVoice;
           utterance.onend = () => finish(resolve, task.token === sequence);
           utterance.onboundary = (event) => {
             if (task.token !== sequence || (event == null ? void 0 : event.name) && event.name !== "word") return;
@@ -42510,33 +42491,39 @@ This typically indicates that your device does not have a healthy Internet conne
       if (!api) throw new Error("Web Speech API is unavailable on this device.");
       const voices = await waitForVoices(api.synthesis, task, () => task.token === sequence, () => notify("preparing", task));
       if (task.token !== sequence) return false;
-      if (!voices.length) throw new Error("No system speech voices were available.");
-      const selectedVoice = chooseVoice(voices, task.locale);
-      if (!selectedVoice) {
-        const error = new Error("No matching language voice was found.");
-        error.needsSpeechSettings = true;
-        throw error;
-      }
-      task.selectedVoice = selectedVoice;
+      task.selectedVoice = chooseVoice(voices, ITALIAN_TTS_LOCALE);
       task.voiceSource = "browser";
-      task.voiceName = voiceNameFor(task.locale, "browser");
-      try {
-        console.log("[TTS] selected system voice metadata:", voiceMetadataForLog(selectedVoice));
-      } catch {
+      task.voiceName = task.selectedVoice ? voiceNameFor() : "Voce italiana scelta dal sistema";
+      if (task.selectedVoice) {
+        try {
+          console.log("[TTS] selected system voice metadata:", voiceMetadataForLog(task.selectedVoice));
+        } catch {
+        }
+      } else {
+        try {
+          console.log("[TTS] no listed Italian voice; requesting it-IT from the system speech engine.");
+        } catch {
+        }
       }
       return true;
     }
     async function speakChunk(task, text) {
-      if (!task.selectedVoice && !await prepareWebVoice(task)) return false;
-      await speakWithWebSpeech(task, text, rateFor(task.locale));
+      if (!task.voicePrepared) {
+        if (!await prepareWebVoice(task)) return false;
+        task.voicePrepared = true;
+      }
+      await speakWithWebSpeech(task, text, rateFor());
       return task.token === sequence;
     }
     async function runSegments(segments, locale, button, onSegment = null, kind = "speech") {
+      if (!String(locale || "").toLowerCase().startsWith("it")) {
+        await stop();
+        return false;
+      }
       const stopping = stop();
       const token = sequence;
       await stopping;
       if (token !== sequence) return false;
-      const normalized = normalizedLocale(locale);
       const prepared = (segments || []).map((segment) => typeof segment === "string" ? { text: segment } : segment).filter((segment) => String((segment == null ? void 0 : segment.text) || "").trim());
       if (!prepared.length) return false;
       const api = resolveWebSpeech(webSpeech);
@@ -42553,10 +42540,10 @@ This typically indicates that your device does not have a healthy Internet conne
       if (!totalCharacters) return false;
       const task = {
         token,
-        locale: normalized,
+        locale: ITALIAN_TTS_LOCALE,
         button,
         kind,
-        voiceName: voiceNameFor(normalized),
+        voiceName: voiceNameFor(),
         voiceSource: "browser",
         paused: false,
         failed: false,
@@ -42567,17 +42554,17 @@ This typically indicates that your device does not have a healthy Internet conne
         currentChunkCharacters: 0,
         currentChunkOffset: 0,
         currentSegmentIndex: 0,
-        currentSegmentText: ""
+        currentSegmentText: "",
+        selectedVoice: null,
+        voicePrepared: false
       };
       activeTask = task;
       if (!api) {
-        showError(task, "web-speech-api-unavailable", voiceInstallMessage(task.locale), true);
+        showError(task, "web-speech-api-unavailable", speechServiceMessage(), true);
         return false;
       }
       try {
-        if (!await prepareWebVoice(task, api)) return false;
-        if (task.token !== sequence) return false;
-        setButtonState(button, "playing");
+        setButtonState(task.button, "playing");
         notify("playing", task);
         for (let segmentIndex = 0; segmentIndex < prepared.length; segmentIndex += 1) {
           if (task.token !== sequence || !await waitUntilResumed(task)) return false;
@@ -42596,8 +42583,8 @@ This typically indicates that your device does not have a healthy Internet conne
               if (!completed || task.token !== sequence) return false;
             } catch (error) {
               if (task.token !== sequence) return false;
-              const voiceUnavailable = (error == null ? void 0 : error.needsSpeechSettings) === true || /speech voice list is unavailable|timed out waiting for system speech voices|no system speech voices|no matching language voice/iu.test(String((error == null ? void 0 : error.message) || error));
-              showError(task, error, voiceUnavailable ? voiceInstallMessage(task.locale) : "تعذّر تشغيل الصوت على هذا الجهاز.", voiceUnavailable);
+              const voiceUnavailable = /language-unavailable|voice-unavailable|speech voice list is unavailable|no matching language voice/iu.test(String((error == null ? void 0 : error.message) || error));
+              showError(task, error, voiceUnavailable ? voiceInstallMessage() : "تعذّر تشغيل الصوت على هذا الجهاز.", voiceUnavailable);
               return false;
             }
             if (task.token !== sequence) return false;
@@ -42610,8 +42597,8 @@ This typically indicates that your device does not have a healthy Internet conne
         return true;
       } catch (error) {
         if (task.token !== sequence) return false;
-        const voiceUnavailable = (error == null ? void 0 : error.needsSpeechSettings) === true || /speech voice list is unavailable|timed out waiting for system speech voices|no system speech voices|no matching language voice/iu.test(String((error == null ? void 0 : error.message) || error));
-        showError(task, error, voiceUnavailable ? voiceInstallMessage(task.locale) : "تعذّر تشغيل الصوت على هذا الجهاز.", voiceUnavailable);
+        const voiceUnavailable = /language-unavailable|voice-unavailable|speech voice list is unavailable|no matching language voice/iu.test(String((error == null ? void 0 : error.message) || error));
+        showError(task, error, voiceUnavailable ? voiceInstallMessage() : "تعذّر تشغيل الصوت على هذا الجهاز.", voiceUnavailable);
         return false;
       } finally {
         if (task.token === sequence && !task.failed) {
@@ -42835,116 +42822,6 @@ This typically indicates that your device does not have a healthy Internet conne
     const matched = terms.filter((term) => haystackTokens.has(term)).length;
     const required = terms.length === 1 ? 1 : Math.max(2, Math.ceil(terms.length * 0.75));
     return matched >= required;
-  }
-  function findRelevantQuestions(questions2, query2, limit2 = 4) {
-    const needle = normalizeSearchText(query2);
-    if (!needle || !Array.isArray(questions2)) return [];
-    const tokens = needle.split(" ").filter((token) => token.length > 1 && !SEARCH_STOP_WORDS.has(token));
-    const searchableTokens = tokens.length ? tokens : needle.split(" ").filter((token) => token.length > 1);
-    if (!searchableTokens.length) return [];
-    return questions2.map((question) => {
-      const fields = [String(question.id ?? ""), question.it ?? "", question.ar ?? "", question.topic ?? ""].map(normalizeSearchText);
-      const matched = searchableTokens.filter((token) => fields.some((field) => field.includes(token)));
-      if (!matched.length) return null;
-      const phrase = fields.some((field) => field.includes(needle));
-      const idExact = normalizeSearchText(question.id) === needle;
-      return { question, score: matched.length * 5 + (phrase ? 12 : 0) + (idExact ? 100 : 0) };
-    }).filter(Boolean).sort((a, b2) => b2.score - a.score || Number(a.question.id) - Number(b2.question.id)).slice(0, Math.max(1, Math.min(10, Number(limit2) || 4))).map((item) => item.question);
-  }
-
-  // src/assistant.mjs
-  function resolveAssistantPrompt(draft = "", suggestion = "") {
-    return String(draft ?? "").trim() || String(suggestion ?? "").trim();
-  }
-  function questionAnswerLabel(question, language) {
-    const value = (question == null ? void 0 : question.answer) === "VERO" ? language === "ar" ? "صحيح" : "Vero" : language === "ar" ? "خطأ" : "Falso";
-    return value;
-  }
-  function findRightOfWayReference(questions2 = []) {
-    return (Array.isArray(questions2) ? questions2 : []).find((question) => Number(question == null ? void 0 : question.id) === 20536) || findRelevantQuestions(questions2, "regola generale precedenza a destra", 1)[0] || null;
-  }
-  function rightOfWayAnswer(questions2 = []) {
-    const reference = findRightOfWayReference(questions2);
-    const referenceIt = reference ? `
-
-Riferimento nel banco locale: quiz #${reference.id}, pagina ${reference.page}; risposta registrata: ${questionAnswerLabel(reference, "it")}.` : "";
-    const referenceAr = reference ? `
-
-مرجع في بنك الأسئلة المحلي: السؤال #${reference.id}، الصفحة ${reference.page}؛ والإجابة المسجلة: ${questionAnswerLabel(reference, "ar")}.` : "";
-    return `Italiano:
-La regola generale è: all'incrocio, se non ci sono indicazioni diverse, devi dare precedenza ai veicoli che arrivano dalla tua destra (art. 145, comma 2, Codice della strada). Avvicinati con prudenza e controlla bene prima di impegnare l'incrocio.
-
-Segui invece le indicazioni specifiche: quelle dell'agente, il semaforo e i segnali di precedenza, come STOP o DARE PRECEDENZA. Non entrare nell'incrocio se non puoi liberarlo senza ostacolare il traffico.
-
-In breve: in assenza di indicazioni diverse, cede il passo chi ha un veicolo alla propria destra.${referenceIt}
-
-La traduzione araba è didattica; nella guida reale rispetta sempre segnaletica, indicazioni degli agenti e prudenza. Fonte: [ACI — art. 145 del Codice della strada](https://aci.gov.it/codice-della-strada/art-145/).
-
-العربية:
-القاعدة العامة: عند التقاطع، إذا لم توجد تعليمات أو إشارات مختلفة، أفسح الطريق للمركبات القادمة من يمينك (المادة 145، الفقرة 2 من قانون الطرق الإيطالي). اقترب بحذر وتحقق جيدًا قبل دخول التقاطع.
-
-اتبع التعليمات المحددة بدلًا من افتراض القاعدة العامة: توجيهات الشرطي، وإشارة المرور، وإشارات الأولوية مثل STOP أو «إفساح الأولوية». ولا تدخل التقاطع إن لم تستطع الخروج منه من دون إعاقة السير.
-
-للحفظ: عند غياب تعليمات مختلفة، أفسح الطريق لمن يأتي من يمينك.${referenceAr}
-
-هذه ترجمة تعليمية؛ أثناء القيادة اتبع دائمًا الإشارات وتعليمات الشرطي وقُد بحذر. المصدر: [ACI — المادة 145 من قانون الطرق الإيطالي](https://aci.gov.it/codice-della-strada/art-145/).`;
-  }
-  function localQuestionListAnswer(query2, matches, totalQuestions = 0, similarGroups = []) {
-    const items = Array.isArray(matches) ? matches.slice(0, 4) : [];
-    if (!items.length) {
-      return `Italiano:
-Non ho trovato una domanda direttamente pertinente nella banca locale di ${Number(totalQuestions).toLocaleString("it-IT")} quiz. Prova una parola chiave più breve o cerca nel banco dei quiz.
-
-العربية:
-لم أعثر على سؤال ذي صلة مباشرة في بنك الأسئلة المحلي الذي يضم ${Number(totalQuestions).toLocaleString("ar")} سؤالًا. جرّب كلمة مفتاحية أقصر أو ابحث في بنك الأسئلة.`;
-    }
-    const relatedNote = (question, language) => {
-      const group = (Array.isArray(similarGroups) ? similarGroups : []).find((item) => {
-        var _a14;
-        return (_a14 = item.question_ids) == null ? void 0 : _a14.includes(Number(question.id));
-      });
-      if (!group) return "";
-      return language === "ar" ? `
-صياغات متقاربة: المجموعة ${group.id} تضم ${Number(group.member_count).toLocaleString("ar")} سجلات مستقلة؛ قد تختلف صورها أو بياناتها.` : `
-Similar wording: group ${group.id} contains ${group.member_count} separate records; their figures or details may differ.`;
-    };
-    const italian = `Non ho una spiegazione locale già preparata per questa formulazione. La ricerca è rimasta su questo dispositivo e ha trovato ${items.length} quiz correlati nella banca locale di ${Number(totalQuestions).toLocaleString("it-IT")}; sono esempi di quiz, non una risposta completa alla regola.
-
-${items.map((question) => `Quiz #${question.id} · pagina ${question.page}
-Domanda: ${question.it}
-Risposta registrata: ${questionAnswerLabel(question, "it")}${relatedNote(question, "it")}`).join("\n\n")}
-
-Per domande basate su un'immagine, apri il quiz nel banco per vedere la figura. La traduzione araba è didattica.`;
-    const arabic = `لم أعثر على شرح محلي مُعدّ مسبقًا لهذه الصياغة. بقي البحث على هذا الجهاز ووجد ${items.length.toLocaleString("ar")} أسئلة تدريبية ذات صلة من أصل ${Number(totalQuestions).toLocaleString("ar")}؛ وهي أمثلة للاختبار وليست جوابًا شاملًا للقاعدة.
-
-${items.map((question) => `السؤال #${question.id} · الصفحة ${question.page}
-السؤال: ${question.ar || question.it}
-الإجابة المسجلة: ${questionAnswerLabel(question, "ar")}${relatedNote(question, "ar")}`).join("\n\n")}
-
-إذا كان السؤال يعتمد على صورة، افتح السؤال في بنك الأسئلة لرؤية الرسم. الترجمة العربية تعليمية.`;
-    return `Italiano:
-${italian}
-
-العربية:
-${arabic}`;
-  }
-  function formatLocalQuestionSearchAnswer(query2, matches, totalQuestions = 0, questions2 = [], similarGroups = []) {
-    const normalized = normalizeSearchText(query2);
-    const asksRightOfWay = /(precedenza|priorita|اولوية|right of way|priority)/u.test(normalized) && /(destra|right|يمين)/u.test(normalized);
-    if (asksRightOfWay) return rightOfWayAnswer(questions2);
-    return localQuestionListAnswer(query2, matches, totalQuestions, similarGroups);
-  }
-  function splitBilingualAssistantAnswer(content = "") {
-    const match = String(content ?? "").match(/^\s*Italiano\s*:?[ \t]*\n([\s\S]*?)\n\s*(?:العربية|Arabo)\s*:?[ \t]*\n([\s\S]*)$/i);
-    return match ? { italian: match[1].trim(), arabic: match[2].trim() } : null;
-  }
-  async function requestAssistantAnswer({ prompt = "", context = "", questions: questions2 = [], similarGroups = [] } = {}) {
-    const lookup2 = [String(prompt ?? "").trim(), String(context ?? "").trim()].filter(Boolean).join(" ");
-    const matches = findRelevantQuestions(questions2, lookup2, 4);
-    return {
-      source: "local",
-      content: formatLocalQuestionSearchAnswer(lookup2, matches, questions2.length, questions2, similarGroups)
-    };
   }
 
   // src/question-figures.mjs
@@ -46743,11 +46620,6 @@ ${arabic}`;
   var toastHandle = null;
   var offlineCacheState = "checking";
   var offlineCacheStats = null;
-  var assistantMessages = [];
-  var assistantContext = "";
-  var assistantDraft = "";
-  var assistantBusy = false;
-  var assistantError = "";
   var lastQuizDefinition = null;
   var progressStorageAvailable = true;
   var lessonAccess = null;
@@ -46775,29 +46647,6 @@ ${arabic}`;
   void loadLocalWordDictionary();
   var _a6;
   (_a6 = document.querySelector("#translationTooltipClose")) == null ? void 0 : _a6.addEventListener("click", () => closeWordTooltip({ restoreFocus: true }));
-  function playItalianAudio(text) {
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const attemptSpeak = () => {
-      const voices = window.speechSynthesis.getVoices();
-      if (voices.length === 0) {
-        setTimeout(attemptSpeak, 100);
-        return;
-      }
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "it-IT";
-      utterance.rate = 0.8;
-      utterance.pitch = 1;
-      const itVoice = voices.find((v2) => v2.lang.startsWith("it"));
-      if (itVoice) utterance.voice = itVoice;
-      try {
-        window.speechSynthesis.speak(utterance);
-      } catch (e2) {
-        console.error(e2);
-      }
-    };
-    setTimeout(attemptSpeak, 50);
-  }
   function loadState(key = stateKey) {
     const empty = { favorites: /* @__PURE__ */ new Set(), wrong: /* @__PURE__ */ new Set(), solved: /* @__PURE__ */ new Set(), correctCount: 0, practiceCount: 0, topicCorrect: {}, topicTotal: {}, completedLessons: /* @__PURE__ */ new Set(), reviewedLessons: /* @__PURE__ */ new Set(), sourceChecks: {}, lastLessonKey: "", lastStudy: "", streak: 0, questionStats: {}, sessions: [], activeQuiz: null, fontSize: 16, syncSetEdits: {} };
     try {
@@ -47004,7 +46853,7 @@ ${arabic}`;
   function setActiveNav(view) {
     const routeTabs = ["home", "review", "bank", "simulation", "profile"];
     let active = view;
-    if (["lesson", "assistant", "glossary", "lessons", "traps", "numbers", "comparisons"].includes(view)) active = "home";
+    if (["lesson", "glossary", "lessons", "traps", "numbers", "comparisons"].includes(view)) active = "home";
     else if (["topics", "similar-groups", "search", "mistakes", "favorites"].includes(view)) active = "bank";
     else if (view === "quiz" || view === "result") active = routeTabs.includes(quiz == null ? void 0 : quiz.returnView) ? quiz.returnView : "bank";
     if (!routeTabs.includes(active)) active = "home";
@@ -47322,7 +47171,6 @@ ${arabic}`;
     const paths = {
       spark: `<path d="m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2L12 3Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/>`,
       exam: `<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6v3H9zM8 12h8M8 16h5"/>`,
-      chat: `<path d="M4 5h16v11H9l-5 4V5Z"/><path d="M8 9h8M8 12h5"/><path d="m17 2 .7 1.6L19.5 4l-1.8.7L17 6.5l-.7-1.8L14.5 4l1.8-.7L17 2Z"/>`,
       book: `<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 6h13M8 10h7M8 13h7"/>`,
       sign: `<path d="M4 5h16l-2 5H6L4 5ZM6 10v9M18 10v9M9 14h6M9 17h6"/>`,
       alert: `<path d="m12 3 9 16H3l9-16Z"/><path d="M12 9v4M12 16h.01"/>`,
@@ -47350,11 +47198,10 @@ ${arabic}`;
     return `<span class="course-unit-art"><svg viewBox="0 0 24 24" role="img" aria-label="${label}" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths[module.module_id] || fallback}</svg></span>`;
   }
   function homePage() {
-    const prog = courseProgress(), next = nextCourseLesson(), accuracy = state.practiceCount ? Math.round(state.correctCount / state.practiceCount * 100) : 0, totalLessons = prog.all.length;
+    const prog = courseProgress(), next = nextCourseLesson(), accuracy = state.practiceCount ? Math.round(state.correctCount / state.practiceCount * 100) : 0;
     const reviewAlert = state.wrong.size ? `<aside class="recommendation-banner"><div>${pair2("A few questions are ready for another look.", "لديك أسئلة تستحق مراجعة أخرى.")}</div><button class="small-button" data-action="mistakes">${controlLabel(`Review ${state.wrong.size} mistakes`, `راجع ${state.wrong.size.toLocaleString("ar")} أخطاء`)}</button></aside>` : "";
     const resumeBanner = state.activeQuiz ? `<aside class="resume-banner"><div>${pair2(progressStorageAvailable ? "You have an unfinished study session saved on this device." : "Browser storage is unavailable; this unfinished session may be lost if you close the tab.", progressStorageAvailable ? "لديك جلسة دراسة غير مكتملة محفوظة على هذا الجهاز." : "تخزين المتصفح غير متاح؛ قد تضيع الجلسة عند إغلاق الصفحة.")}</div><button class="primary-button" data-action="resume-session">${controlLabel("Resume session", "استأنف الجلسة")}</button><button class="quiet-button" data-action="discard-session">${controlLabel("Discard", "إلغاء")}</button></aside>` : "";
     const toolCards = [
-      { view: "assistant", icon: "chat", tone: "mint", it: "Assistente", ar: "المساعد", subIt: "Aiuto pratico per lezioni e quiz.", subAr: "مساعدة في الدروس والأسئلة." },
       { view: "glossary", icon: "book", tone: "blue", it: "Glossario", ar: "القاموس", subIt: "200 termini italiano–arabo con pronuncia.", subAr: "٢٠٠ مصطلح إيطالي–عربي مع النطق." }
     ];
     const tools = toolCards.map((item) => `<button class="dashboard-tool dashboard-tool-primary ${item.tone}" type="button" data-view="${item.view}"><span class="tool-icon">${dashboardIcon(item.icon)}</span><span class="tool-copy">${pair2(item.it, item.ar, "tool-title")}<small>${pair2(item.subIt, item.subAr)}</small></span><span class="tool-arrow" aria-hidden="true">${dashboardIcon("arrow")}</span></button>`).join("");
@@ -47362,9 +47209,8 @@ ${arabic}`;
       const done = module.lessons.filter((_, li) => state.completedLessons.has(lessonKey(module.module_id, li))).length;
       const lessons = module.lessons.map((lesson, li) => {
         const key = lessonKey(module.module_id, li), complete = state.completedLessons.has(key), access = getLessonAccess(), accessible = (access == null ? void 0 : access.hasAccess(key)) === true, free = (access == null ? void 0 : access.isFree(key)) === true;
-        const searchText = `${lesson.heading_it} ${lesson.heading_ar} ${module.title_it} ${module.title_ar}`;
         const accessLabel = !accessible ? controlLabel("Locked · test ad", "مقفل · إعلان اختباري") : !free ? controlLabel("Unlocked this session", "مفتوح لهذه الجلسة") : complete ? controlLabel("Completed", "مكتمل") : controlLabel("Open lesson", "افتح الدرس");
-        return `<button class="course-lesson-row ${accessible ? "" : "is-locked"}" type="button" data-open-lesson="${esc3(module.module_id)}" data-lesson-index="${li}" data-course-lesson-row data-search="${esc3(searchText)}"><span class="lesson-row-mark ${complete ? "is-done" : ""}" aria-hidden="true">${complete ? "✓" : String(li + 1).padStart(2, "0")}</span><span class="course-lesson-copy">${pair2(lesson.heading_it, lesson.heading_ar, "course-lesson-heading")}<small>${accessLabel}</small></span><span class="course-row-arrow" aria-hidden="true">›</span></button>`;
+        return `<button class="course-lesson-row ${accessible ? "" : "is-locked"}" type="button" data-open-lesson="${esc3(module.module_id)}" data-lesson-index="${li}"><span class="lesson-row-mark ${complete ? "is-done" : ""}" aria-hidden="true">${complete ? "✓" : String(li + 1).padStart(2, "0")}</span><span class="course-lesson-copy">${pair2(lesson.heading_it, lesson.heading_ar, "course-lesson-heading")}<small>${accessLabel}</small></span><span class="course-row-arrow" aria-hidden="true">›</span></button>`;
       }).join("");
       return `<details class="course-accordion" data-course-unit><summary><span class="course-unit-number">${String(mi + 1).padStart(2, "0")}</span>${courseUnitIllustration(module)}<span class="course-accordion-title">${pair2(module.title_it, module.title_ar, "unit-title")}</span><span class="unit-progress"><strong>${done.toLocaleString("ar")}/${module.lessons.length.toLocaleString("ar")}</strong><small>${pair2("lezioni", "دروس")}</small></span><span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-accordion-lessons"><p class="course-unit-intro">${pair2(module.intro_it, module.intro_ar)}</p>${lessons}</div></details>`;
     }).join("");
@@ -47372,7 +47218,6 @@ ${arabic}`;
   <details class="home-progress-details"><summary>${pair2("Il tuo progresso", "تقدمك الدراسي")}<span class="accordion-chevron" aria-hidden="true"></span></summary><section class="study-stats" aria-label="Panoramica dello studio · ملخص الدراسة"><div>${pair2("Banca dati dei quiz", "بنك الأسئلة")}<strong>${bank.count.toLocaleString("ar")}</strong></div><div>${pair2("Precisione negli esercizi", "دقة التدريب")}<strong>${accuracy.toLocaleString("ar")}%</strong></div><div>${pair2("Lezioni completate", "الدروس المكتملة")}<strong>${prog.complete.toLocaleString("ar")} / ${prog.all.length.toLocaleString("ar")}</strong></div><div>${pair2("Giorni consecutivi di studio", "أيام المذاكرة المتتالية")}<strong>${state.streak.toLocaleString("ar")}</strong></div></section></details>
   <section class="dashboard-section home-primary-actions"><div class="section-title-row"><div>${pair2("Strumenti di studio", "أدوات الدراسة", "section-title")}</div></div><div class="dashboard-tools">${tools}</div></section>
   <details class="home-reference-tools"><summary>${pair2("Altri strumenti utili", "أدوات أخرى مفيدة")}<span class="accordion-chevron" aria-hidden="true"></span></summary><div class="home-reference-grid"><button class="small-button" data-view="traps">${controlLabel("Trap words", "كلمات ملتبسة")}</button><button class="small-button" data-view="numbers">${controlLabel("Key numbers", "أرقام مهمة")}</button><button class="small-button" data-view="comparisons">${controlLabel("Compare concepts", "قارن المفاهيم")}</button><button class="small-button" data-view="bank">${controlLabel("All quiz questions", "كل أسئلة الاختبار")}</button></div></details>
-  <details class="course-finder" id="courseFinder"><summary>${pair2("Cerca una lezione", "ابحث عن درس")}<span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-finder-body"><p>${pair2("Cerca i titoli delle lezioni in italiano o in arabo.", "ابحث عن عنوان الدرس بالإيطالية أو العربية.")}</p><label class="course-search-box"><span class="search-glyph" aria-hidden="true">⌕</span><input id="courseSearch" type="search" autocomplete="off" placeholder="Cerca le lezioni · ابحث في الدروس" aria-label="Cerca le lezioni in italiano o in arabo · ابحث عن الدروس بالإيطالية أو العربية"></label><p id="courseSearchStatus" class="course-search-status" role="status" aria-live="polite">${pair2(`Le ${totalLessons} lezioni sono organizzate per unità.`, `الدروس الـ${totalLessons.toLocaleString("ar")} مرتبة حسب الوحدة.`)}</p></div></details>
   ${officialSyllabusMarkup()}
   <details class="dashboard-insights"><summary>${pair2("Progressi e risultati recenti", "التقدم والنتائج الأخيرة")}<span aria-hidden="true" class="accordion-chevron"></span></summary>${recentExamReadinessMarkup()}${studyInsightsMarkup()}</details>
   <details class="course-catalog" id="courseCatalog"><summary>${pair2("Contenuti del corso · 50 lezioni", "محتوى المنهج · ٥٠ درسًا")}<span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-catalog-body"><div class="course-accordion-list">${moduleHtml}</div></div></details>
@@ -47393,7 +47238,7 @@ ${arabic}`;
   <div class="lesson-detail-copy">${renderLessonSections(lesson, lessonAnimationMarkup(lesson, module.module_id))}</div>
   <details class="lesson-sources" data-lesson-section="sources"><summary>${pair2("Fonti ufficiali · apri per consultarle", "مصادر رسمية · افتح لعرضها")}<span class="accordion-chevron" aria-hidden="true"></span></summary><ul>${sources}</ul></details>
   ${lessonVideoCTA(lesson, moduleId, index)}
-  <nav class="lesson-footer-nav" aria-label="Navigazione tra le lezioni · التنقل بين الدروس"><button class="quiet-button" data-view="home">${controlLabel("Course home", "الرئيسية")}</button>${prev ? `<button class="quiet-button" data-open-lesson="${esc3(prev.module.module_id)}" data-lesson-index="${prev.index}">${controlLabel("← Previous lesson", `← الدرس السابق: ${prev.lesson.heading_ar}`)}</button>` : ""}${next ? `<button class="primary-button" data-open-lesson="${esc3(next.module.module_id)}" data-lesson-index="${next.index}">${controlLabel("Next lesson →", `الدرس التالي: ${next.lesson.heading_ar} ←`)}</button>` : ""}<button class="small-button" data-review-lesson="${esc3(key)}">${controlLabel("Review this lesson", "راجع هذا الدرس")}</button><button class="small-button" data-ask-lesson="${esc3(key)}">${controlLabel("Ask the tutor", "اسأل المساعد")}</button><button class="small-button" data-toggle-complete="${esc3(key)}">${done ? controlLabel("Completed ✓ · undo", "مكتمل ✓ · إلغاء العلامة") : controlLabel("Mark lesson complete", "علّم الدرس مكتملًا")}</button></nav></article>`;
+  <nav class="lesson-footer-nav" aria-label="Navigazione tra le lezioni · التنقل بين الدروس"><button class="quiet-button" data-view="home">${controlLabel("Course home", "الرئيسية")}</button>${prev ? `<button class="quiet-button" data-open-lesson="${esc3(prev.module.module_id)}" data-lesson-index="${prev.index}">${controlLabel("← Previous lesson", `← الدرس السابق: ${prev.lesson.heading_ar}`)}</button>` : ""}${next ? `<button class="primary-button" data-open-lesson="${esc3(next.module.module_id)}" data-lesson-index="${next.index}">${controlLabel("Next lesson →", `الدرس التالي: ${next.lesson.heading_ar} ←`)}</button>` : ""}<button class="small-button" data-review-lesson="${esc3(key)}">${controlLabel("Review this lesson", "راجع هذا الدرس")}</button><button class="small-button" data-toggle-complete="${esc3(key)}">${done ? controlLabel("Completed ✓ · undo", "مكتمل ✓ · إلغاء العلامة") : controlLabel("Mark lesson complete", "علّم الدرس مكتملًا")}</button></nav></article>`;
   }
   function reviewIndexPage() {
     const progress = courseProgress();
@@ -47427,12 +47272,11 @@ ${arabic}`;
     return `<a href="${esc3(bank.sourceUrl)}#page=${q.page}" target="_blank" rel="noopener noreferrer">${controlLabel(`Source page ${q.page}`, `صفحة المصدر ${q.page}`)}</a>`;
   }
   function questionAudio(q, answered = false) {
-    const buttons = `<button class="audio-button" data-tts-locale="it-IT" data-tts-text="${esc3(q.it)}">${controlLabel("Listen to the question", "استمع إلى السؤال")}</button><button class="audio-button" data-tts-locale="${ARABIC_TTS_LOCALE}" data-tts-text="${esc3(q.ar || "")}">${controlLabel("Listen to Arabic (device voice)", "استمع إلى العربية بصوت الجهاز")}</button>`;
+    const buttons = `<button class="audio-button" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc3(q.it)}">${controlLabel("Listen to the question", "استمع إلى السؤال")}</button>`;
     if (!answered) return `<div class="audio-controls">${buttons}</div>`;
     const isTrue = q.answer === "VERO";
     const it2 = `${q.it} Risposta corretta: ${isTrue ? "Vero" : "Falso"}.${q.explanation_it ? ` Spiegazione: ${q.explanation_it}` : ""}`;
-    const ar2 = `${q.ar || ""} الإجابة الصحيحة: ${isTrue ? "صحيح" : "خطأ"}.${q.explanation_ar ? ` التفسير: ${q.explanation_ar}` : ""}`;
-    return `<div class="audio-controls">${buttons}<button class="audio-button" data-tts-locale="it-IT" data-tts-text="${esc3(it2)}">${controlLabel("Listen to the answer and explanation", "استمع إلى الإجابة والتفسير")}</button><button class="audio-button" data-tts-locale="${ARABIC_TTS_LOCALE}" data-tts-text="${esc3(ar2)}">${controlLabel("Listen to Arabic (device voice)", "استمع إلى العربية بصوت الجهاز")}</button></div>`;
+    return `<div class="audio-controls">${buttons}<button class="audio-button" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc3(it2)}">${controlLabel("Listen to the answer and explanation", "استمع إلى الإجابة والتفسير")}</button></div>`;
   }
   function questionListRow(q) {
     const saved = state.favorites.has(q.id);
@@ -47523,48 +47367,13 @@ ${arabic}`;
     const visible = filtered.slice(browsePage * pageSize, (browsePage + 1) * pageSize), label = topic ? topicLabel(topic) : null, scopedPractice = Array.isArray(opts.groupQuestionIds) && opts.groupQuestionIds.length > 0;
     return `<div class="page-heading"><div>${pair2(kind === "bank" ? "BANCA UFFICIALE" : "RIPASSO PERSONALE", kind === "bank" ? "بنك الأسئلة الرسمي" : "مراجعة شخصية", "eyebrow-pair")}<h1>${label ? pair2(label.it, label.ar) : pair2(titleIt, titleAr)}</h1><p>${pair2(subIt, subAr)}</p></div><button class="primary-button" data-action="${scopedPractice ? "practice-group" : kind === "favorites" ? "favorites" : kind === "mistakes" ? "mistakes" : "practice"}" ${scopedPractice ? `data-practice-group="${opts.groupQuestionIds.map(Number).join(",")}"` : ""}>${scopedPractice ? controlLabel("Practice this group", "تدرّب على المجموعة") : controlLabel("Start random practice", "ابدأ تدريبًا عشوائيًا")}</button></div><form class="search-row" id="searchForm"><input id="searchInput" value="${esc3(query2)}" placeholder="Cerca la domanda" aria-label="Search · بحث"><button type="submit">${controlLabel("Search", "بحث")}</button></form><div class="field-hint">${pair2("Cerca in italiano o in arabo", "يمكنك البحث بالإيطالية أو العربية")}</div><div class="filters"><span class="list-meta">${pair2(`${filtered.length.toLocaleString("it-IT")} results`, `النتائج ${filtered.length.toLocaleString("ar")}`)}</span>${topic ? `<button class="quiet-button" data-view="bank">${controlLabel("Back to subjects", "العودة للموضوعات")}</button>` : ""}</div>${visible.length ? `<div class="question-list">${visible.map(questionListRow).join("")}</div><div class="pager"><button class="quiet-button" data-page="prev" ${browsePage === 0 ? "disabled" : ""}>${controlLabel("Previous", "السابق")}</button><span>${pair2(`${browsePage + 1} / ${Math.max(1, Math.ceil(filtered.length / pageSize))}`, `${(browsePage + 1).toLocaleString("ar")} / ${Math.max(1, Math.ceil(filtered.length / pageSize)).toLocaleString("ar")}`)}</span><button class="quiet-button" data-page="next" ${browsePage >= maxPage ? "disabled" : ""}>${controlLabel("Next", "التالي")}</button></div>` : `<div class="empty-state">${pair2(kind === "favorites" ? "No saved questions yet." : "No matching question.", "لا توجد أسئلة مطابقة حاليًا.")}</div>`}`;
   }
-  var officialHosts = /* @__PURE__ */ new Set(["aci.gov.it", "www.aci.gov.it", "aci.it", "www.aci.it", "mit.gov.it", "www.mit.gov.it", "normattiva.it", "www.normattiva.it", "gazzettaufficiale.it", "www.gazzettaufficiale.it", "ilportaledellautomobilista.it", "www.ilportaledellautomobilista.it"]);
-  function safeAssistantLinks(text) {
-    const links = [];
-    let raw = String(text || "");
-    const put = (label, url) => {
-      const token = `__PATENTE_LINK_${links.length}__`;
-      links.push({ token, label, url });
-      return token;
-    };
-    raw = raw.replace(/\[(.{1,160}?)\]\((https:\/\/[^)\s]+)\)/g, (_, label, url) => put(label, url));
-    raw = raw.replace(/https:\/\/[^\s<>]+/g, (url) => {
-      const clean = url.replace(/[.,!?;:]+$/, "");
-      return put(clean, clean) + url.slice(clean.length);
-    });
-    let html = esc3(raw);
-    for (const item of links) {
-      let safe = false;
-      try {
-        const u2 = new URL(item.url);
-        safe = u2.protocol === "https:" && officialHosts.has(u2.hostname.toLowerCase());
-      } catch {
-      }
-      const rendered = safe ? `<a href="${esc3(item.url)}" target="_blank" rel="noopener noreferrer">${esc3(item.label)}</a>` : `${esc3(item.label)} <span class="untrusted-link-note">(${esc3(item.url)})</span>`;
-      html = html.replace(item.token, rendered);
-    }
-    return html;
-  }
-  function assistantMessageMarkup(message) {
-    if (message.role !== "assistant") return `<div class="chat-content" dir="auto">${esc3(message.content)}</div>`;
-    const bilingual = splitBilingualAssistantAnswer(message.content);
-    if (!bilingual) return `<div class="chat-content" dir="auto">${safeAssistantLinks(message.content)}</div>`;
-    const italian = bilingual.italian, arabic = bilingual.arabic;
-    const cleanSpeech = (value) => value.replace(/\[(.+?)\]\(https:\/\/[^)]+\)/g, "$1").replace(/https:\/\/\S+/g, "").trim();
-    return `<div class="assistant-answer-pair"><section class="assistant-answer-it" lang="it" dir="ltr"><strong>Italiano</strong><div>${safeAssistantLinks(italian)}</div></section><section class="assistant-answer-ar" lang="ar" dir="rtl"><strong>العربية</strong><div>${safeAssistantLinks(arabic)}</div></section></div><div class="audio-controls"><button class="audio-button" data-tts-locale="it-IT" data-tts-text="${esc3(cleanSpeech(italian))}">${controlLabel("Listen to the Italian answer", "استمع إلى الإجابة بالإيطالية")}</button><button class="audio-button" data-tts-locale="${ARABIC_TTS_LOCALE}" data-tts-text="${esc3(cleanSpeech(arabic))}">${controlLabel("Listen to Arabic (device voice)", "استمع إلى العربية بصوت الجهاز")}</button></div>`;
-  }
   function glossaryPage() {
     const cards = glossaryEntries.map((entry) => {
       const category = glossaryCategories[entry.category] || glossaryCategories.licence_exam;
       return `<article class="glossary-card" data-glossary-entry data-glossary-category="${esc3(entry.category)}" data-glossary-search="${esc3(`${entry.it} ${entry.ar}`)}"><div class="glossary-term-head"><div><h2 lang="it" dir="ltr">${esc3(entry.it)}</h2><p lang="ar" dir="rtl">${esc3(entry.ar)}</p></div><button type="button" class="audio-button glossary-audio" data-tts-locale="it-IT" data-tts-text="${esc3(entry.it)}" aria-label="Pronounce ${esc3(entry.it)} in Italian · استمع إلى النطق الإيطالي"><svg class="audio-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6l-5 4H4Z"/><path d="M16 9a5 5 0 0 1 0 6m2-9a9 9 0 0 1 0 12"/></svg>${controlLabel("Listen in Italian", "استمع للنطق الإيطالي")}</button></div><div class="glossary-category">${pair2(category.it, category.ar)}</div>${entry.note ? `<p class="glossary-note" lang="ar" dir="rtl">${esc3(entry.note)}</p>` : ""}</article>`;
     }).join("");
     const options = Object.entries(glossaryCategories).map(([key, value]) => `<option value="${esc3(key)}">${esc3(value.it)} · ${esc3(value.ar)}</option>`).join("");
-    return `<section class="glossary-page"><header class="glossary-hero"><div class="eyebrow"><span lang="it">PATRIMONIO DI PAROLE</span><small lang="ar">مفردات الطريق والرخصة</small></div><h1>${pair2("Italian–Arabic driving glossary", "قاموس القيادة الإيطالي–العربي")}</h1><p>${pair2(`A practical glossary of ${glossaryEntries.length.toLocaleString("it-IT")} selected licence and road-safety terms drawn from the course and quiz material. Tap the audio button to hear the Italian.`, `قاموس عملي يضم ${glossaryEntries.length.toLocaleString("ar")} مصطلحًا مختارًا من دروس الرخصة وأسئلة الطريق. اضغط زر الصوت لسماع النطق بالإيطالية.`)}</p><button class="quiet-button glossary-back" data-view="assistant">${controlLabel("Back to study assistant", "العودة إلى المساعد الدراسي")}</button></header><div class="glossary-controls"><label><span>${pair2("Search a word or meaning", "ابحث عن كلمة أو معنى")}</span><input id="glossarySearch" type="search" autocomplete="off" placeholder="Italiano o arabo · إيطالي أو عربي" aria-label="Search glossary in Italian or Arabic · البحث في القاموس بالإيطالية أو العربية"></label><label><span>${pair2("Category", "التصنيف")}</span><select id="glossaryCategory"><option value="">${pair2("All categories", "كل التصنيفات")}</option>${options}</select></label></div><p id="glossaryStatus" class="glossary-status" role="status" aria-live="polite">${pair2(`${glossaryEntries.length.toLocaleString("it-IT")} selected terms`, `المفردات ${glossaryEntries.length.toLocaleString("ar")}`)}</p><div class="glossary-list" id="glossaryList">${cards}</div><aside class="notice-banner glossary-disclaimer">${pair2("This is a selected study glossary, not a complete dictionary or an official legal translation. Some Arabic equivalents are explanatory; preserve the Italian wording when answering official quiz questions.", "هذا قاموس دراسي منتقى، وليس قاموسًا كاملًا أو ترجمة قانونية رسمية. بعض المقابلات العربية تفسيرية؛ حافظ على نص السؤال الإيطالي عند حل الاختبارات الرسمية.")}</aside></section>`;
+    return `<section class="glossary-page"><header class="glossary-hero"><div class="eyebrow"><span lang="it">PATRIMONIO DI PAROLE</span><small lang="ar">مفردات الطريق والرخصة</small></div><h1>${pair2("Italian–Arabic driving glossary", "قاموس القيادة الإيطالي–العربي")}</h1><p>${pair2(`A practical glossary of ${glossaryEntries.length.toLocaleString("it-IT")} selected licence and road-safety terms drawn from the course and quiz material. Tap the audio button to hear the Italian.`, `قاموس عملي يضم ${glossaryEntries.length.toLocaleString("ar")} مصطلحًا مختارًا من دروس الرخصة وأسئلة الطريق. اضغط زر الصوت لسماع النطق بالإيطالية.`)}</p><button class="quiet-button glossary-back" data-view="home">${controlLabel("Back to course home", "العودة إلى المنهج")}</button></header><div class="glossary-controls"><label><span>${pair2("Search a word or meaning", "ابحث عن كلمة أو معنى")}</span><input id="glossarySearch" type="search" autocomplete="off" placeholder="Italiano o arabo · إيطالي أو عربي" aria-label="Search glossary in Italian or Arabic · البحث في القاموس بالإيطالية أو العربية"></label><label><span>${pair2("Category", "التصنيف")}</span><select id="glossaryCategory"><option value="">${pair2("All categories", "كل التصنيفات")}</option>${options}</select></label></div><p id="glossaryStatus" class="glossary-status" role="status" aria-live="polite">${pair2(`${glossaryEntries.length.toLocaleString("it-IT")} selected terms`, `المفردات ${glossaryEntries.length.toLocaleString("ar")}`)}</p><div class="glossary-list" id="glossaryList">${cards}</div><aside class="notice-banner glossary-disclaimer">${pair2("This is a selected study glossary, not a complete dictionary or an official legal translation. Some Arabic equivalents are explanatory; preserve the Italian wording when answering official quiz questions.", "هذا قاموس دراسي منتقى، وليس قاموسًا كاملًا أو ترجمة قانونية رسمية. بعض المقابلات العربية تفسيرية؛ حافظ على نص السؤال الإيطالي عند حل الاختبارات الرسمية.")}</aside></section>`;
   }
   function updateGlossaryResults() {
     var _a14, _b;
@@ -47577,13 +47386,6 @@ ${arabic}`;
     });
     const status = document.querySelector("#glossaryStatus");
     if (status) status.innerHTML = pair2(`${visible.toLocaleString("it-IT")} matching terms`, `المفردات المطابقة ${visible.toLocaleString("ar")}`);
-  }
-  function assistantPage() {
-    const conversation = assistantMessages.map((m2) => `<article class="chat-message ${m2.role === "user" ? "user-message" : "assistant-message"}"><div class="chat-role">${m2.role === "user" ? controlLabel("You", "أنت") : controlLabel("LOCAL TUTOR · IT / AR", "المساعد المحلي")}</div>${assistantMessageMarkup(m2)}</article>`).join("");
-    const context = assistantContext ? `<div class="assistant-context"><span>${pair2("Study context attached", "تم إرفاق سياق دراسي")}</span><button class="small-button" data-action="clear-assistant-context">${controlLabel("Remove", "إزالة")}</button><p>${esc3(assistantContext.slice(0, 220))}${assistantContext.length > 220 ? "…" : ""}</p></div>` : "";
-    const privacyIt = "The question bank and prepared lessons are stored on this device. If you choose the AI assistant, your question and any attached context are sent to the configured AI service for a reply; do not include personal or sensitive information. Account sign-in is optional. Chat is kept in this page and is not saved to local storage.";
-    const privacyAr = "بنك الأسئلة والدروس المُعدّة محفوظة على هذا الجهاز. إذا اخترت استخدام المساعد الذكي، يُرسل سؤالك وأي سياق مرفق إلى خدمة الذكاء الاصطناعي المهيأة لإعداد الرد؛ لا تُدرج معلومات شخصية أو حساسة. تسجيل الدخول اختياري. تبقى المحادثة في هذه الصفحة ولا تُحفظ في التخزين المحلي.";
-    return `<section class="assistant-hero"><div class="eyebrow"><span lang="it">ASSISTENTE DIDATTICO</span><small lang="ar">مساعد تعليمي</small></div><h1>${pair2("Ask about a rule, lesson or quiz question", "اسأل عن قاعدة أو درس أو سؤال")}</h1><p>${pair2("Prepared lessons and the question bank are available on this device. When configured, the optional AI assistant can answer open-ended questions using an online service.", "الدروس المُعدّة وبنك الأسئلة متاحان على هذا الجهاز. عند تهيئته، يمكن للمساعد الذكي الاختياري الإجابة عن الأسئلة المفتوحة عبر خدمة على الإنترنت.")}</p><div class="assistant-hero-actions"><button class="quiet-button" data-view="glossary">${controlLabel("Open Italian–Arabic glossary", "افتح القاموس الإيطالي–العربي")}</button>${assistantMessages.length ? `<button class="quiet-button" data-action="clear-chat">${controlLabel("Clear conversation", "مسح المحادثة")}</button>` : ""}</div></section><div class="assistant-suggestions"><button type="button" class="suggestion-chip" ${assistantBusy ? "disabled" : ""} data-assistant-prompt="Qual è la differenza tra fermata, sosta e arresto?">${controlLabel("Fermata vs sosta?", "ما الفرق بين الوقوف المؤقت والركن؟")}</button><button type="button" class="suggestion-chip" ${assistantBusy ? "disabled" : ""} data-assistant-prompt="Spiegami la regola generale della precedenza a destra.">${controlLabel("Right-of-way rules", "اشرح قاعدة الأولوية من اليمين")}</button><button type="button" class="suggestion-chip" ${assistantBusy ? "disabled" : ""} data-assistant-prompt="Come posso ricordare i segnali di pericolo?">${controlLabel("Warning signs", "كيف أتذكر إشارات التحذير")}</button></div><section class="assistant-chat" id="assistantChat" aria-live="polite">${conversation || `<div class="chat-empty">${pair2("Your study assistant is ready. Choose a suggestion or write your question below.", "المساعد جاهز لمساعدتك. اختر سؤالًا مقترحًا أو اكتب سؤالك أدناه.")}</div>`}${assistantBusy ? `<div class="chat-message assistant-message loading-answer"><div class="chat-role">${controlLabel("Thinking…", "جارٍ إعداد الإجابة…")}</div><span class="spinner"></span></div>` : ""}${assistantError ? `<div class="assistant-error">${pair2("The answer could not be loaded. Your message is kept; try again.", "تعذّر تحميل الإجابة. احتفظنا برسالتك؛ أعد المحاولة.")}</div><button class="quiet-button" data-action="assistant-retry">${controlLabel("Retry", "إعادة المحاولة")}</button>` : ""}</section>${context}<aside class="assistant-privacy-note" role="note">${pair2(privacyIt + " Do not send personal or sensitive information.", privacyAr + " لا تُرسل معلومات شخصية أو حساسة.")}</aside><form class="assistant-form" id="assistantForm"><label for="assistantInput">${pair2("Your question", "سؤالك")}</label><div class="assistant-input-hint">${pair2("Scrivi in italiano o arabo", "اكتب بالإيطالية أو العربية")}</div><textarea id="assistantInput" rows="3" maxlength="3500" placeholder="Scrivi la tua domanda" required ${assistantBusy ? "disabled" : ""}>${esc3(assistantDraft)}</textarea><div class="assistant-form-foot"><small>${pair2("Optional account · if you choose the AI assistant, your question is sent to its configured service.", "الحساب اختياري · عند اختيار المساعد الذكي، يُرسل سؤالك إلى الخدمة المهيأة.")}</small><button class="primary-button" type="submit" ${assistantBusy ? "disabled" : ""}>${controlLabel("Send question", "إرسال السؤال")}</button></div></form><div class="notice-banner">${pair2("The local question bank and prepared explanations remain on this device. If the optional AI assistant is configured, your question is sent to its service. For current law, consult the linked official sources. Never use the app while driving.", "يبقى بنك الأسئلة والشروح المُعدّة على هذا الجهاز. إذا كان المساعد الذكي الاختياري مهيأً، يُرسل سؤالك إلى خدمته. راجع المصادر الرسمية للقواعد النافذة، ولا تستخدم التطبيق أثناء القيادة.")}</div>`;
   }
   function smartPracticePool(limit2 = 10) {
     const now = Date.now();
@@ -48012,11 +47814,7 @@ ${arabic}`;
       if (options.topic || options.query || options.kind) main.innerHTML = listPage(options.kind || "bank", options);
       else main.innerHTML = bankIndexPage();
     } else if (view === "mistakes" || view === "favorites") main.innerHTML = listPage(view);
-    else if (view === "assistant") {
-      main.innerHTML = assistantPage();
-      const chat = document.querySelector("#assistantChat");
-      if (chat) chat.scrollTop = chat.scrollHeight;
-    } else if (view === "glossary") main.innerHTML = glossaryPage();
+    else if (view === "glossary") main.innerHTML = glossaryPage();
     else if (["traps", "numbers", "comparisons"].includes(view)) main.innerHTML = renderReferencePage(view, referenceData, { pair: pair2 });
     else if (view === "search") {
       browsePage = 0;
@@ -48045,50 +47843,6 @@ ${arabic}`;
       return;
     }
     startQuiz("lesson-review", pool, { lessonKey: item.key, title: item.lesson.heading_it });
-  }
-  async function sendAssistantPrompt(retry = false, promptOverride = "") {
-    var _a14;
-    const input = document.querySelector("#assistantInput");
-    const prompt = retry ? (_a14 = assistantMessages.at(-1)) == null ? void 0 : _a14.content : resolveAssistantPrompt((input == null ? void 0 : input.value) || assistantDraft, promptOverride);
-    if (!prompt || assistantBusy) return;
-    const history = (retry ? assistantMessages.slice(-9, -1) : assistantMessages.slice(-4)).map((m2) => ({ role: m2.role, content: m2.content }));
-    if (!retry) {
-      assistantMessages.push({ role: "user", content: prompt });
-      assistantDraft = "";
-    }
-    assistantBusy = true;
-    assistantError = "";
-    render("assistant");
-    try {
-      const result = await requestAssistantAnswer({ prompt, context: assistantContext, questions, similarGroups: similarQuestionGroups });
-      assistantMessages.push({ role: "assistant", content: result.content });
-    } catch (error) {
-      console.error("assistant request could not produce a local result", error);
-      assistantError = "assistant_error";
-    } finally {
-      assistantBusy = false;
-      render("assistant");
-    }
-  }
-  function attachLessonContext(key) {
-    const found = findLesson(key);
-    if (!found) return;
-    const l2 = found.lesson;
-    assistantContext = `Patente B lesson — ${l2.heading_it}
-${l2.heading_ar}
-
-${l2.body_it}
-${l2.body_ar}`.slice(0, 2800);
-    render("assistant");
-  }
-  function attachQuestionContext(q) {
-    assistantContext = `Official Patente B question #${q.id}
-Italian: ${q.it}
-Arabic: ${q.ar}
-Correct answer: ${q.answer}
-Official PDF page: ${q.page}
-Topic: ${q.topic}`;
-    render("assistant");
   }
   function offlineCacheLabel() {
     if (offlineCacheState === "ready") return "دون اتصال: جاهز";
@@ -48608,20 +48362,14 @@ Topic: ${q.topic}`;
     }
     const lessonItalianAudio = event.target.closest('[data-lesson-italian-audio="true"]');
     if (lessonItalianAudio) {
-      speechController.stop();
-      playItalianAudio(lessonItalianAudio.dataset.ttsText || "");
+      if (speechController.isActive(lessonItalianAudio)) speechController.toggle();
+      else speak(lessonItalianAudio.dataset.ttsText || "", ITALIAN_TTS_LOCALE, lessonItalianAudio);
       return;
     }
     const tts = event.target.closest("[data-tts-locale]");
     if (tts) {
       if (speechController.isActive(tts)) speechController.toggle();
       else speak(tts.dataset.ttsText, tts.dataset.ttsLocale, tts);
-      return;
-    }
-    const legacySpeak = event.target.closest("[data-speak]");
-    if (legacySpeak) {
-      const q = currentQ();
-      if (q) speak(legacySpeak.dataset.speak === "it" ? q.it : q.ar, legacySpeak.dataset.speak === "it" ? "it-IT" : ARABIC_TTS_LOCALE, legacySpeak);
       return;
     }
     const similarPage = event.target.closest("[data-similar-page]");
@@ -48713,36 +48461,7 @@ Topic: ${q.topic}`;
       } else if (action === "lesson-prev" || action === "lesson-next") {
         const all = flatLessons(), at2 = all.findIndex((x2) => x2.key === lessonKey(currentLessonId, currentLessonIndex)), next = all[at2 + (action === "lesson-next" ? 1 : -1)];
         if (next) openLesson(next.module.module_id, next.index);
-      } else if (action === "assistant-retry") sendAssistantPrompt(true);
-      else if (action === "clear-assistant-context") {
-        assistantContext = "";
-        render("assistant");
-      } else if (action === "clear-chat") {
-        assistantMessages = [];
-        assistantContext = "";
-        assistantError = "";
-        render("assistant");
       }
-      return;
-    }
-    const askLesson = event.target.closest("[data-ask-lesson]");
-    if (askLesson) {
-      attachLessonContext(askLesson.dataset.askLesson);
-      return;
-    }
-    const askQ = event.target.closest("[data-ask-question]");
-    if (askQ) {
-      const q = questions.find((x2) => Number(x2.id) === Number(askQ.dataset.askQuestion));
-      if (q) attachQuestionContext(q);
-      return;
-    }
-    const suggestion = event.target.closest("[data-assistant-prompt]");
-    if (suggestion) {
-      if (assistantBusy) return;
-      const input = document.querySelector("#assistantInput");
-      const prompt = resolveAssistantPrompt((input == null ? void 0 : input.value) || assistantDraft, suggestion.dataset.assistantPrompt);
-      assistantDraft = prompt;
-      sendAssistantPrompt(false, prompt);
       return;
     }
     const toggle = event.target.closest("[data-toggle-complete]");
@@ -48792,10 +48511,6 @@ Topic: ${q.topic}`;
       else render("bank", { query: query2, topic: "" });
       return;
     }
-    if (event.target.id === "assistantForm") {
-      event.preventDefault();
-      sendAssistantPrompt(false);
-    }
   });
   main.addEventListener("change", (event) => {
     var _a14, _b, _c;
@@ -48823,47 +48538,20 @@ Topic: ${q.topic}`;
     }
   });
   main.addEventListener("input", (event) => {
-    if (event.target.id === "assistantInput") {
-      assistantDraft = event.target.value;
-      return;
-    }
     if (event.target.id === "glossarySearch") {
       updateGlossaryResults();
       return;
     }
     if (event.target.id === "referenceSearch") {
-      const query3 = normalizeSearchText(event.target.value);
-      let matches2 = 0;
+      const query2 = normalizeSearchText(event.target.value);
+      let matches = 0;
       main.querySelectorAll("[data-reference-entry]").forEach((entry) => {
-        const found = !query3 || normalizeSearchText(entry.dataset.referenceSearch || "").includes(query3);
+        const found = !query2 || normalizeSearchText(entry.dataset.referenceSearch || "").includes(query2);
         entry.hidden = !found;
-        if (found) matches2++;
+        if (found) matches++;
       });
-      const status2 = document.querySelector("#referenceSearchStatus");
-      if (status2) status2.innerHTML = pair2(query3 ? `${matches2} voci trovate` : `${matches2} voci disponibili`, query3 ? `عُثر على ${matches2.toLocaleString("ar")} عنصر` : `${matches2.toLocaleString("ar")} عنصر متاح`);
-      return;
-    }
-    if (event.target.id !== "courseSearch") return;
-    const query2 = normalizeSearchText(event.target.value);
-    const finder = document.querySelector("#courseFinder"), catalog = document.querySelector("#courseCatalog");
-    if (finder) finder.open = !!query2;
-    if (catalog) catalog.open = !!query2;
-    let matches = 0;
-    document.querySelectorAll("[data-course-unit]").forEach((unit) => {
-      let unitMatches = 0;
-      unit.querySelectorAll("[data-course-lesson-row]").forEach((row) => {
-        const found = !query2 || normalizeSearchText(row.dataset.search || "").includes(query2);
-        row.hidden = !found;
-        if (found) unitMatches++;
-      });
-      unit.hidden = !!query2 && !unitMatches;
-      unit.open = !!query2 && unitMatches > 0;
-      matches += unitMatches;
-    });
-    const status = document.querySelector("#courseSearchStatus");
-    if (status) {
-      const total = flatLessons().length;
-      status.textContent = query2 ? `${matches.toLocaleString("ar")} درس مطابق · ${matches} lezioni trovate` : `All ${total} lessons are organized by unit · الدروس الـ${total.toLocaleString("ar")} مرتبة حسب الوحدة`;
+      const status = document.querySelector("#referenceSearchStatus");
+      if (status) status.innerHTML = pair2(query2 ? `${matches} voci trovate` : `${matches} voci disponibili`, query2 ? `عُثر على ${matches.toLocaleString("ar")} عنصر` : `${matches.toLocaleString("ar")} عنصر متاح`);
     }
   });
   var backToTopButton = document.querySelector("#backToTop");

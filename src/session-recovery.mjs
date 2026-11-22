@@ -7,7 +7,7 @@ const MAX_QUESTIONS = {
   'lesson-review': 5, mistakes: 15, favorites: 15, practice: 10, single: 1
 };
 const VALID_RETURN_VIEWS = new Set([
-  'home', 'review', 'bank', 'assistant', 'mistakes', 'favorites',
+  'home', 'review', 'bank', 'mistakes', 'favorites',
   'lesson', 'search', 'topics'
 ]);
 

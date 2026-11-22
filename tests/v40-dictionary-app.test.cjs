@@ -14,10 +14,10 @@ test('v49 app dictionary contains auditable rows and excludes isolated letter ar
   const questions = json('data/questions.json');
   assert.equal(dictionary.schema_version, 1);
   assert.equal(dictionary.metadata.source_question_count, questions.questions.length);
-  assert.equal(dictionary.metadata.app_release, 51);
+  assert.equal(dictionary.metadata.app_release, 54);
   assert.equal(dictionary.metadata.unique_question_bank_terms, 5276);
-  assert.equal(dictionary.metadata.total_entries, 5278);
-  assert.equal(dictionary.entries.length, 5278);
+  assert.equal(dictionary.metadata.total_entries, 5281);
+  assert.equal(dictionary.entries.length, 5281);
   assert.equal(new Set(dictionary.entries.map(row => row.word)).size, dictionary.entries.length);
   for (const row of dictionary.entries) {
     assert.ok(row.word);
@@ -83,7 +83,7 @@ test('existing and Abdul-approved v42 corrections plus the v47 lemma are reviewe
   }
 });
 
-test('v49 contextual lookups cover the video terms and show their context note', async () => {
+test('v49 contextual lookups cover earlier video terms and show their context note', async () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const translation = await import(path.join(root, 'src/lesson-translation.mjs'));
   translation.setGeneratedDictionary(dictionary.entries);
@@ -121,7 +121,7 @@ test('local word-lookup loader serves a single isolated word and never presents 
   ok: url === '/data/italian_arabic_dictionary_lookup.json',
   json: async () => dictionary,
 }));
-  assert.equal(loaded, 5278);
+  assert.equal(loaded, 5281);
   assert.equal(translation.wordAtOffset('La corsia è libera.', 4), 'corsia');
   const approved = translation.translateTappedWord('corsia', []);
   assert.equal(approved.word, 'corsia');

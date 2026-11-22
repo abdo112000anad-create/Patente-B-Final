@@ -1,4 +1,4 @@
-const CACHE_NAME = 'patente-ar-v53-mobile-nav-1';
+const CACHE_NAME = 'patente-ar-v54-italian-audio-1';
 const FETCH_TIMEOUT_MS = 10000;
 const SHELL = [
   '/',

@@ -135,20 +135,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 .home-hero:after { border-color: rgba(46, 92, 107, 16); }
 .home-hero h1 { line-height: 1.4; }
-.stats-grid { gap: 11px; }
-.stat-card, .dashboard-tool, .course-finder, .dashboard-insights, .course-catalog, .dashboard-section,
-.course-accordion, .course-lesson-open, .review-lesson, .question-row, .topic-row, .glossary-card,
-.lesson-detail-head, .lesson-content-block, .lesson-example-block, .lesson-warning-block, .lesson-goals,
-.lesson-visual-column, .lesson-animation, .lesson-sources, .lesson-video-status, .exam-review-cell,
-.review-card, .search-result {
+.stats-grid { gap: 11px; }.stat-card, .dashboard-tool, .dashboard-insights, .course-catalog, .dashboard-section, .course-accordion, .course-lesson-open, .review-lesson, .question-row, .topic-row, .glossary-card, .lesson-detail-head, .lesson-content-block, .lesson-example-block, .lesson-warning-block, .lesson-goals, .lesson-visual-column, .lesson-animation, .lesson-sources, .lesson-video-status, .exam-review-cell, .review-card, .search-result{
   border-color: var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow-soft);
-}
-.stat-card, .dashboard-tool, .course-finder, .dashboard-insights, .course-catalog, .dashboard-section,
-.course-accordion, .course-lesson-open, .review-lesson, .question-row, .topic-row, .glossary-card,
-.lesson-detail-head, .lesson-content-block, .lesson-goals, .lesson-visual-column, .lesson-animation,
-.lesson-sources, .lesson-video-status, .exam-review-cell, .review-card, .search-result {
+}.stat-card, .dashboard-tool, .dashboard-insights, .course-catalog, .dashboard-section, .course-accordion, .course-lesson-open, .review-lesson, .question-row, .topic-row, .glossary-card, .lesson-detail-head, .lesson-content-block, .lesson-goals, .lesson-visual-column, .lesson-animation, .lesson-sources, .lesson-video-status, .exam-review-cell, .review-card, .search-result{
   background-color: var(--surface);
   color: var(--ink);
 }
@@ -169,10 +160,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .lesson-example-block { background: #142733; }
 .lesson-warning-block { background: #193543; }
 .lesson-animation { border-inline-start: 4px solid #2b8b7d; }
-.lesson-animation-scene { border-radius: 15px; background: linear-gradient(150deg, #142733, #e8f0f2); }
-.course-search-box { border: 1px solid #cbdcdd; border-radius: 14px; background: var(--surface); }
-.course-search-box:focus-within { border-color: #5a9894; box-shadow: 0 0 0 3px rgba(41, 121, 115, .12); }
-.course-search-box input, .search-row input, input, select, textarea { color: var(--ink); }
+.lesson-animation-scene { border-radius: 15px; background: linear-gradient(150deg, #142733, #e8f0f2); }.search-row input, input, select, textarea{ color: var(--ink); }
 .toast { border-radius: 14px; }
 .source-dialog, dialog.source-dialog {
   width: min(620px, calc(100% - 24px));
@@ -297,8 +285,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .stat-card { min-height: 76px; padding: 11px; }
   .dashboard-tools { grid-template-columns: 1fr; gap: 9px; }
-  .dashboard-tool { min-height: 78px; padding: 12px; }
-  .course-catalog, .dashboard-section, .course-finder, .dashboard-insights { border-radius: 17px; }
+  .dashboard-tool { min-height: 78px; padding: 12px; }.course-catalog, .dashboard-section, .dashboard-insights{ border-radius: 17px; }
   .course-accordion > summary { min-height: 62px; padding: 10px 11px; }
   .lesson-detail-grid { grid-template-columns: 1fr; }
   .lesson-detail-head { padding: 18px 15px; }
@@ -358,11 +345,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .nav-item.active .nav-glyph { background: #2c625d; }
   .sidebar-note { background: linear-gradient(145deg, #1a2d34, #1b3435); border-color: var(--line); }
   .sidebar-note p, .sidebar-note small { color: var(--ink); }
-  .home-hero { background: radial-gradient(circle at 86% 15%, rgba(81, 197, 174, .16), transparent 34%), linear-gradient(132deg, #0d2933, #12434a 60%, #15504b); }
-  .stat-card, .dashboard-tool, .course-finder, .dashboard-insights, .course-catalog, .dashboard-section,
-  .course-accordion, .course-lesson-open, .review-lesson, .question-row, .topic-row, .glossary-card,
-  .lesson-detail-head, .lesson-content-block, .lesson-goals, .lesson-visual-column, .lesson-animation,
-  .lesson-sources, .lesson-video-status, .exam-review-cell, .review-card, .search-result {
+  .home-hero { background: radial-gradient(circle at 86% 15%, rgba(81, 197, 174, .16), transparent 34%), linear-gradient(132deg, #0d2933, #12434a 60%, #15504b); }.stat-card, .dashboard-tool, .dashboard-insights, .course-catalog, .dashboard-section, .course-accordion, .course-lesson-open, .review-lesson, .question-row, .topic-row, .glossary-card, .lesson-detail-head, .lesson-content-block, .lesson-goals, .lesson-visual-column, .lesson-animation, .lesson-sources, .lesson-video-status, .exam-review-cell, .review-card, .search-result{
     background-color: var(--surface);
     color: var(--ink);
     border-color: var(--line);
@@ -372,10 +355,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .lesson-warning-block { background: #2c291f; color: #2edbc0; border-color: #338091; }
   .course-lesson-row { background: #192b32; color: var(--ink); }
   .course-lesson-row:hover { background: #21373c; }
-  .course-accordion[open] { border-color: #507a77; }
-  .course-search-box, .source-dialog, dialog.source-dialog { background: #172a32; color: var(--ink); border-color: var(--line); }
-  .course-search-box input, .source-dialog input, .source-dialog select, .account-dialog input,
-  .search-row input, input, select, textarea { background: #0f1e24; color: var(--ink); border-color: #40575f; }
+  .course-accordion[open] { border-color: #507a77; }.source-dialog, dialog.source-dialog{ background: #172a32; color: var(--ink); border-color: var(--line); }.source-dialog input, .source-dialog select, .account-dialog input, .search-row input, input, select, textarea{ background: #0f1e24; color: var(--ink); border-color: #40575f; }
   .course-unit-number, .lesson-row-mark, .dialog-close { background: #263c42; color: #dcecea; border-color: #40585e; }
   .lesson-animation-scene { background: #1a3035; border-color: var(--line); }
   .lesson-sources a, .text-link, .lesson-video-status a { color: #8ed6ca; }

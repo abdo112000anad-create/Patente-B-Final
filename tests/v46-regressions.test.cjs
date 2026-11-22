@@ -70,7 +70,7 @@ test('key points use stacked bilingual cards with isolated Italian and Arabic la
   assert.match(css, /\.kp-ar\{[^}]*direction:rtl/u);
 });
 
-test('Web Speech keeps cancellation, exact locales, adjustable rate, neutral pitch, full volume, and unverified name hints', async () => {
+test('Web Speech keeps Italian cancellation, rate, neutral pitch, full volume, and unverified name hints', async () => {
   const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
   const utterances = [];
   let cancelCount = 0;
@@ -90,17 +90,16 @@ test('Web Speech keeps cancellation, exact locales, adjustable rate, neutral pit
   };
   const controller = createSpeechController({ webSpeech, getRate: () => 1 });
   assert.equal(await controller.speak('Ciao.', 'it-IT'), true);
-  assert.equal(await controller.speak('مرحبا.', 'ar-EG'), true);
+  assert.equal(await controller.speak('مرحبا.', 'ar-EG'), false);
   assert.ok(cancelCount >= 2);
+  assert.equal(utterances.length, 1);
   assert.equal(utterances[0].lang, 'it-IT');
-  assert.equal(utterances[1].lang, 'ar-EG');
   for (const utterance of utterances) {
     assert.equal(utterance.rate, 1.0);
     assert.equal(utterance.pitch, 1.0);
     assert.equal(utterance.volume, 1.0);
   }
   assert.equal(utterances[0].voice, voices[1]);
-  assert.equal(utterances[1].voice, voices[2]);
   const speech = read('src/speech.mjs');
   assert.match(speech, /selectionEvidence:.*unverified-name-hint/u);
   await controller.stop();

@@ -13,7 +13,7 @@ animation = (ROOT / "src/lesson-animation.mjs").read_text(encoding="utf-8")
 
 components = [
     ("bilingual title", "lesson-detail-head" in app),
-    ("Italian/Arabic TTS", 'data-tts-locale="it-IT"' in app and 'data-tts-locale="ar-EG"' in app),
+    ("Italian-only TTS", 'data-tts-locale="it-IT"' in app and 'data-tts-locale="ar-EG"' not in app),
     ("animated SVG", "lessonAnimationMarkup" in app and "<svg" in animation),
     ("Italian passage", 'class="lesson-it-text"' in template),
     ("full Arabic translation", 'class="lesson-ar-full"' in template),

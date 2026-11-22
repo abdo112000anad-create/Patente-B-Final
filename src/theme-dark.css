@@ -40,29 +40,7 @@
 :root[data-theme="dark"] .sidebar-note { background: linear-gradient(145deg, #1a2d34, #1b3435); border-color: var(--line); }
 :root[data-theme="dark"] .sidebar-note p,
 :root[data-theme="dark"] .sidebar-note small { color: var(--ink); }
-:root[data-theme="dark"] .home-hero { background: radial-gradient(circle at 86% 15%, rgba(81, 197, 174, .16), transparent 34%), linear-gradient(132deg, #0d2933, #12434a 60%, #15504b); }
-:root[data-theme="dark"] .stat-card,
-:root[data-theme="dark"] .dashboard-tool,
-:root[data-theme="dark"] .course-finder,
-:root[data-theme="dark"] .dashboard-insights,
-:root[data-theme="dark"] .course-catalog,
-:root[data-theme="dark"] .dashboard-section,
-:root[data-theme="dark"] .course-accordion,
-:root[data-theme="dark"] .course-lesson-open,
-:root[data-theme="dark"] .review-lesson,
-:root[data-theme="dark"] .question-row,
-:root[data-theme="dark"] .topic-row,
-:root[data-theme="dark"] .glossary-card,
-:root[data-theme="dark"] .lesson-detail-head,
-:root[data-theme="dark"] .lesson-content-block,
-:root[data-theme="dark"] .lesson-goals,
-:root[data-theme="dark"] .lesson-visual-column,
-:root[data-theme="dark"] .lesson-animation,
-:root[data-theme="dark"] .lesson-sources,
-:root[data-theme="dark"] .lesson-video-status,
-:root[data-theme="dark"] .exam-review-cell,
-:root[data-theme="dark"] .review-card,
-:root[data-theme="dark"] .search-result { background-color: var(--surface);
+:root[data-theme="dark"] .home-hero { background: radial-gradient(circle at 86% 15%, rgba(81, 197, 174, .16), transparent 34%), linear-gradient(132deg, #0d2933, #12434a 60%, #15504b); }:root[data-theme="dark"] .stat-card, :root[data-theme="dark"] .dashboard-tool, :root[data-theme="dark"] .dashboard-insights, :root[data-theme="dark"] .course-catalog, :root[data-theme="dark"] .dashboard-section, :root[data-theme="dark"] .course-accordion, :root[data-theme="dark"] .course-lesson-open, :root[data-theme="dark"] .review-lesson, :root[data-theme="dark"] .question-row, :root[data-theme="dark"] .topic-row, :root[data-theme="dark"] .glossary-card, :root[data-theme="dark"] .lesson-detail-head, :root[data-theme="dark"] .lesson-content-block, :root[data-theme="dark"] .lesson-goals, :root[data-theme="dark"] .lesson-visual-column, :root[data-theme="dark"] .lesson-animation, :root[data-theme="dark"] .lesson-sources, :root[data-theme="dark"] .lesson-video-status, :root[data-theme="dark"] .exam-review-cell, :root[data-theme="dark"] .review-card, :root[data-theme="dark"] .search-result{ background-color: var(--surface);
     color: var(--ink);
     border-color: var(--line);
     box-shadow: var(--shadow-soft); }
@@ -70,18 +48,7 @@
 :root[data-theme="dark"] .lesson-warning-block { background: #2c291f; color: #2edbc0; border-color: #338091; }
 :root[data-theme="dark"] .course-lesson-row { background: #192b32; color: var(--ink); }
 :root[data-theme="dark"] .course-lesson-row:hover { background: #21373c; }
-:root[data-theme="dark"] .course-accordion[open] { border-color: #507a77; }
-:root[data-theme="dark"] .course-search-box,
-:root[data-theme="dark"] .source-dialog,
-:root[data-theme="dark"] dialog.source-dialog { background: #172a32; color: var(--ink); border-color: var(--line); }
-:root[data-theme="dark"] .course-search-box input,
-:root[data-theme="dark"] .source-dialog input,
-:root[data-theme="dark"] .source-dialog select,
-:root[data-theme="dark"] .account-dialog input,
-:root[data-theme="dark"] .search-row input,
-:root[data-theme="dark"] input,
-:root[data-theme="dark"] select,
-:root[data-theme="dark"] textarea { background: #0f1e24; color: var(--ink); border-color: #40575f; }
+:root[data-theme="dark"] .course-accordion[open] { border-color: #507a77; }:root[data-theme="dark"] .source-dialog, :root[data-theme="dark"] dialog.source-dialog{ background: #172a32; color: var(--ink); border-color: var(--line); }:root[data-theme="dark"] .source-dialog input, :root[data-theme="dark"] .source-dialog select, :root[data-theme="dark"] .account-dialog input, :root[data-theme="dark"] .search-row input, :root[data-theme="dark"] input, :root[data-theme="dark"] select, :root[data-theme="dark"] textarea{ background: #0f1e24; color: var(--ink); border-color: #40575f; }
 :root[data-theme="dark"] .course-unit-number,
 :root[data-theme="dark"] .lesson-row-mark,
 :root[data-theme="dark"] .dialog-close { background: #263c42; color: #dcecea; border-color: #40585e; }

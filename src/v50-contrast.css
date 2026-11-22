@@ -81,10 +81,7 @@ body { min-height: 100vh; }
   border: 1px solid var(--v50-line) !important;
   border-radius: 17px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, .22);
-}
-#main .lesson-card, #main .quick-card, #main .topic-row, #main .question-row,
-#main .lesson-visual, #main .lesson-illustration, #main .lesson-key-point-card,
-#main .lesson-key-point-rule, #main .assistant-answer-it, #main .assistant-answer-ar {
+}#main .lesson-card, #main .quick-card, #main .topic-row, #main .question-row, #main .lesson-visual, #main .lesson-illustration, #main .lesson-key-point-card, #main .lesson-key-point-rule{
   background: linear-gradient(145deg, #193543, #142733) !important;
   border-color: var(--v50-line) !important;
   color: var(--v50-text) !important;

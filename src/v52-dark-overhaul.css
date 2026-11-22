@@ -52,10 +52,7 @@ main {
 .brand-mark {
   background: linear-gradient(145deg, #1d353c, #14272e) !important;
   border-color: #38545c !important;
-}
-
-.assistant-hero,
-.back-to-top {
+}.back-to-top{
   background: #162a31 !important;
   color: #e2edef !important;
   border-color: #304851 !important;
@@ -101,154 +98,6 @@ main {
 .home-hero :where(h1, p, .hero-kicker, .hero-route small),
 .lesson-hero :where(h1, p, .eyebrow, .lesson-objectives span),
 .toast {
-  color: #e2edef !important;
-}
-
-:root :is(
-  .nav-glyph,
-  .sidebar-note,
-  .course-unit-heading,
-  .is-complete .course-lesson-number,
-  .lesson-image,
-  .visual-placeholder,
-  .notice-banner,
-  .review-module > header,
-  .bank-hero,
-  .bank-unit-title,
-  .question-id,
-  .lesson-detail-head,
-  .progress-track,
-  .figure-panel,
-  .assistant-chat,
-  .source-button,
-  .text-size-button,
-  .mastery-track,
-  .readiness-card,
-  .exam-review-cell.is-answered,
-  .progress-backup-status,
-  .side-nav,
-  .course-finder,
-  .course-accordion .course-unit-number,
-  .lesson-row-mark,
-  .resume-banner,
-  .syllabus-map-id,
-  .syllabus-open,
-  .review-lesson.is-locked .primary-button,
-  .offline-badge,
-  .lesson-animation-scene,
-  .lesson-animation-step.is-active,
-  .audio-button,
-  .video-pending-button,
-  .sentence-translation-trigger,
-  .lesson-core-idea,
-  .quick-check-number,
-  .reference-count,
-  .nav-item:hover,
-  .nav-item em,
-  .quiet-button,
-  .source-footnote,
-  .topic-tag,
-  .result-score div,
-  .dialog-close,
-  .exam-criteria,
-  .course-teaser,
-  .lesson-progress-label,
-  .course-track,
-  .lesson-card.completed .lesson-card-index,
-  .lesson-section-heading > span,
-  .lesson-example,
-  .lesson-test,
-  .lesson-option,
-  .course-progress,
-  .course-accordion,
-  .course-lesson-row,
-  .course-lesson-open,
-  .question-row,
-  .topic-row,
-  .glossary-card,
-  .lesson-content,
-  .lesson-sources,
-  .lesson-goals,
-  .lesson-visual-column,
-  .exam-review-cell,
-  .review-card,
-  .search-result,
-  .daily-goal-card,
-  .lesson-focus-card,
-  .lesson-goal-points,
-  .lesson-trap-words,
-  .lesson-number-block,
-  .lesson-check-block,
-  .inline-sentence-translation,
-  .translation-sheet,
-  .vocabulary-dialog
-) {
-  background-color: #16262d !important;
-  color: #e2edef !important;
-  border-color: #304851 !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .18) !important;
-}
-
-:root :is(
-  .sidebar-note,
-  .course-unit-heading,
-  .lesson-image,
-  .visual-placeholder,
-  .notice-banner,
-  .review-module > header,
-  .bank-hero,
-  .bank-unit-title,
-  .lesson-detail-head,
-  .figure-panel,
-  .assistant-chat,
-  .source-button,
-  .text-size-button,
-  .readiness-card,
-  .course-finder,
-  .course-accordion .course-unit-number,
-  .lesson-row-mark,
-  .resume-banner,
-  .syllabus-open,
-  .offline-badge,
-  .video-pending-button,
-  .sentence-translation-trigger,
-  .lesson-core-idea,
-  .quiet-button,
-  .source-footnote,
-  .topic-tag,
-  .dialog-close,
-  .exam-criteria,
-  .course-teaser,
-  .lesson-progress-label,
-  .lesson-card.completed .lesson-card-index,
-  .lesson-section-heading > span,
-  .lesson-example,
-  .lesson-test,
-  .lesson-option,
-  .course-progress,
-  .course-accordion,
-  .course-lesson-row,
-  .course-lesson-open,
-  .question-row,
-  .topic-row,
-  .glossary-card,
-  .lesson-content,
-  .lesson-sources,
-  .lesson-goals,
-  .lesson-visual-column,
-  .exam-review-cell,
-  .review-card,
-  .search-result,
-  .daily-goal-card,
-  .lesson-focus-card,
-  .lesson-goal-points,
-  .lesson-trap-words,
-  .lesson-number-block,
-  .lesson-check-block,
-  .inline-sentence-translation,
-  .translation-sheet,
-  .vocabulary-dialog
-) :where(*) {
   color: #e2edef !important;
 }
 
@@ -302,15 +151,6 @@ main {
 .mobile-nav button.active {
   background: #203a3c !important;
   color: #e2edef !important;
-}
-
-:root :is(.user-message, .translation-result, .lesson-example, .lesson-core-idea, .lesson-focus-card) {
-  background-color: #173431 !important;
-  color: #d8f0e6 !important;
-  border-color: #345e53 !important;
-}
-:root :is(.user-message, .translation-result, .lesson-example, .lesson-core-idea, .lesson-focus-card) :where(*) {
-  color: #d8f0e6 !important;
 }
 
 :root :is(

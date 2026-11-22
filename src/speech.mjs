@@ -25,30 +25,16 @@ export function splitSpeechText(text, maxLength = 120) {
 }
 
 export const ITALIAN_TTS_LOCALE = 'it-IT';
-export const ARABIC_TTS_LOCALE = 'ar-EG';
-const VOICE_WAIT_TIMEOUT_MS = 10_000;
-const VOICE_POLL_INTERVAL_MS = 250;
+const VOICE_WAIT_TIMEOUT_MS = 2500;
+const VOICE_POLL_INTERVAL_MS = 200;
 
 export function buildLessonSpeechTexts(lesson = {}) {
   const headingIt = String(lesson.heading_it || '').trim();
   const bodyIt = String(lesson.body_it || '').trim();
-  const headingAr = String(lesson.heading_ar || '').trim();
-  const bodyAr = String(lesson.body_ar || '').trim();
-  return {
-    italian: [headingIt, bodyIt].filter(Boolean).join('\n\n'),
-    arabic: [headingAr, bodyAr].filter(Boolean).join('\n\n')
-  };
+  return {italian: [headingIt, bodyIt].filter(Boolean).join('\n\n')};
 }
 
-function voiceNameFor(locale) {
-  return String(locale || '').toLowerCase().startsWith('it')
-    ? 'صوت إيطالي على الجهاز'
-    : 'صوت عربي على الجهاز';
-}
-
-function normalizedLocale(locale) {
-  return String(locale || '').toLowerCase().startsWith('it') ? ITALIAN_TTS_LOCALE : ARABIC_TTS_LOCALE;
-}
+function voiceNameFor() { return 'صوت إيطالي على الجهاز'; }
 
 function resolveWebSpeech(injected) {
   try {
@@ -63,27 +49,32 @@ function resolveWebSpeech(injected) {
 }
 
 function readAvailableVoices(synthesis) {
-  if (typeof synthesis?.getVoices !== 'function') {
-    throw new Error('The system speech voice list is unavailable on this device.');
+  try {
+    if (typeof synthesis?.getVoices !== 'function') return [];
+    return Array.from(synthesis.getVoices() || []);
+  } catch {
+    return [];
   }
-  return Array.from(synthesis.getVoices() || []);
+}
+
+function hasItalianVoice(voices) {
+  return Array.from(voices || []).some(voice => String(voice?.lang || '').toLowerCase().replace(/_/gu, '-').startsWith('it-') || String(voice?.lang || '').toLowerCase() === 'it');
 }
 
 function waitForVoices(synthesis, task, isCurrent, onWaiting) {
   const initialVoices = readAvailableVoices(synthesis);
-  if (initialVoices.length) return Promise.resolve(initialVoices);
+  if (hasItalianVoice(initialVoices) || typeof synthesis?.getVoices !== 'function') return Promise.resolve(initialVoices);
 
   try {
-    console.log('[TTS] جارٍ تجهيز الصوت... انتظار تحميل أصوات النظام.');
+    console.log('[TTS] جارٍ تجهيز الصوت الإيطالي... انتظار تحميل أصوات النظام.');
     onWaiting?.();
   } catch {}
 
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     let settled = false;
     let timeout = null;
     let poll = null;
     const cleanups = [];
-
     const cleanup = () => {
       if (timeout) clearTimeout(timeout);
       if (poll) clearInterval(poll);
@@ -92,27 +83,21 @@ function waitForVoices(synthesis, task, isCurrent, onWaiting) {
       }
       if (task.cancelVoiceWait === cancel) task.cancelVoiceWait = null;
     };
-    const finish = (voices, error = null) => {
+    const finish = voices => {
       if (settled) return;
       settled = true;
       cleanup();
-      if (error) reject(error);
-      else resolve(voices);
+      resolve(Array.from(voices || []));
     };
     const check = () => {
       if (!isCurrent()) { finish([]); return; }
-      try {
-        const voices = readAvailableVoices(synthesis);
-        if (voices.length) finish(voices);
-      } catch (error) {
-        finish(null, error);
-      }
+      const voices = readAvailableVoices(synthesis);
+      if (hasItalianVoice(voices)) finish(voices);
     };
     const cancel = () => finish([]);
     task.cancelVoiceWait = cancel;
-    timeout = setTimeout(() => finish(null, new Error('Timed out waiting for system speech voices.')), VOICE_WAIT_TIMEOUT_MS);
+    timeout = setTimeout(() => finish(readAvailableVoices(synthesis)), VOICE_WAIT_TIMEOUT_MS);
     poll = setInterval(check, VOICE_POLL_INTERVAL_MS);
-
     try {
       if (typeof synthesis.addEventListener === 'function' && typeof synthesis.removeEventListener === 'function') {
         const remove = () => synthesis.removeEventListener('voiceschanged', check);
@@ -155,31 +140,25 @@ function bestVoice(voices) {
   return [...voices].sort((left, right) => voiceRank(left) - voiceRank(right))[0] || null;
 }
 
-function chooseVoice(voices, locale) {
+function chooseVoice(voices, locale = ITALIAN_TTS_LOCALE) {
   try {
-    const desired = String(locale || '').toLowerCase().replace(/_/gu, '-');
-    const language = desired.split('-')[0];
-    const matching = Array.from(voices || []).filter(voice => String(voice?.lang || '').toLowerCase().replace(/_/gu, '-').split('-')[0] === language);
+    const desired = String(locale || ITALIAN_TTS_LOCALE).toLowerCase().replace(/_/gu, '-');
+    const matching = Array.from(voices || []).filter(voice => String(voice?.lang || '').toLowerCase().replace(/_/gu, '-').split('-')[0] === 'it');
     if (!matching.length) return null;
     const exact = matching.filter(voice => String(voice?.lang || '').toLowerCase().replace(/_/gu, '-') === desired);
     const preferred = candidates => candidates.filter(voice => voiceRank(voice) <= 2);
-    const exactPreferred = bestVoice(preferred(exact));
-    if (exactPreferred) return exactPreferred;
-    if (language === 'ar') {
-      const requestedArabicVariants = matching.filter(voice => ['ar-eg', 'ar-sa'].includes(String(voice?.lang || '').toLowerCase().replace(/_/gu, '-')));
-      const preferredArabic = bestVoice(preferred(requestedArabicVariants));
-      if (preferredArabic) return preferredArabic;
-      if (requestedArabicVariants.length) return bestVoice(requestedArabicVariants);
-    }
-    return bestVoice(exact) || bestVoice(preferred(matching)) || bestVoice(matching);
+    return bestVoice(preferred(exact)) || bestVoice(exact) || bestVoice(preferred(matching)) || bestVoice(matching);
   } catch {
     return null;
   }
 }
 
-function voiceInstallMessage(locale) {
-  const language = String(locale || '').toLowerCase().startsWith('it') ? 'إيطالي' : 'عربي';
-  return `لا يتوفر صوت ${language} مناسب على هذا الجهاز. ثبّت حزمة النطق من إعدادات الهاتف.`;
+function voiceInstallMessage() {
+  return 'لم يتوفر صوت إيطالي للنطق. فعّل أو نزّل صوت اللغة الإيطالية من إعدادات تحويل النص إلى كلام في الهاتف، ثم أعد المحاولة.';
+}
+
+function speechServiceMessage() {
+  return 'خدمة النطق غير متاحة على هذا الجهاز. تأكد من تفعيل محرك تحويل النص إلى كلام في إعدادات الهاتف، ثم أعد المحاولة.';
 }
 
 function voiceMetadataForLog(voice) {
@@ -245,8 +224,7 @@ export function createSpeechController({
         approximate: source !== 'web-boundary'});
     } catch {}
   };
-  const rateFor = (locale = 'it-IT') => {
-    if (!String(locale || '').toLowerCase().startsWith('it')) return 1.0;
+  const rateFor = () => {
     let selected = 0.8;
     try { selected = Number(getRate()) || 0.8; } catch {}
     return Math.max(.70, Math.min(1.30, selected));
@@ -332,12 +310,11 @@ export function createSpeechController({
       };
       try {
         utterance = new api.Utterance(text);
-        utterance.lang = task.locale;
+        utterance.lang = ITALIAN_TTS_LOCALE;
         utterance.rate = rate;
         utterance.pitch = 1.0;
         utterance.volume = 1.0;
-        if (!task.selectedVoice) throw new Error('No matching system voice was selected.');
-        utterance.voice = task.selectedVoice;
+        if (task.selectedVoice) utterance.voice = task.selectedVoice;
         utterance.onend = () => finish(resolve, task.token === sequence);
         utterance.onboundary = event => {
           if (task.token !== sequence || (event?.name && event.name !== 'word')) return;
@@ -361,33 +338,36 @@ export function createSpeechController({
     if (!api) throw new Error('Web Speech API is unavailable on this device.');
     const voices = await waitForVoices(api.synthesis, task, () => task.token === sequence, () => notify('preparing', task));
     if (task.token !== sequence) return false;
-    if (!voices.length) throw new Error('No system speech voices were available.');
-    const selectedVoice = chooseVoice(voices, task.locale);
-    if (!selectedVoice) {
-      const error = new Error('No matching language voice was found.');
-      error.needsSpeechSettings = true;
-      throw error;
-    }
-    task.selectedVoice = selectedVoice;
+    task.selectedVoice = chooseVoice(voices, ITALIAN_TTS_LOCALE);
     task.voiceSource = 'browser';
-    task.voiceName = voiceNameFor(task.locale, 'browser');
-    try { console.log('[TTS] selected system voice metadata:', voiceMetadataForLog(selectedVoice)); } catch {}
+    task.voiceName = task.selectedVoice ? voiceNameFor() : 'Voce italiana scelta dal sistema';
+    if (task.selectedVoice) {
+      try { console.log('[TTS] selected system voice metadata:', voiceMetadataForLog(task.selectedVoice)); } catch {}
+    } else {
+      try { console.log('[TTS] no listed Italian voice; requesting it-IT from the system speech engine.'); } catch {}
+    }
     return true;
   }
 
   async function speakChunk(task, text) {
-    if (!task.selectedVoice && !(await prepareWebVoice(task))) return false;
-    await speakWithWebSpeech(task, text, rateFor(task.locale));
+    if (!task.voicePrepared) {
+      if (!(await prepareWebVoice(task))) return false;
+      task.voicePrepared = true;
+    }
+    await speakWithWebSpeech(task, text, rateFor());
     return task.token === sequence;
   }
 
   async function runSegments(segments, locale, button, onSegment = null, kind = 'speech') {
+    if (!String(locale || '').toLowerCase().startsWith('it')) {
+      await stop();
+      return false;
+    }
     const stopping = stop();
     const token = sequence;
     await stopping;
     if (token !== sequence) return false;
 
-    const normalized = normalizedLocale(locale);
     const prepared = (segments || []).map(segment => typeof segment === 'string' ? {text: segment} : segment)
       .filter(segment => String(segment?.text || '').trim());
     if (!prepared.length) return false;
@@ -405,10 +385,10 @@ export function createSpeechController({
     if (!totalCharacters) return false;
     const task = {
       token,
-      locale: normalized,
+      locale: ITALIAN_TTS_LOCALE,
       button,
       kind,
-      voiceName: voiceNameFor(normalized),
+      voiceName: voiceNameFor(),
       voiceSource: 'browser',
       paused: false,
       failed: false,
@@ -419,17 +399,17 @@ export function createSpeechController({
       currentChunkCharacters: 0,
       currentChunkOffset: 0,
       currentSegmentIndex: 0,
-      currentSegmentText: ''
+      currentSegmentText: '',
+      selectedVoice: null,
+      voicePrepared: false
     };
     activeTask = task;
     if (!api) {
-      showError(task, 'web-speech-api-unavailable', voiceInstallMessage(task.locale), true);
+      showError(task, 'web-speech-api-unavailable', speechServiceMessage(), true);
       return false;
     }
     try {
-      if (!(await prepareWebVoice(task, api))) return false;
-      if (task.token !== sequence) return false;
-      setButtonState(button, 'playing');
+      setButtonState(task.button, 'playing');
       notify('playing', task);
 
       for (let segmentIndex = 0; segmentIndex < prepared.length; segmentIndex += 1) {
@@ -446,8 +426,8 @@ export function createSpeechController({
             if (!completed || task.token !== sequence) return false;
           } catch (error) {
             if (task.token !== sequence) return false;
-            const voiceUnavailable = error?.needsSpeechSettings === true || /speech voice list is unavailable|timed out waiting for system speech voices|no system speech voices|no matching language voice/iu.test(String(error?.message || error));
-            showError(task, error, voiceUnavailable ? voiceInstallMessage(task.locale) : 'تعذّر تشغيل الصوت على هذا الجهاز.', voiceUnavailable);
+            const voiceUnavailable = /language-unavailable|voice-unavailable|speech voice list is unavailable|no matching language voice/iu.test(String(error?.message || error));
+            showError(task, error, voiceUnavailable ? voiceInstallMessage() : 'تعذّر تشغيل الصوت على هذا الجهاز.', voiceUnavailable);
             return false;
           }
           if (task.token !== sequence) return false;
@@ -460,8 +440,8 @@ export function createSpeechController({
       return true;
     } catch (error) {
       if (task.token !== sequence) return false;
-      const voiceUnavailable = error?.needsSpeechSettings === true || /speech voice list is unavailable|timed out waiting for system speech voices|no system speech voices|no matching language voice/iu.test(String(error?.message || error));
-      showError(task, error, voiceUnavailable ? voiceInstallMessage(task.locale) : 'تعذّر تشغيل الصوت على هذا الجهاز.', voiceUnavailable);
+      const voiceUnavailable = /language-unavailable|voice-unavailable|speech voice list is unavailable|no matching language voice/iu.test(String(error?.message || error));
+      showError(task, error, voiceUnavailable ? voiceInstallMessage() : 'تعذّر تشغيل الصوت على هذا الجهاز.', voiceUnavailable);
       return false;
     } finally {
       if (task.token === sequence && !task.failed) {

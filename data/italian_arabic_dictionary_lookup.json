@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-18T06:23:01+00:00",
+    "generated_at_utc": "2026-11-22T07:36:21+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5276,
@@ -10,15 +10,15 @@
       "contextual_override_v49": 9,
       "legacy_glossary_needs_review": 62,
       "machine_draft_needs_review": 5193,
-      "reviewed_override": 14
+      "reviewed_override": 17
     },
-    "total_entries": 5278,
-    "translated_entries": 5278,
+    "total_entries": 5281,
+    "translated_entries": 5281,
     "review_required_entries": 5264,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections and the explicitly requested v47 and v51 lemmas are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
-    "app_release": 51,
-    "terms_with_lookup_entry": 5278,
-    "entries_with_arabic_translation": 5278,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51 lemmas, and v54 video-context terms are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+    "app_release": 54,
+    "terms_with_lookup_entry": 5281,
+    "entries_with_arabic_translation": 5281,
     "entries_without_lexical_translation": 1,
     "entries_with_safe_ui_fallback": 0,
     "owner_approved_corrections": 9,
@@ -31,7 +31,8 @@
       "v",
       "x"
     ],
-    "requested_lemma_additions": 2
+    "requested_lemma_additions": 2,
+    "video_context_additions": 3
   },
   "entries": [
     {
@@ -63369,6 +63370,42 @@
       "status": "reviewed_override",
       "review_required": 0,
       "note": "ترجمة معجمية أضافها المستخدم بطلبه."
+    },
+    {
+      "word": "forme",
+      "translation_ar": "أشكال",
+      "ui_fallback_ar": "أشكال",
+      "translation_kind": "contextual_translation",
+      "source": "video-lesson-context-v54",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في عبارة الدرس عن أشكال إشارات المرور: forme e significati؛ المقصود الأشكال."
+    },
+    {
+      "word": "offrono",
+      "translation_ar": "توفّر / تقدّم",
+      "ui_fallback_ar": "توفّر / تقدّم",
+      "translation_kind": "contextual_translation",
+      "source": "video-lesson-context-v54",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في عبارة الدرس: i segnali di indicazione offrono informazioni utili؛ أي توفّر أو تقدّم معلومات مفيدة."
+    },
+    {
+      "word": "concreto",
+      "translation_ar": "المحدّد / الملموس",
+      "ui_fallback_ar": "المحدّد / الملموس",
+      "translation_kind": "contextual_translation",
+      "source": "video-lesson-context-v54",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في عبارة الدرس: il simbolo concreto؛ أي الرمز المحدّد الظاهر على الإشارة."
     }
   ]
 }
