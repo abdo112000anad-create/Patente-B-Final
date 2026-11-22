@@ -46,17 +46,17 @@ function isDisallowed(token) {
   return nearWhite || yellow;
 }
 
-test('v56 identity is consistent across the PWA and Android package', () => {
-  assert.match(index, /data-app-version="56"/);
-  assert.match(read('package.json'), /"version": "56\.0\.0"/);
-  assert.match(read('package-lock.json'), /"version": "56\.0\.0"/);
-  assert.match(read('android/app/build.gradle'), /versionCode 56/);
-  assert.match(read('android/app/build.gradle'), /versionName "56\.0\.0"/);
+test('v57 identity is consistent across the PWA and Android package', () => {
+  assert.match(index, /data-app-version="57"/);
+  assert.match(read('package.json'), /"version": "57\.0\.0"/);
+  assert.match(read('package-lock.json'), /"version": "57\.0\.0"/);
+  assert.match(read('android/app/build.gradle'), /versionCode 57/);
+  assert.match(read('android/app/build.gradle'), /versionName "57\.0\.0"/);
   assert.match(read('android/app/build.gradle'), /applicationId "it\.patenteb\.sideload\.v29"/);
   assert.match(read('android/app/build.gradle'), /System\.getenv\('PATENTE_DEBUG_STORE_PASSWORD'\)/);
   assert.match(read('android/app/build.gradle'), /System\.getenv\('PATENTE_DEBUG_KEY_ALIAS'\)/);
   assert.match(read('android/app/build.gradle'), /System\.getenv\('PATENTE_DEBUG_KEY_PASSWORD'\)/);
-  assert.match(read('public/sw.js'), /patente-ar-v56-italian-audio-1/);
+  assert.match(read('public/sw.js'), /patente-ar-v57-learning-path-1/);
 });
 
 test('v53 applies the same legible dark palette in every theme preference', () => {
@@ -68,10 +68,10 @@ test('v53 applies the same legible dark palette in every theme preference', () =
   assert.match(dark, /\.feedback\.bad/u);
 });
 
-test('audio bar and rate selector are visible, labelled, and above mobile navigation', () => {
-  assert.match(index, /id="speechRate" aria-label="سرعة الصوت الإيطالي"/);
+test('audio bar and fixed 0.8x rate are visible, labelled, and above mobile navigation', () => {
+  assert.match(index, /class="speech-rate-value" aria-label="سرعة الصوت الإيطالي">0\.8×/);
   assert.match(index, /class="speech-rate-language" aria-hidden="true">سرعة<\/span>/);
-  assert.match(playerCss, /\.speech-rate-control select\s*\{[^}]*opacity:\s*1/s);
+  assert.match(read('src/v57-learning-path.css'), /\.speech-rate-value\s*\{[^}]*font-weight:\s*800/s);
   assert.match(playerCss, /\.speech-playback-bar:not\(\[hidden\]\)\s*\{[^}]*flex-wrap:\s*nowrap\s*!important/s);
   assert.match(playerCss, /inset-block-end:\s*calc\(var\(--v50-mobile-nav-clearance\) \+ 12px\)/);
   assert.match(playerCss, /body\.audio-player-open #main\s*\{[^}]*var\(--v50-player-height\)/s);
@@ -95,10 +95,11 @@ test('welcome loading keeps only a concise accessible status and spinner', () =>
   assert.doesNotMatch(loader, /<div\s*<\/div>/u);
 });
 
-test('course cards and lesson scenes have accessible, content-related illustrations', () => {
-  assert.match(app, /function courseUnitIllustration\(module\)/);
-  assert.match(app, /role="img" aria-label="\$\{label\}"/);
-  assert.match(app, /\$\{courseUnitIllustration\(module\)\}/);
+test('vertical learning path and lesson scenes remain accessible', () => {
+  const home = app.slice(app.indexOf('function homePage(){'), app.indexOf('function lessonDetailPage('));
+  assert.match(home, /<ol class="lesson-path">/u);
+  assert.match(home, /<button class="lesson-path-step"[^>]*aria-current=/u);
+  assert.match(home, /class="lesson-path-marker" aria-hidden="true"/u);
   assert.match(lessonVisuals, /\$\{sceneSvg\(type\)\}/);
   assert.match(lessonVisuals, /aria-label="\$\{escapeHtml\(sceneDescription\)\}"/);
   assert.doesNotMatch(lessonVisuals, /3D animation is not available|رسوم ثلاثية الأبعاد بعد إنشائها/);

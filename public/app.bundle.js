@@ -31,10 +31,10 @@
         }
       };
       getPlatformId = (win) => {
-        var _a14, _b;
+        var _a12, _b;
         if (win === null || win === void 0 ? void 0 : win.androidBridge) {
           return "android";
-        } else if ((_b = (_a14 = win === null || win === void 0 ? void 0 : win.webkit) === null || _a14 === void 0 ? void 0 : _a14.messageHandlers) === null || _b === void 0 ? void 0 : _b.bridge) {
+        } else if ((_b = (_a12 = win === null || win === void 0 ? void 0 : win.webkit) === null || _a12 === void 0 ? void 0 : _a12.messageHandlers) === null || _b === void 0 ? void 0 : _b.bridge) {
           return "ios";
         } else {
           return "web";
@@ -59,8 +59,8 @@
           return false;
         };
         const getPluginHeader = (pluginName) => {
-          var _a14;
-          return (_a14 = cap.PluginHeaders) === null || _a14 === void 0 ? void 0 : _a14.find((h) => h.name === pluginName);
+          var _a12;
+          return (_a12 = cap.PluginHeaders) === null || _a12 === void 0 ? void 0 : _a12.find((h) => h.name === pluginName);
         };
         const handleError = (err) => win.console.error(err);
         const registeredPlugins = /* @__PURE__ */ new Map();
@@ -82,7 +82,7 @@
             return jsImplementation;
           };
           const createPluginMethod = (impl, prop) => {
-            var _a14, _b;
+            var _a12, _b;
             if (pluginHeader) {
               const methodHeader = pluginHeader === null || pluginHeader === void 0 ? void 0 : pluginHeader.methods.find((m2) => prop === m2.name);
               if (methodHeader) {
@@ -92,7 +92,7 @@
                   return (options, callback) => cap.nativeCallback(pluginName, prop.toString(), options, callback);
                 }
               } else if (impl) {
-                return (_a14 = impl[prop]) === null || _a14 === void 0 ? void 0 : _a14.bind(impl);
+                return (_a12 = impl[prop]) === null || _a12 === void 0 ? void 0 : _a12.bind(impl);
               }
             } else if (impl) {
               return (_b = impl[prop]) === null || _b === void 0 ? void 0 : _b.bind(impl);
@@ -233,8 +233,8 @@
           listeners.forEach((listener) => listener(data));
         }
         hasListeners(eventName) {
-          var _a14;
-          return !!((_a14 = this.listeners[eventName]) === null || _a14 === void 0 ? void 0 : _a14.length);
+          var _a12;
+          return !!((_a12 = this.listeners[eventName]) === null || _a12 === void 0 ? void 0 : _a12.length);
         }
         registerWindowListener(windowEventName, pluginEventName) {
           this.windowListeners[pluginEventName] = {
@@ -596,8 +596,8 @@
     !!(window["cordova"] || window["phonegap"] || window["PhoneGap"]) && /ios|iphone|ipod|ipad|android|blackberry|iemobile/i.test(getUA());
   }
   function isNode() {
-    var _a14;
-    const forceEnvironment = (_a14 = getDefaults()) == null ? void 0 : _a14.forceEnvironment;
+    var _a12;
+    const forceEnvironment = (_a12 = getDefaults()) == null ? void 0 : _a12.forceEnvironment;
     if (forceEnvironment === "node") {
       return true;
     } else if (forceEnvironment === "browser") {
@@ -659,8 +659,8 @@
           preExist = false;
         };
         request.onerror = () => {
-          var _a14;
-          reject(((_a14 = request.error) == null ? void 0 : _a14.message) || "");
+          var _a12;
+          reject(((_a12 = request.error) == null ? void 0 : _a12.message) || "");
         };
       } catch (error) {
         reject(error);
@@ -1084,8 +1084,8 @@
         }
       };
       getDefaultEmulatorHost = (productName) => {
-        var _a14, _b;
-        return (_b = (_a14 = getDefaults()) == null ? void 0 : _a14.emulatorHosts) == null ? void 0 : _b[productName];
+        var _a12, _b;
+        return (_b = (_a12 = getDefaults()) == null ? void 0 : _a12.emulatorHosts) == null ? void 0 : _b[productName];
       };
       getDefaultEmulatorHostnameAndPort = (productName) => {
         const host = getDefaultEmulatorHost(productName);
@@ -1104,12 +1104,12 @@
         }
       };
       getDefaultAppConfig = () => {
-        var _a14;
-        return (_a14 = getDefaults()) == null ? void 0 : _a14.config;
+        var _a12;
+        return (_a12 = getDefaults()) == null ? void 0 : _a12.config;
       };
       getExperimentalSetting = (name4) => {
-        var _a14;
-        return (_a14 = getDefaults()) == null ? void 0 : _a14[`_${name4}`];
+        var _a12;
+        return (_a12 = getDefaults()) == null ? void 0 : _a12[`_${name4}`];
       };
       Deferred = class {
         constructor() {
@@ -2678,12 +2678,12 @@
          * already logged, subsequent calls to this function in the same day will be ignored.
          */
         async triggerHeartbeat() {
-          var _a14, _b;
+          var _a12, _b;
           try {
             const platformLogger = this.container.getProvider("platform-logger").getImmediate();
             const agent = platformLogger.getPlatformInfoString();
             const date = getUTCDateString();
-            if (((_a14 = this._heartbeatsCache) == null ? void 0 : _a14.heartbeats) == null) {
+            if (((_a12 = this._heartbeatsCache) == null ? void 0 : _a12.heartbeats) == null) {
               this._heartbeatsCache = await this._heartbeatsCachePromise;
               if (((_b = this._heartbeatsCache) == null ? void 0 : _b.heartbeats) == null) {
                 return;
@@ -2711,12 +2711,12 @@
          * returns an empty string.
          */
         async getHeartbeatsHeader() {
-          var _a14;
+          var _a12;
           try {
             if (this._heartbeatsCache === null) {
               await this._heartbeatsCachePromise;
             }
-            if (((_a14 = this._heartbeatsCache) == null ? void 0 : _a14.heartbeats) == null || this._heartbeatsCache.heartbeats.length === 0) {
+            if (((_a12 = this._heartbeatsCache) == null ? void 0 : _a12.heartbeats) == null || this._heartbeatsCache.heartbeats.length === 0) {
               return "";
             }
             const date = getUTCDateString();
@@ -3351,15 +3351,15 @@
     }
   }
   function _getCurrentUrl() {
-    var _a14;
-    return typeof self !== "undefined" && ((_a14 = self.location) == null ? void 0 : _a14.href) || "";
+    var _a12;
+    return typeof self !== "undefined" && ((_a12 = self.location) == null ? void 0 : _a12.href) || "";
   }
   function _isHttpOrHttps() {
     return _getCurrentScheme() === "http:" || _getCurrentScheme() === "https:";
   }
   function _getCurrentScheme() {
-    var _a14;
-    return typeof self !== "undefined" && ((_a14 = self.location) == null ? void 0 : _a14.protocol) || null;
+    var _a12;
+    return typeof self !== "undefined" && ((_a12 = self.location) == null ? void 0 : _a12.protocol) || null;
   }
   function _isOnline() {
     if (typeof navigator !== "undefined" && navigator && "onLine" in navigator && typeof navigator.onLine === "boolean" && // Apply only for traditional web apps and Chrome extensions.
@@ -3655,7 +3655,7 @@
     return code === `auth/${"user-disabled"}` || code === `auth/${"user-token-expired"}`;
   }
   async function _reloadWithoutSaving(user) {
-    var _a14;
+    var _a12;
     const auth = user.auth;
     const idToken = await user.getIdToken();
     const response = await _logoutIfInvalidated(user, getAccountInfo(auth, { idToken }));
@@ -3667,7 +3667,7 @@
     );
     const coreAccount = response.users[0];
     user._notifyReloadListener(coreAccount);
-    const newProviderData = ((_a14 = coreAccount.providerUserInfo) == null ? void 0 : _a14.length) ? extractProviderData(coreAccount.providerUserInfo) : [];
+    const newProviderData = ((_a12 = coreAccount.providerUserInfo) == null ? void 0 : _a12.length) ? extractProviderData(coreAccount.providerUserInfo) : [];
     const providerData = mergeProviderData(user.providerData, newProviderData);
     const oldIsAnonymous = user.isAnonymous;
     const newIsAnonymous = !(user.email && coreAccount.passwordHash) && !(providerData == null ? void 0 : providerData.length);
@@ -3816,8 +3816,8 @@
     return /iphone|ipad|ipod/i.test(ua2) || /macintosh/i.test(ua2) && /mobile/i.test(ua2);
   }
   function _isIOSStandalone(ua2 = getUA()) {
-    var _a14;
-    return _isIOS(ua2) && !!((_a14 = window.navigator) == null ? void 0 : _a14.standalone);
+    var _a12;
+    return _isIOS(ua2) && !!((_a12 = window.navigator) == null ? void 0 : _a12.standalone);
   }
   function _isIE10() {
     return isIE() && document.documentMode === 10;
@@ -3929,9 +3929,9 @@
     return newRequest;
   }
   async function handleRecaptchaFlow(authInstance, request, actionName, actionMethod, recaptchaAuthProvider) {
-    var _a14, _b;
+    var _a12, _b;
     if (recaptchaAuthProvider === "EMAIL_PASSWORD_PROVIDER") {
-      if ((_a14 = authInstance._getRecaptchaConfig()) == null ? void 0 : _a14.isProviderEnabled("EMAIL_PASSWORD_PROVIDER")) {
+      if ((_a12 = authInstance._getRecaptchaConfig()) == null ? void 0 : _a12.isProviderEnabled("EMAIL_PASSWORD_PROVIDER")) {
         const requestWithRecaptcha = await injectRecaptchaFields(
           authInstance,
           request,
@@ -3961,8 +3961,8 @@
       if ((_b = authInstance._getRecaptchaConfig()) == null ? void 0 : _b.isProviderEnabled("PHONE_PROVIDER")) {
         const requestWithRecaptcha = await injectRecaptchaFields(authInstance, request, actionName);
         return actionMethod(authInstance, requestWithRecaptcha).catch(async (error) => {
-          var _a15;
-          if (((_a15 = authInstance._getRecaptchaConfig()) == null ? void 0 : _a15.getProviderEnforcementState("PHONE_PROVIDER")) === "AUDIT") {
+          var _a13;
+          if (((_a13 = authInstance._getRecaptchaConfig()) == null ? void 0 : _a13.getProviderEnforcementState("PHONE_PROVIDER")) === "AUDIT") {
             if (error.code === `auth/${"missing-recaptcha-token"}` || error.code === `auth/${"invalid-app-credential"}`) {
               console.log(`Failed to verify with reCAPTCHA Enterprise. Automatically triggering the reCAPTCHA v2 flow to complete the ${actionName} flow.`);
               const requestWithRecaptchaFields = await injectRecaptchaFields(
@@ -4241,13 +4241,13 @@
     return null;
   }
   async function signInAnonymously(auth) {
-    var _a14;
+    var _a12;
     if (_isFirebaseServerApp(auth.app)) {
       return Promise.reject(_serverAppCurrentUserOperationNotSupportedError(auth));
     }
     const authInternal = _castAuth(auth);
     await authInternal._initializationPromise;
-    if ((_a14 = authInternal.currentUser) == null ? void 0 : _a14.isAnonymous) {
+    if ((_a12 = authInternal.currentUser) == null ? void 0 : _a12.isAnonymous) {
       return new UserCredentialImpl({
         user: authInternal.currentUser,
         providerId: null,
@@ -4382,9 +4382,9 @@
     return cred;
   }
   function _setActionCodeSettingsOnRequest(auth, request, actionCodeSettings) {
-    var _a14;
+    var _a12;
     _assert(
-      ((_a14 = actionCodeSettings.url) == null ? void 0 : _a14.length) > 0,
+      ((_a12 = actionCodeSettings.url) == null ? void 0 : _a12.length) > 0,
       auth,
       "invalid-continue-uri"
       /* AuthErrorCode.INVALID_CONTINUE_URI */
@@ -4711,7 +4711,7 @@
     );
   }
   function _fromIdTokenResponse(idTokenResponse) {
-    var _a14, _b;
+    var _a12, _b;
     if (!idTokenResponse) {
       return null;
     }
@@ -4719,7 +4719,7 @@
     const profile = idTokenResponse.rawUserInfo ? JSON.parse(idTokenResponse.rawUserInfo) : {};
     const isNewUser = idTokenResponse.isNewUser || idTokenResponse.kind === "identitytoolkit#SignupNewUserResponse";
     if (!providerId && (idTokenResponse == null ? void 0 : idTokenResponse.idToken)) {
-      const signInProvider = (_b = (_a14 = _parseToken(idTokenResponse.idToken)) == null ? void 0 : _a14.firebase) == null ? void 0 : _b["sign_in_provider"];
+      const signInProvider = (_b = (_a12 = _parseToken(idTokenResponse.idToken)) == null ? void 0 : _a12.firebase) == null ? void 0 : _b["sign_in_provider"];
       if (signInProvider) {
         const filteredProviderId = signInProvider !== "anonymous" && signInProvider !== "custom" ? signInProvider : null;
         return new GenericAdditionalUserInfo(isNewUser, filteredProviderId);
@@ -4791,7 +4791,7 @@
     return getModularInstance(user).delete();
   }
   function getMultiFactorResolver(auth, error) {
-    var _a14;
+    var _a12;
     const authModular = getModularInstance(auth);
     const errorInternal = error;
     _assert(
@@ -4801,7 +4801,7 @@
       /* AuthErrorCode.ARGUMENT_ERROR */
     );
     _assert(
-      (_a14 = errorInternal.customData._serverResponse) == null ? void 0 : _a14.mfaPendingCredential,
+      (_a12 = errorInternal.customData._serverResponse) == null ? void 0 : _a12.mfaPendingCredential,
       authModular,
       "argument-error"
       /* AuthErrorCode.ARGUMENT_ERROR */
@@ -4831,10 +4831,10 @@
     return multiFactorUserCache.get(userModular);
   }
   function getDocumentCookie(name4) {
-    var _a14;
+    var _a12;
     const escapedName = name4.replace(/[\\^$.*+?()[\]{}|]/g, "\\$&");
     const matcher = RegExp(`${escapedName}=([^;]+)`);
-    return ((_a14 = document.cookie.match(matcher)) == null ? void 0 : _a14[1]) ?? null;
+    return ((_a12 = document.cookie.match(matcher)) == null ? void 0 : _a12[1]) ?? null;
   }
   function getCookieName(key) {
     const isDevMode = window.location.protocol === "http:";
@@ -4884,8 +4884,8 @@
     }
   }
   function _getServiceWorkerController() {
-    var _a14;
-    return ((_a14 = navigator == null ? void 0 : navigator.serviceWorker) == null ? void 0 : _a14.controller) || null;
+    var _a12;
+    return ((_a12 = navigator == null ? void 0 : navigator.serviceWorker) == null ? void 0 : _a12.controller) || null;
   }
   function _getWorkerGlobalScope() {
     return _isWorker() ? self : null;
@@ -4995,7 +4995,7 @@
     return new ConfirmationResultImpl(verificationId, (cred) => reauthenticateWithCredential(userInternal, cred));
   }
   async function _verifyPhoneNumber(auth, options, verifier) {
-    var _a14;
+    var _a12;
     if (!auth._getRecaptchaConfig()) {
       try {
         await _initializeRecaptchaConfig(auth);
@@ -5061,7 +5061,7 @@
             "internal-error"
             /* AuthErrorCode.INTERNAL_ERROR */
           );
-          const mfaEnrollmentId = ((_a14 = phoneInfoOptions.multiFactorHint) == null ? void 0 : _a14.uid) || phoneInfoOptions.multiFactorUid;
+          const mfaEnrollmentId = ((_a12 = phoneInfoOptions.multiFactorHint) == null ? void 0 : _a12.uid) || phoneInfoOptions.multiFactorUid;
           _assert(
             mfaEnrollmentId,
             auth,
@@ -5435,7 +5435,7 @@
   }
   function loadGapi(auth) {
     return new Promise((resolve, reject) => {
-      var _a14, _b, _c;
+      var _a12, _b, _c;
       function loadGapiIframe() {
         resetUnloadedGapiModules();
         gapi.load("gapi.iframes", {
@@ -5453,7 +5453,7 @@
           timeout: NETWORK_TIMEOUT.get()
         });
       }
-      if ((_b = (_a14 = _window().gapi) == null ? void 0 : _a14.iframes) == null ? void 0 : _b.Iframe) {
+      if ((_b = (_a12 = _window().gapi) == null ? void 0 : _a12.iframes) == null ? void 0 : _b.Iframe) {
         resolve(gapi.iframes.getContext());
       } else if (!!((_c = _window().gapi) == null ? void 0 : _c.load)) {
         loadGapiIframe();
@@ -5743,8 +5743,8 @@
     return auth;
   }
   function getScriptParentElement() {
-    var _a14;
-    return ((_a14 = document.getElementsByTagName("head")) == null ? void 0 : _a14[0]) ?? document;
+    var _a12;
+    return ((_a12 = document.getElementsByTagName("head")) == null ? void 0 : _a12[0]) ?? document;
   }
   var FactorId, ProviderId, SignInMethod, OperationType, ActionCodeOperation, debugErrorMap, prodErrorMap, _DEFAULT_AUTH_ERROR_FACTORY, AUTH_ERROR_CODES_MAP_DO_NOT_USE_INTERNALLY, logClient, Delay, FetchProvider, SERVER_ERROR_MAP, CookieAuthProxiedEndpoints, DEFAULT_API_TIMEOUT_MS, NetworkTimeout, RecaptchaConfig, ProactiveRefresh, UserMetadata, StsTokenManager, UserImpl, instanceCache, InMemoryPersistence, inMemoryPersistence, PersistenceUserManager, AuthMiddlewareQueue, MINIMUM_MIN_PASSWORD_LENGTH, PasswordPolicyImpl, AuthImpl, Subscription, externalJSProvider, _SOLVE_TIME_MS, _EXPIRATION_TIME_MS, _WIDGET_ID_START, MockReCaptcha, MockGreCAPTCHATopLevel, MockGreCAPTCHA, MockWidget, RECAPTCHA_ENTERPRISE_VERIFIER_TYPE, FAKE_TOKEN, RECAPTCHA_ENTERPRISE_ONLOAD_CALLBACK_NAME, RecaptchaEnterpriseVerifier, AuthCredential, EmailAuthCredential, IDP_REQUEST_URI$1, OAuthCredential, VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_, PhoneAuthCredential, ActionCodeURL, EmailAuthProvider, FederatedAuthProvider, BaseOAuthProvider, OAuthProvider, FacebookAuthProvider, GoogleAuthProvider, GithubAuthProvider, IDP_REQUEST_URI, SAMLAuthCredential, SAML_PROVIDER_PREFIX, SAMLAuthProvider, TwitterAuthProvider, UserCredentialImpl, MultiFactorError, MultiFactorInfoImpl, PhoneMultiFactorInfoImpl, TotpMultiFactorInfoImpl, GenericAdditionalUserInfo, FederatedAdditionalUserInfoWithUsername, FacebookAdditionalUserInfo, GithubAdditionalUserInfo, GoogleAdditionalUserInfo, TwitterAdditionalUserInfo, MultiFactorSessionImpl, MultiFactorResolverImpl, MultiFactorUserImpl, multiFactorUserCache, STORAGE_AVAILABLE_KEY, BrowserPersistenceClass, _POLLING_INTERVAL_MS$1, IE10_LOCAL_STORAGE_SYNC_DELAY, BrowserLocalPersistence, browserLocalPersistence, POLLING_INTERVAL_MS, CookiePersistence, browserCookiePersistence, BrowserSessionPersistence, browserSessionPersistence, Receiver, Sender, DB_NAME2, DB_VERSION2, DB_OBJECTSTORE_NAME, DB_DATA_KEYPATH, DBPromise, _POLLING_INTERVAL_MS, _TRANSACTION_RETRY_COUNT, IndexedDBLocalPersistence, indexedDBLocalPersistence, _JSLOAD_CALLBACK, NETWORK_TIMEOUT_DELAY, ReCaptchaLoaderImpl, MockReCaptchaLoaderImpl, RECAPTCHA_VERIFIER_TYPE, DEFAULT_PARAMS, RecaptchaVerifier, ConfirmationResultImpl, PhoneAuthProvider, IdpCredential, AbstractPopupRedirectOperation, _POLL_WINDOW_CLOSE_TIMEOUT, PopupOperation, PENDING_REDIRECT_KEY, redirectOutcomeMap, RedirectAction, EVENT_DUPLICATION_CACHE_DURATION_MS, AuthEventManager, IP_ADDRESS_REGEX, HTTP_REGEX, NETWORK_TIMEOUT, cachedGApiLoader, PING_TIMEOUT, IFRAME_PATH, EMULATED_IFRAME_PATH, IFRAME_ATTRIBUTES, EID_FROM_APIHOST, BASE_POPUP_OPTIONS, DEFAULT_WIDTH, DEFAULT_HEIGHT, TARGET_BLANK, FIREFOX_EMPTY_URL, AuthPopup, WIDGET_PATH, EMULATOR_WIDGET_PATH, FIREBASE_APP_CHECK_FRAGMENT_ID, WEB_STORAGE_SUPPORT_KEY, BrowserPopupRedirectResolver, browserPopupRedirectResolver, MultiFactorAssertionImpl, PhoneMultiFactorAssertionImpl, PhoneMultiFactorGenerator, TotpMultiFactorGenerator, TotpMultiFactorAssertionImpl, TotpSecret, name3, version3, AuthInterop, DEFAULT_ID_TOKEN_MAX_AGE, authIdTokenMaxAge, lastPostedIdToken, mintCookieFactory;
   var init_index_4NFEPWkC = __esm({
@@ -6942,7 +6942,7 @@
       MINIMUM_MIN_PASSWORD_LENGTH = 6;
       PasswordPolicyImpl = class {
         constructor(response) {
-          var _a14;
+          var _a12;
           const responseOptions = response.customStrengthOptions;
           this.customStrengthOptions = {};
           this.customStrengthOptions.minPasswordLength = responseOptions.minPasswordLength ?? MINIMUM_MIN_PASSWORD_LENGTH;
@@ -6965,7 +6965,7 @@
           if (this.enforcementState === "ENFORCEMENT_STATE_UNSPECIFIED") {
             this.enforcementState = "OFF";
           }
-          this.allowedNonAlphanumericCharacters = ((_a14 = response.allowedNonAlphanumericCharacters) == null ? void 0 : _a14.join("")) ?? "";
+          this.allowedNonAlphanumericCharacters = ((_a12 = response.allowedNonAlphanumericCharacters) == null ? void 0 : _a12.join("")) ?? "";
           this.forceUpgradeOnSignin = response.forceUpgradeOnSignin ?? false;
           this.schemaVersion = response.schemaVersion;
         }
@@ -7100,7 +7100,7 @@
             this._popupRedirectResolver = _getInstance(popupRedirectResolver);
           }
           this._initializationPromise = this.queue(async () => {
-            var _a14, _b, _c;
+            var _a12, _b, _c;
             if (this._deleted) {
               return;
             }
@@ -7110,7 +7110,7 @@
               _logWarn(`Failed to initialize persistence: ${e2}`);
               this.persistenceManager = await PersistenceUserManager.create(this, []);
             } finally {
-              (_a14 = this._resolvePersistenceManagerAvailable) == null ? void 0 : _a14.call(this);
+              (_a12 = this._resolvePersistenceManagerAvailable) == null ? void 0 : _a12.call(this);
             }
             if (this._deleted) {
               return;
@@ -7169,7 +7169,7 @@
           }
         }
         async initializeCurrentUser(popupRedirectResolver) {
-          var _a14;
+          var _a12;
           if (_isFirebaseServerApp(this.app)) {
             const idToken = this.app.settings.authIdToken;
             if (idToken) {
@@ -7185,7 +7185,7 @@
           let needsTocheckMiddleware = false;
           if (popupRedirectResolver && this.config.authDomain) {
             await this.getOrInitRedirectPersistenceManager();
-            const redirectUserEventId = (_a14 = this.redirectUser) == null ? void 0 : _a14._redirectEventId;
+            const redirectUserEventId = (_a12 = this.redirectUser) == null ? void 0 : _a12._redirectEventId;
             const storedUserEventId = futureCurrentUser == null ? void 0 : futureCurrentUser._redirectEventId;
             const result = await this.tryRedirectSignIn(popupRedirectResolver);
             if ((!redirectUserEventId || redirectUserEventId === storedUserEventId) && (result == null ? void 0 : result.user)) {
@@ -7387,12 +7387,12 @@
           }
         }
         toJSON() {
-          var _a14;
+          var _a12;
           return {
             apiKey: this.config.apiKey,
             authDomain: this.config.authDomain,
             appName: this.name,
-            currentUser: (_a14 = this._currentUser) == null ? void 0 : _a14.toJSON()
+            currentUser: (_a12 = this._currentUser) == null ? void 0 : _a12.toJSON()
           };
         }
         async _setRedirectUser(user, popupRedirectResolver) {
@@ -7419,12 +7419,12 @@
           return this.redirectPersistenceManager;
         }
         async _redirectUserForId(id) {
-          var _a14, _b;
+          var _a12, _b;
           if (this._isInitialized) {
             await this.queue(async () => {
             });
           }
-          if (((_a14 = this._currentUser) == null ? void 0 : _a14._redirectEventId) === id) {
+          if (((_a12 = this._currentUser) == null ? void 0 : _a12._redirectEventId) === id) {
             return this._currentUser;
           }
           if (((_b = this.redirectUser) == null ? void 0 : _b._redirectEventId) === id) {
@@ -7463,12 +7463,12 @@
           return this.currentUser;
         }
         notifyAuthListeners() {
-          var _a14;
+          var _a12;
           if (!this._isInitialized) {
             return;
           }
           this.idTokenSubscription.next(this.currentUser);
-          const currentUid = ((_a14 = this.currentUser) == null ? void 0 : _a14.uid) ?? null;
+          const currentUid = ((_a12 = this.currentUser) == null ? void 0 : _a12.uid) ?? null;
           if (this.lastNotifiedUid !== currentUid) {
             this.lastNotifiedUid = currentUid;
             this.authStateSubscription.next(this.currentUser);
@@ -7572,7 +7572,7 @@
           return this.frameworks;
         }
         async _getAdditionalHeaders() {
-          var _a14;
+          var _a12;
           const headers = {
             [
               "X-Client-Version"
@@ -7585,9 +7585,9 @@
               /* HttpHeader.X_FIREBASE_GMPID */
             ] = this.app.options.appId;
           }
-          const heartbeatsHeader = await ((_a14 = this.heartbeatServiceProvider.getImmediate({
+          const heartbeatsHeader = await ((_a12 = this.heartbeatServiceProvider.getImmediate({
             optional: true
-          })) == null ? void 0 : _a14.getHeartbeatsHeader());
+          })) == null ? void 0 : _a12.getHeartbeatsHeader());
           if (heartbeatsHeader) {
             headers[
               "X-Firebase-Client"
@@ -7604,11 +7604,11 @@
           return headers;
         }
         async _getAppCheckToken() {
-          var _a14;
+          var _a12;
           if (_isFirebaseServerApp(this.app) && this.app.settings.appCheckToken) {
             return this.app.settings.appCheckToken;
           }
-          const appCheckTokenResult = await ((_a14 = this.appCheckServiceProvider.getImmediate({ optional: true })) == null ? void 0 : _a14.getToken());
+          const appCheckTokenResult = await ((_a12 = this.appCheckServiceProvider.getImmediate({ optional: true })) == null ? void 0 : _a12.getToken());
           if (appCheckTokenResult == null ? void 0 : appCheckTokenResult.error) {
             _logWarn(`Error while retrieving App Check token: ${appCheckTokenResult.error}`);
           }
@@ -7655,20 +7655,20 @@
           return id;
         }
         reset(optWidgetId) {
-          var _a14;
+          var _a12;
           const id = optWidgetId || _WIDGET_ID_START;
-          void ((_a14 = this._widgets.get(id)) == null ? void 0 : _a14.delete());
+          void ((_a12 = this._widgets.get(id)) == null ? void 0 : _a12.delete());
           this._widgets.delete(id);
         }
         getResponse(optWidgetId) {
-          var _a14;
+          var _a12;
           const id = optWidgetId || _WIDGET_ID_START;
-          return ((_a14 = this._widgets.get(id)) == null ? void 0 : _a14.getResponse()) || "";
+          return ((_a12 = this._widgets.get(id)) == null ? void 0 : _a12.getResponse()) || "";
         }
         async execute(optWidgetId) {
-          var _a14;
+          var _a12;
           const id = optWidgetId || _WIDGET_ID_START;
-          void ((_a14 = this._widgets.get(id)) == null ? void 0 : _a14.execute());
+          void ((_a12 = this._widgets.get(id)) == null ? void 0 : _a12.execute());
           return "";
         }
       };
@@ -7850,12 +7850,12 @@
                 }
                 _RecaptchaEnterpriseVerifier.scriptInjectionDeferred = new Deferred();
                 window[RECAPTCHA_ENTERPRISE_ONLOAD_CALLBACK_NAME] = () => {
-                  var _a14;
-                  (_a14 = _RecaptchaEnterpriseVerifier.scriptInjectionDeferred) == null ? void 0 : _a14.resolve();
+                  var _a12;
+                  (_a12 = _RecaptchaEnterpriseVerifier.scriptInjectionDeferred) == null ? void 0 : _a12.resolve();
                 };
                 _loadJS(url).then(() => {
-                  var _a14;
-                  return (_a14 = _RecaptchaEnterpriseVerifier.scriptInjectionDeferred) == null ? void 0 : _a14.promise;
+                  var _a12;
+                  return (_a12 = _RecaptchaEnterpriseVerifier.scriptInjectionDeferred) == null ? void 0 : _a12.promise;
                 }).then(() => {
                   retrieveRecaptchaToken(siteKey, resolve, reject);
                 }).catch((error) => {
@@ -8993,9 +8993,9 @@
           };
         }
         static fromJSON(obj) {
-          var _a14, _b;
+          var _a12, _b;
           if (obj == null ? void 0 : obj.multiFactorSession) {
-            if ((_a14 = obj.multiFactorSession) == null ? void 0 : _a14.pendingCredential) {
+            if ((_a12 = obj.multiFactorSession) == null ? void 0 : _a12.pendingCredential) {
               return _MultiFactorSessionImpl._fromMfaPendingCredential(obj.multiFactorSession.pendingCredential);
             } else if ((_b = obj.multiFactorSession) == null ? void 0 : _b.idToken) {
               return _MultiFactorSessionImpl._fromIdtoken(obj.multiFactorSession.idToken);
@@ -9703,7 +9703,7 @@
          * may not resolve.
          */
         async initializeSender() {
-          var _a14, _b;
+          var _a12, _b;
           this.activeServiceWorker = await _getActiveServiceWorker();
           if (!this.activeServiceWorker) {
             return;
@@ -9718,7 +9718,7 @@
           if (!results) {
             return;
           }
-          if (((_a14 = results[0]) == null ? void 0 : _a14.fulfilled) && ((_b = results[0]) == null ? void 0 : _b.value.includes("keyChanged"))) {
+          if (((_a12 = results[0]) == null ? void 0 : _a12.fulfilled) && ((_b = results[0]) == null ? void 0 : _b.value.includes("keyChanged"))) {
             this.serviceWorkerReceiverAvailable = true;
           }
         }
@@ -9879,10 +9879,10 @@
       NETWORK_TIMEOUT_DELAY = new Delay(3e4, 6e4);
       ReCaptchaLoaderImpl = class {
         constructor() {
-          var _a14;
+          var _a12;
           this.hostLanguage = "";
           this.counter = 0;
-          this.librarySeparatelyLoaded = !!((_a14 = _window().grecaptcha) == null ? void 0 : _a14.render);
+          this.librarySeparatelyLoaded = !!((_a12 = _window().grecaptcha) == null ? void 0 : _a12.render);
         }
         load(auth, hl = "") {
           _assert(
@@ -9942,8 +9942,8 @@
           this.counter--;
         }
         shouldResolveImmediately(hl) {
-          var _a14;
-          return !!((_a14 = _window().grecaptcha) == null ? void 0 : _a14.render) && (hl === this.hostLanguage || this.counter > 0 || this.librarySeparatelyLoaded);
+          var _a12;
+          return !!((_a12 = _window().grecaptcha) == null ? void 0 : _a12.render) && (hl === this.hostLanguage || this.counter > 0 || this.librarySeparatelyLoaded);
         }
       };
       MockReCaptchaLoaderImpl = class {
@@ -10463,8 +10463,8 @@
           this.pollUserCancellation();
         }
         get eventId() {
-          var _a14;
-          return ((_a14 = this.authWindow) == null ? void 0 : _a14.associatedEvent) || null;
+          var _a12;
+          return ((_a12 = this.authWindow) == null ? void 0 : _a12.associatedEvent) || null;
         }
         cancel() {
           this.reject(_createError(
@@ -10486,8 +10486,8 @@
         }
         pollUserCancellation() {
           const poll = () => {
-            var _a14, _b;
-            if ((_b = (_a14 = this.authWindow) == null ? void 0 : _a14.window) == null ? void 0 : _b.closed) {
+            var _a12, _b;
+            if ((_b = (_a12 = this.authWindow) == null ? void 0 : _a12.window) == null ? void 0 : _b.closed) {
               this.pollId = window.setTimeout(
                 () => {
                   this.pollId = null;
@@ -10608,9 +10608,9 @@
           return handled;
         }
         sendToConsumer(event, consumer) {
-          var _a14;
+          var _a12;
           if (event.error && !isNullRedirectEvent(event)) {
-            const code = ((_a14 = event.error.code) == null ? void 0 : _a14.split("auth/")[1]) || "internal-error";
+            const code = ((_a12 = event.error.code) == null ? void 0 : _a12.split("auth/")[1]) || "internal-error";
             consumer.onError(_createError(this.auth, code));
           } else {
             consumer.onAuthEvent(event);
@@ -10696,8 +10696,8 @@
         // Wrapping in async even though we don't await anywhere in order
         // to make sure errors are raised as promise rejections
         async _openPopup(auth, provider, authType, eventId) {
-          var _a14;
-          debugAssert((_a14 = this.eventManagers[auth._key()]) == null ? void 0 : _a14.manager, "_initialize() not called before _openPopup()");
+          var _a12;
+          debugAssert((_a12 = this.eventManagers[auth._key()]) == null ? void 0 : _a12.manager, "_initialize() not called before _openPopup()");
           const url = await _getRedirectUrl(auth, provider, authType, _getCurrentUrl(), eventId);
           return _open(auth, url, _generateEventId());
         }
@@ -10749,8 +10749,8 @@
         _isIframeWebStorageSupported(auth, cb) {
           const iframe = this.iframes[auth._key()];
           iframe.send(WEB_STORAGE_SUPPORT_KEY, { type: WEB_STORAGE_SUPPORT_KEY }, (result) => {
-            var _a14;
-            const isSupported = (_a14 = result == null ? void 0 : result[0]) == null ? void 0 : _a14[WEB_STORAGE_SUPPORT_KEY];
+            var _a12;
+            const isSupported = (_a12 = result == null ? void 0 : result[0]) == null ? void 0 : _a12[WEB_STORAGE_SUPPORT_KEY];
             if (isSupported !== void 0) {
               cb(!!isSupported);
             }
@@ -10870,10 +10870,10 @@
          * @returns A promise to {@link TotpSecret}.
          */
         static async generateSecret(session) {
-          var _a14;
+          var _a12;
           const mfaSession = session;
           _assert(
-            typeof ((_a14 = mfaSession.user) == null ? void 0 : _a14.auth) !== "undefined",
+            typeof ((_a12 = mfaSession.user) == null ? void 0 : _a12.auth) !== "undefined",
             "internal-error"
             /* AuthErrorCode.INTERNAL_ERROR */
           );
@@ -10963,14 +10963,14 @@
          * @returns A QR code URL string.
          */
         generateQrCodeUrl(accountName, issuer) {
-          var _a14;
+          var _a12;
           let useDefaults = false;
           if (_isEmptyString(accountName) || _isEmptyString(issuer)) {
             useDefaults = true;
           }
           if (useDefaults) {
             if (_isEmptyString(accountName)) {
-              accountName = ((_a14 = this.auth.currentUser) == null ? void 0 : _a14.email) || "unknownuser";
+              accountName = ((_a12 = this.auth.currentUser) == null ? void 0 : _a12.email) || "unknownuser";
             }
             if (_isEmptyString(issuer)) {
               issuer = this.auth.name;
@@ -10987,9 +10987,9 @@
           this.internalListeners = /* @__PURE__ */ new Map();
         }
         getUid() {
-          var _a14;
+          var _a12;
           this.assertAuthConfigured();
-          return ((_a14 = this.auth.currentUser) == null ? void 0 : _a14.uid) || null;
+          return ((_a12 = this.auth.currentUser) == null ? void 0 : _a12.uid) || null;
         }
         async getToken(forceRefresh) {
           this.assertAuthConfigured();
@@ -20570,8 +20570,8 @@
     return "string" == typeof e2 ? ByteString.fromBase64String(e2) : ByteString.fromUint8Array(e2);
   }
   function __PRIVATE_isServerTimestamp(e2) {
-    var _a14, _b;
-    const t2 = (_b = (((_a14 = e2 == null ? void 0 : e2.mapValue) == null ? void 0 : _a14.fields) || {})[Ue]) == null ? void 0 : _b.stringValue;
+    var _a12, _b;
+    const t2 = (_b = (((_a12 = e2 == null ? void 0 : e2.mapValue) == null ? void 0 : _a12.fields) || {})[Ue]) == null ? void 0 : _b.stringValue;
     return t2 === Be;
   }
   function __PRIVATE_getPreviousValue(e2) {
@@ -20713,8 +20713,8 @@
         return __PRIVATE_compareArrays(e2.arrayValue, t2.arrayValue);
       case 10:
         return (function __PRIVATE_compareVectors(e3, t3) {
-          var _a14, _b, _c, _d;
-          const n3 = e3.fields || {}, r3 = t3.fields || {}, i2 = (_a14 = n3[je]) == null ? void 0 : _a14.arrayValue, s2 = (_b = r3[je]) == null ? void 0 : _b.arrayValue, _ = __PRIVATE_primitiveComparator(((_c = i2 == null ? void 0 : i2.values) == null ? void 0 : _c.length) || 0, ((_d = s2 == null ? void 0 : s2.values) == null ? void 0 : _d.length) || 0);
+          var _a12, _b, _c, _d;
+          const n3 = e3.fields || {}, r3 = t3.fields || {}, i2 = (_a12 = n3[je]) == null ? void 0 : _a12.arrayValue, s2 = (_b = r3[je]) == null ? void 0 : _b.arrayValue, _ = __PRIVATE_primitiveComparator(((_c = i2 == null ? void 0 : i2.values) == null ? void 0 : _c.length) || 0, ((_d = s2 == null ? void 0 : s2.values) == null ? void 0 : _d.length) || 0);
           if (0 !== _) return _;
           return __PRIVATE_compareArrays(i2, s2);
         })(e2.mapValue, t2.mapValue);
@@ -20842,13 +20842,13 @@
     return !!e2 && "mapValue" in e2;
   }
   function __PRIVATE_isVectorValue(e2) {
-    var _a14, _b;
-    const t2 = (_b = (((_a14 = e2 == null ? void 0 : e2.mapValue) == null ? void 0 : _a14.fields) || {})[Qe]) == null ? void 0 : _b.stringValue;
+    var _a12, _b;
+    const t2 = (_b = (((_a12 = e2 == null ? void 0 : e2.mapValue) == null ? void 0 : _a12.fields) || {})[Qe]) == null ? void 0 : _b.stringValue;
     return t2 === ze;
   }
   function __PRIVATE_getVectorValue(e2) {
-    var _a14, _b;
-    return (_b = (((_a14 = e2 == null ? void 0 : e2.mapValue) == null ? void 0 : _a14.fields) || {})[je]) == null ? void 0 : _b.arrayValue;
+    var _a12, _b;
+    return (_b = (((_a12 = e2 == null ? void 0 : e2.mapValue) == null ? void 0 : _a12.fields) || {})[je]) == null ? void 0 : _b.arrayValue;
   }
   function __PRIVATE_deepClone(e2) {
     if (e2.geoPointValue) return {
@@ -21205,8 +21205,8 @@
     })(e2) : "Filter";
   }
   function __PRIVATE_extractDocumentKeysFromArrayValue(e2, t2) {
-    var _a14;
-    return (((_a14 = t2.arrayValue) == null ? void 0 : _a14.values) || []).map(((e3) => DocumentKey.fromName(e3.referenceValue)));
+    var _a12;
+    return (((_a12 = t2.arrayValue) == null ? void 0 : _a12.values) || []).map(((e3) => DocumentKey.fromName(e3.referenceValue)));
   }
   function __PRIVATE_orderByEquals(e2, t2) {
     return e2.dir === t2.dir && e2.field.isEqual(t2.field);
@@ -22319,7 +22319,7 @@
     return new __PRIVATE_LruGarbageCollectorImpl(e2, t2);
   }
   function connectFirestoreEmulator(t2, n2, r2, i2 = {}) {
-    var _a14;
+    var _a12;
     t2 = ra(t2, Dt);
     const s2 = isCloudWorkstation(n2), _ = t2._getSettings(), o2 = {
       ..._,
@@ -22336,7 +22336,7 @@
       let n3, r3;
       if ("string" == typeof i2.mockUserToken) n3 = i2.mockUserToken, r3 = User.MOCK_USER;
       else {
-        n3 = createMockUserToken(i2.mockUserToken, (_a14 = t2._app) == null ? void 0 : _a14.options.projectId);
+        n3 = createMockUserToken(i2.mockUserToken, (_a12 = t2._app) == null ? void 0 : _a12.options.projectId);
         const s3 = i2.mockUserToken.sub || i2.mockUserToken.user_id;
         if (!s3) throw new e(ta.INVALID_ARGUMENT, "mockUserToken must contain 'sub' or 'user_id' field!");
         r3 = new User(s3);
@@ -22878,8 +22878,8 @@
   }
   function __PRIVATE_strictValueEquals(e2, t2) {
     return __PRIVATE_typeOrder(e2) !== __PRIVATE_typeOrder(t2) ? "TYPE_MISMATCH" : __PRIVATE_isNanValue(e2) || __PRIVATE_isNanValue(t2) ? "NOT_EQ" : __PRIVATE_isNullValue(e2) && __PRIVATE_isNullValue(t2) ? "EQ" : __PRIVATE_isNullValue(e2) || __PRIVATE_isNullValue(t2) ? "NULL" : isArray(e2) && isArray(t2) ? (function __PRIVATE_strictArrayValueEquals(e3, t3) {
-      var _a14, _b, _c;
-      if (((_a14 = e3.values) == null ? void 0 : _a14.length) !== ((_b = t3.values) == null ? void 0 : _b.length)) return "NOT_EQ";
+      var _a12, _b, _c;
+      if (((_a12 = e3.values) == null ? void 0 : _a12.length) !== ((_b = t3.values) == null ? void 0 : _b.length)) return "NOT_EQ";
       let n2 = false;
       for (let r2 = 0; r2 < (((_c = e3.values) == null ? void 0 : _c.length) ?? 0); r2++) {
         const i2 = e3.values[r2], s2 = t3.values[r2];
@@ -23212,9 +23212,9 @@
     return i2 = (function __PRIVATE_isPipelineQueryTarget(e3) {
       return void 0 !== e3.structuredPipeline;
     })(t2.query) ? (function __PRIVATE_fromPipelineTarget(e3, t3) {
-      var _a14, _b;
+      var _a12, _b;
       const n3 = e3.structuredPipeline;
-      __PRIVATE_hardAssert((((_a14 = n3 == null ? void 0 : n3.pipeline) == null ? void 0 : _a14.stages) ?? []).length > 0, 1845);
+      __PRIVATE_hardAssert((((_a12 = n3 == null ? void 0 : n3.pipeline) == null ? void 0 : _a12.stages) ?? []).length > 0, 1845);
       const r3 = (_b = n3 == null ? void 0 : n3.pipeline) == null ? void 0 : _b.stages.map(__PRIVATE_stageFromProto);
       return new CorePipeline(t3, r3);
     })(t2.query, e2.$r) : (function __PRIVATE_isDocumentQuery(e3) {
@@ -23290,8 +23290,8 @@
       }
       case "sort":
         return new L(e2.args.map(((e3) => (function __PRIVATE_orderingFromProto(e4) {
-          var _a14, _b;
-          const t2 = (_a14 = e4.mapValue) == null ? void 0 : _a14.fields;
+          var _a12, _b;
+          const t2 = (_a12 = e4.mapValue) == null ? void 0 : _a12.fields;
           return new Ordering(__PRIVATE_exprFromProto(t2.expression), (_b = t2.direction) == null ? void 0 : _b.stringValue, "orderingFromProto");
         })(e3))), {});
       default:
@@ -23300,8 +23300,8 @@
   }
   function __PRIVATE_exprFromProto(e2) {
     return e2.fieldReferenceValue ? new o(K("_exprFromProto", e2.fieldReferenceValue), "_exprFromProto") : e2.functionValue ? (function __PRIVATE_functionFromProto(e3) {
-      var _a14;
-      return new y(e3.functionValue.name, ((_a14 = e3.functionValue.args) == null ? void 0 : _a14.map(__PRIVATE_exprFromProto)) || []);
+      var _a12;
+      return new y(e3.functionValue.name, ((_a12 = e3.functionValue.args) == null ? void 0 : _a12.map(__PRIVATE_exprFromProto)) || []);
     })(e2) : Constant._fromProto(e2);
   }
   function __PRIVATE_mutationQueueContainsKey(e2, t2, n2) {
@@ -23390,10 +23390,10 @@
     })(e2);
   }
   function __PRIVATE_computeInExpansion(e2) {
-    var _a14, _b;
+    var _a12, _b;
     if (__PRIVATE_hardAssert(e2 instanceof FieldFilter || e2 instanceof CompositeFilter, 20012), e2 instanceof FieldFilter) {
       if (e2 instanceof __PRIVATE_InFilter) {
-        const t3 = ((_b = (_a14 = e2.value.arrayValue) == null ? void 0 : _a14.values) == null ? void 0 : _b.map(((t4) => FieldFilter.create(e2.field, "==", t4)))) || [];
+        const t3 = ((_b = (_a12 = e2.value.arrayValue) == null ? void 0 : _a12.values) == null ? void 0 : _b.map(((t4) => FieldFilter.create(e2.field, "==", t4)))) || [];
         return CompositeFilter.create(
           t3,
           "or"
@@ -23527,11 +23527,11 @@
     })(t2, e2.currentSequenceNumber));
   }
   function __PRIVATE_runPipeline(e2, t2) {
-    var _a14;
+    var _a12;
     let n2 = t2;
     for (const t3 of e2.stages) n2 = evaluate({
       serializer: e2.serializer,
-      serverTimestampBehavior: (_a14 = e2.listenOptions) == null ? void 0 : _a14.serverTimestampBehavior
+      serverTimestampBehavior: (_a12 = e2.listenOptions) == null ? void 0 : _a12.serverTimestampBehavior
     }, t3, n2);
     return n2;
   }
@@ -24673,9 +24673,9 @@
     const r2 = __PRIVATE_debugCast(e2), i2 = [], s2 = [], _ = [];
     r2.Tc.isEmpty() || (r2.Tc.forEach(((e3, o2) => {
       _.push(r2.yc(o2, t2, n2).then(((e4) => {
-        var _a14;
+        var _a12;
         if ((e4 || n2) && r2.isPrimaryClient) {
-          const t3 = e4 ? !e4.fromCache : (_a14 = n2 == null ? void 0 : n2.targetChanges.get(o2.targetId)) == null ? void 0 : _a14.current;
+          const t3 = e4 ? !e4.fromCache : (_a12 = n2 == null ? void 0 : n2.targetChanges.get(o2.targetId)) == null ? void 0 : _a12.current;
           r2.sharedClientState.updateQueryState(o2.targetId, t3 ? "current" : "not-current");
         }
         if (e4) {
@@ -25132,7 +25132,7 @@
       try {
         const i2 = await __PRIVATE_getDatastore(e2);
         r2.resolve((async function __PRIVATE_invokeRunAggregationQueryRpc(e3, t3, n3) {
-          var _a14;
+          var _a12;
           const r3 = __PRIVATE_debugCast(e3), { request: i3, ve: s2, parent: _ } = __PRIVATE_toRunAggregationQueryRequest(r3.serializer, __PRIVATE_queryToAggregateTarget(t3), n3);
           r3.connection.Ze || delete i3.parent;
           const o2 = (await r3._t(
@@ -25144,7 +25144,7 @@
             1
           )).filter(((e4) => !!e4.result));
           __PRIVATE_hardAssert(1 === o2.length, 64727);
-          const a = (_a14 = o2[0].result) == null ? void 0 : _a14.aggregateFields;
+          const a = (_a12 = o2[0].result) == null ? void 0 : _a12.aggregateFields;
           return Object.keys(a).reduce(((e4, t4) => (e4[s2[t4]] = a[t4], e4)), {});
         })(i2, t2, n2));
       } catch (e3) {
@@ -25282,8 +25282,8 @@
     return t2._firestoreClient || __PRIVATE_configureFirestore(t2), t2._firestoreClient;
   }
   function __PRIVATE_configureFirestore(e2) {
-    var _a14, _b, _c, _d;
-    const t2 = e2._freezeSettings(), n2 = __PRIVATE_makeDatabaseInfo(e2._databaseId, ((_a14 = e2._app) == null ? void 0 : _a14.options.appId) || "", e2._persistenceKey, (_b = e2._app) == null ? void 0 : _b.options.apiKey, t2);
+    var _a12, _b, _c, _d;
+    const t2 = e2._freezeSettings(), n2 = __PRIVATE_makeDatabaseInfo(e2._databaseId, ((_a12 = e2._app) == null ? void 0 : _a12.options.appId) || "", e2._persistenceKey, (_b = e2._app) == null ? void 0 : _b.options.apiKey, t2);
     e2._componentsProvider || ((_c = t2.localCache) == null ? void 0 : _c._offlineComponentProvider) && ((_d = t2.localCache) == null ? void 0 : _d._onlineComponentProvider) && (e2._componentsProvider = {
       _offline: t2.localCache._offlineComponentProvider,
       _online: t2.localCache._onlineComponentProvider
@@ -25413,13 +25413,13 @@
     return e2 instanceof DocumentSnapshot2 && t2 instanceof DocumentSnapshot2 ? e2._firestore === t2._firestore && e2._key.isEqual(t2._key) && (null === e2._document ? null === t2._document : e2._document.isEqual(t2._document)) && e2._converter === t2._converter : e2 instanceof QuerySnapshot && t2 instanceof QuerySnapshot && (e2._firestore === t2._firestore && queryEqual(e2.query, t2.query) && e2.metadata.isEqual(t2.metadata) && e2._snapshot.isEqual(t2._snapshot));
   }
   function _internalQueryToProtoQueryTarget(e2) {
-    var _a14;
-    const t2 = oa(ra(e2.firestore, da)), n2 = (_a14 = t2._onlineComponents) == null ? void 0 : _a14.datastore.serializer;
+    var _a12;
+    const t2 = oa(ra(e2.firestore, da)), n2 = (_a12 = t2._onlineComponents) == null ? void 0 : _a12.datastore.serializer;
     return void 0 === n2 ? null : __PRIVATE_toQueryTarget(n2, __PRIVATE_queryToTarget(e2._query)).Se;
   }
   function _internalAggregationQueryToProtoRunAggregationQueryRequest(e2, t2) {
-    var _a14;
-    const n2 = __PRIVATE_mapToArray(t2, ((e3, t3) => new __PRIVATE_AggregateImpl(t3, e3.aggregateType, e3._internalFieldPath))), r2 = oa(ra(e2.firestore, da)), i2 = (_a14 = r2._onlineComponents) == null ? void 0 : _a14.datastore.serializer;
+    var _a12;
+    const n2 = __PRIVATE_mapToArray(t2, ((e3, t3) => new __PRIVATE_AggregateImpl(t3, e3.aggregateType, e3._internalFieldPath))), r2 = oa(ra(e2.firestore, da)), i2 = (_a12 = r2._onlineComponents) == null ? void 0 : _a12.datastore.serializer;
     return void 0 === i2 ? null : __PRIVATE_toRunAggregationQueryRequest(
       i2,
       __PRIVATE_queryToAggregateTarget(e2._query),
@@ -27458,8 +27458,8 @@
           }));
         }
         Ee(e2) {
-          var _a14;
-          return __PRIVATE_targetIsPipelineTarget(e2) ? "documents" === e2.getPipelineSourceType() && 1 === ((_a14 = e2.getPipelineDocuments()) == null ? void 0 : _a14.length) : __PRIVATE_targetIsDocumentTarget(e2);
+          var _a12;
+          return __PRIVATE_targetIsPipelineTarget(e2) ? "documents" === e2.getPipelineSourceType() && 1 === ((_a12 = e2.getPipelineDocuments()) == null ? void 0 : _a12.length) : __PRIVATE_targetIsDocumentTarget(e2);
         }
         /**
          * Handles existence filters and synthesizes deletes for filter mismatches.
@@ -27484,7 +27484,7 @@
                   this.se = this.se.insert(t2, e3);
                 }
                 ot == null ? void 0 : ot.Ae((function __PRIVATE_createExistenceFilterMismatchInfoForTestingHooks(e3, t3, n4, r4, i4) {
-                  var _a14, _b, _c;
+                  var _a12, _b, _c;
                   const s2 = {
                     localCacheCount: e3,
                     existenceFilterCount: t3.count,
@@ -27494,7 +27494,7 @@
                   _ && (s2.bloomFilter = {
                     applied: 0 === i4,
                     hashCount: (_ == null ? void 0 : _.hashCount) ?? 0,
-                    bitmapLength: ((_b = (_a14 = _ == null ? void 0 : _.bits) == null ? void 0 : _a14.bitmap) == null ? void 0 : _b.length) ?? 0,
+                    bitmapLength: ((_b = (_a12 = _ == null ? void 0 : _.bits) == null ? void 0 : _a12.bitmap) == null ? void 0 : _b.length) ?? 0,
                     padding: ((_c = _ == null ? void 0 : _.bits) == null ? void 0 : _c.padding) ?? 0,
                     mightContain: (e4) => (r4 == null ? void 0 : r4.mightContain(e4)) ?? false
                   });
@@ -28390,11 +28390,11 @@
           })), __PRIVATE_unguardedEventListen(c2, WebChannel.EventType.ERROR, ((n3) => {
             E || (E = true, __PRIVATE_logWarn(Rt, `RPC '${t2}' stream ${i2} transport errored. Name:`, n3.name, "Message:", n3.message), h.Vt(new e(ta.UNAVAILABLE, "The operation could not be completed")));
           })), __PRIVATE_unguardedEventListen(c2, WebChannel.EventType.MESSAGE, ((n3) => {
-            var _a14;
+            var _a12;
             if (!E) {
               const r3 = n3.data[0];
               __PRIVATE_hardAssert(!!r3, 16349);
-              const s3 = r3, _2 = (s3 == null ? void 0 : s3.error) || ((_a14 = s3[0]) == null ? void 0 : _a14.error);
+              const s3 = r3, _2 = (s3 == null ? void 0 : s3.error) || ((_a12 = s3[0]) == null ? void 0 : _a12.error);
               if (_2) {
                 __PRIVATE_logDebug(Rt, `RPC '${t2}' stream ${i2} received error:`, _2);
                 const n4 = _2.status;
@@ -29040,8 +29040,8 @@
          * (see https://github.com/axemclion/IndexedDBShim).
          */
         static Dn() {
-          var _a14;
-          return "undefined" != typeof process && "YES" === ((_a14 = process.__PRIVATE_env) == null ? void 0 : _a14.__PRIVATE_USE_MOCK_PERSISTENCE);
+          var _a12;
+          return "undefined" != typeof process && "YES" === ((_a12 = process.__PRIVATE_env) == null ? void 0 : _a12.__PRIVATE_USE_MOCK_PERSISTENCE);
         }
         /** Helper to get a typed SimpleDbStore from a transaction. */
         static Cn(e2, t2) {
@@ -29743,16 +29743,16 @@ Total Duration: ${a - u2}ms`);
           }, this.databaseId, this.serializer, this.ignoreUndefinedProperties, this.fieldTransforms, this.fieldMask);
         }
         childContextForField(e2) {
-          var _a14;
-          const t2 = (_a14 = this.path) == null ? void 0 : _a14.child(e2), n2 = this.contextWith({
+          var _a12;
+          const t2 = (_a12 = this.path) == null ? void 0 : _a12.child(e2), n2 = this.contextWith({
             path: t2,
             arrayElement: false
           });
           return n2.validatePathSegment(e2), n2;
         }
         childContextForFieldPath(e2) {
-          var _a14;
-          const t2 = (_a14 = this.path) == null ? void 0 : _a14.child(e2), n2 = this.contextWith({
+          var _a12;
+          const t2 = (_a12 = this.path) == null ? void 0 : _a12.child(e2), n2 = this.contextWith({
             path: t2,
             arrayElement: false
           });
@@ -32298,13 +32298,13 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14;
+          var _a12;
           let n2 = false, r2 = false;
           for (const i2 of this.expr.params) {
             const s2 = __PRIVATE_toEvaluable(i2).evaluate(e2, t2);
             switch (s2.type) {
               case "BOOLEAN":
-                if (!((_a14 = s2.value) == null ? void 0 : _a14.booleanValue)) return __PRIVATE_EvaluateResult.newValue(Ye);
+                if (!((_a12 = s2.value) == null ? void 0 : _a12.booleanValue)) return __PRIVATE_EvaluateResult.newValue(Ye);
                 break;
               case "NULL":
                 r2 = true;
@@ -32321,13 +32321,13 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14;
+          var _a12;
           __PRIVATE_hardAssert(1 === this.expr.params.length, 9634);
           const n2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
           switch (n2.type) {
             case "BOOLEAN":
               return __PRIVATE_EvaluateResult.newValue({
-                booleanValue: !((_a14 = n2.value) == null ? void 0 : _a14.booleanValue)
+                booleanValue: !((_a12 = n2.value) == null ? void 0 : _a12.booleanValue)
               });
             case "NULL":
               return __PRIVATE_EvaluateResult.gr();
@@ -32341,13 +32341,13 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14;
+          var _a12;
           let n2 = false, r2 = false;
           for (const i2 of this.expr.params) {
             const s2 = __PRIVATE_toEvaluable(i2).evaluate(e2, t2);
             switch (s2.type) {
               case "BOOLEAN":
-                if ((_a14 = s2.value) == null ? void 0 : _a14.booleanValue) return __PRIVATE_EvaluateResult.newValue(Je);
+                if ((_a12 = s2.value) == null ? void 0 : _a12.booleanValue) return __PRIVATE_EvaluateResult.newValue(Je);
                 break;
               case "NULL":
                 r2 = true;
@@ -32364,13 +32364,13 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14;
+          var _a12;
           let n2 = false, r2 = false;
           for (const i2 of this.expr.params) {
             const s2 = __PRIVATE_toEvaluable(i2).evaluate(e2, t2);
             switch (s2.type) {
               case "BOOLEAN":
-                n2 = ___PRIVATE_CoreXor.xor(n2, !!((_a14 = s2.value) == null ? void 0 : _a14.booleanValue));
+                n2 = ___PRIVATE_CoreXor.xor(n2, !!((_a12 = s2.value) == null ? void 0 : _a12.booleanValue));
                 break;
               case "NULL":
                 r2 = true;
@@ -32395,7 +32395,7 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b;
+          var _a12, _b;
           __PRIVATE_hardAssert(2 === this.expr.params.length, 55094);
           let n2 = false;
           const r2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
@@ -32418,7 +32418,7 @@ Total Duration: ${a - u2}ms`);
               return __PRIVATE_EvaluateResult.mr();
           }
           if (n2) return __PRIVATE_EvaluateResult.gr();
-          for (const e3 of ((_b = (_a14 = i2.value) == null ? void 0 : _a14.arrayValue) == null ? void 0 : _b.values) ?? []) {
+          for (const e3 of ((_b = (_a12 = i2.value) == null ? void 0 : _a12.arrayValue) == null ? void 0 : _b.values) ?? []) {
             switch (__PRIVATE_isNullValue(r2.value) && __PRIVATE_isNullValue(e3) ? "EQ" : __PRIVATE_strictValueEquals(r2.value, e3)) {
               case "EQ":
                 return __PRIVATE_EvaluateResult.newValue(Je);
@@ -32532,12 +32532,12 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14;
+          var _a12;
           __PRIVATE_hardAssert(3 === this.expr.params.length, 11706);
           const n2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
           switch (n2.type) {
             case "BOOLEAN":
-              return ((_a14 = n2.value) == null ? void 0 : _a14.booleanValue) ? __PRIVATE_toEvaluable(this.expr.params[1]).evaluate(e2, t2) : __PRIVATE_toEvaluable(this.expr.params[2]).evaluate(e2, t2);
+              return ((_a12 = n2.value) == null ? void 0 : _a12.booleanValue) ? __PRIVATE_toEvaluable(this.expr.params[1]).evaluate(e2, t2) : __PRIVATE_toEvaluable(this.expr.params[2]).evaluate(e2, t2);
             case "NULL":
               return __PRIVATE_toEvaluable(this.expr.params[2]).evaluate(e2, t2);
             default:
@@ -32700,14 +32700,14 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14;
+          var _a12;
           __PRIVATE_hardAssert(1 === this.expr.params.length, 216);
           const n2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
           switch (n2.type) {
             case "NULL":
               return __PRIVATE_EvaluateResult.gr();
             case "ARRAY": {
-              const e3 = ((_a14 = n2.value.arrayValue) == null ? void 0 : _a14.values) ?? [];
+              const e3 = ((_a12 = n2.value.arrayValue) == null ? void 0 : _a12.values) ?? [];
               return __PRIVATE_EvaluateResult.newValue({
                 arrayValue: {
                   values: [...e3].reverse()
@@ -32732,7 +32732,7 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b, _c, _d;
+          var _a12, _b, _c, _d;
           __PRIVATE_hardAssert(2 === this.expr.params.length, 1392);
           let n2 = false;
           const r2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
@@ -32756,7 +32756,7 @@ Total Duration: ${a - u2}ms`);
               return __PRIVATE_EvaluateResult.mr();
           }
           if (n2) return __PRIVATE_EvaluateResult.gr();
-          const s2 = ((_b = (_a14 = i2.value) == null ? void 0 : _a14.arrayValue) == null ? void 0 : _b.values) ?? [], _ = ((_d = (_c = r2.value) == null ? void 0 : _c.arrayValue) == null ? void 0 : _d.values) ?? [];
+          const s2 = ((_b = (_a12 = i2.value) == null ? void 0 : _a12.arrayValue) == null ? void 0 : _b.values) ?? [], _ = ((_d = (_c = r2.value) == null ? void 0 : _c.arrayValue) == null ? void 0 : _d.values) ?? [];
           for (const e3 of s2) {
             let t3 = false;
             n2 = false;
@@ -32791,7 +32791,7 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b, _c, _d;
+          var _a12, _b, _c, _d;
           __PRIVATE_hardAssert(2 === this.expr.params.length, 2680);
           let n2 = false;
           const r2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
@@ -32815,7 +32815,7 @@ Total Duration: ${a - u2}ms`);
               return __PRIVATE_EvaluateResult.mr();
           }
           if (n2) return __PRIVATE_EvaluateResult.gr();
-          const s2 = ((_b = (_a14 = i2.value) == null ? void 0 : _a14.arrayValue) == null ? void 0 : _b.values) ?? [], _ = ((_d = (_c = r2.value) == null ? void 0 : _c.arrayValue) == null ? void 0 : _d.values) ?? [];
+          const s2 = ((_b = (_a12 = i2.value) == null ? void 0 : _a12.arrayValue) == null ? void 0 : _b.values) ?? [], _ = ((_d = (_c = r2.value) == null ? void 0 : _c.arrayValue) == null ? void 0 : _d.values) ?? [];
           for (const e3 of _) for (const t3 of s2) {
             switch (__PRIVATE_isNullValue(e3) && __PRIVATE_isNullValue(t3) ? "EQ" : __PRIVATE_strictValueEquals(e3, t3)) {
               case "EQ":
@@ -32841,7 +32841,7 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b, _c;
+          var _a12, _b, _c;
           __PRIVATE_hardAssert(1 === this.expr.params.length, 38605);
           const n2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
           switch (n2.type) {
@@ -32849,7 +32849,7 @@ Total Duration: ${a - u2}ms`);
               return __PRIVATE_EvaluateResult.gr();
             case "ARRAY":
               return __PRIVATE_EvaluateResult.newValue({
-                integerValue: `${((_c = (_b = (_a14 = n2.value) == null ? void 0 : _a14.arrayValue) == null ? void 0 : _b.values) == null ? void 0 : _c.length) ?? 0}`
+                integerValue: `${((_c = (_b = (_a12 = n2.value) == null ? void 0 : _a12.arrayValue) == null ? void 0 : _b.values) == null ? void 0 : _c.length) ?? 0}`
               });
             default:
               return __PRIVATE_EvaluateResult.mr();
@@ -32869,14 +32869,14 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b;
+          var _a12, _b;
           __PRIVATE_hardAssert(1 === this.expr.params.length, 1508);
           const n2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
           switch (n2.type) {
             case "NULL":
               return __PRIVATE_EvaluateResult.gr();
             case "BYTES": {
-              const e3 = (_a14 = n2.value) == null ? void 0 : _a14.bytesValue;
+              const e3 = (_a12 = n2.value) == null ? void 0 : _a12.bytesValue;
               if ("string" == typeof e3) {
                 const t3 = ByteString.fromBase64String(e3).toUint8Array();
                 return t3.reverse(), __PRIVATE_EvaluateResult.newValue({
@@ -32968,12 +32968,12 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b;
+          var _a12, _b;
           __PRIVATE_hardAssert(1 === this.expr.params.length, 8486);
           const n2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
           switch (n2.type) {
             case "BYTES": {
-              const e3 = (_a14 = n2.value) == null ? void 0 : _a14.bytesValue;
+              const e3 = (_a12 = n2.value) == null ? void 0 : _a12.bytesValue;
               return "string" == typeof e3 ? __PRIVATE_EvaluateResult.newValue({
                 integerValue: ByteString.fromBase64String(e3).toUint8Array().length
               }) : __PRIVATE_EvaluateResult.newValue({
@@ -33019,7 +33019,7 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b;
+          var _a12, _b;
           __PRIVATE_hardAssert(2 === this.expr.params.length, 39773, `${this.expr.name}() function should have exactly two parameters`);
           let n2 = false;
           const r2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
@@ -33042,7 +33042,7 @@ Total Duration: ${a - u2}ms`);
             default:
               return __PRIVATE_EvaluateResult.mr();
           }
-          return n2 ? __PRIVATE_EvaluateResult.gr() : this.Or((_a14 = r2.value) == null ? void 0 : _a14.stringValue, (_b = i2.value) == null ? void 0 : _b.stringValue);
+          return n2 ? __PRIVATE_EvaluateResult.gr() : this.Or((_a12 = r2.value) == null ? void 0 : _a12.stringValue, (_b = i2.value) == null ? void 0 : _b.stringValue);
         }
       };
       __PRIVATE_CoreLike = class extends __PRIVATE_StringSearchFunctionBase {
@@ -33140,13 +33140,13 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b;
+          var _a12, _b;
           __PRIVATE_hardAssert(1 === this.expr.params.length, 29079);
           const n2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
           switch (n2.type) {
             case "STRING":
               return __PRIVATE_EvaluateResult.newValue({
-                stringValue: (_b = (_a14 = n2.value) == null ? void 0 : _a14.stringValue) == null ? void 0 : _b.toLowerCase()
+                stringValue: (_b = (_a12 = n2.value) == null ? void 0 : _a12.stringValue) == null ? void 0 : _b.toLowerCase()
               });
             case "NULL":
               return __PRIVATE_EvaluateResult.gr();
@@ -33160,13 +33160,13 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b;
+          var _a12, _b;
           __PRIVATE_hardAssert(1 === this.expr.params.length, 60487);
           const n2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
           switch (n2.type) {
             case "STRING":
               return __PRIVATE_EvaluateResult.newValue({
-                stringValue: (_b = (_a14 = n2.value) == null ? void 0 : _a14.stringValue) == null ? void 0 : _b.toUpperCase()
+                stringValue: (_b = (_a12 = n2.value) == null ? void 0 : _a12.stringValue) == null ? void 0 : _b.toUpperCase()
               });
             case "NULL":
               return __PRIVATE_EvaluateResult.gr();
@@ -33180,13 +33180,13 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b;
+          var _a12, _b;
           __PRIVATE_hardAssert(1 === this.expr.params.length, 28544);
           const n2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
           switch (n2.type) {
             case "STRING":
               return __PRIVATE_EvaluateResult.newValue({
-                stringValue: (_b = (_a14 = n2.value) == null ? void 0 : _a14.stringValue) == null ? void 0 : _b.trim()
+                stringValue: (_b = (_a12 = n2.value) == null ? void 0 : _a12.stringValue) == null ? void 0 : _b.trim()
               });
             case "NULL":
               return __PRIVATE_EvaluateResult.gr();
@@ -33222,7 +33222,7 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b, _c, _d;
+          var _a12, _b, _c, _d;
           __PRIVATE_hardAssert(2 === this.expr.params.length, 4483);
           const n2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
           switch (n2.type) {
@@ -33235,7 +33235,7 @@ Total Duration: ${a - u2}ms`);
           }
           const r2 = __PRIVATE_toEvaluable(this.expr.params[1]).evaluate(e2, t2);
           if ("STRING" !== r2.type) return __PRIVATE_EvaluateResult.mr();
-          const i2 = (_d = (_b = (_a14 = n2.value) == null ? void 0 : _a14.mapValue) == null ? void 0 : _b.fields) == null ? void 0 : _d[(_c = r2.value) == null ? void 0 : _c.stringValue];
+          const i2 = (_d = (_b = (_a12 = n2.value) == null ? void 0 : _a12.mapValue) == null ? void 0 : _b.fields) == null ? void 0 : _d[(_c = r2.value) == null ? void 0 : _c.stringValue];
           return void 0 === i2 ? __PRIVATE_EvaluateResult.pr() : __PRIVATE_EvaluateResult.newValue(i2);
         }
       };
@@ -33244,7 +33244,7 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14, _b;
+          var _a12, _b;
           __PRIVATE_hardAssert(2 === this.expr.params.length, 25231, `${this.expr.name}() function should have exactly 2 params`);
           let n2 = false;
           const r2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
@@ -33269,7 +33269,7 @@ Total Duration: ${a - u2}ms`);
           }
           if (n2) return __PRIVATE_EvaluateResult.gr();
           const s2 = __PRIVATE_getVectorValue(r2.value), _ = __PRIVATE_getVectorValue(i2.value);
-          if (void 0 === s2 || void 0 === _ || ((_a14 = s2.values) == null ? void 0 : _a14.length) !== ((_b = _.values) == null ? void 0 : _b.length)) return __PRIVATE_EvaluateResult.mr();
+          if (void 0 === s2 || void 0 === _ || ((_a12 = s2.values) == null ? void 0 : _a12.length) !== ((_b = _.values) == null ? void 0 : _b.length)) return __PRIVATE_EvaluateResult.mr();
           const o2 = this.Mr(s2, _);
           return void 0 === o2 || isNaN(o2) ? __PRIVATE_EvaluateResult.mr() : __PRIVATE_EvaluateResult.newValue({
             doubleValue: o2
@@ -33321,14 +33321,14 @@ Total Duration: ${a - u2}ms`);
           this.expr = e2;
         }
         evaluate(e2, t2) {
-          var _a14;
+          var _a12;
           __PRIVATE_hardAssert(1 === this.expr.params.length, 39044);
           const n2 = __PRIVATE_toEvaluable(this.expr.params[0]).evaluate(e2, t2);
           switch (n2.type) {
             case "VECTOR": {
               const e3 = __PRIVATE_getVectorValue(n2.value);
               return __PRIVATE_EvaluateResult.newValue({
-                integerValue: ((_a14 = e3 == null ? void 0 : e3.values) == null ? void 0 : _a14.length) ?? 0
+                integerValue: ((_a12 = e3 == null ? void 0 : e3.values) == null ? void 0 : _a12.length) ?? 0
               });
             }
             case "NULL":
@@ -34230,10 +34230,10 @@ Total Duration: ${a - u2}ms`);
           for (const e3 of Object.keys(n2)) this._i(e3, t2), this.ti(n2[e3], t2);
         }
         ci(e2, t2) {
-          var _a14, _b;
+          var _a12, _b;
           const n2 = e2.fields || {};
           this.ri(t2, 53);
-          const r2 = je, i2 = ((_b = (_a14 = n2[r2].arrayValue) == null ? void 0 : _a14.values) == null ? void 0 : _b.length) || 0;
+          const r2 = je, i2 = ((_b = (_a12 = n2[r2].arrayValue) == null ? void 0 : _a12.values) == null ? void 0 : _b.length) || 0;
           this.ri(t2, 15), t2.ii(__PRIVATE_normalizeNumber(i2)), // Vectors then sort by position value
           this._i(r2, t2), this.ti(n2[r2], t2);
         }
@@ -37146,8 +37146,8 @@ Total Duration: ${a - u2}ms`);
          * handler.
          */
         Z_() {
-          var _a14;
-          "function" == typeof ((_a14 = this.window) == null ? void 0 : _a14.addEventListener) && (this.q_ = () => {
+          var _a12;
+          "function" == typeof ((_a12 = this.window) == null ? void 0 : _a12.addEventListener) && (this.q_ = () => {
             this.ho();
             const e2 = /(?:Version|Mobile)\/1[456]/;
             isSafari() && (navigator.appVersion.match(e2) || navigator.userAgent.match(e2)) && // On Safari 14, 15, and 16, we do not run any cleanup actions as it might
@@ -37169,9 +37169,9 @@ Total Duration: ${a - u2}ms`);
          * cleanup logic in `shutdown()`.
          */
         Eo(e2) {
-          var _a14;
+          var _a12;
           try {
-            const t2 = null !== ((_a14 = this.H_) == null ? void 0 : _a14.getItem(this.lo(e2)));
+            const t2 = null !== ((_a12 = this.H_) == null ? void 0 : _a12.getItem(this.lo(e2)));
             return __PRIVATE_logDebug(sr, `Client '${e2}' ${t2 ? "is" : "is not"} zombied in LocalStorage`), t2;
           } catch (e3) {
             return __PRIVATE_logError(sr, "Failed to get zombied client id.", e3), false;
@@ -38686,8 +38686,8 @@ This typically indicates that your device does not have a healthy Internet conne
           };
         }
         rc(e2) {
-          var _a14;
-          return __PRIVATE_isPipeline(e2) ? (_a14 = __PRIVATE_getLastEffectiveLimit(e2)) == null ? void 0 : _a14.limit : e2.limit || void 0;
+          var _a12;
+          return __PRIVATE_isPipeline(e2) ? (_a12 = __PRIVATE_getLastEffectiveLimit(e2)) == null ? void 0 : _a12.limit : e2.limit || void 0;
         }
         sc(e2) {
           if (__PRIVATE_isPipeline(e2)) {
@@ -38697,9 +38697,9 @@ This typically indicates that your device does not have a healthy Internet conne
           return e2.limitType;
         }
         tc(e2, t2) {
-          var _a14;
+          var _a12;
           if (__PRIVATE_isPipeline(e2)) {
-            const n2 = (_a14 = __PRIVATE_getLastEffectiveLimit(e2)) == null ? void 0 : _a14.limit;
+            const n2 = (_a12 = __PRIVATE_getLastEffectiveLimit(e2)) == null ? void 0 : _a12.limit;
             return [t2.size === n2 ? t2.last() : null, null];
           }
           return ["F" === e2.limitType && t2.size === this.rc(this.query) ? t2.last() : null, "L" === e2.limitType && t2.size === this.rc(this.query) ? t2.first() : null];
@@ -38926,8 +38926,8 @@ This typically indicates that your device does not have a healthy Internet conne
           return new __PRIVATE_MemorySharedClientState();
         }
         async terminate() {
-          var _a14, _b;
-          (_a14 = this.gcScheduler) == null ? void 0 : _a14.stop(), (_b = this.indexBackfillerScheduler) == null ? void 0 : _b.stop(), this.sharedClientState.shutdown(), await this.persistence.shutdown();
+          var _a12, _b;
+          (_a12 = this.gcScheduler) == null ? void 0 : _a12.stop(), (_b = this.indexBackfillerScheduler) == null ? void 0 : _b.stop(), this.sharedClientState.shutdown(), await this.persistence.shutdown();
         }
       };
       __PRIVATE_MemoryOfflineComponentProvider.provider = {
@@ -39048,7 +39048,7 @@ This typically indicates that your device does not have a healthy Internet conne
           })(this.localStore, this.remoteStore, this.eventManager, this.sharedClientState, e2.initialUser, e2.maxConcurrentLimboResolutions, t2);
         }
         async terminate() {
-          var _a14, _b;
+          var _a12, _b;
           await (async function __PRIVATE_remoteStoreShutdown(e2) {
             const t2 = __PRIVATE_debugCast(e2);
             __PRIVATE_logDebug(hr, "RemoteStore shutting down."), t2.la.add(
@@ -39060,7 +39060,7 @@ This typically indicates that your device does not have a healthy Internet conne
               "Unknown"
               /* OnlineState.Unknown */
             );
-          })(this.remoteStore), (_a14 = this.datastore) == null ? void 0 : _a14.terminate(), (_b = this.eventManager) == null ? void 0 : _b.terminate();
+          })(this.remoteStore), (_a12 = this.datastore) == null ? void 0 : _a12.terminate(), (_b = this.eventManager) == null ? void 0 : _b.terminate();
         }
       };
       OnlineComponentProvider.provider = {
@@ -39319,8 +39319,8 @@ This typically indicates that your device does not have a healthy Internet conne
          * if the document doesn't exist.
          */
         _fieldsProto() {
-          var _a14;
-          return ((_a14 = this._document) == null ? void 0 : _a14.data.clone().value.mapValue.fields) ?? void 0;
+          var _a12;
+          return ((_a12 = this._document) == null ? void 0 : _a12.data.clone().value.mapValue.fields) ?? void 0;
         }
         /**
          * Retrieves the field specified by `fieldPath`. Returns `undefined` if the
@@ -39400,8 +39400,8 @@ This typically indicates that your device does not have a healthy Internet conne
          * @internal
          */
         convertVectorValue(e2) {
-          var _a14, _b, _c;
-          const t2 = (_c = (_b = (_a14 = e2.fields) == null ? void 0 : _a14[je].arrayValue) == null ? void 0 : _b.values) == null ? void 0 : _c.map(((e3) => __PRIVATE_normalizeNumber(e3.doubleValue)));
+          var _a12, _b, _c;
+          const t2 = (_c = (_b = (_a12 = e2.fields) == null ? void 0 : _a12[je].arrayValue) == null ? void 0 : _b.values) == null ? void 0 : _c.map(((e3) => __PRIVATE_normalizeNumber(e3.doubleValue)));
           return new n(t2);
         }
         convertGeoPoint(e2) {
@@ -40095,8 +40095,8 @@ This typically indicates that your device does not have a healthy Internet conne
     return new AggregateField("count");
   }
   function aggregateFieldEqual(e2, t2) {
-    var _a14, _b;
-    return e2 instanceof AggregateField && t2 instanceof AggregateField && e2.aggregateType === t2.aggregateType && ((_a14 = e2._internalFieldPath) == null ? void 0 : _a14.canonicalString()) === ((_b = t2._internalFieldPath) == null ? void 0 : _b.canonicalString());
+    var _a12, _b;
+    return e2 instanceof AggregateField && t2 instanceof AggregateField && e2.aggregateType === t2.aggregateType && ((_a12 = e2._internalFieldPath) == null ? void 0 : _a12.canonicalString()) === ((_b = t2._internalFieldPath) == null ? void 0 : _b.canonicalString());
   }
   function aggregateQuerySnapshotEqual(e2, t2) {
     return queryEqual(e2.query, t2.query) && deepEqual(e2.data(), t2.data());
@@ -40224,7 +40224,7 @@ This typically indicates that your device does not have a healthy Internet conne
     return executeWrite(n2, [__PRIVATE_parseSetData(a, "addDoc", r2._key, s2, null !== e2.converter, {}).toMutation(r2._key, Precondition.exists(false))]).then((() => r2));
   }
   function onSnapshot(e2, ...t2) {
-    var _a14, _b, _c;
+    var _a12, _b, _c;
     e2 = getModularInstance(e2);
     let n2 = {
       includeMetadataChanges: false,
@@ -40237,7 +40237,7 @@ This typically indicates that your device does not have a healthy Internet conne
     };
     if (__PRIVATE_isPartialObserver(t2[r2])) {
       const e3 = t2[r2];
-      t2[r2] = (_a14 = e3.next) == null ? void 0 : _a14.bind(e3), t2[r2 + 1] = (_b = e3.error) == null ? void 0 : _b.bind(e3), t2[r2 + 2] = (_c = e3.complete) == null ? void 0 : _c.bind(e3);
+      t2[r2] = (_a12 = e3.next) == null ? void 0 : _a12.bind(e3), t2[r2 + 1] = (_b = e3.error) == null ? void 0 : _b.bind(e3), t2[r2 + 2] = (_c = e3.complete) == null ? void 0 : _c.bind(e3);
     }
     let a, i2, c2;
     if (e2 instanceof aa) i2 = ra(e2.firestore, da), c2 = __PRIVATE_newQueryForPath(e2._key.path), a = {
@@ -40420,12 +40420,12 @@ This typically indicates that your device does not have a healthy Internet conne
     return e$1[t2];
   }
   function getPersistentCacheIndexManager(e2) {
-    var _a14;
+    var _a12;
     e2 = ra(e2, da);
     const t2 = De2.get(e2);
     if (t2) return t2;
     const n2 = oa(e2);
-    if ("persistent" !== ((_a14 = n2._uninitializedComponentsProvider) == null ? void 0 : _a14._offline.kind)) return null;
+    if ("persistent" !== ((_a12 = n2._uninitializedComponentsProvider) == null ? void 0 : _a12._offline.kind)) return null;
     const r2 = new PersistentCacheIndexManager(e2);
     return De2.set(e2, r2), r2;
   }
@@ -41912,8 +41912,8 @@ This typically indicates that your device does not have a healthy Internet conne
     });
     importButton.addEventListener("click", () => input.click());
     input.addEventListener("change", async () => {
-      var _a14;
-      const file = (_a14 = input.files) == null ? void 0 : _a14[0];
+      var _a12;
+      const file = (_a12 = input.files) == null ? void 0 : _a12[0];
       if (!file) return;
       try {
         if (file.size > MAX_FILE_BYTES) throw new Error("backup_too_large");
@@ -41992,7 +41992,7 @@ This typically indicates that your device does not have a healthy Internet conne
     return void 0;
   }
   function restoreActiveQuiz(saved, context = {}) {
-    var _a14, _b;
+    var _a12, _b;
     if (!plainObject2(saved) || !VALID_MODES2.has(saved.mode)) return null;
     const maxQuestions = MAX_QUESTIONS[saved.mode];
     if (!Array.isArray(saved.questionIds) || saved.questionIds.length < 1 || saved.questionIds.length > maxQuestions) return null;
@@ -42024,7 +42024,7 @@ This typically indicates that your device does not have a healthy Internet conne
     const remaining = finiteInteger(saved.remaining, 0, timerMinutes * 60);
     if (remaining === null) return null;
     const flagged = Array.isArray(saved.flagged) && saved.flagged.length === questions2.length && saved.flagged.every((value) => typeof value === "boolean") ? saved.flagged.slice() : Array(questions2.length).fill(false);
-    const lessonKey2 = typeof saved.lessonKey === "string" && ((_b = (_a14 = context.lessonKeys) == null ? void 0 : _a14.has) == null ? void 0 : _b.call(_a14, saved.lessonKey)) ? saved.lessonKey : "";
+    const lessonKey2 = typeof saved.lessonKey === "string" && ((_b = (_a12 = context.lessonKeys) == null ? void 0 : _a12.has) == null ? void 0 : _b.call(_a12, saved.lessonKey)) ? saved.lessonKey : "";
     const lessonTitle = typeof saved.lessonTitle === "string" ? saved.lessonTitle.slice(0, 180) : "";
     const returnView = VALID_RETURN_VIEWS.has(saved.returnView) ? saved.returnView : "bank";
     const savedAt = finiteInteger(saved.savedAt, 0, Number.MAX_SAFE_INTEGER);
@@ -42048,7 +42048,7 @@ This typically indicates that your device does not have a healthy Internet conne
 
   // src/startup.mjs
   async function loadCourseData({ fetchImpl = globalThis.fetch, timeoutMs = 15e3 } = {}) {
-    var _a14, _b;
+    var _a12, _b;
     const controller = new AbortController();
     let timer;
     const timeout = new Promise((_, reject) => {
@@ -42085,13 +42085,15 @@ This typically indicates that your device does not have a healthy Internet conne
       const labels = labelsFile == null ? void 0 : labelsFile.data;
       const similar = similarFile == null ? void 0 : similarFile.data;
       const support = supportFile == null ? void 0 : supportFile.data;
-      if (!bank2 || !Array.isArray(bank2.questions) || bank2.questions.length === 0 || bank2.count !== bank2.questions.length || !lessons || lessons.schema_version !== 3 || !Array.isArray(lessons.modules) || lessons.module_count !== lessons.modules.length || lessons.module_count !== 11 || !labels || typeof labels !== "object" || Array.isArray(labels) || Object.keys(labels).length === 0 || !similar || similar.schema_version !== 2 || !Array.isArray(similar.groups) || similar.group_count !== similar.groups.length || similar.question_count !== bank2.questions.length || !/^[a-f0-9]{64}$/.test(similar.question_bank_sha256 || "") || !support || support.schema_version !== 1 || !support.lessons || typeof support.lessons !== "object" || Array.isArray(support.lessons)) {
+      if (!bank2 || !Array.isArray(bank2.questions) || bank2.questions.length === 0 || bank2.count !== bank2.questions.length || !lessons || lessons.schema_version !== 4 || !Array.isArray(lessons.modules) || lessons.module_count !== lessons.modules.length || lessons.module_count !== 11 || !labels || typeof labels !== "object" || Array.isArray(labels) || Object.keys(labels).length === 0 || !similar || similar.schema_version !== 2 || !Array.isArray(similar.groups) || similar.group_count !== similar.groups.length || similar.question_count !== bank2.questions.length || !/^[a-f0-9]{64}$/.test(similar.question_bank_sha256 || "") || !support || support.schema_version !== 1 || !support.lessons || typeof support.lessons !== "object" || Array.isArray(support.lessons)) {
         const error = new Error("I file del corso sono incompleti o non compatibili. / ملفات المنهج ناقصة أو غير متوافقة.");
         error.code = "course_integrity";
         throw error;
       }
-      const lessonKeys = ["id", "keyPoints", "summaryAr", "summaryIt", "titleAr", "titleIt"].sort().join(",");
-      const pointKeys = ["ar", "it"].join(",");
+      const lessonKeys = "id,titleIt,titleAr,summaryIt,summaryAr,keyPoints,trapWord,quickCheck";
+      const pointKeys = "it,ar";
+      const trapWordKeys = "word,reasonAr";
+      const quickCheckKeys = "qIt,a,explainAr";
       const expectedIds = /* @__PURE__ */ new Set();
       let lessonCount = 0;
       for (const module of lessons.modules) {
@@ -42103,7 +42105,9 @@ This typically indicates that your device does not have a healthy Internet conne
         for (let index = 0; index < module.lessons.length; index += 1) {
           const lesson = module.lessons[index];
           const expectedId = `u${module.order_hint}-l${index + 1}`;
-          if (!lesson || Object.keys(lesson).sort().join(",") !== lessonKeys || lesson.id !== expectedId || expectedIds.has(lesson.id) || !["titleIt", "titleAr", "summaryIt", "summaryAr"].every((key) => typeof lesson[key] === "string" && lesson[key].trim()) || !Array.isArray(lesson.keyPoints) || lesson.keyPoints.length < 3 || lesson.keyPoints.length > 5 || !lesson.keyPoints.every((point) => point && Object.keys(point).sort().join(",") === pointKeys && typeof point.it === "string" && point.it.trim() && typeof point.ar === "string" && point.ar.trim())) {
+          const validTrapWord = (lesson == null ? void 0 : lesson.trapWord) === null || (lesson == null ? void 0 : lesson.trapWord) && typeof lesson.trapWord === "object" && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(",") === trapWordKeys && typeof lesson.trapWord.word === "string" && lesson.trapWord.word.trim() && typeof lesson.trapWord.reasonAr === "string" && lesson.trapWord.reasonAr.trim();
+          const validQuickCheck = Array.isArray(lesson == null ? void 0 : lesson.quickCheck) && lesson.quickCheck.length === 3 && lesson.quickCheck.every((item) => item && typeof item === "object" && !Array.isArray(item) && Object.keys(item).join(",") === quickCheckKeys && typeof item.qIt === "string" && item.qIt.trim() && ["VERO", "FALSO"].includes(item.a) && typeof item.explainAr === "string" && item.explainAr.trim());
+          if (!lesson || Object.keys(lesson).join(",") !== lessonKeys || lesson.id !== expectedId || expectedIds.has(lesson.id) || !["titleIt", "titleAr", "summaryIt", "summaryAr"].every((key) => typeof lesson[key] === "string" && lesson[key].trim()) || !Array.isArray(lesson.keyPoints) || lesson.keyPoints.length < 3 || lesson.keyPoints.length > 4 || !validTrapWord || !validQuickCheck || !lesson.keyPoints.every((point) => point && Object.keys(point).join(",") === pointKeys && typeof point.it === "string" && point.it.trim() && typeof point.ar === "string" && point.ar.trim())) {
             const error = new Error("Il formato di una lezione non è valido. / تنسيق أحد الدروس غير صالح.");
             error.code = "course_integrity";
             throw error;
@@ -42129,7 +42133,7 @@ This typically indicates that your device does not have a healthy Internet conne
           }))
         }))
       };
-      if (!((_a14 = globalThis.crypto) == null ? void 0 : _a14.subtle) || typeof TextEncoder !== "function") {
+      if (!((_a12 = globalThis.crypto) == null ? void 0 : _a12.subtle) || typeof TextEncoder !== "function") {
         const error = new Error("Il controllo d’integrità non è disponibile sul dispositivo. / التحقق من سلامة الملفات غير متاح على هذا الجهاز.");
         error.code = "course_integrity";
         throw error;
@@ -42188,7 +42192,7 @@ This typically indicates that your device does not have a healthy Internet conne
     return chunks;
   }
   var ITALIAN_TTS_LOCALE = "it-IT";
-  var VOICE_WAIT_TIMEOUT_MS = 2500;
+  var VOICE_WAIT_TIMEOUT_MS = 5e3;
   var VOICE_POLL_INTERVAL_MS = 200;
   function buildLessonSpeechTexts(lesson = {}) {
     const headingIt = String(lesson.titleIt || lesson.heading_it || "").trim();
@@ -42199,9 +42203,9 @@ This typically indicates that your device does not have a healthy Internet conne
     return "صوت إيطالي على الجهاز";
   }
   function resolveWebSpeech(injected) {
-    var _a14, _b;
+    var _a12, _b;
     try {
-      const synthesis = (injected == null ? void 0 : injected.synthesis) ?? globalThis.speechSynthesis ?? ((_a14 = globalThis.window) == null ? void 0 : _a14.speechSynthesis);
+      const synthesis = (injected == null ? void 0 : injected.synthesis) ?? globalThis.speechSynthesis ?? ((_a12 = globalThis.window) == null ? void 0 : _a12.speechSynthesis);
       const Utterance = (injected == null ? void 0 : injected.Utterance) ?? globalThis.SpeechSynthesisUtterance ?? ((_b = globalThis.window) == null ? void 0 : _b.SpeechSynthesisUtterance);
       return synthesis && typeof synthesis.speak === "function" && typeof Utterance === "function" ? { synthesis, Utterance } : null;
     } catch {
@@ -42364,9 +42368,9 @@ This typically indicates that your device does not have a healthy Internet conne
       }
     };
     const setButtonState = (button, state2) => {
-      var _a14, _b, _c, _d, _e, _f;
+      var _a12, _b, _c, _d, _e, _f;
       if (!(button == null ? void 0 : button.classList)) return;
-      (_b = (_a14 = button.classList).toggle) == null ? void 0 : _b.call(_a14, "speaking", state2 === "playing");
+      (_b = (_a12 = button.classList).toggle) == null ? void 0 : _b.call(_a12, "speaking", state2 === "playing");
       (_d = (_c = button.classList).toggle) == null ? void 0 : _d.call(_c, "speech-paused", state2 === "paused");
       (_f = (_e = button.classList).toggle) == null ? void 0 : _f.call(_e, "speech-error", state2 === "error");
     };
@@ -42405,14 +42409,14 @@ This typically indicates that your device does not have a healthy Internet conne
       return Math.max(0.7, Math.min(1.3, selected));
     };
     function stopBrowserSpeech() {
-      var _a14, _b, _c;
+      var _a12, _b, _c;
       try {
-        (_c = (_a14 = resolveWebSpeech(webSpeech)) == null ? void 0 : (_b = _a14.synthesis).cancel) == null ? void 0 : _c.call(_b);
+        (_c = (_a12 = resolveWebSpeech(webSpeech)) == null ? void 0 : (_b = _a12.synthesis).cancel) == null ? void 0 : _c.call(_b);
       } catch {
       }
     }
     function stop() {
-      var _a14;
+      var _a12;
       sequence += 1;
       if (errorTimer) {
         clearTimeout(errorTimer);
@@ -42420,7 +42424,7 @@ This typically indicates that your device does not have a healthy Internet conne
       }
       const previous = activeTask;
       activeTask = null;
-      (_a14 = previous == null ? void 0 : previous.cancelVoiceWait) == null ? void 0 : _a14.call(previous);
+      (_a12 = previous == null ? void 0 : previous.cancelVoiceWait) == null ? void 0 : _a12.call(previous);
       if (previous) setButtonState(previous.button, "idle");
       stopBrowserSpeech();
       notify("idle", previous);
@@ -42433,26 +42437,26 @@ This typically indicates that your device does not have a healthy Internet conne
       return task.token === sequence;
     }
     function pause() {
-      var _a14, _b, _c;
+      var _a12, _b, _c;
       const task = activeTask;
       if (!task || task.failed || task.paused) return false;
       task.paused = true;
       setButtonState(task.button, "paused");
       try {
-        (_c = (_a14 = resolveWebSpeech(webSpeech)) == null ? void 0 : (_b = _a14.synthesis).pause) == null ? void 0 : _c.call(_b);
+        (_c = (_a12 = resolveWebSpeech(webSpeech)) == null ? void 0 : (_b = _a12.synthesis).pause) == null ? void 0 : _c.call(_b);
       } catch {
       }
       notify("paused", task);
       return true;
     }
     function resume() {
-      var _a14, _b, _c;
+      var _a12, _b, _c;
       const task = activeTask;
       if (!task || task.failed || !task.paused) return false;
       task.paused = false;
       setButtonState(task.button, "playing");
       try {
-        (_c = (_a14 = resolveWebSpeech(webSpeech)) == null ? void 0 : (_b = _a14.synthesis).resume) == null ? void 0 : _c.call(_b);
+        (_c = (_a12 = resolveWebSpeech(webSpeech)) == null ? void 0 : (_b = _a12.synthesis).resume) == null ? void 0 : _c.call(_b);
       } catch {
       }
       for (const resolve of task.resumeWaiters.splice(0)) resolve();
@@ -42465,7 +42469,7 @@ This typically indicates that your device does not have a healthy Internet conne
     function isActive(button) {
       return !!activeTask && !activeTask.failed && activeTask.button === button;
     }
-    function showError(task, error, userMessage = "تعذّر تشغيل الصوت على هذا الجهاز.", needsSpeechSettings = false) {
+    function showError(task, error, userMessage = "تعذّر تشغيل الصوت على هذا الجهاز.") {
       task.failed = true;
       const reason = String((error == null ? void 0 : error.message) || error || "speech-engine-unavailable");
       try {
@@ -42473,9 +42477,8 @@ This typically indicates that your device does not have a healthy Internet conne
       } catch {
       }
       setButtonState(task.button, "error");
-      notify("error", task, userMessage, { needsSpeechSettings });
+      notify("error", task, userMessage);
       if (errorTimer) clearTimeout(errorTimer);
-      if (needsSpeechSettings) return;
       errorTimer = setTimeout(() => {
         if (task.token !== sequence) return;
         activeTask = null;
@@ -42600,7 +42603,7 @@ This typically indicates that your device does not have a healthy Internet conne
       };
       activeTask = task;
       if (!api) {
-        showError(task, "web-speech-api-unavailable", speechServiceMessage(), true);
+        showError(task, "web-speech-api-unavailable", speechServiceMessage());
         return false;
       }
       try {
@@ -42624,7 +42627,7 @@ This typically indicates that your device does not have a healthy Internet conne
             } catch (error) {
               if (task.token !== sequence) return false;
               const voiceUnavailable = /language-unavailable|voice-unavailable|speech voice list is unavailable|no matching language voice/iu.test(String((error == null ? void 0 : error.message) || error));
-              showError(task, error, voiceUnavailable ? voiceInstallMessage() : "تعذّر تشغيل الصوت على هذا الجهاز.", voiceUnavailable);
+              showError(task, error, voiceUnavailable ? voiceInstallMessage() : "تعذّر تشغيل الصوت على هذا الجهاز.");
               return false;
             }
             if (task.token !== sequence) return false;
@@ -42638,7 +42641,7 @@ This typically indicates that your device does not have a healthy Internet conne
       } catch (error) {
         if (task.token !== sequence) return false;
         const voiceUnavailable = /language-unavailable|voice-unavailable|speech voice list is unavailable|no matching language voice/iu.test(String((error == null ? void 0 : error.message) || error));
-        showError(task, error, voiceUnavailable ? voiceInstallMessage() : "تعذّر تشغيل الصوت على هذا الجهاز.", voiceUnavailable);
+        showError(task, error, voiceUnavailable ? voiceInstallMessage() : "تعذّر تشغيل الصوت على هذا الجهاز.");
         return false;
       } finally {
         if (task.token === sequence && !task.failed) {
@@ -42679,8 +42682,8 @@ This typically indicates that your device does not have a healthy Internet conne
   // src/lesson-animation.mjs
   var escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   function resolveSceneType(lesson = {}, moduleId = "") {
-    var _a14;
-    const explicitScene = (_a14 = lesson.visual_script) == null ? void 0 : _a14.scene_id;
+    var _a12;
+    const explicitScene = (_a12 = lesson.visual_script) == null ? void 0 : _a12.scene_id;
     if (["trailer", "visibility", "roundabout", "intersection", "traffic-light", "traffic-signs", "maneuver", "vehicle-safety", "stopping", "documents", "driver-safety", "road-parts"].includes(explicitScene)) return explicitScene;
     const title = `${lesson.heading_ar || ""} ${lesson.heading_it || ""}`.toLowerCase();
     if (/مقطور|rimorch|rimorchio/.test(title)) return "trailer";
@@ -42748,11 +42751,11 @@ This typically indicates that your device does not have a healthy Internet conne
   var excerpt = (text, max = 190) => {
     const value = String(text || "").trim();
     if (value.length <= max) return value;
-    const boundary2 = value.slice(0, max).lastIndexOf(" ");
-    return `${value.slice(0, boundary2 > max * 0.55 ? boundary2 : max).trim()}…`;
+    const boundary = value.slice(0, max).lastIndexOf(" ");
+    return `${value.slice(0, boundary > max * 0.55 ? boundary : max).trim()}…`;
   };
   function lessonAnimationMarkup(lesson, moduleId = "") {
-    var _a14, _b, _c, _d, _e;
+    var _a12, _b, _c, _d, _e;
     const type = resolveSceneType(lesson, moduleId);
     const labels = [
       { key: "concept", it: "Core idea", ar: "الفكرة الأساسية" },
@@ -42762,13 +42765,13 @@ This typically indicates that your device does not have a healthy Internet conne
     const fallback = [
       { text_it: lesson.core_it || lesson.body_it || lesson.heading_it, text_ar: lesson.core_ar || lesson.body_ar || lesson.heading_ar },
       { text_it: lesson.example_it, text_ar: lesson.example_ar },
-      { text_it: ((_b = (_a14 = lesson.common_mistakes) == null ? void 0 : _a14[0]) == null ? void 0 : _b.mistake_it) || lesson.pitfall_it, text_ar: ((_d = (_c = lesson.common_mistakes) == null ? void 0 : _c[0]) == null ? void 0 : _d.mistake_ar) || lesson.pitfall_ar }
+      { text_it: ((_b = (_a12 = lesson.common_mistakes) == null ? void 0 : _a12[0]) == null ? void 0 : _b.mistake_it) || lesson.pitfall_it, text_ar: ((_d = (_c = lesson.common_mistakes) == null ? void 0 : _c[0]) == null ? void 0 : _d.mistake_ar) || lesson.pitfall_ar }
     ];
     const stages = labels.map((label, index) => {
-      var _a15, _b2, _c2, _d2, _e2, _f;
+      var _a13, _b2, _c2, _d2, _e2, _f;
       return {
         ...label,
-        text_it: excerpt(((_c2 = (_b2 = (_a15 = lesson.visual_script) == null ? void 0 : _a15.stages) == null ? void 0 : _b2[index]) == null ? void 0 : _c2.text_it) || fallback[index].text_it),
+        text_it: excerpt(((_c2 = (_b2 = (_a13 = lesson.visual_script) == null ? void 0 : _a13.stages) == null ? void 0 : _b2[index]) == null ? void 0 : _c2.text_it) || fallback[index].text_it),
         text_ar: excerpt(((_f = (_e2 = (_d2 = lesson.visual_script) == null ? void 0 : _d2.stages) == null ? void 0 : _e2[index]) == null ? void 0 : _f.text_ar) || fallback[index].text_ar)
       };
     });
@@ -45384,34 +45387,6 @@ This typically indicates that your device does not have a healthy Internet conne
     tts_locale: "it-IT"
   })).filter((entry) => entry.it && entry.ar && glossaryCategories[entry.category]);
 
-  // src/lesson-vocabulary.mjs
-  var boundary = String.raw`[\p{L}\p{M}\p{N}]`;
-  function escapeRegExp(value) {
-    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  }
-  function termPattern(term) {
-    const words = String(term).trim().split(/\s+/).map((word) => [...word].map((char) => char === "'" || char === "’" ? "['’]" : escapeRegExp(char)).join(""));
-    return new RegExp(`(?<!${boundary})${words.join("\\s+")}(?!${boundary})`, "giu");
-  }
-  function findGlossaryMatches(text, entries = glossaryEntries) {
-    if (typeof text !== "string" || !text || !Array.isArray(entries)) return [];
-    const candidates = [];
-    for (const entry of entries) {
-      if (typeof (entry == null ? void 0 : entry.it) !== "string" || !entry.it.trim()) continue;
-      for (const match of text.matchAll(termPattern(entry.it))) {
-        candidates.push({ start: match.index, end: match.index + match[0].length, entry });
-      }
-    }
-    candidates.sort((a, b2) => a.start - b2.start || b2.end - b2.start - (a.end - a.start) || a.entry.it.localeCompare(b2.entry.it));
-    const selected = [];
-    for (const candidate of candidates) {
-      const previous = selected.at(-1);
-      if (previous && candidate.start < previous.end) continue;
-      selected.push(candidate);
-    }
-    return selected;
-  }
-
   // src/similar-diff.mjs
   var tokenPattern = /\s+|[\p{L}\p{M}\p{N}]+(?:[’'][\p{L}\p{M}\p{N}]+)*|[^\s]/gu;
   function tokenize(value = "") {
@@ -45510,14 +45485,14 @@ This typically indicates that your device does not have a healthy Internet conne
       return /* @__PURE__ */ new Map();
     }
   }
-  async function loadVideoManifest({ endpoint = ((_a14) => (_a14 = globalThis.PATENTEB_CONFIG) == null ? void 0 : _a14.videoManifestEndpoint)() || "", fetchImpl = globalThis.fetch, storage = globalThis.localStorage, timeoutMs = 3500 } = {}) {
-    var _a15;
+  async function loadVideoManifest({ endpoint = ((_a12) => (_a12 = globalThis.PATENTEB_CONFIG) == null ? void 0 : _a12.videoManifestEndpoint)() || "", fetchImpl = globalThis.fetch, storage = globalThis.localStorage, timeoutMs = 3500 } = {}) {
+    var _a13;
     const cached = readCachedManifest(storage);
     const source = String(endpoint || "").trim();
     if (!source) return cached;
     let url;
     try {
-      url = new URL(source, ((_a15 = globalThis.location) == null ? void 0 : _a15.href) || "https://localhost/");
+      url = new URL(source, ((_a13 = globalThis.location) == null ? void 0 : _a13.href) || "https://localhost/");
     } catch {
       return cached;
     }
@@ -45591,11 +45566,11 @@ This typically indicates that your device does not have a healthy Internet conne
     }));
   }
   function wordAtOffset(text = "", offset = 0) {
-    var _a14;
+    var _a12;
     const value = String(text);
     const position = Math.max(0, Math.min(value.length, Number(offset) || 0));
     const words = lexicalTerms(value);
-    return ((_a14 = words.find((word) => position >= word.start && position <= word.end)) == null ? void 0 : _a14.text) || "";
+    return ((_a12 = words.find((word) => position >= word.start && position <= word.end)) == null ? void 0 : _a12.text) || "";
   }
   var ATTACHED_PRONOUN_SUFFIXES = Object.freeze(["le", "lo", "la", "ne", "ci", "vi", "li"]);
   function lookupExactOfflineWord(selected, entries = []) {
@@ -45694,7 +45669,7 @@ This typically indicates that your device does not have a healthy Internet conne
     return sentenceRanges(text).map((item) => item.text);
   }
   function translateLessonSentence(italianText = "", arabicText = "", offset = 0) {
-    var _a14;
+    var _a12;
     const italian = String(italianText).trim();
     const arabic = String(arabicText).trim();
     const italianParts = sentenceRanges(italian);
@@ -45703,7 +45678,7 @@ This typically indicates that your device does not have a healthy Internet conne
     const selectedIndex = Math.max(0, italianParts.findIndex((part) => position <= part.end));
     if (italianParts.length > 1 && italianParts.length === arabicParts.length) {
       return {
-        source: ((_a14 = italianParts[selectedIndex]) == null ? void 0 : _a14.text) || italian,
+        source: ((_a12 = italianParts[selectedIndex]) == null ? void 0 : _a12.text) || italian,
         translation: arabicParts[selectedIndex] || arabic,
         alignment: "sentence",
         note: "ترجمة الجملة المقابلة من نص الدرس المحلي."
@@ -45775,6 +45750,57 @@ This typically indicates that your device does not have a healthy Internet conne
     return (Array.isArray(questions2) ? questions2 : []).filter((question) => question && isQuestionDue(stats == null ? void 0 : stats[String(question.id)], now));
   }
   var SPACED_REPETITION_CONSTANTS = Object.freeze({ DAY_MS, MINUTE_MS, MIN_EASE, MAX_EASE });
+
+  // src/quick-check-review.mjs
+  var QUICK_CHECK_DAY_MS = 864e5;
+  var QUICK_CHECK_FIRST_CORRECT_DAYS = 3;
+  function quickCheckId(lessonId, index) {
+    const id = String(lessonId || "").trim();
+    const number = Number(index);
+    if (!/^u\d+-l\d+$/.test(id) || !Number.isInteger(number) || number < 0) return "";
+    return `${id}::q${number + 1}`;
+  }
+  function scheduleQuickCheckAnswer({
+    schedule = {},
+    wrongAnswers = [],
+    lessonId,
+    questionIndex,
+    chosen,
+    expected,
+    now = Date.now()
+  } = {}) {
+    const key = quickCheckId(lessonId, questionIndex);
+    if (!key || !["VERO", "FALSO"].includes(chosen) || !["VERO", "FALSO"].includes(expected)) {
+      throw new TypeError("quick_check_answer_invalid");
+    }
+    const timestamp = Number(now);
+    if (!Number.isFinite(timestamp) || timestamp < 0) throw new TypeError("quick_check_time_invalid");
+    const previous = schedule && typeof schedule === "object" && !Array.isArray(schedule) ? schedule[key] || {} : {};
+    const attempts = Math.max(0, Math.floor(Number(previous.attempts) || 0));
+    const correct = chosen === expected;
+    const intervalDays = correct ? QUICK_CHECK_FIRST_CORRECT_DAYS : 1;
+    const nextSchedule = {
+      ...schedule && typeof schedule === "object" && !Array.isArray(schedule) ? schedule : {},
+      [key]: {
+        lessonId: String(lessonId),
+        questionIndex: Number(questionIndex),
+        attempts: attempts + 1,
+        lastAnswer: chosen,
+        lastCorrect: correct,
+        firstAttemptCorrect: attempts === 0 ? correct : previous.firstAttemptCorrect === true,
+        lastAnsweredAt: timestamp,
+        intervalDays,
+        dueAt: timestamp + intervalDays * QUICK_CHECK_DAY_MS
+      }
+    };
+    const oldWrong = Array.isArray(wrongAnswers) ? wrongAnswers.filter((value) => typeof value === "string") : [];
+    const uniqueWrong = [...new Set(oldWrong)];
+    const nextWrong = correct ? uniqueWrong.filter((value) => value !== key) : [.../* @__PURE__ */ new Set([...uniqueWrong, key])];
+    return { key, correct, dueAt: nextSchedule[key].dueAt, schedule: nextSchedule, wrongAnswers: nextWrong };
+  }
+  function isQuickCheckDue(record, now = Date.now()) {
+    return !record || !Number.isFinite(Number(record.dueAt)) || Number(record.dueAt) <= Number(now);
+  }
 
   // src/lesson-access.mjs
   var FREE_LESSON_COUNT = 5;
@@ -45933,11 +45959,11 @@ This typically indicates that your device does not have a healthy Internet conne
     return { date: a.date, questions: Math.max(a.questions, b2.questions), lessons: Math.max(a.lessons, b2.lessons) };
   }
   function mergeMembership(name4, localSet, remoteSet, localEdits, remoteEdits) {
-    var _a14, _b;
+    var _a12, _b;
     const merged = union(localSet, remoteSet);
     const edits = /* @__PURE__ */ Object.create(null);
     for (const key of /* @__PURE__ */ new Set([...Object.keys((localEdits == null ? void 0 : localEdits[name4]) || {}), ...Object.keys((remoteEdits == null ? void 0 : remoteEdits[name4]) || {})])) {
-      const a = (_a14 = localEdits == null ? void 0 : localEdits[name4]) == null ? void 0 : _a14[key], b2 = (_b = remoteEdits == null ? void 0 : remoteEdits[name4]) == null ? void 0 : _b[key];
+      const a = (_a12 = localEdits == null ? void 0 : localEdits[name4]) == null ? void 0 : _a12[key], b2 = (_b = remoteEdits == null ? void 0 : remoteEdits[name4]) == null ? void 0 : _b[key];
       const selected = !a ? b2 : !b2 ? a : b2.at > a.at ? b2 : a.at > b2.at ? a : { value: a.value && b2.value, at: a.at };
       edits[key] = { ...selected };
       const id = name4 === "favorites" ? Number(key) : key;
@@ -46044,12 +46070,12 @@ This typically indicates that your device does not have a healthy Internet conne
       emit();
     };
     const isNative = () => {
-      var _a14, _b;
-      return !!((_b = (_a14 = globalThis.Capacitor) == null ? void 0 : _a14.isNativePlatform) == null ? void 0 : _b.call(_a14));
+      var _a12, _b;
+      return !!((_b = (_a12 = globalThis.Capacitor) == null ? void 0 : _a12.isNativePlatform) == null ? void 0 : _b.call(_a12));
     };
     const live = (u2, n2 = epoch) => n2 === epoch && ((user == null ? void 0 : user.uid) || null) === ((u2 == null ? void 0 : u2.uid) || null);
     async function init() {
-      var _a14, _b, _c;
+      var _a12, _b, _c;
       if (!configured) return;
       try {
         if (deps) {
@@ -46084,7 +46110,7 @@ This typically indicates that your device does not have a healthy Internet conne
         }
         auth.languageCode = "ar";
         sdk.onAuthStateChanged(auth, async (next) => {
-          var _a15, _b2, _c2;
+          var _a13, _b2, _c2;
           const uid = (next == null ? void 0 : next.uid) || null;
           if (((user == null ? void 0 : user.uid) || null) !== uid) {
             ++epoch;
@@ -46097,17 +46123,17 @@ This typically indicates that your device does not have a healthy Internet conne
           } else user = next;
           if (user) {
             set("ready");
-            if (((_a15 = globalThis.navigator) == null ? void 0 : _a15.onLine) === false) set("offline", safeMessages.offline);
+            if (((_a13 = globalThis.navigator) == null ? void 0 : _a13.onLine) === false) set("offline", safeMessages.offline);
             else void syncNow();
           } else set(((_b2 = globalThis.navigator) == null ? void 0 : _b2.onLine) === false ? "offline" : "guest", ((_c2 = globalThis.navigator) == null ? void 0 : _c2.onLine) === false ? safeMessages.offline : "");
         });
         onlineHandler = () => {
           if (user) void syncNow();
         };
-        (_a14 = globalThis.addEventListener) == null ? void 0 : _a14.call(globalThis, "online", onlineHandler);
+        (_a12 = globalThis.addEventListener) == null ? void 0 : _a12.call(globalThis, "online", onlineHandler);
         visibilityHandler = () => {
-          var _a15;
-          if (user && ((_a15 = globalThis.document) == null ? void 0 : _a15.visibilityState) === "visible") void syncNow();
+          var _a13;
+          if (user && ((_a13 = globalThis.document) == null ? void 0 : _a13.visibilityState) === "visible") void syncNow();
         };
         (_c = (_b = globalThis.document) == null ? void 0 : _b.addEventListener) == null ? void 0 : _c.call(_b, "visibilitychange", visibilityHandler);
       } catch (e2) {
@@ -46119,21 +46145,21 @@ This typically indicates that your device does not have a healthy Internet conne
       return sdk.doc(db, "users", uid, "progress", "state");
     }
     function parseRemote(snapshot2) {
-      var _a14;
-      return snapshot2.exists() ? (_a14 = snapshot2.data()) == null ? void 0 : _a14.payload : null;
+      var _a12;
+      return snapshot2.exists() ? (_a12 = snapshot2.data()) == null ? void 0 : _a12.payload : null;
     }
     async function syncNow() {
-      var _a14;
+      var _a12;
       await initialized;
       const who = user, token = epoch;
       if (!who) return;
-      if (((_a14 = globalThis.navigator) == null ? void 0 : _a14.onLine) === false) {
+      if (((_a12 = globalThis.navigator) == null ? void 0 : _a12.onLine) === false) {
         set("offline", safeMessages.offline);
         return;
       }
       if (syncing) return syncing;
       syncing = (async () => {
-        var _a15;
+        var _a13;
         try {
           const refreshed = await sdk.reload(who);
           if (!live(who, token)) return;
@@ -46167,7 +46193,7 @@ This typically indicates that your device does not have a healthy Internet conne
           set("ready", "");
           if (digest(createCloudProgress(finalState)) !== digest(createCloudProgress(result.state))) notifyLocalChange();
         } catch (e2) {
-          if (live(who, token)) set(((_a15 = globalThis.navigator) == null ? void 0 : _a15.onLine) === false ? "offline" : "error", safeError(e2));
+          if (live(who, token)) set(((_a13 = globalThis.navigator) == null ? void 0 : _a13.onLine) === false ? "offline" : "error", safeError(e2));
         } finally {
           if (live(who, token)) syncing = null;
         }
@@ -46226,7 +46252,7 @@ This typically indicates that your device does not have a healthy Internet conne
       }
     }
     async function signInGoogle() {
-      var _a14;
+      var _a12;
       await initialized;
       try {
         const provider = new sdk.GoogleAuthProvider();
@@ -46234,7 +46260,7 @@ This typically indicates that your device does not have a healthy Internet conne
         provider.addScope("profile");
         if (isNative()) {
           const result = await nativeAuth.signInWithGoogle();
-          const credential = sdk.GoogleAuthProvider.credential((_a14 = result.credential) == null ? void 0 : _a14.idToken);
+          const credential = sdk.GoogleAuthProvider.credential((_a12 = result.credential) == null ? void 0 : _a12.idToken);
           await sdk.signInWithCredential(auth, credential);
         } else await sdk.signInWithPopup(auth, provider);
       } catch (e2) {
@@ -46550,13 +46576,16 @@ This typically indicates that your device does not have a healthy Internet conne
   // src/lesson-template.mjs
   var esc2 = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   var pair = (it2, ar2) => `<span class="language-pair lesson-pair"><span class="pair-it" lang="it" dir="ltr">${esc2(it2)}</span><span class="pair-ar" lang="ar" dir="rtl">${esc2(ar2)}</span></span>`;
-  function pointCards(items = []) {
-    const cards = items.map((item) => `<article class="lesson-key-point-card key-point-card"><div class="lesson-key-point-title" role="heading" aria-level="3"><div class="kp-it" lang="it" dir="ltr">${esc2(item.it)}</div><div class="kp-ar" lang="ar" dir="rtl">${esc2(item.ar)}</div></div></article>`).join("");
+  function pointCards(items = [], italianWordMarkup = esc2) {
+    const cards = items.map((item) => `<article class="lesson-key-point-card key-point-card"><div class="lesson-key-point-title" role="heading" aria-level="3"><div class="kp-it" lang="it" dir="ltr">${italianWordMarkup(item.it)}</div><div class="kp-ar" lang="ar" dir="rtl">${esc2(item.ar)}</div></div></article>`).join("");
     return `<section class="lesson-key-points" data-lesson-section="points"><h2>${pair("Punti importanti", "النقاط الأساسية")}</h2><div class="lesson-key-point-list key-points-list key-points-grid">${cards}</div></section>`;
   }
-  function renderLessonSections(lesson, visualMarkup = "") {
-    const summary = `<section class="lesson-content-block" data-lesson-section="summary"><h2>${pair("Sintesi della lezione", "خلاصة الدرس")}</h2><div class="lesson-summary-card"><div class="lesson-it-text" lang="it" dir="ltr">${esc2(lesson.summaryIt)}</div><div class="lesson-ar-full" lang="ar" dir="rtl">${esc2(lesson.summaryAr)}</div></div></section>`;
-    return `${summary}${pointCards(lesson.keyPoints || [])}${visualMarkup}`;
+  function renderLessonSections(lesson, visualMarkup = "", options = {}) {
+    const italianWordMarkup = typeof options.italianWordMarkup === "function" ? options.italianWordMarkup : esc2;
+    const trapMarkup = String(options.trapMarkup || "");
+    const quickCheckMarkup = String(options.quickCheckMarkup || "");
+    const summary = `<section class="lesson-content-block" data-lesson-section="summary"><h2>${pair("Sintesi della lezione", "خلاصة الدرس")}</h2><div class="lesson-summary-card"><div class="lesson-it-text" lang="it" dir="ltr">${italianWordMarkup(lesson.summaryIt)}</div><div class="lesson-ar-full" lang="ar" dir="rtl">${esc2(lesson.summaryAr)}</div></div></section>`;
+    return `${summary}${pointCards(lesson.keyPoints || [], italianWordMarkup)}${trapMarkup}${visualMarkup}${quickCheckMarkup}`;
   }
 
   // src/progress-set-edits.mjs
@@ -46572,12 +46601,12 @@ This typically indicates that your device does not have a healthy Internet conne
     const baseline = membership(state2);
     return {
       record(current) {
-        var _a14, _b;
+        var _a12, _b;
         current.syncSetEdits || (current.syncSetEdits = { favorites: {}, completedLessons: {}, reviewedLessons: {} });
         for (const name4 of CONTEXTS) {
           const present = new Set(current[name4] || []);
           const ids = /* @__PURE__ */ new Set([...baseline[name4], ...present]);
-          const edits = (_a14 = current.syncSetEdits)[name4] || (_a14[name4] = {});
+          const edits = (_a12 = current.syncSetEdits)[name4] || (_a12[name4] = {});
           for (const id of ids) {
             if (baseline[name4].has(id) === present.has(id)) continue;
             const key = String(id);
@@ -46616,7 +46645,6 @@ This typically indicates that your device does not have a healthy Internet conne
   var watchRewardedLessonButton = document.querySelector("#watchRewardedLesson");
   var privacyOptionsButton = document.querySelector("#privacyOptionsButton");
   var NativeRewardedAds = registerPlugin("RewardedAds");
-  var NativeSpeechSettings = registerPlugin("SpeechSettings");
   var stateKey = "patente-ar-state-v1";
   var welcomeKey = "patente-b-welcome-dismissed-v37";
   var activeStateKey = stateKey;
@@ -46658,23 +46686,14 @@ This typically indicates that your device does not have a healthy Internet conne
   (_a2 = document.querySelector("#speechToggle")) == null ? void 0 : _a2.addEventListener("click", () => speechController.toggle());
   var _a3;
   (_a3 = document.querySelector("#speechStop")) == null ? void 0 : _a3.addEventListener("click", () => stopSpeech());
-  var _a4;
-  (_a4 = document.querySelector("#speechSettingsButton")) == null ? void 0 : _a4.addEventListener("click", () => {
-    void openSpeechSettings();
-  });
-  var _a5;
-  (_a5 = document.querySelector("#speechRate")) == null ? void 0 : _a5.addEventListener("change", (event) => {
-    speechRate = Math.max(0.7, Math.min(1.3, Number(event.target.value) || 0.85));
-    event.target.value = String(speechRate);
-  });
   void loadLocalWordDictionary();
-  var _a6;
-  (_a6 = document.querySelector("#translationTooltipClose")) == null ? void 0 : _a6.addEventListener("click", () => closeWordTooltip({ restoreFocus: true }));
+  var _a4;
+  (_a4 = document.querySelector("#translationTooltipClose")) == null ? void 0 : _a4.addEventListener("click", () => closeWordTooltip({ restoreFocus: true }));
   function loadState(key = stateKey) {
-    const empty = { favorites: /* @__PURE__ */ new Set(), wrong: /* @__PURE__ */ new Set(), solved: /* @__PURE__ */ new Set(), correctCount: 0, practiceCount: 0, topicCorrect: {}, topicTotal: {}, completedLessons: /* @__PURE__ */ new Set(), reviewedLessons: /* @__PURE__ */ new Set(), sourceChecks: {}, lastLessonKey: "", lastStudy: "", streak: 0, questionStats: {}, sessions: [], activeQuiz: null, fontSize: 16, syncSetEdits: {} };
+    const empty = { favorites: /* @__PURE__ */ new Set(), wrong: /* @__PURE__ */ new Set(), solved: /* @__PURE__ */ new Set(), correctCount: 0, practiceCount: 0, topicCorrect: {}, topicTotal: {}, completedLessons: /* @__PURE__ */ new Set(), reviewedLessons: /* @__PURE__ */ new Set(), wrongAnswers: [], quickCheckSchedule: {}, sourceChecks: {}, lastLessonKey: "", lastStudy: "", streak: 0, questionStats: {}, sessions: [], activeQuiz: null, fontSize: 16, syncSetEdits: {} };
     try {
       const raw = JSON.parse(localStorage.getItem(key) || "{}");
-      return { favorites: new Set(Array.isArray(raw.favorites) ? raw.favorites : []), wrong: new Set(Array.isArray(raw.wrong) ? raw.wrong : []), solved: new Set(Array.isArray(raw.solved) ? raw.solved : []), correctCount: Number(raw.correctCount) || 0, practiceCount: Number(raw.practiceCount) || 0, topicCorrect: raw.topicCorrect && typeof raw.topicCorrect === "object" ? raw.topicCorrect : {}, topicTotal: raw.topicTotal && typeof raw.topicTotal === "object" ? raw.topicTotal : {}, completedLessons: new Set(Array.isArray(raw.completedLessons) ? raw.completedLessons : []), reviewedLessons: new Set(Array.isArray(raw.reviewedLessons) ? raw.reviewedLessons : []), sourceChecks: raw.sourceChecks && typeof raw.sourceChecks === "object" ? raw.sourceChecks : {}, lastLessonKey: typeof raw.lastLessonKey === "string" ? raw.lastLessonKey : "", lastStudy: typeof raw.lastStudy === "string" ? raw.lastStudy : "", streak: Number(raw.streak) || 0, questionStats: raw.questionStats && typeof raw.questionStats === "object" ? raw.questionStats : {}, sessions: Array.isArray(raw.sessions) ? raw.sessions.filter((x2) => x2 && typeof x2 === "object").slice(0, 20) : [], activeQuiz: raw.activeQuiz && typeof raw.activeQuiz === "object" ? raw.activeQuiz : null, fontSize: [16, 18, 20].includes(Number(raw.fontSize)) ? Number(raw.fontSize) : 16, syncSetEdits: raw.syncSetEdits && typeof raw.syncSetEdits === "object" ? raw.syncSetEdits : {} };
+      return { favorites: new Set(Array.isArray(raw.favorites) ? raw.favorites : []), wrong: new Set(Array.isArray(raw.wrong) ? raw.wrong : []), solved: new Set(Array.isArray(raw.solved) ? raw.solved : []), correctCount: Number(raw.correctCount) || 0, practiceCount: Number(raw.practiceCount) || 0, topicCorrect: raw.topicCorrect && typeof raw.topicCorrect === "object" ? raw.topicCorrect : {}, topicTotal: raw.topicTotal && typeof raw.topicTotal === "object" ? raw.topicTotal : {}, completedLessons: new Set(Array.isArray(raw.completedLessons) ? raw.completedLessons : []), reviewedLessons: new Set(Array.isArray(raw.reviewedLessons) ? raw.reviewedLessons : []), wrongAnswers: Array.isArray(raw.wrongAnswers) ? [...new Set(raw.wrongAnswers.filter((value) => typeof value === "string"))] : [], quickCheckSchedule: raw.quickCheckSchedule && typeof raw.quickCheckSchedule === "object" && !Array.isArray(raw.quickCheckSchedule) ? raw.quickCheckSchedule : {}, sourceChecks: raw.sourceChecks && typeof raw.sourceChecks === "object" ? raw.sourceChecks : {}, lastLessonKey: typeof raw.lastLessonKey === "string" ? raw.lastLessonKey : "", lastStudy: typeof raw.lastStudy === "string" ? raw.lastStudy : "", streak: Number(raw.streak) || 0, questionStats: raw.questionStats && typeof raw.questionStats === "object" ? raw.questionStats : {}, sessions: Array.isArray(raw.sessions) ? raw.sessions.filter((x2) => x2 && typeof x2 === "object").slice(0, 20) : [], activeQuiz: raw.activeQuiz && typeof raw.activeQuiz === "object" ? raw.activeQuiz : null, fontSize: [16, 18, 20].includes(Number(raw.fontSize)) ? Number(raw.fontSize) : 16, syncSetEdits: raw.syncSetEdits && typeof raw.syncSetEdits === "object" ? raw.syncSetEdits : {} };
     } catch {
       progressStorageAvailable = false;
       return empty;
@@ -46776,14 +46795,14 @@ This typically indicates that your device does not have a healthy Internet conne
     clearTimeout(toastHandle);
     toastHandle = setTimeout(() => toastNode.classList.remove("show"), 3200);
   }
-  function syncSpeechControls({ status = "idle", button = null, locale = "", progress = 0, voiceName = "", error = "", needsSpeechSettings = false } = {}) {
+  function syncSpeechControls({ status = "idle", button = null, locale = "", progress = 0, voiceName = "", error = "" } = {}) {
     if (status === "idle" || status === "error") clearLessonWordHighlight(button);
     const bar = document.querySelector("#speechPlaybackBar");
     if (!bar) return;
     const active = status !== "idle", playing = status === "playing", paused = status === "paused", failed = status === "error";
     bar.hidden = !active;
     document.body.classList.toggle("audio-player-open", active);
-    const toggle = document.querySelector("#speechToggle"), playIcon = document.querySelector("#speechIconPlay"), pauseIcon = document.querySelector("#speechIconPause"), progressBar = document.querySelector("#speechProgress"), rate = document.querySelector("#speechRate"), debug = document.querySelector("#speechVoiceDebug"), statusNode = document.querySelector("#speechPlaybackStatus"), notice = document.querySelector("#speechPlaybackNotice"), settingsButton = document.querySelector("#speechSettingsButton");
+    const toggle = document.querySelector("#speechToggle"), playIcon = document.querySelector("#speechIconPlay"), pauseIcon = document.querySelector("#speechIconPause"), progressBar = document.querySelector("#speechProgress"), statusNode = document.querySelector("#speechPlaybackStatus"), notice = document.querySelector("#speechPlaybackNotice");
     if (toggle) {
       toggle.setAttribute("aria-pressed", String(playing));
       toggle.setAttribute("aria-label", paused ? "استئناف الصوت" : playing ? "إيقاف الصوت مؤقتًا" : "تشغيل الصوت");
@@ -46794,19 +46813,8 @@ This typically indicates that your device does not have a healthy Internet conne
       progressBar.value = active ? Math.max(0, Math.min(1, Number(progress) || 0)) : 0;
       progressBar.setAttribute("aria-valuenow", String(Math.round(progressBar.value * 100)));
     }
-    if (rate) {
-      rate.value = String(speechRate);
-      rate.setAttribute("aria-label", "سرعة الصوت الإيطالي");
-    }
-    const selectedVoice = voiceName || (String(locale).toLowerCase().startsWith("it") ? "صوت إيطالي على الجهاز" : locale ? "صوت عربي على الجهاز" : "اختر اللغة");
-    const browserVoice = String(locale).toLowerCase().startsWith("it") ? "نطق إيطالي على الجهاز" : "نطق عربي على الجهاز";
-    if (debug) {
-      debug.textContent = failed ? error || "تعذّر تشغيل الصوت" : `${selectedVoice || browserVoice}`;
-      debug.dataset.qualityHint = "device-speech";
-    }
-    if (statusNode) statusNode.textContent = failed ? error || "تعذّر تشغيل الصوت" : status === "preparing" ? "جارٍ تجهيز صوت الجهاز..." : paused ? "الصوت متوقف مؤقتًا" : playing ? "الصوت يعمل" : "";
+    if (statusNode) statusNode.textContent = failed ? error || "تعذّر تشغيل الصوت" : status === "preparing" ? "جارٍ تجهيز صوت إيطالي... انتظار تحميل الأصوات." : paused ? "الصوت متوقف مؤقتًا" : playing ? "الصوت يعمل بالإيطالية" : "";
     if (notice) notice.hidden = !(statusNode == null ? void 0 : statusNode.textContent);
-    if (settingsButton) settingsButton.hidden = !needsSpeechSettings || !Capacitor.isNativePlatform() || typeof NativeSpeechSettings.openVoiceDataSettings !== "function";
     if (button) {
       button.classList.toggle("speaking", playing);
       button.classList.toggle("speech-paused", paused);
@@ -46815,16 +46823,16 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   }
   function clearLessonWordHighlight(button = null) {
-    var _a14;
-    const scope = ((_a14 = button == null ? void 0 : button.closest) == null ? void 0 : _a14.call(button, ".lesson-detail-page")) || main;
+    var _a12;
+    const scope = ((_a12 = button == null ? void 0 : button.closest) == null ? void 0 : _a12.call(button, ".lesson-detail-page")) || main;
     scope == null ? void 0 : scope.querySelectorAll(".speech-current-word").forEach((node) => {
       node.classList.remove("speech-current-word");
       node.removeAttribute("aria-current");
     });
   }
   function syncItalianSpeechHighlight({ button = null, locale = "", charIndex = 0, status = "progress" } = {}) {
-    var _a14;
-    const page = (_a14 = button == null ? void 0 : button.closest) == null ? void 0 : _a14.call(button, ".lesson-detail-page");
+    var _a12;
+    const page = (_a12 = button == null ? void 0 : button.closest) == null ? void 0 : _a12.call(button, ".lesson-detail-page");
     if (!page || button.dataset.lessonItalianAudio !== "true") return;
     if (status === "clear" || !String(locale).toLowerCase().startsWith("it")) {
       clearLessonWordHighlight(button);
@@ -46848,18 +46856,6 @@ This typically indicates that your device does not have a healthy Internet conne
       if (selected) node.setAttribute("aria-current", "true");
       else node.removeAttribute("aria-current");
     });
-  }
-  async function openSpeechSettings() {
-    if (!Capacitor.isNativePlatform() || typeof NativeSpeechSettings.openVoiceDataSettings !== "function") {
-      showToast("Speech data settings are unavailable here.", "إعدادات بيانات النطق غير متاحة هنا.");
-      return;
-    }
-    try {
-      await NativeSpeechSettings.openVoiceDataSettings();
-    } catch (error) {
-      console.warn("Android speech data settings could not be opened.", String((error == null ? void 0 : error.message) || error));
-      showToast("Speech data settings could not be opened.", "تعذّر فتح إعدادات بيانات النطق. افتح إعدادات الهاتف ثم خدمات تحويل النص إلى كلام.");
-    }
   }
   function updateNavCounts() {
     const node = document.querySelector("#navCount");
@@ -46911,9 +46907,9 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   }
   function dailyGoalToday() {
-    var _a14;
+    var _a12;
     const date = localDateKey();
-    if (((_a14 = state.dailyGoal) == null ? void 0 : _a14.date) !== date) state.dailyGoal = { date, questions: 0, lessons: 0 };
+    if (((_a12 = state.dailyGoal) == null ? void 0 : _a12.date) !== date) state.dailyGoal = { date, questions: 0, lessons: 0 };
     return state.dailyGoal;
   }
   function recordDailyGoal(kind, count2 = 1) {
@@ -46992,7 +46988,7 @@ This typically indicates that your device does not have a healthy Internet conne
     return false;
   }
   async function attemptRewardedLessonUnlock() {
-    var _a14;
+    var _a12;
     const request = pendingLessonRequest, button = document.querySelector("#watchRewardedLesson");
     if (!request) return;
     if (!Capacitor.isNativePlatform() || typeof NativeRewardedAds.showRewarded !== "function") {
@@ -47016,7 +47012,7 @@ This typically indicates that your device does not have a healthy Internet conne
       }
       pendingLessonRequest = null;
       if (lessonUnlockDialog == null ? void 0 : lessonUnlockDialog.open) lessonUnlockDialog.close();
-      (_a14 = request.continueAfterUnlock) == null ? void 0 : _a14.call(request);
+      (_a12 = request.continueAfterUnlock) == null ? void 0 : _a12.call(request);
     } catch (error) {
       console.warn("Rewarded test ad was unavailable or failed", error);
       setLessonUnlockStatus("The test ad could not be loaded. Try again later; no lesson was unlocked.", "تعذّر تحميل الإعلان الاختباري. أعد المحاولة لاحقًا؛ لم يُفتح أي درس.");
@@ -47060,12 +47056,12 @@ This typically indicates that your device does not have a healthy Internet conne
       console.warn("Test interstitial could not be shown", error);
     }
   }
-  var _a7;
-  (_a7 = document.querySelector("#watchRewardedLesson")) == null ? void 0 : _a7.addEventListener("click", () => {
+  var _a5;
+  (_a5 = document.querySelector("#watchRewardedLesson")) == null ? void 0 : _a5.addEventListener("click", () => {
     void attemptRewardedLessonUnlock();
   });
-  var _a8;
-  (_a8 = document.querySelector("#privacyOptionsButton")) == null ? void 0 : _a8.addEventListener("click", () => {
+  var _a6;
+  (_a6 = document.querySelector("#privacyOptionsButton")) == null ? void 0 : _a6.addEventListener("click", () => {
     void openPrivacyOptions();
   });
   lessonUnlockDialog == null ? void 0 : lessonUnlockDialog.addEventListener("close", () => {
@@ -47162,35 +47158,59 @@ This typically indicates that your device does not have a healthy Internet conne
     persistState();
     render("lesson", { moduleId, index });
   }
-  function courseUnitIllustration(module) {
-    const paths = {
-      "road-basics": '<path d="M5 21 9 3h6l4 18M12 4v3m0 4v4m0 4v2"/>',
-      "signs": '<path d="m12 3 9 17H3L12 3Z"/><path d="M12 9v5m0 3h.01"/>',
-      "signals-markings": '<rect x="7" y="3" width="10" height="17" rx="3"/><circle cx="12" cy="8" r="1.7"/><circle cx="12" cy="13" r="1.7"/><path d="M12 20v2"/>',
-      "priority-intersections": '<path d="M3 9h18M9 3v18M15 3v18M3 15h18"/><path d="m15 8 3 1-3 1"/>',
-      "movement-overtaking": '<path d="M4 20 8 4h8l4 16M12 5v4m0 4v5"/><path d="m16 8 3 3-3 3"/>',
-      "speed-stopping-highways": '<path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 14 4-4M7 18h10"/>',
-      "vehicle-safety": '<path d="m3 15 2-6h14l2 6v4H3zM6 9l2-4h8l2 4"/><circle cx="7" cy="17" r="1.5"/><circle cx="17" cy="17" r="1.5"/>',
-      "documents-liability": '<path d="M6 3h9l4 4v14H6zM15 3v5h4M9 12h7m-7 4h7"/>',
-      "driver-health-environment": '<circle cx="12" cy="7" r="3"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M9 15l3 2 3-2"/>',
-      "exam-supplement-driver": '<path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/>',
-      "exam-supplement-vehicle": '<path d="m3 15 2-6h14l2 6v4H3zM6 9l2-4h8l2 4"/><circle cx="7" cy="17" r="1.5"/><circle cx="17" cy="17" r="1.5"/>'
-    };
-    const fallback = '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 6h13M8 10h7M8 14h7"/>';
-    const label = esc3(`${module.title_it} / ${module.title_ar}`);
-    return `<span class="course-unit-art"><svg viewBox="0 0 24 24" role="img" aria-label="${label}" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths[module.module_id] || fallback}</svg></span>`;
-  }
   function homePage() {
-    const access = getLessonAccess();
-    const moduleHtml = lessonModules.map((module, mi) => {
-      const lessons = module.lessons.map((lesson, li) => {
-        const key = lessonKey(module.module_id, li), accessible = (access == null ? void 0 : access.hasAccess(key)) === true;
-        const accessLabel = accessible ? "" : `<small>${controlLabel("Locked · test ad", "مقفل · إعلان اختباري")}</small>`;
-        return `<button class="course-lesson-row ${accessible ? "" : "is-locked"}" type="button" data-open-lesson="${esc3(module.module_id)}" data-lesson-index="${li}"><span class="lesson-row-mark" aria-hidden="true">${String(li + 1).padStart(2, "0")}</span><span class="course-lesson-copy">${pair2(lesson.titleIt || lesson.heading_it, lesson.titleAr || lesson.heading_ar, "course-lesson-heading")}${accessLabel}</span><span class="course-row-arrow" aria-hidden="true">›</span></button>`;
-      }).join("");
-      return `<details class="course-accordion" data-course-unit><summary><span class="course-unit-number">${String(mi + 1).padStart(2, "0")}</span>${courseUnitIllustration(module)}<span class="course-accordion-title">${pair2(module.title_it, module.title_ar, "unit-title")}</span><span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-accordion-lessons">${lessons}</div></details>`;
+    var _a12;
+    const all = flatLessons(), access = getLessonAccess(), suggested = nextCourseLesson();
+    const current = suggested && !state.completedLessons.has(suggested.key) && (access == null ? void 0 : access.hasAccess(suggested.key)) ? suggested.key : ((_a12 = all.find((item) => !state.completedLessons.has(item.key) && (access == null ? void 0 : access.hasAccess(item.key)))) == null ? void 0 : _a12.key) || null;
+    const path = all.map((item, index) => {
+      const key = item.key, done = state.completedLessons.has(key), accessible = (access == null ? void 0 : access.hasAccess(key)) === true, isCurrent = !done && accessible && key === current;
+      const status = done ? "is-complete" : isCurrent ? "is-current" : !accessible ? "is-locked" : "is-available";
+      const mark = done ? "✔" : isCurrent ? "●" : String(index + 1).padStart(2, "0");
+      const statusIt = done ? "Completata" : isCurrent ? "Lezione attuale" : !accessible ? "Bloccata" : "Disponibile";
+      const statusAr = done ? "مكتمل" : isCurrent ? "الدرس الحالي" : !accessible ? "مقفل" : "متاح";
+      const moduleFirst = item.index === 0;
+      const moduleLabel = moduleFirst ? `<small class="lesson-path-unit">${esc3(item.module.title_it)} · ${esc3(item.module.title_ar)}</small>` : "";
+      return `<li class="lesson-path-node ${status}" data-path-status="${status}">${moduleLabel}<button class="lesson-path-step" type="button" data-open-lesson="${esc3(item.module.module_id)}" data-lesson-index="${item.index}" aria-current="${isCurrent ? "step" : "false"}"><span class="lesson-path-marker" aria-hidden="true">${mark}</span><span class="lesson-path-copy"><strong>${esc3(item.lesson.titleIt)}</strong><span lang="ar" dir="rtl">${esc3(item.lesson.titleAr)}</span><small>${pair2(statusIt, statusAr)}</small></span><span class="lesson-path-arrow" aria-hidden="true">›</span></button></li>`;
     }).join("");
-    return `<details class="course-catalog" id="courseCatalog" open><summary>${pair2("Contenuti del corso · 50 lezioni", "محتوى المنهج · ٥٠ درسًا")}<span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-catalog-body"><div class="course-accordion-list">${moduleHtml}</div></div></details>`;
+    return `<section class="lesson-path-shell" aria-label="مسار الدروس"><header class="lesson-path-heading"><div><span class="eyebrow">50 LEZIONI · PERCORSO DI APPRENDIMENTO</span><h1>${pair2("Il tuo percorso di studio", "مسار التعلّم")}</h1></div><button class="quick-error-review-button" type="button" data-action="quick-error-review">Ripasso Errori · مراجعة الأخطاء <span>${state.wrongAnswers.length.toLocaleString("ar")}</span></button></header><ol class="lesson-path">${path}</ol></section>`;
+  }
+  function quickCheckDate(timestamp) {
+    return new Date(Number(timestamp) || 0).toLocaleDateString("ar-IT", { day: "numeric", month: "short" });
+  }
+  function quickCheckCardMarkup(lesson, index, { reviewOnly = false } = {}) {
+    var _a12;
+    const question = (_a12 = lesson.quickCheck) == null ? void 0 : _a12[index];
+    if (!question) return "";
+    const id = quickCheckId(lesson.id, index);
+    if (!id) return "";
+    const missed = state.wrongAnswers.includes(id);
+    if (reviewOnly && !missed) return "";
+    const record = state.quickCheckSchedule[id], due = isQuickCheckDue(record, Date.now()), locked = !!record && !due;
+    const feedback = locked ? `<div class="quick-check-feedback ${record.lastCorrect ? "is-correct" : "is-wrong"}" role="status"><strong>${pair2(record.lastCorrect ? "Corretto" : "Da ripassare", record.lastCorrect ? "إجابة صحيحة" : "تحتاج إلى مراجعة")}</strong><span>${pair2(`Prossimo ripasso: ${quickCheckDate(record.dueAt)}`, `موعد المراجعة التالي: ${quickCheckDate(record.dueAt)}`)}</span><p class="quick-check-explanation" lang="ar" dir="rtl">${esc3(question.explainAr)}</p></div>` : '<div class="quick-check-feedback" role="status" hidden></div>';
+    return `<article class="quick-check-card ${missed ? "is-missed" : ""}" data-quick-check data-lesson-id="${esc3(lesson.id)}" data-question-index="${index}" data-answer="${esc3(question.a)}"><p class="quick-check-question" lang="it" dir="ltr">${esc3(question.qIt)}</p><div class="quick-check-answers"><button type="button" data-quick-check-answer="VERO" ${locked ? "disabled" : ""}>VERO · صحيح</button><button type="button" data-quick-check-answer="FALSO" ${locked ? "disabled" : ""}>FALSO · خطأ</button></div>${feedback}</article>`;
+  }
+  function quickCheckSectionMarkup(lesson, { reviewOnly = false } = {}) {
+    const cards = (lesson.quickCheck || []).map((_, index) => quickCheckCardMarkup(lesson, index, { reviewOnly })).filter(Boolean).join("");
+    if (reviewOnly && !cards) return "";
+    return `<section class="quick-check-section" aria-label="Quick check"><h2>${pair2(reviewOnly ? "Ripasso Errori" : "Controllo rapido", reviewOnly ? "مراجعة الأخطاء" : "اختبار سريع")}</h2>${reviewOnly ? "" : `<p>${pair2("Rispondi alle tre affermazioni Vero/Falso.", "أجب عن العبارات الثلاث بصحيح أو خطأ.")}</p>`}<div class="quick-check-list">${cards}</div></section>`;
+  }
+  function trapWordMarkup(lesson) {
+    const trap = lesson.trapWord;
+    if (!trap) return "";
+    return `<aside class="trap-word-card" role="note"><strong>${pair2("Parola-trappola", "كلمة امتحانية خادعة")}</strong><p class="trap-word-term" lang="it" dir="ltr">${dictionaryWordMarkup(trap.word)}</p><p lang="ar" dir="rtl">${esc3(trap.reasonAr)}</p></aside>`;
+  }
+  function quickErrorReviewPage() {
+    const all = flatLessons(), entries = state.wrongAnswers.map((id) => {
+      var _a12;
+      const match = /^(u\d+-l\d+)::q(\d+)$/.exec(id);
+      if (!match) return null;
+      const item = all.find((candidate) => candidate.lesson.id === match[1]);
+      if (!item) return null;
+      const index = Number(match[2]) - 1, question = (_a12 = item.lesson.quickCheck) == null ? void 0 : _a12[index];
+      return question ? { item, index } : null;
+    }).filter(Boolean);
+    if (!entries.length) return `<section class="quick-errors-page"><button class="quiet-button" data-view="home">${controlLabel("Back to the path", "العودة إلى المسار")}</button><div class="empty-state"><strong>لا توجد أسئلة أخطأت فيها</strong><p>سجّل اختبار الدرس الأسئلة الخاطئة هنا لتراجعها.</p></div></section>`;
+    return `<section class="quick-errors-page"><header class="quick-errors-heading"><button class="quiet-button" data-view="home">${controlLabel("Back to the path", "العودة إلى المسار")}</button><h1>${pair2("Ripasso Errori", "مراجعة الأخطاء")}</h1></header><div class="quick-check-list">${entries.map(({ item, index }) => `<article class="quick-error-item"><small>${pair2(item.lesson.titleIt, item.lesson.titleAr)}</small>${quickCheckCardMarkup(item.lesson, index, { reviewOnly: true })}</article>`).join("")}</div></section>`;
   }
   function lessonDetailPage(moduleId, index) {
     const module = lessonModules.find((m2) => m2.module_id === moduleId), lesson = module == null ? void 0 : module.lessons[index];
@@ -47204,7 +47224,7 @@ This typically indicates that your device does not have a healthy Internet conne
     }).join("");
     return `<article class="lesson-detail-page" data-lesson-page="${esc3(key)}"><header class="lesson-detail-head"><div class="eyebrow" lang="it">UNITÀ ${String(module.order_hint).padStart(2, "0")} · LEZIONE ${String(index + 1).padStart(2, "0")}</div><h1>${pair2(lesson.heading_it, lesson.heading_ar, "detail-title")}</h1></header>
   <div class="lesson-audio-row" role="group" aria-label="محتوى الدرس"><button class="audio-button" data-lesson-italian-audio="true" data-lesson-body-offset="${String(lesson.heading_it || "").trim().length + (lesson.body_it ? 2 : 0)}" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc3(lessonText)}">${controlLabel("Ascolta in italiano", "استمع بالإيطالية")}</button>${lessonVideoBlock(lesson, moduleId, index)}</div>
-  <div class="lesson-detail-copy">${renderLessonSections(lesson, lessonAnimationMarkup(lesson, module.module_id))}</div>
+  <div class="lesson-detail-copy">${renderLessonSections(lesson, lessonAnimationMarkup(lesson, module.module_id), { italianWordMarkup: dictionaryWordMarkup, trapMarkup: trapWordMarkup(lesson), quickCheckMarkup: quickCheckSectionMarkup(lesson) })}</div>
   <details class="lesson-sources" data-lesson-section="sources"><summary>${pair2("Fonti ufficiali · apri per consultarle", "مصادر رسمية · افتح لعرضها")}<span class="accordion-chevron" aria-hidden="true"></span></summary><ul>${sources}</ul></details>
   ${lessonVideoCTA(lesson, moduleId, index)}
   <nav class="lesson-footer-nav" aria-label="Navigazione tra le lezioni · التنقل بين الدروس"><button class="quiet-button" data-view="home">${controlLabel("Course home", "الرئيسية")}</button>${prev ? `<button class="quiet-button" data-open-lesson="${esc3(prev.module.module_id)}" data-lesson-index="${prev.index}">${controlLabel("← Previous lesson", `← الدرس السابق: ${prev.lesson.heading_ar}`)}</button>` : ""}${next ? `<button class="primary-button" data-open-lesson="${esc3(next.module.module_id)}" data-lesson-index="${next.index}">${controlLabel("Next lesson →", `الدرس التالي: ${next.lesson.heading_ar} ←`)}</button>` : ""}<button class="small-button" data-review-lesson="${esc3(key)}">${controlLabel("Review this lesson", "راجع هذا الدرس")}</button><button class="small-button" data-toggle-complete="${esc3(key)}">${done ? controlLabel("Completed ✓ · undo", "مكتمل ✓ · إلغاء العلامة") : controlLabel("Mark lesson complete", "علّم الدرس مكتملًا")}</button></nav></article>`;
@@ -47345,8 +47365,8 @@ This typically indicates that your device does not have a healthy Internet conne
     return `<section class="glossary-page"><header class="glossary-hero"><div class="eyebrow"><span lang="it">PATRIMONIO DI PAROLE</span><small lang="ar">مفردات الطريق والرخصة</small></div><h1>${pair2("Italian–Arabic driving glossary", "قاموس القيادة الإيطالي–العربي")}</h1><p>${pair2(`A practical glossary of ${glossaryEntries.length.toLocaleString("it-IT")} selected licence and road-safety terms drawn from the course and quiz material. Tap the audio button to hear the Italian.`, `قاموس عملي يضم ${glossaryEntries.length.toLocaleString("ar")} مصطلحًا مختارًا من دروس الرخصة وأسئلة الطريق. اضغط زر الصوت لسماع النطق بالإيطالية.`)}</p><button class="quiet-button glossary-back" data-view="home">${controlLabel("Back to course home", "العودة إلى المنهج")}</button></header><div class="glossary-controls"><label><span>${pair2("Search a word or meaning", "ابحث عن كلمة أو معنى")}</span><input id="glossarySearch" type="search" autocomplete="off" placeholder="Italiano o arabo · إيطالي أو عربي" aria-label="Search glossary in Italian or Arabic · البحث في القاموس بالإيطالية أو العربية"></label><label><span>${pair2("Category", "التصنيف")}</span><select id="glossaryCategory"><option value="">${pair2("All categories", "كل التصنيفات")}</option>${options}</select></label></div><p id="glossaryStatus" class="glossary-status" role="status" aria-live="polite">${pair2(`${glossaryEntries.length.toLocaleString("it-IT")} selected terms`, `المفردات ${glossaryEntries.length.toLocaleString("ar")}`)}</p><div class="glossary-list" id="glossaryList">${cards}</div><aside class="notice-banner glossary-disclaimer">${pair2("This is a selected study glossary, not a complete dictionary or an official legal translation. Some Arabic equivalents are explanatory; preserve the Italian wording when answering official quiz questions.", "هذا قاموس دراسي منتقى، وليس قاموسًا كاملًا أو ترجمة قانونية رسمية. بعض المقابلات العربية تفسيرية؛ حافظ على نص السؤال الإيطالي عند حل الاختبارات الرسمية.")}</aside></section>`;
   }
   function updateGlossaryResults() {
-    var _a14, _b;
-    const query2 = ((_a14 = document.querySelector("#glossarySearch")) == null ? void 0 : _a14.value) || "", category = ((_b = document.querySelector("#glossaryCategory")) == null ? void 0 : _b.value) || "";
+    var _a12, _b;
+    const query2 = ((_a12 = document.querySelector("#glossarySearch")) == null ? void 0 : _a12.value) || "", category = ((_b = document.querySelector("#glossaryCategory")) == null ? void 0 : _b.value) || "";
     let visible = 0;
     document.querySelectorAll("[data-glossary-entry]").forEach((node) => {
       const match = (!category || node.dataset.glossaryCategory === category) && (!query2 || matchesSearchText(node.dataset.glossarySearch, query2));
@@ -47382,9 +47402,9 @@ This typically indicates that your device does not have a healthy Internet conne
     return { questions: questionsById, sourceChecks, lessonKeys: new Set(flatLessons().map((item) => item.key)) };
   }
   function resumeActiveQuiz() {
-    var _a14;
+    var _a12;
     const saved = state.activeQuiz;
-    if ((saved == null ? void 0 : saved.mode) === "lesson-review" && saved.lessonKey && !((_a14 = getLessonAccess()) == null ? void 0 : _a14.hasAccess(saved.lessonKey))) {
+    if ((saved == null ? void 0 : saved.mode) === "lesson-review" && saved.lessonKey && !((_a12 = getLessonAccess()) == null ? void 0 : _a12.hasAccess(saved.lessonKey))) {
       const item = findLesson(saved.lessonKey);
       if (item) {
         ensureLessonAccess(item.module.module_id, item.index, () => resumeActiveQuiz());
@@ -47451,8 +47471,8 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   }
   function startQuiz(mode = "practice", pool = null, meta = {}) {
-    var _a14;
-    if (mode === "lesson-review" && meta.lessonKey && !((_a14 = getLessonAccess()) == null ? void 0 : _a14.hasAccess(meta.lessonKey))) {
+    var _a12;
+    if (mode === "lesson-review" && meta.lessonKey && !((_a12 = getLessonAccess()) == null ? void 0 : _a12.hasAccess(meta.lessonKey))) {
       const item = findLesson(meta.lessonKey);
       if (item) {
         ensureLessonAccess(item.module.module_id, item.index, () => startQuiz(mode, pool, meta));
@@ -47466,9 +47486,9 @@ This typically indicates that your device does not have a healthy Internet conne
     if (mode === "favorites") candidates = questions.filter((q) => state.favorites.has(q.id));
     if (mode === "smart") candidates = smartPracticePool(meta.count || 10);
     if (mode === "due") candidates = dueQuestionPool(questions, state.questionStats).sort((a, b2) => {
-      var _a15, _b;
+      var _a13, _b;
       const priority = (q) => state.wrong.has(q.id) ? 0 : state.solved.has(q.id) ? 1 : 2;
-      return priority(a) - priority(b2) || (Number((_a15 = state.questionStats[String(a.id)]) == null ? void 0 : _a15.nextReviewAt) || 0) - (Number((_b = state.questionStats[String(b2.id)]) == null ? void 0 : _b.nextReviewAt) || 0);
+      return priority(a) - priority(b2) || (Number((_a13 = state.questionStats[String(a.id)]) == null ? void 0 : _a13.nextReviewAt) || 0) - (Number((_b = state.questionStats[String(b2.id)]) == null ? void 0 : _b.nextReviewAt) || 0);
     });
     if (!candidates.length) {
       showToast("Nessuna domanda disponibile.", "لا توجد أسئلة متاحة.");
@@ -47499,7 +47519,7 @@ This typically indicates that your device does not have a healthy Internet conne
     return quiz == null ? void 0 : quiz.questions[quiz.index];
   }
   function renderQuiz() {
-    var _a14;
+    var _a12;
     if (!quiz) return;
     stopSpeech();
     const isExam = quiz.mode === "exam";
@@ -47521,7 +47541,7 @@ This typically indicates that your device does not have a healthy Internet conne
         shortcut.className = "quiet-button";
         shortcut.dataset.action = "first-unanswered";
         shortcut.innerHTML = controlLabel("Vai alla prima domanda senza risposta", "انتقل إلى أول سؤال بلا إجابة");
-        (_a14 = main.querySelector(".quiz-controls")) == null ? void 0 : _a14.prepend(shortcut);
+        (_a12 = main.querySelector(".quiz-controls")) == null ? void 0 : _a12.prepend(shortcut);
       }
       return;
     }
@@ -47571,7 +47591,13 @@ This typically indicates that your device does not have a healthy Internet conne
     if (!quiz || quiz.mode !== "exam" && quiz.answers[quiz.index] !== null) return;
     quiz.answers[quiz.index] = value;
     const q = currentQ();
-    if (quiz.mode !== "exam") recordPractice(q, value);
+    if (quiz.mode === "exam") {
+      const errors = quiz.answers.reduce((count2, answer, index) => count2 + (answer !== null && answer !== (quiz.questions[index].answer === "VERO") ? 1 : 0), 0);
+      if (errors >= 4) {
+        finishExam(false, false, true);
+        return;
+      }
+    } else recordPractice(q, value);
     saveActiveQuiz();
     renderQuiz();
   }
@@ -47588,7 +47614,7 @@ This typically indicates that your device does not have a healthy Internet conne
     const results = session.questions.map((q, i2) => ({ q, chosen: session.answers[i2], correct: session.answers[i2] !== null && session.answers[i2] === (q.answer === "VERO"), skipped: session.answers[i2] === null }));
     showResult({ isExam: false, total, right, wrong: total - right, results, label: session.mode === "lesson-review" ? session.lessonTitle : "", returnView: session.returnView });
   }
-  function finishExam(byTime = false, explicitSubmit = false) {
+  function finishExam(byTime = false, explicitSubmit = false, endedByFourthError = false) {
     if (!quiz) return;
     const session = quiz;
     stopTimer();
@@ -47605,7 +47631,7 @@ This typically indicates that your device does not have a healthy Internet conne
     });
     state.activeQuiz = null;
     persistState();
-    showResult({ isExam: true, byTime, total: session.questions.length, answered, right, wrong, results, returnView: session.returnView, studyAdjusted: !!session.studyAdjusted, timerMinutes: session.timerMinutes || 20 });
+    showResult({ isExam: true, byTime, endedByFourthError, total: session.questions.length, answered, right, wrong, results, returnView: session.returnView, studyAdjusted: !!session.studyAdjusted, timerMinutes: session.timerMinutes || 20 });
     if (explicitSubmit && !byTime && !session.studyAdjusted) void showExamInterstitial();
   }
   function recordExamAnswer(q, correct) {
@@ -47629,11 +47655,13 @@ This typically indicates that your device does not have a healthy Internet conne
     persistState();
   }
   function showResult(result) {
-    var _a14;
+    var _a12;
     recordSessionSummary(result);
     stopTimer();
     stopSpeech();
     const passed = result.isExam && result.answered === result.total && result.wrong <= 3, errors = result.results.filter((r2) => !r2.correct);
+    const examTitle = result.endedByFourthError ? "Simulazione non superata al quarto errore" : passed ? "Simulazione superata" : "Continua a esercitarti";
+    const examTitleAr = result.endedByFourthError ? "رسبت عند الخطأ الرابع" : passed ? "اجتزت المحاكاة" : "واصل التدريب";
     lastParentView = result.returnView || "home";
     currentView = "result";
     setActiveNav(result.returnView || "home");
@@ -47643,8 +47671,8 @@ This typically indicates that your device does not have a healthy Internet conne
       const answerAr = `${q.lesson_check ? "تحقق مستند إلى مصدر الوزارة" : "الإجابة المسجلة في ملف الأسئلة الرسمي"}: ${ans ? "صحيح" : "خطأ"}.${q.explanation_ar ? ` ${q.explanation_ar}` : ""}`;
       return `<article class="review-item"><div class="review-question"><span class="question-id">${q.lesson_check ? controlLabel("MIT", "وزارة النقل") : "#" + esc3(q.id)}</span><div><p lang="it" dir="ltr">${esc3(q.it)}</p><p lang="ar" dir="rtl">${esc3(q.ar || "")}</p>${questionAudio(q, true)}</div></div><div class="result-answer">${pair2(r2.skipped ? "Non risposta" : r2.correct ? "Corretto" : "Da rivedere", r2.skipped ? "بلا إجابة" : r2.correct ? "صحيح" : "يحتاج إلى مراجعة")} · ${pair2(answerIt, answerAr)}</div>${linkedLesson ? `<button class="small-button remediation-link" data-open-lesson="${esc3(linkedLesson.module.module_id)}" data-lesson-index="${linkedLesson.index}">${controlLabel("Review the related lesson", "راجع الدرس المرتبط")}</button>` : ""}${sourceAnchor(q)}</article>`;
     }).join("");
-    const lessonLabel = result.label ? (_a14 = findLesson(quiz == null ? void 0 : quiz.lessonKey)) == null ? void 0 : _a14.lesson : null;
-    main.innerHTML = `<section class="result-card"><div class="eyebrow"><span lang="it">${result.isExam ? "ESITO DELLA SIMULAZIONE" : "SESSIONE DI STUDIO"}</span><small lang="ar">${result.isExam ? "نتيجة المحاكاة" : "نتيجة جلسة الدراسة"}</small></div><div class="result-seal ${result.isExam && !passed ? "fail" : ""}">${result.isExam ? passed ? "✓" : "×" : `${result.right}/${result.total}`}</div><h1>${pair2(result.isExam ? passed ? "Simulazione superata" : "Continua a esercitarti" : "Sessione completata", result.isExam ? passed ? "اجتزت المحاكاة" : "واصل التدريب" : "انتهت الجلسة")}</h1><p>${pair2(result.isExam ? "Simulazione didattica; l’esame ufficiale si svolge in italiano." : "Rivedi le risposte e continua con calma.", result.isExam ? "هذه محاكاة تعليمية؛ الامتحان الرسمي باللغة الإيطالية." : "راجع الإجابات وواصل التعلّم بهدوء.")}</p>${result.isExam ? `<div class="result-score"><div>${pair2("Correct", "صحيحة")}<strong>${result.right}</strong></div><div>${pair2("Wrong", "خاطئة")}<strong>${result.wrong}</strong></div><div>${pair2("Blank", "بلا إجابة")}<strong>${result.total - result.answered}</strong></div></div><p class="exam-criteria">${pair2(result.answered < result.total ? "Answer every question to complete the simulation." : result.wrong <= 3 ? "Within the published threshold: no more than three errors." : "More than three errors; review and try again.", result.answered < result.total ? "المحاكاة غير مكتملة: أجب عن جميع الأسئلة." : result.wrong <= 3 ? "ضمن الحد المنشور: ثلاثة أخطاء كحد أقصى." : "تجاوزت ثلاثة أخطاء؛ راجع الأسئلة وأعد المحاولة.")}</p>` : ""}${result.label ? `<p>${pair2("Lesson review", "مراجعة الدرس")}: ${pair2(result.label, (lessonLabel == null ? void 0 : lessonLabel.heading_ar) || result.label)}</p>` : ""}<div class="hero-actions" style="justify-content:center"><button class="primary-button" data-action="practice">${controlLabel("New practice", "تدريب جديد")}</button>${result.isExam ? `<button class="quiet-button" data-view="bank">${controlLabel("Back to the bank", "العودة إلى البنك")}</button>` : `<button class="quiet-button" data-view="review">${controlLabel("Review another lesson", "راجع درسًا آخر")}</button>`}</div><div class="review-list"><div class="section-head"><h2>${pair2(errors.length ? "Review these answers" : "Review your answers", errors.length ? "راجع هذه الإجابات" : "راجع إجاباتك")}</h2></div>${rows}</div></section>`;
+    const lessonLabel = result.label ? (_a12 = findLesson(quiz == null ? void 0 : quiz.lessonKey)) == null ? void 0 : _a12.lesson : null;
+    main.innerHTML = `<section class="result-card"><div class="eyebrow"><span lang="it">${result.isExam ? "ESITO DELLA SIMULAZIONE" : "SESSIONE DI STUDIO"}</span><small lang="ar">${result.isExam ? "نتيجة المحاكاة" : "نتيجة جلسة الدراسة"}</small></div><div class="result-seal ${result.isExam && !passed ? "fail" : ""}">${result.isExam ? passed ? "✓" : "×" : `${result.right}/${result.total}`}</div><h1>${pair2(result.isExam ? examTitle : "Sessione completata", result.isExam ? examTitleAr : "انتهت الجلسة")}</h1><p>${pair2(result.isExam ? "Simulazione didattica; l’esame ufficiale si svolge in italiano." : "Rivedi le risposte e continua con calma.", result.isExam ? result.endedByFourthError ? "توقفت المحاكاة فور تسجيل الخطأ الرابع." : "هذه محاكاة تعليمية؛ الامتحان الرسمي باللغة الإيطالية." : "راجع الإجابات وواصل التعلّم بهدوء.")}</p>${result.isExam ? `<div class="result-score"><div>${pair2("Correct", "صحيحة")}<strong>${result.right}</strong></div><div>${pair2("Wrong", "خاطئة")}<strong>${result.wrong}</strong></div><div>${pair2("Blank", "بلا إجابة")}<strong>${result.total - result.answered}</strong></div></div><p class="exam-criteria">${pair2(result.answered < result.total ? "Answer every question to complete the simulation." : result.wrong <= 3 ? "Within the published threshold: no more than three errors." : "More than three errors; review and try again.", result.answered < result.total ? "المحاكاة غير مكتملة: أجب عن جميع الأسئلة." : result.wrong <= 3 ? "ضمن الحد المنشور: ثلاثة أخطاء كحد أقصى." : "تجاوزت ثلاثة أخطاء؛ راجع الأسئلة وأعد المحاولة.")}</p>` : ""}${result.label ? `<p>${pair2("Lesson review", "مراجعة الدرس")}: ${pair2(result.label, (lessonLabel == null ? void 0 : lessonLabel.heading_ar) || result.label)}</p>` : ""}<div class="hero-actions" style="justify-content:center"><button class="primary-button" data-action="practice">${controlLabel("New practice", "تدريب جديد")}</button>${result.isExam ? `<button class="quiet-button" data-view="bank">${controlLabel("Back to the bank", "العودة إلى البنك")}</button>` : `<button class="quiet-button" data-view="review">${controlLabel("Review another lesson", "راجع درسًا آخر")}</button>`}</div><div class="review-list"><div class="section-head"><h2>${pair2(errors.length ? "Review these answers" : "Review your answers", errors.length ? "راجع هذه الإجابات" : "راجع إجاباتك")}</h2></div>${rows}</div></section>`;
     main.focus({ preventScroll: true });
   }
   function speak(text, locale, button) {
@@ -47688,7 +47716,7 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   }
   function playLessonExplainer(button) {
-    var _a14, _b, _c;
+    var _a12, _b, _c;
     const module = lessonModules.find((item) => item.module_id === currentLessonId), lesson = module == null ? void 0 : module.lessons[currentLessonIndex];
     if (!lesson) return;
     const scene = button.closest(".lesson-animation");
@@ -47700,18 +47728,18 @@ This typically indicates that your device does not have a healthy Internet conne
     }
     setLessonExplainerStep(0);
     setLessonExplainerPlaybackState(scene, "playing");
-    const stages = ((_a14 = lesson.visual_script) == null ? void 0 : _a14.stages) || [];
+    const stages = ((_a12 = lesson.visual_script) == null ? void 0 : _a12.stages) || [];
     const intros = ["Idea principale:", "Esempio:", "Attenzione all’errore comune:"];
     const fallback = [lesson.core_it || lesson.body_it, lesson.example_it, ((_c = (_b = lesson.common_mistakes) == null ? void 0 : _b[0]) == null ? void 0 : _c.mistake_it) || lesson.pitfall_it];
     const visualStageExcerpt = (text, max = 190) => {
       const value = String(text || "").trim();
       if (value.length <= max) return value;
-      const boundary2 = value.slice(0, max).lastIndexOf(" ");
-      return `${value.slice(0, boundary2 > max * 0.55 ? boundary2 : max).trim()}…`;
+      const boundary = value.slice(0, max).lastIndexOf(" ");
+      return `${value.slice(0, boundary > max * 0.55 ? boundary : max).trim()}…`;
     };
     const segments = Array.from({ length: 3 }, (_, index) => {
-      var _a15;
-      return { text: `${intros[index]} ${visualStageExcerpt(((_a15 = stages[index]) == null ? void 0 : _a15.text_it) || fallback[index] || "")}` };
+      var _a13;
+      return { text: `${intros[index]} ${visualStageExcerpt(((_a13 = stages[index]) == null ? void 0 : _a13.text_it) || fallback[index] || "")}` };
     });
     void speechController.speakSequence(segments, ITALIAN_TTS_LOCALE, button, (index) => setLessonExplainerStep(index)).finally(() => {
       if (button.isConnected && !speechController.isActive(button)) setLessonExplainerPlaybackState(scene, "idle");
@@ -47762,7 +47790,7 @@ This typically indicates that your device does not have a healthy Internet conne
     return `<section class="simulation-page"><header class="simulation-hero"><div class="eyebrow">${pair2("SIMULAZIONE D’ESAME", "محاكاة الامتحان")}</div><h1>${pair2("Prepare with the standard Patente B simulation", "استعد بمحاكاة امتحان Patente B القياسية")}</h1><p>${pair2("This launches the app’s actual timed exam session using its existing question bank and scoring flow.", "يبدأ هذا جلسة الامتحان المحددة الوقت الفعلية في التطبيق، باستخدام بنك الأسئلة وآلية التقييم الحالية.")}</p><div class="simulation-criteria"><strong>30</strong><span>${pair2("questions", "سؤالًا")}</span><strong>20</strong><span>${pair2("minutes", "دقيقة")}</span><strong>3</strong><span>${pair2("maximum errors", "أخطاء كحد أقصى")}</span></div><div class="simulation-actions"><button class="primary-button" data-action="start-standard-exam">${controlLabel("Start standard simulation", "ابدأ المحاكاة القياسية")}</button><button class="quiet-button" data-action="exam">${controlLabel("Accessibility and study options", "خيارات الإتاحة والتدريب")}</button></div><p class="simulation-recent" role="status">${recentSummary}</p></header></section>`;
   }
   function render(view, options = {}) {
-    var _a14;
+    var _a12;
     returnProfileControlsToStore();
     if (currentView === "quiz" && quiz && view !== "quiz" && view !== "result") saveActiveQuiz();
     stopTimer();
@@ -47776,6 +47804,7 @@ This typically indicates that your device does not have a healthy Internet conne
       currentLessonIndex = Number.isInteger(options.index) ? options.index : currentLessonIndex;
       main.innerHTML = lessonDetailPage(currentLessonId, currentLessonIndex);
     } else if (view === "review") main.innerHTML = reviewIndexPage();
+    else if (view === "quick-errors") main.innerHTML = quickErrorReviewPage();
     else if (view === "simulation") main.innerHTML = simulationPage();
     else if (view === "profile") main.innerHTML = profilePage();
     else if (view === "similar-groups") main.innerHTML = similarGroupsPage(options);
@@ -47788,7 +47817,7 @@ This typically indicates that your device does not have a healthy Internet conne
     else if (view === "search") {
       browsePage = 0;
       main.innerHTML = listPage("bank", options);
-      (_a14 = document.querySelector("#searchInput")) == null ? void 0 : _a14.focus();
+      (_a12 = document.querySelector("#searchInput")) == null ? void 0 : _a12.focus();
     }
     if (view === "profile") mountProfileControls();
     main.focus({ preventScroll: true });
@@ -47796,13 +47825,13 @@ This typically indicates that your device does not have a healthy Internet conne
     updateNavCounts();
   }
   function startLessonReview(key) {
-    var _a14;
+    var _a12;
     const item = findLesson(key);
     if (!item) {
       showToast("Lezione non trovata.", "لم نعثر على الدرس.");
       return;
     }
-    if (!((_a14 = getLessonAccess()) == null ? void 0 : _a14.hasAccess(item.key))) {
+    if (!((_a12 = getLessonAccess()) == null ? void 0 : _a12.hasAccess(item.key))) {
       ensureLessonAccess(item.module.module_id, item.index, () => startLessonReview(key));
       return;
     }
@@ -47838,39 +47867,20 @@ This typically indicates that your device does not have a healthy Internet conne
     offlineCacheStats = { imageCached: data.imageCached, imageTotal: data.imageTotal, coreCached: data.coreCached, coreTotal: data.coreTotal };
     updateConnectivity();
   });
-  function vocabularyMarkup(text, baseOffset = 0) {
+  function dictionaryWordMarkup(text, baseOffset = 0) {
     const value = String(text);
-    const speechWords = (segment, offset) => {
-      let cursor2 = 0, html2 = "";
-      for (const match of segment.matchAll(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu)) {
-        html2 += esc3(segment.slice(cursor2, match.index));
-        html2 += `<span class="speech-word" data-speech-start="${offset + match.index}">${esc3(match[0])}</span>`;
-        cursor2 = match.index + match[0].length;
-      }
-      return html2 + esc3(segment.slice(cursor2));
-    };
-    const wordMarkup = (segment, index = -1, entry = null, offset = 0) => {
-      if (index >= 0) return `<span class="wt-word inline-vocabulary-term" role="button" tabindex="0" data-vocabulary-index="${index}" aria-haspopup="dialog" aria-label="${esc3(`${entry.it}: ${entry.ar}`)}">${speechWords(segment, offset)}</span>`;
-      let cursor2 = 0, html2 = "";
-      for (const match of segment.matchAll(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu)) {
-        html2 += esc3(segment.slice(cursor2, match.index));
-        const word = match[0];
-        html2 += `<span class="wt-word speech-word" data-speech-start="${offset + match.index}" role="button" tabindex="0" data-tap-word="${esc3(word)}" aria-haspopup="dialog" aria-label="${esc3(`Traduci ${word} · ترجمة ${word}`)}">${esc3(word)}</span>`;
-        cursor2 = match.index + word.length;
-      }
-      return html2 + esc3(segment.slice(cursor2));
-    };
-    const matches = findGlossaryMatches(value);
-    if (!matches.length) return wordMarkup(value, -1, null, baseOffset);
     let cursor = 0, html = "";
-    for (const match of matches) {
-      const index = glossaryEntries.indexOf(match.entry);
-      if (index < 0 || match.start < cursor) continue;
-      html += wordMarkup(value.slice(cursor, match.start), -1, null, baseOffset + cursor);
-      html += wordMarkup(value.slice(match.start, match.end), index, match.entry, baseOffset + match.start);
-      cursor = match.end;
+    for (const match of value.matchAll(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu)) {
+      html += esc3(value.slice(cursor, match.index));
+      const word = match[0];
+      const speech = `<span class="speech-word" data-speech-start="${baseOffset + match.index}">${esc3(word)}</span>`;
+      html += `<span class="wt-word" role="button" tabindex="0" data-term="${esc3(word)}" aria-haspopup="dialog" aria-label="${esc3(`Traduci ${word} · ترجمة ${word}`)}">${speech}</span>`;
+      cursor = match.index + word.length;
     }
-    return html + wordMarkup(value.slice(cursor), -1, null, baseOffset + cursor);
+    return html + esc3(value.slice(cursor));
+  }
+  function vocabularyMarkup(text, baseOffset = 0) {
+    return dictionaryWordMarkup(text, baseOffset);
   }
   function lessonSentenceMarkup(text) {
     const value = String(text), sentences = splitSentences(value);
@@ -47886,10 +47896,10 @@ This typically indicates that your device does not have a healthy Internet conne
     return html + vocabularyMarkup(value.slice(cursor), cursor);
   }
   function translationOffsetAtPoint(root, x2, y2) {
-    var _a14, _b, _c;
+    var _a12, _b, _c;
     let point = null;
     try {
-      point = ((_a14 = document.caretPositionFromPoint) == null ? void 0 : _a14.call(document, x2, y2)) || ((_b = document.caretRangeFromPoint) == null ? void 0 : _b.call(document, x2, y2));
+      point = ((_a12 = document.caretPositionFromPoint) == null ? void 0 : _a12.call(document, x2, y2)) || ((_b = document.caretRangeFromPoint) == null ? void 0 : _b.call(document, x2, y2));
     } catch {
     }
     const node = (point == null ? void 0 : point.offsetNode) || (point == null ? void 0 : point.startContainer), offset = Number((point == null ? void 0 : point.offset) ?? (point == null ? void 0 : point.startOffset)) || 0;
@@ -47918,11 +47928,11 @@ This typically indicates that your device does not have a healthy Internet conne
     tooltip.style.removeProperty("left");
     tooltip.style.removeProperty("top");
   }
-  function showWordTooltip(node, event, word, entry = null) {
-    var _a14;
+  function showWordTooltip(node, event, word) {
+    var _a12;
     const tooltip = document.querySelector("#wordTranslationTooltip");
     if (!tooltip) return;
-    const matched = translateTappedWord(word, glossaryEntries);
+    const matched = translateTappedWord(word, []);
     document.querySelector("#translationTooltipWord").textContent = matched.italian || word;
     document.querySelector("#translationTooltipArabic").textContent = matched.arabic || "لم يُسجَّل مقابل عربي مفرد لهذه الكلمة.";
     document.querySelector("#translationTooltipNote").textContent = matched.note;
@@ -47936,27 +47946,26 @@ This typically indicates that your device does not have a healthy Internet conne
     activeWordTooltipAnchor = node || null;
     activeWordTooltipAnchor == null ? void 0 : activeWordTooltipAnchor.setAttribute("aria-expanded", "true");
     positionWordTooltip(node, event);
-    if ((event == null ? void 0 : event.detail) === 0) (_a14 = document.querySelector("#translationTooltipClose")) == null ? void 0 : _a14.focus({ preventScroll: true });
+    if ((event == null ? void 0 : event.detail) === 0) (_a12 = document.querySelector("#translationTooltipClose")) == null ? void 0 : _a12.focus({ preventScroll: true });
   }
   function openTappedWord(node, event = {}) {
-    var _a14, _b, _c, _d, _e;
+    var _a12, _b, _c, _d;
     closeWordTooltip();
-    const indexed = ((_a14 = node == null ? void 0 : node.dataset) == null ? void 0 : _a14.vocabularyIndex) !== void 0 ? glossaryEntries[Number(node.dataset.vocabularyIndex)] : null;
-    const italianNode = ((_b = node == null ? void 0 : node.matches) == null ? void 0 : _b.call(node, '.lesson-it-text,.q-it,.italian-question,.pair-it,[lang="it"]')) ? node : ((_c = node == null ? void 0 : node.closest) == null ? void 0 : _c.call(node, '.lesson-it-text,.q-it,.italian-question,.pair-it,[lang="it"]')) || node;
+    const italianNode = ((_a12 = node == null ? void 0 : node.matches) == null ? void 0 : _a12.call(node, '.lesson-it-text,.kp-it,.q-it,.italian-question,.pair-it,[lang="it"]')) ? node : ((_b = node == null ? void 0 : node.closest) == null ? void 0 : _b.call(node, '.lesson-it-text,.kp-it,.q-it,.italian-question,.pair-it,[lang="it"]')) || node;
     const offset = italianNode && event ? translationOffsetAtPoint(italianNode, event.clientX || 0, event.clientY || 0) : 0;
-    const word = (indexed == null ? void 0 : indexed.it) || ((_d = node == null ? void 0 : node.dataset) == null ? void 0 : _d.tapWord) || wordAtOffset(((_e = italianNode == null ? void 0 : italianNode.dataset) == null ? void 0 : _e.rawText) || (italianNode == null ? void 0 : italianNode.textContent) || (node == null ? void 0 : node.textContent) || "", offset);
+    const word = ((_c = node == null ? void 0 : node.dataset) == null ? void 0 : _c.term) || wordAtOffset(((_d = italianNode == null ? void 0 : italianNode.dataset) == null ? void 0 : _d.rawText) || (italianNode == null ? void 0 : italianNode.textContent) || (node == null ? void 0 : node.textContent) || "", offset);
     if (word) void loadLocalWordDictionary().then(() => {
-      if (!node || node.isConnected) showWordTooltip(node, event, word, indexed);
+      if (!node || node.isConnected) showWordTooltip(node, event, word);
     });
   }
   function showInlineSentenceTranslation(trigger, event) {
-    var _a14, _b, _c;
+    var _a12, _b, _c;
     const italianNode = trigger == null ? void 0 : trigger.closest(".lesson-it-text"), body = italianNode == null ? void 0 : italianNode.closest(".lesson-body-pair"), languagePair = italianNode == null ? void 0 : italianNode.closest(".language-pair"), arabicNode = (body == null ? void 0 : body.querySelector(".lesson-ar-full")) || (languagePair == null ? void 0 : languagePair.querySelector(".pair-ar"));
     if (!italianNode || !arabicNode) return;
     const selectedSentence = trigger.closest(".lesson-sentence[data-sentence-offset]"), specifiedOffset = trigger.dataset.sentenceTranslate ?? (selectedSentence == null ? void 0 : selectedSentence.dataset.sentenceOffset);
     const offset = specifiedOffset !== void 0 ? Number(specifiedOffset) : translationOffsetAtPoint(italianNode, (event == null ? void 0 : event.clientX) || 0, (event == null ? void 0 : event.clientY) || 0), rawText = italianNode.dataset.rawText || italianNode.textContent || "", matched = translateLessonSentence(rawText, arabicNode.textContent || "", offset);
     const placement = selectedSentence || [...italianNode.querySelectorAll(".lesson-sentence[data-sentence-offset]")].find((sentence) => Number(sentence.dataset.sentenceOffset) === offset) || italianNode;
-    (_a14 = body == null ? void 0 : body.querySelector(".inline-sentence-translation")) == null ? void 0 : _a14.remove();
+    (_a12 = body == null ? void 0 : body.querySelector(".inline-sentence-translation")) == null ? void 0 : _a12.remove();
     (_c = (_b = languagePair == null ? void 0 : languagePair.parentElement) == null ? void 0 : _b.querySelector(".inline-sentence-translation")) == null ? void 0 : _c.remove();
     const note = document.createElement("div");
     note.className = "inline-sentence-translation";
@@ -47969,14 +47978,8 @@ This typically indicates that your device does not have a healthy Internet conne
     note.append(arabic);
     placement.insertAdjacentElement("afterend", note);
   }
-  function openVocabularyCard(rawIndex, event) {
-    const entry = glossaryEntries[Number(rawIndex)];
-    if (!entry) return;
-    const anchor = (event == null ? void 0 : event.target) instanceof Element ? event.target.closest(`.wt-word[data-vocabulary-index="${Number(rawIndex)}"]`) : null;
-    showWordTooltip(anchor || document.querySelector(`.wt-word[data-vocabulary-index="${Number(rawIndex)}"]`), event, entry.it, entry);
-  }
   function enhanceLessonVocabulary() {
-    var _a14;
+    var _a12;
     for (const node of main.querySelectorAll(".lesson-it-text:not([data-vocabulary-ready])")) {
       const text = node.textContent || "";
       node.dataset.rawText = text;
@@ -47988,11 +47991,11 @@ This typically indicates that your device does not have a healthy Internet conne
       node.setAttribute("aria-label", "Testo italiano della lezione. Premi Invio per mostrare la traduzione araba · نص الدرس بالإيطالية؛ اضغط Enter لإظهار ترجمته العربية");
     }
     const heading = main.querySelector(".lesson-content-block h2");
-    if (heading && !((_a14 = heading.nextElementSibling) == null ? void 0 : _a14.classList.contains("inline-vocabulary-hint"))) heading.insertAdjacentHTML("afterend", `<p class="inline-vocabulary-hint">${pair2("Tocca una parola per tradurre", "انقر على الكلمة للترجمة")}</p>`);
+    if (heading && !((_a12 = heading.nextElementSibling) == null ? void 0 : _a12.classList.contains("inline-vocabulary-hint"))) heading.insertAdjacentHTML("afterend", `<p class="inline-vocabulary-hint">${pair2("Tocca una parola per tradurre", "انقر على الكلمة للترجمة")}</p>`);
   }
   function ensureButtonAccessibleNames(root = main) {
-    var _a14;
-    for (const button of ((_a14 = root == null ? void 0 : root.querySelectorAll) == null ? void 0 : _a14.call(root, "button")) || []) {
+    var _a12;
+    for (const button of ((_a12 = root == null ? void 0 : root.querySelectorAll) == null ? void 0 : _a12.call(root, "button")) || []) {
       if (button.hasAttribute("aria-label") || button.hasAttribute("aria-labelledby")) continue;
       const text = (button.textContent || button.title || "").replace(/\s+/gu, " ").trim();
       if (text) button.setAttribute("aria-label", text);
@@ -48031,8 +48034,8 @@ This typically indicates that your device does not have a healthy Internet conne
         const title = card.querySelector(":scope > h1"), seal = card.querySelector(".result-seal"), criteria = card.querySelector(".exam-criteria");
         if (title) title.innerHTML = pair2("Study practice completed", "انتهى التدريب");
         if (seal) seal.textContent = `${quiz.answers.filter((value, index) => {
-          var _a14, _b;
-          return value === true && ((_a14 = quiz.questions[index]) == null ? void 0 : _a14.answer) === "VERO" || value === false && ((_b = quiz.questions[index]) == null ? void 0 : _b.answer) === "FALSO";
+          var _a12, _b;
+          return value === true && ((_a12 = quiz.questions[index]) == null ? void 0 : _a12.answer) === "VERO" || value === false && ((_b = quiz.questions[index]) == null ? void 0 : _b.answer) === "FALSO";
         }).length}/${quiz.questions.length}`;
         if (criteria) criteria.innerHTML = pair2("This study session used personal practice settings; it is not an official exam result. Check the official procedure and the arrangements that apply to you.", "هذه جلسة تدريب بإعدادات شخصية وليست نتيجة امتحان رسمية. راجع الإجراءات الرسمية والتسهيلات التي تنطبق على حالتك.");
       }
@@ -48046,14 +48049,14 @@ This typically indicates that your device does not have a healthy Internet conne
     else if (!dialog) startQuiz("exam", questions);
   }
   document.addEventListener("click", (event) => {
-    var _a14, _b, _c, _d;
+    var _a12, _b, _c, _d;
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
     const standard = target.closest("#startStandardExam");
     if (standard) {
       event.preventDefault();
       event.stopImmediatePropagation();
-      (_a14 = document.querySelector("#examSetupDialog")) == null ? void 0 : _a14.close();
+      (_a12 = document.querySelector("#examSetupDialog")) == null ? void 0 : _a12.close();
       startQuiz("exam", questions);
       return;
     }
@@ -48082,13 +48085,6 @@ This typically indicates that your device does not have a healthy Internet conne
       quiz.lastAutoReadIndex = quiz.autoRead ? -1 : quiz.index;
       saveActiveQuiz();
       renderQuiz();
-      return;
-    }
-    const vocabularyButton = target.closest("[data-vocabulary-index]");
-    if (vocabularyButton) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      openVocabularyCard(vocabularyButton.dataset.vocabularyIndex, event);
       return;
     }
     const tooltipAudio = target.closest("#translationTooltipAudio");
@@ -48162,28 +48158,21 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   });
   main.addEventListener("click", (event) => {
-    var _a14, _b, _c, _d;
+    var _a12, _b, _c, _d;
     const quickAnswer = event.target.closest("[data-quick-check-answer]");
     if (quickAnswer) {
       const item = quickAnswer.closest("[data-quick-check]");
-      if (!item || item.dataset.answered) return;
-      const chosen = quickAnswer.dataset.quickCheckAnswer, expected = item.dataset.answer, correct = chosen === expected;
-      item.dataset.answered = "true";
-      item.querySelectorAll("[data-quick-check-answer]").forEach((button) => {
-        button.disabled = true;
-        button.classList.toggle("is-selected", button === quickAnswer);
-      });
-      const feedback = item.querySelector(".quick-check-feedback"), explanation = item.querySelector(".quick-check-explanation");
-      if (feedback) {
-        const answerIt = expected === "VERO" ? "Vero" : "Falso", answerAr = expected === "VERO" ? "صحيح" : "خطأ";
-        feedback.innerHTML = pair2(correct ? "Corretto!" : `Risposta corretta: ${answerIt}.`, correct ? "إجابة صحيحة!" : `الإجابة الصحيحة: ${answerAr}.`);
-        feedback.classList.toggle("is-correct", correct);
-        feedback.hidden = false;
-      }
-      if (explanation) explanation.hidden = false;
+      if (!item) return;
+      const lessonId = item.dataset.lessonId, questionIndex = Number(item.dataset.questionIndex), expected = item.dataset.answer, key = quickCheckId(lessonId, questionIndex), previous = state.quickCheckSchedule[key];
+      if (previous && !isQuickCheckDue(previous, Date.now())) return;
+      const result = scheduleQuickCheckAnswer({ schedule: state.quickCheckSchedule, wrongAnswers: state.wrongAnswers, lessonId, questionIndex, chosen: quickAnswer.dataset.quickCheckAnswer, expected, now: Date.now() });
+      state.quickCheckSchedule = result.schedule;
+      state.wrongAnswers = result.wrongAnswers;
+      persistState();
+      render(currentView === "quick-errors" ? "quick-errors" : "lesson", { moduleId: currentLessonId, index: currentLessonIndex });
       return;
     }
-    const tappedWord = event.target.closest(".wt-word[data-tap-word]");
+    const tappedWord = event.target.closest(".wt-word[data-term]");
     if (tappedWord) {
       event.preventDefault();
       openTappedWord(tappedWord, event);
@@ -48322,7 +48311,7 @@ This typically indicates that your device does not have a healthy Internet conne
     const similarPage = event.target.closest("[data-similar-page]");
     if (similarPage) {
       browsePage = Math.max(0, browsePage + (similarPage.dataset.similarPage === "next" ? 1 : -1));
-      render("similar-groups", { module: ((_a14 = document.querySelector("#similarUnitFilter")) == null ? void 0 : _a14.value) || "", query: ((_b = document.querySelector("#searchInput")) == null ? void 0 : _b.value) || "" });
+      render("similar-groups", { module: ((_a12 = document.querySelector("#similarUnitFilter")) == null ? void 0 : _a12.value) || "", query: ((_b = document.querySelector("#searchInput")) == null ? void 0 : _b.value) || "" });
       return;
     }
     const page = event.target.closest("[data-page]");
@@ -48377,7 +48366,8 @@ This typically indicates that your device does not have a healthy Internet conne
       else if (action === "continue-course") {
         const n2 = nextCourseLesson();
         if (n2) openLesson(n2.module.module_id, n2.index);
-      } else if (action === "next") nextQuestion();
+      } else if (action === "quick-error-review") render("quick-errors");
+      else if (action === "next") nextQuestion();
       else if (action === "exam-next" || action === "skip") advanceExam();
       else if (action === "prev") {
         if ((quiz == null ? void 0 : quiz.index) > 0) {
@@ -48440,10 +48430,10 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   });
   main.addEventListener("submit", (event) => {
-    var _a14, _b, _c, _d, _e;
+    var _a12, _b, _c, _d, _e;
     if (event.target.id === "customPracticeForm") {
       event.preventDefault();
-      const topic = ((_a14 = document.querySelector("#customTopic")) == null ? void 0 : _a14.value) || "", focus = ((_b = document.querySelector("#customFocus")) == null ? void 0 : _b.value) || "all", count2 = Math.max(1, Math.min(50, Number((_c = document.querySelector("#customCount")) == null ? void 0 : _c.value) || 15));
+      const topic = ((_a12 = document.querySelector("#customTopic")) == null ? void 0 : _a12.value) || "", focus = ((_b = document.querySelector("#customFocus")) == null ? void 0 : _b.value) || "all", count2 = Math.max(1, Math.min(50, Number((_c = document.querySelector("#customCount")) == null ? void 0 : _c.value) || 15));
       let pool = topic ? questions.filter((q) => q.topic === topic) : questions;
       if (focus === "unanswered") pool = pool.filter((q) => !state.solved.has(q.id));
       else if (focus === "mistakes") pool = pool.filter((q) => state.wrong.has(q.id));
@@ -48460,13 +48450,13 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   });
   main.addEventListener("change", (event) => {
-    var _a14, _b, _c;
+    var _a12, _b, _c;
     const variantSelect = event.target.closest("[data-similar-variant]");
     if (variantSelect) {
       const group = similarQuestionGroups.find((item) => item.id === variantSelect.dataset.similarVariant), card = variantSelect.closest("[data-similar-group-card]");
       if (group && card) {
         card.innerHTML = similarComparisonBody(group, variantSelect.value);
-        (_a14 = card.querySelector("[data-similar-variant]")) == null ? void 0 : _a14.focus({ preventScroll: true });
+        (_a12 = card.querySelector("[data-similar-variant]")) == null ? void 0 : _a12.focus({ preventScroll: true });
       }
       return;
     }
@@ -48507,17 +48497,17 @@ This typically indicates that your device does not have a healthy Internet conne
   };
   window.addEventListener("scroll", updateBackToTop, { passive: true });
   backToTopButton == null ? void 0 : backToTopButton.addEventListener("click", () => {
-    var _a14;
-    return window.scrollTo({ top: 0, behavior: ((_a14 = window.matchMedia) == null ? void 0 : _a14.call(window, "(prefers-reduced-motion: reduce)").matches) ? "instant" : "smooth" });
+    var _a12;
+    return window.scrollTo({ top: 0, behavior: ((_a12 = window.matchMedia) == null ? void 0 : _a12.call(window, "(prefers-reduced-motion: reduce)").matches) ? "instant" : "smooth" });
   });
   updateBackToTop();
   document.querySelector("#openSources").addEventListener("click", () => sourceDialog.showModal());
+  var _a7;
+  (_a7 = document.querySelector("#smallerText")) == null ? void 0 : _a7.addEventListener("click", () => adjustFontSize(-2));
+  var _a8;
+  (_a8 = document.querySelector("#largerText")) == null ? void 0 : _a8.addEventListener("click", () => adjustFontSize(2));
   var _a9;
-  (_a9 = document.querySelector("#smallerText")) == null ? void 0 : _a9.addEventListener("click", () => adjustFontSize(-2));
-  var _a10;
-  (_a10 = document.querySelector("#largerText")) == null ? void 0 : _a10.addEventListener("click", () => adjustFontSize(2));
-  var _a11;
-  (_a11 = document.querySelector("#themeToggle")) == null ? void 0 : _a11.addEventListener("click", () => {
+  (_a9 = document.querySelector("#themeToggle")) == null ? void 0 : _a9.addEventListener("click", () => {
     state.themeMode = state.themeMode === "dark" ? "system" : "dark";
     applyThemeMode();
     persistState();
@@ -48528,20 +48518,20 @@ This typically indicates that your device does not have a healthy Internet conne
     if (target.closest('#wordTranslationTooltip,.wt-word[role="button"],.lesson-it-text,.q-it,.italian-question,.pair-it,[lang="it"]')) return;
     closeWordTooltip();
   }, true);
-  var _a12;
-  (_a12 = document.querySelector("#wordTranslationTooltip")) == null ? void 0 : _a12.addEventListener("keydown", (event) => {
+  var _a10;
+  (_a10 = document.querySelector("#wordTranslationTooltip")) == null ? void 0 : _a10.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       closeWordTooltip({ restoreFocus: true });
       event.preventDefault();
     }
   });
   window.addEventListener("resize", () => {
-    var _a14;
-    if (!((_a14 = document.querySelector("#wordTranslationTooltip")) == null ? void 0 : _a14.hidden)) positionWordTooltip(activeWordTooltipAnchor);
+    var _a12;
+    if (!((_a12 = document.querySelector("#wordTranslationTooltip")) == null ? void 0 : _a12.hidden)) positionWordTooltip(activeWordTooltipAnchor);
   }, { passive: true });
   window.addEventListener("scroll", () => {
-    var _a14;
-    if (!((_a14 = document.querySelector("#wordTranslationTooltip")) == null ? void 0 : _a14.hidden)) closeWordTooltip();
+    var _a12;
+    if (!((_a12 = document.querySelector("#wordTranslationTooltip")) == null ? void 0 : _a12.hidden)) closeWordTooltip();
   }, { passive: true });
   document.addEventListener("keydown", (event) => {
     const target = event.target instanceof Element ? event.target : null;
@@ -48549,8 +48539,7 @@ This typically indicates that your device does not have a healthy Internet conne
     const word = target.closest('.wt-word[role="button"]');
     if (word) {
       event.preventDefault();
-      if (word.dataset.vocabularyIndex !== void 0) openVocabularyCard(word.dataset.vocabularyIndex, event);
-      else openTappedWord(word, { clientX: 0, clientY: 0, detail: 0 });
+      openTappedWord(word, { clientX: 0, clientY: 0, detail: 0 });
       return;
     }
     const paragraph = target.closest(".lesson-it-text[data-translation-tappable]");
@@ -48568,8 +48557,8 @@ This typically indicates that your device does not have a healthy Internet conne
     } else if (event.key === "ArrowLeft" && quiz.mode !== "exam" && quiz.answers[quiz.index] !== null) nextQuestion();
   });
   var welcomeDialog = document.querySelector("#welcomeDialog");
-  var _a13;
-  (_a13 = document.querySelector("#welcomeGuest")) == null ? void 0 : _a13.addEventListener("click", () => {
+  var _a11;
+  (_a11 = document.querySelector("#welcomeGuest")) == null ? void 0 : _a11.addEventListener("click", () => {
     try {
       localStorage.setItem(welcomeKey, "1");
     } catch {
@@ -48583,7 +48572,7 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   });
   async function boot() {
-    var _a14, _b, _c, _d;
+    var _a12, _b, _c, _d;
     applyFontSize();
     try {
       const [bankData, course, labels, similarData] = await loadCourseData();
@@ -48603,7 +48592,7 @@ This typically indicates that your device does not have a healthy Internet conne
       officialSyllabusMeta = course.official_syllabus || {};
       officialSyllabus = officialSyllabusMeta.items || [];
       if (!Array.isArray(questions) || questions.length !== bank.count || questions.some((q) => !q.it || !q.ar || !q.answer || !q.topic)) throw new Error("Question bank incomplete / بنك الأسئلة غير مكتمل");
-      if ((similarData == null ? void 0 : similarData.schema_version) !== 2 || ((_a14 = similarData.method) == null ? void 0 : _a14.clustering) !== "complete-link" || !Number.isFinite(similarData.method.minimum_sequence_similarity) || !Number.isInteger(similarData.method.maximum_changed_tokens) || similarData.question_count !== questions.length || similarData.group_count !== similarQuestionGroups.length) throw new Error("Similar-question index incomplete / فهرس الأسئلة المتقاربة غير مكتمل");
+      if ((similarData == null ? void 0 : similarData.schema_version) !== 2 || ((_a12 = similarData.method) == null ? void 0 : _a12.clustering) !== "complete-link" || !Number.isFinite(similarData.method.minimum_sequence_similarity) || !Number.isInteger(similarData.method.maximum_changed_tokens) || similarData.question_count !== questions.length || similarData.group_count !== similarQuestionGroups.length) throw new Error("Similar-question index incomplete / فهرس الأسئلة المتقاربة غير مكتمل");
       const groupedIds = /* @__PURE__ */ new Set();
       for (const group of similarQuestionGroups) {
         if (!group.id || !topicLabels[group.topic] || !Array.isArray(group.question_ids) || group.question_ids.length < 2 || !group.question_ids.includes(group.representative_id) || !Number.isFinite(group.minimum_pair_similarity) || group.minimum_pair_similarity < similarData.method.minimum_sequence_similarity || !Number.isInteger(group.maximum_changed_tokens) || group.maximum_changed_tokens > similarData.method.maximum_changed_tokens) throw new Error("Invalid similar-question group / توجد مجموعة أسئلة متقاربة غير صالحة");
@@ -48615,22 +48604,22 @@ This typically indicates that your device does not have a healthy Internet conne
       }
       if (groupedIds.size !== similarGroupedQuestionCount) throw new Error("Similar-question group count mismatch / عدد مجموعات الأسئلة غير متطابق");
       if (!lessonModules.length || lessonModules.some((m2) => {
-        var _a15, _b2;
-        return !m2.title_it || !m2.title_ar || !((_a15 = m2.lessons) == null ? void 0 : _a15.length) || !((_b2 = m2.sources) == null ? void 0 : _b2.length);
+        var _a13, _b2;
+        return !m2.title_it || !m2.title_ar || !((_a13 = m2.lessons) == null ? void 0 : _a13.length) || !((_b2 = m2.sources) == null ? void 0 : _b2.length);
       })) throw new Error("Course content incomplete / المنهج غير مكتمل");
       const expectedTopics = new Set(questions.map((q) => q.topic));
       if (expectedTopics.size !== 25 || Object.keys(topicLabels).length !== 25 || [...expectedTopics].some((t2) => !topicLabels[t2])) throw new Error("Topic index incomplete / فهرس الموضوعات غير مكتمل");
       const lessonList = flatLessons(), wordCount = (text) => (String(text || "").match(/[\p{L}\p{M}]+(?:[’'][\p{L}\p{M}]+)*/gu) || []).length;
       if (lessonModules.length !== 11 || lessonList.length !== 50 || lessonList.some((x2) => {
-        var _a15, _b2;
+        var _a13, _b2;
         const l2 = x2.lesson, n2 = wordCount(l2.body_it);
-        return !l2.heading_it || !l2.heading_ar || !l2.body_it || !l2.body_ar || n2 < 80 || n2 > 120 || !l2.core_it || !l2.core_ar || !Array.isArray(l2.key_points) || l2.key_points.length < 4 || l2.key_points.length > 6 || !Array.isArray(l2.trap_words) || l2.trap_words.length > 2 || !Array.isArray(l2.numbers) || l2.numbers.length > 2 || !Array.isArray(l2.common_mistakes) || l2.common_mistakes.length < 2 || l2.common_mistakes.length > 3 || !Array.isArray(l2.quick_check) || l2.quick_check.length !== 3 || !Array.isArray(l2.sources) || !l2.sources.length || !((_a15 = l2.bank_topics) == null ? void 0 : _a15.length) || !l2.visual_src && !l2.visual_question_id || !((_b2 = l2.review_question_ids) == null ? void 0 : _b2.length) && !l2.source_check;
+        return !l2.heading_it || !l2.heading_ar || !l2.body_it || !l2.body_ar || n2 < 80 || n2 > 120 || !l2.core_it || !l2.core_ar || !Array.isArray(l2.key_points) || l2.key_points.length < 4 || l2.key_points.length > 6 || !Array.isArray(l2.trap_words) || l2.trap_words.length > 2 || !Array.isArray(l2.numbers) || l2.numbers.length > 2 || !Array.isArray(l2.common_mistakes) || l2.common_mistakes.length < 2 || l2.common_mistakes.length > 3 || !Array.isArray(l2.quick_check) || l2.quick_check.length !== 3 || !Array.isArray(l2.sources) || !l2.sources.length || !((_a13 = l2.bank_topics) == null ? void 0 : _a13.length) || !l2.visual_src && !l2.visual_question_id || !((_b2 = l2.review_question_ids) == null ? void 0 : _b2.length) && !l2.source_check;
       })) throw new Error("Structured lesson package is incomplete, out of word range, or missing required sections / حزمة الدروس ناقصة أو خارج عدد الكلمات أو ينقصها قسم مطلوب");
       if (glossaryEntries.length !== 200 || new Set(glossaryEntries.map((e2) => e2.it.toLocaleLowerCase())).size !== 200 || ((_b = referenceData.traps) == null ? void 0 : _b.length) !== 20 || ((_c = referenceData.numbers) == null ? void 0 : _c.length) !== 40 || ((_d = referenceData.comparisons) == null ? void 0 : _d.length) !== 15) throw new Error("Verified glossary or reference datasets are incomplete / بيانات القاموس والمراجع غير مكتملة");
       const lessonKeys = new Set(lessonList.map((x2) => x2.key));
       if (officialSyllabus.length !== 25 || officialSyllabus.some((item) => {
-        var _a15;
-        return !item.id || !item.title_it || !item.title_ar || !((_a15 = item.lesson_refs) == null ? void 0 : _a15.length) || item.lesson_refs.some((key) => !lessonKeys.has(key));
+        var _a13;
+        return !item.id || !item.title_it || !item.title_ar || !((_a13 = item.lesson_refs) == null ? void 0 : _a13.length) || item.lesson_refs.some((key) => !lessonKeys.has(key));
       })) throw new Error("Official syllabus index is incomplete / فهرس المنهج الرسمي غير مكتمل");
       void loadVideoManifest().then((overrides) => {
         videoUrlOverrides = overrides;
@@ -48646,12 +48635,12 @@ This typically indicates that your device does not have a healthy Internet conne
         applyThemeMode();
         return persistState();
       }, getContext: () => ({ questionIds: new Set(questions.map((q) => Number(q.id))), lessonKeys: new Set(flatLessons().map((x2) => x2.key)), sourceCheckIds: new Set(lessonModules.flatMap((m2) => m2.lessons.map((l2) => {
-        var _a15;
-        return (_a15 = l2.source_check) == null ? void 0 : _a15.id;
+        var _a13;
+        return (_a13 = l2.source_check) == null ? void 0 : _a13.id;
       }).filter(Boolean))), topics: new Set(Object.keys(topicLabels)) }), onImported: () => render("home") });
       accountService = createAccountService({ firebaseConfig, getState: () => state, replaceState: applySyncedProgress, getContext: () => ({ questionIds: new Set(questions.map((q) => Number(q.id))), lessonKeys: new Set(flatLessons().map((x2) => x2.key)), sourceCheckIds: new Set(lessonModules.flatMap((m2) => m2.lessons.map((l2) => {
-        var _a15;
-        return (_a15 = l2.source_check) == null ? void 0 : _a15.id;
+        var _a13;
+        return (_a13 = l2.source_check) == null ? void 0 : _a13.id;
       }).filter(Boolean))), topics: new Set(Object.keys(topicLabels)) }), onOwnerChanged: setStudyOwner, getGuestState: () => loadState(stateKey), onAccountDeleted: (uid) => {
         const key = `patente-ar-account-v1:${uid}`;
         if (activeStateKey === key) setStudyOwner(null, { discardCurrent: true });

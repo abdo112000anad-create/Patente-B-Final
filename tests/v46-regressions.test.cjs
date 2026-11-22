@@ -20,7 +20,7 @@ test('Italian word-tap surfaces suppress selection and prevent default only on a
   assert.match(wordRule, /cursor:\s*pointer/u);
 
   const app = read('src/app.js');
-  const clickStart = app.indexOf("const tappedWord=event.target.closest('.wt-word[data-tap-word]')");
+  const clickStart = app.indexOf("const tappedWord=event.target.closest('.wt-word[data-term]')");
   const clickEnd = app.indexOf('const sentenceControl=', clickStart);
   const wordClickBranch = app.slice(clickStart, clickEnd);
   assert.match(wordClickBranch, /if\(tappedWord\)\{event\.preventDefault\(\);openTappedWord\(tappedWord,event\);return;\}/u);

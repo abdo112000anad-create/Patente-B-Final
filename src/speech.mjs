@@ -25,7 +25,7 @@ export function splitSpeechText(text, maxLength = 120) {
 }
 
 export const ITALIAN_TTS_LOCALE = 'it-IT';
-const VOICE_WAIT_TIMEOUT_MS = 2500;
+const VOICE_WAIT_TIMEOUT_MS = 5000;
 const VOICE_POLL_INTERVAL_MS = 200;
 
 export function buildLessonSpeechTexts(lesson = {}) {
@@ -277,14 +277,13 @@ export function createSpeechController({
   function toggle() { return activeTask?.paused ? resume() : pause(); }
   function isActive(button) { return !!activeTask && !activeTask.failed && activeTask.button === button; }
 
-  function showError(task, error, userMessage = 'تعذّر تشغيل الصوت على هذا الجهاز.', needsSpeechSettings = false) {
+  function showError(task, error, userMessage = 'تعذّر تشغيل الصوت على هذا الجهاز.') {
     task.failed = true;
     const reason = String(error?.message || error || 'speech-engine-unavailable');
     try { console.warn('Web Speech playback failed on this device.', {locale: task.locale, reason}); } catch {}
     setButtonState(task.button, 'error');
-    notify('error', task, userMessage, {needsSpeechSettings});
+    notify('error', task, userMessage);
     if (errorTimer) clearTimeout(errorTimer);
-    if (needsSpeechSettings) return;
     errorTimer = setTimeout(() => {
       if (task.token !== sequence) return;
       activeTask = null;
@@ -405,7 +404,7 @@ export function createSpeechController({
     };
     activeTask = task;
     if (!api) {
-      showError(task, 'web-speech-api-unavailable', speechServiceMessage(), true);
+      showError(task, 'web-speech-api-unavailable', speechServiceMessage());
       return false;
     }
     try {
@@ -427,7 +426,7 @@ export function createSpeechController({
           } catch (error) {
             if (task.token !== sequence) return false;
             const voiceUnavailable = /language-unavailable|voice-unavailable|speech voice list is unavailable|no matching language voice/iu.test(String(error?.message || error));
-            showError(task, error, voiceUnavailable ? voiceInstallMessage() : 'تعذّر تشغيل الصوت على هذا الجهاز.', voiceUnavailable);
+            showError(task, error, voiceUnavailable ? voiceInstallMessage() : 'تعذّر تشغيل الصوت على هذا الجهاز.');
             return false;
           }
           if (task.token !== sequence) return false;
@@ -441,7 +440,7 @@ export function createSpeechController({
     } catch (error) {
       if (task.token !== sequence) return false;
       const voiceUnavailable = /language-unavailable|voice-unavailable|speech voice list is unavailable|no matching language voice/iu.test(String(error?.message || error));
-      showError(task, error, voiceUnavailable ? voiceInstallMessage() : 'تعذّر تشغيل الصوت على هذا الجهاز.', voiceUnavailable);
+      showError(task, error, voiceUnavailable ? voiceInstallMessage() : 'تعذّر تشغيل الصوت على هذا الجهاز.');
       return false;
     } finally {
       if (task.token === sequence && !task.failed) {

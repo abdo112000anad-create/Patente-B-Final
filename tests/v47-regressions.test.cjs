@@ -76,20 +76,17 @@ test('Web Speech fallback waits for voiceschanged with bounded cleanup and fixed
   assert.equal(utterances[0].pitch, 1.0);
 
   const source = read('src/speech.mjs');
-  assert.match(source, /VOICE_WAIT_TIMEOUT_MS\s*=\s*2500/u);
+  assert.match(source, /VOICE_WAIT_TIMEOUT_MS\s*=\s*5000/u);
   assert.match(source, /addEventListener\('voiceschanged'/u);
   assert.match(source, /removeEventListener\('voiceschanged'/u);
   assert.doesNotMatch(source, /nativeTts|nativeEngineDisabled|Piper|ONNX/u);
   assert.match(source, /prepareWebVoice/u);
 });
 
-test('Android TTS visibility query is unique outside application and checked after manifest merge', () => {
+test('Android Native TTS query is absent and CI verifies it stays removed', () => {
   const manifest = read('android/app/src/main/AndroidManifest.xml');
-  const queryPosition = manifest.indexOf('<queries>');
-  const applicationPosition = manifest.indexOf('<application');
-  assert.ok(queryPosition >= 0 && queryPosition < applicationPosition);
-  assert.equal([...manifest.matchAll(/android\.intent\.action\.TTS_SERVICE/gu)].length, 1);
+  assert.doesNotMatch(manifest, /android\.intent\.action\.TTS_SERVICE/u);
   const workflow = read('.github/workflows/build.yml');
-  assert.match(workflow, /Verify merged manifest exposes Android speech services/u);
-  assert.match(workflow, /grep -Fq 'android\.intent\.action\.TTS_SERVICE'/u);
+  assert.match(workflow, /Verify Native TTS service is not queried/u);
+  assert.match(workflow, /! grep -Fq 'android\.intent\.action\.TTS_SERVICE'/u);
 });

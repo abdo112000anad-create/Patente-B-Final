@@ -85,6 +85,7 @@ test('Android source and dependencies remain Web Speech only with no bundled loc
     'scripts/build-piper-alpha.sh',
     'scripts/download_piper_runtime.sh',
   ]) assert.equal(fs.existsSync(path.join(root, rel)), false, `${rel} must be absent`);
-  assert.match(activity, /registerPlugin\(SpeechSettingsPlugin\.class\)/u);
+  assert.doesNotMatch(activity, /SpeechSettingsPlugin/u);
+  assert.equal(fs.existsSync(path.join(root, 'android/app/src/main/java/it/patenteb/sideload/v29/SpeechSettingsPlugin.java')), false);
   assert.match(activity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);
 });

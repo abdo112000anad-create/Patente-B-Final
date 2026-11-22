@@ -50,7 +50,7 @@ test('v46 UI uses a non-modal bottom sheet, single-tap word lookup, and true pai
   assert.doesNotMatch(index, /id="instantTranslationDialog"|id="vocabularyDialog"/u);
   assert.match(app, /data-similar-variant/u);
   assert.match(app, /diffQuestionText/u);
-  assert.match(app, /\.wt-word\[data-tap-word\]/u);
+  assert.match(app, /\.wt-word\[data-term\]/u);
   assert.match(app, /openTappedWord\(tappedWord,event\)/u);
   assert.doesNotMatch(app, /wordHoldTimer|heldItalianTarget/u);
   assert.match(read('src/v40-audio.css'), /inset:\s*auto 0 0/u);
@@ -62,7 +62,7 @@ test('v46 UI uses a non-modal bottom sheet, single-tap word lookup, and true pai
 test('a single click opens the tapped word card without a long-press timer', () => {
   const app = read('src/app.js');
   assert.match(app, /main\.addEventListener\('click',event=>\{/u);
-  assert.match(app, /const tappedWord=event\.target\.closest\('\.wt-word\[data-tap-word\]'\)/u);
+  assert.match(app, /const tappedWord=event\.target\.closest\('\.wt-word\[data-term\]'\)/u);
   assert.match(app, /openTappedWord\(tappedWord,event\)/u);
   assert.doesNotMatch(app, /wordHoldTimer|heldItalianTarget|setTimeout\(\(\)=>\{openTappedWord/u);
 });
@@ -79,7 +79,7 @@ test('v51 keeps Web Speech lesson controls and removes native/local TTS paths', 
   assert.match(speech, /SpeechSynthesisUtterance|speechSynthesis/u);
   assert.doesNotMatch(`${app}\n${speech}\n${mainActivity}`, /Piper|nativeTts|nativeEngineDisabled|ONNX/u);
   assert.match(mainActivity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);
-  assert.match(mainActivity, /registerPlugin\(SpeechSettingsPlugin\.class\)/u);
+  assert.doesNotMatch(mainActivity, /SpeechSettingsPlugin/u);
 });
 
 test('lesson renders accessible topic-specific 2D diagrams without claiming 3D', () => {

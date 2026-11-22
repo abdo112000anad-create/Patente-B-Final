@@ -7,12 +7,9 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 
-test('Android manifest exposes the system TTS service to package visibility', () => {
+test('Android manifest does not request Native TTS package visibility', () => {
   const manifest = read('android/app/src/main/AndroidManifest.xml');
-  const queryAt = manifest.indexOf('<queries>');
-  const applicationAt = manifest.indexOf('<application');
-  assert.ok(queryAt >= 0 && queryAt < applicationAt);
-  assert.match(manifest, /<queries>\s*<intent>\s*<action android:name="android\.intent\.action\.TTS_SERVICE"\s*\/>\s*<\/intent>\s*<\/queries>/u);
+  assert.doesNotMatch(manifest, /<queries>|TTS_SERVICE/u);
 });
 
 test('key points render as vertical bilingual cards without a two-column table', async () => {
@@ -57,7 +54,7 @@ test('lesson detail renders the short Italian then Arabic summary and keeps it s
 
 test('voice-loading state displays an Arabic progress message', () => {
   const app = read('src/app.js');
-  assert.match(app, /status==='preparing'\?'جارٍ تجهيز صوت الجهاز\.\.\.'/u);
+  assert.match(app, /status==='preparing'\?'جارٍ تجهيز صوت إيطالي\.\.\. انتظار تحميل الأصوات\.'/u);
   assert.doesNotMatch(app, /الصوت المحلي|Piper|nativeTts/u);
 });
 
@@ -102,10 +99,9 @@ test('an unlisted Italian voice falls back to the system language selector', asy
   assert.ok(states.some(state => state.status === 'playing' && state.locale === 'it-IT'));
 });
 
-test('Android setup button uses only the standard TTS data installer, not a native speech engine', () => {
+test('Native TTS settings plugin is absent and browser Web Speech remains available', () => {
   const activity = read('android/app/src/main/java/it/patenteb/sideload/v29/MainActivity.java');
-  const plugin = read('android/app/src/main/java/it/patenteb/sideload/v29/SpeechSettingsPlugin.java');
-  assert.match(activity, /registerPlugin\(SpeechSettingsPlugin\.class\)/u);
-  assert.match(plugin, /TextToSpeech\.Engine\.ACTION_INSTALL_TTS_DATA/u);
-  assert.doesNotMatch(plugin, /new TextToSpeech\s*\(|synthesizeToFile|JNI|ONNX|Piper/u);
+  assert.doesNotMatch(activity, /SpeechSettingsPlugin/u);
+  assert.equal(fs.existsSync(path.join(root, 'android/app/src/main/java/it/patenteb/sideload/v29/SpeechSettingsPlugin.java')), false);
+  assert.match(read('src/speech.mjs'), /SpeechSynthesisUtterance|speechSynthesis/u);
 });

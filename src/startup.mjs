@@ -36,7 +36,7 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
     const similar = similarFile?.data;
     const support = supportFile?.data;
     if (!bank || !Array.isArray(bank.questions) || bank.questions.length === 0 || bank.count !== bank.questions.length ||
-        !lessons || lessons.schema_version !== 3 || !Array.isArray(lessons.modules) || lessons.module_count !== lessons.modules.length || lessons.module_count !== 11 ||
+        !lessons || lessons.schema_version !== 4 || !Array.isArray(lessons.modules) || lessons.module_count !== lessons.modules.length || lessons.module_count !== 11 ||
         !labels || typeof labels !== 'object' || Array.isArray(labels) || Object.keys(labels).length === 0 ||
         !similar || similar.schema_version !== 2 || !Array.isArray(similar.groups) || similar.group_count !== similar.groups.length ||
         similar.question_count !== bank.questions.length || !/^[a-f0-9]{64}$/.test(similar.question_bank_sha256 || '') ||
@@ -45,8 +45,10 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
       error.code = 'course_integrity';
       throw error;
     }
-    const lessonKeys = ['id', 'keyPoints', 'summaryAr', 'summaryIt', 'titleAr', 'titleIt'].sort().join(',');
-    const pointKeys = ['ar', 'it'].join(',');
+    const lessonKeys = 'id,titleIt,titleAr,summaryIt,summaryAr,keyPoints,trapWord,quickCheck';
+    const pointKeys = 'it,ar';
+    const trapWordKeys = 'word,reasonAr';
+    const quickCheckKeys = 'qIt,a,explainAr';
     const expectedIds = new Set();
     let lessonCount = 0;
     for (const module of lessons.modules) {
@@ -58,10 +60,14 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
       for (let index = 0; index < module.lessons.length; index += 1) {
         const lesson = module.lessons[index];
         const expectedId = `u${module.order_hint}-l${index + 1}`;
-        if (!lesson || Object.keys(lesson).sort().join(',') !== lessonKeys || lesson.id !== expectedId || expectedIds.has(lesson.id) ||
+        const validTrapWord = lesson?.trapWord === null || (lesson?.trapWord && typeof lesson.trapWord === 'object' && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(',') === trapWordKeys && typeof lesson.trapWord.word === 'string' && lesson.trapWord.word.trim() && typeof lesson.trapWord.reasonAr === 'string' && lesson.trapWord.reasonAr.trim());
+        const validQuickCheck = Array.isArray(lesson?.quickCheck) && lesson.quickCheck.length === 3 && lesson.quickCheck.every(item =>
+          item && typeof item === 'object' && !Array.isArray(item) && Object.keys(item).join(',') === quickCheckKeys &&
+          typeof item.qIt === 'string' && item.qIt.trim() && ['VERO', 'FALSO'].includes(item.a) && typeof item.explainAr === 'string' && item.explainAr.trim());
+        if (!lesson || Object.keys(lesson).join(',') !== lessonKeys || lesson.id !== expectedId || expectedIds.has(lesson.id) ||
             !['titleIt', 'titleAr', 'summaryIt', 'summaryAr'].every(key => typeof lesson[key] === 'string' && lesson[key].trim()) ||
-            !Array.isArray(lesson.keyPoints) || lesson.keyPoints.length < 3 || lesson.keyPoints.length > 5 ||
-            !lesson.keyPoints.every(point => point && Object.keys(point).sort().join(',') === pointKeys && typeof point.it === 'string' && point.it.trim() && typeof point.ar === 'string' && point.ar.trim())) {
+            !Array.isArray(lesson.keyPoints) || lesson.keyPoints.length < 3 || lesson.keyPoints.length > 4 || !validTrapWord || !validQuickCheck ||
+            !lesson.keyPoints.every(point => point && Object.keys(point).join(',') === pointKeys && typeof point.it === 'string' && point.it.trim() && typeof point.ar === 'string' && point.ar.trim())) {
           const error = new Error('Il formato di una lezione non è valido. / تنسيق أحد الدروس غير صالح.');
           error.code = 'course_integrity';
           throw error;

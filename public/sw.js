@@ -1,4 +1,4 @@
-const CACHE_NAME = 'patente-ar-v56-italian-audio-1';
+const CACHE_NAME = 'patente-ar-v57-learning-path-1';
 const FETCH_TIMEOUT_MS = 10000;
 const SHELL = [
   '/',
@@ -16,6 +16,7 @@ const SHELL = [
   '/src/v50-contrast.css',
   '/src/v52-dark-overhaul.css',
   '/src/v53-mobile-nav.css',
+  '/src/v57-learning-path.css',
   '/app.bundle.js',
   '/manifest.webmanifest',
   '/favicon.svg',
@@ -147,15 +148,19 @@ function validJsonPayload(pathname, data) {
     });
   }
   if (pathname === '/data/lessons.json') {
-    const lessonKeys = ['id', 'keyPoints', 'summaryAr', 'summaryIt', 'titleAr', 'titleIt'].join(',');
-    const pointKeys = ['ar', 'it'].join(',');
-    return !!data && data.schema_version === 3 && Array.isArray(data.modules) && data.modules.length === 11 && data.module_count === data.modules.length &&
+    const lessonKeys = ['id', 'titleIt', 'titleAr', 'summaryIt', 'summaryAr', 'keyPoints', 'trapWord', 'quickCheck'].join(',');
+    const pointKeys = ['it', 'ar'].join(',');
+    const quickCheckKeys = ['qIt', 'a', 'explainAr'].join(',');
+    const trapWordKeys = ['word', 'reasonAr'].join(',');
+    return !!data && data.schema_version === 4 && Array.isArray(data.modules) && data.modules.length === 11 && data.module_count === data.modules.length &&
       data.modules.every(module => module?.title_it && module?.title_ar && Array.isArray(module.lessons) && module.lessons.length > 0 &&
         Array.isArray(module.sources) && module.sources.length > 0 && module.lessons.every((lesson, index) => lesson &&
-          Object.keys(lesson).sort().join(',') === lessonKeys && lesson.id === `u${module.order_hint}-l${index + 1}` &&
+          Object.keys(lesson).join(',') === lessonKeys && lesson.id === `u${module.order_hint}-l${index + 1}` &&
           ['titleIt', 'titleAr', 'summaryIt', 'summaryAr'].every(key => typeof lesson[key] === 'string' && lesson[key].trim()) &&
-          Array.isArray(lesson.keyPoints) && lesson.keyPoints.length >= 3 && lesson.keyPoints.length <= 5 &&
-          lesson.keyPoints.every(point => point && Object.keys(point).sort().join(',') === pointKeys && typeof point.it === 'string' && point.it.trim() && typeof point.ar === 'string' && point.ar.trim()))) &&
+          Array.isArray(lesson.keyPoints) && lesson.keyPoints.length >= 3 && lesson.keyPoints.length <= 4 &&
+          lesson.keyPoints.every(point => point && Object.keys(point).join(',') === pointKeys && typeof point.it === 'string' && point.it.trim() && typeof point.ar === 'string' && point.ar.trim()) &&
+          (lesson.trapWord === null || lesson.trapWord && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(',') === trapWordKeys && typeof lesson.trapWord.word === 'string' && lesson.trapWord.word.trim() && typeof lesson.trapWord.reasonAr === 'string' && lesson.trapWord.reasonAr.trim()) &&
+          Array.isArray(lesson.quickCheck) && lesson.quickCheck.length === 3 && lesson.quickCheck.every(item => item && !Array.isArray(item) && Object.keys(item).join(',') === quickCheckKeys && typeof item.qIt === 'string' && item.qIt.trim() && ['VERO', 'FALSO'].includes(item.a) && typeof item.explainAr === 'string' && item.explainAr.trim()))) &&
       data.modules.reduce((count, module) => count + module.lessons.length, 0) === 50;
   }
   if (pathname === '/data/lesson-support.json') {

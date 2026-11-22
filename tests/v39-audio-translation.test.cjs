@@ -34,11 +34,11 @@ test('single-tap lookup resolves one isolated word and labels machine drafts hon
   const tooltipStart = app.indexOf('function showWordTooltip(');
   const tooltipEnd = app.indexOf('function openTappedWord(', tooltipStart);
   const tooltipHandler = app.slice(tooltipStart, tooltipEnd);
-  assert.ok(tooltipHandler.includes('translateTappedWord(word,glossaryEntries)'));
+  assert.ok(tooltipHandler.includes('translateTappedWord(word,[])'));
   assert.ok(!tooltipHandler.includes('translateLessonSentence'));
   assert.match(app.slice(app.indexOf('function openTappedWord('), app.indexOf('function showInlineSentenceTranslation(')), /loadLocalWordDictionary\(\)/u);
   assert.match(app, /main\.addEventListener\('click',event=>\{/u);
-  assert.match(app, /const tappedWord=event\.target\.closest\('\.wt-word\[data-tap-word\]'\)/u);
+  assert.match(app, /const tappedWord=event\.target\.closest\('\.wt-word\[data-term\]'\)/u);
   assert.match(app, /openTappedWord\(tappedWord,event\)/u);
   assert.doesNotMatch(app, /wordHoldTimer|heldItalianTarget/u);
 });
@@ -87,7 +87,8 @@ test('v51 uses Web Speech only, with Italian lesson audio and no bundled local T
   assert.ok(app.includes("ITALIAN_TTS_LOCALE} from './speech.mjs'"));
   assert.doesNotMatch(speech, /playItalianAudio|isAudioUnlocked/u);
   assert.match(mainActivity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);
-  assert.match(mainActivity, /registerPlugin\(SpeechSettingsPlugin\.class\)/u);
+  assert.doesNotMatch(mainActivity, /SpeechSettingsPlugin/u);
+  assert.doesNotMatch(manifest, /TTS_SERVICE/u);
   assert.doesNotMatch(`${app}\n${speech}\n${gradle}\n${manifest}\n${mainActivity}`, /Piper|piperAlpha|nativeTts|ONNX|sherpa-onnx|piper-phonemize/u);
   for (const rel of ['android/app/src/piperAlpha', 'android/app/src/main/assets/piper']) {
     assert.equal(fs.existsSync(path.join(root, rel)), false, `${rel} must remain absent`);
@@ -265,11 +266,11 @@ test('warning cards use the v50 teal palette with WCAG AA contrast', () => {
   assert.ok(contrast('#2edbc0', '#173d4a') >= 4.5);
 });
 
-test('floating audio player uses SVG controls and the requested compact dimensions', () => {
+test('floating audio player uses SVG controls, a fixed 0.8x speed, and compact dimensions', () => {
   const index = read('index.html');
   const css = read('src/v40-audio.css');
   assert.match(index, /id="speechStop"[^>]*aria-label="إيقاف الصوت"/u);
-  assert.match(index, /class="speech-rate-control"[\s\S]*?id="speechRate" aria-label="سرعة الصوت الإيطالي"/u);
+  assert.match(index, /class="speech-rate-control"[\s\S]*?class="speech-rate-value" aria-label="سرعة الصوت الإيطالي">0\.8×/u);
   assert.match(css, /bottom: max\(20px, env\(safe-area-inset-bottom\)\)/u);
   assert.match(css, /width: 90%;[\s\S]*?max-width: 400px;[\s\S]*?height: 60px/u);
 });
