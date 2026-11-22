@@ -15,7 +15,7 @@ const index = read('index.html');
 const app = read('src/app.js');
 
 
-test('v57 keeps exactly 50 lessons with the ordered eight-field bilingual schema', () => {
+test('v58 keeps exactly 50 lessons with the ordered eight-field bilingual schema', () => {
   assert.equal(course.modules.length, 11);
   assert.equal(course.schema_version, 4);
   assert.equal(course.modules.reduce((count, module) => count + module.lessons.length, 0), 50);
@@ -60,11 +60,13 @@ test('course legal caveats keep the current-law limitation clear', () => {
 
 test('lesson review provenance retains official Italian source URLs and verification notes', () => {
   const officialDomains = ['aci.gov.it', 'aci.it', 'normattiva.it', 'gazzettaufficiale.it', 'mit.gov.it'];
-  const practicalOnly = new Set(['u10-l5', 'u10-l6']);
+  const practicalOnly = new Set(['u10-l5']);
   const withoutLegalSources = new Set();
   for (const [id, lesson] of Object.entries(support.lessons)) {
     assert.ok(Array.isArray(lesson.review_sources_checked));
     assert.ok(lesson.review_verification_note);
+    assert.ok(Array.isArray(lesson.sources) && lesson.sources.length > 0);
+    assert.ok(lesson.sources.every(source => source && typeof source === 'object' && source.url && source.title));
     if (lesson.review_sources_checked.length === 0) {
       withoutLegalSources.add(id);
       assert.ok(practicalOnly.has(id));
@@ -78,6 +80,8 @@ test('lesson review provenance retains official Italian source URLs and verifica
     }
   }
   assert.deepEqual(withoutLegalSources, practicalOnly);
+  assert.ok(support.lessons['u10-l6'].review_sources_checked.includes('https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf'));
+  assert.ok(support.lessons['u10-l4'].review_sources_checked.includes('https://aci.gov.it/codice-della-strada/art-148/'));
 });
 
 test('video scripts remain local planning material and are not published', () => {
@@ -233,11 +237,11 @@ test('offline cache includes local lessons, questions, dictionary, and v50 style
   assert.match(serviceWorker, /v52-dark-overhaul\.css/u);
   assert.match(serviceWorker, /italian_arabic_dictionary_lookup\.json/u);
   assert.match(read('scripts/build-pwa.cjs'), /italian_arabic_dictionary_lookup\.json/u);
-  assert.match(serviceWorker, /patente-ar-v57-learning-path/u);
-  assert.match(index, /data-app-version="57"/u);
+  assert.match(serviceWorker, /patente-ar-v58-learning-path/u);
+  assert.match(index, /data-app-version="58"/u);
 });
 
-test('v57 home contains the vertical 50-lesson learning path and no legacy dashboard sections', () => {
+test('v58 home contains the vertical 50-lesson learning path and no legacy dashboard sections', () => {
   const home = app.slice(app.indexOf('function homePage(){'), app.indexOf('function lessonDetailPage('));
   assert.match(home, /lesson-path-shell/u);
   assert.match(home, /<ol class="lesson-path">/u);
@@ -254,7 +258,7 @@ test('Glossary controls fit the single-column mobile layout', () => {
   assert.match(css, /\.glossary-controls > label \{ min-width: 0; \}/u);
 });
 
-test('Android build script remains debug-only and uses v57 metadata', () => {
+test('Android build script remains debug-only and uses v58 metadata', () => {
   const build = read('scripts/build-android.sh');
   const gradleCommand = build.match(/^\.\/gradlew .*$/mu)?.[0] || '';
   assert.match(gradleCommand, /\bclean\b/u);
@@ -262,11 +266,11 @@ test('Android build script remains debug-only and uses v57 metadata', () => {
   assert.match(gradleCommand, /:app:testDebugUnitTest/u);
   assert.doesNotMatch(gradleCommand, /assembleRelease|bundleRelease|publish|upload/iu);
   const gradle = read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+57/u);
-  assert.match(gradle, /versionName\s+"57\.0\.0"/u);
+  assert.match(gradle, /versionCode\s+58/u);
+  assert.match(gradle, /versionName\s+"58\.0\.0"/u);
   assert.match(gradle, /abiFilters\s+'arm64-v8a',\s*'armeabi-v7a'/u);
   assert.match(read('android/variables.gradle'), /minSdkVersion\s*=\s*24/u);
-  assert.equal(json('package.json').version, '57.0.0');
-  assert.equal(json('package-lock.json').packages[''].version, '57.0.0');
-  assert.equal(json('public/release.json').version, 57);
+  assert.equal(json('package.json').version, '58.0.0');
+  assert.equal(json('package-lock.json').packages[''].version, '58.0.0');
+  assert.equal(json('public/release.json').version, 58);
 });

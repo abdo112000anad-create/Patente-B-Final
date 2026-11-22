@@ -878,12 +878,12 @@
       "review_verification_note": "La Gazzetta Ufficiale conferma pubblicazione il 29/11/2024 ed entrata in vigore il 14/12/2024. Il testo consultato non prova quali singole disposizioni siano state modificate; per questo il riepilogo invita a verificarle puntualmente."
     },
     "u2-l1": {
-      "body_ar": "تميّز المادة 39 بين ثلاث مجموعات من الإشارات الرأسية. إشارات الخطر تنبّه إلى وجود خطر وطبيعته وتطلب الحذر. إشارات التنظيم أو الوصفات المرورية تُعلن واجبًا أو منعًا أو قيدًا؛ وتندرج ضمنها إشارات الأولوية والمنع والإلزام. أما إشارات الإرشاد فتقدم معلومات مفيدة للقيادة ولتحديد الأماكن والمسارات والخدمات. وتفصّل اللائحة أشكال الإشارات المفردة ودلالاتها. عبارة «خطر، تنظيم، إرشاد» تساعد على ترتيب المعلومات، لكنها لا تغني عن قراءة الرمز المحدد والقواعد المنطبقة عليه. هذا شرح تعليمي، وليس اقتباسًا من نص القانون.",
+      "body_ar": "تضم إشارات الطريق أربع مجموعات وفق المادة 38: رأسية وأفقية وضوئية وتكميلية. وتصنّف المادة 39 الإشارات الرأسية إلى خطر وتنظيم وإرشاد. تحذّر إشارة الخطر من وجود خطر؛ وتبيّن إشارة التنظيم أولوية أو منعًا أو إلزامًا أو قيدًا؛ أما إشارة الإرشاد فتقدّم معلومات عن الأماكن والطرق والخدمات. تساعد الفئة على الفهم، لكنها لا تغني عن قراءة الرمز نفسه واللوحات الإضافية. يُستخلص المعنى المحدد من الإشارة والقواعد المنطبقة. هذا شرح تعليمي وليس اقتباسًا حرفيًا من القانون.",
       "example_ar": "تحذّر علامة مثلثة من خطر: افهم التحذير وقد بحذر؛ أما علامة الاتجاه الإلزامي فتشير إلى توجيه واجب الاتباع.",
       "heading_ar": "التعرّف على مجموعات الإشارات الرأسية",
       "pitfall_ar": "لا تستنتج الأمر من الشكل أو اللون وحدهما؛ حدّد الفئة وافهم الرمز المحدد.",
       "heading_it": "Riconoscere i gruppi dei segnali verticali",
-      "body_it": "L’articolo 39 distingue tre gruppi di segnali verticali. I segnali di pericolo avvertono della presenza e della natura di un rischio e richiedono prudenza. I segnali di prescrizione comunicano obblighi, divieti o limitazioni; al loro interno rientrano i segnali di precedenza, di divieto e di obbligo. I segnali di indicazione offrono informazioni utili alla guida e per individuare località, itinerari e servizi. Il regolamento specifica forme e significati dei singoli segnali. La formula “pericolo, prescrizione, indicazione” aiuta a orientarsi, ma non sostituisce la lettura del simbolo concreto e delle regole applicabili. Questa è una spiegazione didattica, non una citazione normativa.",
+      "body_it": "L’articolo 38 comprende quattro gruppi di segnaletica: verticale, orizzontale, luminosa e complementare. L’articolo 39 classifica i segnali verticali in pericolo, prescrizione e indicazione. Il pericolo avverte di un rischio; la prescrizione stabilisce precedenza, divieti, obblighi o altre limitazioni; l’indicazione fornisce informazioni su luoghi, itinerari e servizi. La categoria aiuta a orientarsi ma non sostituisce la lettura del simbolo specifico né degli eventuali pannelli integrativi. Il significato puntuale va ricavato dal segnale e dalle regole applicabili. È una sintesi didattica, non una citazione normativa.",
       "example_it": "Un triangolo avverte di un pericolo: riconosci l’avvertimento e guida con prudenza; un segnale di direzione obbligatoria, invece, indica una prescrizione da seguire.",
       "pitfall_it": "Non dedurre il comando soltanto dalla forma o dal colore: individua la categoria e interpreta il simbolo specifico.",
       "visual_question_id": 18950,
@@ -978,34 +978,42 @@
           "title_ar": "Normattiva، المرسوم التشريعي 285/1992 النافذ",
           "legal_reference": "39; artt. 79 e seguenti del regolamento",
           "legal_reference_it": "39; artt. 79 e seguenti del regolamento"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-38/",
+          "title": "Definizione e classificazione della segnaletica stradale",
+          "title_it": "Definizione e classificazione della segnaletica stradale",
+          "title_ar": "تعريف إشارات الطريق وتصنيفها",
+          "legal_reference": "38",
+          "legal_reference_it": "38"
         }
       ],
-      "core_it": "I segnali verticali si dividono in pericolo, prescrizione e indicazione.\nLa forma aiuta, ma va letto il significato specifico.",
-      "core_ar": "تنقسم الإشارات الرأسية إلى خطر وتنظيم وإرشاد.\nالشكل يساعد، لكن يجب قراءة دلالة العلامة المحددة.",
+      "core_it": "La segnaletica comprende quattro gruppi.\nI segnali verticali si dividono in pericolo, prescrizione e indicazione.",
+      "core_ar": "إشارات الطريق لها أربع مجموعات.\nوالإشارات الرأسية تنقسم إلى خطر وتنظيم وإرشاد.",
       "key_points": [
         {
-          "title_it": "Pericolo",
-          "title_ar": "الخطر",
-          "it": "Avverte del rischio e ne indica la natura; richiede prudenza.",
-          "ar": "ينبّه إلى الخطر ويبيّن طبيعته، ويطلب الحذر."
+          "title_it": "Gruppi 1",
+          "title_ar": "المجموعات 1",
+          "it": "Quattro gruppi: segnaletica verticale, orizzontale, luminosa e complementare.",
+          "ar": "أربع مجموعات: إشارات رأسية وأفقية وضوئية وتكميلية."
         },
         {
-          "title_it": "Prescrizione",
-          "title_ar": "التنظيم",
-          "it": "Comunica obblighi, divieti o limitazioni da rispettare.",
-          "ar": "يعلن واجبًا أو منعًا أو قيدًا يجب احترامه."
+          "title_it": "Gruppi 2",
+          "title_ar": "المجموعات 2",
+          "it": "I segnali verticali di pericolo avvertono di un rischio.",
+          "ar": "تحذّر الإشارات الرأسية للخطر من وجود خطر."
         },
         {
-          "title_it": "Indicazione",
-          "title_ar": "الإرشاد",
-          "it": "Fornisce informazioni utili a chi guida e per trovare luoghi o servizi.",
-          "ar": "يقدم معلومات مفيدة للسائق وللوصول إلى أماكن أو خدمات."
+          "title_it": "Gruppi 3",
+          "title_ar": "المجموعات 3",
+          "it": "La prescrizione comprende precedenza, divieto e obbligo.",
+          "ar": "تشمل إشارات التنظيم الأولوية والمنع والإلزام."
         },
         {
-          "title_it": "Sottogruppi",
-          "title_ar": "الفئات الفرعية",
-          "it": "Precedenza, divieto e obbligo sono sottogruppi della prescrizione.",
-          "ar": "الأولوية والمنع والإلزام فئات فرعية من التنظيم."
+          "title_it": "Gruppi 4",
+          "title_ar": "المجموعات 4",
+          "it": "I segnali di indicazione forniscono informazioni utili alla guida.",
+          "ar": "تقدّم إشارات الإرشاد معلومات مفيدة للقيادة."
         }
       ],
       "trap_words": [],
@@ -1032,25 +1040,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "I segnali di indicazione possono aiutare a individuare località e servizi.",
-          "statement_ar": "يمكن لإشارات الإرشاد أن تساعد على تحديد الأماكن والخدمات.",
+          "statement_it": "La segnaletica comprende segnali verticali, orizzontali, luminosi e complementari.",
+          "statement_ar": "تشمل إشارات الطريق الإشارات الرأسية والأفقية والضوئية والتكميلية.",
           "answer": "VERO",
-          "explanation_it": "Questa è una delle funzioni indicate per il gruppo dei segnali di indicazione.",
-          "explanation_ar": "هذه إحدى وظائف مجموعة إشارات الإرشاد."
+          "explanation_it": "La classificazione dell’art. 38 comprende questi quattro gruppi.",
+          "explanation_ar": "تصنّف المادة 38 الإشارات إلى هذه المجموعات الأربع."
         },
         {
-          "statement_it": "I segnali di precedenza sono una sottocategoria dei segnali di prescrizione.",
-          "statement_ar": "إشارات الأولوية فئة فرعية من إشارات التنظيم.",
-          "answer": "VERO",
-          "explanation_it": "L’articolo 39 include i segnali di precedenza nella categoria della prescrizione.",
-          "explanation_ar": "تدرج المادة 39 إشارات الأولوية ضمن فئة التنظيم."
-        },
-        {
-          "statement_it": "Un segnale di pericolo impone sempre un divieto di transito.",
-          "statement_ar": "علامة الخطر تفرض دائمًا منع المرور.",
+          "statement_it": "Precedenza, divieto e obbligo sono segnali di indicazione.",
+          "statement_ar": "الأولوية والمنع والإلزام من إشارات الإرشاد.",
           "answer": "FALSO",
-          "explanation_it": "La sua funzione è avvertire del pericolo e richiedere prudenza, non stabilire sempre un divieto.",
-          "explanation_ar": "وظيفتها التنبيه للخطر وطلب الحذر، وليس فرض المنع دائمًا."
+          "explanation_it": "Sono sottogruppi dei segnali verticali di prescrizione.",
+          "explanation_ar": "هذه فئات فرعية من الإشارات الرأسية التنظيمية."
+        },
+        {
+          "statement_it": "I segnali verticali di pericolo avvertono di un rischio.",
+          "statement_ar": "تحذّر الإشارات الرأسية للخطر من وجود خطر.",
+          "answer": "VERO",
+          "explanation_it": "La loro funzione è avvertire e richiedere prudenza.",
+          "explanation_ar": "وظيفتها التحذير والدعوة إلى الحذر."
         }
       ],
       "video_script_available": true,
@@ -1065,8 +1073,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "I segnali verticali si dividono in pericolo, prescrizione e indicazione.\nLa forma aiuta, ma va letto il significato specifico.",
-            "text_ar": "تنقسم الإشارات الرأسية إلى خطر وتنظيم وإرشاد.\nالشكل يساعد، لكن يجب قراءة دلالة العلامة المحددة."
+            "text_it": "La segnaletica comprende quattro gruppi.\nI segnali verticali si dividono in pericolo, prescrizione e indicazione.",
+            "text_ar": "إشارات الطريق لها أربع مجموعات.\nوالإشارات الرأسية تنقسم إلى خطر وتنظيم وإرشاد."
           },
           {
             "key": "example",
@@ -1082,9 +1090,10 @@
       },
       "videoUrl": null,
       "review_sources_checked": [
-        "https://aci.gov.it/codice-della-strada/art-39/"
+        "https://aci.gov.it/codice-della-strada/art-39/",
+        "https://aci.gov.it/codice-della-strada/art-38/"
       ],
-      "review_verification_note": "Verificata la classificazione nell’art. 39 sul sito ufficiale ACI: le tre categorie e i sottogruppi citati corrispondono al testo consultato. Sintesi didattica, non citazione normativa."
+      "review_verification_note": "Verificata la classificazione nell’art. 39 sul sito ufficiale ACI: le tre categorie e i sottogruppi citati corrispondono al testo consultato. Sintesi didattica, non citazione normativa. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u2-l2": {
       "body_ar": "عند قراءة علامة، اسأل نفسك عمّا تنقله وما السلوك الذي تطلبه، ولا تكتفِ بمظهرها. علامة الخطر تحذّر من وضع محفوف بالخطر وتدعو إلى الحذر؛ ولا تعني تلقائيًا وجود منع. علامة المنع تقيّد فعلًا أو المرور بحسب دلالتها ونطاقها. وعلامة الإلزام تفرض سلوكًا، مثل اتباع اتجاه معيّن. تندرج إشارات المنع والإلزام، مع إشارات الأولوية، ضمن إشارات التنظيم. يساعد الشكل والرمز على التعرّف إلى النوع، لكن معرفة المضمون والنطاق تتطلب قراءة العلامة المحددة وأي لوحة تكميلية مرتبطة بها. هذا شرح تعليمي لا يغطي كل حالة ممكنة.",
@@ -1937,12 +1946,12 @@
       "review_verification_note": "Verificata la disciplina delle linee, delle linee affiancate e degli attraversamenti nell'art. 40 ACI, aggiornato al 2 novembre 2026; l'art. 191 ACI è stato consultato per il contesto della precedenza pedonale. La precedenza dei ciclisti agli attraversamenti ciclabili è riportata secondo l'art. 40, comma 11."
     },
     "u3-l2": {
-      "body_ar": "في إشارة المركبات العادية، يعني الأحمر التوقف، والأصفر إنذارًا بالتوقف، والأخضر السماح بالمرور. عند الأصفر لا تتجاوز نقطة التوقف، إلا إذا كانت المركبة قريبة جدًا بحيث لا يمكنها التوقف بأمان كافٍ؛ وعندها يجب إخلاء التقاطع بحذر. لا يسمح الأخضر بدخول التقاطع إذا لم تكن متأكدًا من إمكان إخلائه قبل ظهور الأحمر. وحتى مع الأخضر، تُعطى الأولوية للمشاة وراكبي الدراجات الذين لديهم سماح متزامن؛ كما يعطي المنعطف الأولوية للمركبات القادمة من اليمين وللمركبات في تيار السير الذي سيدخل إليه. عند الأحمر لا تتجاوز خط التوقف؛ وإن لم يوجد، فلا تدخل التقاطع أو معبر المشاة ولا تتجاوز الإشارة. وتسري الأسهم الضوئية على المركبات المتجهة في الاتجاه الذي يشير إليه السهم. أما الأصفر الوامض فيسمح بالتقدم بسرعة معتدلة وحذر خاص، مع احترام قواعد الأولوية.",
+      "body_ar": "في الإشارة الضوئية العادية، الأحمر يوجب التوقف، والأصفر ينذر به؛ ولا تتجاوز نقطة التوقف إلا إذا تعذّر التوقف بأمان. لا يسمح الأخضر بدخول تقاطع لن تتمكن من إخلائه قبل الأحمر. وعلى من ينعطف إعطاء الأولوية للمركبات وتيارات السير التي يجب أن يفسح لها. لإشارات المشاة قواعد مستقلة: لا يبدأ العبور عند الأحمر؛ وعند الأصفر يُخلى المعبر ولا يبدأ المنتظر من الرصيف؛ ويسمح الأخضر بالعبور في الاتجاه المقرر. تسري الأسهم على الاتجاه المحدد، والأصفر الوامض يوجب الحذر واحترام الأولوية.",
       "example_ar": "تقترب من تقاطع والضوء أصفر ويمكنك التوقف من دون خطر: توقف قبل الخط. إذا كنت قريبًا جدًا بحيث لا تستطيع التوقف بأمان كافٍ، فأخلِ التقاطع بحذر. ومع الأخضر، انتظر إذا كان المرور أمامك لن يسمح بإخلاء التقاطع.",
       "heading_ar": "إشارات المرور الضوئية: الألوان والأسهم والحذر",
       "pitfall_ar": "لا تعتبر الأخضر أولوية مطلقة، ولا تتجاهل اتجاه أسهم المسارات. وعند تعطل الإشارة أو انطفائها، يوجب القانون حذرًا خاصًا؛ فلا تفترض أن تيارات المرور الأخرى متوقفة.",
       "heading_it": "Semafori: colori, frecce e prudenza",
-      "body_it": "Nel semaforo ordinario, rosso significa arresto, giallo preavviso di arresto e verde via libera. Con il giallo non superare il punto di arresto, salvo che tu sia troppo vicino per fermarti in sicurezza; allora libera prudentemente l'incrocio. Il verde non consente di entrare se non puoi sgomberare l'intersezione prima del rosso. Dà precedenza ai pedoni e ai ciclisti con via libera; chi svolta dà precedenza ai veicoli provenienti da destra e a quelli della corrente in cui entra. Con il rosso non superare la linea; se manca, non impegnare l'incrocio o l'attraversamento. Le frecce valgono nella direzione indicata. Con il giallo lampeggiante procedi a velocità moderata, con particolare prudenza e rispettando la precedenza.",
+      "body_it": "Nel semaforo ordinario, il rosso impone l’arresto; il giallo preavvisa l’arresto e si supera il punto solo quando fermarsi non è sicuro. Il verde non autorizza a entrare in un incrocio che non si può liberare prima del rosso. Chi svolta rispetta i veicoli e i flussi cui deve dare precedenza. Le luci pedonali hanno regole distinte: con il rosso non si inizia l’attraversamento; con il giallo si libera il passaggio e non si entra da fermi; con il verde si attraversa nel senso consentito. Le frecce valgono per la direzione indicata; il giallo lampeggiante richiede prudenza e rispetto della precedenza.",
       "example_it": "Ti avvicini a un incrocio con il giallo e puoi fermarti senza rischio: arrestati prima della linea. Se sei troppo vicino per fermarti con sufficiente sicurezza, libera l'area con prudenza. Con il verde, attendi se il traffico davanti non ti permetterebbe di sgombrare l'incrocio.",
       "pitfall_it": "Non trattare il verde come precedenza assoluta e non ignorare la direzione delle frecce di corsia. Quando il semaforo è anomalo o spento, la norma richiede particolare prudenza; non presumere che gli altri flussi siano fermi.",
       "visual_question_id": 20970,
@@ -2026,38 +2035,32 @@
           "legal_reference_it": "Art. 41, commi 2–3 e 9–12, 17–18"
         }
       ],
-      "core_it": "Rosso: arresto; giallo: preavviso di arresto.\nVerde: via libera solo se puoi impegnare e liberare l'incrocio correttamente.",
-      "core_ar": "الأحمر: توقف؛ الأصفر: إنذار بالتوقف.\nالأخضر يسمح بالمرور بشرط إمكان دخول التقاطع وإخلائه على نحو سليم.",
+      "core_it": "Rosso: arresto; giallo: preavviso di arresto.\nVerde: entra solo se puoi liberare l’incrocio in tempo.",
+      "core_ar": "الأحمر: توقف؛ الأصفر: إنذار بالتوقف.\nالأخضر: ادخل فقط إذا أمكن إخلاء التقاطع في الوقت المناسب.",
       "key_points": [
         {
-          "title_it": "Rosso",
-          "title_ar": "الأحمر",
-          "it": "Non superare la linea di arresto; se manca, non impegnare l'incrocio o l'attraversamento.",
-          "ar": "لا تتجاوز خط التوقف؛ وإن لم يوجد فلا تدخل التقاطع أو المعبر."
+          "title_it": "Semaforo 1",
+          "title_ar": "الإشارة الضوئية 1",
+          "it": "Rosso: arresto; giallo: fermati se puoi farlo in sicurezza.",
+          "ar": "الأحمر: توقف؛ والأصفر: توقف إذا أمكن ذلك بأمان."
         },
         {
-          "title_it": "Giallo",
-          "title_ar": "الأصفر",
-          "it": "Preannuncia l'arresto; prosegui solo se fermarti non è più sufficientemente sicuro.",
-          "ar": "ينذر بالتوقف؛ لا تواصل إلا إذا لم يعد التوقف آمنًا بما يكفي."
+          "title_it": "Semaforo 2",
+          "title_ar": "الإشارة الضوئية 2",
+          "it": "Con il verde, non entrare se non puoi liberare l’incrocio prima del rosso.",
+          "ar": "مع الأخضر، لا تدخل التقاطع إذا لم تستطع إخلاءه قبل الأحمر."
         },
         {
-          "title_it": "Verde",
-          "title_ar": "الأخضر",
-          "it": "Non entrare se non puoi liberare l'intersezione prima del rosso.",
-          "ar": "لا تدخل إذا لم تستطع إخلاء التقاطع قبل الأحمر."
+          "title_it": "Semaforo 3",
+          "title_ar": "الإشارة الضوئية 3",
+          "it": "Semaforo pedonale: rosso non iniziare; giallo libera il passaggio e non entrare; verde attraversa nel senso indicato.",
+          "ar": "إشارة المشاة: لا تبدأ العبور عند الأحمر؛ أخلِ المعبر عند الأصفر ولا تبدأ؛ واعبر في الاتجاه المحدد عند الأخضر."
         },
         {
-          "title_it": "Svolta",
-          "title_ar": "الانعطاف",
-          "it": "Chi svolta deve considerare gli altri veicoli e dare la precedenza nei casi previsti.",
-          "ar": "على من ينعطف مراعاة المركبات الأخرى وإعطاء الأولوية في الحالات المقررة."
-        },
-        {
-          "title_it": "Giallo lampeggiante",
-          "title_ar": "الأصفر الوامض",
-          "it": "Procedi a velocità moderata e con particolare prudenza, rispettando la precedenza.",
-          "ar": "تقدم بسرعة معتدلة وحذر خاص مع احترام الأولوية."
+          "title_it": "Semaforo 4",
+          "title_ar": "الإشارة الضوئية 4",
+          "it": "Le frecce valgono per la direzione indicata; il giallo lampeggiante richiede prudenza e precedenza.",
+          "ar": "تسري الأسهم على الاتجاه المحدد؛ والأصفر الوامض يستلزم الحذر واحترام الأولوية."
         }
       ],
       "trap_words": [
@@ -2087,25 +2090,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "Il giallo significa via libera e invita ad accelerare.",
-          "statement_ar": "يعني الأصفر السماح بالمرور ويدعو إلى الإسراع.",
+          "statement_it": "Con il giallo veicolare ci si ferma se è possibile farlo in sicurezza.",
+          "statement_ar": "عند الضوء الأصفر للمركبات، يتوقف السائق إذا أمكن ذلك بأمان.",
+          "answer": "VERO",
+          "explanation_it": "Il giallo preavvisa l’arresto; si prosegue solo se fermarsi non è sicuro.",
+          "explanation_ar": "الأصفر ينذر بالتوقف؛ ولا يُتابع السير إلا إذا تعذّر التوقف بأمان."
+        },
+        {
+          "statement_it": "Con il verde si può entrare in un incrocio che non sarà liberato prima del rosso.",
+          "statement_ar": "يسمح الأخضر بدخول تقاطع لن يُخلى قبل الأحمر.",
           "answer": "FALSO",
-          "explanation_it": "Il giallo è preavviso di arresto.",
-          "explanation_ar": "الأصفر إنذار بالتوقف."
+          "explanation_it": "Non impegnare l’incrocio se non puoi liberarlo prima del rosso.",
+          "explanation_ar": "لا تدخل التقاطع إذا لم تستطع إخلاءه قبل الأحمر."
         },
         {
-          "statement_it": "Con il verde non si deve impegnare un incrocio che non si può liberare prima del rosso.",
-          "statement_ar": "مع الأخضر يجب عدم دخول تقاطع لا يمكن إخلاؤه قبل الأحمر.",
+          "statement_it": "Con il giallo pedonale, chi è già sull’attraversamento lo libera e chi attende non inizia.",
+          "statement_ar": "عند الأصفر للمشاة، يُكمل من بدأ العبور ولا يبدأ المنتظر من الرصيف.",
           "answer": "VERO",
-          "explanation_it": "La regola del verde richiede di poter sgomberare l'area prima dell'accensione del rosso.",
-          "explanation_ar": "تشترط قاعدة الأخضر إمكان إخلاء التقاطع قبل ظهور الأحمر."
-        },
-        {
-          "statement_it": "Il giallo lampeggiante richiede prudenza e il rispetto delle regole di precedenza.",
-          "statement_ar": "يتطلب الأصفر الوامض الحذر واحترام قواعد الأولوية.",
-          "answer": "VERO",
-          "explanation_it": "L'articolo 41 consente di procedere a velocità moderata e con particolare prudenza, rispettando la precedenza.",
-          "explanation_ar": "تسمح المادة 41 بالتقدم بسرعة معتدلة وحذر خاص مع احترام الأولوية."
+          "explanation_it": "È la distinzione prevista per il segnale pedonale giallo.",
+          "explanation_ar": "هذا هو الفرق المقرر لإشارة المشاة الصفراء."
         }
       ],
       "video_script_available": false,
@@ -2120,8 +2123,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Rosso: arresto; giallo: preavviso di arresto.\nVerde: via libera solo se puoi impegnare e liberare l'incrocio correttamente.",
-            "text_ar": "الأحمر: توقف؛ الأصفر: إنذار بالتوقف.\nالأخضر يسمح بالمرور بشرط إمكان دخول التقاطع وإخلائه على نحو سليم."
+            "text_it": "Rosso: arresto; giallo: preavviso di arresto.\nVerde: entra solo se puoi liberare l’incrocio in tempo.",
+            "text_ar": "الأحمر: توقف؛ الأصفر: إنذار بالتوقف.\nالأخضر: ادخل فقط إذا أمكن إخلاء التقاطع في الوقت المناسب."
           },
           {
             "key": "example",
@@ -2139,7 +2142,7 @@
       "review_sources_checked": [
         "https://aci.gov.it/codice-della-strada/art-41/"
       ],
-      "review_verification_note": "Verificato l’art. 41 del Codice della strada sul sito ufficiale ACI (pagina aggiornata il 2 novembre 2026). Le formulazioni su semaforo verde, giallo, rosso, frecce e giallo lampeggiante sono state limitate a quanto confermato dal testo consultato."
+      "review_verification_note": "Verificato l’art. 41 del Codice della strada sul sito ufficiale ACI (pagina aggiornata il 2 novembre 2026). Le formulazioni su semaforo verde, giallo, rosso, frecce e giallo lampeggiante sono state limitate a quanto confermato dal testo consultato. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u3-l3": {
       "body_ar": "عندما ينظم شرطي المرور الحركة، يجب اتباع إشاراته فورًا؛ فإشاراته تتقدم على الأوامر الأخرى الخاصة بالطريق. رفع ذراع واحدة رأسيًا يطلب الانتباه ويقتضي التوقف، باستثناء من لم يعد قادرًا على التوقف بأمان؛ وإذا كانت المركبة داخل التقاطع بالفعل فلا تتوقف فيه. وعند مد ذراع واحدة أو الذراعين أفقيًا، يتوقف المرور القادم من الاتجاهات التي تتقاطع مع الاتجاه الذي يشير إليه الذراع، بينما يسمح بالسير في اتجاه الذراع. وعندما يكون الذراعان منخفضين، يقتضي وجود الشرطي أمام المركبة أو خلفها التوقف، ويسمح بالمرور من جانبيه. ويمكن للعلامات التكميلية إظهار مسار الطريق أو المنحنيات والنقاط الحرجة والعوائق على جسم الطريق أو بمحاذاته. وتُظهر الخطوط أو اللوحات وجود العائق؛ لكنها لا تحدد وحدها أولوية المرور ولا تبيح مسارًا محظورًا.",
@@ -3223,12 +3226,12 @@
       "review_verification_note": "تمت مراجعة المادة 145 في ACI وNormattiva (النص النافذ المعروض حتى 15/11/2026). تؤكد الفقرة 5 التوقف عند خط التوقف حين يقرره الإشعار، والفقرتان 6 و8 حالات أخرى محددة؛ لذا صيغت القاعدة في نطاق الإشارتين ولم تُعمّم على كل الحالات."
     },
     "u4-l4": {
-      "body_ar": "بالقرب من قضبان القطار أو الترام، ادي الأولوية للمركبات اللي ماشية على القضبان، إلا لو فيه إشارة مختلفة. لما تطلع على الطريق من مكان مش مفتوح لمرور الجمهور، لازم تقف وتدي الأولوية للي ماشي على الطريق؛ والمادة 145 بتقرر واجبًا مشابهًا عند مخارج الممرات والدروب والمسالك الجبلية ومسارات الدراجات. ما تدخلش التقاطع لو مش هتقدر تكمل وتفضّي منطقة الحركة بسرعة، عشان تسمح للمركبات الجاية من الاتجاهات التانية تعدّي. القانون كمان فيه أحكام محددة للدراجات في مسارات ومناطق معينة؛ طبّقها في نطاقها، من غير ما تحوّلها لقاعدة عامة مختلفة.",
+      "body_ar": "قرب السكك الحديدية أو الترام، أعطِ الأولوية للمركبات على القضبان ما لم توجد إشارة مختلفة. عند الخروج إلى الطريق من مكان غير مفتوح للمرور العام، توقف وأعطِ الأولوية؛ وتنطبق قواعد مشابهة عند مخارج الممرات والطرق الترابية ومسارات الدراجات. لا تدخل تقاطعًا إذا لم تستطع متابعة السير وإخلاءه سريعًا. عند الأخضر، يفسح المنعطف للمركبات القادمة من اليمين ولتيارات السير التي يقطعها أو يدخل فيها، وكذلك للمشاة وراكبي الدراجات المسموح لهم بالمرور. وتُطبّق أولوية الدراجات حيث تحددها القاعدة، لا على نحو أوسع.",
       "example_ar": "الطابور قدامك واقف وممكن تفضل في نص التقاطع: استنى قبل مدخل التقاطع لحد ما تقدر تعدّي وتفضّي المنطقة.",
       "heading_ar": "السكك والمخارج والتقاطعات اللي ما ينفعش تسدّها",
       "pitfall_ar": "ما تحصرش حالات الوقوف الإلزامي في STOP بس، وما تدخلش تقاطع مش هتقدر تفضّيه بسرعة.",
       "heading_it": "Binari, uscite e incroci da non bloccare",
-      "body_it": "In prossimità di binari ferroviari o tranviari, dai precedenza ai veicoli su rotaia, salvo una segnalazione diversa. Uscendo su strada da un luogo non aperto al passaggio pubblico, devi fermarti e dare precedenza a chi circola sulla strada; l'articolo 145 prevede un obbligo analogo agli sbocchi di sentieri, tratturi, mulattiere e piste ciclabili. Non impegnare un'intersezione se non puoi proseguire e liberare in breve tempo l'area, lasciando passare i veicoli provenienti da altre direzioni. La legge contiene inoltre disposizioni specifiche per i ciclisti in particolari corsie e zone: applicale nel loro ambito, senza trasformarle in una regola generale diversa.",
+      "body_it": "Vicino ai binari ferroviari o tranviari, dai precedenza ai veicoli su rotaia salvo diversa segnalazione. Uscendo su strada da un luogo non aperto al passaggio pubblico, fermati e dai precedenza; l’articolo 145 prevede regole analoghe agli sbocchi di sentieri, mulattiere e piste ciclabili. Non impegnare un’intersezione se non puoi proseguire e liberarla in breve tempo. Al verde, chi svolta deve cedere ai veicoli provenienti da destra e ai flussi che interseca o in cui si immette, oltre a pedoni e ciclisti con via libera. Le precedenze ciclabili previste dalla legge valgono nei loro ambiti specifici.",
       "example_it": "La fila davanti a te è ferma e rischieresti di restare al centro dell'incrocio: aspetta prima della linea d'ingresso finché puoi attraversare e liberare l'area.",
       "pitfall_it": "Non ridurre i casi di arresto obbligatorio al solo STOP e non entrare in un'intersezione che non puoi liberare in breve tempo.",
       "visual_question_id": 23053,
@@ -3318,40 +3321,42 @@
           "title_ar": "Normattiva — قانون الطرق",
           "legal_reference": "Art. 145, testo vigente al 16/10/2026",
           "legal_reference_it": "Art. 145, testo vigente al 16/10/2026"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-41/",
+          "title": "Segnali luminosi",
+          "title_it": "Segnali luminosi",
+          "title_ar": "الإشارات الضوئية",
+          "legal_reference": "41",
+          "legal_reference_it": "41"
         }
       ],
-      "core_it": "In casi specifici la legge richiede di fermarsi e dare precedenza.\nNon entrare nell'intersezione se non puoi liberarla in breve tempo.",
-      "core_ar": "في حالات محددة القانون بيطلب الوقوف وإعطاء الأولوية.\nما تدخلش التقاطع لو مش هتقدر تفضّيه بسرعة.",
+      "core_it": "Non impegnare l’incrocio se non puoi liberarlo.\nAnche col verde, chi svolta deve cedere dove previsto.",
+      "core_ar": "لا تدخل التقاطع إذا لم تستطع إخلاءه.\nحتى مع الأخضر، يفسح المنعطف عند وجوب الأولوية.",
       "key_points": [
         {
-          "title_it": "Veicoli su rotaia",
-          "title_ar": "مركبات على قضبان",
-          "it": "Dai precedenza ai veicoli ferroviari e tranviari, salvo diversa segnalazione.",
-          "ar": "ادي الأولوية لمركبات القطار والترام، إلا لو فيه إشارة مختلفة."
+          "title_it": "Priorità 1",
+          "title_ar": "الأولوية 1",
+          "it": "Ai passaggi ferroviari e tramviari, precedenza ai veicoli su rotaia salvo diversa segnalazione.",
+          "ar": "عند معابر السكك والترام، الأولوية للمركبات على القضبان ما لم توجد إشارة مخالفة."
         },
         {
-          "title_it": "Uscita da luogo privato",
-          "title_ar": "الخروج من مكان غير مفتوح للجمهور",
-          "it": "Arrestati e dai precedenza quando ti immetti da un luogo non soggetto a pubblico passaggio.",
-          "ar": "قف وادي الأولوية لما تطلع من مكان مش مفتوح لمرور الجمهور."
+          "title_it": "Priorità 2",
+          "title_ar": "الأولوية 2",
+          "it": "Fermarsi agli sbocchi previsti dalla legge e dare precedenza.",
+          "ar": "التوقف وإعطاء الأولوية عند المخارج التي يحددها القانون."
         },
         {
-          "title_it": "Altri sbocchi indicati",
-          "title_ar": "مخارج أخرى محددة",
-          "it": "La legge prevede l'obbligo anche agli sbocchi di sentieri, tratturi, mulattiere e piste ciclabili.",
-          "ar": "القانون بيقرر الواجب كمان عند مخارج الممرات والدروب والمسالك الجبلية ومسارات الدراجات."
+          "title_it": "Priorità 3",
+          "title_ar": "الأولوية 3",
+          "it": "Non impegnare un’intersezione se non si può sgombrarla in breve tempo.",
+          "ar": "لا تدخل التقاطع إذا تعذر إخلاؤه في وقت قصير."
         },
         {
-          "title_it": "Non bloccare l'incrocio",
-          "title_ar": "ما تسدّش التقاطع",
-          "it": "Non impegnarlo se non puoi proseguire e liberare l'area in breve tempo.",
-          "ar": "ما تدخلش التقاطع لو مش هتقدر تكمل وتفضّي المنطقة بسرعة."
-        },
-        {
-          "title_it": "Disposizioni per i ciclisti",
-          "title_ar": "أحكام الدراجات",
-          "it": "Le disposizioni specifiche per alcune corsie e zone ciclabili si applicano nel loro ambito.",
-          "ar": "الأحكام الخاصة ببعض مسارات ومناطق الدراجات تسري في نطاقها المحدد."
+          "title_it": "Priorità 4",
+          "title_ar": "الأولوية 4",
+          "it": "Con il verde, chi svolta cede ai flussi interferenti e agli utenti con via libera.",
+          "ar": "مع الأخضر، يفسح المنعطف لتيارات السير المتقاطعة وللمستخدمين المسموح لهم بالمرور."
         }
       ],
       "trap_words": [
@@ -3387,25 +3392,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "In un attraversamento ferroviario o tranviario, si dà precedenza ai veicoli su rotaia salvo diversa segnalazione.",
-          "statement_ar": "عند عبور سكة القطار أو الترام، تدي الأولوية للمركبات على القضبان إلا لو فيه إشارة مختلفة.",
+          "statement_it": "Ai passaggi ferroviari si dà precedenza ai veicoli su rotaia, salvo diversa segnalazione.",
+          "statement_ar": "عند معابر السكك، تُعطى الأولوية للمركبات على القضبان ما لم توجد إشارة مختلفة.",
           "answer": "VERO",
-          "explanation_it": "È la regola dell'articolo 145, comma 3.",
-          "explanation_ar": "دي قاعدة المادة 145، الفقرة 3."
+          "explanation_it": "È la regola generale richiamata nel lesson.",
+          "explanation_ar": "هذه هي القاعدة العامة التي يذكرها الدرس."
         },
         {
-          "statement_it": "È consentito impegnare un'intersezione anche se non si può liberarla in breve tempo.",
-          "statement_ar": "مسموح تدخل التقاطع حتى لو مش هتقدر تفضّيه في وقت قصير.",
+          "statement_it": "Con il verde, chi svolta può ignorare i veicoli e i flussi cui deve dare precedenza.",
+          "statement_ar": "مع الأخضر، يمكن للمنعطف تجاهل المركبات وتيارات السير التي لها أولوية.",
           "answer": "FALSO",
-          "explanation_it": "L'articolo 145, comma 7, vieta di impegnarla in tale situazione.",
-          "explanation_ar": "المادة 145، الفقرة 7، بتحظر الدخول في الحالة دي."
+          "explanation_it": "Il verde non elimina l’obbligo di precedenza previsto per chi svolta.",
+          "explanation_ar": "الضوء الأخضر لا يلغي واجب الأولوية على من ينعطف."
         },
         {
-          "statement_it": "La legge prevede specifici obblighi di arresto e precedenza all'uscita da luoghi non aperti al passaggio pubblico.",
-          "statement_ar": "القانون بيقرر واجبات محددة للوقوف وإعطاء الأولوية عند الخروج من أماكن مش مفتوحة لمرور الجمهور.",
+          "statement_it": "Non si entra in un’intersezione se non la si può liberare in breve tempo.",
+          "statement_ar": "لا تدخل تقاطعًا إذا لم تستطع إخلاءه في وقت قصير.",
           "answer": "VERO",
-          "explanation_it": "Lo stabilisce l'articolo 145, comma 6.",
-          "explanation_ar": "ده ما تقرره المادة 145، الفقرة 6."
+          "explanation_it": "La norma vieta di bloccare l’intersezione quando non è possibile sgomberarla.",
+          "explanation_ar": "تمنع القاعدة تعطيل التقاطع عندما يتعذر إخلاؤه."
         }
       ],
       "video_script_available": false,
@@ -3420,8 +3425,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "In casi specifici la legge richiede di fermarsi e dare precedenza.\nNon entrare nell'intersezione se non puoi liberarla in breve tempo.",
-            "text_ar": "في حالات محددة القانون بيطلب الوقوف وإعطاء الأولوية.\nما تدخلش التقاطع لو مش هتقدر تفضّيه بسرعة."
+            "text_it": "Non impegnare l’incrocio se non puoi liberarlo.\nAnche col verde, chi svolta deve cedere dove previsto.",
+            "text_ar": "لا تدخل التقاطع إذا لم تستطع إخلاءه.\nحتى مع الأخضر، يفسح المنعطف عند وجوب الأولوية."
           },
           {
             "key": "example",
@@ -3438,17 +3443,18 @@
       "videoUrl": null,
       "review_sources_checked": [
         "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1992-04-30;285~art145!vig=",
-        "https://aci.gov.it/codice-della-strada/art-145/"
+        "https://aci.gov.it/codice-della-strada/art-145/",
+        "https://aci.gov.it/codice-della-strada/art-41/"
       ],
-      "review_verification_note": "Verificati i commi pertinenti dell’art. 145 nel testo vigente di Normattiva e nella pagina ACI. Le regole per pedoni e ciclisti sono sintetizzate entro il loro ambito; non sono stati aggiunti numeri o eccezioni non necessari."
+      "review_verification_note": "Verificati i commi pertinenti dell’art. 145 nel testo vigente di Normattiva e nella pagina ACI. Le regole per pedoni e ciclisti sono sintetizzate entro il loro ambito; non sono stati aggiunti numeri o eccezioni non necessari. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u5-l1": {
-      "body_ar": "السير على الطريق يتطلب الانتباه لكل مستخدميه: يجب تجنب الخطر وتعطيل المرور والمساهمة في السلامة العامة. وفقًا للمادة 143، تسير المركبة عادةً في الجزء الأيمن من الطريق وبالقرب من حافته اليمنى، حتى عندما يكون الطريق خاليًا. إذا وُجدت حارات متعددة في الاتجاه نفسه، تُستخدم الحارة الأيمن الأكثر خلوًا، ما لم توجد إشارة مختلفة. داخل المناطق السكنية يمكن اختيار الحارة الأنسب للاتجاه المراد سلوكه عند التقاطع التالي، مع احترام القواعد المعمول بها. هذا شرح تعليمي بالمعنى وليس نص القانون حرفيًا.",
+      "body_ar": "تتطلب القيادة الانتباه إلى جميع مستخدمي الطريق وتجنب الخطر وإعاقة السير. ووفق المادة 143، تسير المركبة عادةً في الجزء الأيمن وبالقرب من الحافة اليمنى. عند تعدد الحارات في الاتجاه نفسه، تُستخدم الحارة الخالية الأبعد إلى اليمين ما لم تدل الإشارة على غير ذلك. تُستخدم الحارات اليسرى للتجاوز وفق القواعد المنطبقة. وداخل المناطق المأهولة يمكن اختيار الحارة الأنسب لاتجاه التقاطع التالي؛ ولا يُغيّر المسار إلا استعدادًا لمناورة مسموح بها. هذا شرح موجز للمادة وليس اقتباسًا حرفيًا.",
       "example_ar": "على طريق متعدد الحارات في الاتجاه نفسه، يستخدم السائق عادةً الحارة الأيمن الأكثر خلوًا، إلا إذا اقتضت مناورة مسموح بها أو الإشارات خلاف ذلك.",
       "heading_ar": "السير يمينًا مع مراعاة الجميع",
       "pitfall_ar": "لا تخلط بين إمكانية اختيار حارة استعدادًا للانعطاف وبين حق البقاء دائمًا في اليسار.",
       "heading_it": "Guidare a destra, guidare con riguardo",
-      "body_it": "La circolazione richiede attenzione verso tutti gli utenti: occorre evitare pericolo e intralcio e contribuire alla sicurezza comune. In base all’articolo 143, il veicolo procede normalmente sulla parte destra della carreggiata e vicino al margine destro, anche quando la strada è libera. Se vi sono più corsie nello stesso senso, si usa quella libera più a destra, salvo diversa segnalazione. Nei centri abitati si può scegliere la corsia più adatta alla direzione da prendere al successivo incrocio, rispettando le regole applicabili. Questa è una parafrasi didattica, non il testo letterale della legge.",
+      "body_it": "La circolazione richiede attenzione verso tutti gli utenti: occorre evitare pericolo e intralcio e contribuire alla sicurezza comune. In base all’articolo 143, il veicolo procede normalmente sulla parte destra della carreggiata e vicino al margine destro, anche quando la strada è libera. Se vi sono più corsie nello stesso senso, si usa quella libera più a destra, salvo diversa segnalazione. Le corsie di sinistra servono al sorpasso secondo le regole applicabili. Nei centri abitati si può scegliere la corsia più adatta alla direzione del successivo incrocio; i cambi vanno fatti solo per una manovra consentita. È una sintesi didattica.",
       "example_it": "Su una strada con più corsie nello stesso senso, il conducente usa di regola la corsia libera più a destra, salvo che una manovra consentita o la segnaletica richiedano diversamente.",
       "pitfall_it": "Non confondere la possibilità di scegliere una corsia per preparare una svolta con un diritto di restare sempre a sinistra.",
       "visual_question_id": 22789,
@@ -3540,32 +3546,32 @@
           "legal_reference_it": "Art. 143 D.Lgs. 285/1992"
         }
       ],
-      "core_it": "In marcia, tieni normalmente la destra.\nEvita pericolo e intralcio per gli altri.",
-      "core_ar": "أثناء السير، التزم عادةً بالجانب الأيمن.\nتجنب تعريض الآخرين للخطر أو تعطيلهم.",
+      "core_it": "Circola normalmente sulla corsia libera più a destra.\nIn città posizionati per tempo per la direzione successiva.",
+      "core_ar": "اسلك عادةً الحارة الخالية الأبعد إلى اليمين.\nداخل المدن تموضع مبكرًا للاتجاه التالي.",
       "key_points": [
         {
-          "title_it": "Sicurezza comune",
-          "title_ar": "السلامة المشتركة",
-          "it": "Ogni utente deve comportarsi senza creare pericolo o intralcio.",
-          "ar": "على كل مستخدم للطريق أن يتصرف من دون خلق خطر أو تعطيل."
+          "title_it": "Corsie 1",
+          "title_ar": "الحارات 1",
+          "it": "Evitare pericolo e intralcio alla circolazione.",
+          "ar": "تجنب الخطر وإعاقة حركة المرور."
         },
         {
-          "title_it": "Posizione ordinaria",
-          "title_ar": "الموضع المعتاد",
-          "it": "La regola generale è circolare sulla parte destra, vicino al margine.",
-          "ar": "القاعدة العامة هي السير في الجزء الأيمن بالقرب من الحافة."
+          "title_it": "Corsie 2",
+          "title_ar": "الحارات 2",
+          "it": "Usare normalmente la corsia libera più a destra.",
+          "ar": "استخدم عادةً الحارة الخالية الأبعد إلى اليمين."
         },
         {
-          "title_it": "Più corsie",
-          "title_ar": "تعدد الحارات",
-          "it": "Salvo diversa segnalazione, si percorre la corsia libera più a destra.",
-          "ar": "ما لم توجد إشارة مختلفة، تُسلك الحارة الأيمن الأكثر خلوًا."
+          "title_it": "Corsie 3",
+          "title_ar": "الحارات 3",
+          "it": "Le corsie di sinistra sono riservate al sorpasso secondo le regole applicabili.",
+          "ar": "تُخصص الحارات اليسرى للتجاوز وفق القواعد المنطبقة."
         },
         {
-          "title_it": "Scelta nei centri abitati",
-          "title_ar": "اختيار الحارة داخل المناطق السكنية",
-          "it": "La corsia può essere scelta in rapporto alla direzione da prendere all’incrocio, nel rispetto delle regole.",
-          "ar": "يمكن اختيار الحارة بحسب الاتجاه المراد عند التقاطع، مع احترام القواعد."
+          "title_it": "Corsie 4",
+          "title_ar": "الحارات 4",
+          "it": "Nei centri abitati, scegliere la corsia per la direzione al prossimo incrocio; cambiare solo per una manovra consentita.",
+          "ar": "داخل المناطق المأهولة، اختر حارة اتجاه التقاطع التالي؛ ولا تغيّر إلا لمناورة مسموح بها."
         }
       ],
       "trap_words": [],
@@ -3586,25 +3592,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "La regola ordinaria prevede di circolare a destra, vicino al margine.",
-          "statement_ar": "القاعدة المعتادة هي السير يمينًا بالقرب من الحافة.",
+          "statement_it": "In generale si usa la corsia libera più a destra.",
+          "statement_ar": "تُستخدم عادةً الحارة الخالية الأبعد إلى اليمين.",
           "answer": "VERO",
-          "explanation_it": "È la posizione indicata in via generale dall’articolo 143.",
-          "explanation_ar": "هذا هو موضع السير المحدد كقاعدة عامة في المادة 143."
+          "explanation_it": "È la regola generale della circolazione sulle strade con più corsie.",
+          "explanation_ar": "هذه هي القاعدة العامة للسير على الطرق متعددة الحارات."
         },
         {
-          "statement_it": "Su una strada libera si può ignorare ogni regola di posizione.",
-          "statement_ar": "إذا كان الطريق خاليًا يمكن تجاهل كل قواعد موضع السير.",
+          "statement_it": "La corsia libera più a sinistra è quella da usare normalmente per la marcia.",
+          "statement_ar": "الحارة الخالية الأبعد إلى اليسار هي الحارة المعتادة للسير.",
           "answer": "FALSO",
-          "explanation_it": "La regola generale sulla posizione vale anche quando la strada è libera.",
-          "explanation_ar": "تظل القاعدة العامة لموضع السير قائمة حتى عندما يكون الطريق خاليًا."
+          "explanation_it": "Le corsie a sinistra sono normalmente riservate al sorpasso; valgono le eccezioni previste.",
+          "explanation_ar": "تُخصص الحارات اليسرى عادةً للتجاوز، مع مراعاة الاستثناءات المقررة."
         },
         {
-          "statement_it": "La sicurezza della circolazione riguarda soltanto chi guida un’automobile.",
-          "statement_ar": "سلامة المرور تخص سائقي السيارات فقط.",
-          "answer": "FALSO",
-          "explanation_it": "Il principio generale riguarda gli utenti della strada.",
-          "explanation_ar": "المبدأ العام يشمل مستخدمي الطريق."
+          "statement_it": "Nei centri abitati la corsia può dipendere dalla direzione al prossimo incrocio.",
+          "statement_ar": "داخل المناطق المأهولة، قد يتحدد اختيار الحارة باتجاه التقاطع التالي.",
+          "answer": "VERO",
+          "explanation_it": "La regola consente la scelta della corsia appropriata nei casi previsti.",
+          "explanation_ar": "تسمح القاعدة باختيار الحارة المناسبة في الحالات المحددة."
         }
       ],
       "video_script_available": false,
@@ -3619,8 +3625,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "In marcia, tieni normalmente la destra.\nEvita pericolo e intralcio per gli altri.",
-            "text_ar": "أثناء السير، التزم عادةً بالجانب الأيمن.\nتجنب تعريض الآخرين للخطر أو تعطيلهم."
+            "text_it": "Circola normalmente sulla corsia libera più a destra.\nIn città posizionati per tempo per la direzione successiva.",
+            "text_ar": "اسلك عادةً الحارة الخالية الأبعد إلى اليمين.\nداخل المدن تموضع مبكرًا للاتجاه التالي."
           },
           {
             "key": "example",
@@ -3638,15 +3644,15 @@
       "review_sources_checked": [
         "https://aci.gov.it/codice-della-strada/art-143/"
       ],
-      "review_verification_note": "Verificato l’art. 143 sul sito ufficiale ACI (pagina aggiornata il 6 novembre 2026). Conferma posizione a destra e regole sulle corsie. Parafrasi didattica, non citazione letterale."
+      "review_verification_note": "Verificato l’art. 143 sul sito ufficiale ACI (pagina aggiornata il 6 novembre 2026). Conferma posizione a destra e regole sulle corsie. Parafrasi didattica, non citazione letterale. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u5-l2": {
-      "body_ar": "قبل تغيير الاتجاه أو الحارة، أو الانعطاف أو الاندماج في حركة المرور أو التوقف، يجب على السائق التأكد من أن المناورة لن تخلق خطرًا أو تعطيلًا. وعليه مراعاة موضع مستخدمي الطريق الآخرين وبعدهم واتجاههم، والتنبيه إلى نيته بوقت كافٍ. تُبقى إشارات الاتجاه فعّالة طوال المناورة وتُطفأ بعد اكتمالها؛ فالإشارة لا تغني عن التحقق من السلامة ولا تمنح الأولوية تلقائيًا. عند الانعطاف يمينًا، ينبغي الاقتراب قدر الإمكان من الحافة اليمنى. هذا ملخص تعليمي للمادة 154.",
+      "body_ar": "قبل تغيير الاتجاه أو الحارة، أو الانعطاف أو الاندماج أو التوقف، يتحقق السائق من أن المناورة لا تسبب خطرًا أو عرقلة. يراعي مواضع الآخرين ومسافاتهم واتجاهاتهم وينبّه قبل التنفيذ بوقت كافٍ. تبقى إشارة الاتجاه فعالة طوال المناورة وتُطفأ عند اكتمالها؛ فالإشارة لا تغني عن التحقق من السلامة ولا تمنح الأولوية تلقائيًا. للانعطاف يمينًا يقترب السائق من الحافة اليمنى؛ ولليسار يقترب من محور الطريق، أو من الحافة اليسرى في الطريق أحادي الاتجاه، من دون الدخول عكس السير. هذا تلخيص تعليمي للمادة 154.",
       "example_ar": "قبل الانتقال إلى اليمين، يتحقق السائق من خلو المسار من المستخدمين، وينبّه مبكرًا، وينتظر إذا كانت المناورة ستسبب خطرًا أو تعطيلًا.",
       "heading_ar": "تحقق أولًا ثم غيّر اتجاهك",
       "pitfall_ar": "إشارة الاتجاه ليست تصريحًا؛ تظل المناورة مشروطة بالسلامة ومراعاة مستخدمي الطريق الآخرين.",
       "heading_it": "Prima controlla, poi cambia direzione",
-      "body_it": "Prima di cambiare direzione o corsia, svoltare, immettersi nel traffico o fermarsi, il conducente deve verificare che la manovra non crei pericolo o intralcio. Deve considerare posizione, distanza e direzione degli altri utenti e segnalare l’intenzione con sufficiente anticipo. Gli indicatori vanno mantenuti attivi per tutta la manovra e spenti quando è completata: segnalare non sostituisce il controllo di sicurezza né attribuisce automaticamente la precedenza. Per svoltare a destra ci si tiene il più vicino possibile al margine destro. È una sintesi didattica dell’articolo 154.",
+      "body_it": "Prima di cambiare direzione o corsia, svoltare, immettersi nel traffico o fermarsi, il conducente deve verificare che la manovra non crei pericolo o intralcio. Deve considerare posizione, distanza e direzione degli altri utenti e segnalare l’intenzione con sufficiente anticipo. Gli indicatori vanno mantenuti attivi per tutta la manovra e spenti quando è completata: segnalare non sostituisce il controllo di sicurezza né attribuisce automaticamente la precedenza. Per svoltare a destra ci si tiene vicino al margine destro; per svoltare a sinistra ci si avvicina all’asse, oppure al margine sinistro su strada a senso unico, senza imboccare contromano. È una sintesi didattica dell’articolo 154.",
       "example_it": "Prima di spostarsi a destra, il conducente controlla che non vi siano utenti nel percorso, segnala per tempo e attende se la manovra causerebbe pericolo o intralcio.",
       "pitfall_it": "La freccia non è un’autorizzazione: la manovra resta subordinata alla sicurezza e alla considerazione degli altri utenti.",
       "visual_question_id": 22662,
@@ -3738,32 +3744,32 @@
           "legal_reference_it": "D.Lgs. 285/1992, testo vigente"
         }
       ],
-      "core_it": "Controlla gli altri prima di manovrare.\nSegnala per tempo: l’indicatore non dà precedenza.",
-      "core_ar": "تحقق من الآخرين قبل المناورة.\nنبّه مبكرًا: الإشارة لا تمنح أولوية المرور.",
+      "core_it": "Controlla gli altri e segnala prima di manovrare.\nPer svoltare a sinistra, posizionati correttamente senza contromano.",
+      "core_ar": "تحقق من الآخرين ونبّه قبل المناورة.\nللانعطاف يسارًا، تموضع صحيحًا من دون السير عكس الاتجاه.",
       "key_points": [
         {
-          "title_it": "Controllo",
-          "title_ar": "التحقق",
-          "it": "Valuta posizione, distanza e direzione degli altri utenti.",
-          "ar": "راعِ موضع مستخدمي الطريق الآخرين وبعدهم واتجاههم."
+          "title_it": "Svolta 1",
+          "title_ar": "الانعطاف 1",
+          "it": "Valutare posizione, distanza e direzione degli altri prima di manovrare.",
+          "ar": "راعِ مواضع الآخرين ومسافاتهم واتجاهاتهم قبل المناورة."
         },
         {
-          "title_it": "Segnalazione anticipata",
-          "title_ar": "التنبيه المبكر",
-          "it": "Indica l’intenzione con sufficiente anticipo e continua a segnalare durante la manovra.",
-          "ar": "أعلن نيتك بوقت كافٍ واستمر في التنبيه أثناء المناورة."
+          "title_it": "Svolta 2",
+          "title_ar": "الانعطاف 2",
+          "it": "Segnalare con sufficiente anticipo.",
+          "ar": "أعلن المناورة قبل تنفيذها بوقت كافٍ."
         },
         {
-          "title_it": "Nessuna precedenza automatica",
-          "title_ar": "لا أولوية تلقائية",
-          "it": "L’indicatore comunica l’intenzione ma non sostituisce la verifica di sicurezza.",
-          "ar": "إشارة الاتجاه تعلن النية لكنها لا تحل محل التحقق من السلامة."
+          "title_it": "Svolta 3",
+          "title_ar": "الانعطاف 3",
+          "it": "Mantenere l’indicatore fino al completamento della manovra.",
+          "ar": "أبقِ إشارة الاتجاه حتى اكتمال المناورة."
         },
         {
-          "title_it": "Svolta a destra",
-          "title_ar": "الانعطاف يمينًا",
-          "it": "Per svoltare a destra, avvicinati al margine destro.",
-          "ar": "عند الانعطاف يمينًا، اقترب من الحافة اليمنى."
+          "title_it": "Svolta 4",
+          "title_ar": "الانعطاف 4",
+          "it": "Per svoltare a sinistra, avvicinarsi all’asse; sul senso unico, al margine sinistro.",
+          "ar": "للانعطاف يسارًا اقترب من المحور؛ وفي الطريق الأحادي اقترب من الحافة اليسرى."
         }
       ],
       "trap_words": [],
@@ -3784,25 +3790,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "La segnalazione anticipata sostituisce il controllo della sicurezza.",
-          "statement_ar": "التنبيه المسبق يغني عن التحقق من السلامة.",
-          "answer": "FALSO",
-          "explanation_it": "L’articolo 154 richiede entrambe le cautele.",
-          "explanation_ar": "تتطلب المادة 154 كلا الإجراءين الاحتياطيين."
-        },
-        {
-          "statement_it": "Per svoltare a destra, il conducente si tiene vicino al margine destro.",
-          "statement_ar": "للانعطاف يمينًا، يقترب السائق من الحافة اليمنى.",
+          "statement_it": "Prima di manovrare si controllano posizione, distanza e direzione degli altri.",
+          "statement_ar": "قبل المناورة، تُفحص مواضع الآخرين ومسافاتهم واتجاهاتهم.",
           "answer": "VERO",
-          "explanation_it": "È la condotta descritta dall’articolo 154.",
-          "explanation_ar": "هذا هو السلوك الوارد في المادة 154."
+          "explanation_it": "La sicurezza dipende anche dalla valutazione degli altri utenti.",
+          "explanation_ar": "تعتمد السلامة أيضًا على تقدير حركة مستخدمي الطريق الآخرين."
         },
         {
-          "statement_it": "L’indicatore di direzione attribuisce da solo la precedenza.",
-          "statement_ar": "إشارة الاتجاه وحدها تمنح أولوية المرور.",
+          "statement_it": "L’indicatore si spegne prima che la manovra sia completata.",
+          "statement_ar": "تُطفأ إشارة الاتجاه قبل اكتمال المناورة.",
           "answer": "FALSO",
-          "explanation_it": "La segnalazione comunica l’intenzione, ma non autorizza una manovra pericolosa.",
-          "explanation_ar": "الإشارة تعلن النية لكنها لا تبيح مناورة خطرة."
+          "explanation_it": "Va mantenuta fino al completamento della manovra.",
+          "explanation_ar": "يجب إبقاؤها حتى اكتمال المناورة."
+        },
+        {
+          "statement_it": "Per svoltare a sinistra su strada a senso unico ci si avvicina al margine sinistro.",
+          "statement_ar": "للانعطاف يسارًا في طريق أحادي الاتجاه، يقترب السائق من الحافة اليسرى.",
+          "answer": "VERO",
+          "explanation_it": "È il posizionamento indicato dall’art. 154.",
+          "explanation_ar": "هذا هو التموضع الذي تحدده المادة 154."
         }
       ],
       "video_script_available": false,
@@ -3817,8 +3823,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Controlla gli altri prima di manovrare.\nSegnala per tempo: l’indicatore non dà precedenza.",
-            "text_ar": "تحقق من الآخرين قبل المناورة.\nنبّه مبكرًا: الإشارة لا تمنح أولوية المرور."
+            "text_it": "Controlla gli altri e segnala prima di manovrare.\nPer svoltare a sinistra, posizionati correttamente senza contromano.",
+            "text_ar": "تحقق من الآخرين ونبّه قبل المناورة.\nللانعطاف يسارًا، تموضع صحيحًا من دون السير عكس الاتجاه."
           },
           {
             "key": "example",
@@ -3836,7 +3842,7 @@
       "review_sources_checked": [
         "https://aci.gov.it/codice-della-strada/art-154/"
       ],
-      "review_verification_note": "Verificato il testo vigente dell’art. 154 sul sito ACI: conferma controllo di sicurezza, segnalazione anticipata e continuata, e posizione per la svolta a destra. Nessun numero o dettaglio ulteriore aggiunto."
+      "review_verification_note": "Verificato il testo vigente dell’art. 154 sul sito ACI: conferma controllo di sicurezza, segnalazione anticipata e continuata, e posizione per la svolta a destra. Nessun numero o dettaglio ulteriore aggiunto. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u5-l3": {
       "body_ar": "قبل التجاوز، يتحقق السائق من أن الرؤية والمساحة تسمحان بإتمام المناورة من دون خطر أو تعطيل؛ ويتأكد أيضًا من أن المركبة أمامه لم تعلن نيتها التجاوز، وأن أحدًا خلفه لم يبدأ التجاوز بالفعل. تكون المناورة عادةً من اليسار، مع ترك مسافة جانبية مناسبة، ثم العودة إلى اليمين متى أمكن من دون خلق خطر. يحدد القانون محظورات وحالات خاصة، لذلك فهذه المعايير ليست قائمة كاملة. عند تجاوز دراجة، يجب ترك مسافة جانبية مناسبة؛ وتكون 1.5 متر على الأقل عندما تسمح ظروف الطريق، وليس ذلك إذنًا بالتجاوز من دون أمان.",
@@ -4789,32 +4795,32 @@
           "legal_reference_it": "154"
         }
       ],
-      "core_it": "Arresto: esigenze del traffico; fermata: breve e con conducente presente; sosta: protratta.\nFuori dai centri abitati, fermata e sosta fuori carreggiata; se impossibile, vicino al margine destro.",
-      "core_ar": "arresto لحركة المرور؛ fermata قصيرة والسائق حاضر؛ sosta لمدة أطول.\nخارج المناطق المأهولة، توقف خارج جسم الطريق؛ ولو مستحيل، قرب الحافة اليمنى.",
+      "core_it": "Arresto: esigenze del traffico; fermata: breve; sosta: protratta.\nFuori dai centri, accosta a destra, parallelo e nel senso di marcia.",
+      "core_ar": "arresto: متطلبات السير؛ fermata: قصيرة؛ sosta: أطول.\nخارج المدن، قف بمحاذاة اليمين وفي اتجاه السير.",
       "key_points": [
         {
-          "title_it": "Arresto",
-          "title_ar": "arresto",
-          "it": "Interruzione dovuta alle esigenze della circolazione.",
-          "ar": "انقطاع السير بسبب احتياجات حركة المرور."
+          "title_it": "Arresto e sosta 1",
+          "title_ar": "التوقف والوقوف 1",
+          "it": "Arresto: interruzione dovuta alle esigenze della circolazione.",
+          "ar": "arresto: انقطاع بسبب متطلبات حركة المرور."
         },
         {
-          "title_it": "Fermata",
-          "title_ar": "fermata",
-          "it": "Breve sospensione; il conducente resta pronto a ripartire.",
-          "ar": "توقف قصير والسائق موجود وجاهز للتحرك."
+          "title_it": "Arresto e sosta 2",
+          "title_ar": "التوقف والوقوف 2",
+          "it": "Fermata: breve, con conducente presente e pronto a ripartire.",
+          "ar": "fermata: وقفة قصيرة والسائق حاضر ومستعد للانطلاق."
         },
         {
-          "title_it": "Sosta",
-          "title_ar": "sosta",
-          "it": "Sospensione protratta con possibilità di allontanarsi.",
-          "ar": "توقف ممتد مع إمكانية ابتعاد السائق."
+          "title_it": "Arresto e sosta 3",
+          "title_ar": "التوقف والوقوف 3",
+          "it": "Sosta: sospensione protratta, con possibilità di allontanamento.",
+          "ar": "sosta: وقوف أطول مع إمكانية ابتعاد السائق."
         },
         {
-          "title_it": "Fuori dai centri",
-          "title_ar": "خارج المناطق المأهولة",
-          "it": "Fuori carreggiata; se impossibile, vicino a destra e paralleli al margine.",
-          "ar": "خارج جسم الطريق؛ ولو مستحيل، قرب اليمين وبموازاة الحافة."
+          "title_it": "Arresto e sosta 4",
+          "title_ar": "التوقف والوقوف 4",
+          "it": "Fuori dai centri: fuori carreggiata; se impossibile, vicino a destra, parallela e nel senso di marcia.",
+          "ar": "خارج المناطق المأهولة: خارج جسم الطريق؛ وإن تعذر، قرب اليمين وبموازاة الطريق وفي اتجاه السير."
         }
       ],
       "trap_words": [
@@ -4852,25 +4858,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "Durante la fermata il conducente deve essere presente e pronto a ripartire.",
-          "statement_ar": "أثناء fermata لازم السائق يكون موجود وجاهز يتحرك.",
+          "statement_it": "L’arresto è dovuto alle esigenze della circolazione.",
+          "statement_ar": "ينتج arresto عن متطلبات حركة المرور.",
           "answer": "VERO",
-          "explanation_it": "È un elemento della definizione dell’articolo 157.",
-          "explanation_ar": "ده جزء من تعريف المادة 157."
+          "explanation_it": "È l’interruzione imposta dalle esigenze del traffico.",
+          "explanation_ar": "هو انقطاع تفرضه متطلبات السير."
         },
         {
-          "statement_it": "La sosta è definita come necessariamente volontaria.",
-          "statement_ar": "تعريف sosta بيشترط إنها تكون اختيارية.",
+          "statement_it": "Nella fermata il conducente può allontanarsi liberamente dal veicolo.",
+          "statement_ar": "يمكن للسائق الابتعاد عن المركبة أثناء fermata.",
           "answer": "FALSO",
-          "explanation_it": "La definizione riguarda durata e possibilità di allontanamento.",
-          "explanation_ar": "التعريف بيركز على المدة وإمكانية ابتعاد السائق."
+          "explanation_it": "Nella fermata resta presente e pronto a ripartire.",
+          "explanation_ar": "في fermata يبقى السائق حاضرًا ومستعدًا للانطلاق."
         },
         {
-          "statement_it": "Fuori dai centri abitati, se è possibile, la fermata va fatta fuori dalla carreggiata.",
-          "statement_ar": "خارج المناطق المأهولة، لو أمكن لازم fermata تكون خارج جسم الطريق.",
+          "statement_it": "Se fuori dai centri non è possibile fermarsi fuori carreggiata, si resta il più possibile a destra e paralleli.",
+          "statement_ar": "إذا تعذر التوقف خارج جسم الطريق خارج المدن، يكون الموضع أقرب ما يمكن لليمين وبموازاة الطريق.",
           "answer": "VERO",
-          "explanation_it": "L’articolo 157 prevede questa regola e disciplina il caso d’impossibilità.",
-          "explanation_ar": "المادة 157 بتقرر القاعدة دي وبتوضح التصرف لو تعذّر تطبيقها."
+          "explanation_it": "La posizione segue la direzione di marcia e il margine destro.",
+          "explanation_ar": "يكون الموضع في اتجاه السير وبالقرب من الحافة اليمنى."
         }
       ],
       "video_script_available": false,
@@ -4885,8 +4891,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Arresto: esigenze del traffico; fermata: breve e con conducente presente; sosta: protratta.\nFuori dai centri abitati, fermata e sosta fuori carreggiata; se impossibile, vicino al margine destro.",
-            "text_ar": "arresto لحركة المرور؛ fermata قصيرة والسائق حاضر؛ sosta لمدة أطول.\nخارج المناطق المأهولة، توقف خارج جسم الطريق؛ ولو مستحيل، قرب الحافة اليمنى."
+            "text_it": "Arresto: esigenze del traffico; fermata: breve; sosta: protratta.\nFuori dai centri, accosta a destra, parallelo e nel senso di marcia.",
+            "text_ar": "arresto: متطلبات السير؛ fermata: قصيرة؛ sosta: أطول.\nخارج المدن، قف بمحاذاة اليمين وفي اتجاه السير."
           },
           {
             "key": "example",
@@ -4905,15 +4911,15 @@
         "https://aci.gov.it/codice-della-strada/art-157/",
         "https://aci.gov.it/codice-della-strada/art-154/"
       ],
-      "review_verification_note": "تم التحقق من المادتين 157 و154 في موقع ACI الرسمي. ضُبطت قاعدة الموضع خارج المناطق المأهولة لتشمل عدم الوقوف على banchine إلا حيث توجد إشارة خاصة؛ ولا يتضمن الملخص أرقاماً أو استثناءات إضافية غير لازمة."
+      "review_verification_note": "تم التحقق من المادتين 157 و154 في موقع ACI الرسمي. ضُبطت قاعدة الموضع خارج المناطق المأهولة لتشمل عدم الوقوف على banchine إلا حيث توجد إشارة خاصة؛ ولا يتضمن الملخص أرقاماً أو استثناءات إضافية غير لازمة. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u6-l4": {
-      "body_ar": "لو عطل أو سبب تاني وقف المركبة، حاول تقلل تعطيل الطريق وتأمّن المرور، بشرط إن ده ما يعرّضكش للخطر. المادة 162 بتطلب التحذير المسبق خارج المناطق المأهولة في حالات محددة: بالليل لو الأنوار الخلفية المطلوبة ناقصة أو مش شغالة، وكمان بالنهار لو المركبة مش باينة من مسافة كافية. الواجب المذكور ما يشملش الدراجات الهوائية والدراجات ذات المحرك ذات العجلتين والدراجات النارية. أثناء وضع التحذير وعند النزول في الحالات المحددة، تُستخدم وسائل عاكسة. على الطريق السريع، اتبع المادة 176: لو المركبة مش قادرة توصل لمساحة الطوارئ، حط المثلث خلفها بالمسافة المقررة. القاعدة ليها شروط محددة.",
+      "body_ar": "إذا أدى عطل إلى توقف المركبة، قلل إعاقة الطريق واحمِ المرور فقط إذا أمكن ذلك من دون خطر. خارج المدن، توجب المادة 162 المثلث في شروط محددة: مثل الليل عند غياب الأضواء الخلفية المطلوبة أو تعطلها، أو النهار إذا لم تكن المركبة مرئية من مسافة كافية. وتُستثنى الدراجات الهوائية والدراجات النارية الصغيرة ذات العجلتين والدراجات النارية من واجب المثلث. عند النزول أو السير على الطريق لوضع التحذير، ارتدِ لباسًا عاكسًا عالي الوضوح، حتى في حارة الطوارئ أو منطقة التوقف. وعلى الطريق السريع تُراعى المادة 176 أيضًا.",
       "example_ar": "عطل خلّى العربية على جسم طريق سريع ومش ممكن تنقلها لمساحة الطوارئ: طبّق التحذير المطلوب في المادة 176.",
       "heading_ar": "العطل والمركبة المتوقفة: خليك واضح للآخرين",
       "pitfall_ar": "ما تعمّمش واجب المثلث خارج الشروط والاستثناءات والحالات المحددة اللي تم التحقق منها.",
       "heading_it": "Guasto e veicolo fermo: rendersi visibili",
-      "body_it": "Se un guasto o un altro evento ferma il veicolo, cerca di ridurre l’ingombro e rendere sicuro il transito, quando puoi farlo senza pericolo. L’articolo 162 prevede, fuori dai centri abitati, la presegnalazione di veicoli fermi sulla carreggiata nelle condizioni indicate: di notte se mancano o non funzionano le luci posteriori richieste, e anche di giorno se il veicolo non è visibile da distanza sufficiente. L’obbligo descritto non riguarda velocipedi, ciclomotori a due ruote e motocicli. Durante la presegnalazione e quando si scende nei casi previsti, si usano dispositivi retroriflettenti. In autostrada, segui l’articolo 176: se il veicolo non può raggiungere lo spazio d’emergenza, colloca il triangolo dietro di esso alla distanza prevista. La regola ha condizioni specifiche.",
+      "body_it": "Se un guasto ferma il veicolo, riduci l’ingombro e proteggi il transito solo se puoi farlo senza pericolo. Fuori dai centri abitati l’articolo 162 richiede il triangolo nelle condizioni previste: per esempio, di notte se mancano o non funzionano le luci posteriori, oppure di giorno se il veicolo non è visibile da distanza sufficiente. Velocipedi, ciclomotori a due ruote e motocicli sono esclusi dall’obbligo del triangolo. Quando scendi o cammini sulla strada per la segnalazione, indossa un indumento retroriflettente ad alta visibilità, anche in corsia d’emergenza o area di sosta. In autostrada segui anche l’articolo 176.",
       "example_it": "Un guasto lascia l’auto sulla carreggiata autostradale e non è possibile spostarla nello spazio d’emergenza: applica la segnalazione prevista dall’articolo 176.",
       "pitfall_it": "Non estendere l’obbligo del triangolo oltre condizioni, eccezioni e casi specifici verificati.",
       "visual_question_id": 22114,
@@ -5005,32 +5011,32 @@
           "legal_reference_it": "176"
         }
       ],
-      "core_it": "Il triangolo dipende dalle condizioni previste, non da ogni sosta.\nIn autostrada, impossibilità di raggiungere gli spazi d’emergenza: triangolo a distanza prescritta.",
-      "core_ar": "المثلث مطلوب حسب شروط محددة، مش عند كل توقف.\nعلى الطريق السريع، لو تعذّر الوصول لمساحة الطوارئ، يوضع المثلث بالمسافة المقررة.",
+      "core_it": "Il triangolo dipende dalle condizioni previste.\nSe sei a piedi sulla strada, usa alta visibilità.",
+      "core_ar": "يعتمد المثلث على شروط محددة.\nإذا كنت تسير على الطريق، ارتدِ لباسًا عالي الوضوح.",
       "key_points": [
         {
-          "title_it": "Ridurre l’ingombro",
-          "title_ar": "تقليل تعطيل الطريق",
-          "it": "Libera il transito per quanto possibile e senza esporti a pericoli.",
-          "ar": "خلّي المرور يعدّي قدر الإمكان من غير ما تعرّض نفسك للخطر."
+          "title_it": "Triangolo e visibilità 1",
+          "title_ar": "المثلث والوضوح 1",
+          "it": "Il triangolo è previsto solo nelle condizioni stabilite dagli artt. 162 e 176.",
+          "ar": "يُستخدم المثلث فقط في الحالات المحددة بالمادتين 162 و176."
         },
         {
-          "title_it": "Fuori dai centri",
-          "title_ar": "خارج المناطق المأهولة",
-          "it": "La presegnalazione dipende da visibilità e luci nelle condizioni di legge.",
-          "ar": "التحذير المسبق مرتبط بالرؤية والأنوار وفق الحالات القانونية."
+          "title_it": "Triangolo e visibilità 2",
+          "title_ar": "المثلث والوضوح 2",
+          "it": "L’art. 162 esclude velocipedi, ciclomotori a due ruote e motocicli dall’obbligo indicato.",
+          "ar": "تستثني المادة 162 الدراجات الهوائية والدراجات النارية الصغيرة ذات العجلتين والدراجات النارية من هذا الواجب."
         },
         {
-          "title_it": "Eccezioni",
-          "title_ar": "استثناءات",
-          "it": "L’articolo 162 esclude velocipedi, ciclomotori a due ruote e motocicli dall’obbligo descritto.",
-          "ar": "المادة 162 تستثني الدراجات الهوائية وذات المحرك ذات العجلتين والدراجات النارية من الواجب المذكور."
+          "title_it": "Triangolo e visibilità 3",
+          "title_ar": "المثلث والوضوح 3",
+          "it": "Indossare un indumento retroriflettente quando si è a piedi sulla strada per la segnalazione.",
+          "ar": "ارتدِ لباسًا عاكسًا عالي الوضوح عند السير على الطريق لوضع التحذير."
         },
         {
-          "title_it": "Autostrada",
-          "title_ar": "الطريق السريع",
-          "it": "L’articolo 176 disciplina il triangolo quando non si può raggiungere lo spazio d’emergenza.",
-          "ar": "المادة 176 بتنظم وضع المثلث لو تعذّر الوصول لمساحة الطوارئ."
+          "title_it": "Triangolo e visibilità 4",
+          "title_ar": "المثلث والوضوح 4",
+          "it": "La protezione ad alta visibilità vale anche su corsie d’emergenza e aree di sosta.",
+          "ar": "يلزم اللباس عالي الوضوح أيضًا في حارات الطوارئ ومناطق التوقف."
         }
       ],
       "trap_words": [
@@ -5060,25 +5066,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "L’articolo 162 descrive un obbligo di presegnalazione applicabile senza eccezioni a ogni veicolo.",
-          "statement_ar": "المادة 162 بتفرض التحذير المسبق على كل المركبات من غير استثناء.",
+          "statement_it": "Il triangolo è obbligatorio per ogni veicolo fermo, senza eccezioni.",
+          "statement_ar": "المثلث واجب لكل مركبة متوقفة بلا استثناء.",
           "answer": "FALSO",
-          "explanation_it": "Esclude velocipedi, ciclomotori a due ruote e motocicli dall’obbligo descritto.",
-          "explanation_ar": "بتستثني الدراجات الهوائية وذات المحرك ذات العجلتين والدراجات النارية من الواجب المذكور."
+          "explanation_it": "Gli articoli 162 e 176 stabiliscono condizioni ed esclusioni.",
+          "explanation_ar": "تحدد المادتان 162 و176 شروطًا واستثناءات."
         },
         {
-          "statement_it": "Fuori dai centri abitati, la visibilità insufficiente di giorno è una delle condizioni per presegnalare il veicolo fermo sulla carreggiata.",
-          "statement_ar": "خارج المناطق المأهولة، ضعف الرؤية نهارًا من حالات التحذير المسبق من المركبة المتوقفة على الطريق.",
+          "statement_it": "L’art. 162 esclude velocipedi, ciclomotori a due ruote e motocicli dall’obbligo indicato.",
+          "statement_ar": "تستثني المادة 162 الدراجات الهوائية والدراجات النارية ذات العجلتين من الواجب المذكور.",
           "answer": "VERO",
-          "explanation_it": "L’articolo 162 menziona la visibilità a distanza sufficiente anche di giorno.",
-          "explanation_ar": "المادة 162 بتذكر عدم وضوح المركبة من مسافة كافية حتى بالنهار."
+          "explanation_it": "L’esclusione è indicata nell’articolo.",
+          "explanation_ar": "الاستثناء منصوص عليه في المادة."
         },
         {
-          "statement_it": "In autostrada il triangolo è previsto anche quando il veicolo non può raggiungere la corsia o piazzola d’emergenza.",
-          "statement_ar": "على الطريق السريع، المثلث مطلوب كمان لو المركبة مش قادرة توصل لحارة أو مساحة الطوارئ.",
+          "statement_it": "Il conducente a piedi sulla corsia d’emergenza deve indossare alta visibilità nei casi previsti.",
+          "statement_ar": "على السائق الذي يسير على حارة الطوارئ ارتداء لباس عالي الوضوح في الحالات المقررة.",
           "answer": "VERO",
-          "explanation_it": "È uno dei casi indicati dall’articolo 176, comma 8.",
-          "explanation_ar": "دي واحدة من الحالات المذكورة في المادة 176 فقرة 8."
+          "explanation_it": "L’obbligo riguarda anche corsie d’emergenza e aree di sosta.",
+          "explanation_ar": "يشمل الواجب حارات الطوارئ ومناطق التوقف أيضًا."
         }
       ],
       "video_script_available": false,
@@ -5093,8 +5099,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Il triangolo dipende dalle condizioni previste, non da ogni sosta.\nIn autostrada, impossibilità di raggiungere gli spazi d’emergenza: triangolo a distanza prescritta.",
-            "text_ar": "المثلث مطلوب حسب شروط محددة، مش عند كل توقف.\nعلى الطريق السريع، لو تعذّر الوصول لمساحة الطوارئ، يوضع المثلث بالمسافة المقررة."
+            "text_it": "Il triangolo dipende dalle condizioni previste.\nSe sei a piedi sulla strada, usa alta visibilità.",
+            "text_ar": "يعتمد المثلث على شروط محددة.\nإذا كنت تسير على الطريق، ارتدِ لباسًا عالي الوضوح."
           },
           {
             "key": "example",
@@ -5114,15 +5120,15 @@
         "https://aci.gov.it/codice-della-strada/art-162/",
         "https://aci.gov.it/codice-della-strada/art-176/"
       ],
-      "review_verification_note": "Verificati gli articoli 161, 162 e 176 nel testo ACI consultato. La sintesi evita di estendere l’obbligo del triangolo a ogni sosta; l’art. 176, comma 8, contempla anche la sosta sulla banchina d’emergenza di notte o con visibilità limitata se le luci di posizione sono inefficienti."
+      "review_verification_note": "Verificati gli articoli 161, 162 e 176 nel testo ACI consultato. La sintesi evita di estendere l’obbligo del triangolo a ogni sosta; l’art. 176, comma 8, contempla anche la sosta sulla banchina d’emergenza di notte o con visibilità limitata se le luci di posizione sono inefficienti. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u6-l5": {
-      "body_ar": "على الطرق اللي بتنطبق عليها المادة 176، عند الدخول استخدم حارة التسارع وادي الأولوية للمركبات اللي ماشية بالفعل. للخروج، انتقل بدري للحارة اليمنى وخد حارة التباطؤ من أولها؛ ولازم تشير قبل تغيير الحارة. حارة الطوارئ مش حارة للسير العادي: استخدامها للتوقف أو استئناف السير في الحالات المقررة. على جسم الطريق والمنحدرات ومخارج الطرق، عكس الاتجاه والسير عكسه ممنوعان؛ والرجوع للخلف ممنوع حتى في حارة الطوارئ، باستثناء المناورات الضرورية داخل مناطق الخدمة أو الانتظار. الاستثناء خاص بالرجوع للخلف فقط. في الطوارئ، انقل المركبة للمساحة المحددة بأسرع ما يمكن. لو فاتك المخرج، كمّل للمخرج اللي بعده.",
+      "body_ar": "تنطبق المادتان 175 و176 على الطرق السريعة والطرق الرئيسية خارج المدن؛ ويُقيّد الدخول على المشاة والحيوانات وفئات متعددة من المركبات. للدخول استخدم حارة التسارع وأعطِ الأولوية، وللخروج اتبع حارة التباطؤ من بدايتها. أشر إلى تغيير الحارة. يُحظر الدوران والسير عكس الاتجاه؛ كما يُحظر الرجوع للخلف على جسم الطريق وحارة الطوارئ إلا للمناورات اللازمة في مناطق الخدمة أو التوقف. حارة الطوارئ ليست للسير العادي؛ ولا تتوقف فيها إلا في الحالات المسموح بها. إذا تجاوزت المخرج، تابع إلى المخرج التالي.",
       "example_ar": "عدّيت المخرج: كمّل للمخرج اللي بعده من غير ما توقف على جسم الطريق أو ترجع للخلف.",
       "heading_ar": "الطريق السريع: الدخول والحارات والخروج",
       "pitfall_ar": "ما تحوّلش الاستثناء المحدود للرجوع للخلف إلى إذن بعكس الاتجاه أو السير عكسه.",
       "heading_it": "Autostrada: ingresso, corsie e uscita",
-      "body_it": "Sulle strade comprese nel campo dell’articolo 176, per entrare si usa la corsia di accelerazione e si dà precedenza ai veicoli già in marcia. Per uscire ci si porta tempestivamente sulla corsia destra e si imbocca quella di decelerazione dal suo inizio; il cambio di corsia va segnalato. La corsia d’emergenza non è una corsia ordinaria: si usa per arrestarsi o riprendere la marcia nei casi previsti. Sulle carreggiate, rampe e svincoli sono vietate inversione e marcia contromano; la retromarcia è vietata anche sulla corsia d’emergenza, salvo manovre necessarie nelle aree di servizio o parcheggio. L’eccezione riguarda solo la retromarcia. In emergenza, sposta il veicolo appena possibile nello spazio indicato. Se superi l’uscita, prosegui verso la successiva.",
+      "body_it": "Gli articoli 175 e 176 si applicano alle autostrade e alle strade extraurbane principali; l’accesso è limitato per pedoni, animali e diverse categorie di veicoli. Per entrare usa la corsia di accelerazione e dai precedenza; per uscire segui la corsia di decelerazione dal suo inizio. Segnala i cambi di corsia. Inversione e circolazione contromano sono vietate; anche la retromarcia è vietata sulla carreggiata e sulla corsia d’emergenza, salvo manovre necessarie nelle aree di servizio o parcheggio. La corsia d’emergenza non è per la marcia normale: fermati solo nei casi consentiti. Se superi un’uscita, prosegui verso la successiva.",
       "example_it": "Hai oltrepassato lo svincolo: continui fino a quello successivo, senza fermarti sulla carreggiata né fare retromarcia.",
       "pitfall_it": "Non trasformare l’eccezione circoscritta alla retromarcia in un permesso di inversione o contromano.",
       "visual_question_id": 22159,
@@ -5222,32 +5228,32 @@
           "legal_reference_it": "154"
         }
       ],
-      "core_it": "Ingresso: corsia di accelerazione e precedenza a chi è già in marcia.\nUscita: corsia destra, poi decelerazione dall’inizio; niente inversioni o retromarcia fuori dall’eccezione stretta.",
-      "core_ar": "الدخول: حارة تسارع وإعطاء الأولوية للمركبات الموجودة.\nالخروج: الحارة اليمنى ثم التباطؤ من بدايته؛ لا عكس اتجاه ولا رجوع للخلف إلا بالاستثناء المحدد.",
+      "core_it": "Entra e esci dalle corsie dedicate.\nLe regole valgono anche sulle strade extraurbane principali.",
+      "core_ar": "استخدم حارات الدخول والخروج المخصصة.\nتسري القواعد أيضًا على الطرق الرئيسية خارج المدن.",
       "key_points": [
         {
-          "title_it": "Ingresso",
-          "title_ar": "الدخول",
-          "it": "Usa la corsia di accelerazione e dai precedenza al traffico già presente.",
-          "ar": "استخدم حارة التسارع وادي الأولوية لحركة المرور الموجودة."
+          "title_it": "Autostrade 1",
+          "title_ar": "الطرق السريعة 1",
+          "it": "Ingresso: corsia di accelerazione e precedenza; uscita: corsia di decelerazione dall’inizio.",
+          "ar": "الدخول عبر حارة التسارع مع إعطاء الأولوية؛ والخروج عبر حارة التباطؤ من بدايتها."
         },
         {
-          "title_it": "Uscita",
-          "title_ar": "الخروج",
-          "it": "Raggiungi per tempo la corsia destra e la corsia di decelerazione dal suo inizio.",
-          "ar": "انتقل بدري لليمين ثم لحارة التباطؤ من أولها."
+          "title_it": "Autostrade 2",
+          "title_ar": "الطرق السريعة 2",
+          "it": "Le regole valgono anche sulle strade extraurbane principali; art. 175 limita accesso e utenti ammessi.",
+          "ar": "تسري القواعد أيضًا على الطرق الرئيسية خارج المدن؛ وتقيّد المادة 175 الدخول وفئات المستخدمين."
         },
         {
-          "title_it": "Segnalazione",
-          "title_ar": "الإشارة",
-          "it": "Segnala tempestivamente il cambiamento di corsia.",
-          "ar": "أشّر بدري قبل تغيير الحارة."
+          "title_it": "Autostrade 3",
+          "title_ar": "الطرق السريعة 3",
+          "it": "Segnalare i cambi di corsia; inversione e retromarcia sono vietate sulla carreggiata.",
+          "ar": "أشر إلى تغيير الحارة؛ ويُحظر الدوران والرجوع على جسم الطريق."
         },
         {
-          "title_it": "Retromarcia",
-          "title_ar": "الرجوع للخلف",
-          "it": "Il limitato caso ammesso riguarda manovre necessarie in aree di servizio o parcheggio.",
-          "ar": "الاستثناء المحدود يخص المناورات الضرورية بمناطق الخدمة أو الانتظار."
+          "title_it": "Autostrade 4",
+          "title_ar": "الطرق السريعة 4",
+          "it": "La corsia d’emergenza non è per marcia o sorpasso; sosta solo nei casi consentiti.",
+          "ar": "حارة الطوارئ ليست للسير أو التجاوز؛ ولا يُتوقف فيها إلا في الحالات المسموح بها."
         }
       ],
       "trap_words": [
@@ -5277,25 +5283,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "Per immettersi, si usa la corsia di accelerazione e si dà precedenza ai veicoli in circolazione.",
-          "statement_ar": "للدخول، استخدم حارة التسارع وادي الأولوية للمركبات اللي ماشية.",
+          "statement_it": "Per entrare si usa la corsia di accelerazione e si dà precedenza ai veicoli già in marcia.",
+          "statement_ar": "للدخول تُستخدم حارة التسارع مع إعطاء الأولوية للمركبات السائرة.",
           "answer": "VERO",
-          "explanation_it": "È l’obbligo indicato dall’articolo 176, comma 2.",
-          "explanation_ar": "ده الواجب المذكور في المادة 176 فقرة 2."
+          "explanation_it": "La corsia di accelerazione serve per inserirsi senza togliere precedenza.",
+          "explanation_ar": "تُستخدم حارة التسارع للاندماج من دون انتزاع الأولوية."
         },
         {
-          "statement_it": "Se si supera l’uscita, è corretto fare retromarcia sulla corsia d’emergenza.",
-          "statement_ar": "لو فاتك المخرج، الصح ترجع للخلف في حارة الطوارئ.",
-          "answer": "FALSO",
-          "explanation_it": "La retromarcia è vietata; si prosegue verso l’uscita successiva.",
-          "explanation_ar": "الرجوع للخلف ممنوع؛ كمّل للمخرج التالي."
+          "statement_it": "Le regole degli artt. 175 e 176 riguardano anche le strade extraurbane principali.",
+          "statement_ar": "تشمل المادتان 175 و176 الطرق الرئيسية خارج المدن أيضًا.",
+          "answer": "VERO",
+          "explanation_it": "Le due norme si applicano a entrambe le tipologie di strada.",
+          "explanation_ar": "تسري المادتان على نوعي الطريق."
         },
         {
-          "statement_it": "L’eccezione per manovre di retromarcia nelle aree di servizio autorizza anche l’inversione.",
-          "statement_ar": "استثناء الرجوع للخلف في مناطق الخدمة بيسمح كمان بعكس الاتجاه.",
+          "statement_it": "Si può usare la corsia d’emergenza per sorpassare il traffico lento.",
+          "statement_ar": "يمكن استخدام حارة الطوارئ لتجاوز حركة المرور البطيئة.",
           "answer": "FALSO",
-          "explanation_it": "L’eccezione normativa riguarda la retromarcia, non l’inversione o il contromano.",
-          "explanation_ar": "الاستثناء القانوني خاص بالرجوع للخلف، مش بعكس الاتجاه أو السير عكسه."
+          "explanation_it": "La corsia d’emergenza non è una corsia ordinaria di marcia o sorpasso.",
+          "explanation_ar": "حارة الطوارئ ليست حارة عادية للسير أو التجاوز."
         }
       ],
       "video_script_available": false,
@@ -5310,8 +5316,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Ingresso: corsia di accelerazione e precedenza a chi è già in marcia.\nUscita: corsia destra, poi decelerazione dall’inizio; niente inversioni o retromarcia fuori dall’eccezione stretta.",
-            "text_ar": "الدخول: حارة تسارع وإعطاء الأولوية للمركبات الموجودة.\nالخروج: الحارة اليمنى ثم التباطؤ من بدايته؛ لا عكس اتجاه ولا رجوع للخلف إلا بالاستثناء المحدد."
+            "text_it": "Entra e esci dalle corsie dedicate.\nLe regole valgono anche sulle strade extraurbane principali.",
+            "text_ar": "استخدم حارات الدخول والخروج المخصصة.\nتسري القواعد أيضًا على الطرق الرئيسية خارج المدن."
           },
           {
             "key": "example",
@@ -5327,17 +5333,18 @@
       },
       "videoUrl": null,
       "review_sources_checked": [
-        "https://aci.gov.it/codice-della-strada/art-176/"
+        "https://aci.gov.it/codice-della-strada/art-176/",
+        "https://aci.gov.it/codice-della-strada/art-175/"
       ],
-      "review_verification_note": "تم التحقق من المادة 176 لدى ACI: الاستثناء يخص الرجوع للخلف فقط في المناورات الضرورية بمناطق الخدمة أو الانتظار، ولا يبيح عكس الاتجاه أو السير عكسه."
+      "review_verification_note": "تم التحقق من المادة 176 لدى ACI: الاستثناء يخص الرجوع للخلف فقط في المناورات الضرورية بمناطق الخدمة أو الانتظار، ولا يبيح عكس الاتجاه أو السير عكسه. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u7-l1": {
-      "body_ar": "أثناء السير، يجب إبقاء المركبات ذات المحرك ومقطوراتها في حالة كفاءة تضمن السلامة وتحصر الضوضاء والتلوث ضمن الحدود المقررة. وتشمل المتطلبات الفنية، من بين أمور أخرى، الإطارات والفرملة والإشارات المرئية والإضاءة (المادة 79، الفقرتان 1 و2). قبل الانطلاق، من المفيد التأكد من عدم وجود تلف ظاهر وأن هذه العناصر تعمل. ويتأثر تماسك المركبة بحالتها وبحالة الطريق؛ وعلى السائق ضبط السرعة مع مراعاة المركبة والحمولة والطريق وحركة المرور (المادة 141). يساعد الفحص العملي على ملاحظة المشكلات، لكنه لا يحل محل الصيانة والفحوص المطلوبة.",
+      "body_ar": "يجب أن تظل المركبات ومقطوراتها كفؤة من أجل السلامة والحد من الضوضاء والانبعاثات. لا يقتصر الفحص على الإطارات والفرامل؛ بل يشمل أيضًا التوجيه والتعليق والأضواء والمؤشرات والعاكسات والمرايا والزجاج الأمامي والماسحات والعادم. يجب أن تعمل هذه العناصر وألا تتلف بما يضعف كفاءتها. للسلامة، افحص ما يمكن رؤيته قبل الانطلاق؛ فهذا لا يغني عن الصيانة والفحوص المقررة. تحدد المادة 79 المتطلبات الفنية، وتوجب المادة 141 ضبط السرعة وفق المركبة والحمولة والطريق والمرور. هذا تلخيص عملي.",
       "example_ar": "قبل رحلة، تلاحظ سائقة إطارًا تالفًا وضوءًا لا يعمل؛ فتتحقق من المشكلة قبل الانطلاق.",
       "heading_ar": "فحص المركبة: الكفاءة والسلامة",
       "pitfall_ar": "قدرة المحرك على العمل لا تثبت أن جميع العناصر المهمة للسلامة سليمة.",
       "heading_it": "Controlli del veicolo: efficienza e sicurezza",
-      "body_it": "Durante la circolazione, i veicoli a motore e i loro rimorchi devono essere mantenuti in condizioni di efficienza tali da garantire la sicurezza e contenere rumore e inquinamento entro i limiti previsti. Le prescrizioni tecniche riguardano, tra l’altro, pneumatici, frenatura, segnalazione visiva e illuminazione (articolo 79, commi 1 e 2). Prima di partire è utile controllare che questi elementi non presentino danni evidenti e funzionino. La tenuta di strada dipende anche dalle condizioni del veicolo e della strada; il conducente deve regolare la velocità considerando veicolo, carico, strada e traffico (articolo 141). Il controllo pratico aiuta a riconoscere problemi, ma non sostituisce manutenzione e verifiche previste.",
+      "body_it": "Veicoli a motore e rimorchi devono restare efficienti per sicurezza, rumore ed emissioni. I controlli non riguardano solo pneumatici e freni: comprendono anche sterzo, sospensioni, luci, indicatori, catadiottri, specchi, parabrezza, tergicristalli e scarico; gli elementi devono funzionare e non presentare danni che ne riducano l’efficacia. Per sicurezza, osserva prima di partire gli elementi accessibili, senza sostituire manutenzione e revisioni. L’articolo 79 stabilisce requisiti tecnici; l’articolo 141 impone di regolare la velocità in base a veicolo, carico, strada e traffico. È una sintesi pratica.",
       "example_it": "Prima di un viaggio, una conducente nota un pneumatico danneggiato e una luce che non funziona: verifica il problema prima di partire.",
       "pitfall_it": "La capacità del motore di avviarsi non dimostra che tutti gli elementi importanti per la sicurezza siano efficienti.",
       "visual_src": "/lessons/lesson-vehicle-safety.webp",
@@ -5427,34 +5434,42 @@
           "title_ar": "السرعة",
           "legal_reference": "141",
           "legal_reference_it": "141"
+        },
+        {
+          "url": "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf",
+          "title": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_it": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_ar": "وزارة البنية التحتية والنقل — برنامج الامتحان النظري لرخص A وB (التعميم 28819/2019)",
+          "legal_reference": "Programma d’esame teorico patente A/B",
+          "legal_reference_it": "Programma d’esame teorico patente A/B"
         }
       ],
-      "core_it": "Controlla pneumatici, freni e luci: sono elementi rilevanti per la sicurezza.\nAdatta la velocità alle condizioni del veicolo, del carico e della strada.",
-      "core_ar": "افحص الإطارات والفرامل والأضواء؛ فهي عناصر مؤثرة في السلامة.\nاضبط السرعة وفق حالة المركبة والحمولة والطريق.",
+      "core_it": "Controlla i componenti di sicurezza e mantieni il veicolo efficiente.\nRegola la velocità in base a veicolo, carico e strada.",
+      "core_ar": "افحص مكونات السلامة وحافظ على كفاءة المركبة.\nاضبط السرعة وفق المركبة والحمولة والطريق.",
       "key_points": [
         {
-          "title_it": "Efficienza",
-          "title_ar": "الكفاءة",
-          "it": "In marcia, veicoli a motore e rimorchi devono mantenere efficienza idonea alla sicurezza.",
-          "ar": "أثناء السير، يجب أن تحافظ المركبات ذات المحرك ومقطوراتها على كفاءة مناسبة للسلامة."
+          "title_it": "Efficienza 1",
+          "title_ar": "الكفاءة 1",
+          "it": "Veicoli a motore e rimorchi devono restare efficienti.",
+          "ar": "يجب إبقاء المركبات ذات المحرك ومقطوراتها بحالة كفاءة."
         },
         {
-          "title_it": "Pneumatici",
-          "title_ar": "الإطارات",
-          "it": "Gli pneumatici rientrano tra gli elementi con requisiti tecnici specifici.",
-          "ar": "تخضع الإطارات لمتطلبات فنية محددة."
+          "title_it": "Efficienza 2",
+          "title_ar": "الكفاءة 2",
+          "it": "Controllare pneumatici, freni, sterzo e sospensioni.",
+          "ar": "افحص الإطارات والفرامل والتوجيه والتعليق."
         },
         {
-          "title_it": "Freni",
-          "title_ar": "الفرامل",
-          "it": "La frenatura è indicata tra gli aspetti regolati per la sicurezza del veicolo.",
-          "ar": "الفرملة من الجوانب المنظمة لضمان سلامة المركبة."
+          "title_it": "Efficienza 3",
+          "title_ar": "الكفاءة 3",
+          "it": "Controllare luci, indicatori, catadiottri, specchi, parabrezza, tergicristalli e scarico.",
+          "ar": "افحص الأضواء والمؤشرات والعاكسات والمرايا والزجاج والماسحات والعادم."
         },
         {
-          "title_it": "Velocità",
-          "title_ar": "السرعة",
-          "it": "La velocità va adeguata anche alle condizioni del veicolo e della strada.",
-          "ar": "ينبغي ملاءمة السرعة أيضًا لحالة المركبة والطريق."
+          "title_it": "Efficienza 4",
+          "title_ar": "الكفاءة 4",
+          "it": "Adeguare la velocità a veicolo, carico, strada e traffico.",
+          "ar": "اضبط السرعة وفق المركبة والحمولة والطريق وحركة المرور."
         }
       ],
       "trap_words": [],
@@ -5481,25 +5496,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "L’articolo 79 riguarda anche l’efficienza dei rimorchi durante la circolazione.",
-          "statement_ar": "تتناول المادة 79 كفاءة المقطورات أثناء السير أيضًا.",
+          "statement_it": "Veicoli a motore e rimorchi devono essere mantenuti efficienti.",
+          "statement_ar": "يجب الحفاظ على كفاءة المركبات ذات المحرك ومقطوراتها.",
           "answer": "VERO",
-          "explanation_it": "Il comma 1 menziona i veicoli a motore e i loro rimorchi.",
-          "explanation_ar": "تذكر الفقرة الأولى المركبات ذات المحرك ومقطوراتها."
+          "explanation_it": "L’efficienza contribuisce alla sicurezza della circolazione.",
+          "explanation_ar": "تسهم الكفاءة في سلامة حركة المرور."
         },
         {
-          "statement_it": "I requisiti tecnici possono riguardare pneumatici e frenatura.",
-          "statement_ar": "قد تشمل المتطلبات الفنية الإطارات والفرملة.",
-          "answer": "VERO",
-          "explanation_it": "Sono due degli ambiti espressamente indicati nell’articolo 79, comma 2.",
-          "explanation_ar": "هذان مجالان مذكوران صراحةً في المادة 79، الفقرة 2."
-        },
-        {
-          "statement_it": "La velocità si sceglie senza considerare le condizioni del veicolo.",
-          "statement_ar": "تُختار السرعة من دون مراعاة حالة المركبة.",
+          "statement_it": "Per adeguare la velocità basta considerare il traffico.",
+          "statement_ar": "يكفي مراعاة حركة المرور لضبط السرعة.",
           "answer": "FALSO",
-          "explanation_it": "L’articolo 141 richiede di tener conto delle condizioni del veicolo.",
-          "explanation_ar": "توجب المادة 141 مراعاة حالة المركبة عند ضبط السرعة."
+          "explanation_it": "Si considerano anche veicolo, carico e strada.",
+          "explanation_ar": "يجب مراعاة المركبة والحمولة والطريق أيضًا."
+        },
+        {
+          "statement_it": "Sterzo, sospensioni, indicatori e tergicristalli rientrano nei controlli del veicolo.",
+          "statement_ar": "يشمل فحص المركبة التوجيه والتعليق والمؤشرات والماسحات.",
+          "answer": "VERO",
+          "explanation_it": "Sono elementi da riconoscere e mantenere efficienti.",
+          "explanation_ar": "هذه عناصر يجب معرفتها والحفاظ على كفاءتها."
         }
       ],
       "video_script_available": false,
@@ -5514,8 +5529,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Controlla pneumatici, freni e luci: sono elementi rilevanti per la sicurezza.\nAdatta la velocità alle condizioni del veicolo, del carico e della strada.",
-            "text_ar": "افحص الإطارات والفرامل والأضواء؛ فهي عناصر مؤثرة في السلامة.\nاضبط السرعة وفق حالة المركبة والحمولة والطريق."
+            "text_it": "Controlla i componenti di sicurezza e mantieni il veicolo efficiente.\nRegola la velocità in base a veicolo, carico e strada.",
+            "text_ar": "افحص مكونات السلامة وحافظ على كفاءة المركبة.\nاضبط السرعة وفق المركبة والحمولة والطريق."
           },
           {
             "key": "example",
@@ -5532,17 +5547,18 @@
       "videoUrl": null,
       "review_sources_checked": [
         "https://aci.gov.it/codice-della-strada/art-79/",
-        "https://aci.gov.it/codice-della-strada/art-141/"
+        "https://aci.gov.it/codice-della-strada/art-141/",
+        "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf"
       ],
-      "review_verification_note": "Verificati i testi ufficiali ACI degli articoli 79 e 141: confermano i requisiti di efficienza e i fattori da considerare per regolare la velocità. Il controllo pratico prima della partenza è presentato come consiglio, non come obbligo specifico di questi articoli."
+      "review_verification_note": "Verificati i testi ufficiali ACI degli articoli 79 e 141: confermano i requisiti di efficienza e i fattori da considerare per regolare la velocità. Il controllo pratico prima della partenza è presentato come consiglio, non come obbligo specifico di questi articoli. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u7-l2": {
-      "body_ar": "ينطبق واجب استخدام الأحزمة الوارد في المادة 172، الفقرة 1، على مركبات L6e ذات الهيكل المغلق، وعلى مركبات الفئات M1 وN1 وN2 وN3 المجهزة بأحزمة؛ أما M2 وM3 فتسري على ركابها الجالسين أحكام محددة. يجب تثبيت الأطفال الذين يقل طولهم عن 1.50 متر بنظام معتمد ومناسب لوزنهم. وعلى السائق التحقق من كفاءة أجهزة التثبيت. لا يوضع مقعد الطفل المواجه للخلف أمام وسادة هوائية أمامية فعالة، إلا إذا عُطلت بطريقة مناسبة. وتتعلق الإعفاءات التي يسردها القانون بفئات وحالات محددة، وليست إعفاءً عامًا. أما الخوذة فتخضع للأحكام الخاصة في المادة 171.",
+      "body_ar": "يشمل واجب استخدام الأحزمة في المادة 172 المركبات والفئات المحددة في النص والمركبات المزودة بأحزمة؛ وللركاب الجالسين في M2 وM3 أحكام خاصة. يستخدم الأطفال الذين يقل طولهم عن 1.50 متر نظام تثبيت معتمدًا ومناسبًا للوزن، ويتحقق السائق من كفاءته. لا يوضع مقعد الطفل المواجه للخلف أمام وسادة هوائية فعالة إلا بعد تعطيلها على نحو مناسب. اضبط مسند الرأس لدعم الرأس، أما الخوذة فتحكمها المادة 171. الإعفاءات القانونية تخص فئات وحالات محددة وليست عامة.",
       "example_ar": "يسافر طفل يقل طوله عن 1.50 متر في سيارة؛ فيُستخدم نظام معتمد مناسب لوزنه، ويُتحقق من موضعه بالنسبة إلى الوسادة الهوائية.",
       "heading_ar": "الأحزمة وأنظمة التثبيت: حماية الركاب",
       "pitfall_ar": "لا تحوّل فئات الأحزمة أو الإعفاءات المحددة إلى قواعد عامة تشمل الجميع.",
       "heading_it": "Cinture e sistemi di ritenuta: proteggere gli occupanti",
-      "body_it": "L’obbligo di usare le cinture previsto dall’articolo 172, comma 1, riguarda i veicoli L6e con carrozzeria chiusa e quelli delle categorie M1, N1, N2 e N3 muniti di cinture; per M2 e M3 valgono disposizioni specifiche per gli occupanti seduti. I bambini di statura inferiore a 1,50 m devono essere assicurati con un sistema omologato e adeguato al loro peso. Il conducente deve verificare l’efficienza dei dispositivi. Un seggiolino rivolto all’indietro non va collocato davanti a un airbag frontale attivo, salvo disattivazione adeguata. Le esenzioni elencate dalla legge riguardano categorie e situazioni determinate: non costituiscono un’esenzione generale. Per il casco si applicano le disposizioni specifiche dell’articolo 171.",
+      "body_it": "L’obbligo di usare le cinture previsto dall’articolo 172 riguarda i veicoli indicati dalla norma e quelli dotati di cinture; per gli occupanti seduti di M2 e M3 valgono disposizioni specifiche. I bambini di statura inferiore a 1,50 m devono usare un sistema di ritenuta omologato e adeguato al peso. Il conducente ne verifica l’efficienza. Un seggiolino rivolto all’indietro non va davanti a un airbag frontale attivo, salvo disattivazione adeguata. Regola anche il poggiatesta per sostenere la testa; il casco segue l’articolo 171. Le esenzioni di legge riguardano categorie e situazioni determinate, non sono generali.",
       "example_it": "In auto viaggia un bambino alto meno di 1,50 m: si usa un sistema omologato adatto al suo peso e si controlla il corretto posizionamento rispetto all’airbag.",
       "pitfall_it": "Non trasformare le categorie previste per le cinture o le esenzioni specifiche in regole universali.",
       "visual_src": "/lessons/lesson-vehicle-safety.webp",
@@ -5632,34 +5648,42 @@
           "title_ar": "استخدام الخوذة الواقية",
           "legal_reference": "171",
           "legal_reference_it": "171"
+        },
+        {
+          "url": "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf",
+          "title": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_it": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_ar": "وزارة البنية التحتية والنقل — برنامج الامتحان النظري لرخص A وB (التعميم 28819/2019)",
+          "legal_reference": "Programma d’esame teorico patente A/B",
+          "legal_reference_it": "Programma d’esame teorico patente A/B"
         }
       ],
-      "core_it": "Bambini sotto 1,50 m: sistema omologato adatto al peso.\nLe deroghe sono specifiche; non presumere un’esenzione generale.",
-      "core_ar": "الأطفال دون 1.50 متر: نظام تثبيت معتمد وملائم للوزن.\nالإعفاءات محددة؛ فلا تفترض وجود إعفاء عام.",
+      "core_it": "Usa cinture e sistemi di ritenuta previsti.\nCon un seggiolino posteriore, disattiva l’airbag anteriore attivo.",
+      "core_ar": "استخدم الأحزمة وأنظمة التثبيت المقررة.\nمع مقعد الطفل المواجه للخلف، عطّل الوسادة الأمامية الفعالة.",
       "key_points": [
         {
-          "title_it": "Ambito",
-          "title_ar": "النطاق",
-          "it": "L’obbligo di cintura del comma 1 si applica alle categorie indicate e munite di cinture.",
-          "ar": "ينطبق واجب الحزام في الفقرة 1 على الفئات المحددة والمجهزة بأحزمة."
+          "title_it": "Protezione 1",
+          "title_ar": "الحماية 1",
+          "it": "L’obbligo di cintura riguarda le categorie e le condizioni previste.",
+          "ar": "يشمل واجب الحزام الفئات والشروط المحددة."
         },
         {
-          "title_it": "Bambini",
-          "title_ar": "الأطفال",
-          "it": "Sotto 1,50 m occorre un sistema omologato adeguato al peso.",
-          "ar": "لمن يقل طولهم عن 1.50 متر يلزم نظام معتمد مناسب للوزن."
+          "title_it": "Protezione 2",
+          "title_ar": "الحماية 2",
+          "it": "Sotto 1,50 m serve un sistema omologato adeguato al peso.",
+          "ar": "لمن يقل طولهم عن 1.50 متر يلزم نظام معتمد يناسب الوزن."
         },
         {
-          "title_it": "Efficienza",
-          "title_ar": "الكفاءة",
-          "it": "Il conducente verifica che i dispositivi di ritenuta restino efficienti.",
-          "ar": "يتحقق السائق من استمرار كفاءة أجهزة التثبيت."
+          "title_it": "Protezione 3",
+          "title_ar": "الحماية 3",
+          "it": "Seggiolino rivolto all’indietro: airbag frontale disattivato o posto diverso.",
+          "ar": "مقعد الطفل المواجه للخلف: عطّل الوسادة الأمامية أو اختر مقعدًا آخر."
         },
         {
-          "title_it": "Airbag",
-          "title_ar": "الوسادة الهوائية",
-          "it": "Il seggiolino rivolto all’indietro non va davanti a un airbag frontale attivo.",
-          "ar": "لا يوضع المقعد المواجه للخلف أمام وسادة هوائية أمامية فعالة."
+          "title_it": "Protezione 4",
+          "title_ar": "الحماية 4",
+          "it": "Regolare il poggiatesta per sostenere correttamente la testa.",
+          "ar": "اضبط مسند الرأس لدعم الرأس على نحو صحيح."
         }
       ],
       "trap_words": [],
@@ -5686,25 +5710,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "Per i bambini sotto 1,50 m è previsto un sistema omologato adeguato al peso.",
-          "statement_ar": "يُشترط للأطفال دون 1.50 متر نظام معتمد مناسب للوزن.",
+          "statement_it": "Per un bambino sotto 1,50 m serve un sistema omologato adeguato al peso.",
+          "statement_ar": "يحتاج الطفل الذي يقل طوله عن 1.50 متر إلى نظام معتمد يناسب وزنه.",
           "answer": "VERO",
-          "explanation_it": "È quanto dispone l’articolo 172, comma 1.",
-          "explanation_ar": "هذا ما تقرره المادة 172، الفقرة 1."
+          "explanation_it": "È il requisito generale previsto dall’art. 172, con le eccezioni definite.",
+          "explanation_ar": "هذا هو الشرط العام في المادة 172 مع الاستثناءات المحددة."
         },
         {
-          "statement_it": "Il comma 1 impone la cintura in modo indistinto su qualunque veicolo.",
-          "statement_ar": "تفرض الفقرة 1 الحزام بلا تمييز في جميع المركبات.",
+          "statement_it": "Un seggiolino rivolto all’indietro può stare davanti a un airbag frontale attivo.",
+          "statement_ar": "يمكن وضع مقعد طفل مواجه للخلف أمام وسادة هوائية أمامية فعالة.",
           "answer": "FALSO",
-          "explanation_it": "La disposizione enumera categorie e condizioni specifiche.",
-          "explanation_ar": "تعدد الأحكام فئات وشروطًا محددة."
+          "explanation_it": "L’airbag deve essere disattivato per quel posto, oppure si sceglie un altro sedile.",
+          "explanation_ar": "يجب تعطيل الوسادة لذلك المقعد أو اختيار مقعد آخر."
         },
         {
-          "statement_it": "Un seggiolino rivolto all’indietro può essere posto davanti a un airbag frontale attivo senza condizioni.",
-          "statement_ar": "يمكن وضع مقعد مواجه للخلف أمام وسادة هوائية أمامية فعالة بلا شروط.",
-          "answer": "FALSO",
-          "explanation_it": "L’articolo 172, comma 5, lo vieta salvo disattivazione adeguata dell’airbag.",
-          "explanation_ar": "تحظر المادة 172، الفقرة 5، ذلك إلا عند تعطيل الوسادة بطريقة مناسبة."
+          "statement_it": "Il poggiatesta va regolato correttamente per sostenere la testa.",
+          "statement_ar": "ينبغي ضبط مسند الرأس على نحو صحيح لدعم الرأس.",
+          "answer": "VERO",
+          "explanation_it": "È una misura di protezione del conducente e dei passeggeri.",
+          "explanation_ar": "هذا إجراء لحماية السائق والركاب."
         }
       ],
       "video_script_available": false,
@@ -5719,8 +5743,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Bambini sotto 1,50 m: sistema omologato adatto al peso.\nLe deroghe sono specifiche; non presumere un’esenzione generale.",
-            "text_ar": "الأطفال دون 1.50 متر: نظام تثبيت معتمد وملائم للوزن.\nالإعفاءات محددة؛ فلا تفترض وجود إعفاء عام."
+            "text_it": "Usa cinture e sistemi di ritenuta previsti.\nCon un seggiolino posteriore, disattiva l’airbag anteriore attivo.",
+            "text_ar": "استخدم الأحزمة وأنظمة التثبيت المقررة.\nمع مقعد الطفل المواجه للخلف، عطّل الوسادة الأمامية الفعالة."
           },
           {
             "key": "example",
@@ -5736,9 +5760,10 @@
       },
       "videoUrl": null,
       "review_sources_checked": [
-        "https://aci.gov.it/codice-della-strada/art-172/"
+        "https://aci.gov.it/codice-della-strada/art-172/",
+        "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf"
       ],
-      "review_verification_note": "Verificati i commi pertinenti dell’art. 172 nel testo ACI aggiornato al 15 novembre 2026. Il riassunto resta limitato ai temi presenti nella lezione; le esenzioni sono descritte solo come specifiche, senza enumerarle."
+      "review_verification_note": "Verificati i commi pertinenti dell’art. 172 nel testo ACI aggiornato al 15 novembre 2026. Il riassunto resta limitato ai temi presenti nella lezione; le esenzioni sono descritte solo come specifiche, senza enumerarle. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u7-l3": {
       "body_ar": "أثناء السير، من نصف ساعة بعد الغروب إلى نصف ساعة قبل الشروق، وكذلك نهارًا داخل الأنفاق أو عند الضباب أو الثلج أو المطر الغزير أو ضعف الرؤية، تُستخدم الأضواء المحددة في المادة 153، الفقرة 1؛ وتضاف الأضواء المنخفضة للمركبات ذات المحرك. خارج المناطق المأهولة يمكن استخدام الضوء العالي عندما تكون الإضاءة الخارجية غائبة أو غير كافية. ويجب التحويل إلى الضوء المنخفض عند مقابلة مركبة، أو متابعة مركبة أخرى عن قرب، أو احتمال إبهار مستخدمي الطريق. وعند متابعة مركبة عن قرب، يُسمح بوميض قصير ومتقطع للتنبيه إلى نية التجاوز. ويُطلب تشغيل الضوء الخلفي للضباب، إن وُجد، في الحالات المحددة بالفقرة 8.",
@@ -6046,32 +6071,32 @@
           "legal_reference_it": "153"
         }
       ],
-      "core_it": "Il clacson serve alla sicurezza, non a esprimere impazienza.\nPer interpretare una spia, consulta il manuale del veicolo.",
-      "core_ar": "البوق للسلامة، وليس للتعبير عن الاستعجال أو الضيق.\nلفهم أي مؤشر، راجع دليل المركبة.",
+      "core_it": "Clacson: sicurezza, moderazione e segnale brevissimo.\nNei centri abitati, solo per pericolo effettivo e immediato.",
+      "core_ar": "البوق: للأمان فقط، باعتدال وتنبيه قصير جدًا.\nداخل المناطق المأهولة، عند خطر فعلي وفوري فقط.",
       "key_points": [
         {
-          "title_it": "Uso moderato",
-          "title_ar": "استعمال معتدل",
-          "it": "Il segnale acustico va usato con moderazione e per sicurezza.",
-          "ar": "يُستخدم التنبيه الصوتي باعتدال ولأغراض السلامة."
+          "title_it": "Segnalazione 1",
+          "title_ar": "التنبيه 1",
+          "it": "Usare il clacson solo per la sicurezza, con moderazione e per il tempo più breve possibile.",
+          "ar": "استخدم البوق للأمان فقط، باعتدال ولأقصر مدة ممكنة."
         },
         {
-          "title_it": "Centri abitati",
-          "title_ar": "المناطق المأهولة",
-          "it": "Qui il clacson è consentito solo per pericolo effettivo e immediato.",
-          "ar": "يُسمح بالبوق فيها عند خطر فعلي وفوري فقط."
+          "title_it": "Segnalazione 2",
+          "title_ar": "التنبيه 2",
+          "it": "Nei centri abitati, usarlo solo per pericolo effettivo e immediato.",
+          "ar": "داخل المناطق المأهولة، استخدمه فقط عند خطر فعلي وفوري."
         },
         {
-          "title_it": "Emergenza",
-          "title_ar": "الطوارئ",
-          "it": "Le luci di emergenza sono previste nelle situazioni specifiche dell’articolo 153.",
-          "ar": "تُستخدم أضواء التحذير في الحالات المحددة بالمادة 153."
+          "title_it": "Segnalazione 3",
+          "title_ar": "التنبيه 3",
+          "it": "Le luci di emergenza avvisano nei casi indicati dalla legge.",
+          "ar": "تنبه أضواء التحذير في الحالات التي يحددها القانون."
         },
         {
-          "title_it": "Spie",
-          "title_ar": "المؤشرات",
-          "it": "Il significato operativo dipende dal veicolo: controlla il relativo manuale.",
-          "ar": "يعتمد معنى المؤشر العملي على المركبة؛ راجع دليلها."
+          "title_it": "Segnalazione 4",
+          "title_ar": "التنبيه 4",
+          "it": "Per interpretare le spie del cruscotto, consulta il manuale del veicolo.",
+          "ar": "لفهم مؤشرات لوحة القيادة، ارجع إلى دليل المركبة."
         }
       ],
       "trap_words": [],
@@ -6092,25 +6117,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "Nei centri abitati il clacson è consentito solo in caso di pericolo effettivo e immediato.",
+          "statement_it": "Il segnale acustico deve essere il più breve possibile e usato per la sicurezza.",
+          "statement_ar": "يجب أن يكون التنبيه الصوتي أقصر ما يمكن وأن يُستخدم لأمان الطريق.",
+          "answer": "VERO",
+          "explanation_it": "L’art. 156 prescrive moderazione e durata minima necessaria.",
+          "explanation_ar": "توجب المادة 156 الاعتدال وأقصر مدة لازمة."
+        },
+        {
+          "statement_it": "Nei centri abitati il clacson è ammesso soltanto per pericolo effettivo e immediato.",
           "statement_ar": "داخل المناطق المأهولة لا يُسمح بالبوق إلا عند خطر فعلي وفوري.",
           "answer": "VERO",
-          "explanation_it": "È la condizione prevista dall’articolo 156, comma 3.",
-          "explanation_ar": "هذا هو الشرط الوارد في المادة 156، الفقرة 3."
+          "explanation_it": "È la condizione indicata dall’art. 156.",
+          "explanation_ar": "هذا هو الشرط الذي تحدده المادة 156."
         },
         {
-          "statement_it": "Il segnale acustico può essere prolungato per esprimere impazienza.",
-          "statement_ar": "يمكن إطالة التنبيه الصوتي للتعبير عن الضيق.",
+          "statement_it": "Le spie del cruscotto hanno lo stesso significato in ogni modello di veicolo.",
+          "statement_ar": "لمؤشرات لوحة القيادة المعنى نفسه في كل طراز من المركبات.",
           "answer": "FALSO",
-          "explanation_it": "La legge richiede moderazione e una segnalazione il più breve possibile.",
-          "explanation_ar": "يشترط القانون الاعتدال وأن يكون التنبيه أقصر ما يمكن."
-        },
-        {
-          "statement_it": "Il significato di ogni spia è identico per tutti i modelli di veicolo.",
-          "statement_ar": "معنى كل مؤشر واحد في جميع طرازات المركبات.",
-          "answer": "FALSO",
-          "explanation_it": "Non è stato verificato un repertorio universale; si consulta il manuale del veicolo.",
-          "explanation_ar": "لم يُتحقق من وجود مرجع شامل موحد؛ ويُرجع إلى دليل المركبة."
+          "explanation_it": "Per il significato specifico si consulta il manuale del proprio veicolo.",
+          "explanation_ar": "يُرجع إلى دليل المركبة لمعرفة الدلالة المحددة."
         }
       ],
       "video_script_available": false,
@@ -6125,8 +6150,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Il clacson serve alla sicurezza, non a esprimere impazienza.\nPer interpretare una spia, consulta il manuale del veicolo.",
-            "text_ar": "البوق للسلامة، وليس للتعبير عن الاستعجال أو الضيق.\nلفهم أي مؤشر، راجع دليل المركبة."
+            "text_it": "Clacson: sicurezza, moderazione e segnale brevissimo.\nNei centri abitati, solo per pericolo effettivo e immediato.",
+            "text_ar": "البوق: للأمان فقط، باعتدال وتنبيه قصير جدًا.\nداخل المناطق المأهولة، عند خطر فعلي وفوري فقط."
           },
           {
             "key": "example",
@@ -6145,7 +6170,7 @@
         "https://aci.gov.it/codice-della-strada/art-156/",
         "https://aci.gov.it/codice-della-strada/art-153/"
       ],
-      "review_verification_note": "Verificati su ACI gli articoli 156 e 153, comma 7: uso moderato e breve del segnale acustico, eccezione nei centri abitati per pericolo effettivo e immediato e casi di attivazione delle luci di emergenza. Non sono stati aggiunti altri dettagli legali."
+      "review_verification_note": "Verificati su ACI gli articoli 156 e 153, comma 7: uso moderato e breve del segnale acustico, eccezione nei centri abitati per pericolo effettivo e immediato e casi di attivazione delle luci di emergenza. Non sono stati aggiunti altri dettagli legali. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u8-l1": {
       "body_ar": "رخصة القيادة بتسمح بقيادة المركبات الداخلة ضمن الفئة المكتوبة عليها، مع الالتزام بالشروط والقيود الشخصية إن وُجدت. قبل التحرك، اتأكد إن فئة الرخصة مناسبة للمركبة وإنها سارية؛ مجرد وجود بطاقة مش كفاية لو ما بتسمحش بقيادة الوسيلة دي. قواعد الفئات والمتطلبات موجودة في قانون المرور، ووزارة النقل بتلخص المركبات المرتبطة برخصة B وبتفرّق بين الرخصة العادية ورمز B96 في الحالات المذكورة. الشروط ممكن تختلف حسب السائق والمركبة؛ في الحالة العملية راجع الرخصة والقواعد المحدّثة، وما تستنتجش صلاحية القيادة من شرح عام.",
@@ -6659,34 +6684,66 @@
           "title_ar": "ACI · قانون الطرق الإيطالي",
           "legal_reference": "قانون المرور الإيطالي",
           "legal_reference_it": "Codice della strada"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-126-bis/",
+          "title": "Patente a punti",
+          "title_it": "Patente a punti",
+          "title_ar": "نظام نقاط رخصة القيادة",
+          "legal_reference": "126-bis",
+          "legal_reference_it": "126-bis"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-195/",
+          "title": "Applicazione delle sanzioni amministrative pecuniarie",
+          "title_it": "Applicazione delle sanzioni amministrative pecuniarie",
+          "title_ar": "تطبيق الغرامات الإدارية المالية",
+          "legal_reference": "195",
+          "legal_reference_it": "195"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-218/",
+          "title": "Sanzione accessoria della sospensione della patente",
+          "title_it": "Sanzione accessoria della sospensione della patente",
+          "title_ar": "العقوبة التكميلية بتعليق الرخصة",
+          "legal_reference": "218",
+          "legal_reference_it": "218"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-219/",
+          "title": "Revoca della patente",
+          "title_it": "Revoca della patente",
+          "title_ar": "سحب رخصة القيادة",
+          "legal_reference": "219",
+          "legal_reference_it": "219"
         }
       ],
-      "core_it": "Civile, penale e amministrativa non sono sinonimi.\nLe conseguenze dipendono dai fatti e dalla legge vigente.",
-      "core_ar": "المسؤولية المدنية والجنائية والإدارية مش مترادفات.\nالنتائج بتتحدد حسب الوقائع والقانون الساري.",
+      "core_it": "Le responsabilità civile, penale e amministrativa sono distinte.\nMulte e misure sulla patente dipendono dalla violazione prevista.",
+      "core_ar": "المسؤوليات المدنية والجنائية والإدارية مختلفة.\nتتحدد الغرامة وتدابير الرخصة وفق المخالفة المنصوص عليها.",
       "key_points": [
         {
-          "title_it": "Civile",
-          "title_ar": "مدنية",
-          "it": "Può riguardare il risarcimento del danno secondo le regole applicabili.",
-          "ar": "ممكن تتعلق بتعويض الضرر وفق القواعد المنطبقة."
+          "title_it": "Conseguenze 1",
+          "title_ar": "النتائج 1",
+          "it": "La responsabilità civile riguarda il risarcimento del danno.",
+          "ar": "تتعلق المسؤولية المدنية بتعويض الضرر."
         },
         {
-          "title_it": "Penale",
-          "title_ar": "جنائية",
-          "it": "Richiede che il fatto costituisca un reato previsto dalla legge.",
-          "ar": "بتتطلب إن الفعل يكون جريمة منصوص عليها في القانون."
+          "title_it": "Conseguenze 2",
+          "title_ar": "النتائج 2",
+          "it": "La responsabilità penale presuppone un reato previsto dalla legge.",
+          "ar": "تتطلب المسؤولية الجنائية جريمة ينص عليها القانون."
         },
         {
-          "title_it": "Amministrativa",
-          "title_ar": "إدارية",
-          "it": "Le violazioni amministrative comportano le conseguenze stabilite dalla normativa.",
-          "ar": "المخالفات الإدارية بيترتب عليها النتائج اللي بتحددها القواعد."
+          "title_it": "Conseguenze 3",
+          "title_ar": "النتائج 3",
+          "it": "Una violazione amministrativa non è automaticamente un reato.",
+          "ar": "لا تُعدّ المخالفة الإدارية جريمة تلقائيًا."
         },
         {
-          "title_it": "Procedura",
-          "title_ar": "الإجراءات",
-          "it": "Accertamento e notificazione seguono procedure e termini previsti.",
-          "ar": "إثبات المخالفة والإخطار بيخضعوا لإجراءات ومواعيد مقررة."
+          "title_it": "Conseguenze 4",
+          "title_ar": "النتائج 4",
+          "it": "La sanzione pecuniaria è distinta dalle misure sulla patente, applicate solo nei casi previsti.",
+          "ar": "تختلف الغرامة المالية عن التدابير المتعلقة بالرخصة، ولا تُطبق إلا في الحالات المحددة."
         }
       ],
       "trap_words": [],
@@ -6707,25 +6764,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "Ogni violazione amministrativa del Codice della strada è necessariamente un reato.",
-          "statement_ar": "كل مخالفة إدارية لقانون المرور تُعد بالضرورة جريمة.",
-          "answer": "FALSO",
-          "explanation_it": "Una violazione amministrativa non diventa automaticamente un reato.",
-          "explanation_ar": "المخالفة الإدارية مش بتتحول تلقائيًا لجريمة."
-        },
-        {
-          "statement_it": "La responsabilità civile può riguardare il risarcimento del danno.",
-          "statement_ar": "المسؤولية المدنية ممكن تتعلق بتعويض الضرر.",
+          "statement_it": "La sanzione pecuniaria e le misure sulla patente sono conseguenze distinte previste solo secondo la violazione.",
+          "statement_ar": "الغرامة المالية والتدابير المتعلقة بالرخصة نتيجتان مختلفتان تطبقان بحسب المخالفة.",
           "answer": "VERO",
-          "explanation_it": "Il risarcimento è un possibile profilo della responsabilità civile.",
-          "explanation_ar": "التعويض جانب ممكن من المسؤولية المدنية."
+          "explanation_it": "Punti, sospensione o revoca non si applicano automaticamente a ogni violazione.",
+          "explanation_ar": "لا تُطبق النقاط أو التعليق أو السحب تلقائيًا على كل مخالفة."
         },
         {
-          "statement_it": "La responsabilità solidale si attribuisce automaticamente a chiunque sia vicino al conducente.",
-          "statement_ar": "المسؤولية التضامنية بتتقَرر تلقائيًا على أي شخص قريب من السائق.",
+          "statement_it": "Ogni violazione amministrativa costituisce automaticamente un reato.",
+          "statement_ar": "كل مخالفة إدارية تُعد تلقائيًا جريمة.",
           "answer": "FALSO",
-          "explanation_it": "La legge la prevede per soggetti e condizioni determinati.",
-          "explanation_ar": "القانون بيحدد أشخاصًا وشروطًا معينة للمسؤولية التضامنية."
+          "explanation_it": "L’illecito amministrativo non diventa automaticamente un reato.",
+          "explanation_ar": "لا تتحول المخالفة الإدارية تلقائيًا إلى جريمة."
+        },
+        {
+          "statement_it": "La responsabilità penale presuppone un reato previsto dalla legge.",
+          "statement_ar": "تتطلب المسؤولية الجنائية جريمة ينص عليها القانون.",
+          "answer": "VERO",
+          "explanation_it": "La responsabilità penale dipende dalla sussistenza di un reato.",
+          "explanation_ar": "تعتمد المسؤولية الجنائية على وجود جريمة."
         }
       ],
       "video_script_available": false,
@@ -6740,8 +6797,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Civile, penale e amministrativa non sono sinonimi.\nLe conseguenze dipendono dai fatti e dalla legge vigente.",
-            "text_ar": "المسؤولية المدنية والجنائية والإدارية مش مترادفات.\nالنتائج بتتحدد حسب الوقائع والقانون الساري."
+            "text_it": "Le responsabilità civile, penale e amministrativa sono distinte.\nMulte e misure sulla patente dipendono dalla violazione prevista.",
+            "text_ar": "المسؤوليات المدنية والجنائية والإدارية مختلفة.\nتتحدد الغرامة وتدابير الرخصة وفق المخالفة المنصوص عليها."
           },
           {
             "key": "example",
@@ -6759,9 +6816,13 @@
       "review_sources_checked": [
         "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1992-04-30;285!vig=",
         "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art2054!vig=",
-        "https://www.aci.it/i-servizi/normative/codice-della-strada.html"
+        "https://www.aci.it/i-servizi/normative/codice-della-strada.html",
+        "https://aci.gov.it/codice-della-strada/art-126-bis/",
+        "https://aci.gov.it/codice-della-strada/art-195/",
+        "https://aci.gov.it/codice-della-strada/art-218/",
+        "https://aci.gov.it/codice-della-strada/art-219/"
       ],
-      "review_verification_note": "Verificato il testo vigente del Codice della strada su Normattiva e consultato l’art. 2054 c.c.; il portale indica aggiornamento dell’atto al 24/04/2026 e vigenza al 22/11/2026. I dettagli su responsabilità solidale e procedure sono mantenuti generali: la pagina Normattiva consultata espone l’indice degli articoli, non il testo puntuale di ciascuno."
+      "review_verification_note": "Verificato il testo vigente del Codice della strada su Normattiva e consultato l’art. 2054 c.c.; il portale indica aggiornamento dell’atto al 24/04/2026 e vigenza al 22/11/2026. I dettagli su responsabilità solidale e procedure sono mantenuti generali: la pagina Normattiva consultata espone l’indice degli articoli, non il testo puntuale di ciascuno. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u8-l4": {
       "body_ar": "المادة 193 من قانون المرور بتحظر تسيير المركبات الخاضعة للواجب من غير تغطية تأمينية للمسؤولية المدنية تجاه الغير، وفق القواعد السارية. والمادة بتحمّل المالك واجب التحقق من التغطية حتى لو كانت المركبة، لأي سبب، في الحيازة القانونية لشخص طبيعي أو اعتباري تاني. ما ينفعش نقصر واجب التحقق على الحالة اللي المالك بنفسه بيسلّم فيها المفاتيح. التغطيات الإضافية، زي تغطية ضرر السيارة نفسها أو المساعدة، مختلفة عن التأمين الإلزامي وبتتحدد حسب العقد. لازم مراجعة المصادر التأمينية والمرورية المحدّثة لمعرفة النطاق والاستثناءات والنتائج؛ الشرح هنا ما بيذكرش مبالغ جزاءات.",
@@ -6971,12 +7032,12 @@
       "review_verification_note": "Verificato l’art. 193 sul sito ACI (aggiornato al 31 ottobre 2026): conferma l’obbligo per i veicoli soggetti e l’onere di verifica del proprietario anche con legittima disponibilità altrui. Le garanzie aggiuntive sono riportate come distinzione contrattuale, senza dettagli su coperture o eccezioni."
     },
     "u9-l1": {
-      "body_ar": "السواقة محتاجة انتباه وإدراك وتحكّم في العربية. التعب أو النعاس أو المرض أو حالة نفسية بتقلل التركيز ممكن تخلي القيادة غير آمنة؛ لو مش قادر تفضل مسيطر على العربية، ما تبدأش أو وقف أول ما تقدر تعمل ده بأمان. المادة 186 بتحظر القيادة في حالة السُكر الناتجة عن تناول مشروبات كحولية؛ وده مش نفس صياغة حظر القيادة بعد أي تناول للكحول. والمادة 187 بتنظم القيادة بعد تناول مواد مخدرة أو مؤثرة نفسيًا. بالنسبة للأدوية، اقرأ التحذيرات واسأل مختصًا صحيًا؛ الشرح هنا مش نصيحة طبية. ده تلخيص تعليمي، مش اقتباس حرفي من القانون.",
+      "body_ar": "تتطلب القيادة الانتباه والإدراك والتحكم في المركبة. قد يقلل التعب أو النعاس أو المرض أو الحالة النفسية الانتباه وسرعة الاستجابة؛ إذا لم تستطع التحكم، فلا تبدأ أو أوقف السير عندما يصبح ذلك آمنًا. تحظر المادة 186 القيادة في حالة سُكر ناتجة عن تناول المشروبات الكحولية، ولا تصوغ المنع على أنه بعد أي تناول للكحول. وتنظم المادة 187 القيادة بعد تناول مواد مخدرة أو مؤثرة نفسيًا. وبالنسبة للأدوية، راجع التحذيرات واستشر مختصًا صحيًا. هذا تلخيص تعليمي وليس اقتباسًا حرفيًا.",
       "example_ar": "شخص قرأ إن دواء ممكن يسبب النعاس وحاسس إن تركيزه أقل؛ يتجنب السواقة لحد ما يستوضح الخطر من مختص صحي.",
       "heading_ar": "السائق والقدرة على القيادة: التركيز والكحول والمواد المخدرة",
       "pitfall_ar": "ما تخلطش بين صياغة المادة 186 عن حالة السُكر وبين حظر عام بعد أي تناول؛ وما تستبدلش الرأي الصحي بتخمينات عن الأدوية.",
       "heading_it": "Conducente e idoneità: attenzione, alcol e sostanze",
-      "body_it": "Guidare richiede attenzione, percezione e controllo del veicolo. Stanchezza, sonnolenza, malessere o una condizione psichica che riduce la concentrazione possono rendere insicura la guida: se non riesci a mantenere il controllo, non partire o interrompi la marcia appena puoi farlo in sicurezza. L’articolo 186 vieta la guida in stato di ebbrezza conseguente all’uso di bevande alcoliche; non equivale a un divieto formulato come guida dopo qualsiasi assunzione. L’articolo 187 disciplina la guida dopo aver assunto sostanze stupefacenti o psicotrope. Per i farmaci, leggi le avvertenze e chiedi un parere sanitario: qui non si formulano indicazioni cliniche. È una sintesi didattica, non una citazione letterale.",
+      "body_it": "Guidare richiede attenzione, percezione e controllo del veicolo. Stanchezza, sonnolenza, malessere o una condizione psichica possono ridurre attenzione e tempi di reazione: se non riesci a mantenere il controllo, non partire o interrompi la marcia appena puoi farlo in sicurezza. L’articolo 186 vieta la guida in stato di ebbrezza conseguente all’uso di bevande alcoliche; non equivale a un divieto formulato come guida dopo qualsiasi assunzione. L’articolo 187 disciplina la guida dopo aver assunto sostanze stupefacenti o psicotrope. Per i farmaci, leggi le avvertenze e chiedi un parere sanitario. È una sintesi didattica, non una citazione letterale.",
       "example_it": "Una persona legge che un medicinale può causare sonnolenza e si sente meno attenta: evita di mettersi alla guida finché non ha chiarito il rischio con un professionista sanitario.",
       "pitfall_it": "Non confondere la formulazione dell’art. 186 sullo stato di ebbrezza con un divieto generale riferito a qualsiasi assunzione; non sostituire il parere sanitario con supposizioni sui farmaci.",
       "visual_src": "/lessons/lesson-driver-safety.webp",
@@ -7074,40 +7135,50 @@
           "title_ar": "وزارة النقل — التعديلات النافذة على قانون الطرق",
           "legal_reference": "Legge 25 novembre 2024, n. 177",
           "legal_reference_it": "Legge 25 novembre 2024, n. 177"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-186/",
+          "title": "Guida sotto l’influenza dell’alcool",
+          "title_it": "Guida sotto l’influenza dell’alcool",
+          "title_ar": "القيادة تحت تأثير الكحول",
+          "legal_reference": "186",
+          "legal_reference_it": "186"
+        },
+        {
+          "url": "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf",
+          "title": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_it": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_ar": "وزارة البنية التحتية والنقل — برنامج الامتحان النظري لرخص A وB (التعميم 28819/2019)",
+          "legal_reference": "Programma d’esame teorico patente A/B",
+          "legal_reference_it": "Programma d’esame teorico patente A/B"
         }
       ],
-      "core_it": "Se attenzione o controllo sono compromessi, la guida non è sicura.\nGli artt. 186 e 187 riguardano fattispecie distinte: ebbrezza e sostanze stupefacenti o psicotrope.",
-      "core_ar": "لو التركيز أو التحكم متأثر، القيادة مش آمنة.\nالمادتان 186 و187 تتناولان حالتين مختلفتين: السُكر والمواد المخدرة أو المؤثرة نفسيًا.",
+      "core_it": "Se attenzione o controllo sono compromessi, non guidare.\nAlcol, sostanze, farmaci e stanchezza richiedono valutazione.",
+      "core_ar": "إذا تأثر الانتباه أو التحكم، فلا تقد.\nالكحول والمواد والأدوية والتعب تتطلب تقديرًا واعيًا.",
       "key_points": [
         {
-          "title_it": "Attenzione e controllo",
-          "title_ar": "التركيز والتحكم",
-          "it": "La capacità di guidare richiede attenzione e controllo effettivo.",
-          "ar": "القيادة تحتاج انتباهًا وتحكمًا فعليًا في المركبة."
+          "title_it": "Idoneità 1",
+          "title_ar": "القدرة على القيادة 1",
+          "it": "Guidare richiede attenzione, percezione e controllo del veicolo.",
+          "ar": "تتطلب القيادة الانتباه والإدراك والتحكم في المركبة."
         },
         {
-          "title_it": "Stanchezza",
-          "title_ar": "التعب",
-          "it": "Se la stanchezza impedisce un controllo adeguato, non proseguire.",
-          "ar": "لو التعب مانعك من التحكم المناسب، ما تكملش السواقة."
+          "title_it": "Idoneità 2",
+          "title_ar": "القدرة على القيادة 2",
+          "it": "Stanchezza, emozioni e farmaci possono ridurre attenzione e tempi di reazione.",
+          "ar": "قد يقلل التعب والحالة النفسية والأدوية الانتباه وسرعة الاستجابة."
         },
         {
-          "title_it": "Alcol",
-          "title_ar": "الكحول",
-          "it": "L’art. 186 formula il divieto come guida in stato di ebbrezza conseguente all’uso di alcol.",
-          "ar": "المادة 186 تصوغ الحظر باعتباره قيادة في حالة سُكر ناتجة عن تناول الكحول."
+          "title_it": "Idoneità 3",
+          "title_ar": "القدرة على القيادة 3",
+          "it": "L’art. 186 riguarda la guida in stato di ebbrezza da alcol.",
+          "ar": "تتناول المادة 186 القيادة في حالة سُكر بسبب الكحول."
         },
         {
-          "title_it": "Sostanze",
-          "title_ar": "المواد المخدرة",
-          "it": "L’art. 187 tratta la guida dopo l’assunzione di sostanze stupefacenti o psicotrope.",
-          "ar": "المادة 187 تتناول القيادة بعد تناول مواد مخدرة أو مؤثرة نفسيًا."
-        },
-        {
-          "title_it": "Farmaci",
-          "title_ar": "الأدوية",
-          "it": "Le avvertenze e il parere sanitario aiutano a valutare il rischio individuale; non si presume l’idoneità automatica.",
-          "ar": "التحذيرات والرأي الصحي بيساعدوا في تقييم الخطر الشخصي؛ وما نفترضش إن الدواء ما بيأثرش تلقائيًا."
+          "title_it": "Idoneità 4",
+          "title_ar": "القدرة على القيادة 4",
+          "it": "L’art. 187 riguarda la guida dopo l’assunzione di sostanze stupefacenti o psicotrope.",
+          "ar": "تتناول المادة 187 القيادة بعد تناول مواد مخدرة أو مؤثرة نفسيًا."
         }
       ],
       "trap_words": [
@@ -7137,25 +7208,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "L’art. 186 vieta la guida in stato di ebbrezza conseguente all’uso di bevande alcoliche.",
-          "statement_ar": "المادة 186 بتحظر القيادة في حالة سُكر ناتجة عن تناول مشروبات كحولية.",
+          "statement_it": "La stanchezza che compromette il controllo può rendere insicura la guida.",
+          "statement_ar": "قد يجعل التعب الذي يضعف التحكم القيادة غير آمنة.",
           "answer": "VERO",
-          "explanation_it": "È la formulazione del divieto riportata dall’articolo.",
-          "explanation_ar": "دي صياغة الحظر الواردة في المادة."
+          "explanation_it": "Se il controllo è compromesso, non si deve proseguire.",
+          "explanation_ar": "إذا تأثر التحكم، فلا ينبغي مواصلة القيادة."
         },
         {
-          "statement_it": "L’art. 187 riguarda la guida dopo aver assunto sostanze stupefacenti o psicotrope.",
-          "statement_ar": "المادة 187 بتتناول القيادة بعد تناول مواد مخدرة أو مؤثرة نفسيًا.",
-          "answer": "VERO",
-          "explanation_it": "La pagina ACI dell’art. 187 descrive questa fattispecie.",
-          "explanation_ar": "صفحة المادة 187 لدى ACI بتعرض الحالة دي."
-        },
-        {
-          "statement_it": "La prescrizione di un farmaco dimostra sempre che si può guidare senza valutazioni ulteriori.",
-          "statement_ar": "وصفة الدواء بتثبت دايمًا إن القيادة آمنة من غير أي تقييم إضافي.",
+          "statement_it": "L’art. 186 riguarda la guida dopo l’assunzione di sostanze psicotrope.",
+          "statement_ar": "تتناول المادة 186 القيادة بعد تناول مواد مؤثرة نفسيًا.",
           "answer": "FALSO",
-          "explanation_it": "Non si può presumere l’idoneità: si devono considerare le avvertenze e chiedere un parere sanitario.",
-          "explanation_ar": "ما ينفعش نفترض صلاحية القيادة؛ لازم مراجعة التحذيرات وسؤال مختص صحي."
+          "explanation_it": "L’art. 186 riguarda l’ebbrezza alcolica; le sostanze sono trattate dall’art. 187.",
+          "explanation_ar": "تتناول المادة 186 السُكر بسبب الكحول؛ وتتناول المادة 187 المواد المخدرة أو المؤثرة نفسيًا."
+        },
+        {
+          "statement_it": "Farmaci e condizioni personali possono influire sull’idoneità alla guida.",
+          "statement_ar": "قد تؤثر الأدوية والحالة الشخصية في القدرة على القيادة.",
+          "answer": "VERO",
+          "explanation_it": "Leggi le avvertenze e chiedi un parere sanitario se necessario.",
+          "explanation_ar": "راجع التحذيرات واستشر مختصًا صحيًا عند الحاجة."
         }
       ],
       "video_script_available": false,
@@ -7170,8 +7241,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Se attenzione o controllo sono compromessi, la guida non è sicura.\nGli artt. 186 e 187 riguardano fattispecie distinte: ebbrezza e sostanze stupefacenti o psicotrope.",
-            "text_ar": "لو التركيز أو التحكم متأثر، القيادة مش آمنة.\nالمادتان 186 و187 تتناولان حالتين مختلفتين: السُكر والمواد المخدرة أو المؤثرة نفسيًا."
+            "text_it": "Se attenzione o controllo sono compromessi, non guidare.\nAlcol, sostanze, farmaci e stanchezza richiedono valutazione.",
+            "text_ar": "إذا تأثر الانتباه أو التحكم، فلا تقد.\nالكحول والمواد والأدوية والتعب تتطلب تقديرًا واعيًا."
           },
           {
             "key": "example",
@@ -7188,9 +7259,11 @@
       "videoUrl": null,
       "review_sources_checked": [
         "https://www.aci.it/fileadmin/cds/art-186.php",
-        "https://aci.gov.it/codice-della-strada/art-187/"
+        "https://aci.gov.it/codice-della-strada/art-187/",
+        "https://aci.gov.it/codice-della-strada/art-186/",
+        "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf"
       ],
-      "review_verification_note": "Verificata la formulazione pertinente degli artt. 186 e 187 sulle pagine ACI aperte. Il testo riassume soltanto queste fattispecie, senza aggiungere soglie o conseguenze sanzionatorie."
+      "review_verification_note": "Verificata la formulazione pertinente degli artt. 186 e 187 sulle pagine ACI aperte. Il testo riassume soltanto queste fattispecie, senza aggiungere soglie o conseguenze sanzionatorie. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u9-l2": {
       "body_ar": "السير الآمن يقتضي إن مستخدمي الطريق ما يسببوش خطر أو تعطيل ويحافظوا على السلامة؛ وده المبدأ العام في المادة 140. والمادة 141 بتطلب من السائق يضبط السرعة مع مراعاة العربية وحمولتها والطريق والزحمة والرؤية والجو والظروف التانية. لازم يفضل متحكم في المركبة ويقدر يقف داخل مجال الرؤية وقدام العوائق المتوقعة. عشان كده الحد الأقصى المعلن مش معناه إن السرعة دي آمنة تلقائيًا في كل موقف. المطر أو ضعف الرؤية أو الزحمة ممكن يتطلبوا تهدئة السرعة وزيادة المسافة. دي تطبيقات عملية للمبدأ، مش أرقام إضافية ولا قواعد مستقلة جديدة.",
@@ -7401,12 +7474,12 @@
       "review_verification_note": "Testi ufficiali ACI degli artt. 140 e 141 consultati; le formulazioni sono limitate ai principi pertinenti al riepilogo, senza importare sanzioni o dettagli numerici."
     },
     "u9-l3": {
-      "body_ar": "لما يكون الحادث مرتبطًا بأي شكل بتصرف السائق، المادة 189 بتلزمه يقف؛ ولو حد اتصاب، لازم يقدم المساعدة اللازمة. والأشخاص المشاركون في الحادث عليهم اتخاذ إجراءات مناسبة لحماية سلامة حركة المرور. لو فيه أضرار مادية بس، السائقون وباقي مستخدمي الطريق المشاركون لازم، لو أمكن، يتجنبوا تعطيل السير. وفي كل الأحوال، السائقون يقدموا بياناتهم الشخصية والمعلومات المفيدة للمتضررين. لو فيه مصاب أو خطر، طلب تدخل خدمات الطوارئ احتياط عملي. مش بنقدم تعليمات طبية: الصفحة القانونية اللي راجعناها ما بتحددش أساليب إسعاف أولي.",
+      "body_ar": "إذا كان الحادث مرتبطًا بتصرفك، فتوقف وقدّم المساعدة اللازمة للمصابين. ويتخذ المشاركون إجراءات لحماية حركة المرور؛ وإذا كانت الأضرار مادية فقط، يتجنبون تعطيل السير متى أمكن. ويقدّم السائقون بياناتهم والمعلومات المفيدة للمتضررين. إذا أُصيب حيوان أليف أو منتج أو محمي، فتوقف واتخذ تدابير مناسبة لضمان إنقاذه سريعًا. وعند وجود مصاب أو خطر، يكون طلب خدمات الطوارئ إجراءً احتياطيًا عمليًا. لا يتضمن الشرح أساليب إسعاف أولي؛ فالنص القانوني الذي راجعناه لا يحددها.",
       "example_ar": "بعد تصادم مرتبط بتصرفها، سائقة بتقف. تلاحظ شخصًا مصابًا، تطلب المساعدة، تساهم في تأمين المكان وتقدم بياناتها والمعلومات المفيدة.",
       "heading_ar": "الحادث: الوقوف وتقديم المساعدة والتعاون",
       "pitfall_ar": "ما تمشيش لمجرد إن الضرر شكله بسيط. وما تعرضش الاحتياطات العامة أو النصائح الطبية كأنها نص المادة 189؛ الأساليب الطبية ما اتراجعتش هنا. كمان الاحتياط بعدم تحريك المصاب إلا عند وجود خطر فوري ما اتراجعش بمصدر طبي مستقل، وما يتفهمش كنصيحة طبية.",
       "heading_it": "Incidente: fermarsi, assistere e collaborare",
-      "body_it": "Quando un incidente è comunque ricollegabile al proprio comportamento, l’articolo 189 impone di fermarsi; se qualcuno ha riportato un danno alla persona, occorre prestare l’assistenza necessaria. Le persone coinvolte devono adottare misure idonee a salvaguardare la sicurezza della circolazione. Se vi sono soltanto danni alle cose, i conducenti e gli altri utenti coinvolti devono, ove possibile, evitare intralcio al traffico. In ogni caso i conducenti forniscono le proprie generalità e le informazioni utili alle persone danneggiate. In presenza di feriti o pericoli, chiedere l’intervento dei servizi di emergenza è una cautela pratica. Non diamo istruzioni cliniche: la pagina normativa consultata non stabilisce tecniche di primo soccorso.",
+      "body_it": "Se un incidente è ricollegabile al tuo comportamento, fermati; presta l’assistenza necessaria alle persone ferite. Tutti i coinvolti adottano misure per la sicurezza della circolazione; se vi sono solo danni materiali, ove possibile evitano intralcio. I conducenti forniscono generalità e informazioni utili ai danneggiati. Se è coinvolto un animale da affezione, da reddito o protetto, fermati e adotta misure idonee a garantire un soccorso tempestivo. Con feriti o pericoli, chiamare i servizi di emergenza è una cautela pratica. Non sono impartite tecniche di primo soccorso: la norma consultata non le specifica.",
       "example_it": "Dopo una collisione collegata alla sua condotta, una conducente si ferma. Nota una persona ferita, chiede soccorso, contribuisce alla sicurezza del luogo e comunica i propri dati e le informazioni utili.",
       "pitfall_it": "Non andarsene perché il danno sembra lieve. Non presentare precauzioni generali o consigli clinici come testo dell’art. 189: qui le tecniche mediche non sono state verificate. La cautela di non spostare il ferito salvo pericolo immediato non è stata verificata con una fonte medica indipendente e non va intesa come consiglio clinico.",
       "visual_src": "/lessons/lesson-driver-safety.webp",
@@ -7491,38 +7564,32 @@
           "legal_reference_it": "Art. 189 Codice della strada"
         }
       ],
-      "core_it": "L’art. 189 richiede di fermarsi e prestare assistenza necessaria ai feriti.\nSicurezza, informazioni utili e niente consigli medici non verificati.",
-      "core_ar": "المادة 189 بتطلب الوقوف وتقديم المساعدة اللازمة للمصابين.\nحماية السلامة وتقديم المعلومات المفيدة، من غير نصائح طبية غير متحقَّق منها.",
+      "core_it": "Fermati, presta l’assistenza necessaria e proteggi la circolazione.\nAnche gli animali feriti richiedono soccorso tempestivo.",
+      "core_ar": "توقف وقدّم المساعدة اللازمة واحمِ حركة المرور.\nتحتاج الحيوانات المصابة أيضًا إلى إنقاذ عاجل.",
       "key_points": [
         {
-          "title_it": "Fermarsi",
-          "title_ar": "الوقوف",
-          "it": "Se l’incidente è collegato al proprio comportamento, la norma richiede di fermarsi.",
-          "ar": "لو الحادث مرتبط بتصرف السائق، القانون بيطلب منه الوقوف."
+          "title_it": "Incidente 1",
+          "title_ar": "الحادث 1",
+          "it": "Fermarsi negli incidenti riconducibili al proprio comportamento.",
+          "ar": "التوقف في الحوادث المرتبطة بتصرف الشخص."
         },
         {
-          "title_it": "Assistenza",
-          "title_ar": "المساعدة",
-          "it": "Se vi sono persone ferite, va prestata l’assistenza necessaria.",
-          "ar": "لو فيه أشخاص مصابون، لازم تقديم المساعدة اللازمة."
+          "title_it": "Incidente 2",
+          "title_ar": "الحادث 2",
+          "it": "Prestare assistenza necessaria ai feriti e proteggere la circolazione.",
+          "ar": "تقديم المساعدة اللازمة للمصابين وحماية حركة المرور."
         },
         {
-          "title_it": "Sicurezza della circolazione",
-          "title_ar": "سلامة حركة المرور",
-          "it": "Le persone coinvolte adottano misure idonee a salvaguardarla.",
-          "ar": "الأشخاص المشاركون يتخذوا إجراءات مناسبة لحماية سلامة السير."
+          "title_it": "Incidente 3",
+          "title_ar": "الحادث 3",
+          "it": "Fornire generalità e informazioni utili alle persone danneggiate.",
+          "ar": "تقديم البيانات الشخصية والمعلومات المفيدة للمتضررين."
         },
         {
-          "title_it": "Danni materiali",
-          "title_ar": "الأضرار المادية",
-          "it": "Quando possibile, si evita di intralciare la circolazione.",
-          "ar": "لو أمكن، لازم تجنب تعطيل حركة المرور."
-        },
-        {
-          "title_it": "Informazioni",
-          "title_ar": "المعلومات",
-          "it": "I conducenti forniscono generalità e informazioni utili alle persone danneggiate.",
-          "ar": "السائقون يقدموا بياناتهم والمعلومات المفيدة للمتضررين."
+          "title_it": "Incidente 4",
+          "title_ar": "الحادث 4",
+          "it": "Se è ferito un animale domestico, da reddito o protetto, fermarsi e favorire soccorso tempestivo.",
+          "ar": "إذا أُصيب حيوان أليف أو منتج أو محمي، فتوقف وساعد على إنقاذه سريعًا."
         }
       ],
       "trap_words": [
@@ -7552,25 +7619,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "Se l’incidente è ricollegabile al proprio comportamento, l’art. 189 prevede l’obbligo di fermarsi.",
-          "statement_ar": "لو الحادث مرتبط بتصرف السائق، المادة 189 بتقرر واجب الوقوف.",
+          "statement_it": "Negli incidenti riconducibili al proprio comportamento, il conducente deve fermarsi.",
+          "statement_ar": "في الحوادث المرتبطة بتصرفه، يجب على السائق التوقف.",
           "answer": "VERO",
-          "explanation_it": "Il comma 1 stabilisce l’obbligo di fermarsi.",
-          "explanation_ar": "الفقرة الأولى بتقرر واجب الوقوف."
+          "explanation_it": "È un obbligo richiamato dall’art. 189.",
+          "explanation_ar": "هذا واجب تذكره المادة 189."
         },
         {
-          "statement_it": "In caso di persone ferite, l’art. 189 richiede l’assistenza occorrente.",
-          "statement_ar": "لو فيه أشخاص مصابون، المادة 189 بتطلب تقديم المساعدة اللازمة.",
-          "answer": "VERO",
-          "explanation_it": "Il comma 1 richiede l’assistenza alle persone che hanno subito danno alla persona.",
-          "explanation_ar": "الفقرة الأولى بتطلب مساعدة الأشخاص اللي أصيبوا."
-        },
-        {
-          "statement_it": "La pagina dell’art. 189 consultata fornisce un protocollo clinico completo di primo soccorso.",
-          "statement_ar": "صفحة المادة 189 اللي راجعناها بتقدم بروتوكولًا طبيًا كاملًا للإسعافات الأولية.",
+          "statement_it": "Se è ferito un animale protetto, l’utente coinvolto può allontanarsi senza intervenire.",
+          "statement_ar": "إذا أُصيب حيوان محمي، يمكن لمستخدم الطريق المعني المغادرة دون تدخل.",
           "answer": "FALSO",
-          "explanation_it": "La disposizione disciplina obblighi stradali dopo l’incidente, non tecniche cliniche di primo soccorso.",
-          "explanation_ar": "المادة بتنظم واجبات المرور بعد الحادث، مش أساليب الإسعاف الطبية."
+          "explanation_it": "La norma richiede di fermarsi e adottare misure per il soccorso tempestivo.",
+          "explanation_ar": "توجب القاعدة التوقف واتخاذ تدابير لضمان الإنقاذ العاجل."
+        },
+        {
+          "statement_it": "I conducenti coinvolti forniscono le informazioni utili alle persone danneggiate.",
+          "statement_ar": "يقدّم السائقون المشاركون المعلومات المفيدة للمتضررين.",
+          "answer": "VERO",
+          "explanation_it": "Lo scambio delle informazioni rientra nei doveri previsti.",
+          "explanation_ar": "يدخل تبادل المعلومات ضمن الواجبات المقررة."
         }
       ],
       "video_script_available": false,
@@ -7585,8 +7652,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "L’art. 189 richiede di fermarsi e prestare assistenza necessaria ai feriti.\nSicurezza, informazioni utili e niente consigli medici non verificati.",
-            "text_ar": "المادة 189 بتطلب الوقوف وتقديم المساعدة اللازمة للمصابين.\nحماية السلامة وتقديم المعلومات المفيدة، من غير نصائح طبية غير متحقَّق منها."
+            "text_it": "Fermati, presta l’assistenza necessaria e proteggi la circolazione.\nAnche gli animali feriti richiedono soccorso tempestivo.",
+            "text_ar": "توقف وقدّم المساعدة اللازمة واحمِ حركة المرور.\nتحتاج الحيوانات المصابة أيضًا إلى إنقاذ عاجل."
           },
           {
             "key": "example",
@@ -7604,7 +7671,7 @@
       "review_sources_checked": [
         "https://aci.gov.it/codice-della-strada/art-189/"
       ],
-      "review_verification_note": "Verificato il testo dell’art. 189 nella pagina ACI consultata, aggiornata al 27 ottobre 2026. Le indicazioni sulle tecniche cliniche di primo soccorso non sono state incluse: la disposizione consultata non le specifica."
+      "review_verification_note": "Verificato il testo dell’art. 189 nella pagina ACI consultata, aggiornata al 27 ottobre 2026. Le indicazioni sulle tecniche cliniche di primo soccorso non sono state incluse: la disposizione consultata non le specifica. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u9-l4": {
       "body_ar": "أسلوب القيادة المنتظم والصيانة الجيدة ممكن يساعدوا في تقليل الاستهلاك؛ ودي نصائح عملية مش قيم قانونية مستقلة. حماية الطريق تشمل كمان محظورات محددة: المادة 15 بتحظر إلقاء أي شيء من مركبة متحركة. وبالنسبة للمركبات ذات المحرك ومقطوراتها أثناء السير، المادة 79 بتطلب كفاءة تضمن السلامة وتحصر الضوضاء والتلوث ضمن الحدود المقررة. المادة 155 بتتناول الضوضاء المزعجة الناتجة عن طريقة القيادة أو ترتيب الحمولة؛ والمادة 156 بتنظم استخدام أجهزة التنبيه الصوتي. لكل مادة نطاق مختلف؛ ما تنسبش الضوضاء والانبعاثات للمادة 15.",
@@ -8356,8 +8423,8 @@
       "heading_it": "Pedoni, ciclisti e motociclisti: attenzione reciproca",
       "heading_ar": "المشاة وراكبو الدراجات والموتوسيكلات: انتباه متبادل",
       "visual_src": "/lessons/lesson-vulnerable-road-users.svg",
-      "body_it": "Pedoni, ciclisti, persone con mobilità ridotta e motociclisti possono essere meno facili da individuare o più esposti agli effetti di una manovra. Avvicinati con prudenza, osserva attraversamenti e incroci e riduci la velocità quando la situazione lo richiede. L’articolo 191 stabilisce obblighi specifici dei conducenti nei confronti dei pedoni, compresa la precedenza nei casi previsti e la prevenzione di pericoli ragionevolmente prevedibili per bambini o anziani. Prima di svoltare, controlla che nessuno si trovi sulla traiettoria; verifica anche gli specchi e le zone non direttamente visibili. Non presumere che gli altri abbiano visto il veicolo o possano evitarlo.",
-      "body_ar": "المشاة وراكبو الدراجات والأشخاص محدودو الحركة وراكبو الموتوسيكلات ممكن يكونوا أصعب في الملاحظة أو أكثر تعرضًا لنتائج المناورة. قرّب بحذر، وراقب ممرات المشاة والتقاطعات، وخفف السرعة لما الموقف يحتاج. المادة 191 بتحدد واجبات خاصة على السائق تجاه المشاة، منها إعطاؤهم الأولوية في الحالات المذكورة ومنع الأخطار اللي ممكن توقعها بشكل معقول على الأطفال أو كبار السن. قبل ما تلف، اتأكد إن مفيش حد في مسار المركبة؛ وبص كمان في المرايات والمناطق اللي مش باينة مباشرة. ما تفترضش إن الآخرين شافوا المركبة أو يقدروا يتفادوها.",
+      "body_it": "Pedoni, ciclisti, persone con mobilità ridotta e motociclisti sono più esposti. Avvicinati con prudenza, osserva attraversamenti e incroci e riduci la velocità quando serve. L’art. 191 impone precedenza ai pedoni nei casi previsti e di prevenire pericoli prevedibili a bambini e anziani. Prima di svoltare controlla traiettoria, specchi e angoli ciechi. Per il sorpasso dei velocipedi, l’art. 148, comma 9-bis, richiede distanza laterale adeguata a velocità e ingombro e almeno 1,5 m ove le condizioni della strada lo consentano. Per prudenza, chi ha poca esperienza dovrebbe anticipare le difficoltà e mantenere margini maggiori.",
+      "body_ar": "المشاة وراكبو الدراجات وذوو الحركة المحدودة وراكبو الدراجات النارية أكثر عرضة للخطر. اقترب بحذر، وراقب المعابر والتقاطعات وخفف السرعة عند الحاجة. تُلزم المادة 191 بإعطاء المشاة الأولوية في الحالات المحددة وتجنب الأخطار المتوقعة على الأطفال وكبار السن. قبل الانعطاف افحص المرايا والنقاط غير المرئية. وعند تجاوز الدراجة، تشترط الفقرة 9 مكرر من المادة 148 مسافة جانبية تناسب السرعة وحجم المركبة، لا تقل عن 1.5 متر إذا سمحت ظروف الطريق. ومن باب الاحتياط، يُستحسن لقليل الخبرة ترك هامش أمان أكبر.",
       "example_it": "Prima di svoltare a destra, controlla attraversamento e lato del veicolo per individuare un ciclista o un pedone.",
       "example_ar": "قبل ما تلف يمين، افحص المعبر وجانب المركبة عشان تلاحظ أي راكب دراجة أو مشاة.",
       "pitfall_it": "Non interpretare l’assenza di un pedone visibile davanti come prova che il lato sia libero.",
@@ -8406,38 +8473,54 @@
           "title_ar": "السرعة",
           "legal_reference": "Art. 141",
           "legal_reference_it": "Art. 141"
+        },
+        {
+          "url": "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf",
+          "title": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_it": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_ar": "وزارة البنية التحتية والنقل — برنامج الامتحان النظري لرخص A وB (التعميم 28819/2019)",
+          "legal_reference": "Programma d’esame teorico patente A/B",
+          "legal_reference_it": "Programma d’esame teorico patente A/B"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-148/",
+          "title": "Sorpasso",
+          "title_it": "Sorpasso",
+          "title_ar": "التجاوز",
+          "legal_reference": "Art. 148, comma 9-bis",
+          "legal_reference_it": "Art. 148, comma 9-bis"
         }
       ],
       "youtube_video": {
         "status": "awaiting_review_and_publication",
         "url": null
       },
-      "core_it": "Anticipa la presenza di utenti più esposti.\nControlla attraversamenti, traiettoria e zone non visibili.",
-      "core_ar": "توقع وجود مستخدمين أكثر عرضة للخطر.\nافحص ممرات المشاة ومسار المركبة والمناطق المحجوبة.",
+      "core_it": "Anticipa gli utenti vulnerabili e controlla le zone cieche.\nSe hai poca esperienza, aumenta i margini di sicurezza.",
+      "core_ar": "توقع مستخدمي الطريق الأكثر عرضة للخطر وافحص النقاط العمياء.\nإن كانت خبرتك قليلة، زد هامش الأمان.",
       "key_points": [
         {
-          "title_it": "Pedoni",
-          "title_ar": "المشاة",
-          "it": "Rispetta gli obblighi di precedenza previsti e guida con prudenza.",
-          "ar": "احترم واجبات الأولوية المقررة وسُق بحذر."
+          "title_it": "Utenti vulnerabili 1",
+          "title_ar": "المستخدمون الأكثر عرضة 1",
+          "it": "Dare precedenza ai pedoni che attraversano o si accingono ad attraversare nei casi previsti.",
+          "ar": "أعطِ الأولوية للمشاة الذين يعبرون أو يستعدون للعبور في الحالات المقررة."
         },
         {
-          "title_it": "Bambini e anziani",
-          "title_ar": "الأطفال وكبار السن",
-          "it": "Previeni pericoli ragionevolmente prevedibili nella situazione concreta.",
-          "ar": "امنع الأخطار المتوقعة بشكل معقول في الموقف الفعلي."
+          "title_it": "Utenti vulnerabili 2",
+          "title_ar": "المستخدمون الأكثر عرضة 2",
+          "it": "Rallentare e proteggere bambini, anziani e persone con mobilità ridotta.",
+          "ar": "خفف السرعة واحمِ الأطفال وكبار السن وذوي الحركة المحدودة."
         },
         {
-          "title_it": "Ciclisti e motociclisti",
-          "title_ar": "راكبو الدراجات والموتوسيكلات",
-          "it": "Osserva la loro posizione prima di svoltare o cambiare traiettoria.",
-          "ar": "لاحظ مكانهم قبل اللف أو تغيير المسار."
+          "title_it": "Utenti vulnerabili 3",
+          "title_ar": "المستخدمون الأكثر عرضة 3",
+          "it": "Prima delle manovre controllare specchi e angoli ciechi per ciclisti e motociclisti.",
+          "ar": "قبل المناورة افحص المرايا والنقاط العمياء لراكبي الدراجات والنارية."
         },
         {
-          "title_it": "Manovre",
-          "title_ar": "المناورات",
-          "it": "Controlla specchi e spazi non direttamente visibili.",
-          "ar": "افحص المرايات والمساحات اللي مش باينة مباشرة."
+          "title_it": "Utenti vulnerabili 4",
+          "title_ar": "المستخدمون الأكثر عرضة 4",
+          "it": "Sorpasso dei velocipedi: distanza laterale adeguata a velocità e ingombro; almeno 1,5 m ove le condizioni lo consentano.",
+          "ar": "تجاوز الدراجات الهوائية: مسافة جانبية تناسب السرعة وحجم المركبة؛ لا تقل عن 1.5 متر إذا سمحت ظروف الطريق."
         }
       ],
       "trap_words": [
@@ -8473,25 +8556,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "L’articolo 191 riguarda il comportamento dei conducenti nei confronti dei pedoni.",
-          "statement_ar": "المادة 191 بتتناول سلوك السائقين تجاه المشاة.",
+          "statement_it": "Nei casi previsti, si dà precedenza ai pedoni che attraversano o si accingono ad attraversare.",
+          "statement_ar": "في الحالات المقررة، تُعطى الأولوية للمشاة الذين يعبرون أو يستعدون للعبور.",
           "answer": "VERO",
-          "explanation_it": "È il titolo e l’oggetto della disposizione consultata.",
-          "explanation_ar": "ده عنوان وموضوع النص اللي تمت مراجعته."
+          "explanation_it": "È la precedenza prevista dall’art. 191 nei casi indicati.",
+          "explanation_ar": "هذه هي الأولوية التي تنص عليها المادة 191 في الحالات المحددة."
         },
         {
-          "statement_it": "Prima di svoltare basta controllare la sola strada davanti al veicolo.",
-          "statement_ar": "قبل اللف يكفي فحص الطريق قدام المركبة بس.",
+          "statement_it": "Prima di svoltare non occorre controllare gli angoli ciechi per ciclisti e motociclisti.",
+          "statement_ar": "لا حاجة إلى فحص النقاط العمياء لراكبي الدراجات والنارية قبل الانعطاف.",
           "answer": "FALSO",
-          "explanation_it": "Occorre osservare anche traiettoria, specchi e zone non direttamente visibili.",
-          "explanation_ar": "لازم تراقب كمان مسار المركبة والمرايات والمناطق المحجوبة."
+          "explanation_it": "Controlla specchi e traiettoria prima della manovra.",
+          "explanation_ar": "افحص المرايا ومسار المركبة قبل المناورة."
         },
         {
-          "statement_it": "La prudenza verso i pedoni comprende la prevenzione di alcuni pericoli prevedibili per bambini e anziani.",
-          "statement_ar": "الحذر تجاه المشاة يشمل منع بعض الأخطار المتوقعة على الأطفال وكبار السن.",
+          "statement_it": "Nel sorpasso dei velocipedi si tiene conto di velocità e ingombro e, se le condizioni lo consentono, si mantiene almeno 1,5 m.",
+          "statement_ar": "عند تجاوز الدراجات الهوائية، تُراعى السرعة وحجم المركبة وتُترك مسافة 1.5 متر على الأقل إذا سمحت الظروف.",
           "answer": "VERO",
-          "explanation_it": "L’articolo 191 richiama la prevenzione dei pericoli ragionevolmente prevedibili.",
-          "explanation_ar": "المادة 191 بتذكر منع الأخطار اللي يمكن توقعها بشكل معقول."
+          "explanation_it": "L’art. 148, comma 9-bis, richiede distanza laterale adeguata a velocità e ingombro, con almeno 1,5 m quando le condizioni lo consentono.",
+          "explanation_ar": "تشترط المادة 148 مسافة جانبية مناسبة للسرعة وحجم المركبة، وحدًا أدنى 1.5 متر متى سمحت ظروف الطريق."
         }
       ],
       "video_script_available": false,
@@ -8506,8 +8589,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Anticipa la presenza di utenti più esposti.\nControlla attraversamenti, traiettoria e zone non visibili.",
-            "text_ar": "توقع وجود مستخدمين أكثر عرضة للخطر.\nافحص ممرات المشاة ومسار المركبة والمناطق المحجوبة."
+            "text_it": "Anticipa gli utenti vulnerabili e controlla le zone cieche.\nSe hai poca esperienza, aumenta i margini di sicurezza.",
+            "text_ar": "توقع مستخدمي الطريق الأكثر عرضة للخطر وافحص النقاط العمياء.\nإن كانت خبرتك قليلة، زد هامش الأمان."
           },
           {
             "key": "example",
@@ -8523,9 +8606,11 @@
       },
       "videoUrl": null,
       "review_sources_checked": [
-        "https://aci.gov.it/codice-della-strada/art-191/"
+        "https://aci.gov.it/codice-della-strada/art-191/",
+        "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf",
+        "https://aci.gov.it/codice-della-strada/art-148/"
       ],
-      "review_verification_note": "Verificato il testo dell’art. 191 nella pagina ACI aggiornata al 25 ottobre 2026. Gli obblighi di precedenza sono descritti nei casi previsti; la prevenzione dei pericoli per bambini e anziani è limitata a quelli ragionevolmente prevedibili nella situazione concreta."
+      "review_verification_note": "Verificati i punti giuridici aggiunti: art. 191 per gli obblighi verso i pedoni e art. 148, comma 9-bis, per il sorpasso dei velocipedi, con distanza laterale adeguata a velocità e ingombro e almeno 1,5 m ove le condizioni stradali lo consentano. I margini più ampi per i conducenti inesperti sono indicati come prudenza, non come obbligo numerico di legge."
     },
     "u10-l5": {
       "heading_it": "Campo visivo e punti ciechi",
@@ -8686,8 +8771,8 @@
     "u10-l6": {
       "heading_it": "Superfici scivolose e traiettoria regolare",
       "heading_ar": "الأسطح الزلقة وخط السير الثابت",
-      "body_it": "Tombini metallici, segnaletica dipinta, binari, ghiaia, foglie o residui sulla carreggiata possono rendere meno sicuro il passaggio, soprattutto se il fondo è bagnato. Osserva la strada in anticipo e adatta la velocità prima di raggiungere il tratto; attraversalo con una traiettoria regolare, evitando accelerazioni, frenate o sterzate improvvise. La prudenza è particolarmente importante in curva e quando il veicolo è inclinato, come può accadere ai motocicli. Non esiste in questa spiegazione una velocità numerica valida per ogni superficie: le condizioni concrete e la visibilità richiedono valutazione. Mantieni il controllo e non fare movimenti bruschi sopra una zona potenzialmente scivolosa.",
-      "body_ar": "أغطية الصرف المعدنية وعلامات الدهان والسكك والحصى والورق أو بقايا الطريق ممكن تخلي المرور أقل أمانًا، خصوصًا لو السطح مبلول. راقب الطريق بدري وظبط السرعة قبل ما توصل للجزء ده؛ وعدّي بخط سير ثابت، وتجنب التسارع أو الفرملة أو اللف المفاجئ. الحذر مهم أكتر في الملفات ولما المركبة تكون مائلة، زي ما ممكن يحصل مع الموتوسيكلات. الشرح ده ما بيحددش سرعة رقمية مناسبة لكل سطح؛ لازم تقيّم الظروف الفعلية والرؤية. حافظ على السيطرة وما تعملش حركة مفاجئة فوق جزء ممكن يكون زلق.",
+      "body_it": "Tombini metallici, segnaletica dipinta, binari, ghiaia, foglie o residui sulla carreggiata possono rendere meno sicuro il passaggio, soprattutto se il fondo è bagnato. Pioggia e passaggio dal giorno alla notte possono modificare aderenza e visibilità: rivaluta le condizioni e osserva la strada in anticipo. Come misura prudenziale, riduci la velocità prima di raggiungere il tratto e attraversalo con traiettoria regolare, evitando accelerazioni, frenate o sterzate improvvise. La prudenza è particolarmente importante in curva e quando il veicolo è inclinato, come può accadere ai motocicli. Non esiste una velocità numerica uguale per ogni superficie: condizioni concrete e visibilità richiedono valutazione.",
+      "body_ar": "قد تجعل أغطية الصرف المعدنية وعلامات الدهان والسكك والحصى والأوراق وبقايا الطريق المرور أقل أمانًا، خصوصًا إذا كان السطح مبللًا. وقد يغير المطر والانتقال من النهار إلى الليل التماسك والرؤية؛ لذا أعد تقدير الظروف وراقب الطريق مبكرًا. ومن باب الاحتياط، خفّف السرعة قبل الوصول إلى الجزء واعبره بخط سير ثابت، متجنبًا التسارع أو الفرملة أو التوجيه المفاجئ. يلزم حذر خاص في المنعطفات وعندما تميل المركبة، كما قد يحدث للدراجات النارية. لا توجد سرعة رقمية واحدة لكل سطح؛ بل تُقدّر وفق الظروف والرؤية الفعلية.",
       "example_it": "Avvicinandoti a binari bagnati in curva, riduci prima la velocità e attraversali con traiettoria regolare.",
       "example_ar": "لما تقرب من قضبان مبلولة في ملف، هدي السرعة قبلها وعدّي بخط سير ثابت.",
       "pitfall_it": "Non correggere bruscamente la traiettoria proprio sopra un tombino o una striscia bagnata.",
@@ -8727,38 +8812,46 @@
           "title_ar": "السرعة",
           "legal_reference": "Art. 141",
           "legal_reference_it": "Art. 141"
+        },
+        {
+          "url": "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf",
+          "title": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_it": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_ar": "وزارة البنية التحتية والنقل — برنامج الامتحان النظري لرخص A وB (التعميم 28819/2019)",
+          "legal_reference": "Programma d’esame teorico patente A/B",
+          "legal_reference_it": "Programma d’esame teorico patente A/B"
         }
       ],
       "youtube_video": {
         "status": "awaiting_review_and_publication",
         "url": null
       },
-      "core_it": "Individua per tempo i tratti potenzialmente scivolosi.\nAdatta la velocità prima e attraversa senza movimenti bruschi.",
-      "core_ar": "لاحظ بدري الأجزاء المحتمل تكون زلقة.\nظبط السرعة قبلها وعدّي من غير حركات مفاجئة.",
+      "core_it": "Rivaluta aderenza e visibilità con meteo e luce.\nAdatta la velocità prima e attraversa senza movimenti bruschi.",
+      "core_ar": "أعد تقدير التماسك والرؤية وفق الطقس والإضاءة.\nاضبط السرعة مبكرًا واعبر من دون حركات مفاجئة.",
       "key_points": [
         {
-          "title_it": "Superficie",
-          "title_ar": "سطح الطريق",
-          "it": "Metallo, segnaletica, binari e residui meritano attenzione.",
-          "ar": "المعدن والعلامات والسكك والبقايا محتاجين انتباه."
+          "title_it": "Aderenza e visibilità 1",
+          "title_ar": "التماسك والرؤية 1",
+          "it": "Riconoscere in anticipo superfici potenzialmente scivolose.",
+          "ar": "تعرف مسبقًا إلى الأسطح التي قد تكون زلقة."
         },
         {
-          "title_it": "Pioggia",
-          "title_ar": "المطر",
-          "it": "Un fondo bagnato richiede una valutazione prudente della guida.",
-          "ar": "السطح المبلول محتاج تقدير حذر للقيادة."
+          "title_it": "Aderenza e visibilità 2",
+          "title_ar": "التماسك والرؤية 2",
+          "it": "Pioggia e passaggio dal giorno alla notte possono ridurre aderenza o visibilità.",
+          "ar": "قد يقلل المطر والانتقال من النهار إلى الليل التماسك أو الرؤية."
         },
         {
-          "title_it": "Preparazione",
-          "title_ar": "الاستعداد",
-          "it": "Adatta la velocità prima di raggiungere la zona.",
-          "ar": "ظبط السرعة قبل الوصول للمنطقة."
+          "title_it": "Aderenza e visibilità 3",
+          "title_ar": "التماسك والرؤية 3",
+          "it": "Adattare la velocità prima di raggiungere il tratto.",
+          "ar": "اضبط السرعة قبل الوصول إلى الجزء."
         },
         {
-          "title_it": "Traiettoria",
-          "title_ar": "خط السير",
-          "it": "Evita comandi bruschi mentre attraversi il tratto.",
-          "ar": "تجنب الأوامر المفاجئة أثناء عبور الجزء."
+          "title_it": "Aderenza e visibilità 4",
+          "title_ar": "التماسك والرؤية 4",
+          "it": "Attraversare con traiettoria regolare, evitando comandi bruschi.",
+          "ar": "اعبر بخط سير ثابت وتجنب الأوامر المفاجئة."
         }
       ],
       "trap_words": [
@@ -8788,25 +8881,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "È prudente osservare il tratto e adattare la velocità prima di raggiungerlo.",
-          "statement_ar": "من الحذر مراقبة الجزء وضبط السرعة قبل الوصول إليه.",
+          "statement_it": "Metallo, binari e residui possono rendere scivolosa la strada.",
+          "statement_ar": "قد يجعل المعدن والسكك والبقايا الطريق زلقًا.",
           "answer": "VERO",
-          "explanation_it": "Prepararsi prima evita di dover reagire bruscamente sopra la superficie.",
-          "explanation_ar": "الاستعداد بدري بيجنبك رد فعل مفاجئ فوق السطح."
+          "explanation_it": "Sono esempi di superfici o condizioni da osservare.",
+          "explanation_ar": "هذه أمثلة على أسطح أو ظروف يجب الانتباه إليها."
         },
         {
-          "statement_it": "La spiegazione stabilisce una velocità numerica uguale per ogni superficie scivolosa.",
-          "statement_ar": "الشرح بيحدد سرعة رقمية واحدة لكل سطح زلق.",
+          "statement_it": "Il passaggio dal giorno alla notte può incidere sulla visibilità.",
+          "statement_ar": "قد يؤثر الانتقال من النهار إلى الليل في الرؤية.",
+          "answer": "VERO",
+          "explanation_it": "La visibilità cambia e va rivalutata con le condizioni.",
+          "explanation_ar": "تتغير الرؤية ويجب إعادة تقديرها وفق الظروف."
+        },
+        {
+          "statement_it": "È meglio frenare bruscamente proprio sopra una superficie scivolosa.",
+          "statement_ar": "من الأفضل الفرملة المفاجئة فوق سطح زلق مباشرة.",
           "answer": "FALSO",
-          "explanation_it": "La velocità va valutata secondo condizioni e visibilità concrete.",
-          "explanation_ar": "لازم تقدّر السرعة حسب الظروف الفعلية والرؤية."
-        },
-        {
-          "statement_it": "Sopra un tratto potenzialmente scivoloso è consigliabile evitare manovre brusche.",
-          "statement_ar": "من الأفضل تجنب المناورات المفاجئة فوق جزء يحتمل يكون زلق.",
-          "answer": "VERO",
-          "explanation_it": "La traiettoria regolare e i comandi graduali sono il consiglio didattico del testo.",
-          "explanation_ar": "خط السير الثابت والأوامر الهادية هي النصيحة التعليمية في الشرح."
+          "explanation_it": "Adatta la velocità prima e attraversa con traiettoria regolare.",
+          "explanation_ar": "اضبط السرعة قبلها واعبر بخط سير ثابت."
         }
       ],
       "video_script_available": false,
@@ -8821,8 +8914,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Individua per tempo i tratti potenzialmente scivolosi.\nAdatta la velocità prima e attraversa senza movimenti bruschi.",
-            "text_ar": "لاحظ بدري الأجزاء المحتمل تكون زلقة.\nظبط السرعة قبلها وعدّي من غير حركات مفاجئة."
+            "text_it": "Rivaluta aderenza e visibilità con meteo e luce.\nAdatta la velocità prima e attraversa senza movimenti bruschi.",
+            "text_ar": "أعد تقدير التماسك والرؤية وفق الطقس والإضاءة.\nاضبط السرعة مبكرًا واعبر من دون حركات مفاجئة."
           },
           {
             "key": "example",
@@ -8837,8 +8930,11 @@
         ]
       },
       "videoUrl": null,
-      "review_sources_checked": [],
-      "review_verification_note": "Il contenuto è un consiglio pratico di guida e non formula una regola o un’affermazione legale; non è stata quindi necessaria una verifica normativa ufficiale."
+      "review_sources_checked": [
+        "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf",
+        "https://aci.gov.it/codice-della-strada/art-141/"
+      ],
+      "review_verification_note": "Il contenuto è un consiglio pratico di guida e non formula una regola o un’affermazione legale; non è stata quindi necessaria una verifica normativa ufficiale. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u11-l1": {
       "heading_it": "Documenti a bordo e titolo di guida",
@@ -9167,8 +9263,8 @@
     "u11-l3": {
       "heading_it": "Trasportare persone e sistemare il carico",
       "heading_ar": "نقل الركاب وترتيب الحمولة",
-      "body_it": "Il numero di persone trasportate deve rispettare i posti previsti per il veicolo; chi viaggia non deve ostacolare i movimenti del conducente né ridurne la visibilità. Colloca e fissa gli oggetti in modo che non cadano o si disperdano, non compromettano la stabilità, non limitino la visuale e non coprano luci o targhe. Rispetta la massa e la sagoma indicate per il mezzo. Se il carico sporge, occorre adottare cautele per non mettere in pericolo gli altri; per la sporgenza longitudinale l’articolo 164 prevede l’apposita segnalazione con pannelli retroriflettenti. Non si deve generalizzare tale segnalazione a ogni sporgenza. Peso e disposizione possono influire sulla stabilità e sulla frenata: controlla i dati del veicolo.",
-      "body_ar": "يجب أن يلتزم عدد الركاب بالمقاعد المقررة للمركبة؛ وألا يعيق الركاب حركة السائق أو يقللوا رؤيته. ضع الأشياء وثبتها بحيث لا تسقط أو تتناثر، ولا تضر بثبات المركبة، ولا تحجب الرؤية أو الأضواء أو لوحة التسجيل. التزم بالكتلة والأبعاد المحددة للمركبة. إذا برزت الحمولة، فاتخذ الاحتياطات اللازمة حتى لا تعرض الآخرين للخطر؛ وبالنسبة للبروز الطولي، تنص المادة 164 على وضع لوحات عاكسة خاصة. لا تعمم وجوب هذه اللوحات على كل أنواع البروز. قد يؤثر الوزن وطريقة التوزيع في الثبات والكبح؛ لذلك راجع بيانات المركبة.",
+      "body_it": "Il numero di persone trasportate non deve superare i posti indicati sulla carta di circolazione; i passeggeri non devono ostacolare i movimenti del conducente né ridurne la visibilità. Colloca e fissa gli oggetti in modo che non cadano, non compromettano la stabilità, non limitino la visuale e non coprano luci o targa. Rispetta la massa e la sagoma del mezzo. Se il carico sporge, adotta cautele per non mettere in pericolo gli altri; per la sporgenza longitudinale l’articolo 164 prevede appositi pannelli retroriflettenti. Non si deve generalizzare tale segnalazione a ogni sporgenza. Peso e disposizione possono influire sulla stabilità e sulla frenata: controlla i dati del veicolo.",
+      "body_ar": "يجب ألا يتجاوز عدد الركاب المقاعد المذكورة في وثيقة التسجيل، وألا يعيقوا حركة السائق أو يحجبوا رؤيته. رتّب الأشياء وثبّتها بحيث لا تسقط أو تخلّ بالثبات أو تحدّ من الرؤية أو تحجب الأضواء ولوحة التسجيل. التزم بكتلة المركبة وأبعادها. إذا برزت الحمولة، اتخذ احتياطات تمنع تعريض الآخرين للخطر؛ وتوجب المادة 164 لوحات عاكسة خاصة للبروز الطولي. لا تُعمم هذه اللوحات على كل بروز. قد يؤثر الوزن والترتيب في الثبات والفرملة، لذا تحقق من بيانات المركبة.",
       "example_it": "Prima di partire con bagagli, li fisso nel vano e controllo che non coprano la visuale, le luci o la targa.",
       "example_ar": "قبل الانطلاق بالأمتعة، أثبتها داخل المركبة وأتأكد من أنها لا تحجب الرؤية أو الأضواء أو لوحة التسجيل.",
       "pitfall_it": "Non confondere la cautela richiesta per ogni carico sporgente con la specifica segnalazione longitudinale.",
@@ -9230,32 +9326,32 @@
         "status": "awaiting_review_and_publication",
         "url": null
       },
-      "core_it": "Fissa il carico e non ostacolare la guida.\nLa segnalazione speciale riguarda la sporgenza longitudinale.",
-      "core_ar": "ثبّت الحمولة ولا تعق القيادة.\nتتعلق اللوحات الخاصة بالبروز الطولي.",
+      "core_it": "Rispetta il numero di posti e non ostacolare la guida.\nFissa il carico e segnala le sporgenze secondo le regole.",
+      "core_ar": "التزم بعدد المقاعد ولا تعق القيادة.\nثبّت الحمولة وأشر إلى البروز وفق القواعد.",
       "key_points": [
         {
-          "title_it": "Posti disponibili",
-          "title_ar": "المقاعد المتاحة",
-          "it": "Non trasportare persone oltre i posti previsti.",
-          "ar": "لا تنقل أشخاصًا فوق عدد المقاعد المقرر."
+          "title_it": "Passeggeri e carico 1",
+          "title_ar": "الركاب والحمولة 1",
+          "it": "Non superare il numero di passeggeri indicato sulla carta di circolazione.",
+          "ar": "لا تتجاوز عدد الركاب المدون في وثيقة التسجيل."
         },
         {
-          "title_it": "Libertà e visibilità",
-          "title_ar": "حرية الحركة والرؤية",
-          "it": "Passeggeri e oggetti non devono ostacolare il conducente.",
-          "ar": "يجب ألا يعيق الركاب أو الأغراض السائق."
+          "title_it": "Passeggeri e carico 2",
+          "title_ar": "الركاب والحمولة 2",
+          "it": "I passeggeri non ostacolano il conducente né ne riducono la visibilità.",
+          "ar": "لا يعيق الركاب السائق ولا يحجبون رؤيته."
         },
         {
-          "title_it": "Carico stabile",
-          "title_ar": "حمولة ثابتة",
-          "it": "Fissa gli oggetti per evitare caduta o dispersione.",
-          "ar": "ثبّت الأشياء لمنع سقوطها أو تناثرها."
+          "title_it": "Passeggeri e carico 3",
+          "title_ar": "الركاب والحمولة 3",
+          "it": "Fissare il carico senza compromettere stabilità, visibilità, luci o targa.",
+          "ar": "ثبّت الحمولة دون الإضرار بالثبات أو الرؤية أو الأضواء أو اللوحة."
         },
         {
-          "title_it": "Sporgenza",
-          "title_ar": "البروز",
-          "it": "Adotta cautele; la segnalazione prescritta qui riguarda il caso longitudinale.",
-          "ar": "اتخذ الاحتياطات؛ واللوحات المقررة هنا تخص حالة البروز الطولي."
+          "title_it": "Passeggeri e carico 4",
+          "title_ar": "الركاب والحمولة 4",
+          "it": "Rispettare regole e segnalazione previste per le sporgenze.",
+          "ar": "التزم بالقواعد والعلامات المقررة للحمولة البارزة."
         }
       ],
       "trap_words": [],
@@ -9276,25 +9372,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "Il carico va sistemato in modo da non compromettere la stabilità.",
-          "statement_ar": "يجب ترتيب الحمولة بحيث لا تضر بثبات المركبة.",
+          "statement_it": "Il numero dei passeggeri non deve superare quello indicato sulla carta di circolazione.",
+          "statement_ar": "يجب ألا يتجاوز عدد الركاب العدد المدون في وثيقة التسجيل.",
           "answer": "VERO",
-          "explanation_it": "È uno dei requisiti dell’articolo 164, comma 1.",
-          "explanation_ar": "هذا أحد متطلبات المادة 164(1)."
+          "explanation_it": "È il limite indicato dall’art. 169.",
+          "explanation_ar": "هذا هو الحد الذي تحدده المادة 169."
         },
         {
-          "statement_it": "La segnalazione con pannelli dell’articolo 164, comma 6, riguarda in ogni caso qualsiasi sporgenza.",
-          "statement_ar": "تخص لوحات المادة 164(6) كل بروز في جميع الحالات.",
+          "statement_it": "I passeggeri possono limitare la visibilità del conducente se sono seduti.",
+          "statement_ar": "يمكن للركاب حجب رؤية السائق ما داموا جالسين.",
           "answer": "FALSO",
-          "explanation_it": "Il comma distingue la cautela generale dalla segnalazione della sporgenza longitudinale.",
-          "explanation_ar": "تميز الفقرة بين الاحتياط العام وإشارة البروز الطولي."
+          "explanation_it": "Non devono limitare i movimenti o la visibilità del conducente.",
+          "explanation_ar": "يجب ألا يحدوا من حركة السائق أو رؤيته."
         },
         {
-          "statement_it": "Il carico non deve coprire i dispositivi luminosi o la targa.",
-          "statement_ar": "يجب ألا تحجب الحمولة الأضواء أو لوحة التسجيل.",
+          "statement_it": "Il carico deve essere fissato senza coprire luci o targa.",
+          "statement_ar": "يجب تثبيت الحمولة دون حجب الأضواء أو لوحة التسجيل.",
           "answer": "VERO",
-          "explanation_it": "L’articolo 164 richiede che tali dispositivi restino visibili.",
-          "explanation_ar": "تطلب المادة 164 بقاء هذه الأضواء واللوحة ظاهرة."
+          "explanation_it": "Il carico non deve compromettere stabilità, visuale o dispositivi.",
+          "explanation_ar": "يجب ألا تضر الحمولة بالثبات أو الرؤية أو الأجهزة."
         }
       ],
       "video_script_available": false,
@@ -9309,8 +9405,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Fissa il carico e non ostacolare la guida.\nLa segnalazione speciale riguarda la sporgenza longitudinale.",
-            "text_ar": "ثبّت الحمولة ولا تعق القيادة.\nتتعلق اللوحات الخاصة بالبروز الطولي."
+            "text_it": "Rispetta il numero di posti e non ostacolare la guida.\nFissa il carico e segnala le sporgenze secondo le regole.",
+            "text_ar": "التزم بعدد المقاعد ولا تعق القيادة.\nثبّت الحمولة وأشر إلى البروز وفق القواعد."
           },
           {
             "key": "example",
@@ -9327,9 +9423,10 @@
       "videoUrl": null,
       "review_sources_checked": [
         "https://aci.gov.it/codice-della-strada/art-164/",
-        "https://aci.gov.it/codice-della-strada/art-169/"
+        "https://aci.gov.it/codice-della-strada/art-169/",
+        "https://aci.gov.it/codice-della-strada/art-167/"
       ],
-      "review_verification_note": "Verificati i testi ufficiali ACI aggiornati: l'art. 164 richiede cautele per ogni carico sporgente e pannelli retroriflettenti per la sporgenza longitudinale; l'art. 169 disciplina i posti e la libertà/visibilità del conducente."
+      "review_verification_note": "Verificati i testi ufficiali ACI aggiornati: l'art. 164 richiede cautele per ogni carico sporgente e pannelli retroriflettenti per la sporgenza longitudinale; l'art. 169 disciplina i posti e la libertà/visibilità del conducente. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u11-l4": {
       "heading_it": "Controllare il veicolo e riconoscere i guasti",
@@ -9815,8 +9912,8 @@
     "u11-l7": {
       "heading_it": "Rimorchi: compatibilità, aggancio e guida",
       "heading_ar": "المقطورات: التوافق والربط والقيادة",
-      "body_it": "Un rimorchio modifica massa, lunghezza, stabilità e frenata del complesso. Controlla sui documenti le masse massime autorizzate del veicolo e del rimorchio, la massa complessiva e i limiti di traino. La pagina MIT indica che la patente B copre un rimorchio fino a 750 kg e, in determinate combinazioni, un complesso fino a 4.250 kg; se il complesso supera 3.500 kg, è necessaria la prova prevista per ottenere il codice B96. Oltre il campo ammesso, verifica i requisiti della patente BE: non dedurre l’abilitazione dal peso a vuoto. Prima del viaggio controlla aggancio, collegamento elettrico, luci, freni e fissaggio del carico. Guida con gradualità e mantieni distanze adeguate. Per i limiti applicabili, consulta i documenti e le regole aggiornate.",
-      "body_ar": "تغير المقطورة كتلة المجموعة وطولها وثباتها وكبحها. راجع وثائق المركبة والمقطورة لمعرفة الكتل القصوى المسموح بها وكتلة المجموعة وحدود الجر. توضح صفحة وزارة النقل أن رخصة B تشمل مقطورة حتى 750 كغ، وفي مجموعات محددة تشمل مجموعة حتى 4250 كغ؛ وإذا تجاوزت كتلة المجموعة 3500 كغ، يلزم اجتياز الاختبار المقرر للحصول على الرمز B96. إذا تجاوزت المجموعة النطاق المسموح، فتحقق من شروط رخصة BE؛ ولا تستنتج صلاحية الرخصة من الوزن الفارغ وحده. قبل الرحلة افحص وصلة الربط والتوصيل الكهربائي والأضواء والفرامل وتثبيت الحمولة. قد بسلاسة وحافظ على مسافات مناسبة. ولحدود المجموعة المنطبقة، راجع الوثائق والقواعد الحديثة.",
+      "body_it": "Un rimorchio modifica massa, lunghezza, stabilità e frenata del complesso. Controlla sui documenti le masse massime autorizzate del veicolo e del rimorchio, la massa complessiva e i limiti di traino. La patente B consente rimorchi fino a 750 kg e, in determinate combinazioni, un complesso fino a 4.250 kg; oltre 3.500 kg può essere richiesta la prova B96. Oltre il campo ammesso, verifica i requisiti della patente BE: non dedurre l’abilitazione dal peso a vuoto. Prima del viaggio controlla aggancio, collegamento elettrico, luci, freni e carico; per prudenza, guida con gradualità e mantieni distanze adeguate. Il traino d’emergenza segue l’articolo 165: collegamento idoneo e segnalato, con i dispositivi prescritti.",
+      "body_ar": "تؤثر المقطورة في كتلة المجموعة وطولها وثباتها وفرملتها. راجع الوثائق للتحقق من الكتل القصوى المسموح بها للمركبة والمقطورة، والكتلة الإجمالية وحد الجر. تسمح رخصة B بمقطورة حتى 750 كغ، وفي مجموعات محددة حتى 4250 كغ؛ وقد يلزم اختبار B96 إذا تجاوزت المجموعة 3500 كغ. وإذا تجاوزت النطاق المسموح، فتحقق من متطلبات رخصة BE؛ ولا تستنتج الإذن من الوزن الفارغ. قبل الرحلة افحص وصلة الربط والتوصيل الكهربائي والأضواء والفرامل والحمولة؛ ومن باب الاحتياط، قد بسلاسة واترك مسافة مناسبة. للجر الطارئ شروط المادة 165: وصلة مناسبة وعلامات وأجهزة التنبيه المقررة.",
       "example_it": "Prima di trainare una roulotte, confronto le masse autorizzate sui documenti, verifico il codice necessario e controllo aggancio, luci e freni.",
       "example_ar": "قبل جر مقطورة سكنية، أقارن الكتل المسموح بها في الوثائق، وأتحقق من الرمز اللازم وأفحص الوصلة والأضواء والفرامل.",
       "pitfall_it": "Non associare automaticamente la soglia massima alla sola patente B: la condizione B96 va esplicitata.",
@@ -9871,38 +9968,46 @@
           "title_ar": "شروط وقيود السير على الطرق السريعة والطرق الرئيسية خارج المدن",
           "legal_reference": "Art. 175",
           "legal_reference_it": "Art. 175"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-165/",
+          "title": "Traino di veicoli in avaria",
+          "title_it": "Traino di veicoli in avaria",
+          "title_ar": "جر المركبات المعطلة",
+          "legal_reference": "165",
+          "legal_reference_it": "165"
         }
       ],
       "youtube_video": {
         "status": "awaiting_review_and_publication",
         "url": null
       },
-      "core_it": "Verifica masse autorizzate e abilitazione per la combinazione.\nControlla aggancio, impianti e carico prima di partire.",
-      "core_ar": "تحقق من الكتل المسموحة والرخصة المناسبة للمجموعة.\nافحص الوصلة والأنظمة والحمولة قبل الانطلاق.",
+      "core_it": "Con il rimorchio verifica masse, patente e impianti.\nIl traino d’emergenza segue condizioni specifiche dell’art. 165.",
+      "core_ar": "مع المقطورة تحقق من الكتل والرخصة والأنظمة.\nللجر الطارئ شروط خاصة في المادة 165.",
       "key_points": [
         {
-          "title_it": "Masse autorizzate",
-          "title_ar": "الكتل المسموح بها",
-          "it": "Leggi i dati del veicolo, del rimorchio e del complesso.",
-          "ar": "راجع بيانات المركبة والمقطورة والمجموعة."
+          "title_it": "Traino 1",
+          "title_ar": "الجر 1",
+          "it": "Verificare masse autorizzate e patente richiesta per la combinazione.",
+          "ar": "تحقق من الكتل المسموح بها والرخصة المطلوبة للمجموعة."
         },
         {
-          "title_it": "B96",
-          "title_ar": "B96",
-          "it": "La prova è richiesta quando il complesso supera 3.500 kg nel caso indicato dal MIT.",
-          "ar": "يلزم الاختبار عند تجاوز المجموعة 3500 كغ في الحالة التي تحددها الوزارة."
+          "title_it": "Traino 2",
+          "title_ar": "الجر 2",
+          "it": "Prima di partire controllare aggancio, collegamenti, luci, freni e carico.",
+          "ar": "قبل الانطلاق، افحص الوصلة والتوصيلات والأضواء والفرامل والحمولة."
         },
         {
-          "title_it": "Controllo dell’aggancio",
-          "title_ar": "فحص وصلة الربط",
-          "it": "Verifica collegamenti, luci, freni e carico fissato.",
-          "ar": "افحص التوصيلات والأضواء والفرامل والحمولة المثبتة."
+          "title_it": "Traino 3",
+          "title_ar": "الجر 3",
+          "it": "Guidare con gradualità e mantenere distanze adeguate.",
+          "ar": "قد بسلاسة وحافظ على مسافات مناسبة."
         },
         {
-          "title_it": "Guida prudente",
-          "title_ar": "قيادة حذرة",
-          "it": "La combinazione richiede manovre graduali e distanze adeguate.",
-          "ar": "تتطلب المجموعة مناورات سلسة ومسافات مناسبة."
+          "title_it": "Traino 4",
+          "title_ar": "الجر 4",
+          "it": "Il traino d’emergenza richiede collegamento idoneo, ben visibile e dispositivi prescritti.",
+          "ar": "يتطلب الجر الطارئ وصلة مناسبة واضحة وأجهزة التنبيه المقررة."
         }
       ],
       "trap_words": [
@@ -9943,25 +10048,25 @@
       ],
       "quick_check": [
         {
-          "statement_it": "La pagina MIT indica che per un complesso oltre 3.500 kg nel caso descritto occorre la prova B96.",
-          "statement_ar": "تذكر صفحة الوزارة أن المجموعة التي تتجاوز 3500 كغ في الحالة المذكورة تتطلب اختبار B96.",
+          "statement_it": "Prima di partire con un rimorchio si controllano aggancio, collegamenti, luci, freni e carico.",
+          "statement_ar": "قبل الانطلاق بالمقطورة، تُفحص الوصلة والتوصيلات والأضواء والفرامل والحمولة.",
           "answer": "VERO",
-          "explanation_it": "Il MIT specifica la prova e il rilascio del codice B96 per tale condizione.",
-          "explanation_ar": "تحدد الوزارة الاختبار والحصول على الرمز B96 لهذه الحالة."
+          "explanation_it": "Sono controlli essenziali prima del viaggio.",
+          "explanation_ar": "هذه فحوص أساسية قبل الرحلة."
         },
         {
-          "statement_it": "Il solo peso a vuoto basta a stabilire se la patente è adeguata.",
-          "statement_ar": "يكفي الوزن الفارغ وحده لتحديد ملاءمة الرخصة.",
+          "statement_it": "Per la combinazione con rimorchio non occorre verificare le masse autorizzate.",
+          "statement_ar": "لا حاجة للتحقق من الكتل المسموح بها لمجموعة المركبة والمقطورة.",
           "answer": "FALSO",
-          "explanation_it": "Vanno considerate masse autorizzate e caratteristiche della combinazione.",
-          "explanation_ar": "يجب مراعاة الكتل المسموحة وخصائص المجموعة."
+          "explanation_it": "La massa autorizzata e la patente dipendono dalla combinazione.",
+          "explanation_ar": "تعتمد الكتلة المسموح بها والرخصة على المجموعة."
         },
         {
-          "statement_it": "Prima di partire è utile controllare aggancio, luci e freni del rimorchio.",
-          "statement_ar": "من المفيد فحص وصلة الربط والأضواء والفرامل قبل الانطلاق.",
+          "statement_it": "Nel traino d’emergenza di un veicolo guasto si usa un collegamento idoneo e segnalato.",
+          "statement_ar": "في جر مركبة معطلة للطوارئ، تُستخدم وصلة مناسبة وواضحة العلامة.",
           "answer": "VERO",
-          "explanation_it": "Sono controlli pratici essenziali per la sicurezza del complesso.",
-          "explanation_ar": "هذه فحوص عملية أساسية لسلامة المجموعة."
+          "explanation_it": "L’art. 165 disciplina collegamento e dispositivi di segnalazione.",
+          "explanation_ar": "تنظم المادة 165 الوصلة وأجهزة التنبيه."
         }
       ],
       "video_script_available": false,
@@ -9976,8 +10081,8 @@
         "stages": [
           {
             "key": "concept",
-            "text_it": "Verifica masse autorizzate e abilitazione per la combinazione.\nControlla aggancio, impianti e carico prima di partire.",
-            "text_ar": "تحقق من الكتل المسموحة والرخصة المناسبة للمجموعة.\nافحص الوصلة والأنظمة والحمولة قبل الانطلاق."
+            "text_it": "Con il rimorchio verifica masse, patente e impianti.\nIl traino d’emergenza segue condizioni specifiche dell’art. 165.",
+            "text_ar": "مع المقطورة تحقق من الكتل والرخصة والأنظمة.\nللجر الطارئ شروط خاصة في المادة 165."
           },
           {
             "key": "example",
@@ -9993,9 +10098,11 @@
       },
       "videoUrl": null,
       "review_sources_checked": [
-        "https://www.mit.gov.it/conseguimento-patente-b"
+        "https://www.mit.gov.it/conseguimento-patente-b",
+        "https://aci.gov.it/codice-della-strada/art-56/",
+        "https://aci.gov.it/codice-della-strada/art-165/"
       ],
-      "review_verification_note": "La pagina ufficiale MIT consultata conferma il limite di 750 kg per il rimorchio e le condizioni per il complesso fino a 4.250 kg, con prova e codice B96 quando la massa del complesso supera 3.500 kg. Non ho verificato separatamente i riferimenti pratici non normativi."
+      "review_verification_note": "La pagina ufficiale MIT consultata conferma il limite di 750 kg per il rimorchio e le condizioni per il complesso fino a 4.250 kg, con prova e codice B96 quando la massa del complesso supera 3.500 kg. Non ho verificato separatamente i riferimenti pratici non normativi. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     }
   }
 }

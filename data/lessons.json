@@ -108,42 +108,42 @@
           "id": "u1-l3",
           "titleIt": "Prudenza e velocità adatta alle condizioni",
           "titleAr": "الحذر والسرعة المناسبة للظروف",
-          "summaryIt": "Il conducente deve regolare la velocità in base alle caratteristiche del veicolo, della strada, del traffico e alle altre circostanze, mantenendo il controllo del veicolo. Deve poter arrestare il veicolo entro il proprio campo visivo.",
-          "summaryAr": "على السائق ضبط السرعة بما يلائم المركبة والطريق وحركة المرور وسائر الظروف، مع إبقاء السيطرة على المركبة (controllo del veicolo). ويجب أن يكون قادرًا على إيقافها ضمن مجال رؤيته (campo visivo).",
+          "summaryIt": "L’art. 140 impone di comportarsi senza creare pericolo o intralcio e salvaguardando la sicurezza della circolazione. L’art. 141 richiede di adeguare la velocità al veicolo, alla strada, al traffico e alla visibilità, mantenere il controllo e potersi fermare entro il campo visibile.",
+          "summaryAr": "توجب المادة 140 عدم خلق خطر أو عرقلة وصون سلامة حركة المرور. وتفرض المادة 141 تكييف السرعة مع المركبة والطريق والمرور والرؤية، والحفاظ على السيطرة والقدرة على التوقف ضمن مجال الرؤية (campo visibile).",
           "keyPoints": [
             {
-              "it": "La velocità va adeguata alle circostanze.",
-              "ar": "تُضبط السرعة بما يناسب الظروف."
+              "it": "Ogni utente deve evitare pericoli e intralci e salvaguardare la sicurezza della circolazione.",
+              "ar": "على كل مستعمل للطريق تجنب الخطر والعرقلة وصون سلامة حركة المرور."
             },
             {
-              "it": "Nel regolare la velocità si considerano il veicolo, la strada e il traffico.",
-              "ar": "عند ضبط السرعة، تُراعى المركبة والطريق وحركة المرور."
+              "it": "Adeguare la velocità al veicolo, alla strada, al traffico e alla visibilità.",
+              "ar": "تكييف السرعة مع المركبة والطريق والمرور والرؤية."
             },
             {
-              "it": "Il conducente deve mantenere il controllo del veicolo.",
-              "ar": "يجب على السائق الحفاظ على السيطرة على المركبة."
+              "it": "Mantenere il controllo del veicolo.",
+              "ar": "الحفاظ على السيطرة على المركبة."
             },
             {
-              "it": "Il conducente deve poter arrestare il veicolo entro il campo visivo.",
-              "ar": "يجب أن يستطيع السائق إيقاف المركبة ضمن مجال الرؤية."
+              "it": "Potersi fermare entro il campo visibile.",
+              "ar": "القدرة على التوقف ضمن مجال الرؤية."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La velocità va regolata in base alle circostanze.",
+              "qIt": "Ogni utente deve evitare pericoli e intralci e salvaguardare la sicurezza della circolazione.",
               "a": "VERO",
-              "explainAr": "الدرس يقرر أن السرعة تُضبط بحسب المركبة والطريق والمرور وسائر الظروف."
+              "explainAr": "هذه هي القاعدة العامة للسلوك على الطريق الواردة في المادة 140."
             },
             {
-              "qIt": "Per il conducente è sufficiente mantenere il controllo del veicolo; non è necessario poterlo arrestare entro il campo visivo.",
+              "qIt": "La velocità può ignorare la visibilità se il conducente mantiene il controllo del veicolo.",
               "a": "FALSO",
-              "explainAr": "يشترط الدرس الحفاظ على السيطرة والقدرة على إيقاف المركبة ضمن مجال الرؤية."
+              "explainAr": "يجب تكييف السرعة مع الرؤية، مع الحفاظ على السيطرة والقدرة على التوقف ضمن مجال الرؤية."
             },
             {
-              "qIt": "Tra gli elementi da considerare per regolare la velocità ci sono il veicolo, la strada e il traffico.",
+              "qIt": "La velocità va adeguata anche al veicolo, alla strada e al traffico.",
               "a": "VERO",
-              "explainAr": "هذه العناصر مذكورة صراحةً ضمن ما تُراعى عند ضبط السرعة."
+              "explainAr": "تذكر المادة 141 المركبة والطريق والمرور ضمن ما يجب مراعاته عند ضبط السرعة."
             }
           ]
         },
@@ -349,42 +349,42 @@
           "id": "u2-l1",
           "titleIt": "Riconoscere i gruppi dei segnali verticali",
           "titleAr": "التعرّف على مجموعات الإشارات الرأسية",
-          "summaryIt": "I segnali verticali si distinguono in segnali di pericolo, di prescrizione e di indicazione. La categoria orienta la lettura, ma il significato va ricavato dal segnale specifico.",
-          "summaryAr": "تنقسم الإشارات الرأسية (segnali verticali) إلى إشارات خطر (pericolo)، وإشارات تنظيم (prescrizione)، وإشارات إرشاد (indicazione). تساعد الفئة على توجيه الفهم، لكن يُستخلص المعنى من الإشارة المحددة.",
+          "summaryIt": "La segnaletica stradale comprende quattro gruppi: verticale, orizzontale, luminosa e complementare. I segnali verticali si dividono in pericolo, prescrizione e indicazione.",
+          "summaryAr": "تشمل إشارات الطريق أربع مجموعات: رأسية وأفقية وضوئية وتكميلية. وتنقسم الإشارات الرأسية إلى خطر (pericolo) وتنظيم (prescrizione) وإرشاد (indicazione).",
           "keyPoints": [
             {
-              "it": "I segnali di pericolo avvertono del rischio e richiedono prudenza.",
-              "ar": "تحذّر إشارات الخطر (segnali di pericolo) من المخاطر وتدعو إلى الحذر."
+              "it": "Quattro gruppi: segnaletica verticale, orizzontale, luminosa e complementare.",
+              "ar": "أربع مجموعات: إشارات رأسية وأفقية وضوئية وتكميلية."
             },
             {
-              "it": "I segnali di prescrizione comunicano obblighi, divieti o limitazioni.",
-              "ar": "تبيّن إشارات التنظيم (segnali di prescrizione) الواجبات أو المحظورات أو القيود."
+              "it": "I segnali verticali di pericolo avvertono di un rischio.",
+              "ar": "تحذّر الإشارات الرأسية للخطر من وجود خطر."
             },
             {
-              "it": "I segnali di indicazione forniscono informazioni utili per la guida.",
-              "ar": "تقدّم إشارات الإرشاد (segnali di indicazione) معلومات مفيدة للقيادة."
+              "it": "La prescrizione comprende precedenza, divieto e obbligo.",
+              "ar": "تشمل إشارات التنظيم الأولوية والمنع والإلزام."
             },
             {
-              "it": "Precedenza, divieto e obbligo sono sottogruppi dei segnali di prescrizione.",
-              "ar": "الأولوية (precedenza) والمنع (divieto) والإلزام (obbligo) فئات فرعية من إشارات التنظيم."
+              "it": "I segnali di indicazione forniscono informazioni utili alla guida.",
+              "ar": "تقدّم إشارات الإرشاد معلومات مفيدة للقيادة."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "I segnali di pericolo avvertono del rischio e richiedono prudenza.",
+              "qIt": "La segnaletica comprende segnali verticali, orizzontali, luminosi e complementari.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس أن إشارات الخطر تحذّر من المخاطر وتطلب الحذر."
+              "explainAr": "تصنّف المادة 38 الإشارات إلى هذه المجموعات الأربع."
             },
             {
-              "qIt": "I segnali di indicazione comunicano obblighi e divieti.",
+              "qIt": "Precedenza, divieto e obbligo sono segnali di indicazione.",
               "a": "FALSO",
-              "explainAr": "الواجبات والمحظورات أو القيود من دلالات إشارات التنظيم، أما الإرشاد فيقدّم معلومات مفيدة للقيادة."
+              "explainAr": "هذه فئات فرعية من الإشارات الرأسية التنظيمية."
             },
             {
-              "qIt": "Precedenza, divieto e obbligo sono sottogruppi dei segnali di prescrizione.",
+              "qIt": "I segnali verticali di pericolo avvertono di un rischio.",
               "a": "VERO",
-              "explainAr": "يصنّف الدرس الأولوية والمنع والإلزام ضمن الفئات الفرعية لإشارات التنظيم."
+              "explainAr": "وظيفتها التحذير والدعوة إلى الحذر."
             }
           ]
         },
@@ -656,42 +656,42 @@
           "id": "u3-l1",
           "titleIt": "Linee e simboli sulla carreggiata",
           "titleAr": "الخطوط والرموز على جسم الطريق",
-          "summaryIt": "La segnaletica orizzontale organizza la circolazione e comunica prescrizioni. La possibilità di oltrepassare una linea non autorizza, da sola, il sorpasso.",
-          "summaryAr": "تنظم العلامات الأفقية (segnaletica orizzontale) حركة المرور وتبيّن التعليمات. وإمكان عبور خط لا يعني وحده جواز التجاوز (sorpasso).",
+          "summaryIt": "La segnaletica orizzontale comprende linee, frecce, linee di arresto e attraversamenti, e organizza la circolazione. Superare una linea non rende automaticamente lecito il sorpasso; ai passaggi pedonali e ciclabili si rispettano le precedenze previste.",
+          "summaryAr": "تشمل العلامات الأفقية (segnaletica orizzontale) الخطوط والأسهم وخطوط التوقف والمعابر، وتنظم حركة المرور. وعبور خط لا يجيز التجاوز تلقائيًا؛ وعند معابر المشاة والدراجات تُراعى الأولوية المقررة.",
           "keyPoints": [
             {
-              "it": "La segnaletica orizzontale regola e guida la circolazione.",
-              "ar": "تنظم العلامات الأفقية حركة المرور وترشد مستعملي الطريق."
+              "it": "Linee, frecce, linee di arresto e attraversamenti organizzano la circolazione.",
+              "ar": "تنظم الخطوط والأسهم وخطوط التوقف والمعابر حركة المرور."
             },
             {
               "it": "La linea continua non si oltrepassa, salvo le eccezioni previste.",
               "ar": "لا يُتجاوز الخط المتصل إلا في الحالات المستثناة المقررة."
             },
             {
-              "it": "La linea discontinua può essere oltrepassata rispettando le altre norme.",
-              "ar": "يمكن عبور الخط المتقطع مع احترام بقية القواعد."
+              "it": "La linea discontinua si oltrepassa solo se le altre regole lo consentono; tra linee affiancate si passa dal lato discontinuo.",
+              "ar": "لا يُعبر الخط المتقطع إلا إذا سمحت بقية القواعد؛ وعند الخطين المتجاورين يكون العبور من جهة الخط المتقطع."
             },
             {
-              "it": "Tra linee affiancate si passa dal lato discontinuo; ciò non autorizza il sorpasso.",
-              "ar": "عند وجود خطين متجاورين يكون العبور من جهة الخط المتقطع، وهذا لا يجيز التجاوز تلقائيًا."
+              "it": "Ai passaggi pedonali e ciclabili si rispettano le precedenze previste.",
+              "ar": "تُراعى الأولوية المقررة عند معابر المشاة والدراجات."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La segnaletica orizzontale organizza la circolazione e comunica prescrizioni.",
+              "qIt": "La segnaletica orizzontale comprende anche linee di arresto e attraversamenti.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس أن العلامات الأفقية تنظم السير وتنقل التعليمات."
+              "explainAr": "من العلامات الأفقية خطوط التوقف ومعابر المشاة والدراجات."
             },
             {
-              "qIt": "La linea discontinua può essere oltrepassata senza rispettare le altre norme.",
+              "qIt": "Una linea discontinua autorizza sempre il sorpasso.",
               "a": "FALSO",
-              "explainAr": "يجوز عبورها مع احترام بقية القواعد، لا بمعزل عنها."
+              "explainAr": "يجوز عبور الخط عند سماح بقية القواعد، لكن ذلك لا يجيز التجاوز تلقائيًا."
             },
             {
-              "qIt": "Oltrepassare una linea autorizza sempre il sorpasso.",
-              "a": "FALSO",
-              "explainAr": "عبور الخط لا يمنح وحده إذنًا بالتجاوز."
+              "qIt": "Ai passaggi pedonali e ciclabili si rispettano le precedenze previste.",
+              "a": "VERO",
+              "explainAr": "تعتمد الأولوية عند المعابر على القواعد والعلامات المقررة."
             }
           ]
         },
@@ -699,20 +699,20 @@
           "id": "u3-l2",
           "titleIt": "Semafori: colori, frecce e prudenza",
           "titleAr": "إشارات المرور الضوئية: الألوان والأسهم والحذر",
-          "summaryIt": "Con il rosso occorre arrestarsi; il giallo preavvisa l’arresto e si prosegue solo se fermarsi non è sicuro. Il verde consente di impegnare l’intersezione solo se la si può liberare prima del rosso; le frecce valgono per la direzione indicata e il giallo lampeggiante richiede prudenza e rispetto della precedenza.",
-          "summaryAr": "الأحمر يوجب التوقف، والأصفر ينذر بالتوقف (preavviso di arresto)، ولا يُتابع السير إلا إذا لم يكن التوقف آمنًا. يسمح الأخضر بدخول التقاطع فقط إذا أمكن إخلاؤه قبل الأحمر؛ وتتبع الأسهم اتجاهها، فيما يتطلب الأصفر الوامض الحذر واحترام الأولوية.",
+          "summaryIt": "Il rosso impone l’arresto; il giallo preavvisa l’arresto e si prosegue solo se fermarsi in sicurezza non è possibile. Il verde consente il passaggio, ma si entra nell’incrocio solo se lo si può liberare prima del rosso; le luci pedonali hanno significati distinti.",
+          "summaryAr": "تعني الإشارة الضوئية (semaforo) الحمراء التوقف؛ والصفراء تنذر به ولا يُتابع السير إلا إذا تعذّر التوقف بأمان. يسمح الأخضر بالمرور، لكن لا تدخل التقاطع إلا إذا أمكن إخلاؤه قبل الأحمر؛ ولإشارات المشاة دلالات منفصلة.",
           "keyPoints": [
             {
-              "it": "Rosso: arresto alla linea; se manca, non impegnare l’incrocio.",
-              "ar": "الأحمر: توقف عند الخط؛ وإن لم يوجد فلا تدخل التقاطع."
+              "it": "Rosso: arresto; giallo: fermati se puoi farlo in sicurezza.",
+              "ar": "الأحمر: توقف؛ والأصفر: توقف إذا أمكن ذلك بأمان."
             },
             {
-              "it": "Giallo: preavviso di arresto; prosegui solo se fermarti non è sicuro.",
-              "ar": "الأصفر: إنذار بالتوقف؛ تابع فقط إذا لم يكن التوقف آمنًا."
+              "it": "Con il verde, non entrare se non puoi liberare l’incrocio prima del rosso.",
+              "ar": "مع الأخضر، لا تدخل التقاطع إذا لم تستطع إخلاءه قبل الأحمر."
             },
             {
-              "it": "Verde: non impegnare l’intersezione se non puoi liberarla prima del rosso.",
-              "ar": "الأخضر: لا تدخل التقاطع إن لم تستطع إخلاءه قبل الأحمر."
+              "it": "Semaforo pedonale: rosso non iniziare; giallo libera il passaggio e non entrare; verde attraversa nel senso indicato.",
+              "ar": "إشارة المشاة: لا تبدأ العبور عند الأحمر؛ أخلِ المعبر عند الأصفر ولا تبدأ؛ واعبر في الاتجاه المحدد عند الأخضر."
             },
             {
               "it": "Le frecce valgono per la direzione indicata; il giallo lampeggiante richiede prudenza e precedenza.",
@@ -725,19 +725,19 @@
           },
           "quickCheck": [
             {
-              "qIt": "Con il semaforo rosso ci si arresta alla linea.",
+              "qIt": "Con il giallo veicolare ci si ferma se è possibile farlo in sicurezza.",
               "a": "VERO",
-              "explainAr": "الأحمر يوجب التوقف عند الخط؛ وإذا غاب فلا تدخل التقاطع."
+              "explainAr": "الأصفر ينذر بالتوقف؛ ولا يُتابع السير إلا إذا تعذّر التوقف بأمان."
             },
             {
-              "qIt": "Con il giallo si può proseguire sempre, anche se è possibile fermarsi in sicurezza.",
+              "qIt": "Con il verde si può entrare in un incrocio che non sarà liberato prima del rosso.",
               "a": "FALSO",
-              "explainAr": "الأصفر إنذار بالتوقف؛ يُتابع السير فقط إذا لم يكن التوقف آمنًا."
+              "explainAr": "لا تدخل التقاطع إذا لم تستطع إخلاءه قبل الأحمر."
             },
             {
-              "qIt": "Con il verde si può impegnare l’intersezione anche quando non la si può liberare prima del rosso.",
-              "a": "FALSO",
-              "explainAr": "لا تدخل التقاطع على الأخضر إذا لم تستطع إخلاءه قبل الأحمر."
+              "qIt": "Con il giallo pedonale, chi è già sull’attraversamento lo libera e chi attende non inizia.",
+              "a": "VERO",
+              "explainAr": "هذا هو الفرق المقرر لإشارة المشاة الصفراء."
             }
           ]
         },
@@ -1113,12 +1113,12 @@
           "id": "u4-l4",
           "titleIt": "Binari, uscite e incroci da non bloccare",
           "titleAr": "السكك والمخارج والتقاطعات اللي ما ينفعش تسدّها",
-          "summaryIt": "Agli attraversamenti ferroviari e tramviari si dà precedenza ai veicoli su rotaia, salvo diversa segnalazione. Ci si ferma agli sbocchi previsti e non si impegna un’intersezione se non è possibile sgombrarla in breve tempo.",
-          "summaryAr": "عند معابر السكك الحديدية والترام تُعطى الأولوية للمركبات على القضبان ما لم توجد إشارة مختلفة. يجب التوقف عند المخارج التي يحددها القانون، وعدم دخول التقاطع إذا تعذّر إخلاؤه في وقت قصير. (passaggi a livello)",
+          "summaryIt": "Ai passaggi ferroviari e tramviari si dà precedenza ai veicoli su rotaia, salvo diversa segnalazione; non si entra in un’intersezione se non si può liberarla. Anche con il semaforo verde, chi svolta rispetta i veicoli e i flussi cui deve dare precedenza, oltre ai pedoni e ciclisti autorizzati.",
+          "summaryAr": "عند معابر السكك والترام تُعطى الأولوية للمركبات على القضبان ما لم توجد إشارة مختلفة؛ ولا تدخل تقاطعًا إذا تعذر إخلاؤه. وحتى مع الضوء الأخضر (semaforo verde)، يفسح المنعطف للمركبات وتيارات السير التي لها أولوية، وللمشاة والدراجات المسموح لهم بالمرور.",
           "keyPoints": [
             {
-              "it": "Agli attraversamenti, precedenza ai veicoli su rotaia salvo diversa segnalazione.",
-              "ar": "عند المعابر، الأولوية للمركبات على القضبان ما لم توجد إشارة مخالفة."
+              "it": "Ai passaggi ferroviari e tramviari, precedenza ai veicoli su rotaia salvo diversa segnalazione.",
+              "ar": "عند معابر السكك والترام، الأولوية للمركبات على القضبان ما لم توجد إشارة مخالفة."
             },
             {
               "it": "Fermarsi agli sbocchi previsti dalla legge e dare precedenza.",
@@ -1126,29 +1126,29 @@
             },
             {
               "it": "Non impegnare un’intersezione se non si può sgombrarla in breve tempo.",
-              "ar": "لا تدخل التقاطع إذا لم تستطع إخلاءه في وقت قصير."
+              "ar": "لا تدخل التقاطع إذا تعذر إخلاؤه في وقت قصير."
             },
             {
-              "it": "Prestare attenzione a pedoni e ciclisti nelle aree e corsie indicate.",
-              "ar": "انتبه للمشاة وراكبي الدراجات في المناطق والحارات المحددة."
+              "it": "Con il verde, chi svolta cede ai flussi interferenti e agli utenti con via libera.",
+              "ar": "مع الأخضر، يفسح المنعطف لتيارات السير المتقاطعة وللمستخدمين المسموح لهم بالمرور."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Agli attraversamenti ferroviari e tramviari si dà precedenza ai veicoli su rotaia, salvo diversa segnalazione.",
+              "qIt": "Ai passaggi ferroviari si dà precedenza ai veicoli su rotaia, salvo diversa segnalazione.",
               "a": "VERO",
-              "explainAr": "الدرس يقرر أولوية المركبات على القضبان عند المعابر، إلا إذا دلت إشارة على غير ذلك."
+              "explainAr": "هذه هي القاعدة العامة التي يذكرها الدرس."
             },
             {
-              "qIt": "Si può impegnare un’intersezione anche quando non è possibile sgombrarla in breve tempo.",
+              "qIt": "Con il verde, chi svolta può ignorare i veicoli e i flussi cui deve dare precedenza.",
               "a": "FALSO",
-              "explainAr": "الدرس ينص على عدم دخول التقاطع إذا تعذّر إخلاؤه في وقت قصير."
+              "explainAr": "الضوء الأخضر لا يلغي واجب الأولوية على من ينعطف."
             },
             {
-              "qIt": "Il conducente deve prestare attenzione a pedoni e ciclisti nelle aree e corsie indicate.",
+              "qIt": "Non si entra in un’intersezione se non la si può liberare in breve tempo.",
               "a": "VERO",
-              "explainAr": "من نقاط الدرس الانتباه للمشاة وراكبي الدراجات في المناطق والحارات المحددة."
+              "explainAr": "تمنع القاعدة تعطيل التقاطع عندما يتعذر إخلاؤه."
             }
           ]
         }
@@ -1300,42 +1300,42 @@
           "id": "u5-l1",
           "titleIt": "Guidare a destra, guidare con riguardo",
           "titleAr": "السير يمينًا مع مراعاة الجميع",
-          "summaryIt": "Per la sicurezza della circolazione occorre evitare pericolo e intralcio. In generale si procede a destra e, sulle strade con più corsie, si utilizza la corsia libera più a destra, salvo diversa segnalazione e le svolte consentite.",
-          "summaryAr": "للسلامة المرورية، يجب تجنب الخطر وإعاقة السير. القاعدة العامة هي السير إلى اليمين، وعلى الطرق متعددة الحارات تُستخدم الحارة الخالية الأبعد إلى اليمين، مع مراعاة الإشارات والانعطافات المسموح بها (corsia libera più a destra).",
+          "summaryIt": "In generale si circola a destra, usando la corsia libera più a destra. Le corsie di sinistra servono al sorpasso; nei centri abitati si può scegliere la corsia adatta alla svolta successiva, senza cambi inutili.",
+          "summaryAr": "القاعدة العامة السير إلى اليمين واستخدام الحارة الخالية الأبعد يمينًا (corsia libera più a destra). تُستخدم الحارات اليسرى للتجاوز؛ وداخل المناطق المأهولة يمكن اختيار الحارة المناسبة للانعطاف التالي، من دون تغيير غير لازم.",
           "keyPoints": [
             {
               "it": "Evitare pericolo e intralcio alla circolazione.",
               "ar": "تجنب الخطر وإعاقة حركة المرور."
             },
             {
-              "it": "Procedere a destra, vicino al margine.",
-              "ar": "السير إلى اليمين بالقرب من حافة الطريق."
+              "it": "Usare normalmente la corsia libera più a destra.",
+              "ar": "استخدم عادةً الحارة الخالية الأبعد إلى اليمين."
             },
             {
-              "it": "Sulle strade con più corsie, usare la corsia libera più a destra, salvo diversa segnalazione.",
-              "ar": "على الطرق متعددة الحارات، استخدم الحارة الخالية الأبعد إلى اليمين ما لم تدل الإشارات على غير ذلك."
+              "it": "Le corsie di sinistra sono riservate al sorpasso secondo le regole applicabili.",
+              "ar": "تُخصص الحارات اليسرى للتجاوز وفق القواعد المنطبقة."
             },
             {
-              "it": "Nei centri abitati, scegliere la corsia adatta alla direzione al prossimo incrocio.",
-              "ar": "داخل المناطق السكنية، اختر الحارة المناسبة للاتجاه عند التقاطع التالي."
+              "it": "Nei centri abitati, scegliere la corsia per la direzione al prossimo incrocio; cambiare solo per una manovra consentita.",
+              "ar": "داخل المناطق المأهولة، اختر حارة اتجاه التقاطع التالي؛ ولا تغيّر إلا لمناورة مسموح بها."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "In generale, si circola a destra.",
+              "qIt": "In generale si usa la corsia libera più a destra.",
               "a": "VERO",
-              "explainAr": "الدرس يقرر أن السير يكون إلى اليمين كقاعدة عامة."
+              "explainAr": "هذه هي القاعدة العامة للسير على الطرق متعددة الحارات."
             },
             {
-              "qIt": "Sulle strade con più corsie, si usa di regola la corsia libera più a sinistra.",
+              "qIt": "La corsia libera più a sinistra è quella da usare normalmente per la marcia.",
               "a": "FALSO",
-              "explainAr": "القاعدة المذكورة هي استخدام الحارة الخالية الأبعد إلى اليمين."
+              "explainAr": "تُخصص الحارات اليسرى عادةً للتجاوز، مع مراعاة الاستثناءات المقررة."
             },
             {
-              "qIt": "Nei centri abitati, la corsia va scelta in relazione alla direzione al prossimo incrocio.",
+              "qIt": "Nei centri abitati la corsia può dipendere dalla direzione al prossimo incrocio.",
               "a": "VERO",
-              "explainAr": "ينص الدرس على اختيار الحارة المناسبة لاتجاه التقاطع التالي داخل المناطق السكنية."
+              "explainAr": "تسمح القاعدة باختيار الحارة المناسبة في الحالات المحددة."
             }
           ]
         },
@@ -1343,42 +1343,42 @@
           "id": "u5-l2",
           "titleIt": "Prima controlla, poi cambia direzione",
           "titleAr": "تحقق أولًا ثم غيّر اتجاهك",
-          "summaryIt": "Prima di ogni manovra, il conducente verifica che sia sicura e non intralci gli altri, considerando la loro posizione, distanza e direzione. Segnala per tempo e mantiene l’indicatore fino al completamento della manovra; per svoltare a destra si tiene vicino al margine destro.",
-          "summaryAr": "قبل أي مناورة (manovra)، يتحقق السائق من سلامتها ومن أنها لا تعيق الآخرين، مع مراعاة مواضعهم ومسافاتهم واتجاهاتهم. يعلن المناورة مسبقًا بإشارة الاتجاه (indicatore) ويُبقيها حتى اكتمالها؛ وعند الانعطاف يمينًا يقترب من الحافة اليمنى.",
+          "summaryIt": "Prima della manovra verifica che sia sicura, segnala per tempo e mantieni l’indicatore fino al completamento. Per svoltare a sinistra avvicinati all’asse della strada; sul senso unico, al margine sinistro, senza entrare contromano.",
+          "summaryAr": "قبل المناورة (manovra)، تحقق من سلامتها ونبّه مبكرًا، وأبقِ إشارة الاتجاه حتى اكتمالها. عند الانعطاف يسارًا اقترب من محور الطريق؛ وفي الطريق أحادي الاتجاه اقترب من الحافة اليسرى من دون الدخول عكس السير.",
           "keyPoints": [
             {
-              "it": "Valuta la posizione, la distanza e la direzione degli altri.",
-              "ar": "يراعي مواضع الآخرين ومسافاتهم واتجاهاتهم."
+              "it": "Valutare posizione, distanza e direzione degli altri prima di manovrare.",
+              "ar": "راعِ مواضع الآخرين ومسافاتهم واتجاهاتهم قبل المناورة."
             },
             {
-              "it": "Segnala la manovra con sufficiente anticipo.",
-              "ar": "يعلن المناورة بإشارة قبل تنفيذها بوقت كافٍ."
+              "it": "Segnalare con sufficiente anticipo.",
+              "ar": "أعلن المناورة قبل تنفيذها بوقت كافٍ."
             },
             {
-              "it": "Mantiene l’indicatore fino al completamento della manovra.",
-              "ar": "يُبقي إشارة الاتجاه حتى اكتمال المناورة."
+              "it": "Mantenere l’indicatore fino al completamento della manovra.",
+              "ar": "أبقِ إشارة الاتجاه حتى اكتمال المناورة."
             },
             {
-              "it": "Per svoltare a destra, si tiene vicino al margine destro.",
-              "ar": "عند الانعطاف يمينًا، يقترب من الحافة اليمنى."
+              "it": "Per svoltare a sinistra, avvicinarsi all’asse; sul senso unico, al margine sinistro.",
+              "ar": "للانعطاف يسارًا اقترب من المحور؛ وفي الطريق الأحادي اقترب من الحافة اليسرى."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Prima di una manovra, il conducente considera la posizione, la distanza e la direzione degli altri.",
+              "qIt": "Prima di manovrare si controllano posizione, distanza e direzione degli altri.",
               "a": "VERO",
-              "explainAr": "هذه هي العناصر التي يراعيها السائق قبل المناورة."
+              "explainAr": "تعتمد السلامة أيضًا على تقدير حركة مستخدمي الطريق الآخرين."
             },
             {
-              "qIt": "L’indicatore si mantiene soltanto prima di iniziare la manovra.",
+              "qIt": "L’indicatore si spegne prima che la manovra sia completata.",
               "a": "FALSO",
-              "explainAr": "يُبقي السائق إشارة الاتجاه حتى اكتمال المناورة."
+              "explainAr": "يجب إبقاؤها حتى اكتمال المناورة."
             },
             {
-              "qIt": "Per svoltare a destra, il conducente si tiene vicino al margine destro.",
+              "qIt": "Per svoltare a sinistra su strada a senso unico ci si avvicina al margine sinistro.",
               "a": "VERO",
-              "explainAr": "عند الانعطاف يمينًا، يقترب السائق من الحافة اليمنى."
+              "explainAr": "هذا هو التموضع الذي تحدده المادة 154."
             }
           ]
         },
@@ -1386,16 +1386,16 @@
           "id": "u5-l3",
           "titleIt": "Sorpassare solo quando c’è spazio sicuro",
           "titleAr": "لا تتجاوز إلا مع توافر مساحة آمنة",
-          "summaryIt": "Prima di iniziare il sorpasso, verifica che vi siano visibilità e spazio sufficienti e considera le manovre degli altri veicoli. Di regola, sorpassa a sinistra e rientra senza pericolo o intralcio; nel sorpasso delle biciclette mantieni una distanza laterale di almeno 1,5 m ove le condizioni della strada lo consentano.",
-          "summaryAr": "قبل بدء التجاوز (sorpasso)، تحقّق من وضوح الرؤية وتوافر المساحة وراعِ مناورات الآخرين. يكون التجاوز عادةً من اليسار، ثم العودة دون خطر أو إعاقة؛ وعند تجاوز الدراجات الهوائية تُترك مسافة جانبية لا تقل عن 1.5 متر إذا سمحت ظروف الطريق.",
+          "summaryIt": "Prima di sorpassare, verifica visibilità e spazio e considera le manovre altrui; non sorpassare dove vietato o con visibilità insufficiente. Alle intersezioni valgono divieti ed eccezioni specifici; di regola si passa a sinistra e, con le biciclette, si lascia almeno 1,5 m quando le condizioni lo consentono.",
+          "summaryAr": "قبل التجاوز (sorpasso)، تحقّق من الرؤية والمساحة وراعِ مناورات الآخرين؛ لا تتجاوز حيث يُحظر ذلك أو عند قصور الرؤية، مع مراعاة الاستثناءات عند التقاطعات والمعابر. يكون التجاوز عادةً من اليسار؛ وعند تجاوز الدراجات اترك 1.5 متر على الأقل إذا سمحت الظروف.",
           "keyPoints": [
             {
               "it": "Verifica visibilità e spazio prima di iniziare il sorpasso.",
               "ar": "تحقّق من وضوح الرؤية وتوافر المساحة قبل بدء التجاوز."
             },
             {
-              "it": "Considera le manovre dei veicoli che precedono e che seguono.",
-              "ar": "راعِ مناورات المركبات التي أمامك والتي خلفك."
+              "it": "Il sorpasso è vietato con visibilità insufficiente, alle intersezioni salvo eccezioni e davanti a un veicolo fermo per far attraversare i pedoni.",
+              "ar": "يُحظر التجاوز عند قصور الرؤية، وعند التقاطعات إلا في الاستثناءات، وأمام مركبة توقفت لإفساح المجال للمشاة."
             },
             {
               "it": "Di regola, sorpassa a sinistra e rientra senza pericolo o intralcio.",
@@ -1411,17 +1411,17 @@
             {
               "qIt": "Prima di iniziare il sorpasso, occorre verificare visibilità e spazio.",
               "a": "VERO",
-              "explainAr": "يشترط محتوى الدرس التحقق من الرؤية والمساحة قبل بدء التجاوز."
+              "explainAr": "يجب التحقق من الرؤية والمساحة قبل بدء التجاوز."
             },
             {
-              "qIt": "Di regola, il sorpasso si effettua a destra.",
+              "qIt": "È sempre consentito sorpassare in prossimità di un’intersezione o di un passaggio pedonale se la strada sembra libera.",
               "a": "FALSO",
-              "explainAr": "القاعدة الواردة في الدرس أن التجاوز يكون عادةً من اليسار."
+              "explainAr": "توجد حالات منع واستثناءات قانونية؛ لا تكفي خلو الطريق الظاهر وحده."
             },
             {
-              "qIt": "Nel sorpasso delle biciclette, la distanza laterale di almeno 1,5 m va mantenuta ove le condizioni della strada lo consentano.",
+              "qIt": "Nel sorpasso delle biciclette, si mantiene almeno 1,5 m ove le condizioni della strada lo consentano.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس مسافة جانبية لا تقل عن 1.5 متر عند تجاوز الدراجات، بشرط أن تسمح ظروف الطريق."
+              "explainAr": "تُترك مسافة جانبية لا تقل عن 1.5 متر عندما تسمح ظروف الطريق."
             }
           ]
         },
@@ -1429,8 +1429,8 @@
           "id": "u5-l4",
           "titleIt": "Lascia spazio per fermarti",
           "titleAr": "اترك مسافة تتيح لك التوقف",
-          "summaryIt": "La distanza di sicurezza dal veicolo che precede deve consentire l’arresto tempestivo ed evitare collisioni. Va valutata in relazione alle condizioni del traffico e della strada.",
-          "summaryAr": "يجب أن تتيح مسافة الأمان (distanza di sicurezza) عن المركبة التي أمامك التوقف في الوقت المناسب وتجنب الاصطدام. وتُقدَّر وفق ظروف حركة المرور والطريق.",
+          "summaryIt": "La distanza di sicurezza deve consentire l’arresto tempestivo ed evitare collisioni. Dipende dalla velocità, dai tempi di reazione e frenata, dall’aderenza e dalle condizioni del veicolo, della strada e del traffico.",
+          "summaryAr": "يجب أن تتيح مسافة الأمان (distanza di sicurezza) التوقف في الوقت المناسب وتجنب الاصطدام. وتتأثر بالسرعة وزمن الاستجابة والفرملة والتماسك وظروف المركبة والطريق وحركة المرور.",
           "keyPoints": [
             {
               "it": "La distanza di sicurezza deve consentire l’arresto tempestivo.",
@@ -1441,8 +1441,8 @@
               "ar": "ينبغي أن تسمح المسافة بتجنب الاصطدام."
             },
             {
-              "it": "La distanza si valuta in relazione alle condizioni del traffico e della strada.",
-              "ar": "تُقدَّر المسافة بحسب ظروف حركة المرور والطريق."
+              "it": "Valutala considerando velocità, reazione, frenata, aderenza e condizioni della strada e del traffico.",
+              "ar": "قدّرها مع مراعاة السرعة والاستجابة والفرملة والتماسك وظروف الطريق والمرور."
             },
             {
               "it": "La distanza non ha un unico valore valido in ogni situazione.",
@@ -1454,17 +1454,17 @@
             {
               "qIt": "La distanza dal veicolo che precede deve consentire l’arresto tempestivo.",
               "a": "VERO",
-              "explainAr": "ينص الدرس على أن المسافة يجب أن تتيح التوقف في الوقت المناسب."
+              "explainAr": "يجب أن تتيح المسافة التوقف في الوقت المناسب."
             },
             {
-              "qIt": "La distanza di sicurezza è sempre uguale, qualunque siano le condizioni della strada e del traffico.",
+              "qIt": "La distanza di sicurezza è sempre uguale, qualunque siano velocità e aderenza.",
               "a": "FALSO",
-              "explainAr": "تُقدَّر المسافة بحسب ظروف الطريق وحركة المرور، ولا توجد قيمة واحدة لكل الحالات."
+              "explainAr": "تتأثر المسافة بالسرعة والتماسك وزمن الاستجابة والفرملة والظروف."
             },
             {
               "qIt": "La distanza dal veicolo che precede deve aiutare a evitare collisioni.",
               "a": "VERO",
-              "explainAr": "تُبقي المسافة المناسبة مجالًا لتجنب الاصطدام."
+              "explainAr": "تتيح المسافة المناسبة مجالًا لتجنب الاصطدام."
             }
           ]
         }
@@ -1617,8 +1617,8 @@
           "id": "u6-l1",
           "titleIt": "Velocità sicura e limiti: due regole da distinguere",
           "titleAr": "السرعة الآمنة والحدود: قاعدتان مختلفتان",
-          "summaryIt": "La velocità va adeguata al veicolo, alla strada, al traffico e alla visibilità, mantenendo il controllo e potendo arrestarsi entro il campo visibile. I limiti ordinari dell’art. 142 sono massimi, non velocità-obiettivo.",
-          "summaryAr": "تُكيَّف السرعة مع المركبة والطريق والمرور والرؤية، مع الحفاظ على السيطرة والقدرة على التوقف ضمن مجال الرؤية (campo visibile). والحدود العامة للسرعة (limiti) هي حدود قصوى وليست سرعة مستهدفة.",
+          "summaryIt": "Per le autovetture: 50 km/h nei centri abitati, 90 sulle strade extraurbane secondarie e locali, 110 sulle principali e 130 in autostrada; con precipitazioni, i massimi sono 110 in autostrada e 90 sulle principali. Sono limiti massimi: adegua comunque la velocità alle condizioni e fermati nel campo visibile.",
+          "summaryAr": "لعربات الركوب: 50 كم/س داخل المناطق المأهولة، و90 على الطرق الثانوية والمحلية خارجها، و110 على الطرق الرئيسية خارجها، و130 على الطريق السريع؛ ومع الهطول ينخفض الحد إلى 110 على الطريق السريع و90 على الطرق الرئيسية. هذه حدود قصوى (limiti massimi)، ويجب مع ذلك تكييف السرعة مع الظروف والقدرة على التوقف ضمن مجال الرؤية.",
           "keyPoints": [
             {
               "it": "Adeguare la velocità al veicolo, alla strada, al traffico e alla visibilità.",
@@ -1633,26 +1633,26 @@
               "ar": "الحدود العامة الواردة في المادة 142 قصوى وليست سرعة مستهدفة."
             },
             {
-              "it": "I limiti massimi ordinari variano secondo il tipo di strada.",
-              "ar": "تختلف الحدود القصوى العامة بحسب نوع الطريق."
+              "it": "Per le autovetture: 50/90/110/130 km/h secondo la strada; con pioggia: 110 in autostrada e 90 sulle extraurbane principali.",
+              "ar": "لعربات الركوب: 50/90/110/130 كم/س بحسب الطريق؛ ومع المطر: 110 على السريع و90 على الطرق الرئيسية خارج المدن."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La velocità va adeguata anche alla visibilità.",
+              "qIt": "Per un’autovettura, il limite ordinario in autostrada è 130 km/h, salvo limiti diversi.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس أن السرعة تُكيَّف مع الرؤية."
+              "explainAr": "هذا هو الحد العام لعربة الركوب، مع بقاء الإشارات والحدود الخاصة واجبة."
             },
             {
-              "qIt": "Il conducente deve potersi arrestare entro il campo visibile.",
-              "a": "VERO",
-              "explainAr": "يشترط الدرس الحفاظ على القدرة على التوقف ضمن مجال الرؤية."
-            },
-            {
-              "qIt": "I limiti ordinari dell’art. 142 sono velocità-obiettivo.",
+              "qIt": "Con precipitazioni, il limite ordinario in autostrada resta 130 km/h.",
               "a": "FALSO",
-              "explainAr": "الدرس يوضح أنها حدود قصوى وليست سرعة مستهدفة."
+              "explainAr": "عند الهطول، الحد الأقصى على الطريق السريع هو 110 كم/س."
+            },
+            {
+              "qIt": "I limiti sono massimi e la velocità va comunque adeguata alle condizioni.",
+              "a": "VERO",
+              "explainAr": "عدم تجاوز الحد لا يكفي إذا كانت الظروف تقتضي سرعة أقل."
             }
           ]
         },
@@ -1703,42 +1703,42 @@
           "id": "u6-l3",
           "titleIt": "Arresto, fermata e sosta: significati e posizione",
           "titleAr": "arresto وfermata وsosta: المعنى وموضع المركبة",
-          "summaryIt": "L’arresto è un’interruzione dovuta alle esigenze della circolazione. La fermata è breve, mentre la sosta è protratta; fuori dai centri abitati si rispettano le regole di collocazione indicate per il veicolo.",
-          "summaryAr": "الـ(arresto) انقطاع تفرضه متطلبات حركة المرور. أما (fermata) فتوقف قصير، و(sosta) توقف ممتد؛ وخارج المناطق المأهولة تُراعى قواعد موضع المركبة المذكورة في الدرس.",
+          "summaryIt": "L’arresto dipende dalle esigenze della circolazione; fermata e sosta si distinguono per durata e presenza del conducente. Fuori dai centri abitati fermata e sosta sono fuori carreggiata; se impossibile, vicino al margine destro, parallele e nel senso di marcia.",
+          "summaryAr": "ينتج التوقف الاضطراري (arresto) عن متطلبات السير؛ وتختلف الوقفة القصيرة (fermata) والوقوف (sosta) في المدة ووجود السائق. خارج المناطق المأهولة يكونان خارج جسم الطريق؛ وإن تعذر، قرب الحافة اليمنى وبموازاة الطريق وفي اتجاه السير.",
           "keyPoints": [
             {
               "it": "Arresto: interruzione dovuta alle esigenze della circolazione.",
-              "ar": "arresto: انقطاع السير بسبب متطلبات حركة المرور."
+              "ar": "arresto: انقطاع بسبب متطلبات حركة المرور."
             },
             {
               "it": "Fermata: breve, con conducente presente e pronto a ripartire.",
-              "ar": "fermata: توقف قصير والسائق حاضر ومستعد للانطلاق."
+              "ar": "fermata: وقفة قصيرة والسائق حاضر ومستعد للانطلاق."
             },
             {
               "it": "Sosta: sospensione protratta, con possibilità di allontanamento.",
-              "ar": "sosta: توقف ممتد مع إمكانية ابتعاد السائق."
+              "ar": "sosta: وقوف أطول مع إمكانية ابتعاد السائق."
             },
             {
-              "it": "Fuori dai centri: fuori carreggiata, non sulle banchine salvo segnalazione.",
-              "ar": "خارج المناطق المأهولة: يكون الموضع خارج جسم الطريق، لا على الأكتاف إلا عند وجود إشارة."
+              "it": "Fuori dai centri: fuori carreggiata; se impossibile, vicino a destra, parallela e nel senso di marcia.",
+              "ar": "خارج المناطق المأهولة: خارج جسم الطريق؛ وإن تعذر، قرب اليمين وبموازاة الطريق وفي اتجاه السير."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "L’arresto è un’interruzione dovuta alle esigenze della circolazione.",
+              "qIt": "L’arresto è dovuto alle esigenze della circolazione.",
               "a": "VERO",
-              "explainAr": "يعرّف الدرس arresto بأنه انقطاع بسبب متطلبات حركة المرور."
+              "explainAr": "هو انقطاع تفرضه متطلبات السير."
             },
             {
-              "qIt": "Nella fermata il conducente può allontanarsi dal veicolo.",
+              "qIt": "Nella fermata il conducente può allontanarsi liberamente dal veicolo.",
               "a": "FALSO",
-              "explainAr": "في fermata يكون السائق حاضرًا ومستعدًا للانطلاق؛ إمكانية الابتعاد مرتبطة بـsosta."
+              "explainAr": "في fermata يبقى السائق حاضرًا ومستعدًا للانطلاق."
             },
             {
-              "qIt": "Fuori dai centri abitati, la sosta si colloca sulla banchina anche senza segnalazione.",
-              "a": "FALSO",
-              "explainAr": "يذكر الدرس أن الموضع يكون خارج جسم الطريق، وليس على الأكتاف إلا بإشارة."
+              "qIt": "Se fuori dai centri non è possibile fermarsi fuori carreggiata, si resta il più possibile a destra e paralleli.",
+              "a": "VERO",
+              "explainAr": "يكون الموضع في اتجاه السير وبالقرب من الحافة اليمنى."
             }
           ]
         },
@@ -1746,42 +1746,42 @@
           "id": "u6-l4",
           "titleIt": "Guasto e veicolo fermo: rendersi visibili",
           "titleAr": "العطل والمركبة المتوقفة: خليك واضح للآخرين",
-          "summaryIt": "In caso di ingombro della carreggiata, il conducente deve liberare il transito per quanto possibile senza creare pericoli. Il triangolo di presegnalazione è previsto nelle condizioni dell’art. 162 e, in autostrada, nei casi specifici dell’art. 176.",
-          "summaryAr": "عند وجود عائق في جزء سير المركبات (carreggiata)، أخلِ الطريق قدر الإمكان من دون التسبب بخطر. يُستخدم مثلث التحذير المسبق (triangolo di presegnalazione) في الحالات التي تحددها المادة 162، وفي حالات محددة على الطريق السريع وفق المادة 176.",
+          "summaryIt": "Il triangolo si usa solo nelle condizioni previste dagli artt. 162 e 176. Quando scendi e cammini sulla strada per la segnalazione, indossa un indumento ad alta visibilità; l’obbligo vale anche in corsia d’emergenza e nelle aree di sosta.",
+          "summaryAr": "يُستخدم مثلث التحذير في الحالات المحددة بالمادتين 162 و176 فقط. عند النزول والسير على الطريق لوضع التحذير، ارتدِ لباسًا عالي الوضوح (indumento ad alta visibilità)؛ ويسري ذلك أيضًا على حارة الطوارئ ومناطق التوقف.",
           "keyPoints": [
             {
-              "it": "Ridurre l’ingombro della carreggiata senza creare pericoli.",
-              "ar": "تقليل إعاقة جزء سير المركبات دون التسبب بخطر."
+              "it": "Il triangolo è previsto solo nelle condizioni stabilite dagli artt. 162 e 176.",
+              "ar": "يُستخدم المثلث فقط في الحالات المحددة بالمادتين 162 و176."
             },
             {
-              "it": "L’art. 162 prevede la presegnalazione nelle condizioni specifiche stabilite.",
-              "ar": "تنص المادة 162 على التحذير المسبق في شروط محددة."
+              "it": "L’art. 162 esclude velocipedi, ciclomotori a due ruote e motocicli dall’obbligo indicato.",
+              "ar": "تستثني المادة 162 الدراجات الهوائية والدراجات النارية الصغيرة ذات العجلتين والدراجات النارية من هذا الواجب."
             },
             {
-              "it": "L’art. 162 esclude velocipedi, ciclomotori a due ruote e motocicli.",
-              "ar": "تستثني المادة 162 الدراجات الهوائية والدراجات النارية ذات العجلتين والدراجات النارية."
+              "it": "Indossare un indumento retroriflettente quando si è a piedi sulla strada per la segnalazione.",
+              "ar": "ارتدِ لباسًا عاكسًا عالي الوضوح عند السير على الطريق لوضع التحذير."
             },
             {
-              "it": "L’art. 176 prevede il triangolo nei casi autostradali specifici.",
-              "ar": "تنص المادة 176 على استخدام المثلث في حالات محددة على الطريق السريع."
+              "it": "La protezione ad alta visibilità vale anche su corsie d’emergenza e aree di sosta.",
+              "ar": "يلزم اللباس عالي الوضوح أيضًا في حارات الطوارئ ومناطق التوقف."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "In caso di ingombro, si deve liberare il transito per quanto possibile senza creare pericoli.",
-              "a": "VERO",
-              "explainAr": "يذكر الدرس وجوب إخلاء الطريق قدر الإمكان مع تجنب التسبب بالخطر."
-            },
-            {
-              "qIt": "L’art. 162 include i velocipedi tra i veicoli soggetti alla presegnalazione indicata nel lesson.",
+              "qIt": "Il triangolo è obbligatorio per ogni veicolo fermo, senza eccezioni.",
               "a": "FALSO",
-              "explainAr": "يوضح الدرس أن المادة 162 تستثني الدراجات الهوائية."
+              "explainAr": "تحدد المادتان 162 و176 شروطًا واستثناءات."
             },
             {
-              "qIt": "In autostrada, l’art. 176 prevede il triangolo in casi specifici.",
+              "qIt": "L’art. 162 esclude velocipedi, ciclomotori a due ruote e motocicli dall’obbligo indicato.",
               "a": "VERO",
-              "explainAr": "يشير الدرس إلى حالات محددة للمثلث على الطريق السريع وفق المادة 176."
+              "explainAr": "الاستثناء منصوص عليه في المادة."
+            },
+            {
+              "qIt": "Il conducente a piedi sulla corsia d’emergenza deve indossare alta visibilità nei casi previsti.",
+              "a": "VERO",
+              "explainAr": "يشمل الواجب حارات الطوارئ ومناطق التوقف أيضًا."
             }
           ]
         },
@@ -1789,42 +1789,42 @@
           "id": "u6-l5",
           "titleIt": "Autostrada: ingresso, corsie e uscita",
           "titleAr": "الطريق السريع: الدخول والحارات والخروج",
-          "summaryIt": "Per entrare in autostrada si usa la corsia di accelerazione dando precedenza ai veicoli in marcia. Per uscire si raggiunge per tempo la corsia destra e si imbocca la corsia di decelerazione dall’inizio; l’art. 176 disciplina la corsia d’emergenza.",
-          "summaryAr": "للدخول إلى الطريق السريع تُستخدم حارة التسارع مع إعطاء الأولوية للمركبات السائرة. وللخروج يُنتقل مبكرًا إلى الحارة اليمنى ثم تُستخدم حارة التباطؤ من بدايتها؛ وتنظم المادة 176 حارة الطوارئ. (corsia di accelerazione; corsia di decelerazione)",
+          "summaryIt": "Le regole degli artt. 175–176 valgono anche per le strade extraurbane principali, non solo per le autostrade. Ingresso e uscita si fanno con le corsie dedicate; pedoni, animali e varie categorie di veicoli sono esclusi o soggetti a limiti.",
+          "summaryAr": "تسري المادتان 175 و176 أيضًا على الطرق الرئيسية خارج المدن (strade extraurbane principali)، وليس على الطرق السريعة فقط. يتم الدخول والخروج عبر الحارات المخصصة؛ ويُمنع المشاة والحيوانات وفئات من المركبات أو تُفرض عليها قيود.",
           "keyPoints": [
             {
-              "it": "Ingresso: usare la corsia di accelerazione e dare precedenza ai veicoli in marcia.",
-              "ar": "الدخول: استخدام حارة التسارع وإعطاء الأولوية للمركبات السائرة."
+              "it": "Ingresso: corsia di accelerazione e precedenza; uscita: corsia di decelerazione dall’inizio.",
+              "ar": "الدخول عبر حارة التسارع مع إعطاء الأولوية؛ والخروج عبر حارة التباطؤ من بدايتها."
             },
             {
-              "it": "Uscita: portarsi per tempo sulla corsia destra e imboccare la corsia di decelerazione dall’inizio.",
-              "ar": "الخروج: الانتقال مبكرًا إلى الحارة اليمنى والدخول إلى حارة التباطؤ من بدايتها."
+              "it": "Le regole valgono anche sulle strade extraurbane principali; art. 175 limita accesso e utenti ammessi.",
+              "ar": "تسري القواعد أيضًا على الطرق الرئيسية خارج المدن؛ وتقيّد المادة 175 الدخول وفئات المستخدمين."
             },
             {
-              "it": "Segnalare tempestivamente il cambio di corsia.",
-              "ar": "يجب الإشارة مبكرًا عند تغيير الحارة."
+              "it": "Segnalare i cambi di corsia; inversione e retromarcia sono vietate sulla carreggiata.",
+              "ar": "أشر إلى تغيير الحارة؛ ويُحظر الدوران والرجوع على جسم الطريق."
             },
             {
-              "it": "La retromarcia è vietata, salvo le manovre necessarie nelle aree di servizio o parcheggio.",
-              "ar": "الرجوع للخلف محظور، عدا المناورات الضرورية في مناطق الخدمة أو الانتظار."
+              "it": "La corsia d’emergenza non è per marcia o sorpasso; sosta solo nei casi consentiti.",
+              "ar": "حارة الطوارئ ليست للسير أو التجاوز؛ ولا يُتوقف فيها إلا في الحالات المسموح بها."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Per entrare in autostrada si usa la corsia di accelerazione e si dà precedenza ai veicoli in marcia.",
+              "qIt": "Per entrare si usa la corsia di accelerazione e si dà precedenza ai veicoli già in marcia.",
               "a": "VERO",
-              "explainAr": "الدخول يكون عبر حارة التسارع مع إعطاء الأولوية للمركبات السائرة."
+              "explainAr": "تُستخدم حارة التسارع للاندماج من دون انتزاع الأولوية."
             },
             {
-              "qIt": "Per uscire dall’autostrada si imbocca la corsia di decelerazione soltanto alla fine.",
-              "a": "FALSO",
-              "explainAr": "تُستخدم حارة التباطؤ من بدايتها."
+              "qIt": "Le regole degli artt. 175 e 176 riguardano anche le strade extraurbane principali.",
+              "a": "VERO",
+              "explainAr": "تسري المادتان على نوعي الطريق."
             },
             {
-              "qIt": "In autostrada è sempre consentita la retromarcia nella corsia di emergenza.",
+              "qIt": "Si può usare la corsia d’emergenza per sorpassare il traffico lento.",
               "a": "FALSO",
-              "explainAr": "الرجوع للخلف محظور؛ ولا يرد في الدرس استثناء لحارة الطوارئ."
+              "explainAr": "حارة الطوارئ ليست حارة عادية للسير أو التجاوز."
             }
           ]
         }
@@ -2001,42 +2001,42 @@
           "id": "u7-l1",
           "titleIt": "Controlli del veicolo: efficienza e sicurezza",
           "titleAr": "فحص المركبة: الكفاءة والسلامة",
-          "summaryIt": "I veicoli a motore e i loro rimorchi devono essere mantenuti in condizioni di efficienza per garantire la sicurezza della circolazione. La velocità va regolata in base al veicolo, al carico, alla strada e al traffico.",
-          "summaryAr": "يجب الحفاظ على المركبات ذات المحرك ومقطوراتها بحالة كفاءة لضمان سلامة السير (efficienza). وتُضبط السرعة بما يلائم المركبة وحمولتها والطريق وحركة المرور (velocità adeguata).",
+          "summaryIt": "Veicoli a motore e rimorchi devono essere mantenuti efficienti per la sicurezza. Per sicurezza, verifica pneumatici, freni, sterzo, sospensioni, luci, indicatori, catadiottri, specchi, parabrezza, tergicristalli e scarico; adegua la velocità al veicolo, al carico, alla strada e al traffico.",
+          "summaryAr": "يجب الحفاظ على كفاءة (efficienza) المركبات ذات المحرك ومقطوراتها من أجل السلامة. وللسلامة، افحص الإطارات والفرامل والتوجيه والتعليق والأضواء والمؤشرات والعاكسات والمرايا والزجاج الأمامي والماسحات والعادم؛ واضبط السرعة وفق المركبة والحمولة والطريق والمرور.",
           "keyPoints": [
             {
-              "it": "Veicoli a motore e rimorchi devono essere mantenuti efficienti.",
-              "ar": "يجب الحفاظ على كفاءة المركبات ذات المحرك ومقطوراتها (veicoli a motore e rimorchi)."
+              "it": "Veicoli a motore e rimorchi devono restare efficienti.",
+              "ar": "يجب إبقاء المركبات ذات المحرك ومقطوراتها بحالة كفاءة."
             },
             {
-              "it": "Pneumatici e dispositivi di frenatura sono aspetti dei controlli del veicolo.",
-              "ar": "تشمل الجوانب المذكورة في فحص المركبة الإطارات وأجهزة الفرملة (pneumatici e dispositivi di frenatura)."
+              "it": "Controllare pneumatici, freni, sterzo e sospensioni.",
+              "ar": "افحص الإطارات والفرامل والتوجيه والتعليق."
             },
             {
-              "it": "La segnalazione visiva e l'illuminazione fanno parte dei controlli considerati.",
-              "ar": "تشمل الجوانب المذكورة الإشارات المرئية وأجهزة الإضاءة (segnalazione visiva e illuminazione)."
+              "it": "Controllare luci, indicatori, catadiottri, specchi, parabrezza, tergicristalli e scarico.",
+              "ar": "افحص الأضواء والمؤشرات والعاكسات والمرايا والزجاج والماسحات والعادم."
             },
             {
-              "it": "La velocità si regola considerando veicolo, carico, strada e traffico.",
-              "ar": "تُضبط السرعة مع مراعاة المركبة والحمولة والطريق وحركة المرور (veicolo, carico, strada e traffico)."
+              "it": "Adeguare la velocità a veicolo, carico, strada e traffico.",
+              "ar": "اضبط السرعة وفق المركبة والحمولة والطريق وحركة المرور."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Veicoli a motore e rimorchi devono essere mantenuti in condizioni di efficienza per la sicurezza.",
+              "qIt": "Veicoli a motore e rimorchi devono essere mantenuti efficienti.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس ضرورة الحفاظ على كفاءة المركبات ومقطوراتها من أجل السلامة."
+              "explainAr": "تسهم الكفاءة في سلامة حركة المرور."
             },
             {
-              "qIt": "Per regolare la velocità si considera soltanto il traffico.",
+              "qIt": "Per adeguare la velocità basta considerare il traffico.",
               "a": "FALSO",
-              "explainAr": "يذكر الدرس مراعاة المركبة والحمولة والطريق والمرور، لا المرور وحده."
+              "explainAr": "يجب مراعاة المركبة والحمولة والطريق أيضًا."
             },
             {
-              "qIt": "Pneumatici e frenatura sono tra gli aspetti indicati per i controlli del veicolo.",
+              "qIt": "Sterzo, sospensioni, indicatori e tergicristalli rientrano nei controlli del veicolo.",
               "a": "VERO",
-              "explainAr": "ترد الإطارات والفرملة ضمن نقاط الدرس المتعلقة بفحص المركبة."
+              "explainAr": "هذه عناصر يجب معرفتها والحفاظ على كفاءتها."
             }
           ]
         },
@@ -2044,42 +2044,42 @@
           "id": "u7-l2",
           "titleIt": "Cinture e sistemi di ritenuta: proteggere gli occupanti",
           "titleAr": "الأحزمة وأنظمة التثبيت: حماية الركاب",
-          "summaryIt": "L’art. 172 disciplina l’uso delle cinture per categorie e condizioni specifiche. Per i bambini di statura inferiore a 1,50 m è necessario un sistema di ritenuta omologato e adeguato al peso; va considerato l’airbag frontale con un seggiolino rivolto all’indietro.",
-          "summaryAr": "تنظّم المادة 172 استخدام أحزمة الأمان (cinture di sicurezza) بحسب فئات وشروط محددة. ويحتاج الطفل الذي يقل طوله عن 1.50 متر إلى نظام تثبيت معتمد يناسب وزنه، مع الانتباه إلى الوسادة الهوائية الأمامية عند استخدام مقعد موجّه إلى الخلف.",
+          "summaryIt": "L’art. 172 prevede cinture per le categorie indicate e un sistema di ritenuta omologato, adeguato al peso, per i bambini sotto 1,50 m. Un seggiolino rivolto all’indietro non va davanti a un airbag attivo; regola correttamente anche il poggiatesta.",
+          "summaryAr": "توجب المادة 172 الأحزمة للفئات المحددة، ونظام تثبيت أطفال معتمدًا يناسب الوزن لمن هم دون 1.50 متر. لا يوضع مقعد الطفل المواجه للخلف أمام وسادة هوائية فعالة؛ واضبط مسند الرأس (poggiatesta) جيدًا.",
           "keyPoints": [
             {
               "it": "L’obbligo di cintura riguarda le categorie e le condizioni previste.",
-              "ar": "يشمل واجب استخدام الحزام الفئات والشروط المحددة."
+              "ar": "يشمل واجب الحزام الفئات والشروط المحددة."
             },
             {
-              "it": "Per i bambini sotto 1,50 m occorre un sistema omologato adeguato al peso.",
-              "ar": "للأطفال دون 1.50 متر يلزم نظام تثبيت معتمد ومناسب للوزن."
+              "it": "Sotto 1,50 m serve un sistema omologato adeguato al peso.",
+              "ar": "لمن يقل طولهم عن 1.50 متر يلزم نظام معتمد يناسب الوزن."
             },
             {
-              "it": "Il conducente verifica l’efficienza dei dispositivi.",
-              "ar": "يتحقق السائق من كفاءة أجهزة التثبيت."
+              "it": "Seggiolino rivolto all’indietro: airbag frontale disattivato o posto diverso.",
+              "ar": "مقعد الطفل المواجه للخلف: عطّل الوسادة الأمامية أو اختر مقعدًا آخر."
             },
             {
-              "it": "Con un seggiolino rivolto all’indietro occorre prestare attenzione all’airbag frontale.",
-              "ar": "عند استخدام مقعد موجّه إلى الخلف، يجب الانتباه إلى الوسادة الهوائية الأمامية."
+              "it": "Regolare il poggiatesta per sostenere correttamente la testa.",
+              "ar": "اضبط مسند الرأس لدعم الرأس على نحو صحيح."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "L’articolo 172 disciplina l’uso delle cinture per categorie e condizioni specifiche.",
+              "qIt": "Per un bambino sotto 1,50 m serve un sistema omologato adeguato al peso.",
               "a": "VERO",
-              "explainAr": "هذا ما يقرره ملخص الدرس عن المادة 172."
+              "explainAr": "هذا هو الشرط العام في المادة 172 مع الاستثناءات المحددة."
             },
             {
-              "qIt": "Per un bambino sotto 1,50 m il sistema di ritenuta non deve essere adeguato al peso.",
+              "qIt": "Un seggiolino rivolto all’indietro può stare davanti a un airbag frontale attivo.",
               "a": "FALSO",
-              "explainAr": "ينص الدرس على أن نظام التثبيت يجب أن يكون مناسبًا لوزن الطفل."
+              "explainAr": "يجب تعطيل الوسادة لذلك المقعد أو اختيار مقعد آخر."
             },
             {
-              "qIt": "Il conducente verifica l’efficienza dei dispositivi.",
+              "qIt": "Il poggiatesta va regolato correttamente per sostenere la testa.",
               "a": "VERO",
-              "explainAr": "تذكر نقطة الدرس أن السائق يتحقق من كفاءة الأجهزة."
+              "explainAr": "هذا إجراء لحماية السائق والركاب."
             }
           ]
         },
@@ -2087,42 +2087,42 @@
           "id": "u7-l3",
           "titleIt": "Luci del veicolo: scegliere e usare quelle corrette",
           "titleAr": "أضواء المركبة: اختيار الإضاءة المناسبة واستخدامها",
-          "summaryIt": "L’uso delle luci prescritte dipende dall’orario e dalla visibilità. Gli abbaglianti si usano nei casi consentiti e si sostituiscono con gli anabbaglianti quando possono abbagliare altri utenti.",
-          "summaryAr": "يتحدد استخدام الأضواء المقررة (dispositivi di illuminazione) بحسب الوقت والرؤية. ويُستخدم الضوء العالي (proiettori di profondità) في الحالات المسموح بها، ويُستبدل بالضوء المنخفض (proiettori anabbaglianti) عندما قد يُبهر مستخدمي الطريق الآخرين.",
+          "summaryIt": "Le luci prescritte si usano di giorno fuori dai centri abitati e, per ciclomotori e motocicli, anche nei centri abitati; di notte, in galleria o con scarsa visibilità si usano quelle richieste. Gli abbaglianti si abbassano per non abbagliare e il retronebbia si usa nei casi previsti.",
+          "summaryAr": "تُستخدم الأضواء المقررة نهارًا خارج المناطق المأهولة، وكذلك للدراجات النارية الصغيرة والنارية داخلها؛ وتُستخدم الأضواء المطلوبة ليلًا وفي الأنفاق وعند ضعف الرؤية. يُخفّض الضوء العالي لتجنب الإبهار، ويُستخدم ضوء الضباب الخلفي (retronebbia) في الحالات المحددة.",
           "keyPoints": [
             {
-              "it": "Al buio o con scarsa visibilità si usano le luci prescritte e gli anabbaglianti.",
-              "ar": "في الظلام أو عند ضعف الرؤية تُستخدم الأضواء المقررة والضوء المنخفض."
+              "it": "Di giorno, luci prescritte fuori dai centri abitati; ciclomotori e motocicli le usano anche nei centri abitati.",
+              "ar": "نهارًا، تُستخدم الأضواء المقررة خارج المناطق المأهولة؛ وتستخدمها الدراجات الصغيرة والنارية داخلها أيضًا."
             },
             {
-              "it": "Gli abbaglianti si usano fuori dai centri abitati con illuminazione insufficiente.",
-              "ar": "يُستخدم الضوء العالي خارج المناطق المأهولة عندما تكون الإضاءة غير كافية."
+              "it": "Di notte, in galleria o con scarsa visibilità si usano i dispositivi di illuminazione richiesti.",
+              "ar": "ليلًا وفي الأنفاق وعند ضعف الرؤية، تُستخدم أجهزة الإضاءة المطلوبة."
             },
             {
-              "it": "Si passa agli anabbaglianti quando si incrocia o si segue da vicino un veicolo.",
-              "ar": "يُحوَّل إلى الضوء المنخفض عند مقابلة مركبة أو السير خلفها عن قرب."
+              "it": "Gli abbaglianti si usano solo quando consentito e si abbassano per non abbagliare chi si incrocia o si segue.",
+              "ar": "يُستخدم الضوء العالي حيث يسمح القانون، ويُخفض عند مقابلة مركبة أو السير خلفها لتجنب الإبهار."
             },
             {
-              "it": "Il lampeggio breve può segnalare l’intenzione di sorpassare; la luce posteriore per nebbia si usa nei casi previsti, se presente.",
-              "ar": "يمكن استخدام وميض قصير للتنبيه إلى نية التجاوز؛ ويُستخدم ضوء الضباب الخلفي في الحالات المحددة إذا كان موجودًا."
+              "it": "Il retronebbia, se presente, è obbligatorio con nebbia sotto 50 m di visibilità, pioggia intensa o neve fitta.",
+              "ar": "ضوء الضباب الخلفي، إن وُجد، واجب عند ضباب يقلل الرؤية عن 50 مترًا أو مطر شديد أو ثلج كثيف."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "L’uso delle luci prescritte dipende dall’orario e dalla visibilità.",
+              "qIt": "Fuori dai centri abitati, durante il giorno, si usano le luci prescritte.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس أن الأضواء المقررة تتحدد بحسب الوقت ومدى الرؤية."
+              "explainAr": "تفرض المادة 152 استعمال الأضواء المقررة نهارًا خارج المناطق المأهولة."
             },
             {
-              "qIt": "Gli abbaglianti si usano fuori dai centri abitati anche quando l’illuminazione è sufficiente.",
+              "qIt": "Gli abbaglianti possono restare accesi quando abbagliano un veicolo che si incrocia.",
               "a": "FALSO",
-              "explainAr": "يذكر الدرس استخدامها خارج المناطق المأهولة عند قصور الإضاءة، لا عند كفايتها."
+              "explainAr": "يجب التحويل إلى الضوء المنخفض عند احتمال إبهار مستعملي الطريق الآخرين."
             },
             {
-              "qIt": "Quando si segue da vicino un veicolo, si usano gli anabbaglianti.",
+              "qIt": "Il retronebbia è obbligatorio nei casi previsti, tra cui nebbia con visibilità inferiore a 50 m.",
               "a": "VERO",
-              "explainAr": "ينص الدرس على استخدام الضوء المنخفض عند متابعة مركبة عن قرب."
+              "explainAr": "من الحالات previste وجود ضباب يقلل الرؤية عن 50 مترًا؛ ويشمل النص أيضًا المطر الشديد والثلج الكثيف."
             }
           ]
         },
@@ -2130,42 +2130,42 @@
           "id": "u7-l4",
           "titleIt": "Clacson, luci di emergenza e spie del cruscotto",
           "titleAr": "البوق وأضواء التحذير ومؤشرات لوحة القيادة",
-          "summaryIt": "Il dispositivo di segnalazione acustica va usato con moderazione e per la sicurezza; nei centri abitati è consentito solo in caso di pericolo effettivo e immediato. Le luci di emergenza si usano nei casi previsti dall’articolo 153; per interpretare le spie si consulta il manuale del veicolo.",
-          "summaryAr": "يُستخدم جهاز التنبيه الصوتي (dispositivo di segnalazione acustica) باعتدال ولأمان الطريق، ولا يُستعمل داخل المناطق المأهولة إلا عند وجود خطر فعلي وفوري. تُستخدم أضواء الطوارئ (luci di emergenza) في الحالات المحددة، ويُراجع دليل المركبة لفهم مؤشرات لوحة القيادة (spie del cruscotto).",
+          "summaryIt": "Il clacson si usa solo per la sicurezza, con la massima moderazione e con il segnale più breve possibile; nei centri abitati è ammesso solo per pericolo effettivo e immediato. Le luci di emergenza si usano nei casi previsti e le spie si interpretano consultando il manuale del veicolo.",
+          "summaryAr": "يُستخدم البوق (clacson) لأمان الطريق فقط، بأقصى اعتدال وبأقصر تنبيه ممكن؛ وداخل المناطق المأهولة لا يُسمح به إلا عند خطر فعلي وفوري. تُستخدم أضواء التحذير في الحالات المقررة، وتُفهم مؤشرات اللوحة بالرجوع إلى دليل المركبة.",
           "keyPoints": [
             {
-              "it": "Il clacson va usato con moderazione e per la sicurezza stradale.",
-              "ar": "يُستخدم البوق باعتدال ولأمان الطريق."
+              "it": "Usare il clacson solo per la sicurezza, con moderazione e per il tempo più breve possibile.",
+              "ar": "استخدم البوق للأمان فقط، باعتدال ولأقصر مدة ممكنة."
             },
             {
-              "it": "Nei centri abitati, il clacson è ammesso solo in caso di pericolo effettivo e immediato.",
-              "ar": "داخل المناطق المأهولة، لا يُسمح بالبوق إلا عند خطر فعلي وفوري."
+              "it": "Nei centri abitati, usarlo solo per pericolo effettivo e immediato.",
+              "ar": "داخل المناطق المأهولة، استخدمه فقط عند خطر فعلي وفوري."
             },
             {
-              "it": "Le luci di emergenza si usano nei casi previsti dall’articolo 153.",
-              "ar": "تُستخدم أضواء الطوارئ في الحالات المنصوص عليها في المادة 153."
+              "it": "Le luci di emergenza avvisano nei casi indicati dalla legge.",
+              "ar": "تنبه أضواء التحذير في الحالات التي يحددها القانون."
             },
             {
-              "it": "Per interpretare le spie del cruscotto, si consulta il manuale del veicolo.",
-              "ar": "لفهم مؤشرات لوحة القيادة، يُراجع دليل المركبة."
+              "it": "Per interpretare le spie del cruscotto, consulta il manuale del veicolo.",
+              "ar": "لفهم مؤشرات لوحة القيادة، ارجع إلى دليل المركبة."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Nei centri abitati, il clacson è ammesso solo in caso di pericolo effettivo e immediato.",
+              "qIt": "Il segnale acustico deve essere il più breve possibile e usato per la sicurezza.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس أن استعمال البوق داخل المناطق المأهولة مسموح فقط عند خطر فعلي وفوري."
+              "explainAr": "توجب المادة 156 الاعتدال وأقصر مدة لازمة."
             },
             {
-              "qIt": "Il clacson può essere usato senza moderazione per la sicurezza stradale.",
+              "qIt": "Nei centri abitati il clacson è ammesso soltanto per pericolo effettivo e immediato.",
+              "a": "VERO",
+              "explainAr": "هذا هو الشرط الذي تحدده المادة 156."
+            },
+            {
+              "qIt": "Le spie del cruscotto hanno lo stesso significato in ogni modello di veicolo.",
               "a": "FALSO",
-              "explainAr": "يؤكد الدرس أن البوق يُستخدم باعتدال ولأغراض السلامة."
-            },
-            {
-              "qIt": "Le luci di emergenza si usano nei casi previsti dall’articolo 153.",
-              "a": "VERO",
-              "explainAr": "يربط الدرس استخدام أضواء الطوارئ بالحالات المحددة في المادة 153."
+              "explainAr": "يُرجع إلى دليل المركبة لمعرفة الدلالة المحددة."
             }
           ]
         }
@@ -2416,42 +2416,42 @@
           "id": "u8-l3",
           "titleIt": "Responsabilità e conseguenze delle violazioni",
           "titleAr": "المسؤولية ونتائج المخالفات",
-          "summaryIt": "La responsabilità civile, penale e amministrativa ha presupposti diversi. Le conseguenze e le procedure dipendono dai fatti e dalle norme applicabili.",
-          "summaryAr": "للمسؤولية المدنية (responsabilità civile) والجنائية (responsabilità penale) والإدارية (responsabilità amministrativa) شروط مختلفة. وتتوقف النتائج والإجراءات على الوقائع والقواعد المنطبقة.",
+          "summaryIt": "Responsabilità civile, penale e amministrativa hanno presupposti diversi. La sanzione pecuniaria è distinta dalle conseguenze sulla patente: punti, sospensione o revoca si applicano solo nei casi previsti; la responsabilità solidale riguarda soggetti e condizioni determinati.",
+          "summaryAr": "للمسؤولية المدنية والجنائية والإدارية شروط مختلفة. وتختلف الغرامة المالية (sanzione pecuniaria) عن النتائج المتعلقة بالرخصة؛ فلا تُخصم النقاط أو تُعلّق الرخصة أو تُسحب إلا في الحالات المقررة، وتخص المسؤولية التضامنية أشخاصًا وشروطًا محددة.",
           "keyPoints": [
             {
-              "it": "Responsabilità civile: risarcimento del danno.",
-              "ar": "المسؤولية المدنية: تعويض الضرر."
+              "it": "La responsabilità civile riguarda il risarcimento del danno.",
+              "ar": "تتعلق المسؤولية المدنية بتعويض الضرر."
             },
             {
               "it": "La responsabilità penale presuppone un reato previsto dalla legge.",
-              "ar": "تفترض المسؤولية الجنائية وجود جريمة ينص عليها القانون."
+              "ar": "تتطلب المسؤولية الجنائية جريمة ينص عليها القانون."
             },
             {
               "it": "Una violazione amministrativa non è automaticamente un reato.",
-              "ar": "المخالفة الإدارية لا تُعدّ جريمة تلقائياً."
+              "ar": "لا تُعدّ المخالفة الإدارية جريمة تلقائيًا."
             },
             {
-              "it": "La responsabilità solidale riguarda soggetti e condizioni determinati.",
-              "ar": "تتعلق المسؤولية التضامنية بأشخاص وشروط محددة."
+              "it": "La sanzione pecuniaria è distinta dalle misure sulla patente, applicate solo nei casi previsti.",
+              "ar": "تختلف الغرامة المالية عن التدابير المتعلقة بالرخصة، ولا تُطبق إلا في الحالات المحددة."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La responsabilità civile riguarda il risarcimento del danno.",
+              "qIt": "La sanzione pecuniaria e le misure sulla patente sono conseguenze distinte previste solo secondo la violazione.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس أن المسؤولية المدنية تتعلق بتعويض الضرر."
+              "explainAr": "لا تُطبق النقاط أو التعليق أو السحب تلقائيًا على كل مخالفة."
             },
             {
-              "qIt": "Ogni violazione amministrativa è automaticamente un reato.",
+              "qIt": "Ogni violazione amministrativa costituisce automaticamente un reato.",
               "a": "FALSO",
-              "explainAr": "يوضح الدرس أن المخالفة الإدارية ليست جريمة تلقائياً."
+              "explainAr": "لا تتحول المخالفة الإدارية تلقائيًا إلى جريمة."
             },
             {
               "qIt": "La responsabilità penale presuppone un reato previsto dalla legge.",
               "a": "VERO",
-              "explainAr": "يشترط الدرس لقيام المسؤولية الجنائية وجود جريمة ينص عليها القانون."
+              "explainAr": "تعتمد المسؤولية الجنائية على وجود جريمة."
             }
           ]
         },
@@ -2459,42 +2459,42 @@
           "id": "u8-l4",
           "titleIt": "R.C.A.: copertura obbligatoria e garanzie facoltative",
           "titleAr": "تأمين المسؤولية تجاه الغير والتغطيات الاختيارية",
-          "summaryIt": "La R.C.A. copre la responsabilità civile verso terzi ed è obbligatoria per i veicoli soggetti alla norma. Il proprietario verifica la copertura anche quando il veicolo è legittimamente nella disponibilità altrui; le garanzie aggiuntive dipendono dal contratto.",
-          "summaryAr": "يغطي تأمين المسؤولية المدنية تجاه الغير (R.C.A.) المسؤولية تجاه الآخرين، وتكون تغطيته إلزامية للمركبات الخاضعة للقانون. على المالك التحقق من استمرار التغطية حتى إذا كانت المركبة في حيازة شخص آخر بصورة قانونية؛ أما التغطيات الإضافية فتتوقف على العقد.",
+          "summaryIt": "La R.C.A. obbligatoria copre la responsabilità verso terzi, non i danni al veicolo o le lesioni del conducente responsabile. Kasko, infortuni del conducente e furto/incendio sono esempi di garanzie facoltative, con copertura determinata dal contratto.",
+          "summaryAr": "يغطي تأمين المسؤولية المدنية تجاه الغير (R.C.A.) الإلزامي المسؤولية تجاه الآخرين، ولا يغطي أضرار سيارة السائق المسؤول أو إصابته الشخصية. ومن التغطيات الاختيارية: كاسكو (Kasko)، وحوادث السائق، والسرقة والحريق؛ وتحدد التغطية شروط العقد.",
           "keyPoints": [
             {
-              "it": "La R.C.A. riguarda la responsabilità civile verso terzi.",
-              "ar": "يتعلق تأمين R.C.A. بالمسؤولية المدنية تجاه الغير."
+              "it": "La R.C.A. obbligatoria copre la responsabilità civile verso terzi.",
+              "ar": "يغطي تأمين R.C.A. الإلزامي المسؤولية المدنية تجاه الغير."
             },
             {
-              "it": "La copertura è obbligatoria per i veicoli soggetti alla norma.",
-              "ar": "التغطية إلزامية للمركبات الخاضعة للقانون."
+              "it": "Il proprietario verifica la copertura dei veicoli soggetti all’obbligo anche se sono nella disponibilità altrui.",
+              "ar": "يتحقق المالك من تغطية المركبة الخاضعة للإلزام حتى إن كانت في حيازة شخص آخر."
             },
             {
-              "it": "Il proprietario verifica la copertura anche se il veicolo è legittimamente nella disponibilità altrui.",
-              "ar": "يتحقق المالك من التغطية حتى عندما تكون المركبة في حيازة شخص آخر بصورة قانونية."
+              "it": "La R.C.A. non copre di regola i danni al veicolo o le lesioni del conducente responsabile.",
+              "ar": "لا يغطي R.C.A. عادةً أضرار المركبة أو إصابة السائق المسؤول."
             },
             {
-              "it": "Le garanzie aggiuntive dipendono dal contratto.",
-              "ar": "تتوقف التغطيات الإضافية على شروط العقد."
+              "it": "Kasko, infortuni del conducente e furto/incendio sono garanzie facoltative previste dal contratto.",
+              "ar": "كاسكو وحوادث السائق والسرقة/الحريق تغطيات اختيارية يحددها العقد."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La R.C.A. copre la responsabilità civile verso terzi.",
+              "qIt": "La R.C.A. obbligatoria copre la responsabilità civile verso terzi.",
               "a": "VERO",
-              "explainAr": "الدرس يحدد أن R.C.A. تغطي المسؤولية المدنية تجاه الغير."
+              "explainAr": "التغطية الإلزامية موجهة للمسؤولية تجاه الغير."
             },
             {
-              "qIt": "Il proprietario deve verificare la copertura soltanto quando guida personalmente il veicolo.",
+              "qIt": "La polizza Kasko è obbligatoria per tutti i veicoli.",
               "a": "FALSO",
-              "explainAr": "يظل على المالك التحقق من التغطية حتى إذا كانت المركبة في حيازة غيره بصورة قانونية."
+              "explainAr": "كاسكو تغطية إضافية اختيارية، وليست التأمين الإلزامي للمسؤولية المدنية."
             },
             {
-              "qIt": "Le garanzie aggiuntive sono determinate dal contratto.",
+              "qIt": "La polizza infortuni del conducente può coprire le lesioni del conducente responsabile.",
               "a": "VERO",
-              "explainAr": "التغطيات الإضافية تتوقف على ما يحدده العقد."
+              "explainAr": "يذكر دليل IVASS هذا التأمين الاختياري لتغطية إصابة السائق المسؤول."
             }
           ]
         }
@@ -2668,16 +2668,16 @@
           "id": "u9-l1",
           "titleIt": "Conducente e idoneità: attenzione, alcol e sostanze",
           "titleAr": "السائق والقدرة على القيادة: التركيز والكحول والمواد المخدرة",
-          "summaryIt": "La stanchezza o altre condizioni che riducono attenzione e controllo possono rendere insicura la guida. Gli artt. 186 e 187 riguardano rispettivamente la guida in stato di ebbrezza da alcol e la guida dopo l’assunzione di sostanze stupefacenti o psicotrope.",
-          "summaryAr": "قد يجعل التعب أو غيره من الحالات التي تقلل الانتباه والتحكم القيادة غير آمنة. تتناول المادتان 186 و187، على الترتيب، القيادة في حالة سُكر بسبب الكحول (stato di ebbrezza) والقيادة بعد تناول مواد مخدرة أو مؤثرة نفسيًا (sostanze stupefacenti o psicotrope).",
+          "summaryIt": "Stanchezza, malessere, stati emotivi o farmaci possono ridurre attenzione e tempo di reazione; se il controllo è compromesso, non guidare e verifica le avvertenze dei medicinali. Gli artt. 186 e 187 riguardano rispettivamente la guida in stato di ebbrezza alcolica e dopo l’assunzione di sostanze stupefacenti o psicotrope.",
+          "summaryAr": "قد يقلل التعب أو المرض أو الحالة النفسية أو الأدوية الانتباه وزمن الاستجابة (tempo di reazione)؛ إذا تأثر التحكم فلا تقد، وراجع تحذيرات الدواء. تتناول المادتان 186 و187 القيادة في حالة سُكر بسبب الكحول والقيادة بعد تناول مواد مخدرة أو مؤثرة نفسيًا، على الترتيب.",
           "keyPoints": [
             {
-              "it": "La guida richiede attenzione e controllo del veicolo.",
-              "ar": "تتطلب القيادة الانتباه والتحكم في المركبة."
+              "it": "Guidare richiede attenzione, percezione e controllo del veicolo.",
+              "ar": "تتطلب القيادة الانتباه والإدراك والتحكم في المركبة."
             },
             {
-              "it": "Se la stanchezza compromette il controllo, non proseguire la guida.",
-              "ar": "إذا أضعف التعب القدرة على التحكم، فلا تواصل القيادة."
+              "it": "Stanchezza, emozioni e farmaci possono ridurre attenzione e tempi di reazione.",
+              "ar": "قد يقلل التعب والحالة النفسية والأدوية الانتباه وسرعة الاستجابة."
             },
             {
               "it": "L’art. 186 riguarda la guida in stato di ebbrezza da alcol.",
@@ -2693,17 +2693,17 @@
             {
               "qIt": "La stanchezza che compromette il controllo può rendere insicura la guida.",
               "a": "VERO",
-              "explainAr": "لأن التعب الذي يقلل التحكم قد يجعل القيادة غير آمنة."
+              "explainAr": "إذا تأثر التحكم، فلا ينبغي مواصلة القيادة."
             },
             {
               "qIt": "L’art. 186 riguarda la guida dopo l’assunzione di sostanze psicotrope.",
               "a": "FALSO",
-              "explainAr": "المادة 186 تتعلق بالقيادة في حالة سُكر بسبب الكحول؛ أما المواد المخدرة أو المؤثرة نفسيًا فتتناولها المادة 187."
+              "explainAr": "تتناول المادة 186 السُكر بسبب الكحول؛ وتتناول المادة 187 المواد المخدرة أو المؤثرة نفسيًا."
             },
             {
-              "qIt": "L’art. 187 riguarda la guida dopo l’assunzione di sostanze stupefacenti o psicotrope.",
+              "qIt": "Farmaci e condizioni personali possono influire sull’idoneità alla guida.",
               "a": "VERO",
-              "explainAr": "هذا هو موضوع المادة 187 وفق الدرس."
+              "explainAr": "راجع التحذيرات واستشر مختصًا صحيًا عند الحاجة."
             }
           ]
         },
@@ -2754,42 +2754,42 @@
           "id": "u9-l3",
           "titleIt": "Incidente: fermarsi, assistere e collaborare",
           "titleAr": "الحادث: الوقوف وتقديم المساعدة والتعاون",
-          "summaryIt": "L’art. 189 richiede al conducente di fermarsi negli incidenti riconducibili al proprio comportamento e di prestare assistenza ai feriti. Deve inoltre salvaguardare la sicurezza della circolazione, evitare intralcio e fornire informazioni utili ai danneggiati.",
-          "summaryAr": "توجب المادة 189 على السائق التوقف في الحوادث المرتبطة بتصرفه وتقديم المساعدة للمصابين. وعليه أيضًا حماية سلامة حركة المرور (sicurezza della circolazione)، وتجنب عرقلتها، وتقديم معلومات مفيدة للمتضررين.",
+          "summaryIt": "Negli incidenti riconducibili al proprio comportamento, fermati e presta l’assistenza necessaria alle persone ferite; proteggi la circolazione e scambia i dati dovuti. Se un animale domestico, da reddito o protetto è ferito, fermati e adotta misure per un soccorso tempestivo.",
+          "summaryAr": "في الحوادث المرتبطة بتصرفك، توقف وقدّم المساعدة (assistenza) اللازمة للمصابين؛ واحمِ حركة المرور وتبادل البيانات المطلوبة. وإذا أُصيب حيوان أليف أو حيوان منتج أو محمي، فتوقف واتخذ ما يلزم لضمان إنقاذه سريعًا.",
           "keyPoints": [
             {
               "it": "Fermarsi negli incidenti riconducibili al proprio comportamento.",
               "ar": "التوقف في الحوادث المرتبطة بتصرف الشخص."
             },
             {
-              "it": "Prestare assistenza ai feriti.",
-              "ar": "تقديم المساعدة للمصابين."
+              "it": "Prestare assistenza necessaria ai feriti e proteggere la circolazione.",
+              "ar": "تقديم المساعدة اللازمة للمصابين وحماية حركة المرور."
             },
             {
-              "it": "Salvaguardare la sicurezza della circolazione.",
-              "ar": "حماية سلامة حركة المرور."
+              "it": "Fornire generalità e informazioni utili alle persone danneggiate.",
+              "ar": "تقديم البيانات الشخصية والمعلومات المفيدة للمتضررين."
             },
             {
-              "it": "Evitare intralcio e fornire informazioni utili ai danneggiati.",
-              "ar": "تجنب عرقلة السير وتقديم معلومات مفيدة للمتضررين."
+              "it": "Se è ferito un animale domestico, da reddito o protetto, fermarsi e favorire soccorso tempestivo.",
+              "ar": "إذا أُصيب حيوان أليف أو منتج أو محمي، فتوقف وساعد على إنقاذه سريعًا."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "L’art. 189 richiede di fermarsi negli incidenti riconducibili al proprio comportamento.",
+              "qIt": "Negli incidenti riconducibili al proprio comportamento, il conducente deve fermarsi.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس وجوب التوقف في الحوادث المرتبطة بتصرف الشخص."
+              "explainAr": "هذا واجب تذكره المادة 189."
             },
             {
-              "qIt": "In caso di incidente, il conducente deve soltanto fornire informazioni ai danneggiati.",
+              "qIt": "Se è ferito un animale protetto, l’utente coinvolto può allontanarsi senza intervenire.",
               "a": "FALSO",
-              "explainAr": "يشمل ما يذكره الدرس أيضًا التوقف ومساعدة المصابين وحماية سلامة المرور وتجنب العرقلة."
+              "explainAr": "توجب القاعدة التوقف واتخاذ تدابير لضمان الإنقاذ العاجل."
             },
             {
-              "qIt": "Il conducente deve prestare assistenza ai feriti.",
+              "qIt": "I conducenti coinvolti forniscono le informazioni utili alle persone danneggiate.",
               "a": "VERO",
-              "explainAr": "تتضمن نقاط الدرس تقديم المساعدة للمصابين."
+              "explainAr": "يدخل تبادل المعلومات ضمن الواجبات المقررة."
             }
           ]
         },
@@ -2797,42 +2797,42 @@
           "id": "u9-l4",
           "titleIt": "Consumi, rumore e tutela dell’ambiente",
           "titleAr": "استهلاك الوقود والضوضاء وحماية البيئة",
-          "summaryIt": "La guida regolare e la manutenzione possono contenere i consumi, come consigli pratici. Gli artt. 15, 79, 155 e 156 disciplinano atti vietati, efficienza dei veicoli, rumori molesti e segnalazioni acustiche.",
-          "summaryAr": "قد تساعد القيادة المنتظمة والصيانة على الحد من استهلاك الوقود كنصيحتين عمليتين. وتنظم المواد 15 و79 و155 و156 الأفعال المحظورة وكفاءة المركبات والضوضاء المزعجة وأجهزة التنبيه الصوتي، على الترتيب. (consumi)",
+          "summaryIt": "Una guida regolare e la manutenzione aiutano a contenere consumi ed emissioni; i dispositivi antinquinamento e di silenziamento devono restare efficienti. Il Codice vieta i rumori molesti e limita l’uso dei segnali acustici ai casi consentiti.",
+          "summaryAr": "تساعد القيادة المنتظمة والصيانة على الحد من استهلاك الوقود والانبعاثات (emissioni)؛ ويجب الحفاظ على كفاءة أجهزة الحد من التلوث وكواتم الصوت. ويحظر القانون الضوضاء المزعجة ويقصر استخدام أجهزة التنبيه الصوتي على الحالات المسموح بها.",
           "keyPoints": [
             {
-              "it": "Guida regolare e manutenzione: consigli pratici per contenere i consumi.",
-              "ar": "القيادة المنتظمة والصيانة نصيحتان عمليتان للحد من الاستهلاك."
+              "it": "Una guida regolare e la manutenzione aiutano a ridurre consumi ed emissioni.",
+              "ar": "تساعد القيادة المنتظمة والصيانة على خفض الاستهلاك والانبعاثات."
             },
             {
-              "it": "L’art. 15 riguarda gli atti vietati.",
-              "ar": "تتناول المادة 15 الأفعال المحظورة."
+              "it": "I dispositivi antinquinamento e di silenziamento devono restare efficienti.",
+              "ar": "يجب الحفاظ على كفاءة أجهزة الحد من التلوث وكواتم الصوت."
             },
             {
-              "it": "L’art. 79 riguarda l’efficienza dei veicoli.",
-              "ar": "تتناول المادة 79 كفاءة المركبات."
+              "it": "L’art. 155 vieta i rumori molesti.",
+              "ar": "تحظر المادة 155 الضوضاء المزعجة."
             },
             {
-              "it": "L’art. 155 riguarda i rumori molesti; l’art. 156 le segnalazioni acustiche.",
-              "ar": "تتناول المادة 155 الضوضاء المزعجة، والمادة 156 أجهزة التنبيه الصوتي."
+              "it": "I segnali acustici si usano soltanto nei casi consentiti.",
+              "ar": "لا تُستخدم أجهزة التنبيه الصوتي إلا في الحالات المسموح بها."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La guida regolare e la manutenzione possono contenere i consumi come consigli pratici.",
+              "qIt": "La manutenzione e una guida regolare possono aiutare a ridurre consumi ed emissioni.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس القيادة المنتظمة والصيانة كنصيحتين عمليتين قد تساعدان على الحد من الاستهلاك."
+              "explainAr": "هما من السلوكيات العملية التي تساعد على الحد من الاستهلاك والانبعاثات."
             },
             {
-              "qIt": "L’art. 155 disciplina le segnalazioni acustiche.",
+              "qIt": "È consentito circolare con dispositivi antinquinamento o di silenziamento non efficienti.",
               "a": "FALSO",
-              "explainAr": "وفق الدرس، تتناول المادة 155 الضوضاء المزعجة، بينما تتناول المادة 156 أجهزة التنبيه الصوتي."
+              "explainAr": "يجب الحفاظ على كفاءة الأجهزة المتعلقة بالتلوث والضوضاء."
             },
             {
-              "qIt": "L’art. 79 riguarda l’efficienza dei veicoli.",
+              "qIt": "L’art. 155 riguarda i rumori molesti.",
               "a": "VERO",
-              "explainAr": "يربط الدرس المادة 79 بكفاءة المركبات."
+              "explainAr": "تتناول المادة 155 الضوضاء المزعجة."
             }
           ]
         }
@@ -3208,42 +3208,42 @@
           "id": "u10-l4",
           "titleIt": "Pedoni, ciclisti e motociclisti: attenzione reciproca",
           "titleAr": "المشاة وراكبو الدراجات والموتوسيكلات: انتباه متبادل",
-          "summaryIt": "Ai passaggi pedonali, nei casi previsti dall’art. 191, il conducente deve dare la precedenza ai pedoni, rallentando gradualmente e fermandosi. Deve inoltre prevenire i pericoli prevedibili per bambini e anziani e controllare traiettoria e zone non visibili.",
-          "summaryAr": "في الحالات التي تحددها المادة 191، يجب على السائق إعطاء الأولوية للمشاة عند ممرات المشاة، مع تخفيف السرعة تدريجيًا والتوقف. وعليه أيضًا منع الأخطار المتوقعة على الأطفال وكبار السن، والانتباه إلى مسار المركبة والمناطق غير المرئية. (attraversamenti pedonali)",
+          "summaryIt": "Ai passaggi pedonali dà precedenza a chi attraversa o si accinge ad attraversare; proteggi con particolare prudenza bambini, anziani e persone con mobilità ridotta. Prima di svoltare controlla specchi e angoli ciechi per ciclisti e motociclisti; per prudenza, chi ha poca esperienza dovrebbe mantenere margini di sicurezza più ampi.",
+          "summaryAr": "عند ممر المشاة، أعطِ الأولوية لمن يعبر أو يستعد للعبور؛ واحذر خصوصًا على الأطفال وكبار السن وذوي الحركة المحدودة. قبل الانعطاف افحص المرايا والنقاط العمياء (angoli ciechi) لراكبي الدراجات والنارية؛ ومن باب الاحتياط، يُستحسن لقليل الخبرة ترك هامش أمان أوسع.",
           "keyPoints": [
             {
-              "it": "Nei casi previsti dall’art. 191, dare la precedenza ai pedoni sui passaggi pedonali.",
-              "ar": "إعطاء الأولوية للمشاة عند ممرات المشاة في الحالات التي تحددها المادة 191."
+              "it": "Dare precedenza ai pedoni che attraversano o si accingono ad attraversare nei casi previsti.",
+              "ar": "أعطِ الأولوية للمشاة الذين يعبرون أو يستعدون للعبور في الحالات المقررة."
             },
             {
-              "it": "Rallentare gradualmente e fermarsi quando è richiesto per dare la precedenza.",
-              "ar": "تخفيف السرعة تدريجيًا والتوقف حين يلزم لإعطاء الأولوية."
+              "it": "Rallentare e proteggere bambini, anziani e persone con mobilità ridotta.",
+              "ar": "خفف السرعة واحمِ الأطفال وكبار السن وذوي الحركة المحدودة."
             },
             {
-              "it": "Prevenire i pericoli prevedibili per bambini e anziani.",
-              "ar": "منع الأخطار المتوقعة على الأطفال وكبار السن."
+              "it": "Prima delle manovre controllare specchi e angoli ciechi per ciclisti e motociclisti.",
+              "ar": "قبل المناورة افحص المرايا والنقاط العمياء لراكبي الدراجات والنارية."
             },
             {
-              "it": "Prima di manovrare, controllare la traiettoria e le zone non visibili.",
-              "ar": "قبل المناورة، افحص مسار المركبة والمناطق غير المرئية."
+              "it": "Sorpasso dei velocipedi: distanza laterale adeguata a velocità e ingombro; almeno 1,5 m ove le condizioni lo consentano.",
+              "ar": "تجاوز الدراجات الهوائية: مسافة جانبية تناسب السرعة وحجم المركبة؛ لا تقل عن 1.5 متر إذا سمحت ظروف الطريق."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Nei casi previsti dall’art. 191, il conducente deve dare la precedenza ai pedoni sui passaggi pedonali.",
+              "qIt": "Nei casi previsti, si dà precedenza ai pedoni che attraversano o si accingono ad attraversare.",
               "a": "VERO",
-              "explainAr": "تنص المادة 191 على إعطاء الأولوية للمشاة عند ممرات المشاة في الحالات المحددة فيها."
+              "explainAr": "هذه هي الأولوية التي تنص عليها المادة 191 في الحالات المحددة."
             },
             {
-              "qIt": "L’art. 191 esclude la necessità di prevenire pericoli prevedibili per bambini e anziani.",
+              "qIt": "Prima di svoltare non occorre controllare gli angoli ciechi per ciclisti e motociclisti.",
               "a": "FALSO",
-              "explainAr": "توجب المادة منع الأخطار التي يمكن توقعها على الأطفال وكبار السن."
+              "explainAr": "افحص المرايا ومسار المركبة قبل المناورة."
             },
             {
-              "qIt": "Prima di una manovra, è utile controllare la traiettoria e le zone non visibili.",
+              "qIt": "Nel sorpasso dei velocipedi si tiene conto di velocità e ingombro e, se le condizioni lo consentono, si mantiene almeno 1,5 m.",
               "a": "VERO",
-              "explainAr": "يوجه محتوى الدرس إلى فحص مسار المركبة والمناطق غير المرئية قبل المناورة."
+              "explainAr": "تشترط المادة 148 مسافة جانبية مناسبة للسرعة وحجم المركبة، وحدًا أدنى 1.5 متر متى سمحت ظروف الطريق."
             }
           ]
         },
@@ -3290,42 +3290,42 @@
           "id": "u10-l6",
           "titleIt": "Superfici scivolose e traiettoria regolare",
           "titleAr": "الأسطح الزلقة وخط السير الثابت",
-          "summaryIt": "Metallo, segnaletica, binari e residui possono rendere scivolosa la strada, soprattutto sul bagnato. Il conducente deve adeguare la velocità prima del tratto e attraversarlo con traiettoria regolare, evitando manovre brusche.",
-          "summaryAr": "قد تجعل الأسطح المعدنية وعلامات الطريق والسكك والبقايا الطريق زلقًا، ولا سيما عندما يكون مبتلًا. اضبط السرعة قبل الجزء الزلق واعبره بخط سير منتظم (traiettoria regolare)، وتجنب المناورات المفاجئة.",
+          "summaryIt": "Metallo, segnaletica, binari e residui possono rendere scivolosa la strada, soprattutto sul bagnato; pioggia e passaggio dal giorno alla notte cambiano aderenza e visibilità. In pratica, riduci la velocità prima del tratto e attraversalo con traiettoria regolare, evitando manovre brusche.",
+          "summaryAr": "قد تجعل الأسطح المعدنية والعلامات والسكك والبقايا الطريق زلقًا، خصوصًا عند البلل؛ كما يؤثر المطر والانتقال من النهار إلى الليل في التماسك (aderenza) والرؤية. عمليًا، خفّف السرعة قبل الجزء الزلق واعبره بخط سير منتظم، وتجنب المناورات المفاجئة.",
           "keyPoints": [
             {
-              "it": "Riconosci in anticipo le superfici potenzialmente scivolose.",
-              "ar": "تعرّف مسبقًا إلى الأسطح التي قد تكون زلقة."
+              "it": "Riconoscere in anticipo superfici potenzialmente scivolose.",
+              "ar": "تعرف مسبقًا إلى الأسطح التي قد تكون زلقة."
             },
             {
-              "it": "Adatta la velocità prima di raggiungere il tratto.",
-              "ar": "اضبط السرعة قبل الوصول إلى الجزء الزلق."
+              "it": "Pioggia e passaggio dal giorno alla notte possono ridurre aderenza o visibilità.",
+              "ar": "قد يقلل المطر والانتقال من النهار إلى الليل التماسك أو الرؤية."
             },
             {
-              "it": "Attraversa con una traiettoria regolare.",
-              "ar": "اعبر بخط سير منتظم (traiettoria regolare)."
+              "it": "Adattare la velocità prima di raggiungere il tratto.",
+              "ar": "اضبط السرعة قبل الوصول إلى الجزء."
             },
             {
-              "it": "Evita accelerazioni, frenate e sterzate improvvise.",
-              "ar": "تجنب التسارع والفرملة والتوجيه المفاجئ."
+              "it": "Attraversare con traiettoria regolare, evitando comandi bruschi.",
+              "ar": "اعبر بخط سير ثابت وتجنب الأوامر المفاجئة."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Le superfici metalliche, i binari e i residui possono rendere scivolosa la strada.",
+              "qIt": "Metallo, binari e residui possono rendere scivolosa la strada.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس أن هذه الأسطح والبقايا قد تجعل الطريق زلقًا."
+              "explainAr": "هذه أمثلة على أسطح أو ظروف يجب الانتباه إليها."
             },
             {
-              "qIt": "È opportuno adeguare la velocità soltanto dopo aver raggiunto il tratto scivoloso.",
+              "qIt": "Il passaggio dal giorno alla notte può incidere sulla visibilità.",
+              "a": "VERO",
+              "explainAr": "تتغير الرؤية ويجب إعادة تقديرها وفق الظروف."
+            },
+            {
+              "qIt": "È meglio frenare bruscamente proprio sopra una superficie scivolosa.",
               "a": "FALSO",
-              "explainAr": "ينص الدرس على ضبط السرعة قبل الوصول إلى الجزء الزلق."
-            },
-            {
-              "qIt": "Sul tratto scivoloso si attraversa con traiettoria regolare, evitando manovre brusche.",
-              "a": "VERO",
-              "explainAr": "يوصي الدرس بخط سير منتظم وتجنب الحركات المفاجئة."
+              "explainAr": "اضبط السرعة قبلها واعبر بخط سير ثابت."
             }
           ]
         }
@@ -3562,42 +3562,42 @@
           "id": "u11-l3",
           "titleIt": "Trasportare persone e sistemare il carico",
           "titleAr": "نقل الركاب وترتيب الحمولة",
-          "summaryIt": "I passeggeri devono rispettare i posti indicati e non ostacolare il conducente. Il carico va sistemato e fissato senza compromettere stabilità e visibilità; la sporgenza longitudinale deve essere segnalata con pannelli retroriflettenti.",
-          "summaryAr": "يلتزم الركاب بالمقاعد المحددة ولا يعيقون السائق. وتُرتب الحمولة وتُثبّت بما لا يضر الثبات أو الرؤية، ويُشار إلى البروز الطولي للحمولة بلوحات عاكسة (pannelli retroriflettenti).",
+          "summaryIt": "Il numero dei passeggeri non supera quello indicato sulla carta di circolazione; i passeggeri non devono ostacolare i movimenti o la visibilità del conducente. Fissa il carico senza compromettere stabilità, luci o targa e rispetta i limiti delle sporgenze.",
+          "summaryAr": "لا يتجاوز عدد الركاب العدد المدون في وثيقة التسجيل (carta di circolazione)، ولا يعيقون حركة السائق أو رؤيته. ثبّت الحمولة من دون الإضرار بالثبات أو حجب الأضواء واللوحة، والتزم بحدود البروز.",
           "keyPoints": [
             {
-              "it": "I passeggeri rispettano i posti indicati.",
-              "ar": "يلتزم الركاب بالمقاعد المحددة."
+              "it": "Non superare il numero di passeggeri indicato sulla carta di circolazione.",
+              "ar": "لا تتجاوز عدد الركاب المدون في وثيقة التسجيل."
             },
             {
-              "it": "I passeggeri non ostacolano il conducente.",
-              "ar": "لا يعيق الركاب السائق."
+              "it": "I passeggeri non ostacolano il conducente né ne riducono la visibilità.",
+              "ar": "لا يعيق الركاب السائق ولا يحجبون رؤيته."
             },
             {
-              "it": "Il carico è fissato senza compromettere stabilità e visibilità.",
-              "ar": "تُثبّت الحمولة بما لا يضر الثبات أو الرؤية."
+              "it": "Fissare il carico senza compromettere stabilità, visibilità, luci o targa.",
+              "ar": "ثبّت الحمولة دون الإضرار بالثبات أو الرؤية أو الأضواء أو اللوحة."
             },
             {
-              "it": "La sporgenza longitudinale è segnalata con pannelli retroriflettenti.",
-              "ar": "يُشار إلى البروز الطولي بلوحات عاكسة."
+              "it": "Rispettare regole e segnalazione previste per le sporgenze.",
+              "ar": "التزم بالقواعد والعلامات المقررة للحمولة البارزة."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "I passeggeri devono rispettare i posti indicati.",
+              "qIt": "Il numero dei passeggeri non deve superare quello indicato sulla carta di circolazione.",
               "a": "VERO",
-              "explainAr": "ينص الدرس على التزام الركاب بالمقاعد المحددة."
+              "explainAr": "هذا هو الحد الذي تحدده المادة 169."
             },
             {
-              "qIt": "Il carico può compromettere la visibilità del conducente.",
+              "qIt": "I passeggeri possono limitare la visibilità del conducente se sono seduti.",
               "a": "FALSO",
-              "explainAr": "يذكر الدرس أن ترتيب الحمولة يجب ألا يضر الرؤية."
+              "explainAr": "يجب ألا يحدوا من حركة السائق أو رؤيته."
             },
             {
-              "qIt": "La sporgenza longitudinale del carico va segnalata con pannelli retroriflettenti.",
+              "qIt": "Il carico deve essere fissato senza coprire luci o targa.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس أن البروز الطولي يُشار إليه بلوحات عاكسة."
+              "explainAr": "يجب ألا تضر الحمولة بالثبات أو الرؤية أو الأجهزة."
             }
           ]
         },
@@ -3734,42 +3734,42 @@
           "id": "u11-l7",
           "titleIt": "Rimorchi: compatibilità, aggancio e guida",
           "titleAr": "المقطورات: التوافق والربط والقيادة",
-          "summaryIt": "Verifica le masse autorizzate della combinazione e la patente richiesta; prima della partenza controlla il dispositivo di aggancio, i collegamenti, le luci, i freni e il carico. Guida con gradualità e mantieni distanze adeguate.",
-          "summaryAr": "تحقّق من الكتل المسموح بها للمجموعة ومن الرخصة المطلوبة، فئة B (patente B) أو B96 بحسب الحالة. قبل الانطلاق افحص وصلة الربط (aggancio) والتوصيلات والأضواء والفرامل والحمولة، وقد بسلاسة وحافظ على مسافات مناسبة.",
+          "summaryIt": "Con un rimorchio verifica masse autorizzate, patente richiesta e aggancio, luci, freni e carico; per prudenza, guida con gradualità e mantieni distanze adeguate. Il traino d’emergenza di un veicolo guasto richiede un collegamento idoneo e chiaramente segnalato e il rispetto delle condizioni dell’art. 165.",
+          "summaryAr": "مع المقطورة (rimorchio)، تحقق من الكتل المسموح بها والرخصة المطلوبة ووصلة الربط والأضواء والفرامل والحمولة؛ ومن باب الاحتياط، قد بسلاسة واترك مسافة مناسبة. يتطلب جر مركبة معطلة للطوارئ وصلة مناسبة وواضحة العلامة والالتزام بشروط المادة 165.",
           "keyPoints": [
             {
-              "it": "Verificare le masse massime autorizzate della combinazione.",
-              "ar": "تحقّق من الكتل القصوى المسموح بها لمجموعة المركبة والمقطورة."
+              "it": "Verificare masse autorizzate e patente richiesta per la combinazione.",
+              "ar": "تحقق من الكتل المسموح بها والرخصة المطلوبة للمجموعة."
             },
             {
-              "it": "Controllare quale patente è richiesta per la combinazione; nel caso previsto può essere necessaria la B96 oltre 3.500 kg.",
-              "ar": "تحقّق من الرخصة المطلوبة للمجموعة؛ وفي الحالة المحددة قد تلزم B96 عند تجاوز 3500 كغ."
-            },
-            {
-              "it": "Prima di partire, controllare aggancio, collegamenti, luci, freni e carico.",
-              "ar": "قبل الانطلاق، افحص وصلة الربط والتوصيلات والأضواء والفرامل والحمولة."
+              "it": "Prima di partire controllare aggancio, collegamenti, luci, freni e carico.",
+              "ar": "قبل الانطلاق، افحص الوصلة والتوصيلات والأضواء والفرامل والحمولة."
             },
             {
               "it": "Guidare con gradualità e mantenere distanze adeguate.",
               "ar": "قد بسلاسة وحافظ على مسافات مناسبة."
+            },
+            {
+              "it": "Il traino d’emergenza richiede collegamento idoneo, ben visibile e dispositivi prescritti.",
+              "ar": "يتطلب الجر الطارئ وصلة مناسبة واضحة وأجهزة التنبيه المقررة."
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Prima di partire con un rimorchio si controllano l’aggancio, i collegamenti, le luci, i freni e il carico.",
+              "qIt": "Prima di partire con un rimorchio si controllano aggancio, collegamenti, luci, freni e carico.",
               "a": "VERO",
-              "explainAr": "هذه العناصر واردة ضمن فحوص ما قبل الانطلاق في الدرس."
+              "explainAr": "هذه فحوص أساسية قبل الرحلة."
             },
             {
               "qIt": "Per la combinazione con rimorchio non occorre verificare le masse autorizzate.",
               "a": "FALSO",
-              "explainAr": "ينص الدرس على التحقق من الكتل المسموح بها للمجموعة."
+              "explainAr": "تعتمد الكتلة المسموح بها والرخصة على المجموعة."
             },
             {
-              "qIt": "Con un rimorchio si guida con gradualità e si mantengono distanze adeguate.",
+              "qIt": "Nel traino d’emergenza di un veicolo guasto si usa un collegamento idoneo e segnalato.",
               "a": "VERO",
-              "explainAr": "يوصي الدرس بالقيادة بسلاسة والحفاظ على مسافات مناسبة."
+              "explainAr": "تنظم المادة 165 الوصلة وأجهزة التنبيه."
             }
           ]
         }
