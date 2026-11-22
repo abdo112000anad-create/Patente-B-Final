@@ -1,6 +1,6 @@
-# Patente B بالعربي — v55
+# Patente B بالعربي — v56
 
-تطبيق Capacitor لتعلّم أسئلة القيادة الإيطالية مع النص والترجمة العربية. رقم Android لهذه النسخة هو `versionCode 55` (`55.0.0`).
+تطبيق Capacitor لتعلّم أسئلة القيادة الإيطالية مع النص والترجمة العربية. رقم Android لهذه النسخة هو `versionCode 56` (`56.0.0`).
 
 ## الصوت والترجمة
 
@@ -16,4 +16,4 @@ npm test
 bash ./scripts/build-android.sh
 ```
 
-ينتج البناء المحلي APK تشخيصيًا موقّعًا بمفتاح debug، وليس إصدار متجر Play. يرفع GitHub Actions الـ APK كـ artifact باسم `patente-b-v55-debug-apk` بعد نجاح اختبارات JavaScript وAndroid والتحقق من خدمات النطق في manifest.
+ينتج البناء المحلي APK تشخيصيًا موقّعًا بمفتاح debug، وليس إصدار متجر Play. تبدأ سرعة Web Speech الإيطالية عند `rate=0.8`. يرفع GitHub Actions الـ APK كـ artifact باسم `patente-b-v56-debug-apk` بعد نجاح اختبارات JavaScript وAndroid والتحقق من خدمات النطق في manifest.

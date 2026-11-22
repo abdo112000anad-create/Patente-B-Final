@@ -1,6 +1,6 @@
 {
-  "version": 55,
-  "entry": "/app.bundle.js?v=55",
+  "version": 56,
+  "entry": "/app.bundle.js?v=56",
   "bundleSha256": "3f484260f119a45f2cf1968e2629a1b167749043bdde31f7743529080962bcd8",
   "lessonsSha256": "4390679ff3279362437a34f8a883007ca7aeab39263f1a41f13faa91aa6753ef",
   "lessonSupportSha256": "76d14792bd17246f8b286f6cd997722acb29bf00d6cdeb45869fd3d12d6419b7",
