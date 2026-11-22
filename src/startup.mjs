@@ -9,7 +9,7 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
       controller.abort();
     }, timeoutMs);
   });
-  const paths = ['/data/questions.json', '/data/lessons.json', '/data/topic-labels.json', '/data/similar-groups.json'];
+  const paths = ['/data/questions.json', '/data/lessons.json', '/data/topic-labels.json', '/data/similar-groups.json', '/data/lesson-support.json'];
   const requests = Promise.all(paths.map(async path => {
     const response = await fetchImpl(path, {signal: controller.signal, credentials: 'same-origin', cache: 'no-store'});
     if (response.headers.get('cf-mitigated') === 'challenge' || response.status === 403) {
@@ -29,20 +29,64 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
   }));
   try {
     const loaded = await Promise.race([requests, timeout]);
-    const [bankFile, lessonFile, labelsFile, similarFile] = loaded;
+    const [bankFile, lessonFile, labelsFile, similarFile, supportFile] = loaded;
     const bank = bankFile?.data;
     const lessons = lessonFile?.data;
     const labels = labelsFile?.data;
     const similar = similarFile?.data;
+    const support = supportFile?.data;
     if (!bank || !Array.isArray(bank.questions) || bank.questions.length === 0 || bank.count !== bank.questions.length ||
-        !lessons || !Array.isArray(lessons.modules) || lessons.module_count !== lessons.modules.length ||
+        !lessons || lessons.schema_version !== 3 || !Array.isArray(lessons.modules) || lessons.module_count !== lessons.modules.length || lessons.module_count !== 11 ||
         !labels || typeof labels !== 'object' || Array.isArray(labels) || Object.keys(labels).length === 0 ||
         !similar || similar.schema_version !== 2 || !Array.isArray(similar.groups) || similar.group_count !== similar.groups.length ||
-        similar.question_count !== bank.questions.length || !/^[a-f0-9]{64}$/.test(similar.question_bank_sha256 || '')) {
+        similar.question_count !== bank.questions.length || !/^[a-f0-9]{64}$/.test(similar.question_bank_sha256 || '') ||
+        !support || support.schema_version !== 1 || !support.lessons || typeof support.lessons !== 'object' || Array.isArray(support.lessons)) {
       const error = new Error('I file del corso sono incompleti o non compatibili. / ملفات المنهج ناقصة أو غير متوافقة.');
       error.code = 'course_integrity';
       throw error;
     }
+    const lessonKeys = ['id', 'keyPoints', 'summaryAr', 'summaryIt', 'titleAr', 'titleIt'].sort().join(',');
+    const pointKeys = ['ar', 'it'].join(',');
+    const expectedIds = new Set();
+    let lessonCount = 0;
+    for (const module of lessons.modules) {
+      if (!Number.isInteger(module?.order_hint) || !Array.isArray(module.lessons)) {
+        const error = new Error('I dati delle lezioni non sono validi. / بيانات الدروس غير صالحة.');
+        error.code = 'course_integrity';
+        throw error;
+      }
+      for (let index = 0; index < module.lessons.length; index += 1) {
+        const lesson = module.lessons[index];
+        const expectedId = `u${module.order_hint}-l${index + 1}`;
+        if (!lesson || Object.keys(lesson).sort().join(',') !== lessonKeys || lesson.id !== expectedId || expectedIds.has(lesson.id) ||
+            !['titleIt', 'titleAr', 'summaryIt', 'summaryAr'].every(key => typeof lesson[key] === 'string' && lesson[key].trim()) ||
+            !Array.isArray(lesson.keyPoints) || lesson.keyPoints.length < 3 || lesson.keyPoints.length > 5 ||
+            !lesson.keyPoints.every(point => point && Object.keys(point).sort().join(',') === pointKeys && typeof point.it === 'string' && point.it.trim() && typeof point.ar === 'string' && point.ar.trim())) {
+          const error = new Error('Il formato di una lezione non è valido. / تنسيق أحد الدروس غير صالح.');
+          error.code = 'course_integrity';
+          throw error;
+        }
+        expectedIds.add(lesson.id);
+        lessonCount += 1;
+      }
+    }
+    if (lessonCount !== 50 || Object.keys(support.lessons).length !== lessonCount || Object.keys(support.lessons).some(id => !expectedIds.has(id))) {
+      const error = new Error('Il numero delle lezioni o dei dati di supporto non coincide. / عدد الدروس أو بيانات الدعم غير متطابق.');
+      error.code = 'course_integrity';
+      throw error;
+    }
+    const runtimeCourse = {
+      ...lessons,
+      modules: lessons.modules.map(module => ({
+        ...module,
+        lessons: module.lessons.map(lesson => ({
+          ...lesson,
+          ...(support.lessons[lesson.id] || {}),
+          heading_it: lesson.titleIt,
+          heading_ar: lesson.titleAr
+        }))
+      }))
+    };
     if (!globalThis.crypto?.subtle || typeof TextEncoder !== 'function') {
       const error = new Error('Il controllo d’integrità non è disponibile sul dispositivo. / التحقق من سلامة الملفات غير متاح على هذا الجهاز.');
       error.code = 'course_integrity';
@@ -56,7 +100,7 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
       error.code = 'course_integrity';
       throw error;
     }
-    return loaded.map(file => file.data);
+    return [bank, runtimeCourse, labels, similar];
   }
   catch (error) {
     if (error.code === 'course_timeout' || error.code === 'course_integrity' || error.message?.includes(' / ')) throw error;

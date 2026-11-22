@@ -336,3 +336,13 @@ dialog.translation-sheet::backdrop{background:rgba(11,25,20,.52);backdrop-filter
 .lesson-animation-controls .lesson-motion-toggle small{font-size:.67rem}
 .lesson-animation-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;min-width:0}
 @media(max-width:650px){.lesson-animation-play-icon{width:54px;height:54px}.lesson-animation-play-icon svg{width:27px;height:27px}.lesson-animation-play-label{font-size:.7rem}.lesson-animation-actions{grid-template-columns:1fr 1fr}}
+
+/* v55: concise bilingual summaries and vertically ordered study-point cards. */
+.lesson-summary-card{display:grid;gap:12px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.lesson-summary-card .lesson-it-text{color:var(--ink);font-size:.96rem;line-height:1.9;text-align:left;direction:ltr}
+.lesson-summary-card>.lesson-ar-full,:root[data-language-order="ar"] .lesson-summary-card>.lesson-ar-full{order:initial!important;padding:12px 0 0!important;border-top:1px solid var(--line)!important;border-bottom:0!important;color:var(--ink);line-height:1.9;text-align:right;direction:rtl}
+.lesson-key-point-list{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.lesson-key-point-card{min-width:0}
+.lesson-key-point-title{display:grid;gap:8px}
+.lesson-key-point-card .kp-it{direction:ltr;text-align:left}
+.lesson-key-point-card .kp-ar{direction:rtl;text-align:right}

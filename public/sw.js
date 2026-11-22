@@ -1,4 +1,4 @@
-const CACHE_NAME = 'patente-ar-v54-italian-audio-1';
+const CACHE_NAME = 'patente-ar-v55-italian-audio-1';
 const FETCH_TIMEOUT_MS = 10000;
 const SHELL = [
   '/',
@@ -32,6 +32,7 @@ const SHELL = [
 ];
 const OFFLINE_DATA = [
   '/data/lessons.json',
+  '/data/lesson-support.json',
   '/data/questions.json',
   '/data/topic-labels.json',
   '/data/similar-groups.json',
@@ -52,6 +53,7 @@ const NETWORK_FIRST = new Set([
   '/app.bundle.js',
   '/manifest.webmanifest',
   '/data/lessons.json',
+  '/data/lesson-support.json',
   '/data/questions.json',
   '/data/topic-labels.json',
   '/data/similar-groups.json',
@@ -145,9 +147,20 @@ function validJsonPayload(pathname, data) {
     });
   }
   if (pathname === '/data/lessons.json') {
-    return !!data && Array.isArray(data.modules) && data.modules.length > 0 && data.module_count === data.modules.length &&
+    const lessonKeys = ['id', 'keyPoints', 'summaryAr', 'summaryIt', 'titleAr', 'titleIt'].join(',');
+    const pointKeys = ['ar', 'it'].join(',');
+    return !!data && data.schema_version === 3 && Array.isArray(data.modules) && data.modules.length === 11 && data.module_count === data.modules.length &&
       data.modules.every(module => module?.title_it && module?.title_ar && Array.isArray(module.lessons) && module.lessons.length > 0 &&
-        Array.isArray(module.sources) && module.sources.length > 0 && module.lessons.every(lesson => lesson?.heading_it && lesson?.heading_ar && lesson?.body_it && lesson?.body_ar));
+        Array.isArray(module.sources) && module.sources.length > 0 && module.lessons.every((lesson, index) => lesson &&
+          Object.keys(lesson).sort().join(',') === lessonKeys && lesson.id === `u${module.order_hint}-l${index + 1}` &&
+          ['titleIt', 'titleAr', 'summaryIt', 'summaryAr'].every(key => typeof lesson[key] === 'string' && lesson[key].trim()) &&
+          Array.isArray(lesson.keyPoints) && lesson.keyPoints.length >= 3 && lesson.keyPoints.length <= 5 &&
+          lesson.keyPoints.every(point => point && Object.keys(point).sort().join(',') === pointKeys && typeof point.it === 'string' && point.it.trim() && typeof point.ar === 'string' && point.ar.trim()))) &&
+      data.modules.reduce((count, module) => count + module.lessons.length, 0) === 50;
+  }
+  if (pathname === '/data/lesson-support.json') {
+    return !!data && data.schema_version === 1 && !!data.lessons && typeof data.lessons === 'object' && !Array.isArray(data.lessons) &&
+      Object.keys(data.lessons).length === 50 && Object.entries(data.lessons).every(([id, metadata]) => /^u(?:[1-9]|1[01])-l[1-9][0-9]*$/.test(id) && metadata && typeof metadata === 'object' && !Array.isArray(metadata));
   }
   if (pathname === '/data/topic-labels.json') {
     return !!data && !Array.isArray(data) && typeof data === 'object' && Object.keys(data).length > 0 &&
@@ -187,19 +200,22 @@ async function sha256Hex(response) {
 
 async function hasCompatibleOfflineData(cache) {
   try {
-    const [bankResponse, lessonResponse, labelsResponse, similarResponse, dictionaryResponse] = await Promise.all([
+    const [bankResponse, lessonResponse, supportResponse, labelsResponse, similarResponse, dictionaryResponse] = await Promise.all([
       cache.match('/data/questions.json'), cache.match('/data/lessons.json'),
-      cache.match('/data/topic-labels.json'), cache.match('/data/similar-groups.json'),
+      cache.match('/data/lesson-support.json'), cache.match('/data/topic-labels.json'), cache.match('/data/similar-groups.json'),
       cache.match('/data/italian_arabic_dictionary_lookup.json')
     ]);
-    if (![bankResponse, lessonResponse, labelsResponse, similarResponse, dictionaryResponse].every(Boolean)) return false;
-    const [bank, lessons, labels, similar, dictionary] = await Promise.all([
-      bankResponse.clone().json(), lessonResponse.clone().json(), labelsResponse.clone().json(), similarResponse.clone().json(), dictionaryResponse.clone().json()
+    if (![bankResponse, lessonResponse, supportResponse, labelsResponse, similarResponse, dictionaryResponse].every(Boolean)) return false;
+    const [bank, lessons, support, labels, similar, dictionary] = await Promise.all([
+      bankResponse.clone().json(), lessonResponse.clone().json(), supportResponse.clone().json(), labelsResponse.clone().json(), similarResponse.clone().json(), dictionaryResponse.clone().json()
     ]);
     if (!validJsonPayload('/data/questions.json', bank) || !validJsonPayload('/data/lessons.json', lessons) ||
+        !validJsonPayload('/data/lesson-support.json', support) ||
         !validJsonPayload('/data/topic-labels.json', labels) || !validJsonPayload('/data/similar-groups.json', similar) ||
         !validJsonPayload('/data/italian_arabic_dictionary_lookup.json', dictionary) ||
         similar.question_count !== bank.count || await sha256Hex(bankResponse) !== similar.question_bank_sha256) return false;
+    const lessonIds = lessons.modules.flatMap(module => module.lessons.map(lesson => lesson.id));
+    if (lessonIds.length !== 50 || new Set(lessonIds).size !== 50 || lessonIds.some(id => !Object.hasOwn(support.lessons, id))) return false;
     const byId = new Map(bank.questions.map(question => [Number(question.id), question]));
     const groupedIds = new Set();
     for (const group of similar.groups) {

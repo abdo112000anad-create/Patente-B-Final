@@ -29,8 +29,8 @@ const VOICE_WAIT_TIMEOUT_MS = 2500;
 const VOICE_POLL_INTERVAL_MS = 200;
 
 export function buildLessonSpeechTexts(lesson = {}) {
-  const headingIt = String(lesson.heading_it || '').trim();
-  const bodyIt = String(lesson.body_it || '').trim();
+  const headingIt = String(lesson.titleIt || lesson.heading_it || '').trim();
+  const bodyIt = String(lesson.summaryIt || lesson.body_it || '').trim();
   return {italian: [headingIt, bodyIt].filter(Boolean).join('\n\n')};
 }
 

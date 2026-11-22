@@ -30,7 +30,7 @@ const headerText = '/*\n' + Object.entries(headers).map(([k,v]) => `  ${k}: ${v}
   '/app.bundle.js\n  content-type: text/javascript; charset=utf-8\n\n' +
   '/sw.js\n  content-type: text/javascript; charset=utf-8\n  service-worker-allowed: /\n';
 fs.writeFileSync(path.join(publicDir, '_headers'), headerText);
-const release = {version, entry: `/app.bundle.js?v=${version}`, bundleSha256: sha256(path.join(publicDir, 'app.bundle.js')), lessonsSha256: sha256(path.join(root, 'data/lessons.json')), questionBankSha256: sha256(path.join(root, 'data/questions.json')), dictionarySha256: sha256(path.join(root, 'data/italian_arabic_dictionary_lookup.json'))};
+const release = {version, entry: `/app.bundle.js?v=${version}`, bundleSha256: sha256(path.join(publicDir, 'app.bundle.js')), lessonsSha256: sha256(path.join(root, 'data/lessons.json')), lessonSupportSha256: sha256(path.join(root, 'data/lesson-support.json')), questionBankSha256: sha256(path.join(root, 'data/questions.json')), dictionarySha256: sha256(path.join(root, 'data/italian_arabic_dictionary_lookup.json'))};
 fs.writeFileSync(path.join(publicDir, 'release.json'), JSON.stringify(release, null, 2) + '\n');
 fs.rmSync(dist, {recursive: true, force: true});
 fs.mkdirSync(dist);
@@ -41,6 +41,6 @@ for (const name of fs.readdirSync(path.join(root, 'src'))) {
   if (/\.(?:css|js|mjs)$/.test(name)) fs.copyFileSync(path.join(root, 'src', name), path.join(dist, 'src', name));
 }
 fs.mkdirSync(path.join(dist, 'data'));
-for (const name of ['questions.json', 'lessons.json', 'topic-labels.json', 'similar-groups.json', 'italian_arabic_dictionary_lookup.json']) fs.copyFileSync(path.join(root, 'data', name), path.join(dist, 'data', name));
+for (const name of ['questions.json', 'lessons.json', 'lesson-support.json', 'topic-labels.json', 'similar-groups.json', 'italian_arabic_dictionary_lookup.json']) fs.copyFileSync(path.join(root, 'data', name), path.join(dist, 'data', name));
 console.log(`Built PWA v${version} in ${dist}`);
 console.log(`Bundle SHA-256: ${release.bundleSha256}`);

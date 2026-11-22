@@ -42059,7 +42059,7 @@ This typically indicates that your device does not have a healthy Internet conne
         controller.abort();
       }, timeoutMs);
     });
-    const paths = ["/data/questions.json", "/data/lessons.json", "/data/topic-labels.json", "/data/similar-groups.json"];
+    const paths = ["/data/questions.json", "/data/lessons.json", "/data/topic-labels.json", "/data/similar-groups.json", "/data/lesson-support.json"];
     const requests = Promise.all(paths.map(async (path) => {
       const response = await fetchImpl(path, { signal: controller.signal, credentials: "same-origin", cache: "no-store" });
       if (response.headers.get("cf-mitigated") === "challenge" || response.status === 403) {
@@ -42079,16 +42079,56 @@ This typically indicates that your device does not have a healthy Internet conne
     }));
     try {
       const loaded = await Promise.race([requests, timeout]);
-      const [bankFile, lessonFile, labelsFile, similarFile] = loaded;
+      const [bankFile, lessonFile, labelsFile, similarFile, supportFile] = loaded;
       const bank2 = bankFile == null ? void 0 : bankFile.data;
       const lessons = lessonFile == null ? void 0 : lessonFile.data;
       const labels = labelsFile == null ? void 0 : labelsFile.data;
       const similar = similarFile == null ? void 0 : similarFile.data;
-      if (!bank2 || !Array.isArray(bank2.questions) || bank2.questions.length === 0 || bank2.count !== bank2.questions.length || !lessons || !Array.isArray(lessons.modules) || lessons.module_count !== lessons.modules.length || !labels || typeof labels !== "object" || Array.isArray(labels) || Object.keys(labels).length === 0 || !similar || similar.schema_version !== 2 || !Array.isArray(similar.groups) || similar.group_count !== similar.groups.length || similar.question_count !== bank2.questions.length || !/^[a-f0-9]{64}$/.test(similar.question_bank_sha256 || "")) {
+      const support = supportFile == null ? void 0 : supportFile.data;
+      if (!bank2 || !Array.isArray(bank2.questions) || bank2.questions.length === 0 || bank2.count !== bank2.questions.length || !lessons || lessons.schema_version !== 3 || !Array.isArray(lessons.modules) || lessons.module_count !== lessons.modules.length || lessons.module_count !== 11 || !labels || typeof labels !== "object" || Array.isArray(labels) || Object.keys(labels).length === 0 || !similar || similar.schema_version !== 2 || !Array.isArray(similar.groups) || similar.group_count !== similar.groups.length || similar.question_count !== bank2.questions.length || !/^[a-f0-9]{64}$/.test(similar.question_bank_sha256 || "") || !support || support.schema_version !== 1 || !support.lessons || typeof support.lessons !== "object" || Array.isArray(support.lessons)) {
         const error = new Error("I file del corso sono incompleti o non compatibili. / ملفات المنهج ناقصة أو غير متوافقة.");
         error.code = "course_integrity";
         throw error;
       }
+      const lessonKeys = ["id", "keyPoints", "summaryAr", "summaryIt", "titleAr", "titleIt"].sort().join(",");
+      const pointKeys = ["ar", "it"].join(",");
+      const expectedIds = /* @__PURE__ */ new Set();
+      let lessonCount = 0;
+      for (const module of lessons.modules) {
+        if (!Number.isInteger(module == null ? void 0 : module.order_hint) || !Array.isArray(module.lessons)) {
+          const error = new Error("I dati delle lezioni non sono validi. / بيانات الدروس غير صالحة.");
+          error.code = "course_integrity";
+          throw error;
+        }
+        for (let index = 0; index < module.lessons.length; index += 1) {
+          const lesson = module.lessons[index];
+          const expectedId = `u${module.order_hint}-l${index + 1}`;
+          if (!lesson || Object.keys(lesson).sort().join(",") !== lessonKeys || lesson.id !== expectedId || expectedIds.has(lesson.id) || !["titleIt", "titleAr", "summaryIt", "summaryAr"].every((key) => typeof lesson[key] === "string" && lesson[key].trim()) || !Array.isArray(lesson.keyPoints) || lesson.keyPoints.length < 3 || lesson.keyPoints.length > 5 || !lesson.keyPoints.every((point) => point && Object.keys(point).sort().join(",") === pointKeys && typeof point.it === "string" && point.it.trim() && typeof point.ar === "string" && point.ar.trim())) {
+            const error = new Error("Il formato di una lezione non è valido. / تنسيق أحد الدروس غير صالح.");
+            error.code = "course_integrity";
+            throw error;
+          }
+          expectedIds.add(lesson.id);
+          lessonCount += 1;
+        }
+      }
+      if (lessonCount !== 50 || Object.keys(support.lessons).length !== lessonCount || Object.keys(support.lessons).some((id) => !expectedIds.has(id))) {
+        const error = new Error("Il numero delle lezioni o dei dati di supporto non coincide. / عدد الدروس أو بيانات الدعم غير متطابق.");
+        error.code = "course_integrity";
+        throw error;
+      }
+      const runtimeCourse = {
+        ...lessons,
+        modules: lessons.modules.map((module) => ({
+          ...module,
+          lessons: module.lessons.map((lesson) => ({
+            ...lesson,
+            ...support.lessons[lesson.id] || {},
+            heading_it: lesson.titleIt,
+            heading_ar: lesson.titleAr
+          }))
+        }))
+      };
       if (!((_a14 = globalThis.crypto) == null ? void 0 : _a14.subtle) || typeof TextEncoder !== "function") {
         const error = new Error("Il controllo d’integrità non è disponibile sul dispositivo. / التحقق من سلامة الملفات غير متاح على هذا الجهاز.");
         error.code = "course_integrity";
@@ -42102,7 +42142,7 @@ This typically indicates that your device does not have a healthy Internet conne
         error.code = "course_integrity";
         throw error;
       }
-      return loaded.map((file) => file.data);
+      return [bank2, runtimeCourse, labels, similar];
     } catch (error) {
       if (error.code === "course_timeout" || error.code === "course_integrity" || ((_b = error.message) == null ? void 0 : _b.includes(" / "))) throw error;
       throw new Error("Connessione interrotta. Controlla la rete e riprova. / انقطع الاتصال. تحقق من الشبكة ثم أعد المحاولة.");
@@ -42151,8 +42191,8 @@ This typically indicates that your device does not have a healthy Internet conne
   var VOICE_WAIT_TIMEOUT_MS = 2500;
   var VOICE_POLL_INTERVAL_MS = 200;
   function buildLessonSpeechTexts(lesson = {}) {
-    const headingIt = String(lesson.heading_it || "").trim();
-    const bodyIt = String(lesson.body_it || "").trim();
+    const headingIt = String(lesson.titleIt || lesson.heading_it || "").trim();
+    const bodyIt = String(lesson.summaryIt || lesson.body_it || "").trim();
     return { italian: [headingIt, bodyIt].filter(Boolean).join("\n\n") };
   }
   function voiceNameFor() {
@@ -46511,29 +46551,12 @@ This typically indicates that your device does not have a healthy Internet conne
   var esc2 = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   var pair = (it2, ar2) => `<span class="language-pair lesson-pair"><span class="pair-it" lang="it" dir="ltr">${esc2(it2)}</span><span class="pair-ar" lang="ar" dir="rtl">${esc2(ar2)}</span></span>`;
   function pointCards(items = []) {
-    const cards = items.map((item) => `<article class="lesson-key-point-card key-point-card"><div class="lesson-key-point-title" role="heading" aria-level="3"><div class="kp-it" lang="it" dir="ltr">${esc2(item.title_it)}</div><div class="kp-ar" lang="ar" dir="rtl">${esc2(item.title_ar)}</div></div><div class="lesson-key-point-rule"><div class="lesson-key-point-rule-label">${pair("Regola da ricordare", "القاعدة التي يجب تذكرها")}</div>${pair(item.it, item.ar)}</div></article>`).join("");
-    return `<section class="lesson-key-points" data-lesson-section="points"><h2>${pair("Punti importanti", "النقاط المهمة")}</h2><div class="lesson-key-point-list key-points-list key-points-grid">${cards}</div></section>`;
-  }
-  function trapCards(items = []) {
-    const body = items.length ? items.map((item) => `<article class="lesson-trap-card"><h3><span lang="it" dir="ltr">${esc2(item.term_it)}</span><small lang="ar" dir="rtl">${esc2(item.meaning_ar)}</small></h3><div>${pair(item.why_it, item.why_ar)}</div>${item.example_it || item.example_ar ? `<blockquote>${pair(item.example_it || "", item.example_ar || "")}</blockquote>` : ""}</article>`).join("") : `<p class="lesson-empty-note">${pair("No special trap word applies to this lesson.", "لا توجد كلمة ملتبسة خاصة بهذا الدرس.")}</p>`;
-    return `<section class="lesson-trap-words" data-lesson-section="trap-words"><h2>${pair("Parole da leggere con attenzione", "كلمات مميزة تستحق الانتباه")}</h2>${body}</section>`;
-  }
-  function numberCards(items = []) {
-    const body = items.length ? `<ul>${items.map((item) => `<li><strong lang="it" dir="ltr">${esc2(item.value)}</strong><div>${pair(item.context_it, item.context_ar)}</div></li>`).join("")}</ul>` : `<p class="lesson-empty-note">${pair("This lesson has no special numeric value to memorize.", "لا يتضمن الدرس رقمًا خاصًا للحفظ.")}</p>`;
-    return `<section class="lesson-number-block" data-lesson-section="numbers"><h2>${pair("Numeri e condizioni", "الأرقام والشروط")}</h2>${body}</section>`;
-  }
-  function mistakesList(items = []) {
-    const rows = items.map((item) => `<li><div class="lesson-mistake"><strong>${pair(item.mistake_it, item.mistake_ar)}</strong><p>${pair(item.why_it, item.why_ar)}</p></div></li>`).join("");
-    return `<section class="lesson-mistakes" data-lesson-section="mistakes"><h2>${pair("Errori comuni", "أخطاء شائعة")}</h2><ol>${rows}</ol></section>`;
-  }
-  function quickChecks(items = []) {
-    const cards = items.map((item, index) => `<fieldset class="lesson-quick-check" data-quick-check data-answer="${item.answer === "VERO" ? "VERO" : "FALSO"}"><legend><span class="quick-check-number">${String(index + 1).padStart(2, "0")}</span>${pair(item.statement_it, item.statement_ar)}</legend><div class="quick-check-buttons"><button type="button" data-quick-check-answer="VERO">${pair("Vero", "صحيح")}</button><button type="button" data-quick-check-answer="FALSO">${pair("Falso", "خطأ")}</button></div><p class="quick-check-feedback" role="status" aria-live="polite" hidden></p><div class="quick-check-explanation" hidden>${pair(item.explanation_it, item.explanation_ar)}</div></fieldset>`).join("");
-    return `<section class="lesson-check-block" data-lesson-section="check"><h2>${pair("Controllo rapido · Vero o Falso?", "تحقق سريع · صحيح أم خطأ؟")}</h2><div class="lesson-quick-check-list">${cards}</div></section>`;
+    const cards = items.map((item) => `<article class="lesson-key-point-card key-point-card"><div class="lesson-key-point-title" role="heading" aria-level="3"><div class="kp-it" lang="it" dir="ltr">${esc2(item.it)}</div><div class="kp-ar" lang="ar" dir="rtl">${esc2(item.ar)}</div></div></article>`).join("");
+    return `<section class="lesson-key-points" data-lesson-section="points"><h2>${pair("Punti importanti", "النقاط الأساسية")}</h2><div class="lesson-key-point-list key-points-list key-points-grid">${cards}</div></section>`;
   }
   function renderLessonSections(lesson, visualMarkup = "") {
-    const body = `<section class="lesson-content-block" data-lesson-section="body"><h2>${pair("Testo in italiano", "النص الإيطالي")}</h2><div class="lesson-body-pair"><div class="lesson-it-text" lang="it" dir="ltr">${esc2(lesson.body_it)}</div><div class="lesson-ar-full" lang="ar" dir="rtl">${esc2(lesson.body_ar)}</div></div></section>`;
-    const core = `<section class="lesson-core-idea" data-lesson-section="idea"><h2>${pair("Idea centrale", "الفكرة الأساسية")}</h2><div>${pair(lesson.core_it, lesson.core_ar)}</div></section>`;
-    return `${body}${core}${pointCards(lesson.key_points || [])}${trapCards(lesson.trap_words || [])}${numberCards(lesson.numbers || [])}${mistakesList(lesson.common_mistakes || [])}${quickChecks(lesson.quick_check || [])}${visualMarkup}`;
+    const summary = `<section class="lesson-content-block" data-lesson-section="summary"><h2>${pair("Sintesi della lezione", "خلاصة الدرس")}</h2><div class="lesson-summary-card"><div class="lesson-it-text" lang="it" dir="ltr">${esc2(lesson.summaryIt)}</div><div class="lesson-ar-full" lang="ar" dir="rtl">${esc2(lesson.summaryAr)}</div></div></section>`;
+    return `${summary}${pointCards(lesson.keyPoints || [])}${visualMarkup}`;
   }
 
   // src/progress-set-edits.mjs
@@ -47139,46 +47162,6 @@ This typically indicates that your device does not have a healthy Internet conne
     persistState();
     render("lesson", { moduleId, index });
   }
-  function recentExamReadinessMarkup() {
-    const recent = state.sessions.filter((item) => item.mode === "exam" && !item.studyAdjusted).slice(0, 3);
-    const total = recent.reduce((sum2, item) => sum2 + Number(item.total || 30), 0);
-    const right = recent.reduce((sum2, item) => sum2 + Number(item.right || 0), 0);
-    const score = total ? Math.round(right / total * 100) : null;
-    return `<section class="readiness-card"><div><div class="eyebrow">${pair2("RECENT EXAM PRACTICE", "نتائج المحاكاة الأخيرة", "eyebrow-pair")}</div><h2>${pair2("Track your mock-exam average", "تابع متوسط نتائج المحاكاة")}</h2><p>${pair2(recent.length ? `Based on your last ${recent.length} completed simulations; this is a study metric, not a guarantee of passing.` : "Complete a timed simulation to start your personal trend.", recent.length ? `مبني على آخر ${recent.length.toLocaleString("ar")} محاكاة؛ مؤشر للمذاكرة وليس ضمانًا للنجاح.` : "أكمل محاكاة محددة الوقت لبدء متابعة مستواك.")}</p></div><strong>${score === null ? "—" : `${score.toLocaleString("ar")}%`}</strong><button class="quiet-button" data-action="exam">${controlLabel("Start exam", "ابدأ محاكاة")}</button></section>`;
-  }
-  function studyInsightsMarkup() {
-    const weakest = orderedTopics().map((topic) => {
-      const total = Number(state.topicTotal[topic] || 0), correct = Number(state.topicCorrect[topic] || 0);
-      return { topic, total, accuracy: total ? Math.round(correct / total * 100) : 0 };
-    }).filter((x2) => x2.total >= 2).sort((a, b2) => a.accuracy - b2.accuracy || b2.total - a.total).slice(0, 3);
-    const topicRows = weakest.length ? weakest.map((x2) => `<div class="mastery-row"><div class="mastery-copy">${pair2(topicLabel(x2.topic).it, topicLabel(x2.topic).ar)}<small>${x2.total.toLocaleString("it-IT")} risposte · ${x2.total.toLocaleString("ar")} إجابة</small></div><div class="mastery-track" role="progressbar" aria-label="${esc3(topicLabel(x2.topic).it)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${x2.accuracy}"><i style="width:${x2.accuracy}%"></i></div><strong>${x2.accuracy.toLocaleString("ar")}%</strong></div>`).join("") : `<div class="insight-empty">${pair2("Rispondi ad alcune domande di allenamento per individuare gli argomenti da ripassare.", "أجب عن بعض أسئلة التدريب لتظهر الموضوعات التي تحتاج إلى تركيز.")}</div>`;
-    const labels = { exam: { it: "Esame simulato", ar: "محاكاة امتحان" }, visual: { it: "Sfida visiva", ar: "تدريب بصري" }, smart: { it: "Ripasso intelligente", ar: "مراجعة ذكية" }, due: { it: "Ripasso programmato", ar: "مراجعة مستحقة" }, custom: { it: "Allenamento personalizzato", ar: "تدريب مخصص" }, topic: { it: "Quiz per argomento", ar: "تدريب موضوعي" }, "lesson-review": { it: "Ripasso lezione", ar: "مراجعة درس" }, mistakes: { it: "Errori", ar: "الأخطاء" }, favorites: { it: "Preferiti", ar: "المحفوظات" }, practice: { it: "Allenamento", ar: "تدريب" }, single: { it: "Domanda singola", ar: "سؤال منفرد" } };
-    const recent = state.sessions.slice(0, 5).map((item) => {
-      const mode = labels[item.mode] || labels.practice, day = Number.isFinite(item.at) ? new Date(item.at).toLocaleDateString("it-IT", { day: "2-digit", month: "short" }) : "";
-      return `<div class="session-row"><span class="session-date">${esc3(day)}</span><div class="session-kind">${pair2(mode.it, mode.ar)}</div><strong>${Number(item.right || 0).toLocaleString("ar")}/${Number(item.answered || 0).toLocaleString("ar")}</strong><span class="session-result">${pair2(item.mode === "exam" ? item.passed ? "Superata" : "Da rivedere" : `${Number(item.wrong || 0)} errori`, item.mode === "exam" ? item.passed ? "اجتياز" : "تحتاج إلى مراجعة" : `${Number(item.wrong || 0).toLocaleString("ar")} أخطاء`)}</span></div>`;
-    }).join("");
-    return `<section class="insight-grid"><article class="insight-card"><h2>${pair2("Argomenti su cui concentrarsi", "موضوعات تحتاج إلى تركيز")}</h2>${topicRows}</article><article class="insight-card"><h2>${pair2("Sessioni di studio recenti", "جلسات الدراسة الأخيرة")}</h2>${recent || `<div class="insight-empty">${pair2("Le sessioni completate appariranno qui.", "ستظهر جلساتك المكتملة هنا.")}</div>`}</article></section>`;
-  }
-  function officialSyllabusMarkup() {
-    const rows = officialSyllabus.map((item) => {
-      const target = (item.lesson_refs || []).map(findLesson).find(Boolean);
-      if (!target) return "";
-      return `<li class="syllabus-map-item"><span class="syllabus-map-id">${esc3(item.id.toUpperCase())}</span><div class="syllabus-map-copy">${pair2(item.title_it, item.title_ar, "syllabus-map-title")}<small>${pair2(`${item.lesson_refs.length} lezioni collegate`, `${item.lesson_refs.length.toLocaleString("ar")} دروس مرتبطة`)}</small></div><button class="syllabus-open" type="button" data-open-lesson="${esc3(target.module.module_id)}" data-lesson-index="${target.index}" aria-label="${esc3(`${item.title_it} / ${item.title_ar}`)}">${controlLabel("Open lesson", "افتح درسًا")}</button></li>`;
-    }).join("");
-    return `<details class="official-syllabus"><summary><span class="syllabus-summary-copy">${pair2(`${officialSyllabus.length} argomenti ufficiali collegati alle lezioni`, `${officialSyllabus.length.toLocaleString("ar")} موضوعًا رسميًا مرتبطًا بالدروس`, "unit-title")}</span><span class="accordion-chevron" aria-hidden="true"></span></summary><div class="official-syllabus-body"><p>${pair2("Index based on the Ministry’s 2019 circular. It is a navigation aid, not a certification of legal completeness.", "فهرس مبني على دورية الوزارة لعام 2019؛ أداة للتنقل وليس شهادة باكتمال التغطية القانونية.")}</p><ol class="syllabus-map-list">${rows}</ol><div class="syllabus-source-links"><a href="${esc3(officialSyllabusMeta.source_url || "#")}" target="_blank" rel="noopener noreferrer">${pair2("Apri la circolare del MIT sul programma", "افتح دورية الوزارة للمنهج")}</a><a href="${esc3(officialSyllabusMeta.exam_format_url || "#")}" target="_blank" rel="noopener noreferrer">${pair2("Consulta le procedure d’esame attuali", "تحقق من إجراءات الامتحان الحالية")}</a></div><p class="syllabus-exam-note">${pair2(officialSyllabusMeta.exam_format_note_it || "", officialSyllabusMeta.exam_format_note_ar || "")}</p></div></details>`;
-  }
-  function dashboardIcon(name4) {
-    const paths = {
-      spark: `<path d="m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2L12 3Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/>`,
-      exam: `<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6v3H9zM8 12h8M8 16h5"/>`,
-      book: `<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 6h13M8 10h7M8 13h7"/>`,
-      sign: `<path d="M4 5h16l-2 5H6L4 5ZM6 10v9M18 10v9M9 14h6M9 17h6"/>`,
-      alert: `<path d="m12 3 9 16H3l9-16Z"/><path d="M12 9v4M12 16h.01"/>`,
-      bookmark: `<path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/>`,
-      arrow: `<path d="M5 12h14M13 6l6 6-6 6"/>`
-    };
-    return `<svg class="tool-svg" viewBox="0 0 24 24" aria-hidden="true">${paths[name4] || paths.book}</svg>`;
-  }
   function courseUnitIllustration(module) {
     const paths = {
       "road-basics": '<path d="M5 21 9 3h6l4 18M12 4v3m0 4v4m0 4v2"/>',
@@ -47198,30 +47181,16 @@ This typically indicates that your device does not have a healthy Internet conne
     return `<span class="course-unit-art"><svg viewBox="0 0 24 24" role="img" aria-label="${label}" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths[module.module_id] || fallback}</svg></span>`;
   }
   function homePage() {
-    const prog = courseProgress(), next = nextCourseLesson(), accuracy = state.practiceCount ? Math.round(state.correctCount / state.practiceCount * 100) : 0;
-    const reviewAlert = state.wrong.size ? `<aside class="recommendation-banner"><div>${pair2("A few questions are ready for another look.", "لديك أسئلة تستحق مراجعة أخرى.")}</div><button class="small-button" data-action="mistakes">${controlLabel(`Review ${state.wrong.size} mistakes`, `راجع ${state.wrong.size.toLocaleString("ar")} أخطاء`)}</button></aside>` : "";
-    const resumeBanner = state.activeQuiz ? `<aside class="resume-banner"><div>${pair2(progressStorageAvailable ? "You have an unfinished study session saved on this device." : "Browser storage is unavailable; this unfinished session may be lost if you close the tab.", progressStorageAvailable ? "لديك جلسة دراسة غير مكتملة محفوظة على هذا الجهاز." : "تخزين المتصفح غير متاح؛ قد تضيع الجلسة عند إغلاق الصفحة.")}</div><button class="primary-button" data-action="resume-session">${controlLabel("Resume session", "استأنف الجلسة")}</button><button class="quiet-button" data-action="discard-session">${controlLabel("Discard", "إلغاء")}</button></aside>` : "";
-    const toolCards = [
-      { view: "glossary", icon: "book", tone: "blue", it: "Glossario", ar: "القاموس", subIt: "200 termini italiano–arabo con pronuncia.", subAr: "٢٠٠ مصطلح إيطالي–عربي مع النطق." }
-    ];
-    const tools = toolCards.map((item) => `<button class="dashboard-tool dashboard-tool-primary ${item.tone}" type="button" data-view="${item.view}"><span class="tool-icon">${dashboardIcon(item.icon)}</span><span class="tool-copy">${pair2(item.it, item.ar, "tool-title")}<small>${pair2(item.subIt, item.subAr)}</small></span><span class="tool-arrow" aria-hidden="true">${dashboardIcon("arrow")}</span></button>`).join("");
+    const access = getLessonAccess();
     const moduleHtml = lessonModules.map((module, mi) => {
-      const done = module.lessons.filter((_, li) => state.completedLessons.has(lessonKey(module.module_id, li))).length;
       const lessons = module.lessons.map((lesson, li) => {
-        const key = lessonKey(module.module_id, li), complete = state.completedLessons.has(key), access = getLessonAccess(), accessible = (access == null ? void 0 : access.hasAccess(key)) === true, free = (access == null ? void 0 : access.isFree(key)) === true;
-        const accessLabel = !accessible ? controlLabel("Locked · test ad", "مقفل · إعلان اختباري") : !free ? controlLabel("Unlocked this session", "مفتوح لهذه الجلسة") : complete ? controlLabel("Completed", "مكتمل") : controlLabel("Open lesson", "افتح الدرس");
-        return `<button class="course-lesson-row ${accessible ? "" : "is-locked"}" type="button" data-open-lesson="${esc3(module.module_id)}" data-lesson-index="${li}"><span class="lesson-row-mark ${complete ? "is-done" : ""}" aria-hidden="true">${complete ? "✓" : String(li + 1).padStart(2, "0")}</span><span class="course-lesson-copy">${pair2(lesson.heading_it, lesson.heading_ar, "course-lesson-heading")}<small>${accessLabel}</small></span><span class="course-row-arrow" aria-hidden="true">›</span></button>`;
+        const key = lessonKey(module.module_id, li), accessible = (access == null ? void 0 : access.hasAccess(key)) === true;
+        const accessLabel = accessible ? "" : `<small>${controlLabel("Locked · test ad", "مقفل · إعلان اختباري")}</small>`;
+        return `<button class="course-lesson-row ${accessible ? "" : "is-locked"}" type="button" data-open-lesson="${esc3(module.module_id)}" data-lesson-index="${li}"><span class="lesson-row-mark" aria-hidden="true">${String(li + 1).padStart(2, "0")}</span><span class="course-lesson-copy">${pair2(lesson.titleIt || lesson.heading_it, lesson.titleAr || lesson.heading_ar, "course-lesson-heading")}${accessLabel}</span><span class="course-row-arrow" aria-hidden="true">›</span></button>`;
       }).join("");
-      return `<details class="course-accordion" data-course-unit><summary><span class="course-unit-number">${String(mi + 1).padStart(2, "0")}</span>${courseUnitIllustration(module)}<span class="course-accordion-title">${pair2(module.title_it, module.title_ar, "unit-title")}</span><span class="unit-progress"><strong>${done.toLocaleString("ar")}/${module.lessons.length.toLocaleString("ar")}</strong><small>${pair2("lezioni", "دروس")}</small></span><span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-accordion-lessons"><p class="course-unit-intro">${pair2(module.intro_it, module.intro_ar)}</p>${lessons}</div></details>`;
+      return `<details class="course-accordion" data-course-unit><summary><span class="course-unit-number">${String(mi + 1).padStart(2, "0")}</span>${courseUnitIllustration(module)}<span class="course-accordion-title">${pair2(module.title_it, module.title_ar, "unit-title")}</span><span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-accordion-lessons">${lessons}</div></details>`;
     }).join("");
-    return `${resumeBanner}${reviewAlert}
-  <details class="home-progress-details"><summary>${pair2("Il tuo progresso", "تقدمك الدراسي")}<span class="accordion-chevron" aria-hidden="true"></span></summary><section class="study-stats" aria-label="Panoramica dello studio · ملخص الدراسة"><div>${pair2("Banca dati dei quiz", "بنك الأسئلة")}<strong>${bank.count.toLocaleString("ar")}</strong></div><div>${pair2("Precisione negli esercizi", "دقة التدريب")}<strong>${accuracy.toLocaleString("ar")}%</strong></div><div>${pair2("Lezioni completate", "الدروس المكتملة")}<strong>${prog.complete.toLocaleString("ar")} / ${prog.all.length.toLocaleString("ar")}</strong></div><div>${pair2("Giorni consecutivi di studio", "أيام المذاكرة المتتالية")}<strong>${state.streak.toLocaleString("ar")}</strong></div></section></details>
-  <section class="dashboard-section home-primary-actions"><div class="section-title-row"><div>${pair2("Strumenti di studio", "أدوات الدراسة", "section-title")}</div></div><div class="dashboard-tools">${tools}</div></section>
-  <details class="home-reference-tools"><summary>${pair2("Altri strumenti utili", "أدوات أخرى مفيدة")}<span class="accordion-chevron" aria-hidden="true"></span></summary><div class="home-reference-grid"><button class="small-button" data-view="traps">${controlLabel("Trap words", "كلمات ملتبسة")}</button><button class="small-button" data-view="numbers">${controlLabel("Key numbers", "أرقام مهمة")}</button><button class="small-button" data-view="comparisons">${controlLabel("Compare concepts", "قارن المفاهيم")}</button><button class="small-button" data-view="bank">${controlLabel("All quiz questions", "كل أسئلة الاختبار")}</button></div></details>
-  ${officialSyllabusMarkup()}
-  <details class="dashboard-insights"><summary>${pair2("Progressi e risultati recenti", "التقدم والنتائج الأخيرة")}<span aria-hidden="true" class="accordion-chevron"></span></summary>${recentExamReadinessMarkup()}${studyInsightsMarkup()}</details>
-  <details class="course-catalog" id="courseCatalog"><summary>${pair2("Contenuti del corso · 50 lezioni", "محتوى المنهج · ٥٠ درسًا")}<span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-catalog-body"><div class="course-accordion-list">${moduleHtml}</div></div></details>
-  <div class="notice-banner">${pair2("Il testo italiano dei quesiti e le relative risposte rimandano alla fonte. Le traduzioni in arabo sono state generate dall’IA e non sono state revisionate da una persona; sono un supporto allo studio, non traduzioni giuridiche ufficiali.", "نص الأسئلة وإجاباتها الإيطالية مرتبط بالمصدر. الترجمات العربية مولّدة آليًا ولم تُراجع بشريًا؛ استخدمها وسيلةً مساعدة للدراسة لا ترجمة قانونية رسمية.")}</div>`;
+    return `<details class="course-catalog" id="courseCatalog" open><summary>${pair2("Contenuti del corso · 50 lezioni", "محتوى المنهج · ٥٠ درسًا")}<span class="accordion-chevron" aria-hidden="true"></span></summary><div class="course-catalog-body"><div class="course-accordion-list">${moduleHtml}</div></div></details>`;
   }
   function lessonDetailPage(moduleId, index) {
     const module = lessonModules.find((m2) => m2.module_id === moduleId), lesson = module == null ? void 0 : module.lessons[index];
@@ -48021,14 +47990,6 @@ This typically indicates that your device does not have a healthy Internet conne
     const heading = main.querySelector(".lesson-content-block h2");
     if (heading && !((_a14 = heading.nextElementSibling) == null ? void 0 : _a14.classList.contains("inline-vocabulary-hint"))) heading.insertAdjacentHTML("afterend", `<p class="inline-vocabulary-hint">${pair2("Tocca una parola per tradurre", "انقر على الكلمة للترجمة")}</p>`);
   }
-  function quickStudyGuideMarkup() {
-    return `<details class="quick-study-guide" data-quick-guide><summary>${pair2("È la prima volta? Inizia con tre semplici passi", "جديد هنا؟ ابدأ بثلاث خطوات بسيطة")}<span class="accordion-chevron" aria-hidden="true"></span></summary><div class="quick-study-steps"><article><strong>01</strong><div>${pair2("Studia una breve lezione bilingue", "تعلّم درسًا ثنائي اللغة")}</div><button class="small-button" data-action="continue-course">${controlLabel("Apri la prossima lezione", "افتح الدرس التالي")}</button></article><article><strong>02</strong><div>${pair2("Esercitati per argomento e ripassa gli errori", "تدرّب حسب الموضوع وراجع أخطاءك")}</div><button class="small-button" data-action="smart-practice">${controlLabel("Inizia con 10 domande", "ابدأ 10 أسئلة")}</button></article><article><strong>03</strong><div>${pair2("Prova una simulazione d’esame quando ti senti pronto", "جرّب المحاكاة عندما تصبح مستعدًا")}</div><button class="small-button" data-action="exam">${controlLabel("Scegli le opzioni dell’esame", "اختر إعدادات المحاكاة")}</button></article></div></details>`;
-  }
-  function dailyGoalMarkup() {
-    const goal = dailyGoalToday(), questionTarget = 10, lessonTarget = 1, due = dueQuestionPool(questions, state.questionStats).length;
-    const questionPct = Math.min(100, Math.round(Number(goal.questions || 0) / questionTarget * 100)), lessonPct = Math.min(100, Math.round(Number(goal.lessons || 0) / lessonTarget * 100));
-    return `<section class="daily-goal-card" data-daily-goal aria-labelledby="dailyGoalTitle"><div class="daily-goal-copy"><div class="eyebrow">${pair2("OBIETTIVO DI STUDIO DI OGGI", "هدف الدراسة اليوم")}</div><h2 id="dailyGoalTitle">${pair2("Un passo costante oggi", "خطوة ثابتة اليوم")}</h2><p>${pair2("Rispondi a 10 domande e completa una lezione. Il conteggio comprende le sessioni di ripasso e le risposte date nelle simulazioni.", "أجب عن ١٠ أسئلة وأكمل درسًا واحدًا. يشمل العدّ المراجعة والإجابات المسلّمة في المحاكاة.")}</p></div><div class="daily-goal-meters"><div class="daily-goal-meter"><span>${pair2("Domande", "الأسئلة")}</span><strong>${Math.min(questionTarget, Number(goal.questions || 0)).toLocaleString("ar")} / ${questionTarget.toLocaleString("ar")}</strong><i role="progressbar" aria-label="Obiettivo giornaliero delle domande · هدف الأسئلة اليومي" aria-valuemin="0" aria-valuemax="${questionTarget}" aria-valuenow="${Math.min(questionTarget, Number(goal.questions || 0))}"><b style="width:${questionPct}%"></b></i></div><div class="daily-goal-meter"><span>${pair2("Lezioni", "الدروس")}</span><strong>${Math.min(lessonTarget, Number(goal.lessons || 0)).toLocaleString("ar")} / ${lessonTarget.toLocaleString("ar")}</strong><i role="progressbar" aria-label="Obiettivo giornaliero delle lezioni · هدف الدروس اليومي" aria-valuemin="0" aria-valuemax="${lessonTarget}" aria-valuenow="${Math.min(lessonTarget, Number(goal.lessons || 0))}"><b style="width:${lessonPct}%"></b></i></div></div><div class="daily-goal-actions"><button type="button" class="small-button" data-action="due-review" aria-label="Ripassa le domande previste e quelle nuove · راجع الأسئلة المستحقة والجديدة">${controlLabel(`Ripassa le domande previste e quelle nuove · ${due.toLocaleString("it-IT")}`, `راجع المستحق · ${due.toLocaleString("ar")}`)}</button></div></section>`;
-  }
   function ensureButtonAccessibleNames(root = main) {
     var _a14;
     for (const button of ((_a14 = root == null ? void 0 : root.querySelectorAll) == null ? void 0 : _a14.call(root, "button")) || []) {
@@ -48038,7 +47999,6 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   }
   function syncDynamicStudyFeatures() {
-    if (currentView === "home" && main.querySelector(".study-stats") && !main.querySelector("[data-daily-goal]")) (main.querySelector(".home-progress-details") || main.querySelector(".study-stats")).insertAdjacentHTML("beforebegin", dailyGoalMarkup());
     if (currentView === "lesson") {
       const marks = [[".lesson-detail-head", "title"], [".lesson-audio-row", "listen"], [".lesson-animation", "visualNotice"], [".lesson-it-text", "italian"], [".lesson-ar-full", "translation"], [".lesson-mistakes", "errors"], [".lesson-sources", "source"], [".lesson-footer-nav", "buttons"]];
       for (const [selector, name4] of marks) {
@@ -48047,19 +48007,6 @@ This typically indicates that your device does not have a healthy Internet conne
       }
     }
     ensureButtonAccessibleNames(document);
-    if (currentView === "home" || currentView === "lessons") {
-      const tools = main.querySelector(".dashboard-section");
-      if (tools && !main.querySelector("[data-quick-guide]")) tools.insertAdjacentHTML("afterend", quickStudyGuideMarkup());
-      for (const [index, row] of [...main.querySelectorAll(".session-row")].entries()) {
-        const session = state.sessions[index];
-        if ((session == null ? void 0 : session.mode) === "exam" && session.studyAdjusted && !row.dataset.adjustedLabel) {
-          row.dataset.adjustedLabel = "true";
-          const kind = row.querySelector(".session-kind"), result = row.querySelector(".session-result");
-          if (kind) kind.innerHTML = pair2("Study practice · adjusted", "تدريب بإعدادات مخصصة");
-          if (result) result.innerHTML = pair2("Study-only session, not a formal exam outcome", "جلسة تدريبية فقط وليست نتيجة امتحان رسمي");
-        }
-      }
-    }
     if (currentView === "lesson") enhanceLessonVocabulary();
     if (Capacitor.isNativePlatform() && currentView === "quiz" && (quiz == null ? void 0 : quiz.mode) === "exam" && !quiz.reviewing) {
       const controls = main.querySelector(".quiz-controls");

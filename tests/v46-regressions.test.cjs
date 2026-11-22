@@ -49,14 +49,9 @@ test('inline sentence translation displays only Arabic beneath the already visib
 test('key points use stacked bilingual cards with isolated Italian and Arabic labels', async () => {
   const { renderLessonSections } = await import(path.join(root, 'src/lesson-template.mjs'));
   const markup = renderLessonSections({
-    body_it: 'La carreggiata è destinata ai veicoli.',
-    body_ar: 'المسار مخصص للمركبات.',
-    core_it: 'La carreggiata può contenere più corsie.',
-    core_ar: 'قد يحتوي المسار على عدة حارات.',
-    key_points: [{
-      title_it: 'carreggiata', title_ar: 'المسار المخصص للمركبات',
-      it: 'La parte della strada destinata ai veicoli.', ar: 'الجزء من الطريق المخصص للمركبات.'
-    }]
+    summaryIt: 'La carreggiata è destinata ai veicoli.',
+    summaryAr: 'المسار مخصص للمركبات.',
+    keyPoints: [{it: 'La parte della strada destinata ai veicoli.', ar: 'الجزء من الطريق المخصص للمركبات.'}]
   });
   assert.match(markup, /class="lesson-key-point-list key-points-list key-points-grid"/u);
   assert.match(markup, /class="lesson-key-point-card key-point-card"/u);
