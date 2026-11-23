@@ -1,4 +1,4 @@
-const CACHE_NAME = 'patente-ar-v58-learning-path-1';
+const CACHE_NAME = 'patente-ar-v59-learning-path-1';
 const FETCH_TIMEOUT_MS = 10000;
 const SHELL = [
   '/',

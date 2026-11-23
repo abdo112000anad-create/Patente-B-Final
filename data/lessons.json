@@ -17,179 +17,173 @@
       "lessons": [
         {
           "id": "u1-l1",
-          "titleIt": "Parti della strada e significato dei termini",
-          "titleAr": "أجزاء الطريق ومعاني المصطلحات",
-          "summaryIt": "La strada è destinata all’uso pubblico per la circolazione di pedoni, veicoli e animali. La carreggiata comprende una o più corsie, mentre il marciapiede è esterno alla carreggiata e destinato ai pedoni.",
-          "summaryAr": "الطريق (strada) مخصص للاستخدام العام لحركة المشاة والمركبات والحيوانات. يضم جزء سير المركبات (carreggiata) حارة أو أكثر، أما الرصيف (marciapiede) فيقع خارج هذا الجزء ومخصص للمشاة.",
+          "titleIt": "Le parti della strada",
+          "titleAr": "أجزاء الطريق",
+          "summaryIt": "La strada comprende la carreggiata per i veicoli e il marciapiede per i pedoni. La carreggiata può essere divisa in corsie.",
+          "summaryAr": "الطريق (strada) يضم جزءًا مخصصًا للمركبات (carreggiata) ورصيفًا للمشاة (marciapiede)، وقد يُقسّم جزء المركبات إلى حارات (corsie).",
           "keyPoints": [
             {
-              "it": "La strada è un'area ad uso pubblico destinata alla circolazione.",
-              "ar": "الطريق (strada) مساحة للاستخدام العام ومخصصة لحركة المرور."
+              "it": "strada",
+              "ar": "الطريق"
             },
             {
-              "it": "La carreggiata è la parte della strada destinata allo scorrimento dei veicoli.",
-              "ar": "جزء سير المركبات (carreggiata) هو الجزء من الطريق المخصص لسير المركبات."
+              "it": "carreggiata",
+              "ar": "جزء الطريق المخصص لحركة المركبات"
             },
             {
-              "it": "La corsia è una fascia longitudinale della carreggiata adatta al transito di una fila di veicoli.",
-              "ar": "الحارة (corsia) شريط طولي من جزء سير المركبات، مناسب لمرور صف واحد من المركبات."
+              "it": "corsia",
+              "ar": "حارة المرور"
             },
             {
-              "it": "Il marciapiede è esterno alla carreggiata ed è destinato ai pedoni.",
-              "ar": "الرصيف (marciapiede) يقع خارج جزء سير المركبات ومخصص للمشاة."
+              "it": "marciapiede",
+              "ar": "رصيف المشاة"
             }
           ],
-          "trapWord": {
-            "word": "carreggiata",
-            "reasonAr": "قد يختلط معناها بـ corsia؛ لكن carreggiata هي الجزء المخصص لسير المركبات، وcorsia شريط داخلها لمرور صف واحد."
-          },
+          "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La strada è destinata all’uso pubblico per la circolazione di pedoni, veicoli e animali.",
+              "qIt": "La carreggiata è destinata alla circolazione dei veicoli.",
               "a": "VERO",
-              "explainAr": "هذا هو معنى الطريق الوارد في الدرس."
+              "explainAr": "نعم، هي الجزء المخصص لحركة المركبات."
             },
             {
-              "qIt": "La corsia è la parte esterna alla carreggiata destinata ai pedoni.",
+              "qIt": "Il marciapiede è destinato principalmente ai veicoli.",
               "a": "FALSO",
-              "explainAr": "هذه صفة الرصيف (marciapiede)؛ أما الحارة (corsia) فهي شريط ضمن carreggiata لمرور صف واحد من المركبات."
+              "explainAr": "الرصيف مخصص للمشاة، وليس لسير المركبات."
             },
             {
-              "qIt": "La carreggiata comprende una o più corsie.",
+              "qIt": "Una corsia può far parte della carreggiata.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس أن جزء سير المركبات (carreggiata) يضم حارة أو أكثر."
+              "explainAr": "نعم، الحارة جزء من مساحة سير المركبات."
             }
           ]
         },
         {
           "id": "u1-l2",
-          "titleIt": "Che cosa è un veicolo e come si classifica",
-          "titleAr": "ما هي المركبة وكيف تُصنَّف؟",
-          "summaryIt": "Il Codice della strada definisce il veicolo come una macchina che circola sulla strada guidata dall’uomo, fatte salve specifiche eccezioni. L’autovettura è un autoveicolo; rimorchi e semirimorchi appartengono alla categoria O.",
-          "summaryAr": "يعرّف قانون الطرق (Codice della strada) المركبة بأنها آلة تسير على الطريق بقيادة الإنسان، مع استثناءات محددة. وعربية الركوب (autovettura) نوع من المركبات الآلية (autoveicoli)، أما المقطورات وأنصاف المقطورات فتندرج ضمن الفئة O.",
+          "titleIt": "Il veicolo e le sue categorie",
+          "titleAr": "المركبة وفئاتها",
+          "summaryIt": "Il Codice della strada distingue diversi tipi di veicoli. Autovetture e rimorchi appartengono a categorie differenti.",
+          "summaryAr": "يصنّف قانون المرور المركبات (veicoli) إلى أنواع مختلفة؛ فعربية الركوب (autovettura) ليست مقطورة (rimorchio)، ولكل نوع فئته.",
           "keyPoints": [
             {
-              "it": "Il veicolo è una macchina che circola sulla strada guidata dall’uomo, con specifiche eccezioni.",
-              "ar": "المركبة آلة تسير على الطريق بقيادة الإنسان، مع استثناءات محددة."
+              "it": "veicolo",
+              "ar": "مركبة"
             },
             {
-              "it": "L’autovettura è un tipo di autoveicolo.",
-              "ar": "عربية الركوب نوع من المركبات الآلية."
+              "it": "autoveicolo",
+              "ar": "مركبة آلية"
             },
             {
-              "it": "Il rimorchio è una categoria distinta.",
-              "ar": "المقطورة فئة مستقلة."
+              "it": "autovettura",
+              "ar": "عربية ركوب"
             },
             {
-              "it": "La categoria O comprende rimorchi e semirimorchi.",
-              "ar": "تشمل الفئة O المقطورات وأنصاف المقطورات."
+              "it": "rimorchio",
+              "ar": "مقطورة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Il Codice definisce il veicolo come una macchina che circola sulla strada guidata dall’uomo, con specifiche eccezioni.",
+              "qIt": "L’autovettura è una categoria di veicolo.",
               "a": "VERO",
-              "explainAr": "هذا هو التعريف الوارد في الدرس، مع التنبيه إلى وجود استثناءات محددة."
+              "explainAr": "نعم، عربية الركوب نوع من المركبات."
             },
             {
-              "qIt": "L’autovettura è un tipo di rimorchio.",
+              "qIt": "Un’autovettura è un rimorchio.",
               "a": "FALSO",
-              "explainAr": "عربية الركوب نوع من المركبات الآلية، وليست مقطورة."
+              "explainAr": "عربية الركوب والمقطورة نوعان مختلفان من المركبات."
             },
             {
-              "qIt": "I semirimorchi rientrano nella categoria O dei rimorchi.",
+              "qIt": "Il Codice della strada distingue diverse categorie di veicoli.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس أن أنصاف المقطورات تندرج ضمن الفئة O للمقطورات."
+              "explainAr": "نعم، يميّز القانون بين فئات متعددة للمركبات."
             }
           ]
         },
         {
           "id": "u1-l3",
-          "titleIt": "Prudenza e velocità adatta alle condizioni",
-          "titleAr": "الحذر والسرعة المناسبة للظروف",
-          "summaryIt": "L’art. 140 impone di comportarsi senza creare pericolo o intralcio e salvaguardando la sicurezza della circolazione. L’art. 141 richiede di adeguare la velocità al veicolo, alla strada, al traffico e alla visibilità, mantenere il controllo e potersi fermare entro il campo visibile.",
-          "summaryAr": "توجب المادة 140 عدم خلق خطر أو عرقلة وصون سلامة حركة المرور. وتفرض المادة 141 تكييف السرعة مع المركبة والطريق والمرور والرؤية، والحفاظ على السيطرة والقدرة على التوقف ضمن مجال الرؤية (campo visibile).",
+          "titleIt": "Prudenza e velocità adeguata",
+          "titleAr": "الحذر والسرعة المناسبة",
+          "summaryIt": "La velocità deve essere adeguata al veicolo, alla strada, al traffico e alla visibilità. Il conducente deve mantenere il controllo e potersi fermare in sicurezza.",
+          "summaryAr": "على السائق اختيار سرعة مناسبة (velocità adeguata) للمركبة والطريق وحركة المرور والرؤية، مع الحفاظ على السيطرة على المركبة.",
           "keyPoints": [
             {
-              "it": "Ogni utente deve evitare pericoli e intralci e salvaguardare la sicurezza della circolazione.",
-              "ar": "على كل مستعمل للطريق تجنب الخطر والعرقلة وصون سلامة حركة المرور."
+              "it": "prudenza",
+              "ar": "الحذر"
             },
             {
-              "it": "Adeguare la velocità al veicolo, alla strada, al traffico e alla visibilità.",
-              "ar": "تكييف السرعة مع المركبة والطريق والمرور والرؤية."
+              "it": "velocità adeguata",
+              "ar": "السرعة المناسبة للظروف"
             },
             {
-              "it": "Mantenere il controllo del veicolo.",
-              "ar": "الحفاظ على السيطرة على المركبة."
+              "it": "controllo del veicolo",
+              "ar": "السيطرة على المركبة"
             },
             {
-              "it": "Potersi fermare entro il campo visibile.",
-              "ar": "القدرة على التوقف ضمن مجال الرؤية."
+              "it": "visibilità",
+              "ar": "مدى الرؤية"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Ogni utente deve evitare pericoli e intralci e salvaguardare la sicurezza della circolazione.",
+              "qIt": "La velocità va adeguata anche alla visibilità.",
               "a": "VERO",
-              "explainAr": "هذه هي القاعدة العامة للسلوك على الطريق الواردة في المادة 140."
+              "explainAr": "نعم، يجب مراعاة مدى الرؤية عند اختيار السرعة."
             },
             {
-              "qIt": "La velocità può ignorare la visibilità se il conducente mantiene il controllo del veicolo.",
+              "qIt": "Il conducente può ignorare le condizioni della strada se rispetta il limite indicato.",
               "a": "FALSO",
-              "explainAr": "يجب تكييف السرعة مع الرؤية، مع الحفاظ على السيطرة والقدرة على التوقف ضمن مجال الرؤية."
+              "explainAr": "الالتزام بالحد المعلن لا يلغي ضرورة مراعاة ظروف الطريق."
             },
             {
-              "qIt": "La velocità va adeguata anche al veicolo, alla strada e al traffico.",
+              "qIt": "Il conducente deve mantenere il controllo del veicolo.",
               "a": "VERO",
-              "explainAr": "تذكر المادة 141 المركبة والطريق والمرور ضمن ما يجب مراعاته عند ضبط السرعة."
+              "explainAr": "نعم، السيطرة على المركبة واجب أساسي للقيادة الآمنة."
             }
           ]
         },
         {
           "id": "u1-l4",
-          "titleIt": "Come leggere l’aggiornamento del Codice del 2024",
-          "titleAr": "إزاي نفهم تحديث قانون المرور في 2024؟",
-          "summaryIt": "La legge 25 novembre 2024, n. 177, è stata pubblicata il 29 novembre 2024 ed è entrata in vigore il 14 dicembre 2024. Per verificare se una disposizione è cambiata, occorre consultarne il testo vigente.",
-          "summaryAr": "صدر القانون رقم 177 لسنة 2024 في 25 نوفمبر، ونُشر في 29 نوفمبر، ودخل حيز النفاذ في 14 ديسمبر 2024. للتحقق مما إذا كان حكم قد تغيّر، راجع نصه النافذ (testo vigente).",
+          "titleIt": "Come verificare gli aggiornamenti del Codice",
+          "titleAr": "كيفية التحقق من تحديثات قانون المرور",
+          "summaryIt": "Una modifica normativa va verificata nel testo vigente e nelle fonti ufficiali. La data di una legge, quella di pubblicazione e quella di entrata in vigore possono essere diverse.",
+          "summaryAr": "للتحقق من قاعدة قانونية، ارجع إلى النص الرسمي النافذ (testo vigente). فتاريخ صدور القانون ونشره وبدء تطبيقه قد لا يكون واحدًا.",
           "keyPoints": [
             {
-              "it": "La legge n. 177/2024 è datata 25 novembre 2024.",
-              "ar": "تاريخ القانون رقم 177/2024 هو 25 نوفمبر 2024."
+              "it": "testo vigente",
+              "ar": "النص القانوني النافذ"
             },
             {
-              "it": "La legge n. 177/2024 è stata pubblicata il 29 novembre 2024.",
-              "ar": "نُشر القانون رقم 177/2024 في 29 نوفمبر 2024."
+              "it": "pubblicazione",
+              "ar": "النشر"
             },
             {
-              "it": "La legge n. 177/2024 è entrata in vigore il 14 dicembre 2024.",
-              "ar": "دخل القانون رقم 177/2024 حيز النفاذ في 14 ديسمبر 2024."
+              "it": "entrata in vigore",
+              "ar": "بدء النفاذ"
             },
             {
-              "it": "Per sapere se una disposizione è cambiata, va verificato il testo vigente.",
-              "ar": "لمعرفة ما إذا كان حكم قد تغيّر، ينبغي التحقق من نصه النافذ."
+              "it": "fonte ufficiale",
+              "ar": "مصدر رسمي"
             }
           ],
-          "trapWord": {
-            "word": "Pubblicazione",
-            "reasonAr": "قد يختلط تاريخ النشر بتاريخ القانون أو بتاريخ بدء نفاذه؛ فلكل منها تاريخ مختلف في هذا الدرس."
-          },
+          "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La legge n. 177/2024 è stata pubblicata il 29 novembre 2024.",
-              "a": "VERO",
-              "explainAr": "يذكر الدرس أن تاريخ النشر هو 29 نوفمبر 2024."
-            },
-            {
-              "qIt": "La legge n. 177/2024 è entrata in vigore il 29 novembre 2024.",
+              "qIt": "La data di pubblicazione coincide sempre con quella di entrata in vigore.",
               "a": "FALSO",
-              "explainAr": "29 نوفمبر هو تاريخ النشر؛ أما بدء النفاذ فكان في 14 ديسمبر 2024."
+              "explainAr": "قد يختلف تاريخ النشر عن تاريخ بدء تطبيق القانون."
             },
             {
-              "qIt": "Per verificare se una disposizione è cambiata, occorre consultare il testo vigente.",
+              "qIt": "Per verificare una regola, è utile consultare il testo vigente.",
               "a": "VERO",
-              "explainAr": "ينص الدرس على ضرورة التحقق من النص النافذ لمعرفة ما إذا كان حكم قد تغيّر."
+              "explainAr": "نعم، النص النافذ والمصادر الرسمية هما المرجع للتحقق."
+            },
+            {
+              "qIt": "Una notizia generica dimostra da sola che ogni articolo del Codice è stato modificato.",
+              "a": "FALSO",
+              "explainAr": "لا تكفي معلومة عامة لإثبات تعديل مادة بعينها؛ يجب مراجعة نصها."
             }
           ]
         }
@@ -347,176 +341,173 @@
       "lessons": [
         {
           "id": "u2-l1",
-          "titleIt": "Riconoscere i gruppi dei segnali verticali",
-          "titleAr": "التعرّف على مجموعات الإشارات الرأسية",
-          "summaryIt": "La segnaletica stradale comprende quattro gruppi: verticale, orizzontale, luminosa e complementare. I segnali verticali si dividono in pericolo, prescrizione e indicazione.",
-          "summaryAr": "تشمل إشارات الطريق أربع مجموعات: رأسية وأفقية وضوئية وتكميلية. وتنقسم الإشارات الرأسية إلى خطر (pericolo) وتنظيم (prescrizione) وإرشاد (indicazione).",
+          "titleIt": "I gruppi della segnaletica stradale",
+          "titleAr": "مجموعات إشارات الطريق",
+          "summaryIt": "La segnaletica comprende segnali verticali, orizzontali, luminosi e complementari. I segnali verticali possono essere di pericolo, di prescrizione o di indicazione.",
+          "summaryAr": "تضم إشارات الطريق (segnaletica stradale) علامات رأسية وأرضية وضوئية وتكميلية، ولكل مجموعة وظيفة مختلفة في تنظيم المرور.",
           "keyPoints": [
             {
-              "it": "Quattro gruppi: segnaletica verticale, orizzontale, luminosa e complementare.",
-              "ar": "أربع مجموعات: إشارات رأسية وأفقية وضوئية وتكميلية."
+              "it": "segnaletica verticale",
+              "ar": "الإشارات الرأسية"
             },
             {
-              "it": "I segnali verticali di pericolo avvertono di un rischio.",
-              "ar": "تحذّر الإشارات الرأسية للخطر من وجود خطر."
+              "it": "segnaletica orizzontale",
+              "ar": "العلامات الأرضية"
             },
             {
-              "it": "La prescrizione comprende precedenza, divieto e obbligo.",
-              "ar": "تشمل إشارات التنظيم الأولوية والمنع والإلزام."
+              "it": "segnali luminosi",
+              "ar": "الإشارات الضوئية"
             },
             {
-              "it": "I segnali di indicazione forniscono informazioni utili alla guida.",
-              "ar": "تقدّم إشارات الإرشاد معلومات مفيدة للقيادة."
+              "it": "segnali complementari",
+              "ar": "الإشارات التكميلية"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La segnaletica comprende segnali verticali, orizzontali, luminosi e complementari.",
+              "qIt": "La segnaletica stradale comprende anche segnali luminosi.",
               "a": "VERO",
-              "explainAr": "تصنّف المادة 38 الإشارات إلى هذه المجموعات الأربع."
+              "explainAr": "نعم، إشارات المرور الضوئية من مجموعات الإشارات."
             },
             {
-              "qIt": "Precedenza, divieto e obbligo sono segnali di indicazione.",
+              "qIt": "La segnaletica stradale è composta soltanto da segnali verticali.",
               "a": "FALSO",
-              "explainAr": "هذه فئات فرعية من الإشارات الرأسية التنظيمية."
+              "explainAr": "تشمل أيضًا علامات أرضية وضوئية وتكميلية."
             },
             {
-              "qIt": "I segnali verticali di pericolo avvertono di un rischio.",
+              "qIt": "I segnali verticali possono indicare un pericolo o una prescrizione.",
               "a": "VERO",
-              "explainAr": "وظيفتها التحذير والدعوة إلى الحذر."
+              "explainAr": "نعم، من وظائف الإشارات الرأسية التحذير أو فرض تعليمات."
             }
           ]
         },
         {
           "id": "u2-l2",
-          "titleIt": "Separare avvertimenti, divieti e obblighi",
-          "titleAr": "التمييز بين التحذير والمنع والإلزام",
-          "summaryIt": "I segnali di pericolo avvertono del rischio e richiedono prudenza; i segnali di divieto indicano divieti o limitazioni, mentre quelli di obbligo prescrivono un comportamento. Per interpretarli, si considera il segnale concreto e si leggono gli eventuali pannelli integrativi.",
-          "summaryAr": "تحذّر إشارات الخطر (segnali di pericolo) من المخاطر وتدعو إلى الحذر؛ وتبيّن إشارات المنع (segnali di divieto) المحظورات أو القيود، بينما تفرض إشارات الإلزام (segnali di obbligo) سلوكًا معينًا. لفهمها، اقرأ الإشارة المحددة واللوحات التكميلية (pannelli integrativi) إن وُجدت.",
+          "titleIt": "Pericolo, divieto e obbligo",
+          "titleAr": "إشارات الخطر والمنع والإلزام",
+          "summaryIt": "I segnali di pericolo avvertono di un rischio. Quelli di divieto limitano alcune condotte, mentre quelli di obbligo prescrivono un comportamento.",
+          "summaryAr": "تحذّرك إشارة الخطر (segnale di pericolo)، وتمنع إشارة المنع (divieto) تصرفًا أو تقيّده، أما إشارة الإلزام (obbligo) فتطلب اتباع سلوك محدد.",
           "keyPoints": [
             {
-              "it": "I segnali di pericolo avvertono del rischio e richiamano prudenza.",
-              "ar": "تحذّر إشارات الخطر من المخاطر وتدعو إلى الحذر."
+              "it": "segnale di pericolo",
+              "ar": "إشارة خطر"
             },
             {
-              "it": "I segnali di divieto indicano divieti o limitazioni.",
-              "ar": "تبيّن إشارات المنع المحظورات أو القيود."
+              "it": "segnale di divieto",
+              "ar": "إشارة منع"
             },
             {
-              "it": "I segnali di obbligo prescrivono un comportamento.",
-              "ar": "تفرض إشارات الإلزام سلوكًا معينًا."
+              "it": "segnale di obbligo",
+              "ar": "إشارة إلزام"
             },
             {
-              "it": "Per interpretare un segnale, si considera quello concreto e si leggono gli eventuali pannelli.",
-              "ar": "لفهم الإشارة، تُقرأ الإشارة المحددة واللوحات التكميلية إن وُجدت."
+              "it": "prescrizione",
+              "ar": "تعليمات ملزمة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "I segnali di pericolo avvertono del rischio e richiedono prudenza.",
+              "qIt": "Un segnale di pericolo avverte di un rischio.",
               "a": "VERO",
-              "explainAr": "إشارات الخطر تحذّر من المخاطر وتدعو إلى الحذر."
+              "explainAr": "نعم، وظيفته تنبيه السائق إلى خطر محتمل."
             },
             {
-              "qIt": "I segnali di divieto prescrivono un comportamento obbligatorio.",
+              "qIt": "Un segnale di divieto impone sempre un comportamento obbligatorio.",
               "a": "FALSO",
-              "explainAr": "إشارات المنع تبيّن المحظورات أو القيود؛ إشارات الإلزام هي التي تفرض سلوكًا."
+              "explainAr": "إشارة المنع تقيّد أو تحظر تصرفًا؛ الإلزام يحدد ما يجب فعله."
             },
             {
-              "qIt": "Per interpretare i segnali, si considera il segnale concreto e si leggono gli eventuali pannelli.",
+              "qIt": "Un segnale di obbligo prescrive un comportamento.",
               "a": "VERO",
-              "explainAr": "يعتمد الفهم على الإشارة المحددة وعلى قراءة اللوحات التكميلية إن وُجدت."
+              "explainAr": "نعم، يطلب من السائق اتباع توجيه محدد."
             }
           ]
         },
         {
           "id": "u2-l3",
-          "titleIt": "Capire le precedenze e le linee di arresto",
-          "titleAr": "فهم الأولوية وخطوط التوقف",
-          "summaryIt": "I segnali di precedenza sono segnali di prescrizione. Il segnale STOP richiede l’arresto; le linee trasversali continue e discontinue indicano limiti di arresto distinti, secondo la gerarchia prevista per i segnali.",
-          "summaryAr": "إشارات الأولوية من الإشارات التنظيمية (segnali di prescrizione). توجب علامة STOP التوقف، ويختلف معنى خط التوقف العرضي المتصل عن المتقطع؛ كما يحدد القانون ترتيب أولوية الإشارات.",
+          "titleIt": "Precedenza e segnale di STOP",
+          "titleAr": "الأولوية وإشارة STOP",
+          "summaryIt": "I segnali di precedenza regolano l’ordine di passaggio. Il segnale STOP richiede di fermarsi e poi rispettare la precedenza.",
+          "summaryAr": "تنظم إشارات الأولوية (precedenza) من يمر أولًا. أما إشارة STOP فتوجب التوقف أولًا ثم إعطاء الأولوية وفق الوضع على الطريق.",
           "keyPoints": [
             {
-              "it": "I segnali di precedenza appartengono ai segnali di prescrizione.",
-              "ar": "إشارات الأولوية تندرج ضمن إشارات التنظيم (segnali di prescrizione)."
+              "it": "precedenza",
+              "ar": "الأولوية"
             },
             {
-              "it": "Il segnale STOP richiede l’arresto e poi di dare precedenza.",
-              "ar": "تتطلب علامة STOP التوقف ثم إعطاء الأولوية."
+              "it": "STOP",
+              "ar": "توقف"
             },
             {
-              "it": "La linea trasversale continua indica l’arresto per il semaforo o per lo STOP.",
-              "ar": "يشير الخط العرضي المتصل إلى موضع التوقف عند الإشارة الضوئية أو علامة STOP."
+              "it": "arresto",
+              "ar": "التوقف"
             },
             {
-              "it": "La linea trasversale discontinua indica l’arresto quando necessario per dare precedenza.",
-              "ar": "يشير الخط العرضي المتقطع إلى التوقف عند الحاجة لإعطاء الأولوية."
-            }
-          ],
-          "trapWord": {
-            "word": "STOP",
-            "reasonAr": "قد يُخلط بينه وبين مجرد إعطاء الأولوية؛ لكنه يتطلب التوقف أولًا ثم إعطاء الأولوية."
-          },
-          "quickCheck": [
-            {
-              "qIt": "I segnali di precedenza appartengono ai segnali di prescrizione.",
-              "a": "VERO",
-              "explainAr": "يذكر الدرس أن إشارات الأولوية من إشارات التنظيم."
-            },
-            {
-              "qIt": "Con il segnale STOP si può proseguire senza arrestarsi se non si vede subito un veicolo.",
-              "a": "FALSO",
-              "explainAr": "علامة STOP توجب التوقف ثم إعطاء الأولوية."
-            },
-            {
-              "qIt": "La linea discontinua richiede sempre l’arresto, anche quando non è necessario dare precedenza.",
-              "a": "FALSO",
-              "explainAr": "التوقف عند الخط المتقطع يكون عند الحاجة لإعطاء الأولوية، لا دائمًا."
-            }
-          ]
-        },
-        {
-          "id": "u2-l4",
-          "titleIt": "Leggere insieme indicazioni e pannelli integrativi",
-          "titleAr": "قراءة الإرشادات واللوحات التكميلية معًا",
-          "summaryIt": "I segnali di indicazione informano su luoghi, itinerari e servizi. Il pannello integrativo si interpreta insieme al segnale associato e può precisarne l’ambito o aggiungere informazioni.",
-          "summaryAr": "تقدّم إشارات الإرشاد معلومات عن الأماكن والمسارات والخدمات. وتُقرأ اللوحة التكميلية (pannello integrativo) مع الإشارة المرتبطة بها، وقد توضّح نطاقها أو تضيف معلومات.",
-          "keyPoints": [
-            {
-              "it": "I segnali di indicazione informano su luoghi e servizi.",
-              "ar": "تقدّم إشارات الإرشاد (segnali di indicazione) معلومات عن الأماكن والخدمات."
-            },
-            {
-              "it": "Il pannello integrativo si legge con il segnale associato.",
-              "ar": "تُقرأ اللوحة التكميلية (pannello integrativo) مع الإشارة المرتبطة بها."
-            },
-            {
-              "it": "Il pannello può precisare tempi, distanze o ambito del segnale.",
-              "ar": "قد توضّح اللوحة زمن سريان الإشارة أو المسافة أو نطاقها."
-            },
-            {
-              "it": "Il significato del pannello dipende dal suo contenuto e dal segnale principale.",
-              "ar": "يتحدد معنى اللوحة بمحتواها وبالإشارة الرئيسية."
+              "it": "linea di arresto",
+              "ar": "خط التوقف"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "I segnali di indicazione informano su luoghi e servizi.",
+              "qIt": "Il segnale STOP richiede di arrestarsi.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس أن إشارات الإرشاد تقدّم معلومات عن الأماكن والخدمات."
+              "explainAr": "نعم، يجب التوقف عند علامة STOP."
             },
             {
-              "qIt": "Il pannello integrativo si interpreta senza considerare il segnale associato.",
+              "qIt": "Con il segnale STOP si può proseguire senza fermarsi se la strada sembra libera.",
               "a": "FALSO",
-              "explainAr": "تُقرأ اللوحة مع الإشارة المرتبطة بها، ويتوقف معناها على الإشارة الرئيسية."
+              "explainAr": "الإشارة توجب التوقف، حتى لو بدا الطريق خاليًا."
             },
             {
-              "qIt": "Il pannello integrativo non può aggiungere informazioni.",
+              "qIt": "Dopo l’arresto al segnale STOP, occorre rispettare la precedenza.",
+              "a": "VERO",
+              "explainAr": "نعم، بعد التوقف يجب إعطاء الأولوية بحسب حركة الطريق."
+            }
+          ]
+        },
+        {
+          "id": "u2-l4",
+          "titleIt": "Segnali di indicazione e pannelli integrativi",
+          "titleAr": "إشارات الإرشاد واللوحات التكميلية",
+          "summaryIt": "I segnali di indicazione forniscono informazioni utili. I pannelli integrativi si leggono insieme al segnale principale e ne precisano il significato o l’ambito.",
+          "summaryAr": "تساعد إشارات الإرشاد (segnali di indicazione) على معرفة الاتجاهات والخدمات. وتُقرأ اللوحة التكميلية (pannello integrativo) مع الإشارة الأساسية لتوضيح نطاقها أو تفاصيلها.",
+          "keyPoints": [
+            {
+              "it": "segnale di indicazione",
+              "ar": "إشارة إرشاد"
+            },
+            {
+              "it": "pannello integrativo",
+              "ar": "لوحة تكميلية"
+            },
+            {
+              "it": "segnale principale",
+              "ar": "الإشارة الأساسية"
+            },
+            {
+              "it": "ambito",
+              "ar": "نطاق السريان"
+            }
+          ],
+          "trapWord": null,
+          "quickCheck": [
+            {
+              "qIt": "I segnali di indicazione possono fornire informazioni su luoghi e servizi.",
+              "a": "VERO",
+              "explainAr": "نعم، قد تدل على أماكن أو مسارات أو خدمات."
+            },
+            {
+              "qIt": "Un pannello integrativo va interpretato sempre senza il segnale principale.",
               "a": "FALSO",
-              "explainAr": "قد تضيف اللوحة التكميلية معلومات أو توضّح نطاق الإشارة."
+              "explainAr": "يجب قراءة اللوحة التكميلية مع الإشارة المرتبطة بها."
+            },
+            {
+              "qIt": "Un pannello integrativo può precisare l’ambito di un segnale.",
+              "a": "VERO",
+              "explainAr": "نعم، قد يوضح اللوحة متى أو أين تسري الإشارة."
             }
           ]
         }
@@ -654,176 +645,173 @@
       "lessons": [
         {
           "id": "u3-l1",
-          "titleIt": "Linee e simboli sulla carreggiata",
-          "titleAr": "الخطوط والرموز على جسم الطريق",
-          "summaryIt": "La segnaletica orizzontale comprende linee, frecce, linee di arresto e attraversamenti, e organizza la circolazione. Superare una linea non rende automaticamente lecito il sorpasso; ai passaggi pedonali e ciclabili si rispettano le precedenze previste.",
-          "summaryAr": "تشمل العلامات الأفقية (segnaletica orizzontale) الخطوط والأسهم وخطوط التوقف والمعابر، وتنظم حركة المرور. وعبور خط لا يجيز التجاوز تلقائيًا؛ وعند معابر المشاة والدراجات تُراعى الأولوية المقررة.",
+          "titleIt": "Linee e simboli sulla strada",
+          "titleAr": "الخطوط والرموز على الطريق",
+          "summaryIt": "La segnaletica orizzontale comprende linee, frecce e attraversamenti. Le sue indicazioni si rispettano insieme alle altre regole della circolazione.",
+          "summaryAr": "تشمل العلامات المرسومة على الطريق (segnaletica orizzontale) الخطوط والأسهم والمعابر. ويجب فهمها مع بقية إشارات وقواعد المرور.",
           "keyPoints": [
             {
-              "it": "Linee, frecce, linee di arresto e attraversamenti organizzano la circolazione.",
-              "ar": "تنظم الخطوط والأسهم وخطوط التوقف والمعابر حركة المرور."
+              "it": "segnaletica orizzontale",
+              "ar": "علامات الطريق الأرضية"
             },
             {
-              "it": "La linea continua non si oltrepassa, salvo le eccezioni previste.",
-              "ar": "لا يُتجاوز الخط المتصل إلا في الحالات المستثناة المقررة."
+              "it": "linea continua",
+              "ar": "خط متصل"
             },
             {
-              "it": "La linea discontinua si oltrepassa solo se le altre regole lo consentono; tra linee affiancate si passa dal lato discontinuo.",
-              "ar": "لا يُعبر الخط المتقطع إلا إذا سمحت بقية القواعد؛ وعند الخطين المتجاورين يكون العبور من جهة الخط المتقطع."
+              "it": "linea discontinua",
+              "ar": "خط متقطع"
             },
             {
-              "it": "Ai passaggi pedonali e ciclabili si rispettano le precedenze previste.",
-              "ar": "تُراعى الأولوية المقررة عند معابر المشاة والدراجات."
+              "it": "attraversamento",
+              "ar": "معبر"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La segnaletica orizzontale comprende anche linee di arresto e attraversamenti.",
+              "qIt": "La segnaletica orizzontale comprende anche frecce e attraversamenti.",
               "a": "VERO",
-              "explainAr": "من العلامات الأفقية خطوط التوقف ومعابر المشاة والدراجات."
+              "explainAr": "نعم، تتضمن العلامات الأرضية الأسهم والمعابر."
             },
             {
-              "qIt": "Una linea discontinua autorizza sempre il sorpasso.",
+              "qIt": "Una linea discontinua autorizza sempre qualsiasi manovra.",
               "a": "FALSO",
-              "explainAr": "يجوز عبور الخط عند سماح بقية القواعد، لكن ذلك لا يجيز التجاوز تلقائيًا."
+              "explainAr": "الخط المتقطع لا يلغي بقية قواعد المرور ولا يسمح تلقائيًا بكل مناورة."
             },
             {
-              "qIt": "Ai passaggi pedonali e ciclabili si rispettano le precedenze previste.",
+              "qIt": "Le linee sulla strada aiutano a organizzare la circolazione.",
               "a": "VERO",
-              "explainAr": "تعتمد الأولوية عند المعابر على القواعد والعلامات المقررة."
+              "explainAr": "نعم، تساعد العلامات الأرضية على تنظيم حركة المرور."
             }
           ]
         },
         {
           "id": "u3-l2",
-          "titleIt": "Semafori: colori, frecce e prudenza",
-          "titleAr": "إشارات المرور الضوئية: الألوان والأسهم والحذر",
-          "summaryIt": "Il rosso impone l’arresto; il giallo preavvisa l’arresto e si prosegue solo se fermarsi in sicurezza non è possibile. Il verde consente il passaggio, ma si entra nell’incrocio solo se lo si può liberare prima del rosso; le luci pedonali hanno significati distinti.",
-          "summaryAr": "تعني الإشارة الضوئية (semaforo) الحمراء التوقف؛ والصفراء تنذر به ولا يُتابع السير إلا إذا تعذّر التوقف بأمان. يسمح الأخضر بالمرور، لكن لا تدخل التقاطع إلا إذا أمكن إخلاؤه قبل الأحمر؛ ولإشارات المشاة دلالات منفصلة.",
+          "titleIt": "Semafori e segnali luminosi",
+          "titleAr": "الإشارات الضوئية",
+          "summaryIt": "Il rosso impone l’arresto e il verde consente di procedere se la strada è libera. Con il giallo ci si ferma quando è possibile farlo in sicurezza.",
+          "summaryAr": "عند الإشارة الضوئية (semaforo)، الأحمر يعني التوقف، والأخضر يسمح بالمرور إذا كان المسار متاحًا. وعند الأصفر، توقّف إذا أمكن ذلك بأمان.",
           "keyPoints": [
             {
-              "it": "Rosso: arresto; giallo: fermati se puoi farlo in sicurezza.",
-              "ar": "الأحمر: توقف؛ والأصفر: توقف إذا أمكن ذلك بأمان."
+              "it": "luce rossa",
+              "ar": "الضوء الأحمر"
             },
             {
-              "it": "Con il verde, non entrare se non puoi liberare l’incrocio prima del rosso.",
-              "ar": "مع الأخضر، لا تدخل التقاطع إذا لم تستطع إخلاءه قبل الأحمر."
+              "it": "luce gialla",
+              "ar": "الضوء الأصفر"
             },
             {
-              "it": "Semaforo pedonale: rosso non iniziare; giallo libera il passaggio e non entrare; verde attraversa nel senso indicato.",
-              "ar": "إشارة المشاة: لا تبدأ العبور عند الأحمر؛ أخلِ المعبر عند الأصفر ولا تبدأ؛ واعبر في الاتجاه المحدد عند الأخضر."
+              "it": "luce verde",
+              "ar": "الضوء الأخضر"
             },
             {
-              "it": "Le frecce valgono per la direzione indicata; il giallo lampeggiante richiede prudenza e precedenza.",
-              "ar": "تسري الأسهم على الاتجاه المحدد؛ والأصفر الوامض يستلزم الحذر واحترام الأولوية."
+              "it": "giallo lampeggiante",
+              "ar": "الضوء الأصفر الوامض"
             }
           ],
-          "trapWord": {
-            "word": "preavviso",
-            "reasonAr": "قد يُفهم خطأً على أنه إذن بالاستمرار؛ لكنه إنذار بالتوقف، ولا يُتابع السير إلا إذا تعذر التوقف بأمان."
-          },
+          "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Con il giallo veicolare ci si ferma se è possibile farlo in sicurezza.",
+              "qIt": "Con la luce rossa occorre arrestarsi.",
               "a": "VERO",
-              "explainAr": "الأصفر ينذر بالتوقف؛ ولا يُتابع السير إلا إذا تعذّر التوقف بأمان."
+              "explainAr": "نعم، الضوء الأحمر يوجب التوقف."
             },
             {
-              "qIt": "Con il verde si può entrare in un incrocio che non sarà liberato prima del rosso.",
+              "qIt": "Con il verde si può entrare in un incrocio anche se è bloccato.",
               "a": "FALSO",
-              "explainAr": "لا تدخل التقاطع إذا لم تستطع إخلاءه قبل الأحمر."
+              "explainAr": "لا تدخل التقاطع إذا لم يكن بإمكانك إخلاؤه بأمان."
             },
             {
-              "qIt": "Con il giallo pedonale, chi è già sull’attraversamento lo libera e chi attende non inizia.",
+              "qIt": "Con il giallo ci si ferma se è possibile farlo in sicurezza.",
               "a": "VERO",
-              "explainAr": "هذا هو الفرق المقرر لإشارة المشاة الصفراء."
+              "explainAr": "نعم، توقف عند الأصفر متى أمكن التوقف بأمان."
             }
           ]
         },
         {
           "id": "u3-l3",
-          "titleIt": "Segnali dell'agente e indicatori degli ostacoli",
-          "titleAr": "إشارات شرطي المرور والعلامات الدالة على العوائق",
-          "summaryIt": "Le segnalazioni dell'agente prevalgono sulle altre prescrizioni; la posizione delle braccia e del corpo regola l'arresto e il via libera. I segnali complementari evidenziano l'andamento della strada, i punti critici e gli ostacoli.",
-          "summaryAr": "تتقدّم إشارات شرطي المرور (segnalazioni dell'agente) على سائر التعليمات، وتحدد وضعية الذراعين والجسم التوقف أو السماح بالسير. وتُبرز العلامات التكميلية (segnali complementari) مسار الطريق والنقاط الحرجة والعوائق.",
+          "titleIt": "Segnali dell’agente e ostacoli",
+          "titleAr": "إشارات شرطي المرور والعوائق",
+          "summaryIt": "Le indicazioni dell’agente del traffico prevalgono sugli altri segnali. I segnali complementari possono evidenziare ostacoli o punti critici.",
+          "summaryAr": "تُتبع تعليمات شرطي المرور (agente del traffico) عند تنظيمه للحركة، وتساعد العلامات التكميلية على التنبه للعوائق والمواضع الخطرة.",
           "keyPoints": [
             {
-              "it": "Le indicazioni dell'agente prevalgono sulle altre prescrizioni.",
-              "ar": "تتقدّم إشارات شرطي المرور على سائر التعليمات."
+              "it": "agente del traffico",
+              "ar": "شرطي المرور"
             },
             {
-              "it": "Il braccio verticale richiama l'attenzione e l'arresto, con eccezioni di sicurezza.",
-              "ar": "الذراع المرفوع يستدعي الانتباه والتوقف، مع مراعاة استثناءات السلامة."
+              "it": "segnalazione dell’agente",
+              "ar": "إشارة شرطي المرور"
             },
             {
-              "it": "Con le braccia orizzontali, si arrestano le direzioni intersecanti e si dà via libera nella direzione indicata.",
-              "ar": "عند مد الذراعين أفقيًا، تتوقف الاتجاهات المتقاطعة ويُسمح بالسير في الاتجاه المشار إليه."
+              "it": "segnale complementare",
+              "ar": "إشارة تكميلية"
             },
             {
-              "it": "I segnali complementari evidenziano l'andamento della strada, i punti critici e gli ostacoli.",
-              "ar": "تُبرز العلامات التكميلية مسار الطريق والنقاط الحرجة والعوائق."
+              "it": "ostacolo",
+              "ar": "عائق"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Le indicazioni dell'agente prevalgono sulle altre prescrizioni.",
+              "qIt": "Le indicazioni dell’agente possono prevalere sugli altri segnali.",
               "a": "VERO",
-              "explainAr": "إشارات شرطي المرور تتقدّم على سائر التعليمات."
+              "explainAr": "نعم، يجب اتباع تعليمات شرطي المرور عند تنظيمه للحركة."
             },
             {
-              "qIt": "Con le braccia orizzontali dell'agente, è consentito il passaggio nelle direzioni intersecanti.",
+              "qIt": "I segnali complementari non possono indicare un ostacolo.",
               "a": "FALSO",
-              "explainAr": "تتوقف الاتجاهات المتقاطعة عندما تكون ذراعا الشرطي أفقيتين."
+              "explainAr": "قد تُستخدم العلامات التكميلية للتنبيه إلى العوائق."
             },
             {
-              "qIt": "I segnali complementari evidenziano anche gli ostacoli.",
+              "qIt": "Il conducente deve prestare attenzione ai segnali dell’agente.",
               "a": "VERO",
-              "explainAr": "تُظهر العلامات التكميلية العوائق، إلى جانب مسار الطريق والنقاط الحرجة."
+              "explainAr": "نعم، على السائق الانتباه إلى إشارات شرطي المرور."
             }
           ]
         },
         {
           "id": "u3-l4",
-          "titleIt": "Cantieri: leggere la segnaletica temporanea",
-          "titleAr": "مواقع الأشغال: قراءة الإشارات المؤقتة",
-          "summaryIt": "Nei cantieri stradali, segui la segnaletica temporanea e il percorso indicato, prestando attenzione ai lavoratori e agli altri utenti della strada. La presenza di lavori non autorizza a ignorare barriere o divieti.",
-          "summaryAr": "في مواقع الأشغال على الطريق (cantieri stradali)، اتبع الإشارات المؤقتة (segnaletica temporanea) والمسار المحدد، وانتبه للعاملين ولسائر مستعملي الطريق. وجود الأشغال لا يبيح تجاهل الحواجز أو إشارات المنع.",
+          "titleIt": "La segnaletica temporanea nei cantieri",
+          "titleAr": "الإشارات المؤقتة في مواقع الأشغال",
+          "summaryIt": "Nei cantieri si seguono la segnaletica temporanea e il percorso indicato. Barriere e divieti esposti vanno rispettati.",
+          "summaryAr": "في مواقع الأشغال، اتبع الإشارات المؤقتة (segnaletica temporanea) والمسار المحدد، واحترم الحواجز والمنع المعلن.",
           "keyPoints": [
             {
-              "it": "Le cautele del cantiere devono essere efficaci di giorno e di notte.",
-              "ar": "ينبغي أن تكون احتياطات موقع الأشغال فعّالة نهارًا وليلًا."
+              "it": "cantiere stradale",
+              "ar": "موقع أشغال على الطريق"
             },
             {
-              "it": "Il personale esposto al traffico deve essere reso visibile.",
-              "ar": "يجب جعل العاملين المعرّضين لحركة المرور ظاهرين."
+              "it": "segnaletica temporanea",
+              "ar": "إشارات مؤقتة"
             },
             {
-              "it": "Segui il percorso temporaneo indicato.",
-              "ar": "اتبع المسار المؤقت المحدد."
+              "it": "percorso indicato",
+              "ar": "المسار المحدد"
             },
             {
-              "it": "Rispetta le barriere e i divieti esposti.",
-              "ar": "احترم الحواجز وإشارات المنع المعلنة."
+              "it": "barriera",
+              "ar": "حاجز"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Nei cantieri, occorre seguire il percorso temporaneo indicato.",
+              "qIt": "In un cantiere occorre seguire il percorso temporaneo indicato.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس صراحةً ضرورة اتباع المسار المؤقت المحدد."
+              "explainAr": "نعم، اتبع المسار الذي تحدده الإشارات المؤقتة."
             },
             {
-              "qIt": "La presenza di lavori autorizza a ignorare le barriere.",
+              "qIt": "La presenza di lavori permette di ignorare le barriere.",
               "a": "FALSO",
-              "explainAr": "الأشغال لا تبيح تجاهل الحواجز أو إشارات المنع."
+              "explainAr": "لا، يجب احترام الحواجز والتعليمات المعلنة."
             },
             {
-              "qIt": "Le cautele del cantiere devono essere efficaci soltanto di giorno.",
-              "a": "FALSO",
-              "explainAr": "احتياطات الموقع ينبغي أن تكون فعّالة نهارًا وليلًا."
+              "qIt": "La segnaletica temporanea aiuta a regolare il traffico nei lavori stradali.",
+              "a": "VERO",
+              "explainAr": "نعم، تنظم الإشارات المؤقتة حركة المرور أثناء الأشغال."
             }
           ]
         }

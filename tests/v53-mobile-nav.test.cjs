@@ -13,7 +13,7 @@ test('v53 removes the top brand icon and keeps all five bottom tabs', () => {
   assert.ok(topbar);
   assert.doesNotMatch(topbar, /brand-mark|<svg|<img/u);
   assert.equal((nav.match(/<button\b/g) || []).length, 5);
-  assert.match(index, /data-app-version="58"/u);
+  assert.match(index, /data-app-version="59"/u);
   assert.match(index, /v53-mobile-nav\.css\?v=55/u);
 });
 
@@ -26,7 +26,7 @@ test('mobile navigation icons and bilingual labels stay high-contrast and unclip
   assert.match(css, /\.mobile-nav button small[\s\S]*?opacity:\s*1 !important/u);
   assert.match(css, /\.back-to-top[\s\S]*?var\(--v53-mobile-nav-height\) \+ 14px/u);
   assert.match(css, /body\.audio-player-open \.back-to-top[\s\S]*?var\(--v50-player-height\)/u);
-  assert.match(read('public/sw.js'), /patente-ar-v58-learning-path-1/u);
+  assert.match(read('public/sw.js'), /patente-ar-v59-learning-path-1/u);
   assert.match(read('public/sw.js'), /'\/src\/v53-mobile-nav\.css'/u);
   assert.match(read('public/sw.js'), /'\/src\/v57-learning-path\.css'/u);
 });

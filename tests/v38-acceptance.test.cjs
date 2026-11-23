@@ -15,7 +15,7 @@ const index = read('index.html');
 const app = read('src/app.js');
 
 
-test('v58 keeps exactly 50 lessons with the ordered eight-field bilingual schema', () => {
+test('v59 keeps exactly 50 lessons with the ordered eight-field bilingual schema', () => {
   assert.equal(course.modules.length, 11);
   assert.equal(course.schema_version, 4);
   assert.equal(course.modules.reduce((count, module) => count + module.lessons.length, 0), 50);
@@ -237,11 +237,11 @@ test('offline cache includes local lessons, questions, dictionary, and v50 style
   assert.match(serviceWorker, /v52-dark-overhaul\.css/u);
   assert.match(serviceWorker, /italian_arabic_dictionary_lookup\.json/u);
   assert.match(read('scripts/build-pwa.cjs'), /italian_arabic_dictionary_lookup\.json/u);
-  assert.match(serviceWorker, /patente-ar-v58-learning-path/u);
-  assert.match(index, /data-app-version="58"/u);
+  assert.match(serviceWorker, /patente-ar-v59-learning-path/u);
+  assert.match(index, /data-app-version="59"/u);
 });
 
-test('v58 home contains the vertical 50-lesson learning path and no legacy dashboard sections', () => {
+test('v59 home contains the vertical 50-lesson learning path and no legacy dashboard sections', () => {
   const home = app.slice(app.indexOf('function homePage(){'), app.indexOf('function lessonDetailPage('));
   assert.match(home, /lesson-path-shell/u);
   assert.match(home, /<ol class="lesson-path">/u);
@@ -258,7 +258,7 @@ test('Glossary controls fit the single-column mobile layout', () => {
   assert.match(css, /\.glossary-controls > label \{ min-width: 0; \}/u);
 });
 
-test('Android build script remains debug-only and uses v58 metadata', () => {
+test('Android build script remains debug-only and uses v59 metadata', () => {
   const build = read('scripts/build-android.sh');
   const gradleCommand = build.match(/^\.\/gradlew .*$/mu)?.[0] || '';
   assert.match(gradleCommand, /\bclean\b/u);
@@ -266,11 +266,11 @@ test('Android build script remains debug-only and uses v58 metadata', () => {
   assert.match(gradleCommand, /:app:testDebugUnitTest/u);
   assert.doesNotMatch(gradleCommand, /assembleRelease|bundleRelease|publish|upload/iu);
   const gradle = read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+58/u);
-  assert.match(gradle, /versionName\s+"58\.0\.0"/u);
+  assert.match(gradle, /versionCode\s+59/u);
+  assert.match(gradle, /versionName\s+"59\.0\.0"/u);
   assert.match(gradle, /abiFilters\s+'arm64-v8a',\s*'armeabi-v7a'/u);
   assert.match(read('android/variables.gradle'), /minSdkVersion\s*=\s*24/u);
-  assert.equal(json('package.json').version, '58.0.0');
-  assert.equal(json('package-lock.json').packages[''].version, '58.0.0');
-  assert.equal(json('public/release.json').version, 58);
+  assert.equal(json('package.json').version, '59.0.0');
+  assert.equal(json('package-lock.json').packages[''].version, '59.0.0');
+  assert.equal(json('public/release.json').version, 59);
 });

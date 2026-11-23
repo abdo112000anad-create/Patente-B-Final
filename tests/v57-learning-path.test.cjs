@@ -12,7 +12,7 @@ const sha256 = file => crypto.createHash('sha256').update(fs.readFileSync(path.j
 
 const DAY = 86_400_000;
 
-test('v58 contains exactly 50 ordered lesson records with the eight required fields', () => {
+test('v59 contains exactly 50 ordered lesson records with the eight required fields', () => {
   const course = json('data/lessons.json');
   const serviceWorker = read('public/sw.js');
   assert.equal(course.schema_version, 4);
@@ -48,7 +48,7 @@ test('GitHub Actions builds the current PWA consumed by Capacitor before Android
   assert.equal(json('package.json').scripts.build, 'node scripts/build-pwa.cjs');
   assert.equal(json('capacitor.config.json').webDir, 'dist');
   assert.match(workflow, /npm run build[\s\S]*npx cap sync android/u);
-  assert.equal(release.version, 58);
+  assert.equal(release.version, 59);
   assert.equal(release.lessonsSha256, lessonHash);
   assert.equal(sha256('dist/data/lessons.json'), lessonHash);
   assert.equal(sha256('dist/app.bundle.js'), release.bundleSha256);
