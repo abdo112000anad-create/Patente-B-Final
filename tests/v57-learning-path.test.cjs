@@ -12,7 +12,7 @@ const sha256 = file => crypto.createHash('sha256').update(fs.readFileSync(path.j
 
 const DAY = 86_400_000;
 
-test('v59 contains exactly 50 ordered lesson records with the eight required fields', () => {
+test('v61 contains exactly 50 ordered lesson records with the eight required fields', () => {
   const course = json('data/lessons.json');
   const serviceWorker = read('public/sw.js');
   assert.equal(course.schema_version, 4);
@@ -48,7 +48,7 @@ test('GitHub Actions builds the current PWA consumed by Capacitor before Android
   assert.equal(json('package.json').scripts.build, 'node scripts/build-pwa.cjs');
   assert.equal(json('capacitor.config.json').webDir, 'dist');
   assert.match(workflow, /npm run build[\s\S]*npx cap sync android/u);
-  assert.equal(release.version, 59);
+  assert.equal(release.version, 61);
   assert.equal(release.lessonsSha256, lessonHash);
   assert.equal(sha256('dist/data/lessons.json'), lessonHash);
   assert.equal(sha256('dist/app.bundle.js'), release.bundleSha256);
@@ -109,7 +109,7 @@ test('Web Speech is Italian-only at rate 0.8 and pitch 1.0; Native TTS is absent
   assert.match(speech, /utterance\.lang\s*=\s*ITALIAN_TTS_LOCALE/u);
   assert.match(speech, /utterance\.pitch\s*=\s*1\.0/u);
   assert.match(app, /const speechRate=\.8/u);
-  assert.match(speech, /VOICE_WAIT_TIMEOUT_MS\s*=\s*5000/u);
+  assert.match(speech, /VOICE_WAIT_TIMEOUT_MS\s*=\s*500/u);
   assert.doesNotMatch(`${speech}\n${app}\n${manifest}`, /Piper|ONNX|SpeechSettingsPlugin|android\.intent\.action\.TTS_SERVICE/u);
   assert.doesNotMatch(manifest, /<queries>/u);
 });

@@ -14,10 +14,10 @@ test('v49 app dictionary contains auditable rows and excludes isolated letter ar
   const questions = json('data/questions.json');
   assert.equal(dictionary.schema_version, 1);
   assert.equal(dictionary.metadata.source_question_count, questions.questions.length);
-  assert.equal(dictionary.metadata.app_release, 54);
+  assert.equal(dictionary.metadata.app_release, 61);
   assert.equal(dictionary.metadata.unique_question_bank_terms, 5276);
-  assert.equal(dictionary.metadata.total_entries, 5281);
-  assert.equal(dictionary.entries.length, 5281);
+  assert.equal(dictionary.metadata.total_entries, 5313);
+  assert.equal(dictionary.entries.length, 5313);
   assert.equal(new Set(dictionary.entries.map(row => row.word)).size, dictionary.entries.length);
   for (const row of dictionary.entries) {
     assert.ok(row.word);
@@ -83,6 +83,40 @@ test('existing and Abdul-approved v42 corrections plus the v47 lemma are reviewe
   }
 });
 
+test('v61 lesson vocabulary includes reviewed Arabic translations for every missing lemma and used form', async () => {
+  const dictionary = json('data/italian_arabic_dictionary_lookup.json');
+  const byWord = new Map(dictionary.entries.map(row => [row.word, row]));
+  const expected = {
+    distingue: 'يميز / يفرق', distinguere: 'يميز / يفرق',
+    appartengono: 'تنتمي / تندرج ضمن', appartenere: 'ينتمي إلى / يندرج ضمن',
+    ignorare: 'يتجاهل', aggiornamenti: 'تحديثات', aggiornamento: 'تحديث',
+    testo: 'نصّ', fonti: 'مصادر', fonte: 'مصدر', ufficiali: 'رسمية', ufficiale: 'رسمي',
+    pubblicazione: 'نشر / إصدار', coincide: 'يتطابق / يتزامن', coincidere: 'يتطابق / يتزامن',
+    consultare: 'يراجع', notizia: 'خبر', gruppi: 'مجموعات', gruppo: 'مجموعة',
+    prescrivono: 'تفرض / تُلزِم', prescrive: 'يفرض / يُلزِم', prescrivere: 'يفرض / يُلزِم',
+    sembra: 'يبدو', sembrare: 'يبدو', ambito: 'نطاق / مجال السريان',
+    leggono: 'تُقرأ', leggere: 'يقرأ', interpretato: 'مُفسَّر', interpretare: 'يفسّر',
+    organizzare: 'ينظّم', prevalere: 'يسود / تكون له الأولوية على', critici: 'حرجة / خطرة', critico: 'حرِج / خطِر',
+  };
+  assert.equal(Object.keys(expected).length, 33);
+  assert.equal(dictionary.metadata.lesson_dictionary_audit_additions, 31);
+  const translation = await import(path.join(root, 'src/lesson-translation.mjs'));
+  translation.setGeneratedDictionary(dictionary.entries);
+  for (const [word, arabic] of Object.entries(expected)) {
+    const row = byWord.get(word);
+    assert.equal(row?.translation_ar, arabic, word);
+    assert.equal(row?.status, 'reviewed_override', word);
+    assert.equal(row?.review_required, 0, word);
+    const result = translation.translateTappedWord(word, []);
+    assert.equal(result.arabic, arabic, word);
+    assert.equal(result.status, 'reviewed_override', word);
+    assert.equal(result.hasLexicalTranslation, true, word);
+  }
+  const prevailing = translation.translateTappedWord('prevalgono', []);
+  assert.equal(prevailing.arabic, 'تتقدّم على');
+  assert.equal(prevailing.status, 'contextual_override_v49');
+});
+
 test('v49 contextual lookups cover earlier video terms and show their context note', async () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const translation = await import(path.join(root, 'src/lesson-translation.mjs'));
@@ -121,7 +155,7 @@ test('local word-lookup loader serves a single isolated word and never presents 
   ok: url === '/data/italian_arabic_dictionary_lookup.json',
   json: async () => dictionary,
 }));
-  assert.equal(loaded, 5281);
+  assert.equal(loaded, 5313);
   assert.equal(translation.wordAtOffset('La corsia è libera.', 4), 'corsia');
   const approved = translation.translateTappedWord('corsia', []);
   assert.equal(approved.word, 'corsia');

@@ -14,6 +14,8 @@ test('lesson Italian audio uses the shared voice-aware Web Speech controller', (
   assert.doesNotMatch(`${app}\n${speech}`, /playItalianAudio|isAudioUnlocked/u);
   assert.match(speech, /function waitForVoices\(/u);
   assert.match(speech, /function prepareWebVoice\(/u);
+  assert.match(speech, /VOICE_WAIT_TIMEOUT_MS = 500/u);
+  assert.match(speech, /api\.synthesis\.speak\(utterance\)/u);
 });
 
 test('lesson interface exposes Italian playback and the explainer narrates Italian text', () => {

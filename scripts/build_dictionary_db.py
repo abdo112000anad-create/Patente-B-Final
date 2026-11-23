@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the v54 SQLite dictionary and its matching JSON lookup."""
+"""Build the v61 SQLite dictionary and its matching JSON lookup."""
 from __future__ import annotations
 import hashlib
 import json
@@ -14,8 +14,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 JSON_PATH = ROOT / "data/italian_arabic_dictionary_lookup.json"
 DB_PATH = ROOT / "android/app/src/main/assets/dictionary.db"
-APP_VERSION = 54
-EXPECTED_WORD_COUNT = 5281
+APP_VERSION = 61
+EXPECTED_WORD_COUNT = 5313
 
 # User-requested standalone lemma, kept separate from question-bank extraction.
 REQUESTED_LEMMA_ADDITIONS = {
@@ -29,10 +29,22 @@ REQUESTED_LEMMA_ADDITIONS = {
         "lexical_translation",
         "ترجمة معجمية أضافها المستخدم بطلبه.",
     ),
+    "distingue": (
+        "يميز / يفرق",
+        "lexical_translation",
+        "صيغة الفعل التي تظهر في درس أنواع المركبات، أُضيفت بطلب المستخدم.",
+    ),
+    "distinguere": (
+        "يميز / يفرق",
+        "lexical_translation",
+        "مصدر الفعل في درس أنواع المركبات، أُضيف بطلب المستخدم.",
+    ),
 }
 REQUESTED_LEMMA_SOURCES = {
     "riconoscere": "user-requested-lemma-v47",
     "spiegazione": "user-requested-lemma-v51",
+    "distingue": "user-requested-lemma-v61",
+    "distinguere": "user-requested-lemma-v61",
 }
 VIDEO_CONTEXT_ADDITIONS = {
     "forme": (
@@ -52,8 +64,43 @@ VIDEO_CONTEXT_ADDITIONS = {
     ),
 }
 VIDEO_CONTEXT_SOURCES = {word: "video-lesson-context-v54" for word in VIDEO_CONTEXT_ADDITIONS}
-PROJECT_ADDITIONS = {**REQUESTED_LEMMA_ADDITIONS, **VIDEO_CONTEXT_ADDITIONS}
-PROJECT_ADDITION_SOURCES = {**REQUESTED_LEMMA_SOURCES, **VIDEO_CONTEXT_SOURCES}
+LESSON_DICTIONARY_ADDITIONS = {
+    "appartengono": ("تنتمي / تندرج ضمن", "contextual_translation", "صيغة الجمع الواردة في درس فئات المركبات."),
+    "appartenere": ("ينتمي إلى / يندرج ضمن", "lexical_translation", "مصدر appartengono في درس فئات المركبات."),
+    "ignorare": ("يتجاهل", "contextual_translation", "مفردة أساسية في درسي الحذر وأعمال الطرق."),
+    "aggiornamenti": ("تحديثات", "contextual_translation", "صيغة الجمع الواردة في درس التحقق من تحديثات القانون."),
+    "aggiornamento": ("تحديث", "lexical_translation", "مصدر aggiornamenti في درس التحقق من تحديثات القانون."),
+    "testo": ("نصّ", "contextual_translation", "النص القانوني الذي يُرجع إليه للتحقق من القاعدة النافذة."),
+    "fonti": ("مصادر", "contextual_translation", "صيغة الجمع في عبارة المصادر الرسمية."),
+    "fonte": ("مصدر", "lexical_translation", "مصدر fonti في درس التحقق من المعلومات الرسمية."),
+    "ufficiali": ("رسمية", "contextual_translation", "صيغة الصفة في عبارة fonti ufficiali."),
+    "ufficiale": ("رسمي", "lexical_translation", "مصدر ufficiali في درس مصادر المعلومات."),
+    "pubblicazione": ("نشر / إصدار", "contextual_translation", "النشر الرسمي للقانون، كما في تاريخ النشر."),
+    "coincide": ("يتطابق / يتزامن", "contextual_translation", "صيغة الفعل في مقارنة تاريخ النشر والنفاذ."),
+    "coincidere": ("يتطابق / يتزامن", "lexical_translation", "مصدر coincide في درس تحديثات القانون."),
+    "consultare": ("يراجع", "contextual_translation", "مراجعة النص القانوني النافذ."),
+    "notizia": ("خبر", "contextual_translation", "خبر عام لا يُعد وحده دليلًا على تعديل القانون."),
+    "gruppi": ("مجموعات", "contextual_translation", "صيغة الجمع في عنوان درس تصنيف الإشارات."),
+    "gruppo": ("مجموعة", "lexical_translation", "مصدر gruppi في درس مجموعات الإشارات."),
+    "prescrivono": ("تفرض / تُلزِم", "contextual_translation", "صيغة الجمع للأفعال التي تصف ما تفرضه إشارات الإلزام."),
+    "prescrive": ("يفرض / يُلزِم", "contextual_translation", "تصحيح للمعنى الفعلي في سياق إشارة الإلزام؛ يستبدل المسودة غير المناسبة."),
+    "prescrivere": ("يفرض / يُلزِم", "lexical_translation", "مصدر prescrive وprescrivono في درس أنواع الإشارات."),
+    "sembra": ("يبدو", "contextual_translation", "صيغة الفعل في عبارة يبدو فيها الطريق خاليًا."),
+    "sembrare": ("يبدو", "lexical_translation", "مصدر sembra في سؤال أولوية المرور."),
+    "ambito": ("نطاق / مجال السريان", "contextual_translation", "المجال الذي تحدده اللوحة التكميلية."),
+    "leggono": ("تُقرأ", "contextual_translation", "صيغة si leggono في شرح كيفية قراءة اللوحات التكميلية."),
+    "leggere": ("يقرأ", "lexical_translation", "مصدر leggono في شرح قراءة اللوحات."),
+    "interpretato": ("مُفسَّر", "contextual_translation", "صيغة اسم المفعول في va interpretato ضمن سؤال التحقق."),
+    "interpretare": ("يفسّر", "lexical_translation", "مصدر interpretato في درس اللوحات التكميلية."),
+    "organizzare": ("ينظّم", "contextual_translation", "وظيفة خطوط الطريق في تنظيم حركة المرور."),
+    "prevalere": ("يسود / تكون له الأولوية على", "lexical_translation", "مصدر prevalgono في درس أولوية إشارات شرطي المرور."),
+    "critici": ("حرجة / خطرة", "contextual_translation", "صيغة الجمع في عبارة punti critici."),
+    "critico": ("حرِج / خطِر", "lexical_translation", "مصدر critici في درس الإشارات والعوائق."),
+}
+LESSON_DICTIONARY_SOURCES = {word: "lesson-dictionary-audit-v61" for word in LESSON_DICTIONARY_ADDITIONS}
+QUESTION_BANK_AUDIT_OVERRIDES = {"prescrive"}
+PROJECT_ADDITIONS = {**REQUESTED_LEMMA_ADDITIONS, **VIDEO_CONTEXT_ADDITIONS, **LESSON_DICTIONARY_ADDITIONS}
+PROJECT_ADDITION_SOURCES = {**REQUESTED_LEMMA_SOURCES, **VIDEO_CONTEXT_SOURCES, **LESSON_DICTIONARY_SOURCES}
 
 # Owner-supplied, explicitly approved corrections from the v42 review.
 # Each tuple is (Arabic display text, translation kind, explanatory note).
@@ -114,7 +161,7 @@ def normalized_word(value: object) -> str:
 
 
 def write_json_atomically(payload: dict) -> None:
-    fd, temp_name = tempfile.mkstemp(prefix="dictionary-v51-", suffix=".json", dir=JSON_PATH.parent)
+    fd, temp_name = tempfile.mkstemp(prefix="dictionary-v61-", suffix=".json", dir=JSON_PATH.parent)
     os.close(fd)
     try:
         Path(temp_name).write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -214,16 +261,17 @@ def main() -> int:
         "total_entries": len(rows),
         "translated_entries": translated_rows,
         "review_required_entries": review_required_rows,
-        "unique_question_bank_terms": sum(row["word"].casefold() not in PROJECT_ADDITIONS for row in rows),
+        "unique_question_bank_terms": sum(row["word"].casefold() not in PROJECT_ADDITIONS or row["word"].casefold() in QUESTION_BANK_AUDIT_OVERRIDES for row in rows),
         "terms_with_lookup_entry": len(rows),
         "entries_with_arabic_translation": translated_rows,
         "entries_without_lexical_translation": nonlexical_rows,
         "entries_with_safe_ui_fallback": 0,
         "owner_approved_corrections": len(OWNER_CORRECTIONS),
         "excluded_single_letter_artifacts": sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS),
-        "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51 lemmas, and v54 video-context terms are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+        "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51/v61 requested terms, v54 video-context terms, and v61 lesson-audit additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
         "requested_lemma_additions": len(REQUESTED_LEMMA_ADDITIONS),
         "video_context_additions": len(VIDEO_CONTEXT_ADDITIONS),
+        "lesson_dictionary_audit_additions": len(LESSON_DICTIONARY_ADDITIONS),
     })
     payload["entries"] = rows
     write_json_atomically(payload)
@@ -275,9 +323,10 @@ def main() -> int:
             "owner_approved_override_rows": str(approved_rows),
             "requested_lemma_addition_rows": str(len(REQUESTED_LEMMA_ADDITIONS)),
             "video_context_addition_rows": str(len(VIDEO_CONTEXT_ADDITIONS)),
+            "lesson_dictionary_audit_rows": str(len(LESSON_DICTIONARY_ADDITIONS)),
             "unresolved_rows_given_transparent_fallback": "0",
             "excluded_single_letter_artifacts": ",".join(sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS)),
-            "translation_notice": "Automatic translations remain drafts unless status is reviewed_override; reviewed overrides include the requested v47/v51 lemmas and the v54 video-context translations.",
+            "translation_notice": "Automatic translations remain drafts unless status is reviewed_override; reviewed overrides include requested v47/v51/v61 lemmas, v54 video-context translations, and v61 lesson-audit terms.",
             "fallback_notice": "The v42 lookup excludes isolated single-letter extraction artifacts and includes owner-approved corrections.",
         }
         db.executemany("INSERT INTO Metadata(Key, Value) VALUES (?, ?)", sorted(sqlite_metadata.items()))

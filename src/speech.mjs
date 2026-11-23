@@ -25,8 +25,8 @@ export function splitSpeechText(text, maxLength = 120) {
 }
 
 export const ITALIAN_TTS_LOCALE = 'it-IT';
-const VOICE_WAIT_TIMEOUT_MS = 5000;
-const VOICE_POLL_INTERVAL_MS = 200;
+const VOICE_WAIT_TIMEOUT_MS = 500;
+const VOICE_POLL_INTERVAL_MS = 100;
 
 export function buildLessonSpeechTexts(lesson = {}) {
   const headingIt = String(lesson.titleIt || lesson.heading_it || '').trim();
@@ -57,13 +57,9 @@ function readAvailableVoices(synthesis) {
   }
 }
 
-function hasItalianVoice(voices) {
-  return Array.from(voices || []).some(voice => String(voice?.lang || '').toLowerCase().replace(/_/gu, '-').startsWith('it-') || String(voice?.lang || '').toLowerCase() === 'it');
-}
-
 function waitForVoices(synthesis, task, isCurrent, onWaiting) {
   const initialVoices = readAvailableVoices(synthesis);
-  if (hasItalianVoice(initialVoices) || typeof synthesis?.getVoices !== 'function') return Promise.resolve(initialVoices);
+  if (initialVoices.length > 0 || typeof synthesis?.getVoices !== 'function') return Promise.resolve(initialVoices);
 
   try {
     console.log('[TTS] جارٍ تجهيز الصوت الإيطالي... انتظار تحميل أصوات النظام.');
@@ -92,7 +88,7 @@ function waitForVoices(synthesis, task, isCurrent, onWaiting) {
     const check = () => {
       if (!isCurrent()) { finish([]); return; }
       const voices = readAvailableVoices(synthesis);
-      if (hasItalianVoice(voices)) finish(voices);
+      if (voices.length > 0) finish(voices);
     };
     const cancel = () => finish([]);
     task.cancelVoiceWait = cancel;

@@ -42192,8 +42192,8 @@ This typically indicates that your device does not have a healthy Internet conne
     return chunks;
   }
   var ITALIAN_TTS_LOCALE = "it-IT";
-  var VOICE_WAIT_TIMEOUT_MS = 5e3;
-  var VOICE_POLL_INTERVAL_MS = 200;
+  var VOICE_WAIT_TIMEOUT_MS = 500;
+  var VOICE_POLL_INTERVAL_MS = 100;
   function buildLessonSpeechTexts(lesson = {}) {
     const headingIt = String(lesson.titleIt || lesson.heading_it || "").trim();
     const bodyIt = String(lesson.summaryIt || lesson.body_it || "").trim();
@@ -42220,12 +42220,9 @@ This typically indicates that your device does not have a healthy Internet conne
       return [];
     }
   }
-  function hasItalianVoice(voices) {
-    return Array.from(voices || []).some((voice) => String((voice == null ? void 0 : voice.lang) || "").toLowerCase().replace(/_/gu, "-").startsWith("it-") || String((voice == null ? void 0 : voice.lang) || "").toLowerCase() === "it");
-  }
   function waitForVoices(synthesis, task, isCurrent, onWaiting) {
     const initialVoices = readAvailableVoices(synthesis);
-    if (hasItalianVoice(initialVoices) || typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return Promise.resolve(initialVoices);
+    if (initialVoices.length > 0 || typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return Promise.resolve(initialVoices);
     try {
       console.log("[TTS] جارٍ تجهيز الصوت الإيطالي... انتظار تحميل أصوات النظام.");
       onWaiting == null ? void 0 : onWaiting();
@@ -42259,7 +42256,7 @@ This typically indicates that your device does not have a healthy Internet conne
           return;
         }
         const voices = readAvailableVoices(synthesis);
-        if (hasItalianVoice(voices)) finish(voices);
+        if (voices.length > 0) finish(voices);
       };
       const cancel = () => finish([]);
       task.cancelVoiceWait = cancel;

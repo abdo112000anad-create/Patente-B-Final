@@ -54,7 +54,7 @@ test('only project-approved terms are presented as reviewed overrides', () => {
 
 test('v49 ships the corrected dictionary in JSON and a valid SQLite asset', () => {
   const dictionary = JSON.parse(read('data/italian_arabic_dictionary_lookup.json'));
-  assert.equal(dictionary.entries.length, 5281);
+  assert.equal(dictionary.entries.length, 5313);
   assert.ok(dictionary.entries.every(row => row.word && row.translation_ar));
   assert.equal(dictionary.entries.filter(row => row.status === 'fallback_draft_needs_review').length, 0);
   assert.equal(dictionary.entries.filter(row => row.source === 'owner-approved-correction-v42' && row.status === 'reviewed_override' && row.review_required === 0).length, 9);
@@ -222,7 +222,7 @@ test('stopping while voices load cleans up the listener and never speaks', async
   assert.equal(controller.state, 'idle');
 });
 
-test('Web Speech falls back to it-IT when the voice list is empty or unavailable', async () => {
+test('Web Speech retries after 500ms then falls back to it-IT when voices are unavailable', async () => {
   const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
   class FakeUtterance { constructor(text) { this.text = text; } }
   const states = [];
@@ -236,6 +236,8 @@ test('Web Speech falls back to it-IT when the voice list is empty or unavailable
   assert.equal(utterances.length, 1);
   assert.equal(utterances[0].lang, 'it-IT');
   assert.equal(utterances[0].voice, undefined);
+  assert.equal(utterances[0].rate, 0.8);
+  assert.equal(utterances[0].pitch, 1.0);
   assert.equal(controller.state, 'idle');
 });
 
