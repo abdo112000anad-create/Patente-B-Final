@@ -16,8 +16,8 @@ test('v62 app dictionary contains auditable rows and excludes isolated letter ar
   assert.equal(dictionary.metadata.source_question_count, questions.questions.length);
   assert.equal(dictionary.metadata.app_release, 62);
   assert.equal(dictionary.metadata.unique_question_bank_terms, 5276);
-  assert.equal(dictionary.metadata.total_entries, 5329);
-  assert.equal(dictionary.entries.length, 5329);
+  assert.equal(dictionary.metadata.total_entries, 5335);
+  assert.equal(dictionary.entries.length, 5335);
   assert.equal(new Set(dictionary.entries.map(row => row.word)).size, dictionary.entries.length);
   for (const row of dictionary.entries) {
     assert.ok(row.word);
@@ -103,9 +103,11 @@ test('v62 lesson vocabulary includes reviewed Arabic translations for every miss
     immobilizzarlo: 'تثبيته ومنعه من الحركة', disposizioni: 'أحكام / قواعد', rotatoria: 'دوّار مروري', riservata: 'مخصّصة',
     retrovisore: 'مرآة الرؤية الخلفية', morto: 'ميت؛ وفي angolo morto تعني أعمى', dosso: 'نتوء / مطب مرتفع',
     segnalazioni: 'إشارات / تنبيهات', acustiche: 'صوتية', sicurezza: 'السلامة', spazio: 'مساحة / حيّز متاح',
+    occupante: 'راكب / شاغل المركبة', identificazione: 'التعريف / تحديد الهوية', documentale: 'متعلق بالوثائق / مستندي',
+    autorità: 'السلطات / الجهات المختصة', legale: 'قانوني', vigente: 'نافذ / ساري المفعول',
   };
-  assert.equal(Object.keys(expected).length, 58);
-  assert.equal(dictionary.metadata.lesson_dictionary_audit_additions, 56);
+  assert.equal(Object.keys(expected).length, 64);
+  assert.equal(dictionary.metadata.lesson_dictionary_audit_additions, 62);
   const translation = await import(path.join(root, 'src/lesson-translation.mjs'));
   translation.setGeneratedDictionary(dictionary.entries);
   for (const [word, arabic] of Object.entries(expected)) {
@@ -164,7 +166,7 @@ test('local word-lookup loader serves a single isolated word and never presents 
   ok: url === '/data/italian_arabic_dictionary_lookup.json',
   json: async () => dictionary,
 }));
-  assert.equal(loaded, 5329);
+  assert.equal(loaded, 5335);
   assert.equal(translation.wordAtOffset('La corsia è libera.', 4), 'corsia');
   const approved = translation.translateTappedWord('corsia', []);
   assert.equal(approved.word, 'corsia');

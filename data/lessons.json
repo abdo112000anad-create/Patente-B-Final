@@ -1978,173 +1978,204 @@
       "lessons": [
         {
           "id": "u7-l1",
-          "titleIt": "Controlli del veicolo: efficienza e sicurezza",
-          "titleAr": "فحص المركبة: الكفاءة والسلامة",
-          "summaryIt": "Veicoli a motore e rimorchi devono essere mantenuti efficienti per la sicurezza. Per sicurezza, verifica pneumatici, freni, sterzo, sospensioni, luci, indicatori, catadiottri, specchi, parabrezza, tergicristalli e scarico; adegua la velocità al veicolo, al carico, alla strada e al traffico.",
-          "summaryAr": "يجب الحفاظ على كفاءة (efficienza) المركبات ذات المحرك ومقطوراتها من أجل السلامة. وللسلامة، افحص الإطارات والفرامل والتوجيه والتعليق والأضواء والمؤشرات والعاكسات والمرايا والزجاج الأمامي والماسحات والعادم؛ واضبط السرعة وفق المركبة والحمولة والطريق والمرور.",
+          "titleIt": "Pneumatici e aderenza",
+          "titleAr": "الإطارات والتماسك",
+          "summaryIt": "Pneumatici in buono stato aiutano il veicolo a mantenere aderenza e stabilità. Pressione e usura vanno controllate regolarmente.",
+          "summaryAr": "الإطارات السليمة (pneumatici) تساعد المركبة على التماسك والثبات؛ افحص ضغطها وحالتها بانتظام.",
           "keyPoints": [
             {
-              "it": "Veicoli a motore e rimorchi devono restare efficienti.",
-              "ar": "يجب إبقاء المركبات ذات المحرك ومقطوراتها بحالة كفاءة."
+              "it": "pneumatici",
+              "ar": "الإطارات"
             },
             {
-              "it": "Controllare pneumatici, freni, sterzo e sospensioni.",
-              "ar": "افحص الإطارات والفرامل والتوجيه والتعليق."
+              "it": "pressione",
+              "ar": "ضغط الهواء"
             },
             {
-              "it": "Controllare luci, indicatori, catadiottri, specchi, parabrezza, tergicristalli e scarico.",
-              "ar": "افحص الأضواء والمؤشرات والعاكسات والمرايا والزجاج والماسحات والعادم."
-            },
-            {
-              "it": "Adeguare la velocità a veicolo, carico, strada e traffico.",
-              "ar": "اضبط السرعة وفق المركبة والحمولة والطريق وحركة المرور."
+              "it": "usura",
+              "ar": "التآكل"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Veicoli a motore e rimorchi devono essere mantenuti efficienti.",
+              "qIt": "Pneumatici usurati possono ridurre l’aderenza.",
               "a": "VERO",
-              "explainAr": "تسهم الكفاءة في سلامة حركة المرور."
+              "explainAr": "نعم، تآكل الإطارات قد يقلل تماسكها بالطريق."
             },
             {
-              "qIt": "Per adeguare la velocità basta considerare il traffico.",
+              "qIt": "La pressione dei pneumatici non influisce sulla sicurezza.",
               "a": "FALSO",
-              "explainAr": "يجب مراعاة المركبة والحمولة والطريق أيضًا."
+              "explainAr": "ضغط الإطارات يؤثر في سلوك المركبة وسلامتها."
             },
             {
-              "qIt": "Sterzo, sospensioni, indicatori e tergicristalli rientrano nei controlli del veicolo.",
+              "qIt": "È utile controllare regolarmente lo stato dei pneumatici.",
               "a": "VERO",
-              "explainAr": "هذه عناصر يجب معرفتها والحفاظ على كفاءتها."
+              "explainAr": "نعم، الفحص المنتظم يساعد على اكتشاف التآكل أو التلف."
             }
           ]
         },
         {
           "id": "u7-l2",
-          "titleIt": "Cinture e sistemi di ritenuta: proteggere gli occupanti",
-          "titleAr": "الأحزمة وأنظمة التثبيت: حماية الركاب",
-          "summaryIt": "L’art. 172 prevede cinture per le categorie indicate e un sistema di ritenuta omologato, adeguato al peso, per i bambini sotto 1,50 m. Un seggiolino rivolto all’indietro non va davanti a un airbag attivo; regola correttamente anche il poggiatesta.",
-          "summaryAr": "توجب المادة 172 الأحزمة للفئات المحددة، ونظام تثبيت أطفال معتمدًا يناسب الوزن لمن هم دون 1.50 متر. لا يوضع مقعد الطفل المواجه للخلف أمام وسادة هوائية فعالة؛ واضبط مسند الرأس (poggiatesta) جيدًا.",
+          "titleIt": "Freni e controllo del veicolo",
+          "titleAr": "الفرامل والسيطرة على المركبة",
+          "summaryIt": "I freni devono funzionare correttamente per rallentare e arrestare il veicolo. Rumori o cambiamenti nella frenata richiedono un controllo.",
+          "summaryAr": "تساعد الفرامل السليمة (freni) على إبطاء المركبة وإيقافها؛ وأي تغير في عملها يستدعي الفحص.",
           "keyPoints": [
             {
-              "it": "L’obbligo di cintura riguarda le categorie e le condizioni previste.",
-              "ar": "يشمل واجب الحزام الفئات والشروط المحددة."
+              "it": "freni",
+              "ar": "الفرامل"
             },
             {
-              "it": "Sotto 1,50 m serve un sistema omologato adeguato al peso.",
-              "ar": "لمن يقل طولهم عن 1.50 متر يلزم نظام معتمد يناسب الوزن."
+              "it": "frenata",
+              "ar": "الكبح"
             },
             {
-              "it": "Seggiolino rivolto all’indietro: airbag frontale disattivato o posto diverso.",
-              "ar": "مقعد الطفل المواجه للخلف: عطّل الوسادة الأمامية أو اختر مقعدًا آخر."
-            },
-            {
-              "it": "Regolare il poggiatesta per sostenere correttamente la testa.",
-              "ar": "اضبط مسند الرأس لدعم الرأس على نحو صحيح."
+              "it": "controllo tecnico",
+              "ar": "الفحص الفني"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Per un bambino sotto 1,50 m serve un sistema omologato adeguato al peso.",
+              "qIt": "I freni devono essere efficienti per arrestare il veicolo.",
               "a": "VERO",
-              "explainAr": "هذا هو الشرط العام في المادة 172 مع الاستثناءات المحددة."
+              "explainAr": "نعم، كفاءة الفرامل أساسية لإيقاف المركبة بأمان."
             },
             {
-              "qIt": "Un seggiolino rivolto all’indietro può stare davanti a un airbag frontale attivo.",
+              "qIt": "Un rumore insolito durante la frenata può essere ignorato.",
               "a": "FALSO",
-              "explainAr": "يجب تعطيل الوسادة لذلك المقعد أو اختيار مقعد آخر."
+              "explainAr": "لا ينبغي تجاهل الأصوات أو التغيرات غير المعتادة في الفرامل."
             },
             {
-              "qIt": "Il poggiatesta va regolato correttamente per sostenere la testa.",
+              "qIt": "La manutenzione aiuta a individuare problemi ai freni.",
               "a": "VERO",
-              "explainAr": "هذا إجراء لحماية السائق والركاب."
+              "explainAr": "نعم، الفحص والصيانة قد يكشفان الأعطال مبكرًا."
             }
           ]
         },
         {
           "id": "u7-l3",
-          "titleIt": "Luci del veicolo: scegliere e usare quelle corrette",
-          "titleAr": "أضواء المركبة: اختيار الإضاءة المناسبة واستخدامها",
-          "summaryIt": "Le luci prescritte si usano di giorno fuori dai centri abitati e, per ciclomotori e motocicli, anche nei centri abitati; di notte, in galleria o con scarsa visibilità si usano quelle richieste. Gli abbaglianti si abbassano per non abbagliare e il retronebbia si usa nei casi previsti.",
-          "summaryAr": "تُستخدم الأضواء المقررة نهارًا خارج المناطق المأهولة، وكذلك للدراجات النارية الصغيرة والنارية داخلها؛ وتُستخدم الأضواء المطلوبة ليلًا وفي الأنفاق وعند ضعف الرؤية. يُخفّض الضوء العالي لتجنب الإبهار، ويُستخدم ضوء الضباب الخلفي (retronebbia) في الحالات المحددة.",
+          "titleIt": "Luci e visibilità del veicolo",
+          "titleAr": "أضواء المركبة ومدى رؤيتها",
+          "summaryIt": "Le luci aiutano il conducente a vedere e rendono il veicolo visibile agli altri. Devono essere pulite e funzionanti.",
+          "summaryAr": "تساعد أضواء المركبة (luci) السائق على الرؤية وتجعل المركبة واضحة للآخرين؛ لذا حافظ عليها نظيفة وسليمة.",
           "keyPoints": [
             {
-              "it": "Di giorno, luci prescritte fuori dai centri abitati; ciclomotori e motocicli le usano anche nei centri abitati.",
-              "ar": "نهارًا، تُستخدم الأضواء المقررة خارج المناطق المأهولة؛ وتستخدمها الدراجات الصغيرة والنارية داخلها أيضًا."
+              "it": "fari",
+              "ar": "المصابيح الأمامية"
             },
             {
-              "it": "Di notte, in galleria o con scarsa visibilità si usano i dispositivi di illuminazione richiesti.",
-              "ar": "ليلًا وفي الأنفاق وعند ضعف الرؤية، تُستخدم أجهزة الإضاءة المطلوبة."
+              "it": "luci posteriori",
+              "ar": "الأضواء الخلفية"
             },
             {
-              "it": "Gli abbaglianti si usano solo quando consentito e si abbassano per non abbagliare chi si incrocia o si segue.",
-              "ar": "يُستخدم الضوء العالي حيث يسمح القانون، ويُخفض عند مقابلة مركبة أو السير خلفها لتجنب الإبهار."
-            },
-            {
-              "it": "Il retronebbia, se presente, è obbligatorio con nebbia sotto 50 m di visibilità, pioggia intensa o neve fitta.",
-              "ar": "ضوء الضباب الخلفي، إن وُجد، واجب عند ضباب يقلل الرؤية عن 50 مترًا أو مطر شديد أو ثلج كثيف."
+              "it": "visibilità",
+              "ar": "مدى الرؤية"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Fuori dai centri abitati, durante il giorno, si usano le luci prescritte.",
+              "qIt": "Le luci aiutano a rendere visibile il veicolo.",
               "a": "VERO",
-              "explainAr": "تفرض المادة 152 استعمال الأضواء المقررة نهارًا خارج المناطق المأهولة."
+              "explainAr": "نعم، الأضواء تساعد مستخدمي الطريق على رؤية المركبة."
             },
             {
-              "qIt": "Gli abbaglianti possono restare accesi quando abbagliano un veicolo che si incrocia.",
+              "qIt": "Una lampada guasta non ha alcuna importanza per la sicurezza.",
               "a": "FALSO",
-              "explainAr": "يجب التحويل إلى الضوء المنخفض عند احتمال إبهار مستعملي الطريق الآخرين."
+              "explainAr": "تعطل الضوء قد يقلل الرؤية أو يجعل المركبة أقل وضوحًا."
             },
             {
-              "qIt": "Il retronebbia è obbligatorio nei casi previsti, tra cui nebbia con visibilità inferiore a 50 m.",
+              "qIt": "È utile controllare che le luci siano pulite e funzionanti.",
               "a": "VERO",
-              "explainAr": "من الحالات previste وجود ضباب يقلل الرؤية عن 50 مترًا؛ ويشمل النص أيضًا المطر الشديد والثلج الكثيف."
+              "explainAr": "نعم، النظافة وسلامة الأضواء تساعدان على أداء وظيفتها."
             }
           ]
         },
         {
           "id": "u7-l4",
-          "titleIt": "Clacson, luci di emergenza e spie del cruscotto",
-          "titleAr": "البوق وأضواء التحذير ومؤشرات لوحة القيادة",
-          "summaryIt": "Il clacson si usa solo per la sicurezza, con la massima moderazione e con il segnale più breve possibile; nei centri abitati è ammesso solo per pericolo effettivo e immediato. Le luci di emergenza si usano nei casi previsti e le spie si interpretano consultando il manuale del veicolo.",
-          "summaryAr": "يُستخدم البوق (clacson) لأمان الطريق فقط، بأقصى اعتدال وبأقصر تنبيه ممكن؛ وداخل المناطق المأهولة لا يُسمح به إلا عند خطر فعلي وفوري. تُستخدم أضواء التحذير في الحالات المقررة، وتُفهم مؤشرات اللوحة بالرجوع إلى دليل المركبة.",
+          "titleIt": "Carico e stabilità",
+          "titleAr": "الحمولة وثبات المركبة",
+          "summaryIt": "Il carico va sistemato e fissato senza compromettere stabilità o visuale. Con un rimorchio, masse autorizzate, aggancio, collegamenti, luci, freni e carico vanno verificati secondo i documenti e le regole applicabili.",
+          "summaryAr": "ثبّت الحمولة (carico) دون التأثير في الثبات أو الرؤية. ومع المقطورة (rimorchio)، تحقّق وفق الوثائق والقواعد السارية من الكتل المسموح بها والربط والتوصيلات والأضواء والفرامل والحمولة.",
           "keyPoints": [
             {
-              "it": "Usare il clacson solo per la sicurezza, con moderazione e per il tempo più breve possibile.",
-              "ar": "استخدم البوق للأمان فقط، باعتدال ولأقصر مدة ممكنة."
+              "it": "carico",
+              "ar": "الحمولة"
             },
             {
-              "it": "Nei centri abitati, usarlo solo per pericolo effettivo e immediato.",
-              "ar": "داخل المناطق المأهولة، استخدمه فقط عند خطر فعلي وفوري."
+              "it": "fissaggio",
+              "ar": "التثبيت"
             },
             {
-              "it": "Le luci di emergenza avvisano nei casi indicati dalla legge.",
-              "ar": "تنبه أضواء التحذير في الحالات التي يحددها القانون."
+              "it": "stabilità",
+              "ar": "الثبات"
             },
             {
-              "it": "Per interpretare le spie del cruscotto, consulta il manuale del veicolo.",
-              "ar": "لفهم مؤشرات لوحة القيادة، ارجع إلى دليل المركبة."
+              "it": "rimorchio",
+              "ar": "مقطورة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Il segnale acustico deve essere il più breve possibile e usato per la sicurezza.",
+              "qIt": "Il carico va fissato in modo sicuro; con un rimorchio si controllano anche aggancio e collegamenti.",
               "a": "VERO",
-              "explainAr": "توجب المادة 156 الاعتدال وأقصر مدة لازمة."
+              "explainAr": "التثبيت الآمن مهم، ومع المقطورة افحص وصلة الربط والتوصيلات أيضًا."
             },
             {
-              "qIt": "Nei centri abitati il clacson è ammesso soltanto per pericolo effettivo e immediato.",
-              "a": "VERO",
-              "explainAr": "هذا هو الشرط الذي تحدده المادة 156."
-            },
-            {
-              "qIt": "Le spie del cruscotto hanno lo stesso significato in ogni modello di veicolo.",
+              "qIt": "Un carico può essere sistemato in modo da coprire la visuale del conducente.",
               "a": "FALSO",
-              "explainAr": "يُرجع إلى دليل المركبة لمعرفة الدلالة المحددة."
+              "explainAr": "يجب ألا تحجب الحمولة مجال رؤية السائق."
+            },
+            {
+              "qIt": "Un carico mal sistemato può compromettere la stabilità.",
+              "a": "VERO",
+              "explainAr": "نعم، الحمولة غير المتوازنة قد تؤثر في ثبات المركبة."
+            }
+          ]
+        },
+        {
+          "id": "u7-l5",
+          "titleIt": "Cinture, sistemi di ritenuta e casco",
+          "titleAr": "الأحزمة وأنظمة التثبيت والخوذة",
+          "summaryIt": "Le cinture e i sistemi di ritenuta proteggono gli occupanti e vanno usati secondo le regole. Su ciclomotori e motoveicoli, il casco conforme va indossato e allacciato; prima di partire, controlla gli elementi essenziali del mezzo.",
+          "summaryAr": "تحمي أحزمة الأمان وأنظمة التثبيت (cinture e sistemi di ritenuta) الركاب، ويجب استخدامها وفق القواعد. وعلى الدراجات النارية والبخارية، تُرتدى الخوذة المطابقة وتُربط (casco protettivo) مع مراعاة الاستثناءات المحددة، وتُفحص عناصر المركبة الأساسية قبل الانطلاق.",
+          "keyPoints": [
+            {
+              "it": "cintura di sicurezza",
+              "ar": "حزام الأمان"
+            },
+            {
+              "it": "sistema di ritenuta",
+              "ar": "نظام تثبيت"
+            },
+            {
+              "it": "casco protettivo",
+              "ar": "الخوذة الواقية"
+            },
+            {
+              "it": "controlli prima della partenza",
+              "ar": "فحوص ما قبل الانطلاق"
+            }
+          ],
+          "trapWord": null,
+          "quickCheck": [
+            {
+              "qIt": "La cintura di sicurezza contribuisce a proteggere gli occupanti.",
+              "a": "VERO",
+              "explainAr": "نعم، تساعد على تقليل خطر الإصابة عند الاصطدام."
+            },
+            {
+              "qIt": "La cintura è utile soltanto per chi guida.",
+              "a": "FALSO",
+              "explainAr": "أنظمة التثبيت مخصصة لحماية الركاب أيضًا وفق القواعد."
+            },
+            {
+              "qIt": "Il casco richiesto per conducenti e passeggeri di ciclomotori e motoveicoli va indossato e allacciato, salvo le esenzioni previste.",
+              "a": "VERO",
+              "explainAr": "هذه هي القاعدة العامة للخوذة وفق المادة 171، مع مراعاة الاستثناءات المحددة."
             }
           ]
         }
@@ -2307,173 +2338,200 @@
       "lessons": [
         {
           "id": "u8-l1",
-          "titleIt": "La patente: categoria, validità e condizioni per guidare",
-          "titleAr": "رخصة القيادة: الفئة والصلاحية وشروط القيادة",
-          "summaryIt": "La patente abilita alla guida dei veicoli della categoria indicata, nel rispetto della validità e delle limitazioni personali. Prima di guidare, verifica che la categoria sia adatta al veicolo e che siano rispettate le condizioni applicabili.",
-          "summaryAr": "تخوّل رخصة القيادة (patente) قيادة المركبات ضمن الفئة المحددة، مع مراعاة صلاحيتها والقيود الشخصية. قبل القيادة، تحقّق من ملاءمة الفئة للمركبة ومن استيفاء الشروط المنطبقة.",
+          "titleIt": "Patente e idoneità alla guida",
+          "titleAr": "الرخصة والأهلية للقيادة",
+          "summaryIt": "Per guidare occorre una patente valida per il veicolo e rispettare le condizioni previste. Il conducente deve conoscere le eventuali limitazioni indicate.",
+          "summaryAr": "تتطلب القيادة رخصة سارية ومناسبة لنوع المركبة (patente di guida)، مع الالتزام بأي شروط أو قيود تنطبق عليها.",
           "keyPoints": [
             {
-              "it": "La patente abilita per la categoria corrispondente al veicolo.",
-              "ar": "تخوّل الرخصة القيادة ضمن الفئة المناسبة للمركبة."
+              "it": "patente di guida",
+              "ar": "رخصة القيادة"
             },
             {
-              "it": "La validità della patente deve essere rispettata.",
-              "ar": "يجب مراعاة صلاحية رخصة القيادة."
+              "it": "validità",
+              "ar": "الصلاحية"
             },
             {
-              "it": "Il conducente deve rispettare le limitazioni personali.",
-              "ar": "على السائق الالتزام بالقيود الشخصية."
-            },
-            {
-              "it": "Prima di guidare, verifica l'abilitazione nel caso concreto.",
-              "ar": "تحقّق قبل القيادة من أهلية الرخصة للحالة المحددة."
+              "it": "limitazione",
+              "ar": "قيد أو شرط"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La patente abilita alla guida dei veicoli della categoria indicata.",
+              "qIt": "La patente deve essere valida per il veicolo guidato.",
               "a": "VERO",
-              "explainAr": "تخوّل الرخصة قيادة المركبات الداخلة ضمن الفئة المحددة."
+              "explainAr": "نعم، يجب أن تغطي الرخصة فئة المركبة التي يقودها الشخص."
             },
             {
-              "qIt": "La validità della patente e le limitazioni personali non devono essere considerate.",
+              "qIt": "Le limitazioni indicate sulla patente possono essere ignorate.",
               "a": "FALSO",
-              "explainAr": "يشترط الدرس مراعاة صلاحية الرخصة والقيود الشخصية."
+              "explainAr": "يجب الالتزام بالشروط والقيود المبيّنة على الرخصة."
             },
             {
-              "qIt": "Prima di guidare, occorre verificare che la categoria sia adatta al veicolo e che valgano le condizioni applicabili.",
+              "qIt": "Il conducente deve verificare la validità della propria patente.",
               "a": "VERO",
-              "explainAr": "ينص الدرس على التحقق من ملاءمة الفئة للمركبة ومن الشروط المنطبقة قبل القيادة."
+              "explainAr": "نعم، من المهم التأكد من أن الرخصة ما زالت سارية."
             }
           ]
         },
         {
           "id": "u8-l2",
-          "titleIt": "Documenti a bordo e controlli stradali",
-          "titleAr": "وثائق المركبة والتفتيش المروري",
-          "summaryIt": "Per circolare, occorrono i documenti prescritti per il veicolo e la guida, compresa una patente valida per la categoria del veicolo. Il conducente deve fermarsi all’invito degli agenti in uniforme o muniti di segnale distintivo ed esibire i documenti prescritti.",
-          "summaryAr": "للسير بالمركبة، يجب توافر وثائق السير والقيادة المطلوبة، ومنها رخصة قيادة صالحة لفئة المركبة (patente valida per la categoria). وعلى السائق التوقف عند طلب الأعوان بالزي الرسمي أو الحاملين علامة مميزة، وإبراز الوثائق المطلوبة.",
+          "titleIt": "Documenti del veicolo",
+          "titleAr": "وثائق المركبة",
+          "summaryIt": "I documenti del veicolo identificano il mezzo e attestano le informazioni richieste. Il conducente deve rispettare gli obblighi documentali in vigore.",
+          "summaryAr": "تعرّف وثائق المركبة (documenti del veicolo) بالمركبة وتثبت البيانات المطلوبة؛ ويجب الالتزام بمتطلبات الوثائق السارية.",
           "keyPoints": [
             {
-              "it": "Occorrono i documenti di circolazione prescritti.",
-              "ar": "تلزم وثائق السير التي يفرضها القانون."
+              "it": "documento del veicolo",
+              "ar": "وثيقة المركبة"
             },
             {
-              "it": "La patente deve essere valida per la categoria del veicolo.",
-              "ar": "يجب أن تكون رخصة القيادة صالحة لفئة المركبة."
+              "it": "identificazione",
+              "ar": "التعريف بالمركبة"
             },
             {
-              "it": "Il conducente si ferma all’invito degli agenti in uniforme o con segnale distintivo.",
-              "ar": "يتوقف السائق عند طلب الأعوان بالزي الرسمي أو الحاملين علامة مميزة."
-            },
-            {
-              "it": "Il conducente esibisce i documenti prescritti dalla legge.",
-              "ar": "يبرز السائق الوثائق التي يوجبها القانون."
+              "it": "obbligo documentale",
+              "ar": "الالتزام بالوثائق المطلوبة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Per circolare occorrono i documenti prescritti per il veicolo e la guida.",
+              "qIt": "I documenti del veicolo servono anche a identificarlo.",
               "a": "VERO",
-              "explainAr": "ينص الدرس على لزوم وثائق المركبة والقيادة المطلوبة للسير."
+              "explainAr": "نعم، تتضمن الوثائق معلومات تعريفية عن المركبة."
             },
             {
-              "qIt": "La patente può non essere valida per la categoria del veicolo.",
+              "qIt": "Gli obblighi documentali possono essere ignorati se il veicolo funziona bene.",
               "a": "FALSO",
-              "explainAr": "يذكر الدرس أن رخصة القيادة يجب أن تكون صالحة لفئة المركبة."
+              "explainAr": "سلامة المركبة لا تلغي متطلبات الوثائق القانونية."
             },
             {
-              "qIt": "Il conducente deve esibire i documenti prescritti quando gli agenti qualificati lo invitano a fermarsi.",
+              "qIt": "È opportuno conoscere quali documenti sono richiesti dalle regole vigenti.",
               "a": "VERO",
-              "explainAr": "يقرر الدرس التوقف عند طلب الأعوان المختصين وإبراز الوثائق المطلوبة."
+              "explainAr": "نعم، ينبغي معرفة الوثائق المطلوبة والتحقق من تحديثها."
             }
           ]
         },
         {
           "id": "u8-l3",
-          "titleIt": "Responsabilità e conseguenze delle violazioni",
-          "titleAr": "المسؤولية ونتائج المخالفات",
-          "summaryIt": "Responsabilità civile, penale e amministrativa hanno presupposti diversi. La sanzione pecuniaria è distinta dalle conseguenze sulla patente: punti, sospensione o revoca si applicano solo nei casi previsti; la responsabilità solidale riguarda soggetti e condizioni determinati.",
-          "summaryAr": "للمسؤولية المدنية والجنائية والإدارية شروط مختلفة. وتختلف الغرامة المالية (sanzione pecuniaria) عن النتائج المتعلقة بالرخصة؛ فلا تُخصم النقاط أو تُعلّق الرخصة أو تُسحب إلا في الحالات المقررة، وتخص المسؤولية التضامنية أشخاصًا وشروطًا محددة.",
+          "titleIt": "Assicurazione e responsabilità",
+          "titleAr": "التأمين والمسؤولية",
+          "summaryIt": "L’assicurazione obbligatoria e la responsabilità del conducente sono aspetti distinti ma collegati alla circolazione. Occorre verificare che la copertura richiesta sia valida.",
+          "summaryAr": "التأمين الإلزامي (assicurazione) ومسؤولية السائق أمران مرتبطان باستخدام المركبة؛ تحقق من سريان التغطية المطلوبة.",
           "keyPoints": [
             {
-              "it": "La responsabilità civile riguarda il risarcimento del danno.",
-              "ar": "تتعلق المسؤولية المدنية بتعويض الضرر."
+              "it": "assicurazione",
+              "ar": "التأمين"
             },
             {
-              "it": "La responsabilità penale presuppone un reato previsto dalla legge.",
-              "ar": "تتطلب المسؤولية الجنائية جريمة ينص عليها القانون."
+              "it": "copertura",
+              "ar": "التغطية التأمينية"
             },
             {
-              "it": "Una violazione amministrativa non è automaticamente un reato.",
-              "ar": "لا تُعدّ المخالفة الإدارية جريمة تلقائيًا."
-            },
-            {
-              "it": "La sanzione pecuniaria è distinta dalle misure sulla patente, applicate solo nei casi previsti.",
-              "ar": "تختلف الغرامة المالية عن التدابير المتعلقة بالرخصة، ولا تُطبق إلا في الحالات المحددة."
+              "it": "responsabilità",
+              "ar": "المسؤولية"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La sanzione pecuniaria e le misure sulla patente sono conseguenze distinte previste solo secondo la violazione.",
+              "qIt": "Il conducente dovrebbe verificare che la copertura assicurativa richiesta sia valida.",
               "a": "VERO",
-              "explainAr": "لا تُطبق النقاط أو التعليق أو السحب تلقائيًا على كل مخالفة."
+              "explainAr": "نعم، يجب التأكد من سريان التغطية المطلوبة للمركبة."
             },
             {
-              "qIt": "Ogni violazione amministrativa costituisce automaticamente un reato.",
+              "qIt": "La presenza di un’assicurazione autorizza a guidare senza prudenza.",
               "a": "FALSO",
-              "explainAr": "لا تتحول المخالفة الإدارية تلقائيًا إلى جريمة."
+              "explainAr": "التأمين لا يعفي السائق من الحذر أو المسؤولية عن القيادة."
             },
             {
-              "qIt": "La responsabilità penale presuppone un reato previsto dalla legge.",
-              "a": "VERO",
-              "explainAr": "تعتمد المسؤولية الجنائية على وجود جريمة."
+              "qIt": "Assicurazione e responsabilità del conducente sono concetti identici.",
+              "a": "FALSO",
+              "explainAr": "التأمين تغطية للمخاطر وفق شروطها، أما المسؤولية فتتعلق بتصرفات السائق والتزاماته."
             }
           ]
         },
         {
           "id": "u8-l4",
-          "titleIt": "R.C.A.: copertura obbligatoria e garanzie facoltative",
-          "titleAr": "تأمين المسؤولية تجاه الغير والتغطيات الاختيارية",
-          "summaryIt": "La R.C.A. obbligatoria copre la responsabilità verso terzi, non i danni al veicolo o le lesioni del conducente responsabile. Kasko, infortuni del conducente e furto/incendio sono esempi di garanzie facoltative, con copertura determinata dal contratto.",
-          "summaryAr": "يغطي تأمين المسؤولية المدنية تجاه الغير (R.C.A.) الإلزامي المسؤولية تجاه الآخرين، ولا يغطي أضرار سيارة السائق المسؤول أو إصابته الشخصية. ومن التغطيات الاختيارية: كاسكو (Kasko)، وحوادث السائق، والسرقة والحريق؛ وتحدد التغطية شروط العقد.",
+          "titleIt": "Comportamento dopo un incidente",
+          "titleAr": "التصرف بعد وقوع حادث",
+          "summaryIt": "Dopo un incidente si protegge la sicurezza delle persone e si evita di creare altri pericoli. In caso di necessità si chiedono i soccorsi e si seguono le indicazioni delle autorità.",
+          "summaryAr": "بعد الحادث المروري (incidente stradale)، اجعل سلامة الأشخاص أولوية، وتجنب خلق خطر إضافي، واطلب المساعدة عند الحاجة واتبع تعليمات الجهات المختصة.",
           "keyPoints": [
             {
-              "it": "La R.C.A. obbligatoria copre la responsabilità civile verso terzi.",
-              "ar": "يغطي تأمين R.C.A. الإلزامي المسؤولية المدنية تجاه الغير."
+              "it": "incidente stradale",
+              "ar": "حادث مروري"
             },
             {
-              "it": "Il proprietario verifica la copertura dei veicoli soggetti all’obbligo anche se sono nella disponibilità altrui.",
-              "ar": "يتحقق المالك من تغطية المركبة الخاضعة للإلزام حتى إن كانت في حيازة شخص آخر."
+              "it": "soccorso",
+              "ar": "الإسعاف أو المساعدة"
             },
             {
-              "it": "La R.C.A. non copre di regola i danni al veicolo o le lesioni del conducente responsabile.",
-              "ar": "لا يغطي R.C.A. عادةً أضرار المركبة أو إصابة السائق المسؤول."
+              "it": "sicurezza delle persone",
+              "ar": "سلامة الأشخاص"
             },
             {
-              "it": "Kasko, infortuni del conducente e furto/incendio sono garanzie facoltative previste dal contratto.",
-              "ar": "كاسكو وحوادث السائق والسرقة/الحريق تغطيات اختيارية يحددها العقد."
+              "it": "autorità",
+              "ar": "الجهات المختصة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La R.C.A. obbligatoria copre la responsabilità civile verso terzi.",
+              "qIt": "Dopo un incidente, la sicurezza delle persone è una priorità.",
               "a": "VERO",
-              "explainAr": "التغطية الإلزامية موجهة للمسؤولية تجاه الغير."
+              "explainAr": "نعم، ابدأ بحماية الأشخاص ومنع أخطار إضافية."
             },
             {
-              "qIt": "La polizza Kasko è obbligatoria per tutti i veicoli.",
+              "qIt": "Dopo un incidente si può lasciare la scena senza valutare la situazione.",
               "a": "FALSO",
-              "explainAr": "كاسكو تغطية إضافية اختيارية، وليست التأمين الإلزامي للمسؤولية المدنية."
+              "explainAr": "يجب التعامل مع الحادث بمسؤولية واتباع المتطلبات والتعليمات المعمول بها."
             },
             {
-              "qIt": "La polizza infortuni del conducente può coprire le lesioni del conducente responsabile.",
+              "qIt": "Quando necessario, occorre chiedere soccorso.",
               "a": "VERO",
-              "explainAr": "يذكر دليل IVASS هذا التأمين الاختياري لتغطية إصابة السائق المسؤول."
+              "explainAr": "نعم، اطلب المساعدة المناسبة إذا وُجد مصابون أو خطر."
+            }
+          ]
+        },
+        {
+          "id": "u8-l5",
+          "titleIt": "Infrazioni e conseguenze",
+          "titleAr": "المخالفات والنتائج",
+          "summaryIt": "Le violazioni delle regole possono comportare conseguenze previste dalla legge. È importante conoscere le norme e non affidarsi a informazioni non aggiornate.",
+          "summaryAr": "قد تترتب على المخالفة (infrazione) المرورية عواقب قانونية؛ تعلّم القواعد الحالية ولا تعتمد على معلومات قديمة.",
+          "keyPoints": [
+            {
+              "it": "infrazione",
+              "ar": "مخالفة"
+            },
+            {
+              "it": "conseguenza legale",
+              "ar": "نتيجة قانونية"
+            },
+            {
+              "it": "norma vigente",
+              "ar": "قاعدة نافذة"
+            }
+          ],
+          "trapWord": null,
+          "quickCheck": [
+            {
+              "qIt": "Le violazioni delle regole stradali possono avere conseguenze legali.",
+              "a": "VERO",
+              "explainAr": "نعم، قد يترتب على المخالفة جزاء وفق القانون."
+            },
+            {
+              "qIt": "È sempre sicuro affidarsi a informazioni vecchie sulle sanzioni.",
+              "a": "FALSO",
+              "explainAr": "قد تتغير القواعد والجزاءات؛ راجع المصدر الرسمي الأحدث."
+            },
+            {
+              "qIt": "Rispettare le regole aiuta a ridurre i rischi per tutti.",
+              "a": "VERO",
+              "explainAr": "نعم، الالتزام بالقواعد يعزز سلامة مستخدمي الطريق."
             }
           ]
         }
@@ -3665,92 +3723,6 @@
               "explainAr": "ينص الدرس على تعطيل الوسادة الهوائية الأمامية مع المقعد الموجّه عكس اتجاه السير."
             }
           ]
-        },
-        {
-          "id": "u11-l6",
-          "titleIt": "Motocicli: casco e verifiche prima della partenza",
-          "titleAr": "الدراجات النارية: الخوذة والفحوص قبل الانطلاق",
-          "summaryIt": "Durante la marcia, conducente e passeggero devono usare un casco protettivo omologato e allacciato, salvo esenzioni specifiche. Prima di partire, controlla pneumatici, luci, indicatori, olio, catena e comandi secondo il manuale del mezzo.",
-          "summaryAr": "أثناء السير، يجب على السائق والراكب استخدام خوذة واقية معتمدة ومربوطة (casco protettivo omologato e allacciato)، مع مراعاة الإعفاءات المحددة. وقبل الانطلاق، افحص الإطارات والأضواء والمؤشرات والزيت والسلسلة وأدوات التحكم وفق دليل المركبة.",
-          "keyPoints": [
-            {
-              "it": "Conducente e passeggero usano un casco omologato e allacciato.",
-              "ar": "يستخدم السائق والراكب خوذة معتمدة ومربوطة."
-            },
-            {
-              "it": "Sono previste esenzioni specifiche dall’obbligo del casco.",
-              "ar": "توجد إعفاءات محددة من إلزامية الخوذة."
-            },
-            {
-              "it": "Prima di partire, controlla pneumatici, luci e indicatori.",
-              "ar": "قبل الانطلاق، افحص الإطارات والأضواء والمؤشرات."
-            },
-            {
-              "it": "Controlla olio, catena e comandi seguendo il manuale del mezzo.",
-              "ar": "افحص الزيت والسلسلة وأدوات التحكم باتباع دليل المركبة."
-            }
-          ],
-          "trapWord": null,
-          "quickCheck": [
-            {
-              "qIt": "Durante la marcia, il casco deve essere omologato e allacciato.",
-              "a": "VERO",
-              "explainAr": "يشترط الدرس خوذة معتمدة ومربوطة أثناء السير."
-            },
-            {
-              "qIt": "Il controllo di olio e catena si effettua senza fare riferimento al manuale del mezzo.",
-              "a": "FALSO",
-              "explainAr": "ينص الدرس على فحص الزيت والسلسلة وفق دليل المركبة."
-            },
-            {
-              "qIt": "Prima di partire, si controllano pneumatici, luci e indicatori.",
-              "a": "VERO",
-              "explainAr": "هذه العناصر واردة ضمن فحوص ما قبل الانطلاق في الدرس."
-            }
-          ]
-        },
-        {
-          "id": "u11-l7",
-          "titleIt": "Rimorchi: compatibilità, aggancio e guida",
-          "titleAr": "المقطورات: التوافق والربط والقيادة",
-          "summaryIt": "Con un rimorchio verifica masse autorizzate, patente richiesta e aggancio, luci, freni e carico; per prudenza, guida con gradualità e mantieni distanze adeguate. Il traino d’emergenza di un veicolo guasto richiede un collegamento idoneo e chiaramente segnalato e il rispetto delle condizioni dell’art. 165.",
-          "summaryAr": "مع المقطورة (rimorchio)، تحقق من الكتل المسموح بها والرخصة المطلوبة ووصلة الربط والأضواء والفرامل والحمولة؛ ومن باب الاحتياط، قد بسلاسة واترك مسافة مناسبة. يتطلب جر مركبة معطلة للطوارئ وصلة مناسبة وواضحة العلامة والالتزام بشروط المادة 165.",
-          "keyPoints": [
-            {
-              "it": "Verificare masse autorizzate e patente richiesta per la combinazione.",
-              "ar": "تحقق من الكتل المسموح بها والرخصة المطلوبة للمجموعة."
-            },
-            {
-              "it": "Prima di partire controllare aggancio, collegamenti, luci, freni e carico.",
-              "ar": "قبل الانطلاق، افحص الوصلة والتوصيلات والأضواء والفرامل والحمولة."
-            },
-            {
-              "it": "Guidare con gradualità e mantenere distanze adeguate.",
-              "ar": "قد بسلاسة وحافظ على مسافات مناسبة."
-            },
-            {
-              "it": "Il traino d’emergenza richiede collegamento idoneo, ben visibile e dispositivi prescritti.",
-              "ar": "يتطلب الجر الطارئ وصلة مناسبة واضحة وأجهزة التنبيه المقررة."
-            }
-          ],
-          "trapWord": null,
-          "quickCheck": [
-            {
-              "qIt": "Prima di partire con un rimorchio si controllano aggancio, collegamenti, luci, freni e carico.",
-              "a": "VERO",
-              "explainAr": "هذه فحوص أساسية قبل الرحلة."
-            },
-            {
-              "qIt": "Per la combinazione con rimorchio non occorre verificare le masse autorizzate.",
-              "a": "FALSO",
-              "explainAr": "تعتمد الكتلة المسموح بها والرخصة على المجموعة."
-            },
-            {
-              "qIt": "Nel traino d’emergenza di un veicolo guasto si usa un collegamento idoneo e segnalato.",
-              "a": "VERO",
-              "explainAr": "تنظم المادة 165 الوصلة وأجهزة التنبيه."
-            }
-          ]
         }
       ],
       "previous_module_id": "exam-supplement-driver",
@@ -3853,8 +3825,7 @@
         "title_it": "Rischi della manovra con diversi veicoli e campo visivo del conducente",
         "title_ar": "مخاطر المناورة بمركبات مختلفة ومجال رؤية السائق",
         "lesson_refs": [
-          "exam-supplement-driver.4",
-          "vehicle-safety.0"
+          "exam-supplement-driver.4"
         ]
       },
       {
@@ -3863,7 +3834,7 @@
         "title_ar": "الإجراءات الإدارية ووثائق السير اللازمة",
         "lesson_refs": [
           "exam-supplement-vehicle.0",
-          "documents-liability.0"
+          "documents-liability.1"
         ]
       },
       {
@@ -3880,7 +3851,9 @@
         "title_it": "Sicurezza del veicolo, del carico e delle persone trasportate",
         "title_ar": "سلامة المركبة والحمولة والركاب",
         "lesson_refs": [
-          "exam-supplement-vehicle.2"
+          "exam-supplement-vehicle.2",
+          "vehicle-safety.3",
+          "vehicle-safety.4"
         ]
       },
       {
@@ -3896,7 +3869,10 @@
         "title_it": "Difetti meccanici rilevanti per la sicurezza: sterzo, sospensioni, freni, pneumatici, luci, specchi, vetri, tergicristalli, scarico, cinture e avvisatore",
         "title_ar": "الأعطال الميكانيكية المؤثرة في السلامة: التوجيه والتعليق والفرامل والإطارات والأضواء والمرايا والزجاج والمسّاحات والعادم والأحزمة والمنبه",
         "lesson_refs": [
-          "exam-supplement-vehicle.3"
+          "exam-supplement-vehicle.3",
+          "vehicle-safety.0",
+          "vehicle-safety.1",
+          "vehicle-safety.2"
         ]
       },
       {
@@ -3905,7 +3881,7 @@
         "title_ar": "أنظمة السلامة: الأحزمة ومساند الرأس وأنظمة سلامة الأطفال",
         "lesson_refs": [
           "exam-supplement-vehicle.4",
-          "vehicle-safety.1"
+          "vehicle-safety.4"
         ]
       },
       {
@@ -3913,8 +3889,7 @@
         "title_it": "Uso dei veicoli e ambiente: dispositivi acustici, consumo ed emissioni",
         "title_ar": "استخدام المركبات والبيئة: المنبه الصوتي واستهلاك الوقود والانبعاثات",
         "lesson_refs": [
-          "driver-health-environment.3",
-          "vehicle-safety.3"
+          "driver-health-environment.3"
         ]
       },
       {
@@ -3922,8 +3897,9 @@
         "title_it": "Casco e altri indumenti protettivi, ove prescritti",
         "title_ar": "الخوذة والملابس الواقية الأخرى عند اشتراطها",
         "lesson_refs": [
-          "exam-supplement-vehicle.5",
-          "vehicle-safety.1"
+          "exam-supplement-vehicle.4",
+          "exam-supplement-driver.3",
+          "vehicle-safety.4"
         ]
       },
       {
@@ -3948,7 +3924,9 @@
         "title_it": "Meccanica dei motocicli: interruttore di emergenza, olio e catena",
         "title_ar": "ميكانيكا الدراجات النارية: مفتاح الطوارئ والزيت والسلسلة",
         "lesson_refs": [
-          "exam-supplement-vehicle.5"
+          "exam-supplement-driver.3",
+          "exam-supplement-vehicle.3",
+          "vehicle-safety.4"
         ]
       },
       {
@@ -3956,9 +3934,9 @@
         "title_it": "Autostrade, strade extraurbane principali, persone, carico, pannelli e traino",
         "title_ar": "الطرق السريعة والرئيسية خارج المدن والركاب والحمولة واللوحات والجر",
         "lesson_refs": [
-          "exam-supplement-driver.2",
           "exam-supplement-vehicle.2",
-          "exam-supplement-vehicle.6"
+          "speed-stopping-highways.4",
+          "vehicle-safety.3"
         ]
       },
       {
@@ -3966,8 +3944,8 @@
         "title_it": "Responsabilità civile, penale e amministrativa e assicurazioni diverse dalla RCA",
         "title_ar": "المسؤولية المدنية والجنائية والإدارية والتأمينات غير التأمين الإلزامي للمركبات",
         "lesson_refs": [
-          "documents-liability.1",
-          "documents-liability.2"
+          "documents-liability.2",
+          "documents-liability.4"
         ]
       },
       {
@@ -3976,7 +3954,9 @@
         "title_ar": "مكونات المركبة وصيانتها واستخدامها وثباتها وتماسكها على الطريق",
         "lesson_refs": [
           "exam-supplement-vehicle.3",
-          "exam-supplement-driver.1"
+          "vehicle-safety.0",
+          "vehicle-safety.1",
+          "vehicle-safety.2"
         ]
       },
       {
@@ -3984,7 +3964,7 @@
         "title_it": "Sistema sanzionatorio",
         "title_ar": "نظام العقوبات والمخالفات",
         "lesson_refs": [
-          "documents-liability.3"
+          "documents-liability.4"
         ]
       },
       {
@@ -3992,7 +3972,8 @@
         "title_it": "Limiti di traino, organi di aggancio, frenatura, comportamento e velocità del rimorchio",
         "title_ar": "حدود الجر ووصلات الربط والفرملة وسلوك المقطورة وحدود سرعتها",
         "lesson_refs": [
-          "exam-supplement-vehicle.6"
+          "vehicle-safety.3",
+          "documents-liability.1"
         ]
       }
     ]

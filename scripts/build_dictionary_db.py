@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 JSON_PATH = ROOT / "data/italian_arabic_dictionary_lookup.json"
 DB_PATH = ROOT / "android/app/src/main/assets/dictionary.db"
 APP_VERSION = 62
-EXPECTED_WORD_COUNT = 5329
+EXPECTED_WORD_COUNT = 5335
 
 # User-requested standalone lemma, kept separate from question-bank extraction.
 REQUESTED_LEMMA_ADDITIONS = {
@@ -123,6 +123,12 @@ V62_LESSON_DICTIONARY_ADDITIONS = {
     "acustiche": ("صوتية", "contextual_translation", "صفة مؤنثة جمع في segnalazioni acustiche: تنبيهات صوتية."),
     "sicurezza": ("السلامة", "contextual_translation", "السلامة من الخطر في القيادة، لا الأمن بمعنى الحراسة."),
     "spazio": ("مساحة / حيّز متاح", "contextual_translation", "المساحة المتاحة للمناورة أو التوقف الآمن."),
+    "occupante": ("راكب / شاغل المركبة", "lexical_translation", "مفرد occupanti في درس أحزمة الأمان وأنظمة التثبيت."),
+    "identificazione": ("التعريف / تحديد الهوية", "contextual_translation", "التعريف بالمركبة أو تحديد هويتها في سياق الوثائق."),
+    "documentale": ("متعلق بالوثائق / مستندي", "lexical_translation", "صفة obligation documentale: الالتزام بالوثائق المطلوبة."),
+    "autorità": ("السلطات / الجهات المختصة", "contextual_translation", "في سياق اتباع تعليمات السلطات بعد حادث مروري."),
+    "legale": ("قانوني", "lexical_translation", "صفة conseguenza legale: نتيجة قانونية."),
+    "vigente": ("نافذ / ساري المفعول", "lexical_translation", "في norma vigente: القاعدة القانونية النافذة."),
 }
 LESSON_DICTIONARY_ADDITIONS.update(V62_LESSON_DICTIONARY_ADDITIONS)
 LESSON_DICTIONARY_SOURCES = {

@@ -54,7 +54,7 @@ test('only project-approved terms are presented as reviewed overrides', () => {
 
 test('v62 ships the corrected dictionary in JSON and a valid SQLite asset', () => {
   const dictionary = JSON.parse(read('data/italian_arabic_dictionary_lookup.json'));
-  assert.equal(dictionary.entries.length, 5329);
+  assert.equal(dictionary.entries.length, 5335);
   assert.ok(dictionary.entries.every(row => row.word && row.translation_ar));
   assert.equal(dictionary.entries.filter(row => row.status === 'fallback_draft_needs_review').length, 0);
   assert.equal(dictionary.entries.filter(row => row.source === 'owner-approved-correction-v42' && row.status === 'reviewed_override' && row.review_required === 0).length, 9);

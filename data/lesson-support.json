@@ -5589,182 +5589,128 @@
       "review_verification_note": "Verificati i testi ufficiali ACI degli articoli 79 e 141: confermano i requisiti di efficienza e i fattori da considerare per regolare la velocità. Il controllo pratico prima della partenza è presentato come consiglio, non come obbligo specifico di questi articoli. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u7-l2": {
-      "body_ar": "يشمل واجب استخدام الأحزمة في المادة 172 المركبات والفئات المحددة في النص والمركبات المزودة بأحزمة؛ وللركاب الجالسين في M2 وM3 أحكام خاصة. يستخدم الأطفال الذين يقل طولهم عن 1.50 متر نظام تثبيت معتمدًا ومناسبًا للوزن، ويتحقق السائق من كفاءته. لا يوضع مقعد الطفل المواجه للخلف أمام وسادة هوائية فعالة إلا بعد تعطيلها على نحو مناسب. اضبط مسند الرأس لدعم الرأس، أما الخوذة فتحكمها المادة 171. الإعفاءات القانونية تخص فئات وحالات محددة وليست عامة.",
-      "example_ar": "يسافر طفل يقل طوله عن 1.50 متر في سيارة؛ فيُستخدم نظام معتمد مناسب لوزنه، ويُتحقق من موضعه بالنسبة إلى الوسادة الهوائية.",
-      "heading_ar": "الأحزمة وأنظمة التثبيت: حماية الركاب",
-      "pitfall_ar": "لا تحوّل فئات الأحزمة أو الإعفاءات المحددة إلى قواعد عامة تشمل الجميع.",
-      "heading_it": "Cinture e sistemi di ritenuta: proteggere gli occupanti",
-      "body_it": "L’obbligo di usare le cinture previsto dall’articolo 172 riguarda i veicoli indicati dalla norma e quelli dotati di cinture; per gli occupanti seduti di M2 e M3 valgono disposizioni specifiche. I bambini di statura inferiore a 1,50 m devono usare un sistema di ritenuta omologato e adeguato al peso. Il conducente ne verifica l’efficienza. Un seggiolino rivolto all’indietro non va davanti a un airbag frontale attivo, salvo disattivazione adeguata. Regola anche il poggiatesta per sostenere la testa; il casco segue l’articolo 171. Le esenzioni di legge riguardano categorie e situazioni determinate, non sono generali.",
-      "example_it": "In auto viaggia un bambino alto meno di 1,50 m: si usa un sistema omologato adatto al suo peso e si controlla il corretto posizionamento rispetto all’airbag.",
-      "pitfall_it": "Non trasformare le categorie previste per le cinture o le esenzioni specifiche in regole universali.",
-      "visual_src": "/lessons/lesson-vehicle-safety.webp",
+      "heading_it": "Controllare il veicolo e riconoscere i guasti",
+      "heading_ar": "فحص المركبة والتعرف إلى الأعطال",
+      "body_it": "Prima di partire, osserva gli elementi che incidono sulla sicurezza: pneumatici e ruote, luci, indicatori, specchi, parabrezza e tergicristalli. Fai attenzione anche a sterzo, sospensioni, freni, cinture, avvisatore acustico e impianto di scarico. Una spia, una perdita, un rumore o una vibrazione insolita possono segnalare un’anomalia, ma non permettono da soli di diagnosticarne la causa. Consulta il manuale del veicolo e, se necessario, un’officina qualificata. Non proseguire quando un difetto compromette la sicurezza. I veicoli a motore e i loro rimorchi devono mantenere l’efficienza richiesta durante la circolazione; rispetta inoltre gli obblighi di revisione applicabili. Questa lezione non sostituisce una verifica tecnica.",
+      "body_ar": "قبل الانطلاق، افحص العناصر المؤثرة في السلامة: الإطارات والعجلات والأضواء والمؤشرات والمرايا والزجاج الأمامي والمسّاحات. وانتبه أيضًا إلى التوجيه والتعليق والفرامل والأحزمة والمنبه ونظام العادم. قد تشير لمبة تحذير أو تسرب أو صوت أو اهتزاز غير معتاد إلى خلل، لكنها لا تكفي وحدها لتشخيص سببه. راجع دليل المركبة، واستعن بورشة مؤهلة عند الحاجة. لا تواصل السير إذا كان العطل يضر بالسلامة. يجب أن تحافظ المركبات الآلية ومقطوراتها على الكفاءة المطلوبة أثناء السير؛ والتزم كذلك بمتطلبات الفحص الفني السارية. لا يحل هذا الدرس محل الفحص الفني المتخصص.",
+      "example_it": "Se noto una perdita o un’anomalia nei freni, consulto il manuale e faccio controllare il veicolo prima di ripartire.",
+      "example_ar": "إذا لاحظت تسربًا أو خللًا في الفرامل، أراجع دليل المركبة وأفحصها قبل متابعة السير.",
+      "pitfall_it": "Rilevare un sintomo non equivale a conoscere la causa né autorizza una riparazione improvvisata.",
+      "pitfall_ar": "ملاحظة العَرَض لا تعني معرفة السبب ولا تبرر إصلاحًا مرتجلًا.",
       "bank_topics": [
-        "Dispositivi di equipaggiamento: funzione ed uso; cinture di sicurezza e sistemi di ritenuta per bambini; casco protettivo;"
+        "Elementi costitutivi del veicolo importanti per la sicurezza; manutenzione ed uso; stabilità e tenuta di strada del veicolo;",
+        "Uso delle luci; uso dei dispositivi acustici; spie e simboli"
       ],
       "review_question_ids": [
-        24323,
-        24322,
-        24366,
-        24337,
-        24344,
-        24368,
-        24320,
-        24401,
-        24359,
-        24338,
-        24372,
-        24349,
-        24346,
-        24369,
-        24375,
-        24362,
-        24374,
-        24378,
-        24352,
-        24348,
-        24351,
-        24343,
-        24412,
-        24342,
-        24392,
-        24339,
-        24330,
-        24357,
-        24408,
-        24373,
-        24393,
-        24371,
-        24389,
-        24336,
-        24370,
-        24319,
-        24403,
-        24402,
-        24340,
-        24347,
-        24361,
-        24404,
-        24350,
-        24341,
-        24398,
-        24364,
-        24455,
-        24385,
-        24318,
-        24380,
-        24452,
-        24331,
-        24387,
-        24334,
-        24437,
-        24399,
-        24453,
-        24423,
-        24325,
-        24391
+        24141,
+        24142,
+        24143,
+        24144,
+        24145,
+        24146,
+        24147,
+        24148,
+        24149,
+        24150,
+        24151,
+        24152,
+        24153,
+        24154,
+        24155,
+        24156
       ],
-      "review_match_score": 0.316,
+      "visual_question_id": 24197,
+      "syllabus_items": [
+        "p",
+        "bb"
+      ],
+      "sources": [
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-79/",
+          "title": "Efficienza dei veicoli a motore e loro rimorchi in circolazione",
+          "title_it": "Efficienza dei veicoli a motore e loro rimorchi in circolazione",
+          "title_ar": "كفاءة المركبات الآلية ومقطوراتها أثناء السير",
+          "legal_reference": "Art. 79",
+          "legal_reference_it": "Art. 79"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-80/",
+          "title": "Revisioni",
+          "title_it": "Revisioni",
+          "title_ar": "الفحص الفني الدوري",
+          "legal_reference": "Art. 80",
+          "legal_reference_it": "Art. 80"
+        }
+      ],
       "youtube_video": {
         "status": "awaiting_review_and_publication",
         "url": null
       },
-      "sources": [
-        {
-          "url": "https://aci.gov.it/codice-della-strada/art-172/",
-          "title": "Uso delle cinture di sicurezza e dei sistemi di ritenuta e sicurezza per bambini",
-          "title_it": "Uso delle cinture di sicurezza e dei sistemi di ritenuta e sicurezza per bambini",
-          "title_ar": "استخدام أحزمة الأمان وأنظمة تثبيت الأطفال وسلامتهم",
-          "legal_reference": "172",
-          "legal_reference_it": "172"
-        },
-        {
-          "url": "https://aci.gov.it/codice-della-strada/art-171/",
-          "title": "Uso del casco protettivo",
-          "title_it": "Uso del casco protettivo",
-          "title_ar": "استخدام الخوذة الواقية",
-          "legal_reference": "171",
-          "legal_reference_it": "171"
-        },
-        {
-          "url": "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf",
-          "title": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
-          "title_it": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
-          "title_ar": "وزارة البنية التحتية والنقل — برنامج الامتحان النظري لرخص A وB (التعميم 28819/2019)",
-          "legal_reference": "Programma d’esame teorico patente A/B",
-          "legal_reference_it": "Programma d’esame teorico patente A/B"
-        }
-      ],
-      "core_it": "Usa cinture e sistemi di ritenuta previsti.\nCon un seggiolino posteriore, disattiva l’airbag anteriore attivo.",
-      "core_ar": "استخدم الأحزمة وأنظمة التثبيت المقررة.\nمع مقعد الطفل المواجه للخلف، عطّل الوسادة الأمامية الفعالة.",
+      "core_it": "Controlla gli elementi che incidono sulla sicurezza.\nUn’anomalia va valutata senza improvvisare riparazioni.",
+      "core_ar": "افحص العناصر المؤثرة في السلامة.\nيجب تقييم الخلل دون ارتجال الإصلاح.",
       "key_points": [
         {
-          "title_it": "Protezione 1",
-          "title_ar": "الحماية 1",
-          "it": "L’obbligo di cintura riguarda le categorie e le condizioni previste.",
-          "ar": "يشمل واجب الحزام الفئات والشروط المحددة."
+          "title_it": "Controllo visivo",
+          "title_ar": "فحص بصري",
+          "it": "Osserva ruote, pneumatici, luci, specchi e vetri.",
+          "ar": "افحص العجلات والإطارات والأضواء والمرايا والزجاج."
         },
         {
-          "title_it": "Protezione 2",
-          "title_ar": "الحماية 2",
-          "it": "Sotto 1,50 m serve un sistema omologato adeguato al peso.",
-          "ar": "لمن يقل طولهم عن 1.50 متر يلزم نظام معتمد يناسب الوزن."
+          "title_it": "Comandi e impianti",
+          "title_ar": "أدوات التحكم والأنظمة",
+          "it": "Presta attenzione a freni, sterzo, sospensioni e scarico.",
+          "ar": "انتبه إلى الفرامل والتوجيه والتعليق والعادم."
         },
         {
-          "title_it": "Protezione 3",
-          "title_ar": "الحماية 3",
-          "it": "Seggiolino rivolto all’indietro: airbag frontale disattivato o posto diverso.",
-          "ar": "مقعد الطفل المواجه للخلف: عطّل الوسادة الأمامية أو اختر مقعدًا آخر."
+          "title_it": "Segnali di anomalia",
+          "title_ar": "علامات الخلل",
+          "it": "Spie, perdite e rumori insoliti richiedono attenzione.",
+          "ar": "تتطلب اللمبات والتسربات والأصوات غير المعتادة الانتباه."
         },
         {
-          "title_it": "Protezione 4",
-          "title_ar": "الحماية 4",
-          "it": "Regolare il poggiatesta per sostenere correttamente la testa.",
-          "ar": "اضبط مسند الرأس لدعم الرأس على نحو صحيح."
+          "title_it": "Assistenza tecnica",
+          "title_ar": "المساعدة الفنية",
+          "it": "Consulta manuale e officina, senza sostituirti al tecnico.",
+          "ar": "راجع الدليل والورشة دون أن تحل محل الفني."
         }
       ],
       "trap_words": [],
-      "numbers": [
-        {
-          "value": "1,50 m",
-          "context_it": "Soglia di statura sotto la quale è richiesto un sistema di ritenuta per bambini adeguato al peso.",
-          "context_ar": "حد الطول الذي يلزم دونه نظام تثبيت للأطفال مناسب للوزن."
-        }
-      ],
+      "numbers": [],
       "common_mistakes": [
         {
-          "mistake_it": "Estendere il comma 1 indistintamente a ogni veicolo.",
-          "mistake_ar": "تعميم الفقرة الأولى على كل المركبات بلا تمييز.",
-          "why_it": "Il testo delimita l’obbligo alle categorie e alle condizioni indicate.",
-          "why_ar": "يحدد النص الواجب بالفئات والشروط المذكورة."
+          "mistake_it": "Ignorare una spia o un rumore perché il veicolo continua a muoversi.",
+          "mistake_ar": "تجاهل لمبة تحذير أو صوت لأن المركبة ما زالت تتحرك.",
+          "why_it": "Un’anomalia può compromettere la sicurezza anche senza arresto immediato.",
+          "why_ar": "قد يضر الخلل بالسلامة حتى إن لم تتوقف المركبة فورًا."
         },
         {
-          "mistake_it": "Pensare che ogni eccezione sia valida per qualunque conducente o passeggero.",
-          "mistake_ar": "الاعتقاد أن كل استثناء يسري على أي سائق أو راكب.",
-          "why_it": "Le esenzioni del comma 8 sono riferite a casi e categorie specifici.",
-          "why_ar": "تتعلق إعفاءات الفقرة 8 بحالات وفئات بعينها."
+          "mistake_it": "Riparare da soli sistemi senza le competenze necessarie.",
+          "mistake_ar": "إصلاح الأنظمة ذاتيًا دون الخبرة اللازمة.",
+          "why_it": "La spiegazione didattica non sostituisce diagnosi e intervento qualificati.",
+          "why_ar": "لا يحل الشرح التعليمي محل التشخيص والعمل الفني المؤهل."
         }
       ],
       "quick_check": [
         {
-          "statement_it": "Per un bambino sotto 1,50 m serve un sistema omologato adeguato al peso.",
-          "statement_ar": "يحتاج الطفل الذي يقل طوله عن 1.50 متر إلى نظام معتمد يناسب وزنه.",
+          "statement_it": "Un rumore insolito può essere un segnale da approfondire.",
+          "statement_ar": "قد يكون الصوت غير المعتاد علامة تستلزم التحقق.",
           "answer": "VERO",
-          "explanation_it": "È il requisito generale previsto dall’art. 172, con le eccezioni definite.",
-          "explanation_ar": "هذا هو الشرط العام في المادة 172 مع الاستثناءات المحددة."
+          "explanation_it": "Può indicare un’anomalia, anche se non ne identifica da solo la causa.",
+          "explanation_ar": "قد يدل على خلل، لكنه لا يحدد سببه وحده."
         },
         {
-          "statement_it": "Un seggiolino rivolto all’indietro può stare davanti a un airbag frontale attivo.",
-          "statement_ar": "يمكن وضع مقعد طفل مواجه للخلف أمام وسادة هوائية أمامية فعالة.",
+          "statement_it": "L’articolo 79 riguarda l’efficienza dei veicoli a motore e dei rimorchi in circolazione.",
+          "statement_ar": "تتناول المادة 79 كفاءة المركبات الآلية ومقطوراتها أثناء السير.",
+          "answer": "VERO",
+          "explanation_it": "La disposizione indica l’efficienza dei veicoli a motore e dei rimorchi.",
+          "explanation_ar": "تتناول المادة كفاءة المركبات الآلية والمقطورات."
+        },
+        {
+          "statement_it": "Il conducente dovrebbe ignorare un difetto che incide sulla sicurezza finché l’auto si muove.",
+          "statement_ar": "ينبغي للسائق تجاهل العطل المؤثر في السلامة ما دامت السيارة تتحرك.",
           "answer": "FALSO",
-          "explanation_it": "L’airbag deve essere disattivato per quel posto, oppure si sceglie un altro sedile.",
-          "explanation_ar": "يجب تعطيل الوسادة لذلك المقعد أو اختيار مقعد آخر."
-        },
-        {
-          "statement_it": "Il poggiatesta va regolato correttamente per sostenere la testa.",
-          "statement_ar": "ينبغي ضبط مسند الرأس على نحو صحيح لدعم الرأس.",
-          "answer": "VERO",
-          "explanation_it": "È una misura di protezione del conducente e dei passeggeri.",
-          "explanation_ar": "هذا إجراء لحماية السائق والركاب."
+          "explanation_it": "Un difetto che compromette la sicurezza richiede verifica e non va ignorato.",
+          "explanation_ar": "العطل الذي يضر بالسلامة يستلزم التحقق ولا ينبغي تجاهله."
         }
       ],
       "video_script_available": false,
@@ -5773,33 +5719,32 @@
         "renderer": "inline-svg",
         "scene_id": "vehicle-safety",
         "visual_path": "inline-svg:vehicle-safety",
-        "description_it": "Illustrazione didattica per «Cinture e sistemi di ritenuta: proteggere gli occupanti»: concetto, esempio e attenzione a un errore comune.",
-        "description_ar": "رسم تعليمي لدرس «الأحزمة وأنظمة التثبيت: حماية الركاب»: الفكرة والمثال والتنبيه إلى خطأ شائع.",
+        "description_it": "Illustrazione didattica per «Controllare il veicolo e riconoscere i guasti»: concetto, esempio e attenzione a un errore comune.",
+        "description_ar": "رسم تعليمي لدرس «فحص المركبة والتعرف إلى الأعطال»: الفكرة والمثال والتنبيه إلى خطأ شائع.",
         "narration_locale": "ar-EG",
         "stages": [
           {
             "key": "concept",
-            "text_it": "Usa cinture e sistemi di ritenuta previsti.\nCon un seggiolino posteriore, disattiva l’airbag anteriore attivo.",
-            "text_ar": "استخدم الأحزمة وأنظمة التثبيت المقررة.\nمع مقعد الطفل المواجه للخلف، عطّل الوسادة الأمامية الفعالة."
+            "text_it": "Controlla gli elementi che incidono sulla sicurezza.\nUn’anomalia va valutata senza improvvisare riparazioni.",
+            "text_ar": "افحص العناصر المؤثرة في السلامة.\nيجب تقييم الخلل دون ارتجال الإصلاح."
           },
           {
             "key": "example",
-            "text_it": "In auto viaggia un bambino alto meno di 1,50 m: si usa un sistema omologato adatto al suo peso e si controlla il corretto posizionamento rispetto all’airbag.",
-            "text_ar": "يسافر طفل يقل طوله عن 1.50 متر في سيارة؛ فيُستخدم نظام معتمد مناسب لوزنه، ويُتحقق من موضعه بالنسبة إلى الوسادة الهوائية."
+            "text_it": "Se noto una perdita o un’anomalia nei freni, consulto il manuale e faccio controllare il veicolo prima di ripartire.",
+            "text_ar": "إذا لاحظت تسربًا أو خللًا في الفرامل، أراجع دليل المركبة وأفحصها قبل متابعة السير."
           },
           {
             "key": "warning",
-            "text_it": "Estendere il comma 1 indistintamente a ogni veicolo. Il testo delimita l’obbligo alle categorie e alle condizioni indicate.",
-            "text_ar": "تعميم الفقرة الأولى على كل المركبات بلا تمييز. يحدد النص الواجب بالفئات والشروط المذكورة."
+            "text_it": "Ignorare una spia o un rumore perché il veicolo continua a muoversi. Un’anomalia può compromettere la sicurezza anche senza arresto immediato.",
+            "text_ar": "تجاهل لمبة تحذير أو صوت لأن المركبة ما زالت تتحرك. قد يضر الخلل بالسلامة حتى إن لم تتوقف المركبة فورًا."
           }
         ]
       },
       "videoUrl": null,
       "review_sources_checked": [
-        "https://aci.gov.it/codice-della-strada/art-172/",
-        "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf"
+        "https://aci.gov.it/codice-della-strada/art-79/"
       ],
-      "review_verification_note": "Verificati i commi pertinenti dell’art. 172 nel testo ACI aggiornato al 15 novembre 2026. Il riassunto resta limitato ai temi presenti nella lezione; le esenzioni sono descritte solo come specifiche, senza enumerarle. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
+      "review_verification_note": "Ho verificato il testo dell’art. 79 sul sito ACI: richiede che veicoli a motore e rimorchi in circolazione siano mantenuti in condizioni di efficienza idonee a garantire la sicurezza. Non ho incluso dettagli sulla revisione periodica, non verificati qui."
     },
     "u7-l3": {
       "body_ar": "أثناء السير، من نصف ساعة بعد الغروب إلى نصف ساعة قبل الشروق، وكذلك نهارًا داخل الأنفاق أو عند الضباب أو الثلج أو المطر الغزير أو ضعف الرؤية، تُستخدم الأضواء المحددة في المادة 153، الفقرة 1؛ وتضاف الأضواء المنخفضة للمركبات ذات المحرك. خارج المناطق المأهولة يمكن استخدام الضوء العالي عندما تكون الإضاءة الخارجية غائبة أو غير كافية. ويجب التحويل إلى الضوء المنخفض عند مقابلة مركبة، أو متابعة مركبة أخرى عن قرب، أو احتمال إبهار مستخدمي الطريق. وعند متابعة مركبة عن قرب، يُسمح بوميض قصير ومتقطع للتنبيه إلى نية التجاوز. ويُطلب تشغيل الضوء الخلفي للضباب، إن وُجد، في الحالات المحددة بالفقرة 8.",
@@ -6010,203 +5955,199 @@
       "review_verification_note": "Verificati gli artt. 152 e 153 sul sito ACI (pagine aggiornate a novembre 2026). L’art. 153, comma 8, limita il retronebbia ai casi ivi indicati; il riepilogo non ne amplia le condizioni."
     },
     "u7-l4": {
-      "body_ar": "يُستخدم التنبيه الصوتي بأقصى قدر من الاعتدال ولأسباب تتعلق بالسلامة فقط، وينبغي أن يكون أقصر ما يمكن. خارج المناطق المأهولة يُسمح به عندما تستدعي الظروف البيئية أو حركة المرور ذلك لتجنب حادث. وداخل المناطق المأهولة لا يُسمح به إلا عند وجود خطر فعلي وفوري (المادة 156). وتوجب المادة 153، الفقرة 7، تشغيل أضواء التحذير في حالات محددة، منها وجود عائق يشغل مسار السير، أو تباطؤ مفاجئ، أو توقف اضطراري يشكل خطرًا. ولا يوجد هنا معنى موحد متحقق منه لمؤشرات لوحة القيادة يصلح لكل طراز؛ لذا ينبغي الرجوع إلى دليل المركبة وعدم تخمين معنى الرمز.",
-      "example_ar": "في المدينة، يستخدم سائق البوق فقط للتنبيه إلى خطر فوري؛ وإذا ظهر مؤشر لا يعرفه، يرجع إلى دليل المركبة.",
-      "heading_ar": "البوق وأضواء التحذير ومؤشرات لوحة القيادة",
-      "pitfall_ar": "لا تستخدم البوق بسبب الضيق، ولا تستنتج معنى المؤشر دون مراجعة دليل الطراز المحدد.",
-      "heading_it": "Clacson, luci di emergenza e spie del cruscotto",
-      "body_it": "Il segnale acustico va usato con la massima moderazione e soltanto per motivi di sicurezza; la segnalazione deve essere il più breve possibile. Fuori dai centri abitati è consentito quando le condizioni ambientali o del traffico lo richiedono per evitare un incidente. Nei centri abitati è consentito soltanto in caso di pericolo effettivo e immediato (articolo 156). L’articolo 153, comma 7, richiede le luci di emergenza in situazioni specifiche, tra cui un ingombro della carreggiata, un rallentamento improvviso o una fermata di emergenza pericolosa. Le spie del cruscotto non hanno qui un significato unico verificato per ogni modello: occorre consultare il manuale del proprio veicolo e non indovinare il messaggio.",
-      "example_it": "In città un conducente suona soltanto per avvertire di un pericolo immediato; se compare una spia che non riconosce, consulta il manuale del veicolo.",
-      "pitfall_it": "Non usare il clacson per impazienza e non dedurre il significato di una spia senza verificare il manuale specifico.",
-      "visual_question_id": 24216,
+      "heading_it": "Rimorchi: compatibilità, aggancio e guida",
+      "heading_ar": "المقطورات: التوافق والربط والقيادة",
+      "body_it": "Un rimorchio modifica massa, lunghezza, stabilità e frenata del complesso. Controlla sui documenti le masse massime autorizzate del veicolo e del rimorchio, la massa complessiva e i limiti di traino. La patente B consente rimorchi fino a 750 kg e, in determinate combinazioni, un complesso fino a 4.250 kg; oltre 3.500 kg può essere richiesta la prova B96. Oltre il campo ammesso, verifica i requisiti della patente BE: non dedurre l’abilitazione dal peso a vuoto. Prima del viaggio controlla aggancio, collegamento elettrico, luci, freni e carico; per prudenza, guida con gradualità e mantieni distanze adeguate. Il traino d’emergenza segue l’articolo 165: collegamento idoneo e segnalato, con i dispositivi prescritti.",
+      "body_ar": "تؤثر المقطورة في كتلة المجموعة وطولها وثباتها وفرملتها. راجع الوثائق للتحقق من الكتل القصوى المسموح بها للمركبة والمقطورة، والكتلة الإجمالية وحد الجر. تسمح رخصة B بمقطورة حتى 750 كغ، وفي مجموعات محددة حتى 4250 كغ؛ وقد يلزم اختبار B96 إذا تجاوزت المجموعة 3500 كغ. وإذا تجاوزت النطاق المسموح، فتحقق من متطلبات رخصة BE؛ ولا تستنتج الإذن من الوزن الفارغ. قبل الرحلة افحص وصلة الربط والتوصيل الكهربائي والأضواء والفرامل والحمولة؛ ومن باب الاحتياط، قد بسلاسة واترك مسافة مناسبة. للجر الطارئ شروط المادة 165: وصلة مناسبة وعلامات وأجهزة التنبيه المقررة.",
+      "example_it": "Prima di trainare una roulotte, confronto le masse autorizzate sui documenti, verifico il codice necessario e controllo aggancio, luci e freni.",
+      "example_ar": "قبل جر مقطورة سكنية، أقارن الكتل المسموح بها في الوثائق، وأتحقق من الرمز اللازم وأفحص الوصلة والأضواء والفرامل.",
+      "pitfall_it": "Non associare automaticamente la soglia massima alla sola patente B: la condizione B96 va esplicitata.",
+      "pitfall_ar": "لا تربط الحد الأعلى تلقائيًا برخصة B وحدها؛ يجب توضيح شرط B96.",
       "bank_topics": [
-        "Uso delle luci; uso dei dispositivi acustici; spie e simboli"
+        "Ingombro della carreggiata; segnalazione di veicolo fermo; norme sulla circolazione in autostrada e strade extraurbane"
       ],
       "review_question_ids": [
-        24216,
-        24187,
-        24219,
-        24220,
-        24264,
-        24153,
-        24265,
-        24257,
-        24259,
-        24208,
-        24267,
-        24145,
-        24266,
-        24271,
-        24269,
-        24258,
-        24256,
-        24268,
-        24215,
-        24228,
-        24162,
-        24307,
-        24249,
-        24260,
-        24222,
-        24252,
-        24313,
-        24250,
-        24270,
-        24201,
-        24206,
-        24314,
-        24165,
-        24179,
-        24232,
-        24166,
-        24202,
-        24308,
-        24237,
-        24226,
-        24229,
-        24284,
-        24194,
-        24149,
-        24209,
-        24291,
-        24294,
-        24238,
-        24293,
-        24305,
-        24200,
-        24203,
-        24225,
-        24151,
-        24295,
-        24214,
-        24142,
-        24207,
-        24283,
-        24247
+        23805,
+        23806,
+        23807,
+        23808,
+        23809,
+        23810,
+        23811,
+        23812,
+        23813,
+        23814,
+        23816,
+        23817,
+        23818,
+        23819,
+        23820,
+        23821
       ],
-      "review_match_score": 0.214,
+      "visual_question_id": 23936,
+      "syllabus_items": [
+        "dd",
+        "z"
+      ],
+      "sources": [
+        {
+          "url": "https://www.mit.gov.it/conseguimento-patente-b",
+          "title": "Veicoli guidabili con patente B",
+          "title_it": "Veicoli guidabili con patente B",
+          "title_ar": "المركبات التي تسمح رخصة B بقيادتها",
+          "legal_reference": "Patente B e codice B96",
+          "legal_reference_it": "Patente B e codice B96"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-56/",
+          "title": "Rimorchi",
+          "title_it": "Rimorchi",
+          "title_ar": "المقطورات",
+          "legal_reference": "Art. 56",
+          "legal_reference_it": "Art. 56"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-175/",
+          "title": "Condizioni e limitazioni della circolazione sulle autostrade e strade extraurbane principali",
+          "title_it": "Condizioni e limitazioni della circolazione sulle autostrade e strade extraurbane principali",
+          "title_ar": "شروط وقيود السير على الطرق السريعة والطرق الرئيسية خارج المدن",
+          "legal_reference": "Art. 175",
+          "legal_reference_it": "Art. 175"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-165/",
+          "title": "Traino di veicoli in avaria",
+          "title_it": "Traino di veicoli in avaria",
+          "title_ar": "جر المركبات المعطلة",
+          "legal_reference": "165",
+          "legal_reference_it": "165"
+        }
+      ],
       "youtube_video": {
         "status": "awaiting_review_and_publication",
         "url": null
       },
-      "sources": [
-        {
-          "url": "https://aci.gov.it/codice-della-strada/art-156/",
-          "title": "Uso dei dispositivi di segnalazione acustica",
-          "title_it": "Uso dei dispositivi di segnalazione acustica",
-          "title_ar": "استخدام أجهزة التنبيه الصوتي",
-          "legal_reference": "156",
-          "legal_reference_it": "156"
-        },
-        {
-          "url": "https://aci.gov.it/codice-della-strada/art-153/",
-          "title": "Uso dei dispositivi di segnalazione visiva e di illuminazione",
-          "title_it": "Uso dei dispositivi di segnalazione visiva e di illuminazione",
-          "title_ar": "استخدام أجهزة الإشارات المرئية والإضاءة",
-          "legal_reference": "153",
-          "legal_reference_it": "153"
-        }
-      ],
-      "core_it": "Clacson: sicurezza, moderazione e segnale brevissimo.\nNei centri abitati, solo per pericolo effettivo e immediato.",
-      "core_ar": "البوق: للأمان فقط، باعتدال وتنبيه قصير جدًا.\nداخل المناطق المأهولة، عند خطر فعلي وفوري فقط.",
+      "core_it": "Con il rimorchio verifica masse, patente e impianti.\nIl traino d’emergenza segue condizioni specifiche dell’art. 165.",
+      "core_ar": "مع المقطورة تحقق من الكتل والرخصة والأنظمة.\nللجر الطارئ شروط خاصة في المادة 165.",
       "key_points": [
         {
-          "title_it": "Segnalazione 1",
-          "title_ar": "التنبيه 1",
-          "it": "Usare il clacson solo per la sicurezza, con moderazione e per il tempo più breve possibile.",
-          "ar": "استخدم البوق للأمان فقط، باعتدال ولأقصر مدة ممكنة."
+          "title_it": "Traino 1",
+          "title_ar": "الجر 1",
+          "it": "Verificare masse autorizzate e patente richiesta per la combinazione.",
+          "ar": "تحقق من الكتل المسموح بها والرخصة المطلوبة للمجموعة."
         },
         {
-          "title_it": "Segnalazione 2",
-          "title_ar": "التنبيه 2",
-          "it": "Nei centri abitati, usarlo solo per pericolo effettivo e immediato.",
-          "ar": "داخل المناطق المأهولة، استخدمه فقط عند خطر فعلي وفوري."
+          "title_it": "Traino 2",
+          "title_ar": "الجر 2",
+          "it": "Prima di partire controllare aggancio, collegamenti, luci, freni e carico.",
+          "ar": "قبل الانطلاق، افحص الوصلة والتوصيلات والأضواء والفرامل والحمولة."
         },
         {
-          "title_it": "Segnalazione 3",
-          "title_ar": "التنبيه 3",
-          "it": "Le luci di emergenza avvisano nei casi indicati dalla legge.",
-          "ar": "تنبه أضواء التحذير في الحالات التي يحددها القانون."
+          "title_it": "Traino 3",
+          "title_ar": "الجر 3",
+          "it": "Guidare con gradualità e mantenere distanze adeguate.",
+          "ar": "قد بسلاسة وحافظ على مسافات مناسبة."
         },
         {
-          "title_it": "Segnalazione 4",
-          "title_ar": "التنبيه 4",
-          "it": "Per interpretare le spie del cruscotto, consulta il manuale del veicolo.",
-          "ar": "لفهم مؤشرات لوحة القيادة، ارجع إلى دليل المركبة."
+          "title_it": "Traino 4",
+          "title_ar": "الجر 4",
+          "it": "Il traino d’emergenza richiede collegamento idoneo, ben visibile e dispositivi prescritti.",
+          "ar": "يتطلب الجر الطارئ وصلة مناسبة واضحة وأجهزة التنبيه المقررة."
         }
       ],
-      "trap_words": [],
-      "numbers": [],
-      "common_mistakes": [
+      "trap_words": [
         {
-          "mistake_it": "Suonare per salutare o manifestare impazienza in un centro abitato.",
-          "mistake_ar": "إطلاق البوق للتحية أو لإظهار الضيق داخل منطقة مأهولة.",
-          "why_it": "In centro abitato il segnale acustico è consentito solo in caso di pericolo effettivo e immediato.",
-          "why_ar": "داخل المنطقة المأهولة لا يُسمح بالتنبيه الصوتي إلا عند خطر فعلي وفوري."
+          "term_it": "complesso",
+          "meaning_ar": "مجموعة المركبة والمقطورة",
+          "why_it": "La massa complessiva della combinazione non coincide con la sola massa del rimorchio.",
+          "why_ar": "كتلة المجموعة لا تساوي كتلة المقطورة وحدها.",
+          "example_it": "Controllo la massa del complesso riportata nei dati pertinenti.",
+          "example_ar": "أتحقق من كتلة المجموعة في البيانات ذات الصلة."
+        }
+      ],
+      "numbers": [
+        {
+          "value": "750 kg",
+          "context_it": "La pagina MIT indica questa soglia per il rimorchio nella descrizione della patente B.",
+          "context_ar": "تذكر صفحة الوزارة هذا الحد للمقطورة ضمن وصف رخصة B."
         },
         {
-          "mistake_it": "Attribuire a ogni spia lo stesso significato su tutti i veicoli.",
-          "mistake_ar": "افتراض أن كل مؤشر له المعنى نفسه في جميع المركبات.",
-          "why_it": "I simboli e le indicazioni dipendono dal modello; va consultato il manuale.",
-          "why_ar": "تختلف الرموز والدلالات باختلاف الطراز؛ لذا يجب الرجوع إلى الدليل."
+          "value": "3.500 kg / 4.250 kg",
+          "context_it": "La pagina MIT collega il codice B96 al superamento di 3.500 kg entro la combinazione ammessa fino a 4.250 kg.",
+          "context_ar": "تربط صفحة الوزارة رمز B96 بتجاوز 3500 كغ ضمن مجموعة مسموحة حتى 4250 كغ."
+        }
+      ],
+      "common_mistakes": [
+        {
+          "mistake_it": "Attribuire alla patente B ordinaria qualsiasi combinazione fino a 4.250 kg.",
+          "mistake_ar": "اعتبار رخصة B العادية كافية لأي مجموعة حتى 4250 كغ.",
+          "why_it": "Quando la massa complessiva supera 3.500 kg nel caso indicato, serve la prova B96.",
+          "why_ar": "عند تجاوز كتلة المجموعة 3500 كغ في الحالة المذكورة، يلزم اختبار B96."
+        },
+        {
+          "mistake_it": "Valutare l’abilitazione usando soltanto il peso a vuoto del rimorchio.",
+          "mistake_ar": "تحديد صلاحية الرخصة بالاعتماد على الوزن الفارغ للمقطورة وحده.",
+          "why_it": "Contano le masse massime autorizzate e i limiti della combinazione.",
+          "why_ar": "العبرة بالكتل القصوى المسموح بها وحدود المجموعة."
         }
       ],
       "quick_check": [
         {
-          "statement_it": "Il segnale acustico deve essere il più breve possibile e usato per la sicurezza.",
-          "statement_ar": "يجب أن يكون التنبيه الصوتي أقصر ما يمكن وأن يُستخدم لأمان الطريق.",
+          "statement_it": "Prima di partire con un rimorchio si controllano aggancio, collegamenti, luci, freni e carico.",
+          "statement_ar": "قبل الانطلاق بالمقطورة، تُفحص الوصلة والتوصيلات والأضواء والفرامل والحمولة.",
           "answer": "VERO",
-          "explanation_it": "L’art. 156 prescrive moderazione e durata minima necessaria.",
-          "explanation_ar": "توجب المادة 156 الاعتدال وأقصر مدة لازمة."
+          "explanation_it": "Sono controlli essenziali prima del viaggio.",
+          "explanation_ar": "هذه فحوص أساسية قبل الرحلة."
         },
         {
-          "statement_it": "Nei centri abitati il clacson è ammesso soltanto per pericolo effettivo e immediato.",
-          "statement_ar": "داخل المناطق المأهولة لا يُسمح بالبوق إلا عند خطر فعلي وفوري.",
-          "answer": "VERO",
-          "explanation_it": "È la condizione indicata dall’art. 156.",
-          "explanation_ar": "هذا هو الشرط الذي تحدده المادة 156."
-        },
-        {
-          "statement_it": "Le spie del cruscotto hanno lo stesso significato in ogni modello di veicolo.",
-          "statement_ar": "لمؤشرات لوحة القيادة المعنى نفسه في كل طراز من المركبات.",
+          "statement_it": "Per la combinazione con rimorchio non occorre verificare le masse autorizzate.",
+          "statement_ar": "لا حاجة للتحقق من الكتل المسموح بها لمجموعة المركبة والمقطورة.",
           "answer": "FALSO",
-          "explanation_it": "Per il significato specifico si consulta il manuale del proprio veicolo.",
-          "explanation_ar": "يُرجع إلى دليل المركبة لمعرفة الدلالة المحددة."
+          "explanation_it": "La massa autorizzata e la patente dipendono dalla combinazione.",
+          "explanation_ar": "تعتمد الكتلة المسموح بها والرخصة على المجموعة."
+        },
+        {
+          "statement_it": "Nel traino d’emergenza di un veicolo guasto si usa un collegamento idoneo e segnalato.",
+          "statement_ar": "في جر مركبة معطلة للطوارئ، تُستخدم وصلة مناسبة وواضحة العلامة.",
+          "answer": "VERO",
+          "explanation_it": "L’art. 165 disciplina collegamento e dispositivi di segnalazione.",
+          "explanation_ar": "تنظم المادة 165 الوصلة وأجهزة التنبيه."
         }
       ],
       "video_script_available": false,
       "visual_script": {
         "schema_version": 1,
         "renderer": "inline-svg",
-        "scene_id": "vehicle-safety",
-        "visual_path": "inline-svg:vehicle-safety",
-        "description_it": "Illustrazione didattica per «Clacson, luci di emergenza e spie del cruscotto»: concetto, esempio e attenzione a un errore comune.",
-        "description_ar": "رسم تعليمي لدرس «البوق وأضواء التحذير ومؤشرات لوحة القيادة»: الفكرة والمثال والتنبيه إلى خطأ شائع.",
+        "scene_id": "trailer",
+        "visual_path": "inline-svg:trailer",
+        "description_it": "Illustrazione didattica per «Rimorchi: compatibilità, aggancio e guida»: concetto, esempio e attenzione a un errore comune.",
+        "description_ar": "رسم تعليمي لدرس «المقطورات: التوافق والربط والقيادة»: الفكرة والمثال والتنبيه إلى خطأ شائع.",
         "narration_locale": "ar-EG",
         "stages": [
           {
             "key": "concept",
-            "text_it": "Clacson: sicurezza, moderazione e segnale brevissimo.\nNei centri abitati, solo per pericolo effettivo e immediato.",
-            "text_ar": "البوق: للأمان فقط، باعتدال وتنبيه قصير جدًا.\nداخل المناطق المأهولة، عند خطر فعلي وفوري فقط."
+            "text_it": "Con il rimorchio verifica masse, patente e impianti.\nIl traino d’emergenza segue condizioni specifiche dell’art. 165.",
+            "text_ar": "مع المقطورة تحقق من الكتل والرخصة والأنظمة.\nللجر الطارئ شروط خاصة في المادة 165."
           },
           {
             "key": "example",
-            "text_it": "In città un conducente suona soltanto per avvertire di un pericolo immediato; se compare una spia che non riconosce, consulta il manuale del veicolo.",
-            "text_ar": "في المدينة، يستخدم سائق البوق فقط للتنبيه إلى خطر فوري؛ وإذا ظهر مؤشر لا يعرفه، يرجع إلى دليل المركبة."
+            "text_it": "Prima di trainare una roulotte, confronto le masse autorizzate sui documenti, verifico il codice necessario e controllo aggancio, luci e freni.",
+            "text_ar": "قبل جر مقطورة سكنية، أقارن الكتل المسموح بها في الوثائق، وأتحقق من الرمز اللازم وأفحص الوصلة والأضواء والفرامل."
           },
           {
             "key": "warning",
-            "text_it": "Suonare per salutare o manifestare impazienza in un centro abitato. In centro abitato il segnale acustico è consentito solo in caso di pericolo effettivo e immediato.",
-            "text_ar": "إطلاق البوق للتحية أو لإظهار الضيق داخل منطقة مأهولة. داخل المنطقة المأهولة لا يُسمح بالتنبيه الصوتي إلا عند خطر فعلي وفوري."
+            "text_it": "Attribuire alla patente B ordinaria qualsiasi combinazione fino a 4.250 kg. Quando la massa complessiva supera 3.500 kg nel caso indicato, serve la prova B96.",
+            "text_ar": "اعتبار رخصة B العادية كافية لأي مجموعة حتى 4250 كغ. عند تجاوز كتلة المجموعة 3500 كغ في الحالة المذكورة، يلزم اختبار B96."
           }
         ]
       },
       "videoUrl": null,
       "review_sources_checked": [
-        "https://aci.gov.it/codice-della-strada/art-156/",
-        "https://aci.gov.it/codice-della-strada/art-153/"
+        "https://www.mit.gov.it/conseguimento-patente-b",
+        "https://aci.gov.it/codice-della-strada/art-56/",
+        "https://aci.gov.it/codice-della-strada/art-165/"
       ],
-      "review_verification_note": "Verificati su ACI gli articoli 156 e 153, comma 7: uso moderato e breve del segnale acustico, eccezione nei centri abitati per pericolo effettivo e immediato e casi di attivazione delle luci di emergenza. Non sono stati aggiunti altri dettagli legali. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
+      "review_verification_note": "La pagina ufficiale MIT consultata conferma il limite di 750 kg per il rimorchio e le condizioni per il complesso fino a 4.250 kg, con prova e codice B96 quando la massa del complesso supera 3.500 kg. Non ho verificato separatamente i riferimenti pratici non normativi. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u8-l1": {
       "body_ar": "رخصة القيادة بتسمح بقيادة المركبات الداخلة ضمن الفئة المكتوبة عليها، مع الالتزام بالشروط والقيود الشخصية إن وُجدت. قبل التحرك، اتأكد إن فئة الرخصة مناسبة للمركبة وإنها سارية؛ مجرد وجود بطاقة مش كفاية لو ما بتسمحش بقيادة الوسيلة دي. قواعد الفئات والمتطلبات موجودة في قانون المرور، ووزارة النقل بتلخص المركبات المرتبطة برخصة B وبتفرّق بين الرخصة العادية ورمز B96 في الحالات المذكورة. الشروط ممكن تختلف حسب السائق والمركبة؛ في الحالة العملية راجع الرخصة والقواعد المحدّثة، وما تستنتجش صلاحية القيادة من شرح عام.",
@@ -6617,250 +6558,6 @@
       "review_verification_note": "Verificate le versioni ACI consultate, aggiornate rispettivamente al 25 ottobre e al 5 novembre 2026: gli artt. 180 e 192 confermano i documenti prescritti e le condizioni per fermarsi e mostrarli. La documentazione richiesta varia secondo veicolo e situazione; non sono riportate sanzioni o eccezioni."
     },
     "u8-l3": {
-      "body_ar": "بعد واقعة مرورية، ممكن تظهر أنواع مختلفة من المسؤولية، وده بيتحدد حسب الظروف والقواعد المنطبقة. المسؤولية المدنية بتتعلق بتعويض الضرر وفق القانون المدني؛ أما الجنائية فبتفترض إن الواقعة استوفت عناصر جريمة منصوص عليها في القانون. المخالفة الإدارية ممكن تؤدي للجزاء اللي بيحدده قانون المرور، لكنها مش بتتحول تلقائيًا لجريمة. وفي حالات محددة، القانون بيرتب مسؤولية تضامنية على أشخاص بعينهم بشروط واستثناءات؛ ما ينفعش ننسبها لأي شخص من غير تمييز. إثبات المخالفة وتحريرها وإخطار المعني ودفع الجزاء ليهم إجراءات قانونية. النتيجة بتتوقف على الوقائع والقواعد السارية؛ راجع المصدر الرسمي المحدّث لأي مبلغ أو تدبير إضافي.",
-      "example_ar": "بعد تصادم، الضرر ممكن يثير مسألة مدنية؛ ولو الوقائع بتكوّن جريمة ممكن يتبحث الجانب الجنائي كمان، ومخالفة مستقلة ممكن يكون لها جزاء إداري.",
-      "heading_ar": "المسؤولية ونتائج المخالفات",
-      "pitfall_ar": "ما تخلطش بين التعويض والجريمة والجزاء الإداري؛ لكل واحد شروط وإجراءات مختلفة.",
-      "heading_it": "Responsabilità e conseguenze delle violazioni",
-      "body_it": "Dopo un fatto stradale possono rilevare piani diversi, da valutare secondo le circostanze e le norme applicabili. La responsabilità civile riguarda il risarcimento del danno secondo il diritto civile; quella penale presuppone che ricorrano gli elementi di un reato previsto dalla legge. Una violazione amministrativa può comportare la sanzione stabilita dal Codice della strada, senza diventare per questo automaticamente un reato. In determinate situazioni la legge prevede inoltre responsabilità solidale di soggetti specifici, con condizioni ed eccezioni: non si può attribuirla indistintamente a chiunque. Accertamento, contestazione, notificazione e pagamento seguono regole procedurali. L’esito dipende dai fatti e dalla disciplina vigente; importi e misure accessorie vanno controllati nella fonte ufficiale aggiornata.",
-      "example_it": "Dopo una collisione, il danno può porre una questione civile; se i fatti integrano un reato può esaminarsi anche il profilo penale, mentre un’apposita infrazione può avere conseguenze amministrative.",
-      "pitfall_it": "Non confondere risarcimento, reato e sanzione amministrativa: possono avere presupposti e percorsi diversi.",
-      "visual_src": "/lessons/lesson-documents.webp",
-      "bank_topics": [
-        "Responsabilità civile, penale, amministrativa; assicurazione R.C.A.; altre forme assicurative legate al veicolo"
-      ],
-      "review_question_ids": [
-        25052,
-        25000,
-        24993,
-        24983,
-        24999,
-        24976,
-        25015,
-        25014,
-        25051,
-        24985,
-        25017,
-        25003,
-        25054,
-        24974,
-        24995,
-        24992,
-        24979,
-        24996,
-        24988,
-        24975,
-        24994,
-        24997,
-        31050,
-        24977,
-        25053,
-        24978,
-        24998,
-        24982,
-        25048,
-        24990,
-        25064,
-        25018,
-        25024,
-        25046,
-        25055,
-        24984,
-        25001,
-        24973,
-        25025,
-        25021,
-        25016,
-        25041,
-        24981,
-        24991,
-        24987,
-        25004,
-        25059,
-        24980,
-        25026,
-        25049,
-        25002,
-        25045,
-        25050,
-        31042,
-        25027,
-        25028,
-        25023,
-        25022,
-        24989,
-        25006
-      ],
-      "review_match_score": 0.384,
-      "youtube_video": {
-        "status": "awaiting_review_and_publication",
-        "url": null
-      },
-      "sources": [
-        {
-          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1992-04-30;285!vig=",
-          "title": "Normattiva — Codice della strada, sanzioni amministrative",
-          "title_it": "Normattiva — Codice della strada, sanzioni amministrative",
-          "title_ar": "Normattiva — قانون المرور والجزاءات الإدارية",
-          "legal_reference": "D.Lgs. 285/1992, artt. 194–224, in particolare 196 e 200–202",
-          "legal_reference_it": "D.Lgs. 285/1992, artt. 194–224, in particolare 196 e 200–202"
-        },
-        {
-          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art2054!vig=",
-          "title": "Normattiva — Responsabilità per la circolazione dei veicoli",
-          "title_it": "Normattiva — Responsabilità per la circolazione dei veicoli",
-          "title_ar": "Normattiva — المسؤولية عن حركة المركبات",
-          "legal_reference": "Codice civile, art. 2054",
-          "legal_reference_it": "Codice civile, art. 2054"
-        },
-        {
-          "url": "https://www.aci.it/i-servizi/normative/codice-della-strada.html",
-          "title": "ACI · Codice della strada",
-          "title_it": "ACI · Codice della strada",
-          "title_ar": "ACI · قانون الطرق الإيطالي",
-          "legal_reference": "قانون المرور الإيطالي",
-          "legal_reference_it": "Codice della strada"
-        },
-        {
-          "url": "https://aci.gov.it/codice-della-strada/art-126-bis/",
-          "title": "Patente a punti",
-          "title_it": "Patente a punti",
-          "title_ar": "نظام نقاط رخصة القيادة",
-          "legal_reference": "126-bis",
-          "legal_reference_it": "126-bis"
-        },
-        {
-          "url": "https://aci.gov.it/codice-della-strada/art-195/",
-          "title": "Applicazione delle sanzioni amministrative pecuniarie",
-          "title_it": "Applicazione delle sanzioni amministrative pecuniarie",
-          "title_ar": "تطبيق الغرامات الإدارية المالية",
-          "legal_reference": "195",
-          "legal_reference_it": "195"
-        },
-        {
-          "url": "https://aci.gov.it/codice-della-strada/art-218/",
-          "title": "Sanzione accessoria della sospensione della patente",
-          "title_it": "Sanzione accessoria della sospensione della patente",
-          "title_ar": "العقوبة التكميلية بتعليق الرخصة",
-          "legal_reference": "218",
-          "legal_reference_it": "218"
-        },
-        {
-          "url": "https://aci.gov.it/codice-della-strada/art-219/",
-          "title": "Revoca della patente",
-          "title_it": "Revoca della patente",
-          "title_ar": "سحب رخصة القيادة",
-          "legal_reference": "219",
-          "legal_reference_it": "219"
-        }
-      ],
-      "core_it": "Le responsabilità civile, penale e amministrativa sono distinte.\nMulte e misure sulla patente dipendono dalla violazione prevista.",
-      "core_ar": "المسؤوليات المدنية والجنائية والإدارية مختلفة.\nتتحدد الغرامة وتدابير الرخصة وفق المخالفة المنصوص عليها.",
-      "key_points": [
-        {
-          "title_it": "Conseguenze 1",
-          "title_ar": "النتائج 1",
-          "it": "La responsabilità civile riguarda il risarcimento del danno.",
-          "ar": "تتعلق المسؤولية المدنية بتعويض الضرر."
-        },
-        {
-          "title_it": "Conseguenze 2",
-          "title_ar": "النتائج 2",
-          "it": "La responsabilità penale presuppone un reato previsto dalla legge.",
-          "ar": "تتطلب المسؤولية الجنائية جريمة ينص عليها القانون."
-        },
-        {
-          "title_it": "Conseguenze 3",
-          "title_ar": "النتائج 3",
-          "it": "Una violazione amministrativa non è automaticamente un reato.",
-          "ar": "لا تُعدّ المخالفة الإدارية جريمة تلقائيًا."
-        },
-        {
-          "title_it": "Conseguenze 4",
-          "title_ar": "النتائج 4",
-          "it": "La sanzione pecuniaria è distinta dalle misure sulla patente, applicate solo nei casi previsti.",
-          "ar": "تختلف الغرامة المالية عن التدابير المتعلقة بالرخصة، ولا تُطبق إلا في الحالات المحددة."
-        }
-      ],
-      "trap_words": [],
-      "numbers": [],
-      "common_mistakes": [
-        {
-          "mistake_it": "Trattare ogni infrazione stradale come reato.",
-          "mistake_ar": "اعتبار كل مخالفة مرورية جريمة.",
-          "why_it": "La responsabilità penale richiede una fattispecie di reato prevista dalla legge.",
-          "why_ar": "المسؤولية الجنائية بتحتاج إلى جريمة محددة في القانون."
-        },
-        {
-          "mistake_it": "Supporre che il pagamento di una sanzione cancelli ogni possibile conseguenza civile o penale.",
-          "mistake_ar": "الاعتقاد إن دفع الجزاء بيلغي كل نتيجة مدنية أو جنائية محتملة.",
-          "why_it": "I diversi piani di responsabilità hanno presupposti distinti.",
-          "why_ar": "كل نوع من المسؤولية له شروطه المختلفة."
-        }
-      ],
-      "quick_check": [
-        {
-          "statement_it": "La sanzione pecuniaria e le misure sulla patente sono conseguenze distinte previste solo secondo la violazione.",
-          "statement_ar": "الغرامة المالية والتدابير المتعلقة بالرخصة نتيجتان مختلفتان تطبقان بحسب المخالفة.",
-          "answer": "VERO",
-          "explanation_it": "Punti, sospensione o revoca non si applicano automaticamente a ogni violazione.",
-          "explanation_ar": "لا تُطبق النقاط أو التعليق أو السحب تلقائيًا على كل مخالفة."
-        },
-        {
-          "statement_it": "Ogni violazione amministrativa costituisce automaticamente un reato.",
-          "statement_ar": "كل مخالفة إدارية تُعد تلقائيًا جريمة.",
-          "answer": "FALSO",
-          "explanation_it": "L’illecito amministrativo non diventa automaticamente un reato.",
-          "explanation_ar": "لا تتحول المخالفة الإدارية تلقائيًا إلى جريمة."
-        },
-        {
-          "statement_it": "La responsabilità penale presuppone un reato previsto dalla legge.",
-          "statement_ar": "تتطلب المسؤولية الجنائية جريمة ينص عليها القانون.",
-          "answer": "VERO",
-          "explanation_it": "La responsabilità penale dipende dalla sussistenza di un reato.",
-          "explanation_ar": "تعتمد المسؤولية الجنائية على وجود جريمة."
-        }
-      ],
-      "video_script_available": false,
-      "visual_script": {
-        "schema_version": 1,
-        "renderer": "inline-svg",
-        "scene_id": "documents",
-        "visual_path": "inline-svg:documents",
-        "description_it": "Illustrazione didattica per «Responsabilità e conseguenze delle violazioni»: concetto, esempio e attenzione a un errore comune.",
-        "description_ar": "رسم تعليمي لدرس «المسؤولية ونتائج المخالفات»: الفكرة والمثال والتنبيه إلى خطأ شائع.",
-        "narration_locale": "ar-EG",
-        "stages": [
-          {
-            "key": "concept",
-            "text_it": "Le responsabilità civile, penale e amministrativa sono distinte.\nMulte e misure sulla patente dipendono dalla violazione prevista.",
-            "text_ar": "المسؤوليات المدنية والجنائية والإدارية مختلفة.\nتتحدد الغرامة وتدابير الرخصة وفق المخالفة المنصوص عليها."
-          },
-          {
-            "key": "example",
-            "text_it": "Dopo una collisione, il danno può porre una questione civile; se i fatti integrano un reato può esaminarsi anche il profilo penale, mentre un’apposita infrazione può avere conseguenze amministrative.",
-            "text_ar": "بعد تصادم، الضرر ممكن يثير مسألة مدنية؛ ولو الوقائع بتكوّن جريمة ممكن يتبحث الجانب الجنائي كمان، ومخالفة مستقلة ممكن يكون لها جزاء إداري."
-          },
-          {
-            "key": "warning",
-            "text_it": "Trattare ogni infrazione stradale come reato. La responsabilità penale richiede una fattispecie di reato prevista dalla legge.",
-            "text_ar": "اعتبار كل مخالفة مرورية جريمة. المسؤولية الجنائية بتحتاج إلى جريمة محددة في القانون."
-          }
-        ]
-      },
-      "videoUrl": null,
-      "review_sources_checked": [
-        "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1992-04-30;285!vig=",
-        "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art2054!vig=",
-        "https://www.aci.it/i-servizi/normative/codice-della-strada.html",
-        "https://aci.gov.it/codice-della-strada/art-126-bis/",
-        "https://aci.gov.it/codice-della-strada/art-195/",
-        "https://aci.gov.it/codice-della-strada/art-218/",
-        "https://aci.gov.it/codice-della-strada/art-219/"
-      ],
-      "review_verification_note": "Verificato il testo vigente del Codice della strada su Normattiva e consultato l’art. 2054 c.c.; il portale indica aggiornamento dell’atto al 24/04/2026 e vigenza al 22/11/2026. I dettagli su responsabilità solidale e procedure sono mantenuti generali: la pagina Normattiva consultata espone l’indice degli articoli, non il testo puntuale di ciascuno. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
-    },
-    "u8-l4": {
       "body_ar": "المادة 193 من قانون المرور بتحظر تسيير المركبات الخاضعة للواجب من غير تغطية تأمينية للمسؤولية المدنية تجاه الغير، وفق القواعد السارية. والمادة بتحمّل المالك واجب التحقق من التغطية حتى لو كانت المركبة، لأي سبب، في الحيازة القانونية لشخص طبيعي أو اعتباري تاني. ما ينفعش نقصر واجب التحقق على الحالة اللي المالك بنفسه بيسلّم فيها المفاتيح. التغطيات الإضافية، زي تغطية ضرر السيارة نفسها أو المساعدة، مختلفة عن التأمين الإلزامي وبتتحدد حسب العقد. لازم مراجعة المصادر التأمينية والمرورية المحدّثة لمعرفة النطاق والاستثناءات والنتائج؛ الشرح هنا ما بيذكرش مبالغ جزاءات.",
       "example_ar": "مالكة بتدي السيارة لشخص تاني بقت المركبة في حيازته القانونية؛ تفضل تتحقق إن العربية ما تسيرش من غير R.C.A.، وأي تغطية لضرر سيارتها بتفضل ضمان منفصل.",
       "heading_ar": "تأمين المسؤولية تجاه الغير والتغطيات الاختيارية",
@@ -7066,6 +6763,206 @@
         "https://aci.gov.it/codice-della-strada/art-193/"
       ],
       "review_verification_note": "Verificato l’art. 193 sul sito ACI (aggiornato al 31 ottobre 2026): conferma l’obbligo per i veicoli soggetti e l’onere di verifica del proprietario anche con legittima disponibilità altrui. Le garanzie aggiuntive sono riportate come distinzione contrattuale, senza dettagli su coperture o eccezioni."
+    },
+    "u8-l4": {
+      "body_ar": "إذا كان الحادث مرتبطًا بتصرفك، فتوقف وقدّم المساعدة اللازمة للمصابين. ويتخذ المشاركون إجراءات لحماية حركة المرور؛ وإذا كانت الأضرار مادية فقط، يتجنبون تعطيل السير متى أمكن. ويقدّم السائقون بياناتهم والمعلومات المفيدة للمتضررين. إذا أُصيب حيوان أليف أو منتج أو محمي، فتوقف واتخذ تدابير مناسبة لضمان إنقاذه سريعًا. وعند وجود مصاب أو خطر، يكون طلب خدمات الطوارئ إجراءً احتياطيًا عمليًا. لا يتضمن الشرح أساليب إسعاف أولي؛ فالنص القانوني الذي راجعناه لا يحددها.",
+      "example_ar": "بعد تصادم مرتبط بتصرفها، سائقة بتقف. تلاحظ شخصًا مصابًا، تطلب المساعدة، تساهم في تأمين المكان وتقدم بياناتها والمعلومات المفيدة.",
+      "heading_ar": "الحادث: الوقوف وتقديم المساعدة والتعاون",
+      "pitfall_ar": "ما تمشيش لمجرد إن الضرر شكله بسيط. وما تعرضش الاحتياطات العامة أو النصائح الطبية كأنها نص المادة 189؛ الأساليب الطبية ما اتراجعتش هنا. كمان الاحتياط بعدم تحريك المصاب إلا عند وجود خطر فوري ما اتراجعش بمصدر طبي مستقل، وما يتفهمش كنصيحة طبية.",
+      "heading_it": "Incidente: fermarsi, assistere e collaborare",
+      "body_it": "Se un incidente è ricollegabile al tuo comportamento, fermati; presta l’assistenza necessaria alle persone ferite. Tutti i coinvolti adottano misure per la sicurezza della circolazione; se vi sono solo danni materiali, ove possibile evitano intralcio. I conducenti forniscono generalità e informazioni utili ai danneggiati. Se è coinvolto un animale da affezione, da reddito o protetto, fermati e adotta misure idonee a garantire un soccorso tempestivo. Con feriti o pericoli, chiamare i servizi di emergenza è una cautela pratica. Non sono impartite tecniche di primo soccorso: la norma consultata non le specifica.",
+      "example_it": "Dopo una collisione collegata alla sua condotta, una conducente si ferma. Nota una persona ferita, chiede soccorso, contribuisce alla sicurezza del luogo e comunica i propri dati e le informazioni utili.",
+      "pitfall_it": "Non andarsene perché il danno sembra lieve. Non presentare precauzioni generali o consigli clinici come testo dell’art. 189: qui le tecniche mediche non sono state verificate. La cautela di non spostare il ferito salvo pericolo immediato non è stata verificata con una fonte medica indipendente e non va intesa come consiglio clinico.",
+      "visual_src": "/lessons/lesson-driver-safety.webp",
+      "bank_topics": [
+        "Comportamenti per prevenire incidenti stradali; comportamento in caso di incidente stradale; peculiarità della guida di",
+        "Guida in relazione alle qualità e condizioni fisiche e psichiche; alcool, droga e farmaci ; primo soccorso"
+      ],
+      "review_question_ids": [
+        24763,
+        24937,
+        24935,
+        24938,
+        24936,
+        24863,
+        24764,
+        24867,
+        24780,
+        24769,
+        24871,
+        24771,
+        24765,
+        24766,
+        24939,
+        24865,
+        24767,
+        24828,
+        24803,
+        24866,
+        24857,
+        24768,
+        24877,
+        24858,
+        24770,
+        24753,
+        24864,
+        24702,
+        24821,
+        24825,
+        24873,
+        24940,
+        24862,
+        24744,
+        24860,
+        24854,
+        24794,
+        24800,
+        24739,
+        24941,
+        24932,
+        24880,
+        24801,
+        24751,
+        24772,
+        24902,
+        24778,
+        24913,
+        24709,
+        24878,
+        24868,
+        24802,
+        24908,
+        24781,
+        24931,
+        24704,
+        24861,
+        24933,
+        24808,
+        24740
+      ],
+      "review_match_score": 0.348,
+      "youtube_video": {
+        "status": "awaiting_review_and_publication",
+        "url": null
+      },
+      "sources": [
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-189/",
+          "title": "ACI — Comportamento in caso di incidente",
+          "title_it": "ACI — Comportamento in caso di incidente",
+          "title_ar": "ACI — السلوك في حالة وقوع حادث",
+          "legal_reference": "Art. 189 Codice della strada",
+          "legal_reference_it": "Art. 189 Codice della strada"
+        }
+      ],
+      "core_it": "Fermati, presta l’assistenza necessaria e proteggi la circolazione.\nAnche gli animali feriti richiedono soccorso tempestivo.",
+      "core_ar": "توقف وقدّم المساعدة اللازمة واحمِ حركة المرور.\nتحتاج الحيوانات المصابة أيضًا إلى إنقاذ عاجل.",
+      "key_points": [
+        {
+          "title_it": "Incidente 1",
+          "title_ar": "الحادث 1",
+          "it": "Fermarsi negli incidenti riconducibili al proprio comportamento.",
+          "ar": "التوقف في الحوادث المرتبطة بتصرف الشخص."
+        },
+        {
+          "title_it": "Incidente 2",
+          "title_ar": "الحادث 2",
+          "it": "Prestare assistenza necessaria ai feriti e proteggere la circolazione.",
+          "ar": "تقديم المساعدة اللازمة للمصابين وحماية حركة المرور."
+        },
+        {
+          "title_it": "Incidente 3",
+          "title_ar": "الحادث 3",
+          "it": "Fornire generalità e informazioni utili alle persone danneggiate.",
+          "ar": "تقديم البيانات الشخصية والمعلومات المفيدة للمتضررين."
+        },
+        {
+          "title_it": "Incidente 4",
+          "title_ar": "الحادث 4",
+          "it": "Se è ferito un animale domestico, da reddito o protetto, fermarsi e favorire soccorso tempestivo.",
+          "ar": "إذا أُصيب حيوان أليف أو منتج أو محمي، فتوقف وساعد على إنقاذه سريعًا."
+        }
+      ],
+      "trap_words": [
+        {
+          "term_it": "assistenza occorrente",
+          "meaning_ar": "المساعدة اللازمة",
+          "why_it": "È l’obbligo previsto dalla norma, non un protocollo medico descritto qui.",
+          "why_ar": "ده الالتزام الوارد في القانون، مش بروتوكول طبي موضح هنا.",
+          "example_it": "In caso di feriti, si presta l’assistenza necessaria e si richiedono soccorsi se opportuno.",
+          "example_ar": "لو فيه مصابين، تُقدَّم المساعدة اللازمة وتُطلب الطوارئ عند الحاجة."
+        }
+      ],
+      "numbers": [],
+      "common_mistakes": [
+        {
+          "mistake_it": "Pensare che l’obbligo di fermarsi valga soltanto quando il danno appare grave.",
+          "mistake_ar": "الاعتقاد إن واجب الوقوف ينطبق بس لما الضرر يبان خطير.",
+          "why_it": "L’art. 189 lega il dovere alla connessione dell’incidente con il proprio comportamento; per danni alle cose disciplina comunque gli obblighi pertinenti.",
+          "why_ar": "المادة 189 بتربط الواجب بارتباط الحادث بتصرف السائق؛ وبتحدد كمان الالتزامات في حالة الأضرار المادية."
+        },
+        {
+          "mistake_it": "Presentare il consiglio di non spostare un ferito come regola medica o obbligo espresso dall’art. 189.",
+          "mistake_ar": "عرض نصيحة عدم تحريك المصاب كقاعدة طبية أو واجب منصوص عليه في المادة 189.",
+          "why_it": "Qui non è stata verificata una fonte medica indipendente e l’articolo consultato non descrive tecniche di soccorso.",
+          "why_ar": "ما راجعناش هنا مصدرًا طبيًا مستقلًا، والمادة المفتوحة ما بتشرحش طرق الإسعاف."
+        }
+      ],
+      "quick_check": [
+        {
+          "statement_it": "Negli incidenti riconducibili al proprio comportamento, il conducente deve fermarsi.",
+          "statement_ar": "في الحوادث المرتبطة بتصرفه، يجب على السائق التوقف.",
+          "answer": "VERO",
+          "explanation_it": "È un obbligo richiamato dall’art. 189.",
+          "explanation_ar": "هذا واجب تذكره المادة 189."
+        },
+        {
+          "statement_it": "Se è ferito un animale protetto, l’utente coinvolto può allontanarsi senza intervenire.",
+          "statement_ar": "إذا أُصيب حيوان محمي، يمكن لمستخدم الطريق المعني المغادرة دون تدخل.",
+          "answer": "FALSO",
+          "explanation_it": "La norma richiede di fermarsi e adottare misure per il soccorso tempestivo.",
+          "explanation_ar": "توجب القاعدة التوقف واتخاذ تدابير لضمان الإنقاذ العاجل."
+        },
+        {
+          "statement_it": "I conducenti coinvolti forniscono le informazioni utili alle persone danneggiate.",
+          "statement_ar": "يقدّم السائقون المشاركون المعلومات المفيدة للمتضررين.",
+          "answer": "VERO",
+          "explanation_it": "Lo scambio delle informazioni rientra nei doveri previsti.",
+          "explanation_ar": "يدخل تبادل المعلومات ضمن الواجبات المقررة."
+        }
+      ],
+      "video_script_available": false,
+      "visual_script": {
+        "schema_version": 1,
+        "renderer": "inline-svg",
+        "scene_id": "driver-safety",
+        "visual_path": "inline-svg:driver-safety",
+        "description_it": "Illustrazione didattica per «Incidente: fermarsi, assistere e collaborare»: concetto, esempio e attenzione a un errore comune.",
+        "description_ar": "رسم تعليمي لدرس «الحادث: الوقوف وتقديم المساعدة والتعاون»: الفكرة والمثال والتنبيه إلى خطأ شائع.",
+        "narration_locale": "ar-EG",
+        "stages": [
+          {
+            "key": "concept",
+            "text_it": "Fermati, presta l’assistenza necessaria e proteggi la circolazione.\nAnche gli animali feriti richiedono soccorso tempestivo.",
+            "text_ar": "توقف وقدّم المساعدة اللازمة واحمِ حركة المرور.\nتحتاج الحيوانات المصابة أيضًا إلى إنقاذ عاجل."
+          },
+          {
+            "key": "example",
+            "text_it": "Dopo una collisione collegata alla sua condotta, una conducente si ferma. Nota una persona ferita, chiede soccorso, contribuisce alla sicurezza del luogo e comunica i propri dati e le informazioni utili.",
+            "text_ar": "بعد تصادم مرتبط بتصرفها، سائقة بتقف. تلاحظ شخصًا مصابًا، تطلب المساعدة، تساهم في تأمين المكان وتقدم بياناتها والمعلومات المفيدة."
+          },
+          {
+            "key": "warning",
+            "text_it": "Pensare che l’obbligo di fermarsi valga soltanto quando il danno appare grave. L’art. 189 lega il dovere alla connessione dell’incidente con il proprio comportamento; per danni alle cose disciplina comunque gli obblighi pertinenti.",
+            "text_ar": "الاعتقاد إن واجب الوقوف ينطبق بس لما الضرر يبان خطير. المادة 189 بتربط الواجب بارتباط الحادث بتصرف السائق؛ وبتحدد كمان الالتزامات في حالة الأضرار المادية."
+          }
+        ]
+      },
+      "videoUrl": null,
+      "review_sources_checked": [
+        "https://aci.gov.it/codice-della-strada/art-189/"
+      ],
+      "review_verification_note": "Verificato il testo dell’art. 189 nella pagina ACI consultata, aggiornata al 27 ottobre 2026. Le indicazioni sulle tecniche cliniche di primo soccorso non sono state incluse: la disposizione consultata non le specifica. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     },
     "u9-l1": {
       "body_ar": "تتطلب القيادة الانتباه والإدراك والتحكم في المركبة. قد يقلل التعب أو النعاس أو المرض أو الحالة النفسية الانتباه وسرعة الاستجابة؛ إذا لم تستطع التحكم، فلا تبدأ أو أوقف السير عندما يصبح ذلك آمنًا. تحظر المادة 186 القيادة في حالة سُكر ناتجة عن تناول المشروبات الكحولية، ولا تصوغ المنع على أنه بعد أي تناول للكحول. وتنظم المادة 187 القيادة بعد تناول مواد مخدرة أو مؤثرة نفسيًا. وبالنسبة للأدوية، راجع التحذيرات واستشر مختصًا صحيًا. هذا تلخيص تعليمي وليس اقتباسًا حرفيًا.",
@@ -9786,44 +9683,103 @@
       ],
       "review_verification_note": "تمت مراجعة المادة 172 المنشورة لدى ACI (محدّثة في 15 نوفمبر 2026). تؤكد حد 1.50 م، وملاءمة النظام للوزن واعتماده، واشتراط تعطيل الوسادة أمام المقعد المواجه للخلف، وأن الإعفاءات محددة. صياغة استعمال الأحزمة مقيدة بفئات المركبات الواردة في النص."
     },
-    "u11-l6": {
-      "heading_it": "Motocicli: casco e verifiche prima della partenza",
-      "heading_ar": "الدراجات النارية: الخوذة والفحوص قبل الانطلاق",
-      "visual_src": "/lessons/lesson-vulnerable-road-users.svg",
-      "body_it": "Durante la marcia, conducenti e passeggeri di ciclomotori e motoveicoli devono indossare e allacciare regolarmente un casco protettivo conforme ai tipi omologati. La legge prevede esenzioni specifiche per alcuni veicoli a tre o quattro ruote con carrozzeria chiusa e per determinate configurazioni dotate di cellula di sicurezza, sistemi di ritenuta e dispositivi prescritti: non trasformarle in un’esenzione generale. Prima di partire, controlla pneumatici, luci e indicatori; verifica inoltre, secondo il manuale del mezzo, comandi di emergenza, livello dell’olio e catena quando presente. Assicurati che conducente e passeggero siano sistemati correttamente. Ulteriori capi protettivi possono essere una prudente scelta di sicurezza, ma non presentarli come obbligo generale sulla sola base di questa lezione.",
-      "body_ar": "أثناء السير، يجب على سائقي وركاب الدراجات ذات المحرك والدراجات النارية ارتداء خوذة واقية مطابقة للأنواع المعتمدة وربطها بإحكام. وينص القانون على إعفاءات محددة لبعض المركبات ذات الثلاث أو الأربع عجلات بهيكل مغلق، ولبعض التجهيزات التي تضم خلية أمان وأنظمة تثبيت ومعدات مقررة؛ فلا تحولها إلى إعفاء عام. قبل الانطلاق، افحص الإطارات والأضواء والمؤشرات، وتحقق وفق دليل المركبة من أدوات التحكم في الطوارئ ومستوى الزيت والسلسلة إن وجدت. وتأكد من جلوس السائق والراكب على نحو سليم. قد تكون الملابس الواقية الإضافية اختيارًا احترازيًا حكيمًا، لكن لا تعرضها كالتزام عام استنادًا إلى هذا الدرس وحده.",
-      "example_it": "Prima di partire in moto, allaccio il casco omologato e controllo luci, pneumatici e gli elementi indicati nel manuale.",
-      "example_ar": "قبل الانطلاق بالدراجة النارية، أربط الخوذة المعتمدة وأفحص الأضواء والإطارات والعناصر المذكورة في الدليل.",
-      "pitfall_it": "Non confondere la raccomandazione di protezioni aggiuntive con un obbligo generale verificato qui.",
-      "pitfall_ar": "لا تخلط بين التوصية بوسائل حماية إضافية وبين التزام عام تم التحقق منه هنا.",
+    "u7-l5": {
+      "body_ar": "تُستخدم الأحزمة في المركبات والظروف التي تحددها المادة 172، مع الحفاظ على كفاءتها. ويحتاج الأطفال الذين يقل طولهم عن 1.50 م إلى نظام معتمد ومناسب للوزن؛ ومع مقعد الطفل المواجه للخلف، يجب تعطيل الوسادة الهوائية الأمامية أو اختيار مقعد آخر. وعلى الدراجات البخارية والنارية، يرتدي السائق والراكب خوذة واقية مطابقة ويربطانها، مع مراعاة الاستثناءات المحددة. قبل الانطلاق، افحص الإطارات والأضواء وإشارات الاتجاه؛ ووفق دليل المركبة افحص مفاتيح الطوارئ والزيت والسلسلة إن وجدت. وقد تكون الملابس الواقية الإضافية خيارًا احترازيًا، لكن لا تُعرض هنا كواجب قانوني عام.",
+      "example_ar": "يسافر طفل يقل طوله عن 1.50 متر في سيارة؛ فيُستخدم نظام معتمد مناسب لوزنه، ويُتحقق من موضعه بالنسبة إلى الوسادة الهوائية.",
+      "heading_ar": "الأحزمة وأنظمة التثبيت والخوذة",
+      "pitfall_ar": "لا تحوّل فئات الأحزمة أو الإعفاءات المحددة إلى قواعد عامة تشمل الجميع.",
+      "heading_it": "Cinture, sistemi di ritenuta e casco",
+      "body_it": "Le cinture si usano nei veicoli e nelle condizioni previste dall’articolo 172; conducente e passeggeri devono mantenerle efficienti. I bambini di statura inferiore a 1,50 m usano un sistema omologato adeguato al peso; con un seggiolino rivolto all’indietro, l’airbag frontale attivo va disattivato o va scelto un altro posto. Su ciclomotori e motoveicoli, conducente e passeggero indossano e allacciano un casco protettivo conforme, fatte salve le esenzioni specifiche. Prima di partire, controlla pneumatici, luci e indicatori; segui il manuale per verificare i comandi d’emergenza, l’olio e la catena, se presente. Gli altri indumenti protettivi possono essere una scelta prudente, ma qui non sono presentati come obbligo generale.",
+      "example_it": "In auto viaggia un bambino alto meno di 1,50 m: si usa un sistema omologato adatto al suo peso e si controlla il corretto posizionamento rispetto all’airbag.",
+      "pitfall_it": "Non trasformare le categorie previste per le cinture o le esenzioni specifiche in regole universali.",
+      "visual_src": "/lessons/lesson-vehicle-safety.webp",
       "bank_topics": [
-        "Elementi costitutivi del veicolo importanti per la sicurezza; manutenzione ed uso; stabilità e tenuta di strada del veicolo;",
-        "Dispositivi di equipaggiamento: funzione ed uso; cinture di sicurezza e sistemi di ritenuta per bambini; casco protettivo;"
+        "Dispositivi di equipaggiamento: funzione ed uso; cinture di sicurezza e sistemi di ritenuta per bambini; casco protettivo;",
+        "Elementi costitutivi del veicolo importanti per la sicurezza; manutenzione ed uso; stabilità e tenuta di strada del veicolo;"
       ],
       "review_question_ids": [
-        24318,
-        24319,
-        24320,
-        24321,
-        24322,
         24323,
+        24322,
+        24366,
+        24337,
+        24344,
+        24368,
+        24320,
+        24401,
+        24359,
+        24338,
+        24372,
+        24349,
+        24346,
+        24369,
+        24375,
+        24362,
+        24374,
+        24378,
+        24352,
+        24348,
+        24351,
+        24343,
+        24412,
+        24342,
+        24392,
+        24339,
+        24330,
+        24357,
+        24408,
+        24373,
+        24393,
+        24371,
+        24389,
+        24336,
+        24370,
+        24319,
+        24403,
+        24402,
+        24340,
+        24347,
+        24361,
+        24404,
+        24350,
+        24341,
+        24398,
+        24364,
+        24455,
+        24385,
+        24318,
+        24380,
+        24452,
+        24331,
+        24387,
+        24334,
+        24437,
+        24399,
+        24453,
+        24423,
         24325,
+        24391,
+        24321,
         24326,
         24327,
         24328,
         24329,
-        24330,
-        24331,
         24332,
-        24333,
-        24334
+        24333
       ],
-      "visual_question_id": 24318,
-      "syllabus_items": [
-        "s",
-        "v"
-      ],
+      "review_match_score": 0.316,
+      "youtube_video": {
+        "status": "awaiting_review_and_publication",
+        "url": null
+      },
       "sources": [
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-172/",
+          "title": "Uso delle cinture di sicurezza e dei sistemi di ritenuta e sicurezza per bambini",
+          "title_it": "Uso delle cinture di sicurezza e dei sistemi di ritenuta e sicurezza per bambini",
+          "title_ar": "استخدام أحزمة الأمان وأنظمة تثبيت الأطفال وسلامتهم",
+          "legal_reference": "172",
+          "legal_reference_it": "172"
+        },
         {
           "url": "https://aci.gov.it/codice-della-strada/art-171/",
           "title": "Uso del casco protettivo per gli utenti di veicoli a due ruote",
@@ -9831,6 +9787,14 @@
           "title_ar": "استخدام الخوذة الواقية لمستخدمي المركبات ذات العجلتين",
           "legal_reference": "Art. 171",
           "legal_reference_it": "Art. 171"
+        },
+        {
+          "url": "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf",
+          "title": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_it": "MIT — Programma d’esame teorico per le patenti A e B (circolare prot. 28819/2019)",
+          "title_ar": "وزارة البنية التحتية والنقل — برنامج الامتحان النظري لرخص A وB (التعميم 28819/2019)",
+          "legal_reference": "Programma d’esame teorico patente A/B",
+          "legal_reference_it": "Programma d’esame teorico patente A/B"
         },
         {
           "url": "https://aci.gov.it/codice-della-strada/art-170/",
@@ -9841,75 +9805,89 @@
           "legal_reference_it": "Art. 170"
         }
       ],
-      "youtube_video": {
-        "status": "awaiting_review_and_publication",
-        "url": null
-      },
-      "core_it": "Casco omologato e allacciato, salvo esenzioni specifiche.\nControlli e comandi si verificano secondo il manuale.",
-      "core_ar": "خوذة معتمدة ومربوطة، عدا الإعفاءات المحددة.\nتُفحص المعدات وأدوات التحكم وفق الدليل.",
+      "core_it": "Usa cinture e sistemi di ritenuta previsti; proteggi i bambini secondo altezza e peso.\nSu ciclomotori e motoveicoli, indossa e allaccia il casco conforme previsto.",
+      "core_ar": "استخدم الأحزمة وأنظمة تثبيت الأطفال المناسبة وفق القواعد.\nعلى الدراجات النارية والبخارية، ارتدِ الخوذة المطابقة واربطها وفق القانون.",
       "key_points": [
         {
-          "title_it": "Casco",
-          "title_ar": "الخوذة",
-          "it": "Deve essere conforme e regolarmente allacciato durante la marcia.",
-          "ar": "يجب أن تكون مطابقة ومربوطة أثناء السير."
+          "title_it": "Protezione 1",
+          "title_ar": "الحماية 1",
+          "it": "L’obbligo di cintura riguarda le categorie e le condizioni previste.",
+          "ar": "يشمل واجب الحزام الفئات والشروط المحددة."
         },
         {
-          "title_it": "Esenzioni circoscritte",
-          "title_ar": "إعفاءات محددة",
-          "it": "La norma elenca configurazioni precise, non un’esenzione generale.",
-          "ar": "يسرد القانون تجهيزات محددة لا إعفاءً عامًا."
+          "title_it": "Protezione 2",
+          "title_ar": "الحماية 2",
+          "it": "Sotto 1,50 m serve un sistema omologato adeguato al peso.",
+          "ar": "لمن يقل طولهم عن 1.50 متر يلزم نظام معتمد يناسب الوزن."
         },
         {
-          "title_it": "Controlli",
-          "title_ar": "الفحوص",
-          "it": "Pneumatici, luci e comandi si controllano prima della partenza.",
-          "ar": "افحص الإطارات والأضواء وأدوات التحكم قبل الانطلاق."
+          "title_it": "Protezione 3",
+          "title_ar": "الحماية 3",
+          "it": "Seggiolino rivolto all’indietro: airbag frontale disattivato o posto diverso.",
+          "ar": "مقعد الطفل المواجه للخلف: عطّل الوسادة الأمامية أو اختر مقعدًا آخر."
         },
         {
-          "title_it": "Manuale del mezzo",
-          "title_ar": "دليل المركبة",
-          "it": "Segui le istruzioni per olio, catena e comandi specifici.",
-          "ar": "اتبع تعليمات الزيت والسلسلة وأدوات التحكم الخاصة."
+          "title_it": "Protezione 4",
+          "title_ar": "الحماية 4",
+          "it": "Regolare il poggiatesta per sostenere correttamente la testa.",
+          "ar": "اضبط مسند الرأس لدعم الرأس على نحو صحيح."
+        },
+        {
+          "title_it": "Casco e verifiche",
+          "title_ar": "الخوذة والفحوص",
+          "it": "Il casco richiesto va omologato e allacciato; prima di partire si controllano gli elementi essenziali.",
+          "ar": "يجب أن تكون الخوذة المطلوبة معتمدة ومربوطة؛ وتُفحص العناصر الأساسية قبل الانطلاق."
         }
       ],
       "trap_words": [],
-      "numbers": [],
+      "numbers": [
+        {
+          "value": "1,50 m",
+          "context_it": "Soglia di statura sotto la quale è richiesto un sistema di ritenuta per bambini adeguato al peso.",
+          "context_ar": "حد الطول الذي يلزم دونه نظام تثبيت للأطفال مناسب للوزن."
+        }
+      ],
       "common_mistakes": [
         {
-          "mistake_it": "Dire che il casco non serve mai su un mezzo con più ruote.",
-          "mistake_ar": "القول إن الخوذة لا تلزم أبدًا على مركبة متعددة العجلات.",
-          "why_it": "Le esenzioni dipendono da configurazioni definite dall’articolo 171.",
-          "why_ar": "تعتمد الإعفاءات على تجهيزات يحددها نص المادة 171."
+          "mistake_it": "Estendere l’obbligo di cintura indistintamente a ogni veicolo.",
+          "mistake_ar": "تعميم واجب الحزام على كل المركبات بلا تمييز.",
+          "why_it": "Il testo delimita l’obbligo alle categorie e alle condizioni indicate.",
+          "why_ar": "يحدد النص الواجب بالفئات والشروط المذكورة."
         },
         {
-          "mistake_it": "Presentare ogni capo protettivo come obbligatorio per legge.",
+          "mistake_it": "Pensare che le esenzioni per il casco valgano per ogni veicolo a più ruote.",
+          "mistake_ar": "الاعتقاد أن استثناءات الخوذة تسري على كل مركبة متعددة العجلات.",
+          "why_it": "Le esenzioni dipendono da configurazioni definite dall’articolo 171.",
+          "why_ar": "تعتمد الاستثناءات على تجهيزات محددة في المادة 171."
+        },
+        {
+          "mistake_it": "Presentare ogni indumento protettivo come obbligatorio per legge.",
           "mistake_ar": "عرض كل لباس واقٍ على أنه إلزام قانوني.",
-          "why_it": "La lezione distingue il casco prescritto dalle ulteriori raccomandazioni.",
-          "why_ar": "يميز الدرس بين الخوذة المفروضة والتوصيات الإضافية."
+          "why_it": "La norma sul casco non rende automaticamente obbligatorio ogni altro capo.",
+          "why_ar": "لا تجعل قاعدة الخوذة كل لباس واقٍ آخر واجبًا تلقائيًا."
         }
       ],
       "quick_check": [
+        {
+          "statement_it": "Per un bambino sotto 1,50 m serve un sistema omologato adeguato al peso.",
+          "statement_ar": "يحتاج الطفل الذي يقل طوله عن 1.50 متر إلى نظام معتمد يناسب وزنه.",
+          "answer": "VERO",
+          "explanation_it": "È il requisito generale previsto dall’art. 172, con le eccezioni definite.",
+          "explanation_ar": "هذا هو الشرط العام في المادة 172 مع الاستثناءات المحددة."
+        },
+        {
+          "statement_it": "Un seggiolino rivolto all’indietro può stare davanti a un airbag frontale attivo.",
+          "statement_ar": "يمكن وضع مقعد طفل مواجه للخلف أمام وسادة هوائية أمامية فعالة.",
+          "answer": "FALSO",
+          "explanation_it": "L’airbag deve essere disattivato per quel posto, oppure si sceglie un altro sedile.",
+          "explanation_ar": "يجب تعطيل الوسادة لذلك المقعد أو اختيار مقعد آخر."
+        },
         {
           "statement_it": "Il casco richiesto deve essere omologato e allacciato durante la marcia.",
           "statement_ar": "يجب أن تكون الخوذة المطلوبة معتمدة ومربوطة أثناء السير.",
           "answer": "VERO",
           "explanation_it": "È la regola generale dell’articolo 171, fatte salve le esenzioni specifiche.",
           "explanation_ar": "هذه القاعدة العامة للمادة 171 مع مراعاة الإعفاءات المحددة."
-        },
-        {
-          "statement_it": "Le esenzioni previste per il casco valgono indistintamente per ogni veicolo a tre ruote.",
-          "statement_ar": "تنطبق إعفاءات الخوذة بلا تمييز على كل مركبة ذات ثلاث عجلات.",
-          "answer": "FALSO",
-          "explanation_it": "La norma lega l’esenzione a caratteristiche precise del veicolo.",
-          "explanation_ar": "يربط القانون الإعفاء بخصائص محددة للمركبة."
-        },
-        {
-          "statement_it": "La catena va controllata quando è presente, seguendo le istruzioni del mezzo.",
-          "statement_ar": "تُفحص السلسلة عند وجودها وفق تعليمات المركبة.",
-          "answer": "VERO",
-          "explanation_it": "È un controllo pratico dipendente dalla configurazione e dal manuale.",
-          "explanation_ar": "هذا فحص عملي يتوقف على تجهيز المركبة ودليلها."
         }
       ],
       "video_script_available": false,
@@ -9918,227 +9896,278 @@
         "renderer": "inline-svg",
         "scene_id": "vehicle-safety",
         "visual_path": "inline-svg:vehicle-safety",
-        "description_it": "Illustrazione didattica per «Motocicli: casco e verifiche prima della partenza»: concetto, esempio e attenzione a un errore comune.",
-        "description_ar": "رسم تعليمي لدرس «الدراجات النارية: الخوذة والفحوص قبل الانطلاق»: الفكرة والمثال والتنبيه إلى خطأ شائع.",
+        "description_it": "Illustrazione didattica per «Cinture e sistemi di ritenuta: proteggere gli occupanti»: concetto, esempio e attenzione a un errore comune.",
+        "description_ar": "رسم تعليمي لدرس «الأحزمة وأنظمة التثبيت: حماية الركاب»: الفكرة والمثال والتنبيه إلى خطأ شائع.",
         "narration_locale": "ar-EG",
         "stages": [
           {
             "key": "concept",
-            "text_it": "Casco omologato e allacciato, salvo esenzioni specifiche.\nControlli e comandi si verificano secondo il manuale.",
-            "text_ar": "خوذة معتمدة ومربوطة، عدا الإعفاءات المحددة.\nتُفحص المعدات وأدوات التحكم وفق الدليل."
+            "text_it": "Usa cinture e sistemi di ritenuta previsti.\nCon un seggiolino posteriore, disattiva l’airbag anteriore attivo.",
+            "text_ar": "استخدم الأحزمة وأنظمة التثبيت المقررة.\nمع مقعد الطفل المواجه للخلف، عطّل الوسادة الأمامية الفعالة."
           },
           {
             "key": "example",
-            "text_it": "Prima di partire in moto, allaccio il casco omologato e controllo luci, pneumatici e gli elementi indicati nel manuale.",
-            "text_ar": "قبل الانطلاق بالدراجة النارية، أربط الخوذة المعتمدة وأفحص الأضواء والإطارات والعناصر المذكورة في الدليل."
+            "text_it": "In auto viaggia un bambino alto meno di 1,50 m: si usa un sistema omologato adatto al suo peso e si controlla il corretto posizionamento rispetto all’airbag.",
+            "text_ar": "يسافر طفل يقل طوله عن 1.50 متر في سيارة؛ فيُستخدم نظام معتمد مناسب لوزنه، ويُتحقق من موضعه بالنسبة إلى الوسادة الهوائية."
           },
           {
             "key": "warning",
-            "text_it": "Dire che il casco non serve mai su un mezzo con più ruote. Le esenzioni dipendono da configurazioni definite dall’articolo 171.",
-            "text_ar": "القول إن الخوذة لا تلزم أبدًا على مركبة متعددة العجلات. تعتمد الإعفاءات على تجهيزات يحددها نص المادة 171."
+            "text_it": "Estendere il comma 1 indistintamente a ogni veicolo. Il testo delimita l’obbligo alle categorie e alle condizioni indicate.",
+            "text_ar": "تعميم الفقرة الأولى على كل المركبات بلا تمييز. يحدد النص الواجب بالفئات والشروط المذكورة."
           }
         ]
       },
       "videoUrl": null,
       "review_sources_checked": [
+        "https://aci.gov.it/codice-della-strada/art-172/",
+        "https://www.mit.gov.it/nfsmitgov/files/media/normativa/2019-09/Circolare_protocollo_28819_del_19-09-2019.pdf",
         "https://aci.gov.it/codice-della-strada/art-171/"
       ],
-      "review_verification_note": "تم التحقق من قاعدة الخوذة والاستثناءات المحددة في المادة 171 لدى ACI؛ لا يُفهم منها إعفاء عام لكل مركبة متعددة العجلات. الفحوص العملية وردت في مادة الدرس وتُتبع بحسب دليل المركبة."
+      "review_verification_note": "Verificati i commi pertinenti dell’art. 172 nel testo ACI aggiornato al 15 novembre 2026. Il riassunto resta limitato ai temi presenti nella lezione; le esenzioni sono descritte solo come specifiche, senza enumerarle. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge. تم التحقق من قاعدة الخوذة والاستثناءات المحددة في المادة 171 لدى ACI؛ لا يُفهم منها إعفاء عام لكل مركبة متعددة العجلات. الفحوص العملية وردت في مادة الدرس وتُتبع بحسب دليل المركبة."
     },
-    "u11-l7": {
-      "heading_it": "Rimorchi: compatibilità, aggancio e guida",
-      "heading_ar": "المقطورات: التوافق والربط والقيادة",
-      "body_it": "Un rimorchio modifica massa, lunghezza, stabilità e frenata del complesso. Controlla sui documenti le masse massime autorizzate del veicolo e del rimorchio, la massa complessiva e i limiti di traino. La patente B consente rimorchi fino a 750 kg e, in determinate combinazioni, un complesso fino a 4.250 kg; oltre 3.500 kg può essere richiesta la prova B96. Oltre il campo ammesso, verifica i requisiti della patente BE: non dedurre l’abilitazione dal peso a vuoto. Prima del viaggio controlla aggancio, collegamento elettrico, luci, freni e carico; per prudenza, guida con gradualità e mantieni distanze adeguate. Il traino d’emergenza segue l’articolo 165: collegamento idoneo e segnalato, con i dispositivi prescritti.",
-      "body_ar": "تؤثر المقطورة في كتلة المجموعة وطولها وثباتها وفرملتها. راجع الوثائق للتحقق من الكتل القصوى المسموح بها للمركبة والمقطورة، والكتلة الإجمالية وحد الجر. تسمح رخصة B بمقطورة حتى 750 كغ، وفي مجموعات محددة حتى 4250 كغ؛ وقد يلزم اختبار B96 إذا تجاوزت المجموعة 3500 كغ. وإذا تجاوزت النطاق المسموح، فتحقق من متطلبات رخصة BE؛ ولا تستنتج الإذن من الوزن الفارغ. قبل الرحلة افحص وصلة الربط والتوصيل الكهربائي والأضواء والفرامل والحمولة؛ ومن باب الاحتياط، قد بسلاسة واترك مسافة مناسبة. للجر الطارئ شروط المادة 165: وصلة مناسبة وعلامات وأجهزة التنبيه المقررة.",
-      "example_it": "Prima di trainare una roulotte, confronto le masse autorizzate sui documenti, verifico il codice necessario e controllo aggancio, luci e freni.",
-      "example_ar": "قبل جر مقطورة سكنية، أقارن الكتل المسموح بها في الوثائق، وأتحقق من الرمز اللازم وأفحص الوصلة والأضواء والفرامل.",
-      "pitfall_it": "Non associare automaticamente la soglia massima alla sola patente B: la condizione B96 va esplicitata.",
-      "pitfall_ar": "لا تربط الحد الأعلى تلقائيًا برخصة B وحدها؛ يجب توضيح شرط B96.",
+    "u8-l5": {
+      "body_ar": "بعد واقعة مرورية، ممكن تظهر أنواع مختلفة من المسؤولية، وده بيتحدد حسب الظروف والقواعد المنطبقة. المسؤولية المدنية بتتعلق بتعويض الضرر وفق القانون المدني؛ أما الجنائية فبتفترض إن الواقعة استوفت عناصر جريمة منصوص عليها في القانون. المخالفة الإدارية ممكن تؤدي للجزاء اللي بيحدده قانون المرور، لكنها مش بتتحول تلقائيًا لجريمة. وفي حالات محددة، القانون بيرتب مسؤولية تضامنية على أشخاص بعينهم بشروط واستثناءات؛ ما ينفعش ننسبها لأي شخص من غير تمييز. إثبات المخالفة وتحريرها وإخطار المعني ودفع الجزاء ليهم إجراءات قانونية. النتيجة بتتوقف على الوقائع والقواعد السارية؛ راجع المصدر الرسمي المحدّث لأي مبلغ أو تدبير إضافي.",
+      "example_ar": "بعد تصادم، الضرر ممكن يثير مسألة مدنية؛ ولو الوقائع بتكوّن جريمة ممكن يتبحث الجانب الجنائي كمان، ومخالفة مستقلة ممكن يكون لها جزاء إداري.",
+      "heading_ar": "المسؤولية ونتائج المخالفات",
+      "pitfall_ar": "ما تخلطش بين التعويض والجريمة والجزاء الإداري؛ لكل واحد شروط وإجراءات مختلفة.",
+      "heading_it": "Responsabilità e conseguenze delle violazioni",
+      "body_it": "Dopo un fatto stradale possono rilevare piani diversi, da valutare secondo le circostanze e le norme applicabili. La responsabilità civile riguarda il risarcimento del danno secondo il diritto civile; quella penale presuppone che ricorrano gli elementi di un reato previsto dalla legge. Una violazione amministrativa può comportare la sanzione stabilita dal Codice della strada, senza diventare per questo automaticamente un reato. In determinate situazioni la legge prevede inoltre responsabilità solidale di soggetti specifici, con condizioni ed eccezioni: non si può attribuirla indistintamente a chiunque. Accertamento, contestazione, notificazione e pagamento seguono regole procedurali. L’esito dipende dai fatti e dalla disciplina vigente; importi e misure accessorie vanno controllati nella fonte ufficiale aggiornata.",
+      "example_it": "Dopo una collisione, il danno può porre una questione civile; se i fatti integrano un reato può esaminarsi anche il profilo penale, mentre un’apposita infrazione può avere conseguenze amministrative.",
+      "pitfall_it": "Non confondere risarcimento, reato e sanzione amministrativa: possono avere presupposti e percorsi diversi.",
+      "visual_src": "/lessons/lesson-documents.webp",
       "bank_topics": [
-        "Ingombro della carreggiata; segnalazione di veicolo fermo; norme sulla circolazione in autostrada e strade extraurbane"
+        "Responsabilità civile, penale, amministrativa; assicurazione R.C.A.; altre forme assicurative legate al veicolo"
       ],
       "review_question_ids": [
-        23805,
-        23806,
-        23807,
-        23808,
-        23809,
-        23810,
-        23811,
-        23812,
-        23813,
-        23814,
-        23816,
-        23817,
-        23818,
-        23819,
-        23820,
-        23821
+        25052,
+        25000,
+        24993,
+        24983,
+        24999,
+        24976,
+        25015,
+        25014,
+        25051,
+        24985,
+        25017,
+        25003,
+        25054,
+        24974,
+        24995,
+        24992,
+        24979,
+        24996,
+        24988,
+        24975,
+        24994,
+        24997,
+        31050,
+        24977,
+        25053,
+        24978,
+        24998,
+        24982,
+        25048,
+        24990,
+        25064,
+        25018,
+        25024,
+        25046,
+        25055,
+        24984,
+        25001,
+        24973,
+        25025,
+        25021,
+        25016,
+        25041,
+        24981,
+        24991,
+        24987,
+        25004,
+        25059,
+        24980,
+        25026,
+        25049,
+        25002,
+        25045,
+        25050,
+        31042,
+        25027,
+        25028,
+        25023,
+        25022,
+        24989,
+        25006
       ],
-      "visual_question_id": 23936,
-      "syllabus_items": [
-        "dd",
-        "z"
-      ],
-      "sources": [
-        {
-          "url": "https://www.mit.gov.it/conseguimento-patente-b",
-          "title": "Veicoli guidabili con patente B",
-          "title_it": "Veicoli guidabili con patente B",
-          "title_ar": "المركبات التي تسمح رخصة B بقيادتها",
-          "legal_reference": "Patente B e codice B96",
-          "legal_reference_it": "Patente B e codice B96"
-        },
-        {
-          "url": "https://aci.gov.it/codice-della-strada/art-56/",
-          "title": "Rimorchi",
-          "title_it": "Rimorchi",
-          "title_ar": "المقطورات",
-          "legal_reference": "Art. 56",
-          "legal_reference_it": "Art. 56"
-        },
-        {
-          "url": "https://aci.gov.it/codice-della-strada/art-175/",
-          "title": "Condizioni e limitazioni della circolazione sulle autostrade e strade extraurbane principali",
-          "title_it": "Condizioni e limitazioni della circolazione sulle autostrade e strade extraurbane principali",
-          "title_ar": "شروط وقيود السير على الطرق السريعة والطرق الرئيسية خارج المدن",
-          "legal_reference": "Art. 175",
-          "legal_reference_it": "Art. 175"
-        },
-        {
-          "url": "https://aci.gov.it/codice-della-strada/art-165/",
-          "title": "Traino di veicoli in avaria",
-          "title_it": "Traino di veicoli in avaria",
-          "title_ar": "جر المركبات المعطلة",
-          "legal_reference": "165",
-          "legal_reference_it": "165"
-        }
-      ],
+      "review_match_score": 0.384,
       "youtube_video": {
         "status": "awaiting_review_and_publication",
         "url": null
       },
-      "core_it": "Con il rimorchio verifica masse, patente e impianti.\nIl traino d’emergenza segue condizioni specifiche dell’art. 165.",
-      "core_ar": "مع المقطورة تحقق من الكتل والرخصة والأنظمة.\nللجر الطارئ شروط خاصة في المادة 165.",
+      "sources": [
+        {
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1992-04-30;285!vig=",
+          "title": "Normattiva — Codice della strada, sanzioni amministrative",
+          "title_it": "Normattiva — Codice della strada, sanzioni amministrative",
+          "title_ar": "Normattiva — قانون المرور والجزاءات الإدارية",
+          "legal_reference": "D.Lgs. 285/1992, artt. 194–224, in particolare 196 e 200–202",
+          "legal_reference_it": "D.Lgs. 285/1992, artt. 194–224, in particolare 196 e 200–202"
+        },
+        {
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art2054!vig=",
+          "title": "Normattiva — Responsabilità per la circolazione dei veicoli",
+          "title_it": "Normattiva — Responsabilità per la circolazione dei veicoli",
+          "title_ar": "Normattiva — المسؤولية عن حركة المركبات",
+          "legal_reference": "Codice civile, art. 2054",
+          "legal_reference_it": "Codice civile, art. 2054"
+        },
+        {
+          "url": "https://www.aci.it/i-servizi/normative/codice-della-strada.html",
+          "title": "ACI · Codice della strada",
+          "title_it": "ACI · Codice della strada",
+          "title_ar": "ACI · قانون الطرق الإيطالي",
+          "legal_reference": "قانون المرور الإيطالي",
+          "legal_reference_it": "Codice della strada"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-126-bis/",
+          "title": "Patente a punti",
+          "title_it": "Patente a punti",
+          "title_ar": "نظام نقاط رخصة القيادة",
+          "legal_reference": "126-bis",
+          "legal_reference_it": "126-bis"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-195/",
+          "title": "Applicazione delle sanzioni amministrative pecuniarie",
+          "title_it": "Applicazione delle sanzioni amministrative pecuniarie",
+          "title_ar": "تطبيق الغرامات الإدارية المالية",
+          "legal_reference": "195",
+          "legal_reference_it": "195"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-218/",
+          "title": "Sanzione accessoria della sospensione della patente",
+          "title_it": "Sanzione accessoria della sospensione della patente",
+          "title_ar": "العقوبة التكميلية بتعليق الرخصة",
+          "legal_reference": "218",
+          "legal_reference_it": "218"
+        },
+        {
+          "url": "https://aci.gov.it/codice-della-strada/art-219/",
+          "title": "Revoca della patente",
+          "title_it": "Revoca della patente",
+          "title_ar": "سحب رخصة القيادة",
+          "legal_reference": "219",
+          "legal_reference_it": "219"
+        }
+      ],
+      "core_it": "Le responsabilità civile, penale e amministrativa sono distinte.\nMulte e misure sulla patente dipendono dalla violazione prevista.",
+      "core_ar": "المسؤوليات المدنية والجنائية والإدارية مختلفة.\nتتحدد الغرامة وتدابير الرخصة وفق المخالفة المنصوص عليها.",
       "key_points": [
         {
-          "title_it": "Traino 1",
-          "title_ar": "الجر 1",
-          "it": "Verificare masse autorizzate e patente richiesta per la combinazione.",
-          "ar": "تحقق من الكتل المسموح بها والرخصة المطلوبة للمجموعة."
+          "title_it": "Conseguenze 1",
+          "title_ar": "النتائج 1",
+          "it": "La responsabilità civile riguarda il risarcimento del danno.",
+          "ar": "تتعلق المسؤولية المدنية بتعويض الضرر."
         },
         {
-          "title_it": "Traino 2",
-          "title_ar": "الجر 2",
-          "it": "Prima di partire controllare aggancio, collegamenti, luci, freni e carico.",
-          "ar": "قبل الانطلاق، افحص الوصلة والتوصيلات والأضواء والفرامل والحمولة."
+          "title_it": "Conseguenze 2",
+          "title_ar": "النتائج 2",
+          "it": "La responsabilità penale presuppone un reato previsto dalla legge.",
+          "ar": "تتطلب المسؤولية الجنائية جريمة ينص عليها القانون."
         },
         {
-          "title_it": "Traino 3",
-          "title_ar": "الجر 3",
-          "it": "Guidare con gradualità e mantenere distanze adeguate.",
-          "ar": "قد بسلاسة وحافظ على مسافات مناسبة."
+          "title_it": "Conseguenze 3",
+          "title_ar": "النتائج 3",
+          "it": "Una violazione amministrativa non è automaticamente un reato.",
+          "ar": "لا تُعدّ المخالفة الإدارية جريمة تلقائيًا."
         },
         {
-          "title_it": "Traino 4",
-          "title_ar": "الجر 4",
-          "it": "Il traino d’emergenza richiede collegamento idoneo, ben visibile e dispositivi prescritti.",
-          "ar": "يتطلب الجر الطارئ وصلة مناسبة واضحة وأجهزة التنبيه المقررة."
+          "title_it": "Conseguenze 4",
+          "title_ar": "النتائج 4",
+          "it": "La sanzione pecuniaria è distinta dalle misure sulla patente, applicate solo nei casi previsti.",
+          "ar": "تختلف الغرامة المالية عن التدابير المتعلقة بالرخصة، ولا تُطبق إلا في الحالات المحددة."
         }
       ],
-      "trap_words": [
-        {
-          "term_it": "complesso",
-          "meaning_ar": "مجموعة المركبة والمقطورة",
-          "why_it": "La massa complessiva della combinazione non coincide con la sola massa del rimorchio.",
-          "why_ar": "كتلة المجموعة لا تساوي كتلة المقطورة وحدها.",
-          "example_it": "Controllo la massa del complesso riportata nei dati pertinenti.",
-          "example_ar": "أتحقق من كتلة المجموعة في البيانات ذات الصلة."
-        }
-      ],
-      "numbers": [
-        {
-          "value": "750 kg",
-          "context_it": "La pagina MIT indica questa soglia per il rimorchio nella descrizione della patente B.",
-          "context_ar": "تذكر صفحة الوزارة هذا الحد للمقطورة ضمن وصف رخصة B."
-        },
-        {
-          "value": "3.500 kg / 4.250 kg",
-          "context_it": "La pagina MIT collega il codice B96 al superamento di 3.500 kg entro la combinazione ammessa fino a 4.250 kg.",
-          "context_ar": "تربط صفحة الوزارة رمز B96 بتجاوز 3500 كغ ضمن مجموعة مسموحة حتى 4250 كغ."
-        }
-      ],
+      "trap_words": [],
+      "numbers": [],
       "common_mistakes": [
         {
-          "mistake_it": "Attribuire alla patente B ordinaria qualsiasi combinazione fino a 4.250 kg.",
-          "mistake_ar": "اعتبار رخصة B العادية كافية لأي مجموعة حتى 4250 كغ.",
-          "why_it": "Quando la massa complessiva supera 3.500 kg nel caso indicato, serve la prova B96.",
-          "why_ar": "عند تجاوز كتلة المجموعة 3500 كغ في الحالة المذكورة، يلزم اختبار B96."
+          "mistake_it": "Trattare ogni infrazione stradale come reato.",
+          "mistake_ar": "اعتبار كل مخالفة مرورية جريمة.",
+          "why_it": "La responsabilità penale richiede una fattispecie di reato prevista dalla legge.",
+          "why_ar": "المسؤولية الجنائية بتحتاج إلى جريمة محددة في القانون."
         },
         {
-          "mistake_it": "Valutare l’abilitazione usando soltanto il peso a vuoto del rimorchio.",
-          "mistake_ar": "تحديد صلاحية الرخصة بالاعتماد على الوزن الفارغ للمقطورة وحده.",
-          "why_it": "Contano le masse massime autorizzate e i limiti della combinazione.",
-          "why_ar": "العبرة بالكتل القصوى المسموح بها وحدود المجموعة."
+          "mistake_it": "Supporre che il pagamento di una sanzione cancelli ogni possibile conseguenza civile o penale.",
+          "mistake_ar": "الاعتقاد إن دفع الجزاء بيلغي كل نتيجة مدنية أو جنائية محتملة.",
+          "why_it": "I diversi piani di responsabilità hanno presupposti distinti.",
+          "why_ar": "كل نوع من المسؤولية له شروطه المختلفة."
         }
       ],
       "quick_check": [
         {
-          "statement_it": "Prima di partire con un rimorchio si controllano aggancio, collegamenti, luci, freni e carico.",
-          "statement_ar": "قبل الانطلاق بالمقطورة، تُفحص الوصلة والتوصيلات والأضواء والفرامل والحمولة.",
+          "statement_it": "La sanzione pecuniaria e le misure sulla patente sono conseguenze distinte previste solo secondo la violazione.",
+          "statement_ar": "الغرامة المالية والتدابير المتعلقة بالرخصة نتيجتان مختلفتان تطبقان بحسب المخالفة.",
           "answer": "VERO",
-          "explanation_it": "Sono controlli essenziali prima del viaggio.",
-          "explanation_ar": "هذه فحوص أساسية قبل الرحلة."
+          "explanation_it": "Punti, sospensione o revoca non si applicano automaticamente a ogni violazione.",
+          "explanation_ar": "لا تُطبق النقاط أو التعليق أو السحب تلقائيًا على كل مخالفة."
         },
         {
-          "statement_it": "Per la combinazione con rimorchio non occorre verificare le masse autorizzate.",
-          "statement_ar": "لا حاجة للتحقق من الكتل المسموح بها لمجموعة المركبة والمقطورة.",
+          "statement_it": "Ogni violazione amministrativa costituisce automaticamente un reato.",
+          "statement_ar": "كل مخالفة إدارية تُعد تلقائيًا جريمة.",
           "answer": "FALSO",
-          "explanation_it": "La massa autorizzata e la patente dipendono dalla combinazione.",
-          "explanation_ar": "تعتمد الكتلة المسموح بها والرخصة على المجموعة."
+          "explanation_it": "L’illecito amministrativo non diventa automaticamente un reato.",
+          "explanation_ar": "لا تتحول المخالفة الإدارية تلقائيًا إلى جريمة."
         },
         {
-          "statement_it": "Nel traino d’emergenza di un veicolo guasto si usa un collegamento idoneo e segnalato.",
-          "statement_ar": "في جر مركبة معطلة للطوارئ، تُستخدم وصلة مناسبة وواضحة العلامة.",
+          "statement_it": "La responsabilità penale presuppone un reato previsto dalla legge.",
+          "statement_ar": "تتطلب المسؤولية الجنائية جريمة ينص عليها القانون.",
           "answer": "VERO",
-          "explanation_it": "L’art. 165 disciplina collegamento e dispositivi di segnalazione.",
-          "explanation_ar": "تنظم المادة 165 الوصلة وأجهزة التنبيه."
+          "explanation_it": "La responsabilità penale dipende dalla sussistenza di un reato.",
+          "explanation_ar": "تعتمد المسؤولية الجنائية على وجود جريمة."
         }
       ],
       "video_script_available": false,
       "visual_script": {
         "schema_version": 1,
         "renderer": "inline-svg",
-        "scene_id": "trailer",
-        "visual_path": "inline-svg:trailer",
-        "description_it": "Illustrazione didattica per «Rimorchi: compatibilità, aggancio e guida»: concetto, esempio e attenzione a un errore comune.",
-        "description_ar": "رسم تعليمي لدرس «المقطورات: التوافق والربط والقيادة»: الفكرة والمثال والتنبيه إلى خطأ شائع.",
+        "scene_id": "documents",
+        "visual_path": "inline-svg:documents",
+        "description_it": "Illustrazione didattica per «Responsabilità e conseguenze delle violazioni»: concetto, esempio e attenzione a un errore comune.",
+        "description_ar": "رسم تعليمي لدرس «المسؤولية ونتائج المخالفات»: الفكرة والمثال والتنبيه إلى خطأ شائع.",
         "narration_locale": "ar-EG",
         "stages": [
           {
             "key": "concept",
-            "text_it": "Con il rimorchio verifica masse, patente e impianti.\nIl traino d’emergenza segue condizioni specifiche dell’art. 165.",
-            "text_ar": "مع المقطورة تحقق من الكتل والرخصة والأنظمة.\nللجر الطارئ شروط خاصة في المادة 165."
+            "text_it": "Le responsabilità civile, penale e amministrativa sono distinte.\nMulte e misure sulla patente dipendono dalla violazione prevista.",
+            "text_ar": "المسؤوليات المدنية والجنائية والإدارية مختلفة.\nتتحدد الغرامة وتدابير الرخصة وفق المخالفة المنصوص عليها."
           },
           {
             "key": "example",
-            "text_it": "Prima di trainare una roulotte, confronto le masse autorizzate sui documenti, verifico il codice necessario e controllo aggancio, luci e freni.",
-            "text_ar": "قبل جر مقطورة سكنية، أقارن الكتل المسموح بها في الوثائق، وأتحقق من الرمز اللازم وأفحص الوصلة والأضواء والفرامل."
+            "text_it": "Dopo una collisione, il danno può porre una questione civile; se i fatti integrano un reato può esaminarsi anche il profilo penale, mentre un’apposita infrazione può avere conseguenze amministrative.",
+            "text_ar": "بعد تصادم، الضرر ممكن يثير مسألة مدنية؛ ولو الوقائع بتكوّن جريمة ممكن يتبحث الجانب الجنائي كمان، ومخالفة مستقلة ممكن يكون لها جزاء إداري."
           },
           {
             "key": "warning",
-            "text_it": "Attribuire alla patente B ordinaria qualsiasi combinazione fino a 4.250 kg. Quando la massa complessiva supera 3.500 kg nel caso indicato, serve la prova B96.",
-            "text_ar": "اعتبار رخصة B العادية كافية لأي مجموعة حتى 4250 كغ. عند تجاوز كتلة المجموعة 3500 كغ في الحالة المذكورة، يلزم اختبار B96."
+            "text_it": "Trattare ogni infrazione stradale come reato. La responsabilità penale richiede una fattispecie di reato prevista dalla legge.",
+            "text_ar": "اعتبار كل مخالفة مرورية جريمة. المسؤولية الجنائية بتحتاج إلى جريمة محددة في القانون."
           }
         ]
       },
       "videoUrl": null,
       "review_sources_checked": [
-        "https://www.mit.gov.it/conseguimento-patente-b",
-        "https://aci.gov.it/codice-della-strada/art-56/",
-        "https://aci.gov.it/codice-della-strada/art-165/"
+        "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1992-04-30;285!vig=",
+        "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art2054!vig=",
+        "https://www.aci.it/i-servizi/normative/codice-della-strada.html",
+        "https://aci.gov.it/codice-della-strada/art-126-bis/",
+        "https://aci.gov.it/codice-della-strada/art-195/",
+        "https://aci.gov.it/codice-della-strada/art-218/",
+        "https://aci.gov.it/codice-della-strada/art-219/"
       ],
-      "review_verification_note": "La pagina ufficiale MIT consultata conferma il limite di 750 kg per il rimorchio e le condizioni per il complesso fino a 4.250 kg, con prova e codice B96 quando la massa del complesso supera 3.500 kg. Non ho verificato separatamente i riferimenti pratici non normativi. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
+      "review_verification_note": "Verificato il testo vigente del Codice della strada su Normattiva e consultato l’art. 2054 c.c.; il portale indica aggiornamento dell’atto al 24/04/2026 e vigenza al 22/11/2026. I dettagli su responsabilità solidale e procedure sono mantenuti generali: la pagina Normattiva consultata espone l’indice degli articoli, non il testo puntuale di ciascuno. Integrazione v58: verificati i punti aggiunti nelle fonti ufficiali elencate per la lezione; le indicazioni pratiche non sono presentate come ulteriori obblighi di legge."
     }
   }
 }

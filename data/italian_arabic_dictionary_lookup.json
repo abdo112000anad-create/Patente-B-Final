@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-24T05:46:30+00:00",
+    "generated_at_utc": "2026-11-24T13:23:50+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5276,
@@ -10,15 +10,15 @@
       "contextual_override_v49": 9,
       "legacy_glossary_needs_review": 62,
       "machine_draft_needs_review": 5183,
-      "reviewed_override": 75
+      "reviewed_override": 81
     },
-    "total_entries": 5329,
-    "translated_entries": 5329,
+    "total_entries": 5335,
+    "translated_entries": 5335,
     "review_required_entries": 5254,
     "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51/v61 requested terms, v54 video-context terms, and v61/v62 lesson-audit additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
     "app_release": 62,
-    "terms_with_lookup_entry": 5329,
-    "entries_with_arabic_translation": 5329,
+    "terms_with_lookup_entry": 5335,
+    "entries_with_arabic_translation": 5335,
     "entries_without_lexical_translation": 1,
     "entries_with_safe_ui_fallback": 0,
     "owner_approved_corrections": 9,
@@ -33,7 +33,7 @@
     ],
     "requested_lemma_additions": 4,
     "video_context_additions": 3,
-    "lesson_dictionary_audit_additions": 56
+    "lesson_dictionary_audit_additions": 62
   },
   "entries": [
     {
@@ -63983,6 +63983,78 @@
       "status": "reviewed_override",
       "review_required": 0,
       "note": "في عبارة salvo diverse disposizioni: ما لم تنص القواعد على خلاف ذلك."
+    },
+    {
+      "word": "occupante",
+      "translation_ar": "راكب / شاغل المركبة",
+      "ui_fallback_ar": "راكب / شاغل المركبة",
+      "translation_kind": "lexical_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "مفرد occupanti في درس أحزمة الأمان وأنظمة التثبيت."
+    },
+    {
+      "word": "identificazione",
+      "translation_ar": "التعريف / تحديد الهوية",
+      "ui_fallback_ar": "التعريف / تحديد الهوية",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "التعريف بالمركبة أو تحديد هويتها في سياق الوثائق."
+    },
+    {
+      "word": "documentale",
+      "translation_ar": "متعلق بالوثائق / مستندي",
+      "ui_fallback_ar": "متعلق بالوثائق / مستندي",
+      "translation_kind": "lexical_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "صفة obligation documentale: الالتزام بالوثائق المطلوبة."
+    },
+    {
+      "word": "autorità",
+      "translation_ar": "السلطات / الجهات المختصة",
+      "ui_fallback_ar": "السلطات / الجهات المختصة",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في سياق اتباع تعليمات السلطات بعد حادث مروري."
+    },
+    {
+      "word": "legale",
+      "translation_ar": "قانوني",
+      "ui_fallback_ar": "قانوني",
+      "translation_kind": "lexical_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "صفة conseguenza legale: نتيجة قانونية."
+    },
+    {
+      "word": "vigente",
+      "translation_ar": "نافذ / ساري المفعول",
+      "ui_fallback_ar": "نافذ / ساري المفعول",
+      "translation_kind": "lexical_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في norma vigente: القاعدة القانونية النافذة."
     }
   ]
 }
