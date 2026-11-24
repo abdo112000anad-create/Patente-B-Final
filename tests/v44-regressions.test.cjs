@@ -75,9 +75,9 @@ test('Italian voice selection prefers an available Italian voice and ignores Ara
   const controller = createSpeechController({webSpeech});
   assert.equal(await controller.speak('Ciao.', 'it-IT'), true);
   assert.equal(await controller.speak('مرحبا.', 'ar-EG'), false);
-  assert.equal(utterances.length, 2);
-  assert.equal(utterances[0].text, '');
-  assert.equal(utterances[1].voice, voices[1]);
+  assert.equal(utterances.length, 1);
+  assert.equal(utterances[0].text, 'Ciao.');
+  assert.equal(utterances[0].voice, voices[1]);
   const speech = read('src/speech.mjs');
   assert.match(speech, /selectionEvidence:.*unverified-name-hint/u);
   assert.doesNotMatch(speech, /nameQualityHint:.*natural voice/u);
@@ -94,10 +94,9 @@ test('an unlisted Italian voice falls back to the system language selector', asy
   };
   const controller = createSpeechController({webSpeech, onStateChange: state => states.push(state)});
   assert.equal(await controller.speak('Ciao.', 'it-IT'), true);
-  assert.equal(utterances.length, 2);
-  assert.equal(utterances[0].text, '');
-  assert.equal(utterances[1].lang, 'it-IT');
-  assert.equal(utterances[1].voice, undefined);
+  assert.equal(utterances.length, 1);
+  assert.equal(utterances[0].lang, 'it-IT');
+  assert.equal(utterances[0].voice, undefined);
   assert.ok(states.some(state => state.status === 'playing' && state.locale === 'it-IT'));
 });
 

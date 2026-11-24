@@ -47,10 +47,9 @@ test('v54 asks the system for it-IT when no Italian voice is listed', async () =
     synthesis: {getVoices: () => [{name: 'Default', lang: 'en-US'}], speak: utterance => { utterances.push(utterance); queueMicrotask(() => utterance.onend?.()); }, cancel() {}}
   }});
   assert.equal(await controller.speak('Riconoscere i segnali.', 'it-IT'), true);
-  assert.equal(utterances.length, 2);
-  assert.equal(utterances[0].text, '');
-  assert.equal(utterances[1].lang, 'it-IT');
-  assert.equal(utterances[1].voice, undefined);
+  assert.equal(utterances.length, 1);
+  assert.equal(utterances[0].lang, 'it-IT');
+  assert.equal(utterances[0].voice, undefined);
 });
 
 test('v54 dictionary includes contextual translations for the three words in the video', () => {

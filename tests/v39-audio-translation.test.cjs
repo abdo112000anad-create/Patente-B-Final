@@ -118,10 +118,9 @@ test('Web Speech speaks Italian only and rejects Arabic playback requests', asyn
   const controller = createSpeechController({webSpeech, onStateChange: state => states.push(state)});
   assert.equal(await controller.speak('Ciao, prudenza.', 'it-IT'), true);
   assert.equal(await controller.speak('يجب القيادة بحذر.', 'ar-EG'), false);
-  assert.equal(utterances[0].text, '');
-  assert.deepEqual(utterances.slice(1).map(({text, lang}) => ({text, lang})), [{text: 'Ciao, prudenza.', lang: 'it-IT'}]);
-  assert.equal(utterances[1].voice, voices[0]);
-  assert.equal(utterances[1].rate, 0.8);
+  assert.deepEqual(utterances.map(({text, lang}) => ({text, lang})), [{text: 'Ciao, prudenza.', lang: 'it-IT'}]);
+  assert.equal(utterances[0].voice, voices[0]);
+  assert.equal(utterances[0].rate, 0.8);
   for (const utterance of utterances) {
     assert.equal(utterance.pitch, 1.0);
     assert.equal(utterance.volume, 1.0);
@@ -158,7 +157,8 @@ test('stopping a pending browser fallback cancels it without an unhandled error'
   };
   const controller = createSpeechController({webSpeech});
   const playing = controller.speak('Una frase.', 'it-IT');
-  for (let attempt = 0; attempt < 10 && !current; attempt += 1) await new Promise(resolve => setImmediate(resolve));
+  const deadline = Date.now() + 1000;
+  while (!current && Date.now() < deadline) await new Promise(resolve => setTimeout(resolve, 10));
   assert.ok(current);
   await controller.stop();
   assert.equal(await playing, false);
@@ -189,14 +189,13 @@ test('Web Speech waits briefly for Italian voices before falling back to the sys
   const speaking = controller.speak('Voce di sistema.', 'it-IT');
   await new Promise(resolve => setImmediate(resolve));
   assert.ok(states.some(state => state.status === 'preparing'));
-  assert.equal(utterances.length, 1);
-  assert.equal(utterances[0].text, '');
+  assert.equal(utterances.length, 0);
   voices = [italianVoice];
   for (const listener of [...listeners]) listener();
   assert.equal(await speaking, true);
-  assert.equal(utterances.length, 2);
-  assert.equal(utterances[1].voice, italianVoice);
-  assert.equal(cancelCount, 2);
+  assert.equal(utterances.length, 1);
+  assert.equal(utterances[0].voice, italianVoice);
+  assert.equal(cancelCount, 1);
   assert.equal(listeners.size, 0);
 });
 
@@ -223,9 +222,8 @@ test('stopping while voices load cleans up the listener and never speaks', async
   await controller.stop();
   assert.equal(await speaking, false);
   assert.equal(listeners.size, 0);
-  assert.equal(utterances.length, 1);
-  assert.equal(utterances[0].text, '');
-  assert.equal(cancelCount, 3);
+  assert.equal(utterances.length, 0);
+  assert.equal(cancelCount, 2);
   assert.equal(controller.state, 'idle');
 });
 
@@ -240,12 +238,11 @@ test('Web Speech requests it-IT when the voice list is unavailable', async () =>
   };
   const controller = createSpeechController({webSpeech, onStateChange: state => states.push(state)});
   assert.equal(await controller.speak('Ciao.', 'it-IT'), true);
-  assert.equal(utterances.length, 2);
-  assert.equal(utterances[0].text, '');
-  assert.equal(utterances[1].lang, 'it-IT');
-  assert.equal(utterances[1].voice, undefined);
-  assert.equal(utterances[1].rate, 0.8);
-  assert.equal(utterances[1].pitch, 1.0);
+  assert.equal(utterances.length, 1);
+  assert.equal(utterances[0].lang, 'it-IT');
+  assert.equal(utterances[0].voice, undefined);
+  assert.equal(utterances[0].rate, 0.8);
+  assert.equal(utterances[0].pitch, 1.0);
   assert.equal(controller.state, 'idle');
 });
 

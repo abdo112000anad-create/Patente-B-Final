@@ -14,35 +14,34 @@ test('lesson Italian audio uses the shared voice-aware Web Speech controller', (
   assert.doesNotMatch(`${app}\n${speech}`, /playItalianAudio|isAudioUnlocked/u);
   assert.match(speech, /function waitForVoices\(/u);
   assert.match(speech, /function prepareWebVoice\(/u);
+  assert.match(speech, /ANDROID_WEBVIEW_SPEAK_DELAY_MS\s*=\s*150/u);
   assert.match(speech, /VOICE_POLL_INTERVAL_MS = 200/u);
   assert.match(speech, /setInterval\(check, VOICE_POLL_INTERVAL_MS\)/u);
-  assert.match(speech, /api\.synthesis\.speak\(warmup\)/u);
-  assert.match(speech, /api\.synthesis\.cancel\?\.\(\)/u);
+  assert.doesNotMatch(speech, /unlockSpeechOnce|warmup/u);
+  assert.match(speech, /synthesis\.cancel\?\.\(\)/u);
   assert.match(speech, /api\.synthesis\.speak\(utterance\)/u);
 });
 
-test('Web Speech performs and cancels one empty Italian warm-up per controller', async () => {
+test('Web Speech waits 150ms after cancel before speaking Italian text', async () => {
   const {createSpeechController} = await import(path.join(root, 'src/speech.mjs'));
   const utterances = [];
+  const delays = [];
   let cancelCount = 0;
+  let lastCancelAt = 0;
   class FakeUtterance { constructor(text) { this.text = text; } }
   const italianVoice = {name: 'Italian system voice', lang: 'it-IT'};
   const synthesis = {
     getVoices: () => [italianVoice],
-    speak(utterance) { utterances.push(utterance); queueMicrotask(() => utterance.onend?.()); },
-    cancel() { cancelCount += 1; },
+    speak(utterance) { delays.push(Date.now() - lastCancelAt); utterances.push(utterance); queueMicrotask(() => utterance.onend?.()); },
+    cancel() { cancelCount += 1; lastCancelAt = Date.now(); },
   };
   const controller = createSpeechController({webSpeech: {Utterance: FakeUtterance, synthesis}});
   assert.equal(await controller.speak('Prima prova.', 'it-IT'), true);
   assert.equal(await controller.speak('Seconda prova.', 'it-IT'), true);
-  const warmups = utterances.filter(item => item.text === '');
-  assert.equal(warmups.length, 1);
-  assert.equal(warmups[0].lang, 'it-IT');
-  assert.equal(warmups[0].rate, 0.8);
-  assert.equal(warmups[0].pitch, 1.0);
-  assert.equal(warmups[0].volume, 1.0);
-  assert.deepEqual(utterances.filter(item => item.text).map(item => item.text), ['Prima prova.', 'Seconda prova.']);
-  assert.equal(cancelCount, 3);
+  assert.deepEqual(utterances.map(item => item.text), ['Prima prova.', 'Seconda prova.']);
+  assert.ok(delays.every(delay => delay >= 150), `Observed cancel-to-speak delays: ${delays.join(', ')}`);
+  assert.ok(utterances.every(item => item.lang === 'it-IT' && item.rate === 0.8 && item.pitch === 1.0 && item.volume === 1.0 && item.voice === italianVoice));
+  assert.equal(cancelCount, 2);
 });
 
 test('lesson interface exposes Italian playback and the explainer narrates Italian text', () => {
@@ -92,10 +91,9 @@ test('Italian lesson explanation waits for delayed voices, then plays each segme
   }, 0);
   assert.equal(await playback, true);
   assert.deepEqual(segmentSteps, [0, 1, 2]);
-  assert.equal(utterances.length, 4);
-  assert.equal(utterances[0].text, '');
-  assert.ok(utterances.slice(1).every(item => item.lang === 'it-IT' && item.rate === 0.8 && item.voice === italianVoice));
-  assert.equal(cancelCount, 2);
+  assert.equal(utterances.length, 3);
+  assert.ok(utterances.every(item => item.lang === 'it-IT' && item.rate === 0.8 && item.voice === italianVoice));
+  assert.equal(cancelCount, 1);
   assert.ok(states.some(state => state.status === 'preparing'));
   assert.ok(states.some(state => state.status === 'playing' && state.voiceSource === 'browser'));
   assert.equal(controller.state, 'idle');
@@ -122,10 +120,9 @@ test('Web Speech polling discovers late Italian voices without a voiceschanged e
   });
   const completed = await Promise.race([playback, deadline]).finally(() => clearTimeout(watchdog));
   assert.equal(completed, true);
-  assert.equal(utterances.length, 2);
-  assert.equal(utterances[0].text, '');
-  assert.equal(utterances[1].voice, italianVoice);
-  assert.equal(cancelCount, 2);
+  assert.equal(utterances.length, 1);
+  assert.equal(utterances[0].voice, italianVoice);
+  assert.equal(cancelCount, 1);
 });
 
 test('Android source and dependencies remain Web Speech only with no bundled local model', () => {

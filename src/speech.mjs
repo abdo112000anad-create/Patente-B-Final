@@ -25,6 +25,8 @@ export function splitSpeechText(text, maxLength = 120) {
 }
 
 export const ITALIAN_TTS_LOCALE = 'it-IT';
+const ANDROID_WEBVIEW_SPEAK_DELAY_MS = 150;
+const VOICE_WAIT_TIMEOUT_MS = 5000;
 const VOICE_POLL_INTERVAL_MS = 200;
 
 export function buildLessonSpeechTexts(lesson = {}) {
@@ -52,13 +54,17 @@ function readAvailableVoices(synthesis) {
     if (typeof synthesis?.getVoices !== 'function') return [];
     return Array.from(synthesis.getVoices() || []);
   } catch {
-    return null;
+    return [];
   }
+}
+
+function hasItalianVoice(voices) {
+  return Array.from(voices || []).some(voice => String(voice?.lang || '').toLowerCase().replace(/_/gu, '-').startsWith('it-') || String(voice?.lang || '').toLowerCase() === 'it');
 }
 
 function waitForVoices(synthesis, task, isCurrent, onWaiting) {
   const initialVoices = readAvailableVoices(synthesis);
-  if (initialVoices?.length > 0 || !initialVoices || typeof synthesis?.getVoices !== 'function') return Promise.resolve(initialVoices || []);
+  if (hasItalianVoice(initialVoices) || typeof synthesis?.getVoices !== 'function') return Promise.resolve(initialVoices);
 
   try {
     console.log('[TTS] جارٍ تجهيز الصوت الإيطالي... انتظار تحميل أصوات النظام.');
@@ -67,9 +73,11 @@ function waitForVoices(synthesis, task, isCurrent, onWaiting) {
 
   return new Promise(resolve => {
     let settled = false;
+    let timeout = null;
     let poll = null;
     const cleanups = [];
     const cleanup = () => {
+      if (timeout) clearTimeout(timeout);
       if (poll) clearInterval(poll);
       for (const removeListener of cleanups.splice(0)) {
         try { removeListener(); } catch {}
@@ -85,10 +93,11 @@ function waitForVoices(synthesis, task, isCurrent, onWaiting) {
     const check = () => {
       if (!isCurrent()) { finish([]); return; }
       const voices = readAvailableVoices(synthesis);
-      if (voices === null || voices.length > 0) finish(voices || []);
+      if (hasItalianVoice(voices)) finish(voices);
     };
     const cancel = () => finish([]);
     task.cancelVoiceWait = cancel;
+    timeout = setTimeout(() => finish(readAvailableVoices(synthesis)), VOICE_WAIT_TIMEOUT_MS);
     poll = setInterval(check, VOICE_POLL_INTERVAL_MS);
     try {
       if (typeof synthesis.addEventListener === 'function' && typeof synthesis.removeEventListener === 'function') {
@@ -177,7 +186,6 @@ export function createSpeechController({
   let sequence = 0;
   let activeTask = null;
   let errorTimer = null;
-  let speechUnlocked = false;
 
   const notify = (status, task = activeTask, error = '', extra = {}) => {
     try {
@@ -222,20 +230,6 @@ export function createSpeechController({
     try { selected = Number(getRate()) || 0.8; } catch {}
     return Math.max(.70, Math.min(1.30, selected));
   };
-
-  function unlockSpeechOnce(api) {
-    if (speechUnlocked) return;
-    speechUnlocked = true;
-    try {
-      const warmup = new api.Utterance('');
-      warmup.lang = ITALIAN_TTS_LOCALE;
-      warmup.rate = 0.8;
-      warmup.pitch = 1.0;
-      warmup.volume = 1.0;
-      api.synthesis.speak(warmup);
-      api.synthesis.cancel?.();
-    } catch {}
-  }
 
   function stopBrowserSpeech() {
     try { resolveWebSpeech(webSpeech)?.synthesis.cancel?.(); } catch {}
@@ -333,7 +327,12 @@ export function createSpeechController({
           else finish(reject, new Error(`Web Speech API failed: ${String(event?.error || 'unknown error')}`));
         };
         timeout = setTimeout(() => finish(reject, new Error('Web Speech API timed out.')), Math.max(20000, Math.min(120000, text.length * 350)));
-        api.synthesis.speak(utterance);
+        // Android WebView needs a short delay after cancel() before speak() is accepted.
+        setTimeout(() => {
+          if (settled) return;
+          if (task.token !== sequence) { finish(resolve, false); return; }
+          try { api.synthesis.speak(utterance); } catch (error) { finish(reject, error); }
+        }, ANDROID_WEBVIEW_SPEAK_DELAY_MS);
       } catch (error) {
         finish(reject, error);
       }
@@ -342,7 +341,6 @@ export function createSpeechController({
 
   async function prepareWebVoice(task, api = resolveWebSpeech(webSpeech)) {
     if (!api) throw new Error('Web Speech API is unavailable on this device.');
-    unlockSpeechOnce(api);
     const voices = await waitForVoices(api.synthesis, task, () => task.token === sequence, () => notify('preparing', task));
     if (task.token !== sequence) return false;
     task.selectedVoice = chooseVoice(voices, ITALIAN_TTS_LOCALE);

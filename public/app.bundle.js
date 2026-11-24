@@ -42192,6 +42192,8 @@ This typically indicates that your device does not have a healthy Internet conne
     return chunks;
   }
   var ITALIAN_TTS_LOCALE = "it-IT";
+  var ANDROID_WEBVIEW_SPEAK_DELAY_MS = 150;
+  var VOICE_WAIT_TIMEOUT_MS = 5e3;
   var VOICE_POLL_INTERVAL_MS = 200;
   function buildLessonSpeechTexts(lesson = {}) {
     const headingIt = String(lesson.titleIt || lesson.heading_it || "").trim();
@@ -42216,12 +42218,15 @@ This typically indicates that your device does not have a healthy Internet conne
       if (typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return [];
       return Array.from(synthesis.getVoices() || []);
     } catch {
-      return null;
+      return [];
     }
+  }
+  function hasItalianVoice(voices) {
+    return Array.from(voices || []).some((voice) => String((voice == null ? void 0 : voice.lang) || "").toLowerCase().replace(/_/gu, "-").startsWith("it-") || String((voice == null ? void 0 : voice.lang) || "").toLowerCase() === "it");
   }
   function waitForVoices(synthesis, task, isCurrent, onWaiting) {
     const initialVoices = readAvailableVoices(synthesis);
-    if ((initialVoices == null ? void 0 : initialVoices.length) > 0 || !initialVoices || typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return Promise.resolve(initialVoices || []);
+    if (hasItalianVoice(initialVoices) || typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return Promise.resolve(initialVoices);
     try {
       console.log("[TTS] جارٍ تجهيز الصوت الإيطالي... انتظار تحميل أصوات النظام.");
       onWaiting == null ? void 0 : onWaiting();
@@ -42229,9 +42234,11 @@ This typically indicates that your device does not have a healthy Internet conne
     }
     return new Promise((resolve) => {
       let settled = false;
+      let timeout = null;
       let poll = null;
       const cleanups = [];
       const cleanup = () => {
+        if (timeout) clearTimeout(timeout);
         if (poll) clearInterval(poll);
         for (const removeListener of cleanups.splice(0)) {
           try {
@@ -42253,10 +42260,11 @@ This typically indicates that your device does not have a healthy Internet conne
           return;
         }
         const voices = readAvailableVoices(synthesis);
-        if (voices === null || voices.length > 0) finish(voices || []);
+        if (hasItalianVoice(voices)) finish(voices);
       };
       const cancel = () => finish([]);
       task.cancelVoiceWait = cancel;
+      timeout = setTimeout(() => finish(readAvailableVoices(synthesis)), VOICE_WAIT_TIMEOUT_MS);
       poll = setInterval(check, VOICE_POLL_INTERVAL_MS);
       try {
         if (typeof synthesis.addEventListener === "function" && typeof synthesis.removeEventListener === "function") {
@@ -42343,7 +42351,6 @@ This typically indicates that your device does not have a healthy Internet conne
     let sequence = 0;
     let activeTask = null;
     let errorTimer = null;
-    let speechUnlocked = false;
     const notify = (status, task = activeTask, error = "", extra = {}) => {
       try {
         onStateChange({
@@ -42402,21 +42409,6 @@ This typically indicates that your device does not have a healthy Internet conne
       }
       return Math.max(0.7, Math.min(1.3, selected));
     };
-    function unlockSpeechOnce(api) {
-      var _a12, _b;
-      if (speechUnlocked) return;
-      speechUnlocked = true;
-      try {
-        const warmup = new api.Utterance("");
-        warmup.lang = ITALIAN_TTS_LOCALE;
-        warmup.rate = 0.8;
-        warmup.pitch = 1;
-        warmup.volume = 1;
-        api.synthesis.speak(warmup);
-        (_b = (_a12 = api.synthesis).cancel) == null ? void 0 : _b.call(_a12);
-      } catch {
-      }
-    }
     function stopBrowserSpeech() {
       var _a12, _b, _c;
       try {
@@ -42533,7 +42525,18 @@ This typically indicates that your device does not have a healthy Internet conne
             else finish(reject, new Error(`Web Speech API failed: ${String((event == null ? void 0 : event.error) || "unknown error")}`));
           };
           timeout = setTimeout(() => finish(reject, new Error("Web Speech API timed out.")), Math.max(2e4, Math.min(12e4, text.length * 350)));
-          api.synthesis.speak(utterance);
+          setTimeout(() => {
+            if (settled) return;
+            if (task.token !== sequence) {
+              finish(resolve, false);
+              return;
+            }
+            try {
+              api.synthesis.speak(utterance);
+            } catch (error) {
+              finish(reject, error);
+            }
+          }, ANDROID_WEBVIEW_SPEAK_DELAY_MS);
         } catch (error) {
           finish(reject, error);
         }
@@ -42541,7 +42544,6 @@ This typically indicates that your device does not have a healthy Internet conne
     }
     async function prepareWebVoice(task, api = resolveWebSpeech(webSpeech)) {
       if (!api) throw new Error("Web Speech API is unavailable on this device.");
-      unlockSpeechOnce(api);
       const voices = await waitForVoices(api.synthesis, task, () => task.token === sequence, () => notify("preparing", task));
       if (task.token !== sequence) return false;
       task.selectedVoice = chooseVoice(voices, ITALIAN_TTS_LOCALE);
