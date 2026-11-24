@@ -12,7 +12,7 @@ const sha256 = file => crypto.createHash('sha256').update(fs.readFileSync(path.j
 
 const DAY = 86_400_000;
 
-test('v61 contains exactly 50 ordered lesson records with the eight required fields', () => {
+test('v62 contains exactly 50 ordered lesson records with the eight required fields', () => {
   const course = json('data/lessons.json');
   const serviceWorker = read('public/sw.js');
   assert.equal(course.schema_version, 4);
@@ -41,6 +41,30 @@ test('v61 contains exactly 50 ordered lesson records with the eight required fie
   }
 });
 
+test('v62 illustrated lessons render all new supported SVG scene types', async () => {
+  const support = json('data/lesson-support.json').lessons;
+  const targetIds = new Set([
+    ...Array.from({length: 4}, (_, i) => `u4-l${i + 1}`),
+    ...Array.from({length: 4}, (_, i) => `u5-l${i + 1}`),
+    ...Array.from({length: 4}, (_, i) => `u6-l${i + 1}`),
+  ]);
+  const {lessonAnimationMarkup, resolveSceneType} = await import(path.join(root, 'src/lesson-animation.mjs'));
+  for (const scene of ['vulnerable-road-users', 'emergency', 'retromarcia', 'highway']) {
+    const ids = Object.entries(support).filter(([, lesson]) => lesson.visual_script?.scene_id === scene).map(([id]) => id);
+    assert.ok(ids.length > 0, `${scene} must be attached to a lesson`);
+    assert.ok(ids.every(id => targetIds.has(id)), `${scene} must map to one of the twelve replacement lessons`);
+    for (const id of ids) {
+      const lesson = support[id];
+      assert.equal(resolveSceneType(lesson), scene, `${id} scene resolution`);
+      const markup = lessonAnimationMarkup(lesson);
+      assert.ok(markup.includes(`data-scene="${scene}"`));
+      assert.ok(markup.includes(`data-visual-path="inline-svg:${scene}"`));
+      assert.match(markup, /<svg class="lesson-animation-svg"[^>]*aria-label="[^"]+"/u);
+      assert.equal(lesson.visual_script.stages.length, 3, `${id} must retain all three staged explanations`);
+    }
+  }
+});
+
 test('GitHub Actions builds the current PWA consumed by Capacitor before Android sync', () => {
   const workflow = read('.github/workflows/build.yml');
   const release = json('dist/release.json');
@@ -48,7 +72,7 @@ test('GitHub Actions builds the current PWA consumed by Capacitor before Android
   assert.equal(json('package.json').scripts.build, 'node scripts/build-pwa.cjs');
   assert.equal(json('capacitor.config.json').webDir, 'dist');
   assert.match(workflow, /npm run build[\s\S]*npx cap sync android/u);
-  assert.equal(release.version, 61);
+  assert.equal(release.version, 62);
   assert.equal(release.lessonsSha256, lessonHash);
   assert.equal(sha256('dist/data/lessons.json'), lessonHash);
   assert.equal(sha256('dist/app.bundle.js'), release.bundleSha256);
@@ -109,7 +133,7 @@ test('Web Speech is Italian-only at rate 0.8 and pitch 1.0; Native TTS is absent
   assert.match(speech, /utterance\.lang\s*=\s*ITALIAN_TTS_LOCALE/u);
   assert.match(speech, /utterance\.pitch\s*=\s*1\.0/u);
   assert.match(app, /const speechRate=\.8/u);
-  assert.match(speech, /VOICE_WAIT_TIMEOUT_MS\s*=\s*500/u);
+  assert.match(speech, /VOICE_POLL_INTERVAL_MS\s*=\s*200/u);
   assert.doesNotMatch(`${speech}\n${app}\n${manifest}`, /Piper|ONNX|SpeechSettingsPlugin|android\.intent\.action\.TTS_SERVICE/u);
   assert.doesNotMatch(manifest, /<queries>/u);
 });

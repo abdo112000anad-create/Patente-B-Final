@@ -47,9 +47,10 @@ test('v54 asks the system for it-IT when no Italian voice is listed', async () =
     synthesis: {getVoices: () => [{name: 'Default', lang: 'en-US'}], speak: utterance => { utterances.push(utterance); queueMicrotask(() => utterance.onend?.()); }, cancel() {}}
   }});
   assert.equal(await controller.speak('Riconoscere i segnali.', 'it-IT'), true);
-  assert.equal(utterances.length, 1);
-  assert.equal(utterances[0].lang, 'it-IT');
-  assert.equal(utterances[0].voice, undefined);
+  assert.equal(utterances.length, 2);
+  assert.equal(utterances[0].text, '');
+  assert.equal(utterances[1].lang, 'it-IT');
+  assert.equal(utterances[1].voice, undefined);
 });
 
 test('v54 dictionary includes contextual translations for the three words in the video', () => {
@@ -64,11 +65,11 @@ test('v54 dictionary includes contextual translations for the three words in the
   }
 });
 
-test('v61 release metadata agrees across the PWA and Android package', () => {
-  assert.equal(json('package.json').version, '61.0.0');
-  assert.equal(json('package-lock.json').version, '61.0.0');
-  assert.equal(json('public/release.json').version, 61);
-  assert.match(read('android/app/build.gradle'), /versionCode 61/u);
-  assert.match(read('android/app/build.gradle'), /versionName "61\.0\.0"/u);
-  assert.match(read('.github/workflows/build.yml'), /patente-b-v61-debug-apk/u);
+test('v62 release metadata agrees across the PWA and Android package', () => {
+  assert.equal(json('package.json').version, '62.0.0');
+  assert.equal(json('package-lock.json').version, '62.0.0');
+  assert.equal(json('public/release.json').version, 62);
+  assert.match(read('android/app/build.gradle'), /versionCode 62/u);
+  assert.match(read('android/app/build.gradle'), /versionName "62\.0\.0"/u);
+  assert.match(read('.github/workflows/build.yml'), /patente-b-v62-debug-apk/u);
 });

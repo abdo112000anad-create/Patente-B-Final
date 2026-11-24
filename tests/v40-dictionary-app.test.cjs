@@ -9,15 +9,15 @@ const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const json = file => JSON.parse(read(file));
 
-test('v49 app dictionary contains auditable rows and excludes isolated letter artifacts', () => {
+test('v62 app dictionary contains auditable rows and excludes isolated letter artifacts', () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const questions = json('data/questions.json');
   assert.equal(dictionary.schema_version, 1);
   assert.equal(dictionary.metadata.source_question_count, questions.questions.length);
-  assert.equal(dictionary.metadata.app_release, 61);
+  assert.equal(dictionary.metadata.app_release, 62);
   assert.equal(dictionary.metadata.unique_question_bank_terms, 5276);
-  assert.equal(dictionary.metadata.total_entries, 5313);
-  assert.equal(dictionary.entries.length, 5313);
+  assert.equal(dictionary.metadata.total_entries, 5329);
+  assert.equal(dictionary.entries.length, 5329);
   assert.equal(new Set(dictionary.entries.map(row => row.word)).size, dictionary.entries.length);
   for (const row of dictionary.entries) {
     assert.ok(row.word);
@@ -83,7 +83,7 @@ test('existing and Abdul-approved v42 corrections plus the v47 lemma are reviewe
   }
 });
 
-test('v61 lesson vocabulary includes reviewed Arabic translations for every missing lemma and used form', async () => {
+test('v62 lesson vocabulary includes reviewed Arabic translations for every missing lemma and used form', async () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const byWord = new Map(dictionary.entries.map(row => [row.word, row]));
   const expected = {
@@ -97,9 +97,15 @@ test('v61 lesson vocabulary includes reviewed Arabic translations for every miss
     sembra: 'يبدو', sembrare: 'يبدو', ambito: 'نطاق / مجال السريان',
     leggono: 'تُقرأ', leggere: 'يقرأ', interpretato: 'مُفسَّر', interpretare: 'يفسّر',
     organizzare: 'ينظّم', prevalere: 'يسود / تكون له الأولوية على', critici: 'حرجة / خطرة', critico: 'حرِج / خطِر',
+    incrociarsi: 'تتقاطع مساراتها', traiettorie: 'مسارات المركبات', utente: 'مستخدم للطريق', vulnerabile: 'معرّض للخطر / ضعيف الحماية',
+    ambulanza: 'سيارة إسعاف', emergenze: 'حالات الطوارئ', urgente: 'عاجل', angoli: 'زوايا', ciechi: 'عمياء', indicatore: 'إشارة الاتجاه',
+    meteo: 'الأحوال الجوية', sfavorevole: 'غير ملائم / سيئ', avverse: 'غير ملائمة / قاسية', allontanamento: 'الابتعاد',
+    immobilizzarlo: 'تثبيته ومنعه من الحركة', disposizioni: 'أحكام / قواعد', rotatoria: 'دوّار مروري', riservata: 'مخصّصة',
+    retrovisore: 'مرآة الرؤية الخلفية', morto: 'ميت؛ وفي angolo morto تعني أعمى', dosso: 'نتوء / مطب مرتفع',
+    segnalazioni: 'إشارات / تنبيهات', acustiche: 'صوتية', sicurezza: 'السلامة', spazio: 'مساحة / حيّز متاح',
   };
-  assert.equal(Object.keys(expected).length, 33);
-  assert.equal(dictionary.metadata.lesson_dictionary_audit_additions, 31);
+  assert.equal(Object.keys(expected).length, 58);
+  assert.equal(dictionary.metadata.lesson_dictionary_audit_additions, 56);
   const translation = await import(path.join(root, 'src/lesson-translation.mjs'));
   translation.setGeneratedDictionary(dictionary.entries);
   for (const [word, arabic] of Object.entries(expected)) {
@@ -111,6 +117,9 @@ test('v61 lesson vocabulary includes reviewed Arabic translations for every miss
     assert.equal(result.arabic, arabic, word);
     assert.equal(result.status, 'reviewed_override', word);
     assert.equal(result.hasLexicalTranslation, true, word);
+  }
+  for (const word of ['rotatoria', 'riservata', 'retrovisore', 'morto', 'dosso', 'segnalazioni', 'acustiche', 'sicurezza', 'spazio']) {
+    assert.equal(byWord.get(word).source, 'lesson-dictionary-audit-v62', word);
   }
   const prevailing = translation.translateTappedWord('prevalgono', []);
   assert.equal(prevailing.arabic, 'تتقدّم على');
@@ -155,7 +164,7 @@ test('local word-lookup loader serves a single isolated word and never presents 
   ok: url === '/data/italian_arabic_dictionary_lookup.json',
   json: async () => dictionary,
 }));
-  assert.equal(loaded, 5313);
+  assert.equal(loaded, 5329);
   assert.equal(translation.wordAtOffset('La corsia è libera.', 4), 'corsia');
   const approved = translation.translateTappedWord('corsia', []);
   assert.equal(approved.word, 'corsia');

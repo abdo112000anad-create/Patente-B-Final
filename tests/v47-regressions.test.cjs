@@ -72,11 +72,15 @@ test('Web Speech fallback waits for voiceschanged with bounded cleanup and fixed
   for (const listener of [...listeners]) listener();
   assert.equal(await playback, true);
   assert.equal(listeners.size, 0);
-  assert.equal(utterances[0].rate, 0.8);
-  assert.equal(utterances[0].pitch, 1.0);
+  assert.equal(utterances.length, 2);
+  assert.equal(utterances[0].text, '');
+  assert.equal(utterances[1].voice.lang, 'it-IT');
+  assert.equal(utterances[1].rate, 0.8);
+  assert.equal(utterances[1].pitch, 1.0);
 
   const source = read('src/speech.mjs');
-  assert.match(source, /VOICE_WAIT_TIMEOUT_MS\s*=\s*500/u);
+  assert.match(source, /VOICE_POLL_INTERVAL_MS\s*=\s*200/u);
+  assert.match(source, /setInterval\(check, VOICE_POLL_INTERVAL_MS\)/u);
   assert.match(source, /addEventListener\('voiceschanged'/u);
   assert.match(source, /removeEventListener\('voiceschanged'/u);
   assert.doesNotMatch(source, /nativeTts|nativeEngineDisabled|Piper|ONNX/u);

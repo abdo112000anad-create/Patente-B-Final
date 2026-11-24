@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-23T21:16:21+00:00",
+    "generated_at_utc": "2026-11-24T05:46:30+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5276,
@@ -9,16 +9,16 @@
     "counts_by_status": {
       "contextual_override_v49": 9,
       "legacy_glossary_needs_review": 62,
-      "machine_draft_needs_review": 5192,
-      "reviewed_override": 50
+      "machine_draft_needs_review": 5183,
+      "reviewed_override": 75
     },
-    "total_entries": 5313,
-    "translated_entries": 5313,
-    "review_required_entries": 5263,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51/v61 requested terms, v54 video-context terms, and v61 lesson-audit additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
-    "app_release": 61,
-    "terms_with_lookup_entry": 5313,
-    "entries_with_arabic_translation": 5313,
+    "total_entries": 5329,
+    "translated_entries": 5329,
+    "review_required_entries": 5254,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51/v61 requested terms, v54 video-context terms, and v61/v62 lesson-audit additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+    "app_release": 62,
+    "terms_with_lookup_entry": 5329,
+    "entries_with_arabic_translation": 5329,
     "entries_without_lexical_translation": 1,
     "entries_with_safe_ui_fallback": 0,
     "owner_approved_corrections": 9,
@@ -33,7 +33,7 @@
     ],
     "requested_lemma_additions": 4,
     "video_context_additions": 3,
-    "lesson_dictionary_audit_additions": 31
+    "lesson_dictionary_audit_additions": 56
   },
   "entries": [
     {
@@ -1226,15 +1226,15 @@
     },
     {
       "word": "acustiche",
-      "translation_ar": "صوتي",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "صوتية",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "صفة مؤنثة جمع في segnalazioni acustiche: تنبيهات صوتية.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "صوتية"
     },
     {
       "word": "acustici",
@@ -19562,15 +19562,15 @@
     },
     {
       "word": "dosso",
-      "translation_ar": "إلى الأعلى",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "نتوء / مطب مرتفع",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "نتوء أو قمة محدبة في الطريق، لا تعني الاتجاه إلى الأعلى.",
+      "translation_kind": "lexical_translation",
+      "ui_fallback_ar": "نتوء / مطب مرتفع"
     },
     {
       "word": "dotata",
@@ -35906,15 +35906,15 @@
     },
     {
       "word": "morto",
-      "translation_ar": "ميت",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "ميت؛ وفي angolo morto تعني أعمى",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في مصطلح angolo morto: زاوية عمياء أو موضع لا يظهر في مجال الرؤية.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "ميت؛ وفي angolo morto تعني أعمى"
     },
     {
       "word": "mosso",
@@ -46646,15 +46646,15 @@
     },
     {
       "word": "retrovisore",
-      "translation_ar": "الخلفية",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "مرآة الرؤية الخلفية",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "اسم المرآة التي تُستخدم لمراجعة الطريق خلف المركبة.",
+      "translation_kind": "lexical_translation",
+      "ui_fallback_ar": "مرآة الرؤية الخلفية"
     },
     {
       "word": "retrovisori",
@@ -48518,15 +48518,15 @@
     },
     {
       "word": "riservata",
-      "translation_ar": "سري",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "مخصّصة",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "صفة مؤنثة في corsia riservata: حارة مخصصة.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "مخصّصة"
     },
     {
       "word": "riservate",
@@ -49058,15 +49058,15 @@
     },
     {
       "word": "rotatoria",
-      "translation_ar": "دوران",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "دوّار مروري",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "المعنى في درس الدوارات؛ يصحح المسودة التي ترجمتها بمعنى الدوران.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "دوّار مروري"
     },
     {
       "word": "rotolare",
@@ -51182,15 +51182,15 @@
     },
     {
       "word": "segnalazioni",
-      "translation_ar": "بلاغات",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "إشارات / تنبيهات",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "إشارات المرور أو تنبيهات مركبة الطوارئ، لا البلاغات.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "إشارات / تنبيهات"
     },
     {
       "word": "segnale",
@@ -52370,15 +52370,15 @@
     },
     {
       "word": "sicurezza",
-      "translation_ar": "الأمن",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "السلامة",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "السلامة من الخطر في القيادة، لا الأمن بمعنى الحراسة.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "السلامة"
     },
     {
       "word": "sicuri",
@@ -54494,15 +54494,15 @@
     },
     {
       "word": "spazio",
-      "translation_ar": "فراغ",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "مساحة / حيّز متاح",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "المساحة المتاحة للمناورة أو التوقف الآمن.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "مساحة / حيّز متاح"
     },
     {
       "word": "spazzatura",
@@ -63791,6 +63791,198 @@
       "status": "reviewed_override",
       "review_required": 0,
       "note": "مصدر critici في درس الإشارات والعوائق."
+    },
+    {
+      "word": "incrociarsi",
+      "translation_ar": "تتقاطع مساراتها",
+      "ui_fallback_ar": "تتقاطع مساراتها",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في درس التقاطعات: مسارات المركبات على وشك أن تتقاطع."
+    },
+    {
+      "word": "traiettorie",
+      "translation_ar": "مسارات المركبات",
+      "ui_fallback_ar": "مسارات المركبات",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في درس الأولوية عند تقاطع مسارات السير."
+    },
+    {
+      "word": "utente",
+      "translation_ar": "مستخدم للطريق",
+      "ui_fallback_ar": "مستخدم للطريق",
+      "translation_kind": "lexical_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "المستخدم في سياق قواعد الطريق."
+    },
+    {
+      "word": "vulnerabile",
+      "translation_ar": "معرّض للخطر / ضعيف الحماية",
+      "ui_fallback_ar": "معرّض للخطر / ضعيف الحماية",
+      "translation_kind": "lexical_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "وصف مستخدمي الطريق الأكثر عرضة للإصابة، مثل المشاة وراكبي الدراجات."
+    },
+    {
+      "word": "ambulanza",
+      "translation_ar": "سيارة إسعاف",
+      "ui_fallback_ar": "سيارة إسعاف",
+      "translation_kind": "lexical_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "مركبة طوارئ في أسئلة إفساح الطريق."
+    },
+    {
+      "word": "emergenze",
+      "translation_ar": "حالات الطوارئ",
+      "ui_fallback_ar": "حالات الطوارئ",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "صيغة الجمع في درس حارات الطوارئ ومركبات الإسعاف."
+    },
+    {
+      "word": "urgente",
+      "translation_ar": "عاجل",
+      "ui_fallback_ar": "عاجل",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في عبارة mezzo in servizio urgente: مركبة تؤدي خدمة عاجلة."
+    },
+    {
+      "word": "angoli",
+      "translation_ar": "زوايا",
+      "ui_fallback_ar": "زوايا",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "صيغة الجمع في مصطلح angoli ciechi: الزوايا العمياء."
+    },
+    {
+      "word": "ciechi",
+      "translation_ar": "عمياء",
+      "ui_fallback_ar": "عمياء",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "صيغة المذكر الجمع في مصطلح angoli ciechi: الزوايا العمياء."
+    },
+    {
+      "word": "indicatore",
+      "translation_ar": "إشارة الاتجاه",
+      "ui_fallback_ar": "إشارة الاتجاه",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في عبارة indicatore di direzione: إشارة الانعطاف/الاتجاه."
+    },
+    {
+      "word": "meteo",
+      "translation_ar": "الأحوال الجوية",
+      "ui_fallback_ar": "الأحوال الجوية",
+      "translation_kind": "lexical_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "الطقس في سياق مسافة الأمان."
+    },
+    {
+      "word": "sfavorevole",
+      "translation_ar": "غير ملائم / سيئ",
+      "ui_fallback_ar": "غير ملائم / سيئ",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "وصف الأحوال الجوية التي تزيد خطر الطريق."
+    },
+    {
+      "word": "avverse",
+      "translation_ar": "غير ملائمة / قاسية",
+      "ui_fallback_ar": "غير ملائمة / قاسية",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "صفة الجمع في عبارة condizioni avverse: ظروف جوية أو طريق غير ملائمة."
+    },
+    {
+      "word": "allontanamento",
+      "translation_ar": "الابتعاد",
+      "ui_fallback_ar": "الابتعاد",
+      "translation_kind": "lexical_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "إمكانية ابتعاد السائق عن المركبة تميز sosta عن fermata."
+    },
+    {
+      "word": "immobilizzarlo",
+      "translation_ar": "تثبيته ومنعه من الحركة",
+      "ui_fallback_ar": "تثبيته ومنعه من الحركة",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في درس الوقوف على منحدر: منع المركبة من التحرك."
+    },
+    {
+      "word": "disposizioni",
+      "translation_ar": "أحكام / قواعد",
+      "ui_fallback_ar": "أحكام / قواعد",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v62",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في عبارة salvo diverse disposizioni: ما لم تنص القواعد على خلاف ذلك."
     }
   ]
 }

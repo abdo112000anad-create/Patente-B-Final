@@ -52,9 +52,9 @@ test('only project-approved terms are presented as reviewed overrides', () => {
   assert.ok(app.includes('document.querySelector(\'#translationTooltipNote\').textContent=matched.note'));
 });
 
-test('v49 ships the corrected dictionary in JSON and a valid SQLite asset', () => {
+test('v62 ships the corrected dictionary in JSON and a valid SQLite asset', () => {
   const dictionary = JSON.parse(read('data/italian_arabic_dictionary_lookup.json'));
-  assert.equal(dictionary.entries.length, 5313);
+  assert.equal(dictionary.entries.length, 5329);
   assert.ok(dictionary.entries.every(row => row.word && row.translation_ar));
   assert.equal(dictionary.entries.filter(row => row.status === 'fallback_draft_needs_review').length, 0);
   assert.equal(dictionary.entries.filter(row => row.source === 'owner-approved-correction-v42' && row.status === 'reviewed_override' && row.review_required === 0).length, 9);
@@ -118,9 +118,10 @@ test('Web Speech speaks Italian only and rejects Arabic playback requests', asyn
   const controller = createSpeechController({webSpeech, onStateChange: state => states.push(state)});
   assert.equal(await controller.speak('Ciao, prudenza.', 'it-IT'), true);
   assert.equal(await controller.speak('يجب القيادة بحذر.', 'ar-EG'), false);
-  assert.deepEqual(utterances.map(({text, lang}) => ({text, lang})), [{text: 'Ciao, prudenza.', lang: 'it-IT'}]);
-  assert.equal(utterances[0].voice, voices[0]);
-  assert.equal(utterances[0].rate, 0.8);
+  assert.equal(utterances[0].text, '');
+  assert.deepEqual(utterances.slice(1).map(({text, lang}) => ({text, lang})), [{text: 'Ciao, prudenza.', lang: 'it-IT'}]);
+  assert.equal(utterances[1].voice, voices[0]);
+  assert.equal(utterances[1].rate, 0.8);
   for (const utterance of utterances) {
     assert.equal(utterance.pitch, 1.0);
     assert.equal(utterance.volume, 1.0);
@@ -171,6 +172,7 @@ test('Web Speech waits briefly for Italian voices before falling back to the sys
   const listeners = new Set();
   const states = [];
   let voices = [];
+  let cancelCount = 0;
   class FakeUtterance { constructor(text) { this.text = text; } }
   const italianVoice = {name: 'Italian', lang: 'it-IT'};
   const webSpeech = {
@@ -180,19 +182,21 @@ test('Web Speech waits briefly for Italian voices before falling back to the sys
       addEventListener: (name, listener) => { if (name === 'voiceschanged') listeners.add(listener); },
       removeEventListener: (name, listener) => { if (name === 'voiceschanged') listeners.delete(listener); },
       speak: utterance => { utterances.push(utterance); queueMicrotask(() => utterance.onend?.()); },
-      cancel() {}
+      cancel() { cancelCount += 1; }
     }
   };
   const controller = createSpeechController({webSpeech, onStateChange: state => states.push(state)});
   const speaking = controller.speak('Voce di sistema.', 'it-IT');
   await new Promise(resolve => setImmediate(resolve));
   assert.ok(states.some(state => state.status === 'preparing'));
-  assert.equal(utterances.length, 0);
+  assert.equal(utterances.length, 1);
+  assert.equal(utterances[0].text, '');
   voices = [italianVoice];
   for (const listener of [...listeners]) listener();
   assert.equal(await speaking, true);
-  assert.equal(utterances.length, 1);
-  assert.equal(utterances[0].voice, italianVoice);
+  assert.equal(utterances.length, 2);
+  assert.equal(utterances[1].voice, italianVoice);
+  assert.equal(cancelCount, 2);
   assert.equal(listeners.size, 0);
 });
 
@@ -200,6 +204,7 @@ test('stopping while voices load cleans up the listener and never speaks', async
   const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
   const listeners = new Set();
   const utterances = [];
+  let cancelCount = 0;
   class FakeUtterance { constructor(text) { this.text = text; } }
   const webSpeech = {
     Utterance: FakeUtterance,
@@ -208,7 +213,7 @@ test('stopping while voices load cleans up the listener and never speaks', async
       addEventListener: (name, listener) => { if (name === 'voiceschanged') listeners.add(listener); },
       removeEventListener: (name, listener) => { if (name === 'voiceschanged') listeners.delete(listener); },
       speak: utterance => utterances.push(utterance),
-      cancel() {}
+      cancel() { cancelCount += 1; }
     }
   };
   const controller = createSpeechController({webSpeech});
@@ -218,11 +223,13 @@ test('stopping while voices load cleans up the listener and never speaks', async
   await controller.stop();
   assert.equal(await speaking, false);
   assert.equal(listeners.size, 0);
-  assert.equal(utterances.length, 0);
+  assert.equal(utterances.length, 1);
+  assert.equal(utterances[0].text, '');
+  assert.equal(cancelCount, 3);
   assert.equal(controller.state, 'idle');
 });
 
-test('Web Speech retries after 500ms then falls back to it-IT when voices are unavailable', async () => {
+test('Web Speech requests it-IT when the voice list is unavailable', async () => {
   const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
   class FakeUtterance { constructor(text) { this.text = text; } }
   const states = [];
@@ -233,11 +240,12 @@ test('Web Speech retries after 500ms then falls back to it-IT when voices are un
   };
   const controller = createSpeechController({webSpeech, onStateChange: state => states.push(state)});
   assert.equal(await controller.speak('Ciao.', 'it-IT'), true);
-  assert.equal(utterances.length, 1);
-  assert.equal(utterances[0].lang, 'it-IT');
-  assert.equal(utterances[0].voice, undefined);
-  assert.equal(utterances[0].rate, 0.8);
-  assert.equal(utterances[0].pitch, 1.0);
+  assert.equal(utterances.length, 2);
+  assert.equal(utterances[0].text, '');
+  assert.equal(utterances[1].lang, 'it-IT');
+  assert.equal(utterances[1].voice, undefined);
+  assert.equal(utterances[1].rate, 0.8);
+  assert.equal(utterances[1].pitch, 1.0);
   assert.equal(controller.state, 'idle');
 });
 

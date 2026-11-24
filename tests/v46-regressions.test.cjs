@@ -87,14 +87,16 @@ test('Web Speech keeps Italian cancellation, rate, neutral pitch, full volume, a
   assert.equal(await controller.speak('Ciao.', 'it-IT'), true);
   assert.equal(await controller.speak('مرحبا.', 'ar-EG'), false);
   assert.ok(cancelCount >= 2);
-  assert.equal(utterances.length, 1);
-  assert.equal(utterances[0].lang, 'it-IT');
-  for (const utterance of utterances) {
+  assert.equal(utterances.length, 2);
+  assert.equal(utterances[0].text, '');
+  assert.equal(utterances[0].rate, 0.8);
+  assert.equal(utterances[1].lang, 'it-IT');
+  for (const utterance of utterances.slice(1)) {
     assert.equal(utterance.rate, 1.0);
     assert.equal(utterance.pitch, 1.0);
     assert.equal(utterance.volume, 1.0);
   }
-  assert.equal(utterances[0].voice, voices[1]);
+  assert.equal(utterances[1].voice, voices[1]);
   const speech = read('src/speech.mjs');
   assert.match(speech, /selectionEvidence:.*unverified-name-hint/u);
   await controller.stop();

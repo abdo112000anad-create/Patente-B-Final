@@ -42192,8 +42192,7 @@ This typically indicates that your device does not have a healthy Internet conne
     return chunks;
   }
   var ITALIAN_TTS_LOCALE = "it-IT";
-  var VOICE_WAIT_TIMEOUT_MS = 500;
-  var VOICE_POLL_INTERVAL_MS = 100;
+  var VOICE_POLL_INTERVAL_MS = 200;
   function buildLessonSpeechTexts(lesson = {}) {
     const headingIt = String(lesson.titleIt || lesson.heading_it || "").trim();
     const bodyIt = String(lesson.summaryIt || lesson.body_it || "").trim();
@@ -42217,12 +42216,12 @@ This typically indicates that your device does not have a healthy Internet conne
       if (typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return [];
       return Array.from(synthesis.getVoices() || []);
     } catch {
-      return [];
+      return null;
     }
   }
   function waitForVoices(synthesis, task, isCurrent, onWaiting) {
     const initialVoices = readAvailableVoices(synthesis);
-    if (initialVoices.length > 0 || typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return Promise.resolve(initialVoices);
+    if ((initialVoices == null ? void 0 : initialVoices.length) > 0 || !initialVoices || typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return Promise.resolve(initialVoices || []);
     try {
       console.log("[TTS] جارٍ تجهيز الصوت الإيطالي... انتظار تحميل أصوات النظام.");
       onWaiting == null ? void 0 : onWaiting();
@@ -42230,11 +42229,9 @@ This typically indicates that your device does not have a healthy Internet conne
     }
     return new Promise((resolve) => {
       let settled = false;
-      let timeout = null;
       let poll = null;
       const cleanups = [];
       const cleanup = () => {
-        if (timeout) clearTimeout(timeout);
         if (poll) clearInterval(poll);
         for (const removeListener of cleanups.splice(0)) {
           try {
@@ -42256,11 +42253,10 @@ This typically indicates that your device does not have a healthy Internet conne
           return;
         }
         const voices = readAvailableVoices(synthesis);
-        if (voices.length > 0) finish(voices);
+        if (voices === null || voices.length > 0) finish(voices || []);
       };
       const cancel = () => finish([]);
       task.cancelVoiceWait = cancel;
-      timeout = setTimeout(() => finish(readAvailableVoices(synthesis)), VOICE_WAIT_TIMEOUT_MS);
       poll = setInterval(check, VOICE_POLL_INTERVAL_MS);
       try {
         if (typeof synthesis.addEventListener === "function" && typeof synthesis.removeEventListener === "function") {
@@ -42347,6 +42343,7 @@ This typically indicates that your device does not have a healthy Internet conne
     let sequence = 0;
     let activeTask = null;
     let errorTimer = null;
+    let speechUnlocked = false;
     const notify = (status, task = activeTask, error = "", extra = {}) => {
       try {
         onStateChange({
@@ -42405,6 +42402,21 @@ This typically indicates that your device does not have a healthy Internet conne
       }
       return Math.max(0.7, Math.min(1.3, selected));
     };
+    function unlockSpeechOnce(api) {
+      var _a12, _b;
+      if (speechUnlocked) return;
+      speechUnlocked = true;
+      try {
+        const warmup = new api.Utterance("");
+        warmup.lang = ITALIAN_TTS_LOCALE;
+        warmup.rate = 0.8;
+        warmup.pitch = 1;
+        warmup.volume = 1;
+        api.synthesis.speak(warmup);
+        (_b = (_a12 = api.synthesis).cancel) == null ? void 0 : _b.call(_a12);
+      } catch {
+      }
+    }
     function stopBrowserSpeech() {
       var _a12, _b, _c;
       try {
@@ -42529,6 +42541,7 @@ This typically indicates that your device does not have a healthy Internet conne
     }
     async function prepareWebVoice(task, api = resolveWebSpeech(webSpeech)) {
       if (!api) throw new Error("Web Speech API is unavailable on this device.");
+      unlockSpeechOnce(api);
       const voices = await waitForVoices(api.synthesis, task, () => task.token === sequence, () => notify("preparing", task));
       if (task.token !== sequence) return false;
       task.selectedVoice = chooseVoice(voices, ITALIAN_TTS_LOCALE);
@@ -42681,7 +42694,7 @@ This typically indicates that your device does not have a healthy Internet conne
   function resolveSceneType(lesson = {}, moduleId = "") {
     var _a12;
     const explicitScene = (_a12 = lesson.visual_script) == null ? void 0 : _a12.scene_id;
-    if (["trailer", "visibility", "roundabout", "intersection", "traffic-light", "traffic-signs", "maneuver", "vehicle-safety", "stopping", "documents", "driver-safety", "road-parts"].includes(explicitScene)) return explicitScene;
+    if (["trailer", "visibility", "roundabout", "intersection", "traffic-light", "traffic-signs", "maneuver", "vehicle-safety", "stopping", "documents", "driver-safety", "road-parts", "vulnerable-road-users", "emergency", "retromarcia", "highway"].includes(explicitScene)) return explicitScene;
     const title = `${lesson.heading_ar || ""} ${lesson.heading_it || ""}`.toLowerCase();
     if (/مقطور|rimorch|rimorchio/.test(title)) return "trailer";
     if (/أعمى|النقاط العمياء|مجال الرؤية|visibilità|angoli ciechi|campo visivo/.test(title)) return "visibility";
@@ -42719,8 +42732,12 @@ This typically indicates that your device does not have a healthy Internet conne
       "traffic-signs": "رسم توضيحي لإشارات المرور",
       "traffic-light": "رسم توضيحي للإشارة الضوئية",
       "intersection": "رسم توضيحي لتقاطع الطرق والأولوية",
+      "vulnerable-road-users": "رسم توضيحي للمشاة وراكبي الدراجات عند المعبر",
+      "emergency": "رسم توضيحي لمركبة طوارئ تُخلي الطريق",
       "roundabout": "رسم توضيحي لحركة المرور في الدوار",
       "maneuver": "رسم توضيحي لتغيير المسار والتجاوز",
+      "retromarcia": "رسم توضيحي لمناورة الرجوع إلى الخلف",
+      "highway": "رسم توضيحي لحارات الطريق السريع وحارة الطوارئ",
       "stopping": "رسم توضيحي للتوقف ومسافة الأمان",
       "vehicle-safety": "رسم توضيحي لسلامة المركبة",
       "documents": "رسم توضيحي لوثائق المركبة",
@@ -42731,11 +42748,15 @@ This typically indicates that your device does not have a healthy Internet conne
     const shared = `<svg class="lesson-animation-svg" viewBox="0 0 640 210" role="img" aria-label="${escapeHtml(sceneDescription)}"><rect width="640" height="210" rx="18" fill="#102936"/><circle cx="555" cy="41" r="21" fill="#2edbc0" opacity=".75"/>${road}`;
     const pieces = {
       "road-parts": `${badge("corsia", 36, 33)}${badge("carreggiata", 184, 33)}${badge("marciapiede", 492, 33)}<path d="M68 83v25M240 83v25M548 83v25" stroke="#092a32" stroke-dasharray="3 4"/>${car(120, 128, "scene-car scene-car-road")}`,
+      "vulnerable-road-users": `<g class="focus-concept" transform="translate(342 116)"><path d="M0 0v67M18 0v67M36 0v67M54 0v67" stroke="#c8e5ea" stroke-width="9"/></g><g class="focus-example" transform="translate(180 70)"><circle cx="20" cy="13" r="9" fill="#55bff0" stroke="#092a32" stroke-width="2"/><path d="M20 23v30m0-18-13 12m13-12 12 9m-12 9-10 16m10-16 11 16" stroke="#55bff0" stroke-width="6" stroke-linecap="round"/></g><g class="focus-warning" transform="translate(474 125)" fill="none" stroke="#2edbc0" stroke-width="4"><circle cx="10" cy="29" r="12"/><circle cx="59" cy="29" r="12"/><path d="m10 29 14-22 15 22H10l12-17h15l11 17m-24-22h11"/></g>${car(74, 128, "scene-car scene-car-road")}`,
+      "emergency": `${badge("soccorso", 35, 29)}<path class="focus-example" d="M160 149h386" stroke="#2edbc0" stroke-width="7" stroke-dasharray="16 11"/><path class="focus-warning" d="M515 121v62" stroke="#d84a43" stroke-width="8"/><g class="focus-concept" transform="translate(333 110)"><circle cx="24" cy="7" r="8" fill="#d84a43"/><circle cx="54" cy="7" r="8" fill="#55bff0"/></g>${car(315, 128, "scene-car scene-car-emergency")}`,
       "traffic-signs": `<g class="focus-concept" transform="translate(84 30)"><path d="M35 2 69 60H1Z" fill="#73d9e1" stroke="#c8473d" stroke-width="8"/><path d="M28 45h14" stroke="#092a32" stroke-width="5"/></g><g class="focus-example" transform="translate(270 30)"><circle cx="34" cy="34" r="31" fill="#73d9e1" stroke="#c8473d" stroke-width="8"/><path d="M12 34h44" stroke="#c8473d" stroke-width="8"/></g><g class="focus-warning" transform="translate(455 30)"><circle cx="34" cy="34" r="31" fill="#2c6d9d"/><path d="M34 13v25M34 48v2" stroke="#73d9e1" stroke-width="6" stroke-linecap="round"/></g>${car(270, 128, "scene-car scene-car-road")}`,
       "traffic-light": `<g class="focus-concept" transform="translate(78 18)"><rect x="0" y="0" width="49" height="111" rx="12" fill="#092a32"/><circle cx="24" cy="22" r="13" fill="#d84a43"/><circle cx="24" cy="56" r="13" fill="#2edbc0"/><circle cx="24" cy="89" r="13" fill="#43d9a2"/><path d="M24 111v17" stroke="#092a32" stroke-width="7"/></g><path class="focus-example" d="M135 149h430" stroke="#43d9a2" stroke-width="8" stroke-dasharray="20 12"/><path class="focus-warning" d="M135 149h70" stroke="#d84a43" stroke-width="8"/>${car(300, 128, "scene-car scene-car-road")}`,
       "intersection": `<rect x="274" y="0" width="92" height="210" fill="#275364"/><path d="M0 151h640" stroke="#275364" stroke-width="70"/><path d="M320 0v70M320 190v20M0 151h205M435 151h205" stroke="#73d9e1" stroke-width="3" stroke-dasharray="20 16"/><g class="focus-concept" transform="translate(60 37)"><path d="M30 0 60 52H0Z" fill="#73d9e1" stroke="#c8473d" stroke-width="7"/><path d="M30 55v28" stroke="#092a32" stroke-width="4"/></g><path class="focus-example" d="M320 35v83h118" fill="none" stroke="#2edbc0" stroke-width="6" stroke-dasharray="10 7"/><path class="focus-warning" d="M250 151h-90" stroke="#2edbc0" stroke-width="6" stroke-dasharray="10 7"/>${car(390, 128, "scene-car scene-car-cross")}`,
       "roundabout": `<path d="M320 0v68M320 190v20M0 140h244M396 140h244" stroke="#275364" stroke-width="49"/><circle cx="320" cy="140" r="76" fill="#275364" stroke="#73d9e1" stroke-width="3" stroke-dasharray="13 10"/><circle cx="320" cy="140" r="39" fill="#247b70" stroke="#73d9e1" stroke-width="3"/><path class="focus-example" d="M320 61a79 79 0 0 1 79 79" fill="none" stroke="#2edbc0" stroke-width="6" stroke-dasharray="10 7"/><path class="focus-concept" d="M320 10v43m0 0-10-11m10 11 10-11M618 140h-42m0 0 11-10m-11 10 11 10" stroke="#193543" stroke-width="4" fill="none"/><g class="scene-car-roundabout focus-warning" style="transform-origin:320px 140px"><g transform="translate(370 134) rotate(90)"><rect x="-14" y="-7" width="28" height="14" rx="5" fill="#2edbc0" stroke="#092a32" stroke-width="2"/><circle cx="-8" cy="8" r="2.5" fill="#092a32"/><circle cx="8" cy="8" r="2.5" fill="#092a32"/></g></g>${badge("rotatoria", 36, 29)}`,
       "maneuver": `<path class="focus-concept" d="M88 152h170" stroke="#2edbc0" stroke-width="7" stroke-dasharray="17 13"/><path class="focus-example" d="M168 141c35-65 92-65 142-8" fill="none" stroke="#43d9a2" stroke-width="6" stroke-dasharray="11 7"/><path class="focus-warning" d="M390 141c34-44 77-45 119-15" fill="none" stroke="#d84a43" stroke-width="6" stroke-dasharray="11 7"/><path d="m301 126 13 7-13 7" fill="#43d9a2"/>${car(110, 128, "scene-car scene-car-maneuver")}${car(420, 128, "scene-car scene-car-road")}`,
+      "retromarcia": `${badge("retromarcia", 35, 30)}<path class="focus-warning" d="M300 151H128m0 0 15-12m-15 12 15 12" fill="none" stroke="#d84a43" stroke-width="6"/><path class="focus-concept" d="M345 119h145" stroke="#2edbc0" stroke-width="5" stroke-dasharray="12 9"/>${car(235, 128, "scene-car scene-car-reverse")}`,
+      "highway": `<path class="focus-concept" d="M0 128h640M0 151h640M0 174h640" stroke="#c8e5ea" stroke-width="2" stroke-dasharray="18 14"/><path class="focus-warning" d="M0 185h640" stroke="#d84a43" stroke-width="7"/><path class="focus-example" d="M44 105h105m0 0-13-10m13 10-13 10" fill="none" stroke="#2edbc0" stroke-width="5"/><path class="focus-example" d="M485 105h105m0 0-13-10m13 10-13 10" fill="none" stroke="#2edbc0" stroke-width="5"/>${badge("destra", 35, 32)}${badge("corsia emergenza", 470, 32, "focus-warning")}${car(225, 128, "scene-car scene-car-highway")}`,
       "stopping": `<g class="focus-concept" transform="translate(56 31)"><circle cx="42" cy="42" r="34" fill="#193543" stroke="#092a32" stroke-width="5"/><path d="M42 42 62 25" stroke="#c8473d" stroke-width="5"/><path d="M42 8v8M76 42h-8" stroke="#092a32" stroke-width="3"/></g><path class="focus-example" d="M355 118v69M390 118v69M425 118v69M460 118v69" stroke="#2edbc0" stroke-width="5"/><path class="focus-warning" d="M488 117v70" stroke="#d84a43" stroke-width="7"/>${car(225, 128, "scene-car scene-car-brake")}`,
       "vehicle-safety": `<g class="focus-concept" transform="translate(70 27)"><rect x="0" y="0" width="94" height="72" rx="16" fill="#193543" stroke="#092a32" stroke-width="3"/><path d="M18 13 75 60M25 62 68 15" stroke="#55bff0" stroke-width="8"/><circle cx="47" cy="36" r="7" fill="#092a32"/></g><path class="focus-example" d="M180 166h350" stroke="#43d9a2" stroke-width="6"/><g class="focus-warning" transform="translate(500 34)"><path d="M25 0 51 47H0Z" fill="#73d9e1" stroke="#c8473d" stroke-width="6"/><path d="M25 14v15M25 37v2" stroke="#c8473d" stroke-width="4"/></g>${car(280, 128, "scene-car scene-car-road")}`,
       "documents": `<g class="focus-concept" transform="translate(72 26)"><rect x="0" y="0" width="92" height="112" rx="8" fill="#193543" stroke="#092a32" stroke-width="3"/><path d="M17 23h55M17 40h55M17 58h40M17 76h49" stroke="#47bda7" stroke-width="5" stroke-linecap="round"/><circle cx="68" cy="89" r="10" fill="#2edbc0"/></g><path class="focus-example" d="M208 78h300" stroke="#43d9a2" stroke-width="5" stroke-dasharray="10 7"/>${car(290, 128, "scene-car scene-car-road")}${badge("R.C.A.", 456, 34, "focus-warning")}`,

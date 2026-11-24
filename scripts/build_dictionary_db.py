@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the v61 SQLite dictionary and its matching JSON lookup."""
+"""Build the v62 SQLite dictionary and its matching JSON lookup."""
 from __future__ import annotations
 import hashlib
 import json
@@ -14,8 +14,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 JSON_PATH = ROOT / "data/italian_arabic_dictionary_lookup.json"
 DB_PATH = ROOT / "android/app/src/main/assets/dictionary.db"
-APP_VERSION = 61
-EXPECTED_WORD_COUNT = 5313
+APP_VERSION = 62
+EXPECTED_WORD_COUNT = 5329
 
 # User-requested standalone lemma, kept separate from question-bank extraction.
 REQUESTED_LEMMA_ADDITIONS = {
@@ -97,8 +97,39 @@ LESSON_DICTIONARY_ADDITIONS = {
     "critici": ("حرجة / خطرة", "contextual_translation", "صيغة الجمع في عبارة punti critici."),
     "critico": ("حرِج / خطِر", "lexical_translation", "مصدر critici في درس الإشارات والعوائق."),
 }
-LESSON_DICTIONARY_SOURCES = {word: "lesson-dictionary-audit-v61" for word in LESSON_DICTIONARY_ADDITIONS}
-QUESTION_BANK_AUDIT_OVERRIDES = {"prescrive"}
+V62_LESSON_DICTIONARY_ADDITIONS = {
+    "incrociarsi": ("تتقاطع مساراتها", "contextual_translation", "في درس التقاطعات: مسارات المركبات على وشك أن تتقاطع."),
+    "traiettorie": ("مسارات المركبات", "contextual_translation", "في درس الأولوية عند تقاطع مسارات السير."),
+    "utente": ("مستخدم للطريق", "lexical_translation", "المستخدم في سياق قواعد الطريق."),
+    "vulnerabile": ("معرّض للخطر / ضعيف الحماية", "lexical_translation", "وصف مستخدمي الطريق الأكثر عرضة للإصابة، مثل المشاة وراكبي الدراجات."),
+    "ambulanza": ("سيارة إسعاف", "lexical_translation", "مركبة طوارئ في أسئلة إفساح الطريق."),
+    "emergenze": ("حالات الطوارئ", "contextual_translation", "صيغة الجمع في درس حارات الطوارئ ومركبات الإسعاف."),
+    "urgente": ("عاجل", "contextual_translation", "في عبارة mezzo in servizio urgente: مركبة تؤدي خدمة عاجلة."),
+    "angoli": ("زوايا", "contextual_translation", "صيغة الجمع في مصطلح angoli ciechi: الزوايا العمياء."),
+    "ciechi": ("عمياء", "contextual_translation", "صيغة المذكر الجمع في مصطلح angoli ciechi: الزوايا العمياء."),
+    "indicatore": ("إشارة الاتجاه", "contextual_translation", "في عبارة indicatore di direzione: إشارة الانعطاف/الاتجاه."),
+    "meteo": ("الأحوال الجوية", "lexical_translation", "الطقس في سياق مسافة الأمان."),
+    "sfavorevole": ("غير ملائم / سيئ", "contextual_translation", "وصف الأحوال الجوية التي تزيد خطر الطريق."),
+    "avverse": ("غير ملائمة / قاسية", "contextual_translation", "صفة الجمع في عبارة condizioni avverse: ظروف جوية أو طريق غير ملائمة."),
+    "allontanamento": ("الابتعاد", "lexical_translation", "إمكانية ابتعاد السائق عن المركبة تميز sosta عن fermata."),
+    "immobilizzarlo": ("تثبيته ومنعه من الحركة", "contextual_translation", "في درس الوقوف على منحدر: منع المركبة من التحرك."),
+    "disposizioni": ("أحكام / قواعد", "contextual_translation", "في عبارة salvo diverse disposizioni: ما لم تنص القواعد على خلاف ذلك."),
+    "rotatoria": ("دوّار مروري", "contextual_translation", "المعنى في درس الدوارات؛ يصحح المسودة التي ترجمتها بمعنى الدوران."),
+    "riservata": ("مخصّصة", "contextual_translation", "صفة مؤنثة في corsia riservata: حارة مخصصة."),
+    "retrovisore": ("مرآة الرؤية الخلفية", "lexical_translation", "اسم المرآة التي تُستخدم لمراجعة الطريق خلف المركبة."),
+    "morto": ("ميت؛ وفي angolo morto تعني أعمى", "contextual_translation", "في مصطلح angolo morto: زاوية عمياء أو موضع لا يظهر في مجال الرؤية."),
+    "dosso": ("نتوء / مطب مرتفع", "lexical_translation", "نتوء أو قمة محدبة في الطريق، لا تعني الاتجاه إلى الأعلى."),
+    "segnalazioni": ("إشارات / تنبيهات", "contextual_translation", "إشارات المرور أو تنبيهات مركبة الطوارئ، لا البلاغات."),
+    "acustiche": ("صوتية", "contextual_translation", "صفة مؤنثة جمع في segnalazioni acustiche: تنبيهات صوتية."),
+    "sicurezza": ("السلامة", "contextual_translation", "السلامة من الخطر في القيادة، لا الأمن بمعنى الحراسة."),
+    "spazio": ("مساحة / حيّز متاح", "contextual_translation", "المساحة المتاحة للمناورة أو التوقف الآمن."),
+}
+LESSON_DICTIONARY_ADDITIONS.update(V62_LESSON_DICTIONARY_ADDITIONS)
+LESSON_DICTIONARY_SOURCES = {
+    word: "lesson-dictionary-audit-v62" if word in V62_LESSON_DICTIONARY_ADDITIONS else "lesson-dictionary-audit-v61"
+    for word in LESSON_DICTIONARY_ADDITIONS
+}
+QUESTION_BANK_AUDIT_OVERRIDES = {"prescrive", "rotatoria", "riservata", "retrovisore", "morto", "dosso", "segnalazioni", "acustiche", "sicurezza", "spazio"}
 PROJECT_ADDITIONS = {**REQUESTED_LEMMA_ADDITIONS, **VIDEO_CONTEXT_ADDITIONS, **LESSON_DICTIONARY_ADDITIONS}
 PROJECT_ADDITION_SOURCES = {**REQUESTED_LEMMA_SOURCES, **VIDEO_CONTEXT_SOURCES, **LESSON_DICTIONARY_SOURCES}
 
@@ -161,7 +192,7 @@ def normalized_word(value: object) -> str:
 
 
 def write_json_atomically(payload: dict) -> None:
-    fd, temp_name = tempfile.mkstemp(prefix="dictionary-v61-", suffix=".json", dir=JSON_PATH.parent)
+    fd, temp_name = tempfile.mkstemp(prefix="dictionary-v62-", suffix=".json", dir=JSON_PATH.parent)
     os.close(fd)
     try:
         Path(temp_name).write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -268,7 +299,7 @@ def main() -> int:
         "entries_with_safe_ui_fallback": 0,
         "owner_approved_corrections": len(OWNER_CORRECTIONS),
         "excluded_single_letter_artifacts": sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS),
-        "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51/v61 requested terms, v54 video-context terms, and v61 lesson-audit additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+        "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51/v61 requested terms, v54 video-context terms, and v61/v62 lesson-audit additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
         "requested_lemma_additions": len(REQUESTED_LEMMA_ADDITIONS),
         "video_context_additions": len(VIDEO_CONTEXT_ADDITIONS),
         "lesson_dictionary_audit_additions": len(LESSON_DICTIONARY_ADDITIONS),
@@ -326,7 +357,7 @@ def main() -> int:
             "lesson_dictionary_audit_rows": str(len(LESSON_DICTIONARY_ADDITIONS)),
             "unresolved_rows_given_transparent_fallback": "0",
             "excluded_single_letter_artifacts": ",".join(sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS)),
-            "translation_notice": "Automatic translations remain drafts unless status is reviewed_override; reviewed overrides include requested v47/v51/v61 lemmas, v54 video-context translations, and v61 lesson-audit terms.",
+            "translation_notice": "Automatic translations remain drafts unless status is reviewed_override; reviewed overrides include requested v47/v51/v61 lemmas, v54 video-context translations, and v61/v62 lesson-audit terms.",
             "fallback_notice": "The v42 lookup excludes isolated single-letter extraction artifacts and includes owner-approved corrections.",
         }
         db.executemany("INSERT INTO Metadata(Key, Value) VALUES (?, ?)", sorted(sqlite_metadata.items()))
