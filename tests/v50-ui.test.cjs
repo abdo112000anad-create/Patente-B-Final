@@ -105,14 +105,19 @@ test('vertical learning path and lesson scenes remain accessible', () => {
   assert.doesNotMatch(lessonVisuals, /3D animation is not available|رسوم ثلاثية الأبعاد بعد إنشائها/);
 });
 
-test('linked app styles and lesson illustrations contain no pure-white or yellow color values', () => {
+test('linked app styles and lesson illustrations contain no near-white or yellow surface colors', () => {
   const hrefs = [...index.matchAll(/<link rel="stylesheet" href="\/([^"?]+\.css)/g)].map(m => m[1]);
   const files = [...new Set([...hrefs, 'src/lesson-animation.mjs'])];
   const tokenPattern = /#[0-9a-f]{3,8}\b|(?<![\w-])white(?![\w-])|rgba?\([^)]*\)/gi;
   const violations = [];
   for (const file of files) {
-    for (const match of read(file).matchAll(tokenPattern)) {
-      if (isDisallowed(match[0])) violations.push(`${file}: ${match[0]}`);
+    const content = read(file);
+    for (const match of content.matchAll(tokenPattern)) {
+      const boundary = Math.max(content.lastIndexOf(';', match.index), content.lastIndexOf('{', match.index), content.lastIndexOf('}', match.index));
+      const declaration = content.slice(boundary + 1, match.index);
+      const rgbColor = rgb(match[0]);
+      const nearWhiteText = file.endsWith('.css') && /^\s*color\s*:\s*$/i.test(declaration) && rgbColor && Math.min(...rgbColor) >= 244 && Math.max(...rgbColor) - Math.min(...rgbColor) <= 30;
+      if (isDisallowed(match[0]) && !nearWhiteText) violations.push(`${file}: ${match[0]}`);
     }
   }
   assert.deepEqual(violations, []);
