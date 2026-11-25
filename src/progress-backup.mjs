@@ -2,6 +2,7 @@ const FORMAT = 'patente-b-progress-backup';
 const VERSION = 1;
 const MAX_FILE_BYTES = 2_000_000;
 const MAX_COUNT = 1_000_000_000;
+const MAX_QUICK_CHECKS = 150;
 const VALID_MODES = new Set([
   'exam', 'visual', 'smart', 'custom', 'topic', 'lesson-review', 'due',
   'mistakes', 'favorites', 'practice', 'single'
@@ -63,6 +64,51 @@ function validTimestamp(value) {
   const number = Number(value);
   return Number.isFinite(number) && number >= 0 && number <= 99_999_999_999_999
     ? Math.trunc(number) : 0;
+}
+
+function quickCheckParts(key, allowedLessons = null) {
+  if (typeof key !== 'string') return null;
+  const match = /^(u\d+-l\d+)::q([1-3])$/.exec(key);
+  if (!match || (allowedLessons && !allowedLessons.has(match[1]))) return null;
+  return {lessonId: match[1], questionIndex: Number(match[2]) - 1};
+}
+
+function normalizeWrongAnswers(value, allowedLessons = null) {
+  if (!Array.isArray(value)) return [];
+  const result = new Set();
+  for (const key of value) {
+    const parts = quickCheckParts(key, allowedLessons);
+    if (!parts) continue;
+    result.add(`${parts.lessonId}::q${parts.questionIndex + 1}`);
+    if (result.size >= MAX_QUICK_CHECKS) break;
+  }
+  return [...result];
+}
+
+function normalizeQuickCheckSchedule(value, allowedLessons = null) {
+  const result = Object.create(null);
+  if (!plainObject(value)) return result;
+  for (const [key, item] of Object.entries(value).slice(0, MAX_QUICK_CHECKS)) {
+    const parts = quickCheckParts(key, allowedLessons);
+    if (!parts || !plainObject(item)) continue;
+    const attempts = safeCount(item.attempts);
+    const lastAnsweredAt = validTimestamp(item.lastAnsweredAt);
+    const dueAt = validTimestamp(item.dueAt);
+    const intervalDays = Number(item.intervalDays);
+    if (item.lessonId !== parts.lessonId || Number(item.questionIndex) !== parts.questionIndex ||
+        attempts < 1 || !['VERO', 'FALSO'].includes(item.lastAnswer) ||
+        typeof item.lastCorrect !== 'boolean' || typeof item.firstAttemptCorrect !== 'boolean' ||
+        !lastAnsweredAt || !dueAt || ![1, 3].includes(intervalDays) ||
+        intervalDays !== (item.lastCorrect ? 3 : 1) ||
+        dueAt !== lastAnsweredAt + intervalDays * 86_400_000) continue;
+    result[key] = {
+      lessonId: parts.lessonId, questionIndex: parts.questionIndex, attempts,
+      lastAnswer: item.lastAnswer, lastCorrect: item.lastCorrect,
+      firstAttemptCorrect: item.firstAttemptCorrect, lastAnsweredAt,
+      intervalDays, dueAt
+    };
+  }
+  return result;
 }
 
 function normalizeQuestionStats(value, allowedIds) {
@@ -128,6 +174,8 @@ export function createProgressBackup(state, exportedAt = new Date().toISOString(
     completedLessons: [...(state.completedLessons || [])],
     reviewedLessons: [...(state.reviewedLessons || [])],
     sourceChecks: state.sourceChecks || {},
+    wrongAnswers: normalizeWrongAnswers(state.wrongAnswers),
+    quickCheckSchedule: normalizeQuickCheckSchedule(state.quickCheckSchedule),
     lastLessonKey: state.lastLessonKey || '',
     lastStudy: state.lastStudy || '',
     streak: safeCount(state.streak),
@@ -163,6 +211,8 @@ export function restoreProgressBackup(payload, context) {
     completedLessons: lessonSet(progress.completedLessons, allowedLessons),
     reviewedLessons: lessonSet(progress.reviewedLessons, allowedLessons),
     sourceChecks: normalizeSourceChecks(progress.sourceChecks, allowedSourceChecks),
+    wrongAnswers: normalizeWrongAnswers(progress.wrongAnswers, allowedLessons),
+    quickCheckSchedule: normalizeQuickCheckSchedule(progress.quickCheckSchedule, allowedLessons),
     lastLessonKey,
     lastStudy: dateKey(progress.lastStudy),
     streak: safeCount(progress.streak),

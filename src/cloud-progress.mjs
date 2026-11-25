@@ -57,7 +57,7 @@ export function validateCloudProgress(payload, context) {
   const envelope = ensureCloudEnvelope(payload);
   const allowedTop = new Set(['format', 'version', 'exportedAt', 'progress', 'setEdits']);
   if (Object.keys(envelope).some(k => !allowedTop.has(k))) throw new Error('cloud_progress_format');
-  const allowedProgress = new Set(['favorites','wrong','solved','correctCount','practiceCount','topicCorrect','topicTotal','completedLessons','reviewedLessons','sourceChecks','lastLessonKey','lastStudy','streak','questionStats','sessions','dailyGoal']);
+  const allowedProgress = new Set(['favorites','wrong','solved','correctCount','practiceCount','topicCorrect','topicTotal','completedLessons','reviewedLessons','sourceChecks','wrongAnswers','quickCheckSchedule','lastLessonKey','lastStudy','streak','questionStats','sessions','dailyGoal']);
   if (Object.keys(envelope.progress).some(k => !allowedProgress.has(k))) throw new Error('cloud_progress_format');
   const normalized = restoreProgressBackup({ format: 'patente-b-progress-backup', version: 1, exportedAt: envelope.exportedAt, progress: envelope.progress }, context);
   normalized.activeQuiz = null;
@@ -102,6 +102,26 @@ function mergeSessions(a, b) {
   return [...byKey.values()].sort((x,y) => y.at-x.at).slice(0,20);
 }
 
+function mergeQuickCheckSchedules(a, b) {
+  const out = Object.create(null);
+  for (const key of new Set([...Object.keys(a || {}), ...Object.keys(b || {})])) {
+    const x = a?.[key], y = b?.[key];
+    if (!x) { out[key] = {...y}; continue; }
+    if (!y) { out[key] = {...x}; continue; }
+    let selected;
+    if (x.lastAnsweredAt !== y.lastAnsweredAt) selected = y.lastAnsweredAt > x.lastAnsweredAt ? y : x;
+    else if (x.attempts !== y.attempts) selected = y.attempts > x.attempts ? y : x;
+    else if (x.lastCorrect !== y.lastCorrect) selected = x.lastCorrect ? y : x;
+    else selected = x;
+    out[key] = {
+      ...selected,
+      attempts: Math.max(x.attempts, y.attempts),
+      firstAttemptCorrect: x.firstAttemptCorrect && y.firstAttemptCorrect
+    };
+  }
+  return out;
+}
+
 function mergeDailyGoal(a, b) {
   if (!a?.date) return b || {date: '', questions: 0, lessons: 0};
   if (!b?.date || a.date > b.date) return a;
@@ -142,12 +162,19 @@ export function mergeCloudProgress(localState, remotePayload, context) {
   const favorites = mergeMembership('favorites', local.favorites, remote.favorites, local.syncSetEdits, remote.syncSetEdits);
   const completed = mergeMembership('completedLessons', local.completedLessons, remote.completedLessons, local.syncSetEdits, remote.syncSetEdits);
   const reviewed = mergeMembership('reviewedLessons', local.reviewedLessons, remote.reviewedLessons, local.syncSetEdits, remote.syncSetEdits);
+  const quickCheckSchedule = mergeQuickCheckSchedules(local.quickCheckSchedule, remote.quickCheckSchedule);
+  const wrongAnswers = new Set([...local.wrongAnswers, ...remote.wrongAnswers]);
+  for (const [key, record] of Object.entries(quickCheckSchedule)) {
+    if (record.lastCorrect) wrongAnswers.delete(key);
+    else wrongAnswers.add(key);
+  }
   return {
     ...local, favorites: favorites.set, wrong,
     solved: union(local.solved, remote.solved), completedLessons: completed.set, reviewedLessons: reviewed.set,
     correctCount: maxCount(local.correctCount, remote.correctCount), practiceCount: maxCount(local.practiceCount, remote.practiceCount),
     topicCorrect: mergeMap(local.topicCorrect, remote.topicCorrect), topicTotal: mergeMap(local.topicTotal, remote.topicTotal),
     sourceChecks: { ...remote.sourceChecks, ...local.sourceChecks },
+    wrongAnswers: [...wrongAnswers], quickCheckSchedule,
     lastLessonKey: local.lastLessonKey || remote.lastLessonKey,
     lastStudy: local.lastStudy > remote.lastStudy ? local.lastStudy : remote.lastStudy,
     streak: maxCount(local.streak, remote.streak), questionStats,

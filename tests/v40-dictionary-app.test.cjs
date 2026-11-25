@@ -9,15 +9,15 @@ const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const json = file => JSON.parse(read(file));
 
-test('v62 app dictionary contains auditable rows and excludes isolated letter artifacts', () => {
+test('v63 app dictionary contains auditable rows and excludes isolated letter artifacts', () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const questions = json('data/questions.json');
   assert.equal(dictionary.schema_version, 1);
   assert.equal(dictionary.metadata.source_question_count, questions.questions.length);
-  assert.equal(dictionary.metadata.app_release, 62);
-  assert.equal(dictionary.metadata.unique_question_bank_terms, 5276);
-  assert.equal(dictionary.metadata.total_entries, 5335);
-  assert.equal(dictionary.entries.length, 5335);
+  assert.equal(dictionary.metadata.app_release, 63);
+  assert.equal(dictionary.metadata.unique_question_bank_terms, 5277);
+  assert.equal(dictionary.metadata.total_entries, 5336);
+  assert.equal(dictionary.entries.length, 5336);
   assert.equal(new Set(dictionary.entries.map(row => row.word)).size, dictionary.entries.length);
   for (const row of dictionary.entries) {
     assert.ok(row.word);
@@ -83,7 +83,7 @@ test('existing and Abdul-approved v42 corrections plus the v47 lemma are reviewe
   }
 });
 
-test('v62 lesson vocabulary includes reviewed Arabic translations for every missing lemma and used form', async () => {
+test('v63 lesson vocabulary includes reviewed Arabic translations for every missing lemma and used form', async () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const byWord = new Map(dictionary.entries.map(row => [row.word, row]));
   const expected = {
@@ -99,6 +99,7 @@ test('v62 lesson vocabulary includes reviewed Arabic translations for every miss
     organizzare: 'ينظّم', prevalere: 'يسود / تكون له الأولوية على', critici: 'حرجة / خطرة', critico: 'حرِج / خطِر',
     incrociarsi: 'تتقاطع مساراتها', traiettorie: 'مسارات المركبات', utente: 'مستخدم للطريق', vulnerabile: 'معرّض للخطر / ضعيف الحماية',
     ambulanza: 'سيارة إسعاف', emergenze: 'حالات الطوارئ', urgente: 'عاجل', angoli: 'زوايا', ciechi: 'عمياء', indicatore: 'إشارة الاتجاه',
+    spia: 'مؤشر تحذير', spie: 'مؤشرات تحذير',
     meteo: 'الأحوال الجوية', sfavorevole: 'غير ملائم / سيئ', avverse: 'غير ملائمة / قاسية', allontanamento: 'الابتعاد',
     immobilizzarlo: 'تثبيته ومنعه من الحركة', disposizioni: 'أحكام / قواعد', rotatoria: 'دوّار مروري', riservata: 'مخصّصة',
     retrovisore: 'مرآة الرؤية الخلفية', morto: 'ميت؛ وفي angolo morto تعني أعمى', dosso: 'نتوء / مطب مرتفع',
@@ -106,8 +107,8 @@ test('v62 lesson vocabulary includes reviewed Arabic translations for every miss
     occupante: 'راكب / شاغل المركبة', identificazione: 'التعريف / تحديد الهوية', documentale: 'متعلق بالوثائق / مستندي',
     autorità: 'السلطات / الجهات المختصة', legale: 'قانوني', vigente: 'نافذ / ساري المفعول',
   };
-  assert.equal(Object.keys(expected).length, 64);
-  assert.equal(dictionary.metadata.lesson_dictionary_audit_additions, 62);
+  assert.equal(Object.keys(expected).length, 66);
+  assert.equal(dictionary.metadata.lesson_dictionary_audit_additions, 64);
   const translation = await import(path.join(root, 'src/lesson-translation.mjs'));
   translation.setGeneratedDictionary(dictionary.entries);
   for (const [word, arabic] of Object.entries(expected)) {
@@ -122,6 +123,9 @@ test('v62 lesson vocabulary includes reviewed Arabic translations for every miss
   }
   for (const word of ['rotatoria', 'riservata', 'retrovisore', 'morto', 'dosso', 'segnalazioni', 'acustiche', 'sicurezza', 'spazio']) {
     assert.equal(byWord.get(word).source, 'lesson-dictionary-audit-v62', word);
+  }
+  for (const word of ['spia', 'spie']) {
+    assert.equal(byWord.get(word).source, 'lesson-dictionary-audit-v63', word);
   }
   const prevailing = translation.translateTappedWord('prevalgono', []);
   assert.equal(prevailing.arabic, 'تتقدّم على');
@@ -159,6 +163,15 @@ test('compact lookup asset is in the offline PWA and its release hash matches', 
   assert.equal(crypto.createHash('sha256').update(fs.readFileSync(distPath)).digest('hex'), assetHash);
 });
 
+test('service-worker validator accepts the current dictionary schema and contextual overrides', () => {
+  const vm = require('node:vm');
+  const dictionary = json('data/italian_arabic_dictionary_lookup.json');
+  const sandbox = { self: { addEventListener() {} } };
+  vm.runInNewContext(`${read('public/sw.js')}\nglobalThis.__validateJsonPayload = validJsonPayload;`, sandbox);
+  assert.notEqual(dictionary.metadata.unique_question_bank_terms, dictionary.entries.length);
+  assert.equal(sandbox.__validateJsonPayload('/data/italian_arabic_dictionary_lookup.json', dictionary), true);
+});
+
 test('local word-lookup loader serves a single isolated word and never presents model output as reviewed', async () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const translation = await import(path.join(root, 'src/lesson-translation.mjs'));
@@ -166,7 +179,7 @@ test('local word-lookup loader serves a single isolated word and never presents 
   ok: url === '/data/italian_arabic_dictionary_lookup.json',
   json: async () => dictionary,
 }));
-  assert.equal(loaded, 5335);
+  assert.equal(loaded, 5336);
   assert.equal(translation.wordAtOffset('La corsia è libera.', 4), 'corsia');
   const approved = translation.translateTappedWord('corsia', []);
   assert.equal(approved.word, 'corsia');

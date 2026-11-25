@@ -1,24 +1,24 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-24T13:23:50+00:00",
+    "generated_at_utc": "2026-11-25T16:02:08+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
-    "unique_question_bank_terms": 5276,
+    "unique_question_bank_terms": 5277,
     "model": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
     "counts_by_status": {
       "contextual_override_v49": 9,
       "legacy_glossary_needs_review": 62,
-      "machine_draft_needs_review": 5183,
-      "reviewed_override": 81
+      "machine_draft_needs_review": 5182,
+      "reviewed_override": 83
     },
-    "total_entries": 5335,
-    "translated_entries": 5335,
-    "review_required_entries": 5254,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51/v61 requested terms, v54 video-context terms, and v61/v62 lesson-audit additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
-    "app_release": 62,
-    "terms_with_lookup_entry": 5335,
-    "entries_with_arabic_translation": 5335,
+    "total_entries": 5336,
+    "translated_entries": 5336,
+    "review_required_entries": 5253,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51/v61 requested terms, v54 video-context terms, and v61/v62/v63 lesson-audit additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+    "app_release": 63,
+    "terms_with_lookup_entry": 5336,
+    "entries_with_arabic_translation": 5336,
     "entries_without_lexical_translation": 1,
     "entries_with_safe_ui_fallback": 0,
     "owner_approved_corrections": 9,
@@ -33,7 +33,7 @@
     ],
     "requested_lemma_additions": 4,
     "video_context_additions": 3,
-    "lesson_dictionary_audit_additions": 62
+    "lesson_dictionary_audit_additions": 64
   },
   "entries": [
     {
@@ -54902,15 +54902,15 @@
     },
     {
       "word": "spia",
-      "translation_ar": "جاسوس",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "مؤشر تحذير",
+      "source": "lesson-dictionary-audit-v63",
+      "provider": "project-maintained",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "في سياق لوحة عدادات المركبة، spia تعني مؤشرًا أو ضوءًا تحذيريًا لا جاسوسًا.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "مؤشر تحذير"
     },
     {
       "word": "spingano",
@@ -64055,6 +64055,18 @@
       "status": "reviewed_override",
       "review_required": 0,
       "note": "في norma vigente: القاعدة القانونية النافذة."
+    },
+    {
+      "word": "spie",
+      "translation_ar": "مؤشرات تحذير",
+      "ui_fallback_ar": "مؤشرات تحذير",
+      "translation_kind": "contextual_translation",
+      "source": "lesson-dictionary-audit-v63",
+      "provider": "project-maintained",
+      "confidence": null,
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "صيغة الجمع في درس لوحة عدادات المركبة؛ تعني مؤشرات أو أضواء التحذير."
     }
   ]
 }

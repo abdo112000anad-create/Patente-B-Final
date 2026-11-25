@@ -16,6 +16,13 @@ if (!/<script id="bootGuard">[\s\S]*?<\/script>/.test(index)) throw new Error('M
 index = index.replace(/<script id="bootGuard">[\s\S]*?<\/script>/, `<script id="bootGuard">\n${guard}</script>`);
 const version = Number(index.match(/data-app-version="(\d+)"/)?.[1]);
 if (!Number.isSafeInteger(version) || version < 1) throw new Error('Missing or invalid data-app-version.');
+const versionedAssetRef = (pattern, replacement, label) => {
+  if (!pattern.test(index)) throw new Error(`Missing ${label} reference in index.html.`);
+  index = index.replace(pattern, replacement);
+};
+versionedAssetRef(/href="\/manifest\.webmanifest(?:\?v=[^"]*)?"/, `href="/manifest.webmanifest?v=${version}"`, 'manifest');
+versionedAssetRef(/src="\/runtime-config\.js(?:\?v=[^"]*)?"/, `src="/runtime-config.js?v=${version}"`, 'runtime configuration');
+versionedAssetRef(/src="\/app\.bundle\.js(?:\?v=[^"]*)?"/, `src="/app.bundle.js?v=${version}"`, 'app bundle');
 esbuild.buildSync({
   entryPoints: [path.join(root, 'src/app.js')],
   outfile: path.join(publicDir, 'app.bundle.js'),
@@ -30,6 +37,11 @@ const headerText = '/*\n' + Object.entries(headers).map(([k,v]) => `  ${k}: ${v}
   '/app.bundle.js\n  content-type: text/javascript; charset=utf-8\n\n' +
   '/sw.js\n  content-type: text/javascript; charset=utf-8\n  service-worker-allowed: /\n';
 fs.writeFileSync(path.join(publicDir, '_headers'), headerText);
+const swPath = path.join(publicDir, 'sw.js');
+const swSource = fs.readFileSync(swPath, 'utf8');
+const cacheNamePattern = /^const CACHE_NAME = 'patente-ar-v\d+([^']*)';/m;
+if (!cacheNamePattern.test(swSource)) throw new Error('Missing versioned Service Worker cache name.');
+fs.writeFileSync(swPath, swSource.replace(cacheNamePattern, (_, suffix) => `const CACHE_NAME = 'patente-ar-v${version}${suffix}';`));
 const release = {version, entry: `/app.bundle.js?v=${version}`, bundleSha256: sha256(path.join(publicDir, 'app.bundle.js')), lessonsSha256: sha256(path.join(root, 'data/lessons.json')), lessonSupportSha256: sha256(path.join(root, 'data/lesson-support.json')), questionBankSha256: sha256(path.join(root, 'data/questions.json')), dictionarySha256: sha256(path.join(root, 'data/italian_arabic_dictionary_lookup.json'))};
 fs.writeFileSync(path.join(publicDir, 'release.json'), JSON.stringify(release, null, 2) + '\n');
 fs.rmSync(dist, {recursive: true, force: true});

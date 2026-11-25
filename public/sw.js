@@ -1,4 +1,4 @@
-const CACHE_NAME = 'patente-ar-v62-learning-path-1';
+const CACHE_NAME = 'patente-ar-v65-native-tts-1';
 const FETCH_TIMEOUT_MS = 10000;
 const SHELL = [
   '/',
@@ -17,6 +17,7 @@ const SHELL = [
   '/src/v52-dark-overhaul.css',
   '/src/v53-mobile-nav.css',
   '/src/v57-learning-path.css',
+  '/src/v64-ui-fixes.css',
   '/app.bundle.js',
   '/manifest.webmanifest',
   '/favicon.svg',
@@ -51,6 +52,13 @@ const NETWORK_FIRST = new Set([
   '/src/v24.css',
   '/src/account-ui.css',
   '/src/theme-dark.css',
+  '/src/refactor-v38.css',
+  '/src/v40-audio.css',
+  '/src/v50-contrast.css',
+  '/src/v52-dark-overhaul.css',
+  '/src/v53-mobile-nav.css',
+  '/src/v57-learning-path.css',
+  '/src/v64-ui-fixes.css',
   '/app.bundle.js',
   '/manifest.webmanifest',
   '/data/lessons.json',
@@ -62,16 +70,7 @@ const NETWORK_FIRST = new Set([
 ]);
 
 async function cachedResponse(cache, request) {
-  const current = await cache.match(request, { ignoreSearch: true });
-  if (current) return current;
-  const older = (await caches.keys())
-    .filter(key => key.startsWith('patente-ar-') && key !== CACHE_NAME)
-    .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
-  for (const key of older) {
-    const response = await (await caches.open(key)).match(request, { ignoreSearch: true });
-    if (response) return response;
-  }
-  return undefined;
+  return (await cache.match(request, { ignoreSearch: true })) || undefined;
 }
 
 async function cacheUrl(cache, url) {
@@ -183,14 +182,18 @@ function validJsonPayload(pathname, data) {
   }
   if (pathname === '/data/italian_arabic_dictionary_lookup.json') {
     if (!data || data.schema_version !== 1 || !data.metadata || !Array.isArray(data.entries) || !data.entries.length ||
-        data.metadata.total_entries !== data.entries.length || data.metadata.unique_question_bank_terms !== data.entries.length || data.metadata.terms_with_lookup_entry !== data.entries.length) return false;
+        data.metadata.total_entries !== data.entries.length ||
+        !Number.isInteger(data.metadata.unique_question_bank_terms) ||
+        data.metadata.unique_question_bank_terms < 0 ||
+        data.metadata.unique_question_bank_terms > data.entries.length ||
+        data.metadata.terms_with_lookup_entry !== data.entries.length) return false;
     const words = new Set();
     return data.entries.every(entry => {
       if (!entry || typeof entry.word !== 'string' || !entry.word || words.has(entry.word) ||
-          typeof entry.source !== 'string' || !entry.source || typeof entry.provider !== 'string' || !entry.provider ||
-          !['reviewed_override', 'legacy_glossary_needs_review', 'machine_draft_needs_review', 'needs_translation'].includes(entry.status) ||
-          ![0, 1].includes(entry.review_required) || !(entry.confidence === null || Number.isFinite(entry.confidence)) ||
-          !(entry.translation_ar === null || typeof entry.translation_ar === 'string') || !(entry.ui_fallback_ar === null || typeof entry.ui_fallback_ar === 'string') || (entry.status === 'needs_translation' && !entry.ui_fallback_ar)) return false;
+        typeof entry.source !== 'string' || !entry.source || typeof entry.provider !== 'string' || !entry.provider ||
+        !['reviewed_override', 'legacy_glossary_needs_review', 'machine_draft_needs_review', 'contextual_override_v49', 'needs_translation'].includes(entry.status) ||
+        ![0, 1].includes(entry.review_required) || !(entry.confidence === null || Number.isFinite(entry.confidence)) ||
+        !(entry.translation_ar === null || typeof entry.translation_ar === 'string') || !(entry.ui_fallback_ar === null || typeof entry.ui_fallback_ar === 'string') || (entry.status === 'needs_translation' && !entry.ui_fallback_ar)) return false;
       words.add(entry.word);
       return true;
     });
@@ -300,7 +303,7 @@ self.addEventListener('fetch', event => {
   const cacheable = url.pathname === '/' || url.pathname === '/index.html' ||
     url.pathname.startsWith('/data/') || url.pathname.startsWith('/src/') ||
     url.pathname.startsWith('/quiz-images/') || url.pathname.startsWith('/lessons/') ||
-    url.pathname.startsWith('/app-icon-') || url.pathname.endsWith('.webmanifest') ||
+    url.pathname.startsWith('/app-icon-') || url.pathname.startsWith('/fonts/') || url.pathname.endsWith('.webmanifest') ||
     url.pathname === '/app.bundle.js' || url.pathname === '/favicon.svg' || url.pathname === '/offline-assets.json';
   if (!cacheable) return;
 

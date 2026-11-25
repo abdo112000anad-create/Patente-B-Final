@@ -41,18 +41,20 @@ test('v62 contains exactly 50 ordered lesson records with the eight required fie
   }
 });
 
-test('v62 illustrated lessons render all new supported SVG scene types', async () => {
+test('illustrated lessons render all supported SVG scene types', async () => {
   const support = json('data/lesson-support.json').lessons;
   const targetIds = new Set([
     ...Array.from({length: 4}, (_, i) => `u4-l${i + 1}`),
     ...Array.from({length: 4}, (_, i) => `u5-l${i + 1}`),
     ...Array.from({length: 4}, (_, i) => `u6-l${i + 1}`),
+    'u6-l5',
+    'u9-l6',
   ]);
   const {lessonAnimationMarkup, resolveSceneType} = await import(path.join(root, 'src/lesson-animation.mjs'));
   for (const scene of ['vulnerable-road-users', 'emergency', 'retromarcia', 'highway']) {
     const ids = Object.entries(support).filter(([, lesson]) => lesson.visual_script?.scene_id === scene).map(([id]) => id);
     assert.ok(ids.length > 0, `${scene} must be attached to a lesson`);
-    assert.ok(ids.every(id => targetIds.has(id)), `${scene} must map to one of the twelve replacement lessons`);
+    assert.ok(ids.every(id => targetIds.has(id)), `${scene} must map to an approved lesson`);
     for (const id of ids) {
       const lesson = support[id];
       assert.equal(resolveSceneType(lesson), scene, `${id} scene resolution`);
@@ -72,7 +74,7 @@ test('GitHub Actions builds the current PWA consumed by Capacitor before Android
   assert.equal(json('package.json').scripts.build, 'node scripts/build-pwa.cjs');
   assert.equal(json('capacitor.config.json').webDir, 'dist');
   assert.match(workflow, /npm run build[\s\S]*npx cap sync android/u);
-  assert.equal(release.version, 62);
+  assert.equal(release.version, 65);
   assert.equal(release.lessonsSha256, lessonHash);
   assert.equal(sha256('dist/data/lessons.json'), lessonHash);
   assert.equal(sha256('dist/app.bundle.js'), release.bundleSha256);
@@ -124,18 +126,6 @@ test('exam uses 30 random questions, 20 minutes, fails at the fourth mistake, an
   assert.match(app, /endedByFourthError\?'Simulazione non superata al quarto errore'/u);
   assert.match(app, /quiz\.answers\.findIndex\(value=>value===null\)/u);
   assert.match(app, /const css=marked\?'is-flagged':hasAnswer\?'is-answered':'is-blank'/u);
-});
-
-test('Web Speech is Italian-only at rate 0.8 and pitch 1.0; Native TTS is absent', () => {
-  const speech = read('src/speech.mjs');
-  const app = read('src/app.js');
-  const manifest = read('android/app/src/main/AndroidManifest.xml');
-  assert.match(speech, /utterance\.lang\s*=\s*ITALIAN_TTS_LOCALE/u);
-  assert.match(speech, /utterance\.pitch\s*=\s*1\.0/u);
-  assert.match(app, /const speechRate=\.8/u);
-  assert.match(speech, /VOICE_POLL_INTERVAL_MS\s*=\s*200/u);
-  assert.doesNotMatch(`${speech}\n${app}\n${manifest}`, /Piper|ONNX|SpeechSettingsPlugin|android\.intent\.action\.TTS_SERVICE/u);
-  assert.doesNotMatch(manifest, /<queries>/u);
 });
 
 test('word-tap translates from the local dictionary and resolves all required attached Italian pronouns', async () => {

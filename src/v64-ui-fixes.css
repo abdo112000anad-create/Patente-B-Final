@@ -1,0 +1,309 @@
+:root {
+  color-scheme: dark;
+  --v64-bg: #0b171d;
+  --v64-surface: #142733;
+  --v64-raised: #1b3440;
+  --v64-raised-2: #203b46;
+  --v64-ink: #f2f7f6;
+  --v64-muted: #c2d2d5;
+  --v64-line: #3a5964;
+  --v64-accent: #76e2d0;
+}
+
+html,
+body,
+.app-shell,
+.layout,
+.topbar,
+.side-nav,
+.mobile-nav,
+#main {
+  background-color: var(--v64-bg) !important;
+  color: var(--v64-ink) !important;
+  color-scheme: dark;
+}
+
+#main :where(article, .review-module, .review-module > header, .review-lesson,
+  .page-heading, .lesson-detail-head, .bank-hero, .bank-unit-title,
+  .bank-topic-row, .bank-tool-row, .practice-builder, .quiz-card,
+  .exam-review-cell, .quiz-figure, .question-figure, .figure-panel,
+  .question-figure-source-note,
+  .quick-check-card, .quick-error-item, .notice-banner, .simulation-hero,
+  .empty-state) {
+  background-color: var(--v64-surface) !important;
+  border-color: var(--v64-line) !important;
+  color: var(--v64-ink) !important;
+}
+
+#main .review-module {
+  overflow: hidden;
+  border: 1px solid var(--v64-line) !important;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #132732, #10232d) !important;
+  box-shadow: 0 10px 28px #050d1260;
+}
+
+#main .review-module > header {
+  background: linear-gradient(100deg, #1b3d48, #17323e) !important;
+  color: var(--v64-ink) !important;
+}
+
+#main .review-module > header :where(.pair-it, .pair-ar) {
+  color: var(--v64-ink) !important;
+}
+
+#main .review-lesson {
+  display: grid;
+  grid-template-columns: minmax(56px, 72px) minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #38545e !important;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #1b3440, #172d38) !important;
+  color: var(--v64-ink) !important;
+}
+
+#main .review-lesson :where(.review-lesson-copy, .review-heading, .pair-it, .pair-ar) {
+  min-width: 0;
+  color: var(--v64-ink) !important;
+  overflow-wrap: anywhere;
+}
+
+#main .review-lesson-copy > small {
+  display: block;
+  margin-block-start: 6px;
+  color: var(--v64-muted) !important;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+#main .review-lesson > .primary-button {
+  grid-column: 2 / 4;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+#main .question-figure,
+#main .quiz-figure {
+  box-sizing: border-box;
+  width: min(100%, 560px);
+  max-width: 100%;
+  min-width: 0;
+  margin: 12px auto;
+  overflow: hidden;
+  border: 1px solid var(--v64-line) !important;
+  border-radius: 16px;
+  background: #0d1c24 !important;
+}
+
+#main .question-figure-img,
+#main .quiz-figure img {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: clamp(150px, 42vh, 340px);
+  max-height: 48vh;
+  object-fit: contain;
+  background: #0a171e !important;
+}
+
+/* Component display rules must never override native hidden semantics. */
+#main [hidden] {
+  display: none !important;
+}
+
+#main .figure-source {
+  color: var(--v64-accent) !important;
+  font-size: .72rem;
+  font-weight: 750;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+#main .question-figure figcaption,
+#main .quiz-figure figcaption {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  padding: 10px 12px;
+  color: var(--v64-muted) !important;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+#main .question-figure-source-note {
+  display: grid;
+  gap: 6px;
+  box-sizing: border-box;
+  width: min(100%, 560px);
+  min-width: 0;
+  min-height: 110px;
+  margin: 12px auto;
+  padding: 14px;
+  border: 1px dashed #66808a !important;
+  border-radius: 16px;
+  background: #18303a !important;
+  color: var(--v64-ink) !important;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+#main .question-figure-source-note :where(small, strong) {
+  color: var(--v64-ink) !important;
+  overflow-wrap: anywhere;
+}
+
+#main .question-figure-source-note a {
+  color: var(--v64-accent) !important;
+}
+
+#main :where(input, select, textarea) {
+  color-scheme: dark;
+  background-color: #142733 !important;
+  border-color: var(--v64-line) !important;
+  color: var(--v64-ink) !important;
+}
+
+#main :where(.bank-hero, .page-heading, .notice-banner, .quiz-card, .simulation-hero,
+  .quick-check-card, .quick-error-item) :where(p, h1, h2, h3, small, span, strong) {
+  color: inherit;
+}
+
+#main :where(.review-module, .review-lesson, .quiz-card, .bank-hero, .notice-banner,
+  .question-figure-source-note) :where(a:not(.primary-button)) {
+  color: var(--v64-accent);
+}
+
+#main .review-module-list,
+#main .review-lesson,
+#main .review-lesson-copy,
+#main .review-lesson-copy > small,
+#main .quiz-card,
+#main .quiz-figure,
+#main .question-figure,
+#main .question-figure-source-note {
+  min-width: 0;
+}
+
+#main .quiz-card {
+  overflow: hidden;
+}
+
+#main .quiz-tags,
+#main .quiz-topline,
+#main .answer-buttons,
+#main .quiz-controls {
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+#main .arabic-question,
+#main .italian-question,
+#main .review-heading,
+#main .quiz-explanation {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 430px) {
+  #main .review-lesson {
+    grid-template-columns: minmax(54px, 64px) minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 9px;
+  }
+
+  #main .review-lesson-copy > small {
+    font-size: .78rem;
+  }
+
+  #main .review-lesson > .primary-button {
+    grid-column: 2 / 4;
+  }
+
+  #main .quiz-figure img,
+  #main .question-figure-img {
+    height: clamp(140px, 40vh, 300px);
+  }
+}
+
+
+/* Inline lesson schematics: scalable, bilingual, dark-surface artwork. */
+#main .lesson-detail-head {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+#main .lesson-detail-head > .lesson-svg-figure {
+  width: 100%;
+  max-width: 760px;
+  margin: 12px 0 0;
+}
+
+#main .lesson-svg-figure {
+  box-sizing: border-box;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #38566b;
+  border-radius: 22px;
+  background: #1e293b;
+  box-shadow: 0 12px 28px rgba(2, 10, 18, .32);
+}
+
+#main .lesson-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 760 / 320;
+}
+
+#main .lesson-svg-figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 14px;
+  padding: 9px 13px;
+  color: #c7dbe5;
+  background: #162532;
+  font-size: .78rem;
+  line-height: 1.6;
+}
+
+#main .review-lesson {
+  grid-template-columns: minmax(88px, 104px) minmax(0, 1fr) auto;
+}
+
+#main .review-lesson > .lesson-svg-figure.is-compact {
+  width: 100%;
+  max-width: 104px;
+  margin: 0;
+  border-radius: 12px;
+  align-self: center;
+}
+
+#main .review-lesson > .lesson-svg-figure.is-compact .lesson-svg {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 430px) {
+  #main .review-lesson {
+    grid-template-columns: minmax(64px, 72px) minmax(0, 1fr) auto;
+  }
+
+  #main .review-lesson > .lesson-svg-figure.is-compact {
+    max-width: 72px;
+    border-radius: 9px;
+  }
+
+  #main .lesson-detail-head > .lesson-svg-figure {
+    border-radius: 17px;
+  }
+}

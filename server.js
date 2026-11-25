@@ -11,9 +11,10 @@ const PUBLIC = path.join(ROOT, 'public');
 const DIST = path.join(ROOT, 'dist');
 const SECURITY_HEADERS = makeSecurityHeaders(fs.readFileSync(path.join(DIST, 'index.html'), 'utf8'));
 const PORT = Number(process.env.PORT || 3000);
-const PUBLIC_FILES = new Set(['favicon.svg', 'app-icon-192.png', 'app-icon-512.png', 'app-icon-maskable-512.png', 'manifest.webmanifest', 'sw.js', 'manus-routes.json', 'offline-assets.json', 'app.bundle.js', 'release.json']);
-const STATIC_SOURCE_FILES = new Set(['app.js', 'styles.css', 'rebuild.css', 'v24.css', 'progress-backup.mjs', 'session-recovery.mjs', 'startup.mjs', 'boot-guard.js', 'account-ui.css', 'theme-dark.css']);
-const STATIC_DATA_FILES = new Set(['questions.json', 'lessons.json', 'topic-labels.json', 'similar-groups.json']);
+const PUBLIC_FILES = new Set(['favicon.svg', 'app-icon-192.png', 'app-icon-512.png', 'app-icon-maskable-512.png', 'manifest.webmanifest', 'sw.js', 'manus-routes.json', 'offline-assets.json', 'app.bundle.js', 'release.json', 'runtime-config.js']);
+const STATIC_SOURCE_FILES = new Set(['app.js', 'styles.css', 'rebuild.css', 'v24.css', 'progress-backup.mjs', 'session-recovery.mjs', 'startup.mjs', 'boot-guard.js', 'account-ui.css', 'theme-dark.css', 'v29-theme.css', 'refactor-v38.css', 'v40-audio.css', 'v50-contrast.css', 'v52-dark-overhaul.css', 'v53-mobile-nav.css', 'v57-learning-path.css', 'v64-ui-fixes.css']);
+const STATIC_DATA_FILES = new Set(['questions.json', 'lessons.json', 'lesson-support.json', 'topic-labels.json', 'similar-groups.json', 'italian_arabic_dictionary_lookup.json']);
+const STATIC_FONT_FILES = new Set(['Cairo-Variable.ttf', 'OFL.txt']);
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8',
   '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8',
@@ -45,6 +46,7 @@ function resolveStaticFile(pathname) {
   if (segments.length === 1 && PUBLIC_FILES.has(segments[0])) return path.join(PUBLIC, segments[0]);
   if (segments.length === 2 && segments[0] === 'src' && STATIC_SOURCE_FILES.has(segments[1])) return path.join(ROOT, ...segments);
   if (segments.length === 2 && segments[0] === 'data' && STATIC_DATA_FILES.has(segments[1])) return path.join(ROOT, ...segments);
+  if (segments.length === 2 && segments[0] === 'fonts' && STATIC_FONT_FILES.has(segments[1])) return path.join(PUBLIC, ...segments);
   if (segments.length === 2 && (segments[0] === 'quiz-images' || segments[0] === 'lessons') && /\.(?:jpg|webp|svg)$/i.test(segments[1])) return path.join(PUBLIC, ...segments);
   return null;
 }
@@ -61,7 +63,7 @@ function serveStatic(req, res, pathname) {
       res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8', 'x-content-type-options': 'nosniff' }); res.end('Not found'); return;
     }
     const type = MIME[path.extname(file).toLowerCase()] || 'application/octet-stream';
-    const noCache = ['index.html', 'sw.js', 'manus-routes.json', 'manifest.webmanifest', 'app.bundle.js', 'release.json'].includes(path.basename(file));
+    const noCache = ['index.html', 'sw.js', 'manus-routes.json', 'manifest.webmanifest', 'app.bundle.js', 'release.json', 'runtime-config.js'].includes(path.basename(file));
     const compressible = /^(text\/|application\/(json|javascript|manifest\+json))/.test(type) || type === 'image/svg+xml';
     const gzip = compressible && stat.size > 1024 && /\bgzip\b/.test(req.headers['accept-encoding'] || '');
     const headers = {
@@ -89,4 +91,8 @@ const server = http.createServer((req, res) => {
   serveStatic(req, res, url.pathname);
 });
 
-server.listen(PORT, '0.0.0.0', () => console.log(`Patente server listening on 0.0.0.0:${PORT}`));
+if (require.main === module) {
+  server.listen(PORT, '0.0.0.0', () => console.log(`Patente server listening on 0.0.0.0:${PORT}`));
+}
+
+module.exports = {server, resolveStaticFile};

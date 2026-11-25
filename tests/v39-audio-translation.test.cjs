@@ -52,9 +52,9 @@ test('only project-approved terms are presented as reviewed overrides', () => {
   assert.ok(app.includes('document.querySelector(\'#translationTooltipNote\').textContent=matched.note'));
 });
 
-test('v62 ships the corrected dictionary in JSON and a valid SQLite asset', () => {
+test('v63 ships the corrected dictionary in JSON and a valid SQLite asset', () => {
   const dictionary = JSON.parse(read('data/italian_arabic_dictionary_lookup.json'));
-  assert.equal(dictionary.entries.length, 5335);
+  assert.equal(dictionary.entries.length, 5336);
   assert.ok(dictionary.entries.every(row => row.word && row.translation_ar));
   assert.equal(dictionary.entries.filter(row => row.status === 'fallback_draft_needs_review').length, 0);
   assert.equal(dictionary.entries.filter(row => row.source === 'owner-approved-correction-v42' && row.status === 'reviewed_override' && row.review_required === 0).length, 9);
@@ -73,177 +73,11 @@ test('v62 ships the corrected dictionary in JSON and a valid SQLite asset', () =
   assert.equal(db.subarray(0, 16).toString('ascii'), 'SQLite format 3\0');
 });
 
-test('v51 uses Web Speech only, with Italian lesson audio and no bundled local TTS', () => {
-  const index = read('index.html');
-  const app = read('src/app.js');
-  const speech = read('src/speech.mjs');
-  const mainActivity = read('android/app/src/main/java/it/patenteb/sideload/v29/MainActivity.java');
-  const gradle = read('android/app/build.gradle');
-  const manifest = read('android/app/src/main/AndroidManifest.xml');
-  assert.match(index, /data-audio-backend="web-speech"/u);
-  assert.match(speech, /speechSynthesis|SpeechSynthesisUtterance/u);
-  assert.match(speech, /getVoices\(\)/u);
-  assert.match(app, /createSpeechController\(\{getRate:/u);
-  assert.ok(app.includes("ITALIAN_TTS_LOCALE} from './speech.mjs'"));
-  assert.doesNotMatch(speech, /playItalianAudio|isAudioUnlocked/u);
-  assert.match(mainActivity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);
-  assert.doesNotMatch(mainActivity, /SpeechSettingsPlugin/u);
-  assert.doesNotMatch(manifest, /TTS_SERVICE/u);
-  assert.doesNotMatch(`${app}\n${speech}\n${gradle}\n${manifest}\n${mainActivity}`, /Piper|piperAlpha|nativeTts|ONNX|sherpa-onnx|piper-phonemize/u);
-  for (const rel of ['android/app/src/piperAlpha', 'android/app/src/main/assets/piper']) {
-    assert.equal(fs.existsSync(path.join(root, rel)), false, `${rel} must remain absent`);
-  }
-  assert.equal(fs.existsSync(path.join(root, 'scripts/build-piper-alpha.sh')), false);
-  assert.equal(fs.existsSync(path.join(root, 'scripts/download_piper_runtime.sh')), false);
-  assert.match(app, /Capacitor\.isNativePlatform\(\)/u);
-});
-
 test('v43 top bar keeps the brand only and removes install controls and listeners', () => {
   const index = read('index.html');
   const app = read('src/app.js');
   assert.doesNotMatch(index, /installApp|installDialog|install-button|Installa|تثبيت التطبيق/u);
   assert.doesNotMatch(app, /installPrompt|beforeinstallprompt|appinstalled|showInstallHelp|updateInstallButton|isStandalone/u);
-});
-
-test('Web Speech speaks Italian only and rejects Arabic playback requests', async () => {
-  const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
-  const utterances = [];
-  class FakeUtterance { constructor(text) { this.text = text; } }
-  const voices = [{name: 'Italian', lang: 'it-IT'}, {name: 'Arabic', lang: 'ar-EG'}];
-  const webSpeech = {
-    Utterance: FakeUtterance,
-    synthesis: {getVoices: () => voices, speak: utterance => { utterances.push(utterance); queueMicrotask(() => utterance.onend?.()); }, cancel() {}, pause() {}, resume() {}}
-  };
-  const states = [];
-  const controller = createSpeechController({webSpeech, onStateChange: state => states.push(state)});
-  assert.equal(await controller.speak('Ciao, prudenza.', 'it-IT'), true);
-  assert.equal(await controller.speak('يجب القيادة بحذر.', 'ar-EG'), false);
-  assert.deepEqual(utterances.map(({text, lang}) => ({text, lang})), [{text: 'Ciao, prudenza.', lang: 'it-IT'}]);
-  assert.equal(utterances[0].voice, voices[0]);
-  assert.equal(utterances[0].rate, 0.8);
-  for (const utterance of utterances) {
-    assert.equal(utterance.pitch, 1.0);
-    assert.equal(utterance.volume, 1.0);
-  }
-  assert.ok(states.some(state => state.status === 'playing' && state.voiceSource === 'browser' && state.qualityHint === 'device-speech'));
-  assert.equal(controller.state, 'idle');
-});
-
-test('missing or incomplete speech engines fail safely and stop clears the error', async () => {
-  const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
-  const states = [];
-  const controller = createSpeechController({webSpeech: {synthesis: {}, Utterance: null}, onStateChange: state => states.push(state)});
-  assert.equal(await controller.speak('Ciao.', 'it-IT'), false);
-  assert.equal(controller.state, 'error');
-  assert.ok(states.some(state => state.status === 'error'));
-  await controller.stop();
-  assert.equal(controller.state, 'idle');
-});
-
-test('stopping a pending browser fallback cancels it without an unhandled error', async () => {
-  const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
-  let current = null;
-  let cancelCount = 0;
-  class FakeUtterance { constructor(text) { this.text = text; } }
-  const webSpeech = {
-    Utterance: FakeUtterance,
-    synthesis: {
-      getVoices: () => [{name: 'Italian', lang: 'it-IT'}],
-      speak: utterance => { current = utterance; },
-      cancel: () => { cancelCount += 1; current?.onerror?.({error: 'canceled'}); },
-      pause() {},
-      resume() {}
-    }
-  };
-  const controller = createSpeechController({webSpeech});
-  const playing = controller.speak('Una frase.', 'it-IT');
-  const deadline = Date.now() + 1000;
-  while (!current && Date.now() < deadline) await new Promise(resolve => setTimeout(resolve, 10));
-  assert.ok(current);
-  await controller.stop();
-  assert.equal(await playing, false);
-  assert.ok(cancelCount >= 2);
-  assert.equal(controller.state, 'idle');
-});
-
-test('Web Speech waits briefly for Italian voices before falling back to the system language selector', async () => {
-  const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
-  const utterances = [];
-  const listeners = new Set();
-  const states = [];
-  let voices = [];
-  let cancelCount = 0;
-  class FakeUtterance { constructor(text) { this.text = text; } }
-  const italianVoice = {name: 'Italian', lang: 'it-IT'};
-  const webSpeech = {
-    Utterance: FakeUtterance,
-    synthesis: {
-      getVoices: () => voices,
-      addEventListener: (name, listener) => { if (name === 'voiceschanged') listeners.add(listener); },
-      removeEventListener: (name, listener) => { if (name === 'voiceschanged') listeners.delete(listener); },
-      speak: utterance => { utterances.push(utterance); queueMicrotask(() => utterance.onend?.()); },
-      cancel() { cancelCount += 1; }
-    }
-  };
-  const controller = createSpeechController({webSpeech, onStateChange: state => states.push(state)});
-  const speaking = controller.speak('Voce di sistema.', 'it-IT');
-  await new Promise(resolve => setImmediate(resolve));
-  assert.ok(states.some(state => state.status === 'preparing'));
-  assert.equal(utterances.length, 0);
-  voices = [italianVoice];
-  for (const listener of [...listeners]) listener();
-  assert.equal(await speaking, true);
-  assert.equal(utterances.length, 1);
-  assert.equal(utterances[0].voice, italianVoice);
-  assert.equal(cancelCount, 1);
-  assert.equal(listeners.size, 0);
-});
-
-test('stopping while voices load cleans up the listener and never speaks', async () => {
-  const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
-  const listeners = new Set();
-  const utterances = [];
-  let cancelCount = 0;
-  class FakeUtterance { constructor(text) { this.text = text; } }
-  const webSpeech = {
-    Utterance: FakeUtterance,
-    synthesis: {
-      getVoices: () => [],
-      addEventListener: (name, listener) => { if (name === 'voiceschanged') listeners.add(listener); },
-      removeEventListener: (name, listener) => { if (name === 'voiceschanged') listeners.delete(listener); },
-      speak: utterance => utterances.push(utterance),
-      cancel() { cancelCount += 1; }
-    }
-  };
-  const controller = createSpeechController({webSpeech});
-  const speaking = controller.speak('Una frase.', 'it-IT');
-  await new Promise(resolve => setImmediate(resolve));
-  assert.equal(listeners.size, 1);
-  await controller.stop();
-  assert.equal(await speaking, false);
-  assert.equal(listeners.size, 0);
-  assert.equal(utterances.length, 0);
-  assert.equal(cancelCount, 2);
-  assert.equal(controller.state, 'idle');
-});
-
-test('Web Speech requests it-IT when the voice list is unavailable', async () => {
-  const { createSpeechController } = await import(path.join(root, 'src/speech.mjs'));
-  class FakeUtterance { constructor(text) { this.text = text; } }
-  const states = [];
-  const utterances = [];
-  const webSpeech = {
-    Utterance: FakeUtterance,
-    synthesis: {getVoices() { throw new Error('voice list unavailable'); }, speak(utterance) { utterances.push(utterance); queueMicrotask(() => utterance.onend?.()); }, cancel() {}}
-  };
-  const controller = createSpeechController({webSpeech, onStateChange: state => states.push(state)});
-  assert.equal(await controller.speak('Ciao.', 'it-IT'), true);
-  assert.equal(utterances.length, 1);
-  assert.equal(utterances[0].lang, 'it-IT');
-  assert.equal(utterances[0].voice, undefined);
-  assert.equal(utterances[0].rate, 0.8);
-  assert.equal(utterances[0].pitch, 1.0);
-  assert.equal(controller.state, 'idle');
 });
 
 test('published video links remain high-contrast controls and unpublished lessons are status-only', () => {

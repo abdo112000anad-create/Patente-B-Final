@@ -67,21 +67,6 @@ test('a single click opens the tapped word card without a long-press timer', () 
   assert.doesNotMatch(app, /wordHoldTimer|heldItalianTarget|setTimeout\(\(\)=>\{openTappedWord/u);
 });
 
-test('v51 keeps Web Speech lesson controls and removes native/local TTS paths', () => {
-  const index = read('index.html');
-  const app = read('src/app.js');
-  const speech = read('src/speech.mjs');
-  const mainActivity = read('android/app/src/main/java/it/patenteb/sideload/v29/MainActivity.java');
-  assert.match(index, /data-audio-backend="web-speech"/u);
-  assert.match(index, /speechPlaybackBar/u);
-  assert.match(app, /createSpeechController\(\{getRate:/u);
-  assert.match(app, /speak\(lessonItalianAudio\.dataset\.ttsText/u);
-  assert.match(speech, /SpeechSynthesisUtterance|speechSynthesis/u);
-  assert.doesNotMatch(`${app}\n${speech}\n${mainActivity}`, /Piper|nativeTts|nativeEngineDisabled|ONNX/u);
-  assert.match(mainActivity, /registerPlugin\(RewardedAdsPlugin\.class\)/u);
-  assert.doesNotMatch(mainActivity, /SpeechSettingsPlugin/u);
-});
-
 test('lesson renders accessible topic-specific 2D diagrams without claiming 3D', () => {
   const animation = read('src/lesson-animation.mjs');
   assert.match(animation, /\$\{sceneSvg\(type\)\}/u);

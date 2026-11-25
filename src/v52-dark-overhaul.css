@@ -102,8 +102,6 @@ main {
 }
 
 :root :is(
-  .lesson-image img,
-  .lesson-visual img,
   .figure-panel img,
   .lesson-illustration img,
   .course-unit-number,

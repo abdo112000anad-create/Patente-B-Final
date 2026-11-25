@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the v62 SQLite dictionary and its matching JSON lookup."""
+"""Build the v63 SQLite dictionary and its matching JSON lookup."""
 from __future__ import annotations
 import hashlib
 import json
@@ -14,8 +14,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 JSON_PATH = ROOT / "data/italian_arabic_dictionary_lookup.json"
 DB_PATH = ROOT / "android/app/src/main/assets/dictionary.db"
-APP_VERSION = 62
-EXPECTED_WORD_COUNT = 5335
+APP_VERSION = 63
+EXPECTED_WORD_COUNT = 5336
 
 # User-requested standalone lemma, kept separate from question-bank extraction.
 REQUESTED_LEMMA_ADDITIONS = {
@@ -130,12 +130,19 @@ V62_LESSON_DICTIONARY_ADDITIONS = {
     "legale": ("قانوني", "lexical_translation", "صفة conseguenza legale: نتيجة قانونية."),
     "vigente": ("نافذ / ساري المفعول", "lexical_translation", "في norma vigente: القاعدة القانونية النافذة."),
 }
+V63_LESSON_DICTIONARY_ADDITIONS = {
+    "spia": ("مؤشر تحذير", "contextual_translation", "في سياق لوحة عدادات المركبة، spia تعني مؤشرًا أو ضوءًا تحذيريًا لا جاسوسًا."),
+    "spie": ("مؤشرات تحذير", "contextual_translation", "صيغة الجمع في درس لوحة عدادات المركبة؛ تعني مؤشرات أو أضواء التحذير."),
+}
 LESSON_DICTIONARY_ADDITIONS.update(V62_LESSON_DICTIONARY_ADDITIONS)
+LESSON_DICTIONARY_ADDITIONS.update(V63_LESSON_DICTIONARY_ADDITIONS)
 LESSON_DICTIONARY_SOURCES = {
-    word: "lesson-dictionary-audit-v62" if word in V62_LESSON_DICTIONARY_ADDITIONS else "lesson-dictionary-audit-v61"
+    word: "lesson-dictionary-audit-v63" if word in V63_LESSON_DICTIONARY_ADDITIONS
+    else "lesson-dictionary-audit-v62" if word in V62_LESSON_DICTIONARY_ADDITIONS
+    else "lesson-dictionary-audit-v61"
     for word in LESSON_DICTIONARY_ADDITIONS
 }
-QUESTION_BANK_AUDIT_OVERRIDES = {"prescrive", "rotatoria", "riservata", "retrovisore", "morto", "dosso", "segnalazioni", "acustiche", "sicurezza", "spazio"}
+QUESTION_BANK_AUDIT_OVERRIDES = {"prescrive", "rotatoria", "riservata", "retrovisore", "morto", "dosso", "segnalazioni", "acustiche", "sicurezza", "spazio", "spia", "spie"}
 PROJECT_ADDITIONS = {**REQUESTED_LEMMA_ADDITIONS, **VIDEO_CONTEXT_ADDITIONS, **LESSON_DICTIONARY_ADDITIONS}
 PROJECT_ADDITION_SOURCES = {**REQUESTED_LEMMA_SOURCES, **VIDEO_CONTEXT_SOURCES, **LESSON_DICTIONARY_SOURCES}
 
@@ -198,7 +205,7 @@ def normalized_word(value: object) -> str:
 
 
 def write_json_atomically(payload: dict) -> None:
-    fd, temp_name = tempfile.mkstemp(prefix="dictionary-v62-", suffix=".json", dir=JSON_PATH.parent)
+    fd, temp_name = tempfile.mkstemp(prefix="dictionary-v63-", suffix=".json", dir=JSON_PATH.parent)
     os.close(fd)
     try:
         Path(temp_name).write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -305,7 +312,7 @@ def main() -> int:
         "entries_with_safe_ui_fallback": 0,
         "owner_approved_corrections": len(OWNER_CORRECTIONS),
         "excluded_single_letter_artifacts": sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS),
-        "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51/v61 requested terms, v54 video-context terms, and v61/v62 lesson-audit additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+        "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51/v61 requested terms, v54 video-context terms, and v61/v62/v63 lesson-audit additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
         "requested_lemma_additions": len(REQUESTED_LEMMA_ADDITIONS),
         "video_context_additions": len(VIDEO_CONTEXT_ADDITIONS),
         "lesson_dictionary_audit_additions": len(LESSON_DICTIONARY_ADDITIONS),
@@ -363,7 +370,7 @@ def main() -> int:
             "lesson_dictionary_audit_rows": str(len(LESSON_DICTIONARY_ADDITIONS)),
             "unresolved_rows_given_transparent_fallback": "0",
             "excluded_single_letter_artifacts": ",".join(sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS)),
-            "translation_notice": "Automatic translations remain drafts unless status is reviewed_override; reviewed overrides include requested v47/v51/v61 lemmas, v54 video-context translations, and v61/v62 lesson-audit terms.",
+            "translation_notice": "Automatic translations remain drafts unless status is reviewed_override; reviewed overrides include requested v47/v51/v61 lemmas, v54 video-context translations, and v61/v62/v63 lesson-audit terms.",
             "fallback_notice": "The v42 lookup excludes isolated single-letter extraction artifacts and includes owner-approved corrections.",
         }
         db.executemany("INSERT INTO Metadata(Key, Value) VALUES (?, ?)", sorted(sqlite_metadata.items()))

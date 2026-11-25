@@ -41700,6 +41700,7 @@ This typically indicates that your device does not have a healthy Internet conne
   var VERSION = 1;
   var MAX_FILE_BYTES = 2e6;
   var MAX_COUNT = 1e9;
+  var MAX_QUICK_CHECKS = 150;
   var VALID_MODES = /* @__PURE__ */ new Set([
     "exam",
     "visual",
@@ -41761,6 +41762,48 @@ This typically indicates that your device does not have a healthy Internet conne
   function validTimestamp(value) {
     const number = Number(value);
     return Number.isFinite(number) && number >= 0 && number <= 99999999999999 ? Math.trunc(number) : 0;
+  }
+  function quickCheckParts(key, allowedLessons = null) {
+    if (typeof key !== "string") return null;
+    const match = /^(u\d+-l\d+)::q([1-3])$/.exec(key);
+    if (!match || allowedLessons && !allowedLessons.has(match[1])) return null;
+    return { lessonId: match[1], questionIndex: Number(match[2]) - 1 };
+  }
+  function normalizeWrongAnswers(value, allowedLessons = null) {
+    if (!Array.isArray(value)) return [];
+    const result = /* @__PURE__ */ new Set();
+    for (const key of value) {
+      const parts = quickCheckParts(key, allowedLessons);
+      if (!parts) continue;
+      result.add(`${parts.lessonId}::q${parts.questionIndex + 1}`);
+      if (result.size >= MAX_QUICK_CHECKS) break;
+    }
+    return [...result];
+  }
+  function normalizeQuickCheckSchedule(value, allowedLessons = null) {
+    const result = /* @__PURE__ */ Object.create(null);
+    if (!plainObject(value)) return result;
+    for (const [key, item] of Object.entries(value).slice(0, MAX_QUICK_CHECKS)) {
+      const parts = quickCheckParts(key, allowedLessons);
+      if (!parts || !plainObject(item)) continue;
+      const attempts = safeCount(item.attempts);
+      const lastAnsweredAt = validTimestamp(item.lastAnsweredAt);
+      const dueAt = validTimestamp(item.dueAt);
+      const intervalDays = Number(item.intervalDays);
+      if (item.lessonId !== parts.lessonId || Number(item.questionIndex) !== parts.questionIndex || attempts < 1 || !["VERO", "FALSO"].includes(item.lastAnswer) || typeof item.lastCorrect !== "boolean" || typeof item.firstAttemptCorrect !== "boolean" || !lastAnsweredAt || !dueAt || ![1, 3].includes(intervalDays) || intervalDays !== (item.lastCorrect ? 3 : 1) || dueAt !== lastAnsweredAt + intervalDays * 864e5) continue;
+      result[key] = {
+        lessonId: parts.lessonId,
+        questionIndex: parts.questionIndex,
+        attempts,
+        lastAnswer: item.lastAnswer,
+        lastCorrect: item.lastCorrect,
+        firstAttemptCorrect: item.firstAttemptCorrect,
+        lastAnsweredAt,
+        intervalDays,
+        dueAt
+      };
+    }
+    return result;
   }
   function normalizeQuestionStats(value, allowedIds) {
     const result = /* @__PURE__ */ Object.create(null);
@@ -41827,6 +41870,8 @@ This typically indicates that your device does not have a healthy Internet conne
       completedLessons: [...state2.completedLessons || []],
       reviewedLessons: [...state2.reviewedLessons || []],
       sourceChecks: state2.sourceChecks || {},
+      wrongAnswers: normalizeWrongAnswers(state2.wrongAnswers),
+      quickCheckSchedule: normalizeQuickCheckSchedule(state2.quickCheckSchedule),
       lastLessonKey: state2.lastLessonKey || "",
       lastStudy: state2.lastStudy || "",
       streak: safeCount(state2.streak),
@@ -41859,6 +41904,8 @@ This typically indicates that your device does not have a healthy Internet conne
       completedLessons: lessonSet(progress.completedLessons, allowedLessons),
       reviewedLessons: lessonSet(progress.reviewedLessons, allowedLessons),
       sourceChecks: normalizeSourceChecks(progress.sourceChecks, allowedSourceChecks),
+      wrongAnswers: normalizeWrongAnswers(progress.wrongAnswers, allowedLessons),
+      quickCheckSchedule: normalizeQuickCheckSchedule(progress.quickCheckSchedule, allowedLessons),
       lastLessonKey,
       lastStudy: dateKey(progress.lastStudy),
       streak: safeCount(progress.streak),
@@ -42160,9 +42207,9 @@ This typically indicates that your device does not have a healthy Internet conne
   init_dist();
 
   // src/speech.mjs
-  function splitSpeechText(text, maxLength = 120) {
+  function splitSpeechText(text2, maxLength = 120) {
     maxLength = Math.max(1, Math.floor(maxLength));
-    const clean = String(text || "").trim();
+    const clean = String(text2 || "").trim();
     if (!clean) return [];
     const sentences = clean.split(/(?<=[.!?؟])\s+|\n+/u).map((part) => part.trim()).filter(Boolean);
     const chunks = [];
@@ -42192,155 +42239,23 @@ This typically indicates that your device does not have a healthy Internet conne
     return chunks;
   }
   var ITALIAN_TTS_LOCALE = "it-IT";
-  var ANDROID_WEBVIEW_SPEAK_DELAY_MS = 150;
-  var VOICE_WAIT_TIMEOUT_MS = 5e3;
-  var VOICE_POLL_INTERVAL_MS = 200;
+  var ITALIAN_TTS_RATE = 0.8;
+  var ITALIAN_TTS_PITCH = 1;
   function buildLessonSpeechTexts(lesson = {}) {
     const headingIt = String(lesson.titleIt || lesson.heading_it || "").trim();
     const bodyIt = String(lesson.summaryIt || lesson.body_it || "").trim();
     return { italian: [headingIt, bodyIt].filter(Boolean).join("\n\n") };
   }
-  function voiceNameFor() {
-    return "صوت إيطالي على الجهاز";
+  function serviceMessage() {
+    return "خدمة النطق الأصلية غير متاحة. افتح التطبيق على Android وتأكد من تفعيل محرك تحويل النص إلى كلام في إعدادات الهاتف.";
   }
-  function resolveWebSpeech(injected) {
-    var _a12, _b;
-    try {
-      const synthesis = (injected == null ? void 0 : injected.synthesis) ?? globalThis.speechSynthesis ?? ((_a12 = globalThis.window) == null ? void 0 : _a12.speechSynthesis);
-      const Utterance = (injected == null ? void 0 : injected.Utterance) ?? globalThis.SpeechSynthesisUtterance ?? ((_b = globalThis.window) == null ? void 0 : _b.SpeechSynthesisUtterance);
-      return synthesis && typeof synthesis.speak === "function" && typeof Utterance === "function" ? { synthesis, Utterance } : null;
-    } catch {
-      return null;
-    }
-  }
-  function readAvailableVoices(synthesis) {
-    try {
-      if (typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return [];
-      return Array.from(synthesis.getVoices() || []);
-    } catch {
-      return [];
-    }
-  }
-  function hasItalianVoice(voices) {
-    return Array.from(voices || []).some((voice) => String((voice == null ? void 0 : voice.lang) || "").toLowerCase().replace(/_/gu, "-").startsWith("it-") || String((voice == null ? void 0 : voice.lang) || "").toLowerCase() === "it");
-  }
-  function waitForVoices(synthesis, task, isCurrent, onWaiting) {
-    const initialVoices = readAvailableVoices(synthesis);
-    if (hasItalianVoice(initialVoices) || typeof (synthesis == null ? void 0 : synthesis.getVoices) !== "function") return Promise.resolve(initialVoices);
-    try {
-      console.log("[TTS] جارٍ تجهيز الصوت الإيطالي... انتظار تحميل أصوات النظام.");
-      onWaiting == null ? void 0 : onWaiting();
-    } catch {
-    }
-    return new Promise((resolve) => {
-      let settled = false;
-      let timeout = null;
-      let poll = null;
-      const cleanups = [];
-      const cleanup = () => {
-        if (timeout) clearTimeout(timeout);
-        if (poll) clearInterval(poll);
-        for (const removeListener of cleanups.splice(0)) {
-          try {
-            removeListener();
-          } catch {
-          }
-        }
-        if (task.cancelVoiceWait === cancel) task.cancelVoiceWait = null;
-      };
-      const finish = (voices) => {
-        if (settled) return;
-        settled = true;
-        cleanup();
-        resolve(Array.from(voices || []));
-      };
-      const check = () => {
-        if (!isCurrent()) {
-          finish([]);
-          return;
-        }
-        const voices = readAvailableVoices(synthesis);
-        if (hasItalianVoice(voices)) finish(voices);
-      };
-      const cancel = () => finish([]);
-      task.cancelVoiceWait = cancel;
-      timeout = setTimeout(() => finish(readAvailableVoices(synthesis)), VOICE_WAIT_TIMEOUT_MS);
-      poll = setInterval(check, VOICE_POLL_INTERVAL_MS);
-      try {
-        if (typeof synthesis.addEventListener === "function" && typeof synthesis.removeEventListener === "function") {
-          const remove = () => synthesis.removeEventListener("voiceschanged", check);
-          cleanups.push(remove);
-          synthesis.addEventListener("voiceschanged", check);
-        } else {
-          const previousHandler = synthesis.onvoiceschanged;
-          const chainedHandler = (event) => {
-            try {
-              if (typeof previousHandler === "function") previousHandler.call(synthesis, event);
-            } catch {
-            }
-            check();
-          };
-          synthesis.onvoiceschanged = chainedHandler;
-          cleanups.push(() => {
-            if (synthesis.onvoiceschanged === chainedHandler) synthesis.onvoiceschanged = previousHandler;
-          });
-        }
-      } catch {
-      }
-      check();
-    });
-  }
-  function hasExplicitVoiceQuality(voice) {
-    if ((voice == null ? void 0 : voice.natural) === true || (voice == null ? void 0 : voice.isNatural) === true || (voice == null ? void 0 : voice.enhanced) === true || (voice == null ? void 0 : voice.isEnhanced) === true) return true;
-    return [voice == null ? void 0 : voice.quality, voice == null ? void 0 : voice.voiceType].some((value) => ["natural", "enhanced", "neural", "premium"].includes(String(value || "").toLowerCase()));
-  }
-  function hasVoiceNameQualityHint(voice) {
-    return /\b(?:google|natural|premium|neural)\b/iu.test(String((voice == null ? void 0 : voice.name) || ""));
-  }
-  function voiceRank(voice) {
-    if (hasExplicitVoiceQuality(voice)) return 0;
-    if ((voice == null ? void 0 : voice.localService) === false) return 1;
-    if (hasVoiceNameQualityHint(voice)) return 2;
-    if ((voice == null ? void 0 : voice.default) === true) return 3;
-    return 4;
-  }
-  function bestVoice(voices) {
-    return [...voices].sort((left, right) => voiceRank(left) - voiceRank(right))[0] || null;
-  }
-  function chooseVoice(voices, locale = ITALIAN_TTS_LOCALE) {
-    try {
-      const desired = String(locale || ITALIAN_TTS_LOCALE).toLowerCase().replace(/_/gu, "-");
-      const matching = Array.from(voices || []).filter((voice) => String((voice == null ? void 0 : voice.lang) || "").toLowerCase().replace(/_/gu, "-").split("-")[0] === "it");
-      if (!matching.length) return null;
-      const exact = matching.filter((voice) => String((voice == null ? void 0 : voice.lang) || "").toLowerCase().replace(/_/gu, "-") === desired);
-      const preferred = (candidates) => candidates.filter((voice) => voiceRank(voice) <= 2);
-      return bestVoice(preferred(exact)) || bestVoice(exact) || bestVoice(preferred(matching)) || bestVoice(matching);
-    } catch {
-      return null;
-    }
-  }
-  function voiceInstallMessage() {
-    return "لم يتوفر صوت إيطالي للنطق. فعّل أو نزّل صوت اللغة الإيطالية من إعدادات تحويل النص إلى كلام في الهاتف، ثم أعد المحاولة.";
-  }
-  function speechServiceMessage() {
-    return "خدمة النطق غير متاحة على هذا الجهاز. تأكد من تفعيل محرك تحويل النص إلى كلام في إعدادات الهاتف، ثم أعد المحاولة.";
-  }
-  function voiceMetadataForLog(voice) {
-    const explicitQuality = hasExplicitVoiceQuality(voice);
-    return {
-      name: String((voice == null ? void 0 : voice.name) || ""),
-      lang: String((voice == null ? void 0 : voice.lang) || ""),
-      voiceURI: String((voice == null ? void 0 : voice.voiceURI) || ""),
-      localService: typeof (voice == null ? void 0 : voice.localService) === "boolean" ? voice.localService : "unknown",
-      default: (voice == null ? void 0 : voice.default) === true,
-      qualityMetadata: String((voice == null ? void 0 : voice.quality) || (voice == null ? void 0 : voice.voiceType) || "not reported"),
-      nameQualityHint: hasVoiceNameQualityHint(voice),
-      selectionEvidence: explicitQuality ? "engine-reported-quality" : (voice == null ? void 0 : voice.localService) === false ? "network-service" : hasVoiceNameQualityHint(voice) ? "unverified-name-hint" : "language-match"
-    };
+  function languageMessage() {
+    return "لا توجد حزمة صوت إيطالية it-IT على محرك الهاتف. نزّل الصوت الإيطالي من إعدادات تحويل النص إلى كلام، ثم أعد المحاولة.";
   }
   function createSpeechController({
-    webSpeech = null,
-    getRate = () => 0.8,
+    nativeTts = null,
+    isAndroidNative = () => false,
+    getRate = () => ITALIAN_TTS_RATE,
     onStateChange = () => {
     },
     onProgress = () => {
@@ -42351,6 +42266,8 @@ This typically indicates that your device does not have a healthy Internet conne
     let sequence = 0;
     let activeTask = null;
     let errorTimer = null;
+    let nativeReadyPromise = null;
+    let progressListenerPromise = null;
     const notify = (status, task = activeTask, error = "", extra = {}) => {
       try {
         onStateChange({
@@ -42359,9 +42276,9 @@ This typically indicates that your device does not have a healthy Internet conne
           locale: (task == null ? void 0 : task.locale) || "",
           kind: (task == null ? void 0 : task.kind) || "speech",
           progress: (task == null ? void 0 : task.progress) || 0,
-          voiceName: (task == null ? void 0 : task.voiceName) || "",
-          voiceSource: "browser",
-          qualityHint: "device-speech",
+          voiceName: (task == null ? void 0 : task.voiceName) || "Android system voice",
+          voiceSource: "android-native",
+          qualityHint: "system-native-tts",
           error,
           ...extra
         });
@@ -42378,46 +42295,82 @@ This typically indicates that your device does not have a healthy Internet conne
     const reportProgress = (task, value) => {
       task.progress = Math.max(0, Math.min(1, Number(value) || 0));
       try {
-        onProgress({ progress: task.progress, locale: task.locale, voiceName: task.voiceName, voiceSource: task.voiceSource || "browser" });
+        onProgress({ progress: task.progress, locale: task.locale, voiceName: task.voiceName, voiceSource: "android-native" });
       } catch {
       }
     };
-    const reportWordProgress = (task, index, source, charLength = 0) => {
+    const reportWordProgress = (task, index, charLength = 0) => {
       if (task.token !== sequence) return;
-      const text = String(task.currentSegmentText || "");
-      const charIndex = Math.max(0, Math.min(Math.max(0, text.length - 1), Math.floor(Number(index) || 0)));
+      const text2 = String(task.currentSegmentText || "");
+      const charIndex = Math.max(0, Math.min(Math.max(0, text2.length - 1), Math.floor(Number(index) || 0)));
       try {
         onWordProgress({
           button: task.button,
           locale: task.locale,
           kind: task.kind,
-          text,
+          text: text2,
           charIndex,
           charLength: Math.max(0, Number(charLength) || 0),
           progress: task.progress,
-          source,
-          approximate: source !== "web-boundary"
+          source: "android-range",
+          approximate: false
         });
       } catch {
       }
     };
     const rateFor = () => {
-      let selected = 0.8;
+      let selected = ITALIAN_TTS_RATE;
       try {
-        selected = Number(getRate()) || 0.8;
+        selected = Number(getRate()) || ITALIAN_TTS_RATE;
       } catch {
       }
       return Math.max(0.7, Math.min(1.3, selected));
     };
-    function stopBrowserSpeech() {
-      var _a12, _b, _c;
+    function ensureProgressListener() {
+      if (progressListenerPromise) return progressListenerPromise;
+      if (typeof (nativeTts == null ? void 0 : nativeTts.addListener) !== "function") return Promise.resolve();
+      progressListenerPromise = Promise.resolve(nativeTts.addListener("progress", (event) => {
+        const task = activeTask;
+        if (!task || task.token !== sequence || task.paused || (event == null ? void 0 : event.locale) !== ITALIAN_TTS_LOCALE) return;
+        const localIndex = Number(event == null ? void 0 : event.start);
+        if (!Number.isFinite(localIndex)) return;
+        reportWordProgress(task, task.currentChunkOffset + localIndex, Number(event == null ? void 0 : event.end) - localIndex);
+      })).catch((error) => {
+        progressListenerPromise = null;
+        throw error;
+      });
+      return progressListenerPromise;
+    }
+    async function ensureNativeEngine(task) {
+      if (!nativeTts || typeof nativeTts.initialize !== "function" || typeof nativeTts.speak !== "function") {
+        throw new Error("native-tts-plugin-unavailable");
+      }
+      if (typeof isAndroidNative !== "function" || !isAndroidNative()) throw new Error("android-native-runtime-required");
+      if (!nativeReadyPromise) {
+        nativeReadyPromise = Promise.resolve().then(() => nativeTts.initialize({ locale: ITALIAN_TTS_LOCALE })).then((result) => {
+          if ((result == null ? void 0 : result.ready) === false) {
+            if ((result == null ? void 0 : result.languageAvailable) === false || /language|locale|voice/iu.test(String((result == null ? void 0 : result.error) || ""))) throw new Error("language-unavailable");
+            throw new Error(String((result == null ? void 0 : result.error) || "native-tts-initialization-failed"));
+          }
+          if ((result == null ? void 0 : result.languageAvailable) === false) throw new Error("language-unavailable");
+          return result || {};
+        }).catch((error) => {
+          nativeReadyPromise = null;
+          throw error;
+        });
+      }
+      notify("preparing", task);
+      await Promise.all([nativeReadyPromise, ensureProgressListener()]);
+      return task.token === sequence;
+    }
+    async function stopNativeEngine() {
+      var _a12;
       try {
-        (_c = (_a12 = resolveWebSpeech(webSpeech)) == null ? void 0 : (_b = _a12.synthesis).cancel) == null ? void 0 : _c.call(_b);
+        await ((_a12 = nativeTts == null ? void 0 : nativeTts.stop) == null ? void 0 : _a12.call(nativeTts));
       } catch {
       }
     }
     function stop() {
-      var _a12;
       sequence += 1;
       if (errorTimer) {
         clearTimeout(errorTimer);
@@ -42425,9 +42378,8 @@ This typically indicates that your device does not have a healthy Internet conne
       }
       const previous = activeTask;
       activeTask = null;
-      (_a12 = previous == null ? void 0 : previous.cancelVoiceWait) == null ? void 0 : _a12.call(previous);
       if (previous) setButtonState(previous.button, "idle");
-      stopBrowserSpeech();
+      void stopNativeEngine();
       notify("idle", previous);
       return Promise.resolve();
     }
@@ -42438,28 +42390,20 @@ This typically indicates that your device does not have a healthy Internet conne
       return task.token === sequence;
     }
     function pause() {
-      var _a12, _b, _c;
       const task = activeTask;
       if (!task || task.failed || task.paused) return false;
       task.paused = true;
+      task.pausePending = true;
       setButtonState(task.button, "paused");
-      try {
-        (_c = (_a12 = resolveWebSpeech(webSpeech)) == null ? void 0 : (_b = _a12.synthesis).pause) == null ? void 0 : _c.call(_b);
-      } catch {
-      }
+      void stopNativeEngine();
       notify("paused", task);
       return true;
     }
     function resume() {
-      var _a12, _b, _c;
       const task = activeTask;
       if (!task || task.failed || !task.paused) return false;
       task.paused = false;
       setButtonState(task.button, "playing");
-      try {
-        (_c = (_a12 = resolveWebSpeech(webSpeech)) == null ? void 0 : (_b = _a12.synthesis).resume) == null ? void 0 : _c.call(_b);
-      } catch {
-      }
       for (const resolve of task.resumeWaiters.splice(0)) resolve();
       notify("playing", task);
       return true;
@@ -42472,9 +42416,9 @@ This typically indicates that your device does not have a healthy Internet conne
     }
     function showError(task, error, userMessage = "تعذّر تشغيل الصوت على هذا الجهاز.") {
       task.failed = true;
-      const reason = String((error == null ? void 0 : error.message) || error || "speech-engine-unavailable");
+      const reason = String((error == null ? void 0 : error.message) || error || "native-tts-unavailable");
       try {
-        console.warn("Web Speech playback failed on this device.", { locale: task.locale, reason });
+        console.warn("Android Native TTS playback failed.", { locale: task.locale, reason });
       } catch {
       }
       setButtonState(task.button, "error");
@@ -42488,90 +42432,22 @@ This typically indicates that your device does not have a healthy Internet conne
         errorTimer = null;
       }, 5e3);
     }
-    function speakWithWebSpeech(task, text, rate) {
-      const api = resolveWebSpeech(webSpeech);
-      if (!api) return Promise.reject(new Error("Web Speech API is unavailable on this device."));
-      return new Promise((resolve, reject) => {
-        let utterance = null;
-        let timeout = null;
-        let settled = false;
-        const finish = (callback, value) => {
-          if (settled) return;
-          settled = true;
-          if (timeout) clearTimeout(timeout);
-          if (utterance) {
-            utterance.onend = null;
-            utterance.onerror = null;
-            utterance.onboundary = null;
-          }
-          callback(value);
-        };
-        try {
-          utterance = new api.Utterance(text);
-          utterance.lang = ITALIAN_TTS_LOCALE;
-          utterance.rate = rate;
-          utterance.pitch = 1;
-          utterance.volume = 1;
-          if (task.selectedVoice) utterance.voice = task.selectedVoice;
-          utterance.onend = () => finish(resolve, task.token === sequence);
-          utterance.onboundary = (event) => {
-            if (task.token !== sequence || (event == null ? void 0 : event.name) && event.name !== "word") return;
-            const index = Number(event == null ? void 0 : event.charIndex);
-            if (!Number.isFinite(index)) return;
-            reportWordProgress(task, task.currentChunkOffset + index, "web-boundary", event == null ? void 0 : event.charLength);
-          };
-          utterance.onerror = (event) => {
-            if (task.token !== sequence) finish(resolve, false);
-            else finish(reject, new Error(`Web Speech API failed: ${String((event == null ? void 0 : event.error) || "unknown error")}`));
-          };
-          timeout = setTimeout(() => finish(reject, new Error("Web Speech API timed out.")), Math.max(2e4, Math.min(12e4, text.length * 350)));
-          setTimeout(() => {
-            if (settled) return;
-            if (task.token !== sequence) {
-              finish(resolve, false);
-              return;
-            }
-            try {
-              api.synthesis.speak(utterance);
-            } catch (error) {
-              finish(reject, error);
-            }
-          }, ANDROID_WEBVIEW_SPEAK_DELAY_MS);
-        } catch (error) {
-          finish(reject, error);
-        }
-      });
+    async function speakNative(task, text2) {
+      const result = await nativeTts.speak({ text: text2, locale: ITALIAN_TTS_LOCALE, rate: rateFor(), pitch: ITALIAN_TTS_PITCH });
+      return (result == null ? void 0 : result.completed) !== false && (result == null ? void 0 : result.cancelled) !== true && task.token === sequence;
     }
-    async function prepareWebVoice(task, api = resolveWebSpeech(webSpeech)) {
-      if (!api) throw new Error("Web Speech API is unavailable on this device.");
-      const voices = await waitForVoices(api.synthesis, task, () => task.token === sequence, () => notify("preparing", task));
-      if (task.token !== sequence) return false;
-      task.selectedVoice = chooseVoice(voices, ITALIAN_TTS_LOCALE);
-      task.voiceSource = "browser";
-      task.voiceName = task.selectedVoice ? voiceNameFor() : "Voce italiana scelta dal sistema";
-      if (task.selectedVoice) {
-        try {
-          console.log("[TTS] selected system voice metadata:", voiceMetadataForLog(task.selectedVoice));
-        } catch {
-        }
-      } else {
-        try {
-          console.log("[TTS] no listed Italian voice; requesting it-IT from the system speech engine.");
-        } catch {
-        }
+    async function speakChunk(task, text2) {
+      while (task.token === sequence) {
+        if (!await waitUntilResumed(task)) return false;
+        task.pausePending = false;
+        const completed = await speakNative(task, text2);
+        if (completed) return true;
+        if (!task.paused && !task.pausePending || task.token !== sequence) return false;
       }
-      return true;
-    }
-    async function speakChunk(task, text) {
-      if (!task.voicePrepared) {
-        if (!await prepareWebVoice(task)) return false;
-        task.voicePrepared = true;
-      }
-      await speakWithWebSpeech(task, text, rateFor());
-      return task.token === sequence;
+      return false;
     }
     async function runSegments(segments, locale, button, onSegment = null, kind = "speech") {
-      if (!String(locale || "").toLowerCase().startsWith("it")) {
+      if (String(locale || "").toLowerCase() !== ITALIAN_TTS_LOCALE.toLowerCase()) {
         await stop();
         return false;
       }
@@ -42581,14 +42457,13 @@ This typically indicates that your device does not have a healthy Internet conne
       if (token !== sequence) return false;
       const prepared = (segments || []).map((segment) => typeof segment === "string" ? { text: segment } : segment).filter((segment) => String((segment == null ? void 0 : segment.text) || "").trim());
       if (!prepared.length) return false;
-      const api = resolveWebSpeech(webSpeech);
       const chunksBySegment = prepared.map((segment) => {
         let cursor = 0;
-        return splitSpeechText(segment.text).map((text) => {
-          const found = String(segment.text).indexOf(text, cursor);
+        return splitSpeechText(segment.text).map((text2) => {
+          const found = String(segment.text).indexOf(text2, cursor);
           const offset = found >= 0 ? found : cursor;
-          cursor = offset + text.length;
-          return { text, offset };
+          cursor = offset + text2.length;
+          return { text: text2, offset };
         });
       });
       const totalCharacters = chunksBySegment.flat().reduce((sum2, chunk) => sum2 + chunk.text.length, 0);
@@ -42598,27 +42473,22 @@ This typically indicates that your device does not have a healthy Internet conne
         locale: ITALIAN_TTS_LOCALE,
         button,
         kind,
-        voiceName: voiceNameFor(),
-        voiceSource: "browser",
+        voiceName: "Android system voice",
         paused: false,
         failed: false,
         resumeWaiters: [],
         progress: 0,
         totalCharacters,
         completedCharacters: 0,
-        currentChunkCharacters: 0,
         currentChunkOffset: 0,
         currentSegmentIndex: 0,
         currentSegmentText: "",
-        selectedVoice: null,
-        voicePrepared: false
+        enginePrepared: false
       };
       activeTask = task;
-      if (!api) {
-        showError(task, "web-speech-api-unavailable", speechServiceMessage());
-        return false;
-      }
       try {
+        if (!await ensureNativeEngine(task) || task.token !== sequence) return false;
+        task.enginePrepared = true;
         setButtonState(task.button, "playing");
         notify("playing", task);
         for (let segmentIndex = 0; segmentIndex < prepared.length; segmentIndex += 1) {
@@ -42631,20 +42501,18 @@ This typically indicates that your device does not have a healthy Internet conne
           }
           for (const chunk of chunksBySegment[segmentIndex]) {
             if (task.token !== sequence || !await waitUntilResumed(task)) return false;
-            task.currentChunkCharacters = chunk.text.length;
             task.currentChunkOffset = chunk.offset;
             try {
               const completed = await speakChunk(task, chunk.text);
               if (!completed || task.token !== sequence) return false;
             } catch (error) {
               if (task.token !== sequence) return false;
-              const voiceUnavailable = /language-unavailable|voice-unavailable|speech voice list is unavailable|no matching language voice/iu.test(String((error == null ? void 0 : error.message) || error));
-              showError(task, error, voiceUnavailable ? voiceInstallMessage() : "تعذّر تشغيل الصوت على هذا الجهاز.");
+              const languageUnavailable = /language-unavailable|voice-unavailable|language not available|missing language data/iu.test(String((error == null ? void 0 : error.message) || error));
+              showError(task, error, languageUnavailable ? languageMessage() : serviceMessage());
               return false;
             }
             if (task.token !== sequence) return false;
             task.completedCharacters += chunk.text.length;
-            task.currentChunkCharacters = 0;
             reportProgress(task, task.completedCharacters / task.totalCharacters);
           }
         }
@@ -42652,8 +42520,8 @@ This typically indicates that your device does not have a healthy Internet conne
         return true;
       } catch (error) {
         if (task.token !== sequence) return false;
-        const voiceUnavailable = /language-unavailable|voice-unavailable|speech voice list is unavailable|no matching language voice/iu.test(String((error == null ? void 0 : error.message) || error));
-        showError(task, error, voiceUnavailable ? voiceInstallMessage() : "تعذّر تشغيل الصوت على هذا الجهاز.");
+        const languageUnavailable = /language-unavailable|voice-unavailable|language not available|missing language data/iu.test(String((error == null ? void 0 : error.message) || error));
+        showError(task, error, languageUnavailable ? languageMessage() : serviceMessage());
         return false;
       } finally {
         if (task.token === sequence && !task.failed) {
@@ -42663,8 +42531,8 @@ This typically indicates that your device does not have a healthy Internet conne
         }
       }
     }
-    function speak2(text, locale, button) {
-      return runSegments([{ text: String(text || "") }], locale, button);
+    function speak2(text2, locale, button) {
+      return runSegments([{ text: String(text2 || "") }], locale, button);
     }
     function speakSequence(segments, locale, button, onSegment) {
       return runSegments(segments, locale, button, onSegment, "lesson-explainer");
@@ -42681,124 +42549,6 @@ This typically indicates that your device does not have a healthy Internet conne
         return activeTask ? activeTask.failed ? "error" : activeTask.paused ? "paused" : "playing" : "idle";
       }
     };
-  }
-
-  // src/lesson-visual.mjs
-  function resolveLessonVisual(lesson, questions2) {
-    const official = (lesson == null ? void 0 : lesson.visual_question_id) ? questions2.find((question) => Number(question.id) === Number(lesson.visual_question_id)) || null : null;
-    const officialImage = (official == null ? void 0 : official.image) || "";
-    const src = officialImage || (lesson == null ? void 0 : lesson.visual_src) || "";
-    return { official, src, isOfficialImage: !!officialImage };
-  }
-
-  // src/lesson-animation.mjs
-  var escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
-  function resolveSceneType(lesson = {}, moduleId = "") {
-    var _a12;
-    const explicitScene = (_a12 = lesson.visual_script) == null ? void 0 : _a12.scene_id;
-    if (["trailer", "visibility", "roundabout", "intersection", "traffic-light", "traffic-signs", "maneuver", "vehicle-safety", "stopping", "documents", "driver-safety", "road-parts", "vulnerable-road-users", "emergency", "retromarcia", "highway"].includes(explicitScene)) return explicitScene;
-    const title = `${lesson.heading_ar || ""} ${lesson.heading_it || ""}`.toLowerCase();
-    if (/مقطور|rimorch|rimorchio/.test(title)) return "trailer";
-    if (/أعمى|النقاط العمياء|مجال الرؤية|visibilità|angoli ciechi|campo visivo/.test(title)) return "visibility";
-    if (/دوّار|دوار|دوارات|rotatoria|rotonda|circonvallazione/.test(title)) return "roundabout";
-    if (/تقاطع|الأولوية|incroc|precedenza|stop/.test(title)) return "intersection";
-    if (/إشارة|إشارات|علامات|segnal|cartell/.test(title)) return /ضوئي|الضوء|luminos|semafor/.test(title) ? "traffic-light" : "traffic-signs";
-    if (/تجاوز|تغيير المسار|انعطاف|corsia|sorpass|svolta|cambio di corsia/.test(title)) return "maneuver";
-    if (/المركبة|المركبات|veicolo|veicoli/.test(title)) return "vehicle-safety";
-    if (/سرع|توقف|مسافة|خطر|عائق|fermata|sosta|arresto|velocità|distanza|ostac/.test(title)) return "stopping";
-    if (/وثائق|رخص|تأمين|مسؤولية|عقوب|document|patente|assicur|responsabilità/.test(title)) return "documents";
-    if (/حزام|طفل|خوذ|أضواء|صيانة|سلامة المركبة|cintura|seggiolino|casco|luci|manutenzione/.test(title)) return "vehicle-safety";
-    if (/طريق وأجزاؤه|strada e le sue parti/.test(title)) return "road-parts";
-    if (/سائق|حالة|حادث|إسعاف|بيئ|انتباه|استجابة|راكب|انزلاق|سكة|cantiere|incidente|primo soccorso|attenzione|reazione|utenti|aderenza|scivolos|galleria|carico|passegger|controlli/.test(title)) return "driver-safety";
-    const byModule = {
-      "road-basics": "road-parts",
-      "signs": "traffic-signs",
-      "signals-markings": "traffic-light",
-      "priority-intersections": "intersection",
-      "movement-overtaking": "maneuver",
-      "speed-stopping-highways": "stopping",
-      "vehicle-safety": "vehicle-safety",
-      "documents-liability": "documents",
-      "driver-health-environment": "driver-safety",
-      "exam-supplement-driver": "visibility",
-      "exam-supplement-vehicle": "vehicle-safety"
-    };
-    return byModule[moduleId] || "road-parts";
-  }
-  var car = (x2 = 110, y2 = 125, className = "scene-car") => `<g class="${className}" transform="translate(${x2} ${y2})" aria-hidden="true"><rect x="0" y="7" width="86" height="32" rx="13" fill="#2edbc0" stroke="#092a32" stroke-width="3"/><path d="M18 8 29-5h28L68 8" fill="#55bff0" stroke="#092a32" stroke-width="3"/><circle cx="19" cy="40" r="7" fill="#092a32"/><circle cx="67" cy="40" r="7" fill="#092a32"/><path d="M22 12h40" stroke="#73d9e1" stroke-width="2"/></g>`;
-  var road = `<rect x="0" y="116" width="640" height="70" rx="8" fill="#275364"/><path d="M0 151h640" stroke="#73d9e1" stroke-width="3" stroke-dasharray="24 18"/><path d="M0 120h640M0 182h640" stroke="#73d9e1" stroke-width="2" opacity=".7"/>`;
-  var badge = (label, x2, y2, className = "focus-concept") => `<g class="${className}" transform="translate(${x2} ${y2})"><rect width="112" height="44" rx="12" fill="#193543" stroke="#3d7180" stroke-width="2"/><circle cx="22" cy="22" r="9" fill="#2edbc0"/><path d="M18 22h8M22 18v8" stroke="#092a32" stroke-width="2"/><text x="40" y="27" font-size="12" font-family="system-ui,sans-serif" fill="#c8e5ea">${label}</text></g>`;
-  function sceneSvg(type) {
-    const sceneDescription = {
-      "road-parts": "رسم توضيحي لأجزاء الطريق",
-      "traffic-signs": "رسم توضيحي لإشارات المرور",
-      "traffic-light": "رسم توضيحي للإشارة الضوئية",
-      "intersection": "رسم توضيحي لتقاطع الطرق والأولوية",
-      "vulnerable-road-users": "رسم توضيحي للمشاة وراكبي الدراجات عند المعبر",
-      "emergency": "رسم توضيحي لمركبة طوارئ تُخلي الطريق",
-      "roundabout": "رسم توضيحي لحركة المرور في الدوار",
-      "maneuver": "رسم توضيحي لتغيير المسار والتجاوز",
-      "retromarcia": "رسم توضيحي لمناورة الرجوع إلى الخلف",
-      "highway": "رسم توضيحي لحارات الطريق السريع وحارة الطوارئ",
-      "stopping": "رسم توضيحي للتوقف ومسافة الأمان",
-      "vehicle-safety": "رسم توضيحي لسلامة المركبة",
-      "documents": "رسم توضيحي لوثائق المركبة",
-      "driver-safety": "رسم توضيحي لسلامة السائق",
-      "visibility": "رسم توضيحي لمجال الرؤية",
-      "trailer": "رسم توضيحي للمركبة والمقطورة"
-    }[type] || "رسم توضيحي مبسط للطريق والمركبات";
-    const shared = `<svg class="lesson-animation-svg" viewBox="0 0 640 210" role="img" aria-label="${escapeHtml(sceneDescription)}"><rect width="640" height="210" rx="18" fill="#102936"/><circle cx="555" cy="41" r="21" fill="#2edbc0" opacity=".75"/>${road}`;
-    const pieces = {
-      "road-parts": `${badge("corsia", 36, 33)}${badge("carreggiata", 184, 33)}${badge("marciapiede", 492, 33)}<path d="M68 83v25M240 83v25M548 83v25" stroke="#092a32" stroke-dasharray="3 4"/>${car(120, 128, "scene-car scene-car-road")}`,
-      "vulnerable-road-users": `<g class="focus-concept" transform="translate(342 116)"><path d="M0 0v67M18 0v67M36 0v67M54 0v67" stroke="#c8e5ea" stroke-width="9"/></g><g class="focus-example" transform="translate(180 70)"><circle cx="20" cy="13" r="9" fill="#55bff0" stroke="#092a32" stroke-width="2"/><path d="M20 23v30m0-18-13 12m13-12 12 9m-12 9-10 16m10-16 11 16" stroke="#55bff0" stroke-width="6" stroke-linecap="round"/></g><g class="focus-warning" transform="translate(474 125)" fill="none" stroke="#2edbc0" stroke-width="4"><circle cx="10" cy="29" r="12"/><circle cx="59" cy="29" r="12"/><path d="m10 29 14-22 15 22H10l12-17h15l11 17m-24-22h11"/></g>${car(74, 128, "scene-car scene-car-road")}`,
-      "emergency": `${badge("soccorso", 35, 29)}<path class="focus-example" d="M160 149h386" stroke="#2edbc0" stroke-width="7" stroke-dasharray="16 11"/><path class="focus-warning" d="M515 121v62" stroke="#d84a43" stroke-width="8"/><g class="focus-concept" transform="translate(333 110)"><circle cx="24" cy="7" r="8" fill="#d84a43"/><circle cx="54" cy="7" r="8" fill="#55bff0"/></g>${car(315, 128, "scene-car scene-car-emergency")}`,
-      "traffic-signs": `<g class="focus-concept" transform="translate(84 30)"><path d="M35 2 69 60H1Z" fill="#73d9e1" stroke="#c8473d" stroke-width="8"/><path d="M28 45h14" stroke="#092a32" stroke-width="5"/></g><g class="focus-example" transform="translate(270 30)"><circle cx="34" cy="34" r="31" fill="#73d9e1" stroke="#c8473d" stroke-width="8"/><path d="M12 34h44" stroke="#c8473d" stroke-width="8"/></g><g class="focus-warning" transform="translate(455 30)"><circle cx="34" cy="34" r="31" fill="#2c6d9d"/><path d="M34 13v25M34 48v2" stroke="#73d9e1" stroke-width="6" stroke-linecap="round"/></g>${car(270, 128, "scene-car scene-car-road")}`,
-      "traffic-light": `<g class="focus-concept" transform="translate(78 18)"><rect x="0" y="0" width="49" height="111" rx="12" fill="#092a32"/><circle cx="24" cy="22" r="13" fill="#d84a43"/><circle cx="24" cy="56" r="13" fill="#2edbc0"/><circle cx="24" cy="89" r="13" fill="#43d9a2"/><path d="M24 111v17" stroke="#092a32" stroke-width="7"/></g><path class="focus-example" d="M135 149h430" stroke="#43d9a2" stroke-width="8" stroke-dasharray="20 12"/><path class="focus-warning" d="M135 149h70" stroke="#d84a43" stroke-width="8"/>${car(300, 128, "scene-car scene-car-road")}`,
-      "intersection": `<rect x="274" y="0" width="92" height="210" fill="#275364"/><path d="M0 151h640" stroke="#275364" stroke-width="70"/><path d="M320 0v70M320 190v20M0 151h205M435 151h205" stroke="#73d9e1" stroke-width="3" stroke-dasharray="20 16"/><g class="focus-concept" transform="translate(60 37)"><path d="M30 0 60 52H0Z" fill="#73d9e1" stroke="#c8473d" stroke-width="7"/><path d="M30 55v28" stroke="#092a32" stroke-width="4"/></g><path class="focus-example" d="M320 35v83h118" fill="none" stroke="#2edbc0" stroke-width="6" stroke-dasharray="10 7"/><path class="focus-warning" d="M250 151h-90" stroke="#2edbc0" stroke-width="6" stroke-dasharray="10 7"/>${car(390, 128, "scene-car scene-car-cross")}`,
-      "roundabout": `<path d="M320 0v68M320 190v20M0 140h244M396 140h244" stroke="#275364" stroke-width="49"/><circle cx="320" cy="140" r="76" fill="#275364" stroke="#73d9e1" stroke-width="3" stroke-dasharray="13 10"/><circle cx="320" cy="140" r="39" fill="#247b70" stroke="#73d9e1" stroke-width="3"/><path class="focus-example" d="M320 61a79 79 0 0 1 79 79" fill="none" stroke="#2edbc0" stroke-width="6" stroke-dasharray="10 7"/><path class="focus-concept" d="M320 10v43m0 0-10-11m10 11 10-11M618 140h-42m0 0 11-10m-11 10 11 10" stroke="#193543" stroke-width="4" fill="none"/><g class="scene-car-roundabout focus-warning" style="transform-origin:320px 140px"><g transform="translate(370 134) rotate(90)"><rect x="-14" y="-7" width="28" height="14" rx="5" fill="#2edbc0" stroke="#092a32" stroke-width="2"/><circle cx="-8" cy="8" r="2.5" fill="#092a32"/><circle cx="8" cy="8" r="2.5" fill="#092a32"/></g></g>${badge("rotatoria", 36, 29)}`,
-      "maneuver": `<path class="focus-concept" d="M88 152h170" stroke="#2edbc0" stroke-width="7" stroke-dasharray="17 13"/><path class="focus-example" d="M168 141c35-65 92-65 142-8" fill="none" stroke="#43d9a2" stroke-width="6" stroke-dasharray="11 7"/><path class="focus-warning" d="M390 141c34-44 77-45 119-15" fill="none" stroke="#d84a43" stroke-width="6" stroke-dasharray="11 7"/><path d="m301 126 13 7-13 7" fill="#43d9a2"/>${car(110, 128, "scene-car scene-car-maneuver")}${car(420, 128, "scene-car scene-car-road")}`,
-      "retromarcia": `${badge("retromarcia", 35, 30)}<path class="focus-warning" d="M300 151H128m0 0 15-12m-15 12 15 12" fill="none" stroke="#d84a43" stroke-width="6"/><path class="focus-concept" d="M345 119h145" stroke="#2edbc0" stroke-width="5" stroke-dasharray="12 9"/>${car(235, 128, "scene-car scene-car-reverse")}`,
-      "highway": `<path class="focus-concept" d="M0 128h640M0 151h640M0 174h640" stroke="#c8e5ea" stroke-width="2" stroke-dasharray="18 14"/><path class="focus-warning" d="M0 185h640" stroke="#d84a43" stroke-width="7"/><path class="focus-example" d="M44 105h105m0 0-13-10m13 10-13 10" fill="none" stroke="#2edbc0" stroke-width="5"/><path class="focus-example" d="M485 105h105m0 0-13-10m13 10-13 10" fill="none" stroke="#2edbc0" stroke-width="5"/>${badge("destra", 35, 32)}${badge("corsia emergenza", 470, 32, "focus-warning")}${car(225, 128, "scene-car scene-car-highway")}`,
-      "stopping": `<g class="focus-concept" transform="translate(56 31)"><circle cx="42" cy="42" r="34" fill="#193543" stroke="#092a32" stroke-width="5"/><path d="M42 42 62 25" stroke="#c8473d" stroke-width="5"/><path d="M42 8v8M76 42h-8" stroke="#092a32" stroke-width="3"/></g><path class="focus-example" d="M355 118v69M390 118v69M425 118v69M460 118v69" stroke="#2edbc0" stroke-width="5"/><path class="focus-warning" d="M488 117v70" stroke="#d84a43" stroke-width="7"/>${car(225, 128, "scene-car scene-car-brake")}`,
-      "vehicle-safety": `<g class="focus-concept" transform="translate(70 27)"><rect x="0" y="0" width="94" height="72" rx="16" fill="#193543" stroke="#092a32" stroke-width="3"/><path d="M18 13 75 60M25 62 68 15" stroke="#55bff0" stroke-width="8"/><circle cx="47" cy="36" r="7" fill="#092a32"/></g><path class="focus-example" d="M180 166h350" stroke="#43d9a2" stroke-width="6"/><g class="focus-warning" transform="translate(500 34)"><path d="M25 0 51 47H0Z" fill="#73d9e1" stroke="#c8473d" stroke-width="6"/><path d="M25 14v15M25 37v2" stroke="#c8473d" stroke-width="4"/></g>${car(280, 128, "scene-car scene-car-road")}`,
-      "documents": `<g class="focus-concept" transform="translate(72 26)"><rect x="0" y="0" width="92" height="112" rx="8" fill="#193543" stroke="#092a32" stroke-width="3"/><path d="M17 23h55M17 40h55M17 58h40M17 76h49" stroke="#47bda7" stroke-width="5" stroke-linecap="round"/><circle cx="68" cy="89" r="10" fill="#2edbc0"/></g><path class="focus-example" d="M208 78h300" stroke="#43d9a2" stroke-width="5" stroke-dasharray="10 7"/>${car(290, 128, "scene-car scene-car-road")}${badge("R.C.A.", 456, 34, "focus-warning")}`,
-      "driver-safety": `<g class="focus-concept" transform="translate(70 24)"><circle cx="43" cy="36" r="28" fill="#2edbc0" stroke="#092a32" stroke-width="3"/><path d="M20 100c4-26 19-37 41-37s37 11 41 37" fill="#43d9a2" stroke="#092a32" stroke-width="3"/><circle cx="35" cy="36" r="3" fill="#092a32"/><circle cx="52" cy="36" r="3" fill="#092a32"/><path d="M37 49q7 6 14 0" fill="none" stroke="#092a32" stroke-width="3"/></g><g class="focus-example" transform="translate(485 28)"><path d="M37 0 72 65H2Z" fill="#73d9e1" stroke="#c8473d" stroke-width="6"/><path d="M37 20v20M37 50v2" stroke="#c8473d" stroke-width="5"/></g><path class="focus-warning" d="M182 158h282" stroke="#2edbc0" stroke-width="7" stroke-dasharray="16 9"/>${car(270, 128, "scene-car scene-car-road")}`,
-      "visibility": `<g class="focus-concept" transform="translate(58 31)"><path d="M0 35Q43-2 86 35 43 72 0 35Z" fill="#193543" stroke="#092a32" stroke-width="4"/><circle cx="43" cy="35" r="13" fill="#2c6d9d"/><circle cx="43" cy="35" r="5" fill="#092a32"/></g><path class="focus-example" d="M130 140 270 119 270 181Z" fill="#2edbc0" opacity=".52"/><path class="focus-warning" d="M413 126 552 102 552 188Z" fill="#d84a43" opacity=".3"/>${car(270, 128, "scene-car scene-car-road")}`,
-      "trailer": `${car(168, 128, "scene-car scene-car-road")}<g class="scene-trailer focus-concept"><path d="M257 146h34" stroke="#092a32" stroke-width="5"/><rect x="292" y="131" width="105" height="34" rx="7" fill="#1e4552" stroke="#092a32" stroke-width="3"/><circle cx="315" cy="169" r="6" fill="#092a32"/><circle cx="374" cy="169" r="6" fill="#092a32"/></g>${badge("limiti", 432, 35, "focus-example")}${badge("frenata", 432, 82, "focus-warning")}`
-    };
-    return `${shared}${pieces[type] || pieces["road-parts"]}<path d="M20 199h600" stroke="#2e5c6b" stroke-width="1"/></svg>`;
-  }
-  var excerpt = (text, max = 190) => {
-    const value = String(text || "").trim();
-    if (value.length <= max) return value;
-    const boundary = value.slice(0, max).lastIndexOf(" ");
-    return `${value.slice(0, boundary > max * 0.55 ? boundary : max).trim()}…`;
-  };
-  function lessonAnimationMarkup(lesson, moduleId = "") {
-    var _a12, _b, _c, _d, _e;
-    const type = resolveSceneType(lesson, moduleId);
-    const labels = [
-      { key: "concept", it: "Core idea", ar: "الفكرة الأساسية" },
-      { key: "example", it: "Practical example", ar: "مثال تطبيقي" },
-      { key: "warning", it: "Common mistake", ar: "خطأ شائع" }
-    ];
-    const fallback = [
-      { text_it: lesson.core_it || lesson.body_it || lesson.heading_it, text_ar: lesson.core_ar || lesson.body_ar || lesson.heading_ar },
-      { text_it: lesson.example_it, text_ar: lesson.example_ar },
-      { text_it: ((_b = (_a12 = lesson.common_mistakes) == null ? void 0 : _a12[0]) == null ? void 0 : _b.mistake_it) || lesson.pitfall_it, text_ar: ((_d = (_c = lesson.common_mistakes) == null ? void 0 : _c[0]) == null ? void 0 : _d.mistake_ar) || lesson.pitfall_ar }
-    ];
-    const stages = labels.map((label, index) => {
-      var _a13, _b2, _c2, _d2, _e2, _f;
-      return {
-        ...label,
-        text_it: excerpt(((_c2 = (_b2 = (_a13 = lesson.visual_script) == null ? void 0 : _a13.stages) == null ? void 0 : _b2[index]) == null ? void 0 : _c2.text_it) || fallback[index].text_it),
-        text_ar: excerpt(((_f = (_e2 = (_d2 = lesson.visual_script) == null ? void 0 : _d2.stages) == null ? void 0 : _e2[index]) == null ? void 0 : _f.text_ar) || fallback[index].text_ar)
-      };
-    });
-    const stageCards = stages.map((stage, index) => `<article class="lesson-animation-stage${index === 0 ? " is-active" : ""}" data-explainer-stage="${index}" aria-current="${index === 0 ? "step" : "false"}"><strong><span lang="it">${escapeHtml(stage.it)}</span><small lang="ar" dir="rtl">${escapeHtml(stage.ar)}</small></strong><p class="lesson-animation-stage-it" lang="it" dir="ltr">${escapeHtml(stage.text_it)}</p><p class="lesson-animation-stage-ar" lang="ar" dir="rtl">${escapeHtml(stage.text_ar)}</p></article>`).join("");
-    const stageButtons = stages.map((stage, index) => `<button type="button" class="lesson-animation-step${index === 0 ? " is-active" : ""}" data-explainer-step="${index}" aria-pressed="${index === 0 ? "true" : "false"}"><span>${String(index + 1).padStart(2, "0")}</span><small>${escapeHtml(stage.ar)}</small></button>`).join("");
-    const visualPath = ((_e = lesson.visual_script) == null ? void 0 : _e.visual_path) || `inline-svg:${type}`;
-    return `<section class="lesson-animation" data-scene="${type}" data-visual-path="${escapeHtml(visualPath)}" data-step="0" aria-labelledby="lessonAnimationTitle"><div class="lesson-animation-heading"><div><div class="eyebrow"><span lang="it">FASI DELLA LEZIONE</span> · <span lang="ar">مراحل الدرس</span></div><h2 id="lessonAnimationTitle"><span lang="it">La lezione in tre fasi</span><small lang="ar" dir="rtl">نصوص الدرس مرتبة في ثلاث مراحل</small></h2></div><span class="offline-badge" lang="ar">يعمل دون إنترنت</span></div><div class="lesson-animation-scene">${sceneSvg(type)}</div><div class="lesson-animation-stages" aria-live="polite">${stageCards}</div><div class="lesson-animation-controls"><div class="lesson-animation-steps" role="group" aria-label="Fasi della spiegazione · مراحل الشرح">${stageButtons}</div></div></section>`;
   }
 
   // src/search.mjs
@@ -42888,7 +42638,7 @@ This typically indicates that your device does not have a healthy Internet conne
   }
 
   // src/question-figures.mjs
-  function escapeHtml2(value = "") {
+  function escapeHtml(value = "") {
     return String(value ?? "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
   }
   var EXPLICIT_VISUAL_WORDING = /\b(?:figura\b|raffigur\w*\b|immagine\b|disegn\w*\b|illustrat\w*\b)/iu;
@@ -42897,19 +42647,20 @@ This typically indicates that your device does not have a healthy Internet conne
     const italian = String(question.it ?? "");
     return Boolean(question.hasFigureRef) || EXPLICIT_VISUAL_WORDING.test(italian) && !NON_VISUAL_FIGURA.test(italian);
   }
-  function unavailableNote(question) {
-    const id = escapeHtml2(question.id ?? "");
+  function officialFigureNote(question, sourceMarkup = "") {
+    const id = escapeHtml(question.id ?? "");
     const page = Number(question.page);
-    const pageIt = Number.isFinite(page) ? ` (PDF p. ${page})` : "";
+    const pageIt = Number.isFinite(page) ? ` (pagina PDF ${page})` : "";
     const pageAr = Number.isFinite(page) ? ` (صفحة ${page.toLocaleString("ar")})` : "";
-    return `<aside class="question-figure-unavailable" data-figure-fallback role="note"><span lang="it" dir="ltr">This question record is marked as having a related figure, but no local image is available${pageIt}. Check the original source before answering.</span><span lang="ar" dir="rtl">سجل هذا السؤال معلّم بوجود شكل مرتبط، لكن لا تتوفر له صورة محلية في التطبيق${pageAr}. راجع المصدر الأصلي قبل الإجابة.</span><small>Quiz #${id}</small></aside>`;
+    return `<aside class="question-figure-source-note" data-figure-fallback data-question-id="${id}" role="note"><strong lang="it" dir="ltr">Per la figura di questo quesito, consulta il PDF ufficiale.</strong><small lang="it" dir="ltr">Riferimento${pageIt}.</small><strong lang="ar" dir="rtl">لرؤية رسم هذا السؤال، راجع ملف الوزارة الرسمي.</strong><small lang="ar" dir="rtl">المرجع${pageAr}.</small>${sourceMarkup}</aside>`;
   }
-  function questionFigureMarkup(question = {}) {
+  function questionFigureMarkup(question = {}, { sourceMarkup = "" } = {}) {
     const image = String(question.image ?? "").trim();
-    const id = escapeHtml2(question.id ?? "");
-    const fallback = unavailableNote(question);
+    const id = escapeHtml(question.id ?? "");
+    const fallback = officialFigureNote(question, sourceMarkup);
     if (image) {
-      return `<figure class="question-figure"><img class="question-figure-img" data-question-figure data-question-id="${id}" src="${escapeHtml2(image)}" alt="Illustration for quiz question #${id}" loading="lazy" decoding="async"><figcaption><span lang="it" dir="ltr">Figure for quiz #${id}</span><span lang="ar" dir="rtl">رسم السؤال #${id}</span></figcaption>${fallback.replace("<aside ", "<aside hidden ")}</figure>`;
+      const alt = escapeHtml(question.it || "Illustrazione della domanda");
+      return `<figure class="quiz-figure question-figure" data-question-id="${id}"><img class="question-figure-img" data-question-figure data-question-id="${id}" src="${escapeHtml(image)}" alt="${alt}" loading="lazy" decoding="async"><figcaption><span lang="it" dir="ltr">Illustrazione della domanda</span><span lang="ar" dir="rtl">رسم توضيحي للسؤال</span>${sourceMarkup}</figcaption>${fallback.replace("<aside ", "<aside hidden ")}</figure>`;
     }
     if (hasQuestionVisualReference(question)) return fallback;
     return "";
@@ -45449,8 +45200,8 @@ This typically indicates that your device does not have a healthy Internet conne
   function renderDiffSide(changes, side = "original", escape2 = (value) => String(value)) {
     const excluded = side === "original" ? "added" : "removed";
     return (Array.isArray(changes) ? changes : []).filter((change) => change.type !== excluded).map((change) => {
-      const text = escape2(change.text);
-      return change.type === "equal" ? text : `<span class="diff-token diff-${change.type}">${text}</span>`;
+      const text2 = escape2(change.text);
+      return change.type === "equal" ? text2 : `<span class="diff-token diff-${change.type}">${text2}</span>`;
     }).join("");
   }
 
@@ -45578,16 +45329,16 @@ This typically indicates that your device does not have a healthy Internet conne
     })();
     return dictionaryLoadPromise;
   }
-  function lexicalTerms(text = "") {
-    return [...String(text).matchAll(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu)].map((match) => ({
+  function lexicalTerms(text2 = "") {
+    return [...String(text2).matchAll(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu)].map((match) => ({
       text: match[0],
       start: match.index,
       end: match.index + match[0].length
     }));
   }
-  function wordAtOffset(text = "", offset = 0) {
+  function wordAtOffset(text2 = "", offset = 0) {
     var _a12;
-    const value = String(text);
+    const value = String(text2);
     const position = Math.max(0, Math.min(value.length, Number(offset) || 0));
     const words = lexicalTerms(value);
     return ((_a12 = words.find((word) => position >= word.start && position <= word.end)) == null ? void 0 : _a12.text) || "";
@@ -45661,8 +45412,8 @@ This typically indicates that your device does not have a healthy Internet conne
       uiFallback: (match == null ? void 0 : match.uiFallback) || ""
     };
   }
-  function sentenceRanges(text = "") {
-    const value = String(text).trim();
+  function sentenceRanges(text2 = "") {
+    const value = String(text2).trim();
     if (!value) return [];
     const ranges = [];
     const closing = /* @__PURE__ */ new Set(["»", "”", "’", '"', "'", ")", "]", "}"]);
@@ -45685,8 +45436,8 @@ This typically indicates that your device does not have a healthy Internet conne
     if (left >= 0) ranges.push({ start: start + left, end: value.length, text: tail.slice(left).trim() });
     return ranges;
   }
-  function splitSentences(text = "") {
-    return sentenceRanges(text).map((item) => item.text);
+  function splitSentences(text2 = "") {
+    return sentenceRanges(text2).map((item) => item.text);
   }
   function translateLessonSentence(italianText = "", arabicText = "", offset = 0) {
     var _a12;
@@ -45916,7 +45667,7 @@ This typically indicates that your device does not have a healthy Internet conne
     const envelope = ensureCloudEnvelope(payload);
     const allowedTop = /* @__PURE__ */ new Set(["format", "version", "exportedAt", "progress", "setEdits"]);
     if (Object.keys(envelope).some((k2) => !allowedTop.has(k2))) throw new Error("cloud_progress_format");
-    const allowedProgress = /* @__PURE__ */ new Set(["favorites", "wrong", "solved", "correctCount", "practiceCount", "topicCorrect", "topicTotal", "completedLessons", "reviewedLessons", "sourceChecks", "lastLessonKey", "lastStudy", "streak", "questionStats", "sessions", "dailyGoal"]);
+    const allowedProgress = /* @__PURE__ */ new Set(["favorites", "wrong", "solved", "correctCount", "practiceCount", "topicCorrect", "topicTotal", "completedLessons", "reviewedLessons", "sourceChecks", "wrongAnswers", "quickCheckSchedule", "lastLessonKey", "lastStudy", "streak", "questionStats", "sessions", "dailyGoal"]);
     if (Object.keys(envelope.progress).some((k2) => !allowedProgress.has(k2))) throw new Error("cloud_progress_format");
     const normalized = restoreProgressBackup({ format: "patente-b-progress-backup", version: 1, exportedAt: envelope.exportedAt, progress: envelope.progress }, context);
     normalized.activeQuiz = null;
@@ -45972,6 +45723,31 @@ This typically indicates that your device does not have a healthy Internet conne
     }
     return [...byKey.values()].sort((x2, y2) => y2.at - x2.at).slice(0, 20);
   }
+  function mergeQuickCheckSchedules(a, b2) {
+    const out = /* @__PURE__ */ Object.create(null);
+    for (const key of /* @__PURE__ */ new Set([...Object.keys(a || {}), ...Object.keys(b2 || {})])) {
+      const x2 = a == null ? void 0 : a[key], y2 = b2 == null ? void 0 : b2[key];
+      if (!x2) {
+        out[key] = { ...y2 };
+        continue;
+      }
+      if (!y2) {
+        out[key] = { ...x2 };
+        continue;
+      }
+      let selected;
+      if (x2.lastAnsweredAt !== y2.lastAnsweredAt) selected = y2.lastAnsweredAt > x2.lastAnsweredAt ? y2 : x2;
+      else if (x2.attempts !== y2.attempts) selected = y2.attempts > x2.attempts ? y2 : x2;
+      else if (x2.lastCorrect !== y2.lastCorrect) selected = x2.lastCorrect ? y2 : x2;
+      else selected = x2;
+      out[key] = {
+        ...selected,
+        attempts: Math.max(x2.attempts, y2.attempts),
+        firstAttemptCorrect: x2.firstAttemptCorrect && y2.firstAttemptCorrect
+      };
+    }
+    return out;
+  }
   function mergeDailyGoal(a, b2) {
     if (!(a == null ? void 0 : a.date)) return b2 || { date: "", questions: 0, lessons: 0 };
     if (!(b2 == null ? void 0 : b2.date) || a.date > b2.date) return a;
@@ -46013,6 +45789,12 @@ This typically indicates that your device does not have a healthy Internet conne
     const favorites = mergeMembership("favorites", local.favorites, remote.favorites, local.syncSetEdits, remote.syncSetEdits);
     const completed = mergeMembership("completedLessons", local.completedLessons, remote.completedLessons, local.syncSetEdits, remote.syncSetEdits);
     const reviewed = mergeMembership("reviewedLessons", local.reviewedLessons, remote.reviewedLessons, local.syncSetEdits, remote.syncSetEdits);
+    const quickCheckSchedule = mergeQuickCheckSchedules(local.quickCheckSchedule, remote.quickCheckSchedule);
+    const wrongAnswers = /* @__PURE__ */ new Set([...local.wrongAnswers, ...remote.wrongAnswers]);
+    for (const [key, record] of Object.entries(quickCheckSchedule)) {
+      if (record.lastCorrect) wrongAnswers.delete(key);
+      else wrongAnswers.add(key);
+    }
     return {
       ...local,
       favorites: favorites.set,
@@ -46025,6 +45807,8 @@ This typically indicates that your device does not have a healthy Internet conne
       topicCorrect: mergeMap(local.topicCorrect, remote.topicCorrect),
       topicTotal: mergeMap(local.topicTotal, remote.topicTotal),
       sourceChecks: { ...remote.sourceChecks, ...local.sourceChecks },
+      wrongAnswers: [...wrongAnswers],
+      quickCheckSchedule,
       lastLessonKey: local.lastLessonKey || remote.lastLessonKey,
       lastStudy: local.lastStudy > remote.lastStudy ? local.lastStudy : remote.lastStudy,
       streak: maxCount(local.streak, remote.streak),
@@ -46388,14 +46172,14 @@ This typically indicates that your device does not have a healthy Internet conne
     privacy: "في نسخة الاختبار المحلية، تسجيل الدخول والمزامنة مع Firebase معطّلان؛ لا تُرسل بيانات حساب إلى Firebase. يبقى تقدمك على هذا الجهاز ويمكنك نسخه احتياطيًا محليًا. لا توجد إعلانات حية.",
     free: "أنت تستخدم التطبيق دون حساب؛ يُحفظ التقدم محليًا على هذا الجهاز."
   };
-  function element(tag, attrs = {}, text = "") {
+  function element(tag, attrs = {}, text2 = "") {
     const node = document.createElement(tag);
     for (const [key, value] of Object.entries(attrs)) {
       if (key === "className") node.className = value;
       else if (key === "type" || key === "name" || key === "autocomplete" || key === "minLength" || key === "required" || key === "dir" || key === "lang" || key === "id" || key === "role" || key === "ariaLive" || key === "for") node.setAttribute(key === "ariaLive" ? "aria-live" : key === "for" ? "for" : key, value === true ? "" : String(value));
       else if (key.startsWith("aria-")) node.setAttribute(key, String(value));
     }
-    if (text) node.textContent = text;
+    if (text2) node.textContent = text2;
     return node;
   }
   function initializeAccountUI({ service } = {}) {
@@ -46593,19 +46377,183 @@ This typically indicates that your device does not have a healthy Internet conne
     return `<section class="reference-page" data-reference-page="${esc(kind)}">${header(page.titleIt, page.titleAr, page.descIt, page.descAr, entries.length, pair3)}${searchBox(pair3)}<div class="reference-card-list" id="referenceList">${cards || `<div class="empty-state">${pair3("Verified reference entries will appear here.", "ستظهر هنا عناصر المرجع بعد التحقق منها.")}</div>`}</div><aside class="notice-banner reference-disclaimer">${pair3("Educational summaries only; consult the linked current law and official driving-school guidance before relying on a rule.", "هذه خلاصات تعليمية؛ راجع النص القانوني النافذ وإرشادات مدرسة القيادة عبر المصادر المرتبطة قبل الاعتماد على أي قاعدة.")}</aside></section>`;
   }
 
+  // src/lesson-visuals.mjs
+  var xml = (value) => String(value ?? "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" })[ch]);
+  var lessonVisuals = {
+    "u1-l1": ["road", "Parti della strada", "أجزاء الطريق"],
+    "u1-l2": ["vehicle", "Categorie di veicoli", "فئات المركبات"],
+    "u1-l3": ["speed", "Velocità adeguata", "السرعة المناسبة"],
+    "u1-l4": ["law", "Testo vigente e fonte ufficiale", "النص النافذ والمصدر الرسمي"],
+    "u2-l1": ["sign-groups", "Gruppi della segnaletica", "مجموعات الإشارات"],
+    "u2-l2": ["sign-types", "Pericolo · divieto · obbligo", "الخطر والمنع والإلزام"],
+    "u2-l3": ["stop", "STOP e precedenza", "التوقف والأولوية"],
+    "u2-l4": ["supplementary", "Segnale e pannello integrativo", "الإشارة واللوحة التكميلية"],
+    "u3-l1": ["markings", "Linee e simboli stradali", "الخطوط والرموز المرورية"],
+    "u3-l2": ["traffic-light", "Segnali luminosi", "الإشارات الضوئية"],
+    "u3-l3": ["officer", "Agente e ostacolo", "الشرطي والعائق"],
+    "u3-l4": ["roadworks", "Cantiere stradale", "أعمال الطريق"],
+    "u4-l1": ["priority", "Precedenza a destra", "الأولوية للقادم من اليمين"],
+    "u4-l2": ["roundabout", "Rotatoria", "الدوّار"],
+    "u4-l3": ["vulnerable", "Pedoni e ciclisti", "المشاة وراكبو الدراجات"],
+    "u4-l4": ["emergency", "Mezzi di emergenza", "مركبات الطوارئ"],
+    "u5-l1": ["lane-change", "Posizione e cambio corsia", "الموضع وتغيير الحارة"],
+    "u5-l2": ["overtake", "Sorpasso sicuro", "التجاوز الآمن"],
+    "u5-l3": ["distance", "Distanza di sicurezza", "مسافة الأمان"],
+    "u5-l4": ["reverse", "Retromarcia", "الرجوع إلى الخلف"],
+    "u6-l1": ["speed-sign", "Limiti e velocità", "الحدود والسرعة"],
+    "u6-l2": ["parking", "Arresto · fermata · sosta", "التوقف والوقوف"],
+    "u6-l3": ["curves", "Curve, dossi e discesa", "المنحنيات والنتوءات والمنحدرات"],
+    "u6-l4": ["highway-emergency", "Autostrada e corsia di emergenza", "الطريق السريع وحارة الطوارئ"],
+    "u6-l5": ["highway-merge", "Ingresso, corsie e uscita", "الدخول والحارات والخروج"],
+    "u7-l1": ["tire", "Battistrada e aderenza", "نقشة الإطار والتماسك"],
+    "u7-l2": ["brake", "Freni e controllo", "الفرامل والسيطرة"],
+    "u7-l3": ["lights", "Luci e visibilità", "الأضواء ومدى الرؤية"],
+    "u7-l4": ["cargo", "Carico e stabilità", "الحمولة والثبات"],
+    "u7-l5": ["restraint", "Cinture e sistemi di ritenuta", "الأحزمة وأنظمة التثبيت"],
+    "u8-l1": ["license", "Patente e idoneità", "الرخصة والأهلية"],
+    "u8-l2": ["documents", "Documenti del veicolo", "وثائق المركبة"],
+    "u8-l3": ["insurance", "Assicurazione e responsabilità", "التأمين والمسؤولية"],
+    "u8-l4": ["accident", "Dopo un incidente", "ما بعد الحادث"],
+    "u8-l5": ["violation", "Infrazioni e conseguenze", "المخالفات والنتائج"],
+    "u9-l1": ["alcohol", "Alcol e guida", "الكحول والقيادة"],
+    "u9-l2": ["medicine", "Sostanze e medicinali", "المخدرات والأدوية"],
+    "u9-l3": ["fatigue", "Stanchezza e attenzione", "التعب والانتباه"],
+    "u9-l4": ["phone", "Distrazione da telefono", "التشتت بسبب الهاتف"],
+    "u9-l5": ["emotion", "Equilibrio del conducente", "اتزان السائق"],
+    "u9-l6": ["vulnerable", "Utenti vulnerabili", "مستخدمو الطريق الأكثر عرضة للخطر"],
+    "u10-l1": ["eco", "Guida efficiente", "القيادة الموفّرة"],
+    "u10-l2": ["noise", "Rumore e rispetto", "الضوضاء والاحترام"],
+    "u10-l3": ["pollution", "Manutenzione e emissioni", "الصيانة والانبعاثات"],
+    "u10-l4": ["fuel", "Consumo e pianificazione", "الاستهلاك والتخطيط"],
+    "u11-l1": ["checklist", "Controlli prima di partire", "الفحوصات قبل الانطلاق"],
+    "u11-l2": ["dashboard", "Spie e anomalie", "المؤشرات والأعطال"],
+    "u11-l3": ["safety", "Sistemi di sicurezza", "أنظمة الأمان"],
+    "u11-l4": ["heat", "Temperatura e guasto", "الحرارة والعطل"],
+    "u11-l5": ["passengers", "Carico e passeggeri", "الحمولة والركاب"]
+  };
+  var text = (x2, y2, value, fill = "#e8f2f7", size = 13, weight = 700, anchor = "start") => `<text x="${x2}" y="${y2}" fill="${fill}" font-size="${size}" font-weight="${weight}" text-anchor="${anchor}">${xml(value)}</text>`;
+  var car = (x2, y2, color = "#10b981", rotate = 0, scale = 1) => `<g transform="translate(${x2} ${y2}) rotate(${rotate} 42 20) scale(${scale})" filter="url(#shadow)"><path d="M8 28 12 16q2-5 8-5h24q7 0 10 6l5 11v8H8z" fill="${color}" stroke="#a8fff0" stroke-width="2"/><path d="m18 16 3-4h20l5 6H16z" fill="url(#glass)"/><path d="M31 12v7m-14 0h32" stroke="#102433" stroke-width="2" opacity=".72"/><circle cx="20" cy="36" r="5" fill="#0b1722" stroke="#8aa2b2" stroke-width="2"/><circle cx="48" cy="36" r="5" fill="#0b1722" stroke="#8aa2b2" stroke-width="2"/><path d="M10 28h5m39 0h4" stroke="#f7c46a" stroke-width="2" stroke-linecap="round"/></g>`;
+  var wheel = (x2, y2, r2 = 42) => `<g filter="url(#shadow)"><circle cx="${x2}" cy="${y2}" r="${r2}" fill="#0b1722" stroke="#637b8d" stroke-width="8"/><circle cx="${x2}" cy="${y2}" r="${r2 - 10}" fill="#20384b" stroke="#10b981" stroke-width="3"/><circle cx="${x2}" cy="${y2}" r="${r2 - 22}" fill="url(#glass)" stroke="#9bdad9" stroke-width="3"/><circle cx="${x2}" cy="${y2}" r="7" fill="#cceff3"/><path d="M${x2} ${y2 - r2 + 5}v9M${x2 + r2 - 5} ${y2}h-9M${x2} ${y2 + r2 - 5}v-9M${x2 - r2 + 5} ${y2}h9" stroke="#9ab2c1" stroke-width="3" stroke-linecap="round"/></g>`;
+  var defs = (id) => `<defs><linearGradient id="${id}-bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#20384b"/><stop offset="1" stop-color="#101c29"/></linearGradient><linearGradient id="${id}-mint" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#39e4c3"/><stop offset="1" stop-color="#10b981"/></linearGradient><linearGradient id="${id}-blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#76c6ff"/><stop offset="1" stop-color="#3b82f6"/></linearGradient><linearGradient id="${id}-glass" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#8eeaff"/><stop offset="1" stop-color="#285d81"/></linearGradient><linearGradient id="${id}-rubber" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#556b7c"/><stop offset=".5" stop-color="#1b2a39"/><stop offset="1" stop-color="#41586b"/></linearGradient><linearGradient id="${id}-road" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#30495b"/><stop offset="1" stop-color="#1b2d3c"/></linearGradient><radialGradient id="${id}-glow"><stop stop-color="#10b981" stop-opacity=".26"/><stop offset="1" stop-color="#10b981" stop-opacity="0"/></radialGradient><marker id="${id}-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M0 0 10 5 0 10z" fill="#10b981"/></marker><filter id="${id}-shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="7" stdDeviation="6" flood-color="#050c13" flood-opacity=".62"/></filter><filter id="${id}-soft"><feGaussianBlur stdDeviation="7"/></filter><style>@keyframes ${id}-pulse{0%,100%{opacity:.5}50%{opacity:1}}@keyframes ${id}-flow{from{stroke-dashoffset:42}to{stroke-dashoffset:0}}.${id}-pulse{animation:${id}-pulse 2.2s ease-in-out infinite}.${id}-flow{stroke-dasharray:9 9;animation:${id}-flow 1.8s linear infinite}@media(prefers-reduced-motion:reduce){.${id}-pulse,.${id}-flow{animation:none!important}}</style></defs>`;
+  function artwork(theme, id) {
+    const road = `<rect x="38" y="124" width="684" height="137" rx="23" fill="url(#${id}-road)" stroke="#436176" stroke-width="2"/><path d="M52 191h656" stroke="#c6e9ef" stroke-width="3" stroke-dasharray="18 15" opacity=".75"/><path d="M60 137h640M60 249h640" stroke="#10b981" stroke-width="2" opacity=".75"/>${car(166, 166, "#10b981", 0, 0.88)}${text(548, 158, "CORSIA", "#9ed9e9", 11, 800)}`;
+    const sign = (x2, y2, color, label, shape = "circle") => {
+      const symbol = shape === "triangle" ? `<path d="M${x2} ${y2 - 39} ${x2 + 39} ${y2 + 29} ${x2 - 39} ${y2 + 29}Z" fill="#f4f7f9" stroke="${color}" stroke-width="7"/><path d="M${x2} ${y2 - 19}v25m0 10v2" stroke="#e25555" stroke-width="6" stroke-linecap="round"/>` : shape === "oct" ? `<path d="M${x2 - 23} ${y2 - 38}h46l15 15v46l-15 15h-46l-15-15v-46z" fill="#f5f8f8" stroke="${color}" stroke-width="8"/>` : `<circle cx="${x2}" cy="${y2}" r="35" fill="#f5f8f8" stroke="${color}" stroke-width="8"/>`;
+      const labelMarkup = shape === "triangle" ? "" : text(x2, y2 + 6, label, "#172b3a", shape === "oct" ? 14 : 18, 900, "middle");
+      return `<g filter="url(#shadow)">${symbol}${labelMarkup}</g>`;
+    };
+    switch (theme) {
+      case "tire":
+        return `<g><ellipse cx="174" cy="193" rx="91" ry="94" fill="none" stroke="#07121d" stroke-width="48"/><ellipse cx="174" cy="193" rx="91" ry="94" fill="none" stroke="url(#${id}-rubber)" stroke-width="38"/><ellipse cx="174" cy="193" rx="63" ry="66" fill="none" stroke="#92a6b4" stroke-width="8" opacity=".8"/><path d="M128 113q46-26 91 3M127 270q48 26 94-3" fill="none" stroke="#10b981" stroke-width="4" stroke-dasharray="7 7"/>${wheel(174, 193, 42)}<path d="M338 103h368a16 16 0 0 1 16 16v145a16 16 0 0 1-16 16H338a16 16 0 0 1-16-16V119a16 16 0 0 1 16-16Z" fill="#132637" stroke="#3f6178" stroke-width="2"/><path d="M348 226h352" stroke="#aebbc5" stroke-width="5"/><path d="M348 218h352" stroke="#60798b" stroke-width="16"/><path d="M364 218v-35h47v35m9 0v-35h46v35m10 0v-35h46v35m10 0v-35h46v35m10 0v-35h46v35m10 0v-35h46v35" fill="#263c4e" stroke="#7890a0" stroke-width="2"/><path d="M393 185v26m72-26v26m72-26v26m72-26v26" stroke="#081723" stroke-width="7" stroke-linecap="round"/><path d="M375 180v-30m0 0-8 10m8-10 8 10m290 20v-20m0 0-8 10m8-10 8 10" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${text(380, 140, "BATTISTRADA", "#e9f5f8", 13, 800)}${text(558, 263, "PROFONDITÀ DEL BATTISTRADA", "#8ee9d4", 11, 800, "middle")}${text(174, 302, "Sezione del pneumatico", "#b5c9d5", 11, 700, "middle")}<path d="M375 180h-20v22" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4 4"/></g>`;
+      case "priority":
+        return `<rect x="46" y="90" width="668" height="191" rx="22" fill="#172a39" stroke="#34546a" stroke-width="2"/><path d="M269 98h222v174H269z" fill="url(#${id}-road)"/><path d="M54 137h652v97H54z" fill="url(#${id}-road)"/><path d="M380 99v39m0 96v35M55 185h214m222 0h213" stroke="#d1e0e5" stroke-width="3" stroke-dasharray="15 13" opacity=".65"/><path d="M286 137v96m188-96v96" stroke="#10b981" stroke-width="3" opacity=".6"/><path d="M380 253V207" stroke="#10b981" stroke-width="5" stroke-linecap="round" marker-end="url(#${id}-arrow)" class="${id}-flow"/><path d="M246 185h53" stroke="#f4bd63" stroke-width="4" stroke-linecap="round"/><path d="M286 165v40" stroke="#f4bd63" stroke-width="4"/><path d="M424 185h74" stroke="#10b981" stroke-width="4" stroke-linecap="round" marker-end="url(#${id}-arrow)"/>${car(220, 165, "#f2b85b", 0, 0.82)}${car(339, 229, "#10b981", -90, 0.82)}<circle cx="380" cy="185" r="19" fill="url(#${id}-glow)" class="${id}-pulse"/>${text(66, 114, "CHI ARRIVA DA DESTRA PASSA PER PRIMO", "#d8e8ed", 11, 800)}${text(665, 267, "A DESTRA → PRECEDENZA", "#56e2c5", 11, 800, "end")}<path d="M0 0"/>`;
+      case "speed":
+        return `<circle cx="246" cy="190" r="105" fill="#142838" stroke="#46667c" stroke-width="3"/><path d="M167 235a98 98 0 1 1 158 0" fill="none" stroke="#3b5264" stroke-width="15" stroke-linecap="round"/><path d="M171 232a94 94 0 0 1 132-119" fill="none" stroke="url(#${id}-mint)" stroke-width="9" stroke-linecap="round"/><g transform="rotate(-38 246 190)" class="${id}-pulse"><path d="M246 190 246 112" stroke="#f6bc62" stroke-width="6" stroke-linecap="round"/><circle cx="246" cy="190" r="10" fill="#f6bc62"/></g>${text(246, 242, "ADEGUA LA VELOCITÀ", "#e8f3f7", 12, 800, "middle")}${text(515, 145, "VEICOLO", "#8ed7ef", 12, 800)}${text(515, 169, "STRADA", "#8ed7ef", 12, 800)}${text(515, 193, "TRAFFICO", "#8ed7ef", 12, 800)}${text(515, 217, "VISIBILITÀ", "#8ed7ef", 12, 800)}<path d="M481 140h-20v88h20" fill="none" stroke="#3b82f6" stroke-width="3"/>${car(446, 229, "#10b981", 0, 0.68)}`;
+      case "traffic-light":
+        return `<rect x="96" y="98" width="174" height="177" rx="32" fill="#0b1722" stroke="#516c7e" stroke-width="4" filter="url(#shadow)"/><circle cx="183" cy="143" r="28" fill="#f0525f" class="${id}-pulse"/><circle cx="183" cy="143" r="40" fill="#ef445d" opacity=".16" filter="url(#${id}-soft)"/><circle cx="183" cy="190" r="23" fill="#735c35"/><circle cx="183" cy="235" r="23" fill="#234c44"/><path d="M183 275v22m-22 0h44" stroke="#7892a3" stroke-width="8" stroke-linecap="round"/>${text(364, 139, "ROSSO", "#ff8890", 18, 900)}${text(364, 165, "FERMATI", "#d5e5eb", 12, 700)}<path d="M320 153h26" stroke="#f0525f" stroke-width="3"/><path d="M370 204h258" stroke="#496b80" stroke-width="4"/><circle cx="376" cy="204" r="8" fill="#10b981"/><circle cx="505" cy="204" r="8" fill="#3b82f6"/><circle cx="632" cy="204" r="8" fill="#10b981"/>${text(376, 233, "OSSERVA", "#b8ccd6", 10, 700, "middle")}${text(505, 233, "DECIDI", "#b8ccd6", 10, 700, "middle")}${text(632, 233, "AGISCI", "#b8ccd6", 10, 700, "middle")}`;
+      case "distance":
+        return `<path d="M80 119h600v146H80z" fill="url(#${id}-road)" stroke="#496c80" stroke-width="2"/><path d="M86 192h588" stroke="#c9e1e9" stroke-width="3" stroke-dasharray="20 16"/><path d="M128 145v95m74-95v95m74-95v95m74-95v95m74-95v95m74-95v95m74-95v95" stroke="#3b82f6" stroke-width="2" opacity=".25"/><path d="M232 145h282" stroke="#10b981" stroke-width="3" marker-start="url(#${id}-arrow)" marker-end="url(#${id}-arrow)"/>${car(140, 165, "#3b82f6", 0, 0.76)}${car(534, 165, "#10b981", 0, 0.76)}<circle cx="378" cy="185" r="40" fill="url(#${id}-glow)"/>${text(374, 137, "SPAZIO DI ARRESTO", "#b8e9e2", 12, 800, "middle")}${text(380, 249, "AUMENTA LO SPAZIO CON VELOCITÀ E CONDIZIONI", "#d6e5eb", 10, 700, "middle")}`;
+      case "stop":
+        return `<path d="M78 117h604v145H78z" fill="url(#${id}-road)" stroke="#426075" stroke-width="2"/><path d="M98 187h565" stroke="#d4e8ed" stroke-width="3" stroke-dasharray="16 14"/><path d="M493 128v122" stroke="#f7f8f9" stroke-width="5"/><path d="M469 152h48" stroke="#ef5d65" stroke-width="5"/>${car(270, 164, "#f1b85f", 0, 0.78)}${sign(572, 184, "#e7555c", "STOP", "oct")}${text(112, 144, "ARRESTO COMPLETO", "#f4c86d", 12, 800)}${text(112, 231, "POI DAI LA PRECEDENZA", "#dfeaf0", 12, 800)}`;
+      case "roundabout":
+        return `<circle cx="375" cy="192" r="96" fill="none" stroke="#344e61" stroke-width="73"/><circle cx="375" cy="192" r="59" fill="#132534" stroke="#547286" stroke-width="3"/><circle cx="375" cy="192" r="20" fill="url(#${id}-glow)"/><path d="M375 82a110 110 0 0 1 98 59m-8 98a110 110 0 0 1-108 61m-92-55a110 110 0 0 1 0-108" fill="none" stroke="#10b981" stroke-width="5" stroke-linecap="round" marker-end="url(#${id}-arrow)" class="${id}-flow"/>${car(432, 108, "#10b981", 40, 0.65)}${text(375, 197, "ROTATORIA", "#e8f4f8", 12, 800, "middle")}${text(88, 268, "OSSERVA I SEGNALI E REGOLA LA VELOCITÀ", "#b5cbd6", 10, 700)}`;
+      case "road":
+      case "markings":
+        return `${road}<path d="M367 135v38m0 45v33" stroke="#f3c75d" stroke-width="5" stroke-linecap="round"/><path d="M610 185h-58m0 0 15-12m-15 12 15 12" fill="none" stroke="#3b82f6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>${text(82, 108, theme === "road" ? "CARREGGIATA · CORSIA · MARCIAPIEDE" : "LINEE CHE ORGANIZZANO LA CIRCOLAZIONE", "#dbeaf0", 11, 800)}`;
+      case "vehicle":
+      case "lane-change":
+      case "overtake":
+      case "reverse":
+      case "highway-merge":
+      case "highway-emergency":
+        return `<path d="M84 123h592v140H84z" fill="url(#${id}-road)" stroke="#47667a" stroke-width="2"/><path d="M95 192h570" stroke="#d2e3e9" stroke-width="3" stroke-dasharray="19 15"/><path d="M374 127v130" stroke="#e9c45e" stroke-width="3" stroke-dasharray="9 10"/>${car(205, 165, "#10b981", theme === "reverse" ? 180 : 0, 0.84)}<path d="M345 180h98" stroke="#3b82f6" stroke-width="4" marker-end="url(#${id}-arrow)" class="${id}-flow"/>${text(465, 150, theme === "vehicle" ? "VEICOLO" : "MANOVRA SICURA", "#dcebf0", 12, 800)}${text(465, 174, theme === "highway-emergency" ? "CORSIA DI EMERGENZA" : "CONTROLLA SPAZIO E TRAFFICO", "#9dc4d7", 10, 700)}`;
+      case "speed-sign":
+        return `<rect x="70" y="111" width="620" height="144" rx="20" fill="#162b3c" stroke="#405e72" stroke-width="2"/>${sign(210, 180, "#e5545b", "50")}${text(210, 235, "km/h", "#b9d0da", 11, 800, "middle")}${text(375, 158, "LIMITE INDICATO", "#e8f2f5", 13, 800)}${text(375, 186, "ESEMPIO: 50 km/h", "#f2c56f", 15, 900)}${text(375, 214, "ADEGUA LA VELOCITÀ ALLE CONDIZIONI", "#9fc5d4", 10, 700)}`;
+      case "sign-groups":
+      case "sign-types":
+        return `<rect x="70" y="111" width="620" height="144" rx="20" fill="#162b3c" stroke="#405e72" stroke-width="2"/>${sign(192, 178, "#e5545b", "!", "triangle")}${sign(375, 178, "#e5545b", "—")}${sign(558, 178, "#3b82f6", "↗")}${text(192, 238, "PERICOLO", "#f2c56f", 10, 800, "middle")}${text(375, 238, "DIVIETO", "#f2c56f", 10, 800, "middle")}${text(558, 238, "OBBLIGO / INFO", "#f2c56f", 10, 800, "middle")}`;
+      case "supplementary":
+        return `<rect x="86" y="110" width="178" height="137" rx="18" fill="#f4f7f8" stroke="#e5545b" stroke-width="8" filter="url(#shadow)"/><path d="M175 129v50m-15-15 15 15 15-15" stroke="#243b4d" stroke-width="8" fill="none" stroke-linecap="round"/><rect x="330" y="137" width="332" height="86" rx="14" fill="#e5edf1" stroke="#7892a2" stroke-width="2"/><path d="M356 159h280m-280 20h190m-190 20h235" stroke="#617c8f" stroke-width="5" stroke-linecap="round"/>${text(498, 250, "IL PANNELLO PRECISA IL SEGNALE", "#b9d1dc", 11, 800, "middle")}`;
+      case "officer":
+        return `<path d="M90 220h580" stroke="#91a8b5" stroke-width="5"/><circle cx="379" cy="132" r="25" fill="#e8c49a"/><path d="M344 127q35-42 70 0v11h-70z" fill="#1b3448" stroke="#75c9ec" stroke-width="3"/><path d="M349 160h60l21 78h-101z" fill="#3b82f6" stroke="#a9dcfa" stroke-width="2"/><path d="M359 180 318 160m82 20 43-37" stroke="#e8c49a" stroke-width="12" stroke-linecap="round"/><path d="M318 155h-25m147-34 18-11" stroke="#f4c35e" stroke-width="7" stroke-linecap="round"/>${text(112, 260, "SEGUI LE INDICAZIONI DELL’AGENTE", "#dbe9ee", 11, 800)}`;
+      case "roadworks":
+        return `<path d="M84 230h592V129H84z" fill="url(#${id}-road)"/><path d="M95 197h570" stroke="#d4e5eb" stroke-width="3" stroke-dasharray="17 15"/><path d="M120 130h500" stroke="#f3bd55" stroke-width="5" stroke-dasharray="15 10"/>${[190, 300, 410, 520].map((x2) => `<path d="m${x2} 220 20-54 20 54z" fill="#f29b44" stroke="#ffcf74" stroke-width="3"/><path d="M${x2 + 9} 199h22" stroke="#f6e9d6" stroke-width="5"/>`).join("")}<path d="M610 147v45m-12-12 12 12 12-12" fill="none" stroke="#3b82f6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>${text(107, 111, "SEGNALETICA TEMPORANEA", "#f5ca76", 11, 800)}`;
+      case "vulnerable":
+        return `<path d="M95 235h570" stroke="#416176" stroke-width="28" stroke-linecap="round"/><path d="M95 235h570" stroke="#dce9ed" stroke-width="3" stroke-dasharray="16 15"/>${car(490, 202, "#3b82f6", 0, 0.62)}<circle cx="202" cy="159" r="14" fill="#f2bd65"/><path d="m202 176-6 39m6-25-19 15m19-15 17 10m-23 15-16 30m18-30 20 29" stroke="#d9e5eb" stroke-width="7" stroke-linecap="round"/><circle cx="319" cy="191" r="9" fill="#10b981"/><circle cx="352" cy="191" r="9" fill="#10b981"/><path d="M318 200v29m34-29v29m-34-14 34 0" stroke="#a2c4d1" stroke-width="5" stroke-linecap="round"/>${text(92, 119, "ATTENZIONE · SPAZIO · PRECEDENZA", "#d7e8ee", 11, 800)}`;
+      case "emergency":
+        return `<path d="M82 226h596" stroke="#445f72" stroke-width="58"/><path d="M82 226h596" stroke="#d5e2e8" stroke-width="3" stroke-dasharray="20 16"/><rect x="133" y="167" width="139" height="55" rx="15" fill="#eef4f6" stroke="#8aa1af" stroke-width="2"/><path d="M160 168v-13h84v13" fill="#e24f59" stroke="#ff8b89" stroke-width="3"/><path d="M201 160v-10m-8 5h16" stroke="#fff" stroke-width="3"/>${car(155, 177, "#f1f5f7", 0, 0.75)}<path d="M290 191h140" stroke="#10b981" stroke-width="5" marker-end="url(#${id}-arrow)" class="${id}-flow"/>${text(446, 172, "LIBERA IL PASSAGGIO", "#90eadb", 13, 800)}${text(446, 196, "SICUREZZA PRIMA DI TUTTO", "#d0e0e7", 10, 700)}`;
+      case "parking":
+      case "curves":
+        return `<path d="M85 251h590" stroke="#38576b" stroke-width="78" stroke-linecap="round"/><path d="M85 251h590" stroke="#d7e7eb" stroke-width="3" stroke-dasharray="20 15"/><path d="M158 216v-54q0-34 34-34h83m-63 122v-52q0-28 26-28h96" fill="none" stroke="#3b82f6" stroke-width="5" stroke-linecap="round" marker-end="url(#${id}-arrow)"/>${car(220, 207, "#10b981", 0, 0.62)}${text(440, 142, theme === "curves" ? "VISIBILITÀ LIMITATA" : "OSSERVA I DIVIETI", "#dcebf0", 12, 800)}${text(440, 166, "SCEGLI UN LUOGO SICURO", "#95becf", 10, 700)}`;
+      case "brake":
+        return `${wheel(188, 194, 70)}<circle cx="188" cy="194" r="34" fill="#263e50" stroke="#f0b65e" stroke-width="7"/><path d="M222 157q40 28 0 74" fill="none" stroke="#ff7478" stroke-width="12" stroke-linecap="round"/><path d="M280 191h96" stroke="#10b981" stroke-width="5" marker-end="url(#${id}-arrow)"/><path d="M409 138v106m-14-15 14 15 14-15" fill="none" stroke="#3b82f6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>${text(492, 167, "FRENATA PROGRESSIVA", "#e3eef2", 12, 800)}${text(492, 194, "VEICOLO SOTTO CONTROLLO", "#94bfd1", 10, 700)}`;
+      case "lights":
+        return `<path d="M112 159q72-52 144 0v63q-72-52-144 0z" fill="#193043" stroke="#7fa2b6" stroke-width="4"/><path d="M242 163h136m-136 27h189m-189 27h136" stroke="#10b981" stroke-width="4" stroke-linecap="round" opacity=".85"/><path d="M363 151 438 124m-75 66h92m-92 28 75 27" stroke="#3b82f6" stroke-width="3" opacity=".75"/>${text(485, 158, "LUCI ADEGUATE", "#dcebf0", 13, 800)}${text(485, 183, "VEDERE · ESSERE VISTI", "#98c6d4", 11, 700)}`;
+      case "cargo":
+      case "passengers":
+        return `<path d="M118 176h380v70H118z" fill="#344e62" stroke="#7992a2" stroke-width="3"/><path d="M177 176v-47h92v47m22 0v-58h99v58m20 0v-34h82v34" fill="#10b981" fill-opacity=".45" stroke="#5be4c6" stroke-width="3"/><path d="M512 202h78m-78 0 16-13m-16 13 16 13" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>${wheel(190, 250, 15)}${wheel(438, 250, 15)}${text(519, 147, "CARICO STABILE", "#dceaf0", 11, 800)}${text(519, 170, "PESO DISTRIBUITO", "#96c2d2", 10, 700)}`;
+      case "restraint":
+        return `<path d="M167 112v130m124-130v130" stroke="#536e82" stroke-width="18" stroke-linecap="round"/><path d="M177 130 271 229" stroke="#10b981" stroke-width="13" stroke-linecap="round"/><path d="M254 135 193 229" stroke="#3b82f6" stroke-width="9" stroke-linecap="round"/><circle cx="220" cy="155" r="18" fill="#e9c79f"/><path d="M220 176v52m-24-35h48" stroke="#dcebf1" stroke-width="9" stroke-linecap="round"/>${text(369, 158, "ANCORAGGIO CORRETTO", "#dcebf0", 12, 800)}${text(369, 187, "PROTEZIONE PER OGNI VIAGGIO", "#94bfd1", 10, 700)}`;
+      case "license":
+      case "documents":
+      case "law":
+        return `<rect x="113" y="111" width="222" height="145" rx="17" fill="#e5eef2" stroke="#98b3c0" stroke-width="3" filter="url(#shadow)"/><rect x="113" y="111" width="222" height="30" rx="15" fill="url(#${id}-blue)"/><circle cx="155" cy="180" r="24" fill="#9bb7c4"/><path d="M136 221q19-28 38 0" fill="none" stroke="#526f80" stroke-width="9" stroke-linecap="round"/><path d="M200 166h102m-102 23h84m-84 23h95" stroke="#59788a" stroke-width="5" stroke-linecap="round"/>${text(406, 157, theme === "law" ? "TESTO VIGENTE" : theme === "license" ? "PATENTE IN REGOLA" : "DOCUMENTI A BORDO", "#dcebf1", 12, 800)}${text(406, 184, "VERIFICA · CONSERVA · AGGIORNA", "#99c6d5", 10, 700)}`;
+      case "insurance":
+      case "accident":
+      case "violation":
+        return `<path d="M210 112h138l50 50v92H210z" fill="#e9f1f4" stroke="#9bb1bd" stroke-width="3" filter="url(#shadow)"/><path d="M348 112v51h50" fill="#c8dbe2" stroke="#8ea7b4" stroke-width="3"/><path d="M241 185h122m-122 22h105m-105 22h79" stroke="#607c8b" stroke-width="5" stroke-linecap="round"/><circle cx="507" cy="178" r="51" fill="#193345" stroke="${theme === "accident" ? "#f1b65f" : "#10b981"}" stroke-width="4"/><path d="M507 148v35m0 16h.1" stroke="${theme === "accident" ? "#f1b65f" : "#10b981"}" stroke-width="8" stroke-linecap="round"/>${text(507, 253, theme === "insurance" ? "COPERTURA" : "SEGUI LA PROCEDURA", "#dbeaf0", 11, 800, "middle")}`;
+      case "alcohol":
+      case "medicine":
+        return `<path d="M190 125h85m-15 0v69l38 52q9 13-8 13h-116q-17 0-8-13l38-52v-69" fill="#244258" stroke="#8da9b7" stroke-width="4"/><path d="M184 212h98" stroke="#10b981" stroke-width="25" opacity=".75"/><path d="M164 135 300 247" stroke="#ec5c67" stroke-width="9" stroke-linecap="round"/><circle cx="492" cy="184" r="61" fill="#162b3b" stroke="#e85d65" stroke-width="5"/><path d="m460 184 22 22 44-48" fill="none" stroke="#10b981" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>${text(492, 269, "MAI ALLA GUIDA", "#f28b8e", 12, 800, "middle")}`;
+      case "fatigue":
+      case "emotion":
+        return `<path d="M113 195q83-93 166 0-83 93-166 0Z" fill="#172c3c" stroke="#6e8c9e" stroke-width="4"/><circle cx="196" cy="195" r="29" fill="#3b82f6"/><circle cx="196" cy="195" r="12" fill="#0b1520"/><path d="M420 136h160m-160 32h120m-120 32h142" stroke="#5b778a" stroke-width="6" stroke-linecap="round"/><path d="M451 232h94" stroke="#10b981" stroke-width="5" stroke-linecap="round"/>${text(420, 125, theme === "fatigue" ? "RIPOSA PRIMA DI GUIDARE" : "CALMA E CONCENTRAZIONE", "#dcebf0", 12, 800)}${text(196, 259, theme === "fatigue" ? "ATTENZIONE" : "EQUILIBRIO", "#96c3d2", 10, 700, "middle")}`;
+      case "phone":
+        return `<rect x="150" y="105" width="112" height="174" rx="20" fill="#071522" stroke="#92aab8" stroke-width="4" filter="url(#shadow)"/><rect x="162" y="124" width="88" height="131" rx="8" fill="#24465d"/><circle cx="206" cy="267" r="5" fill="#91aab7"/><path d="M150 116 267 270" stroke="#ed5d66" stroke-width="9" stroke-linecap="round"/><path d="M355 227h278" stroke="#3c596d" stroke-width="31"/><path d="M355 227h278" stroke="#d4e4e9" stroke-width="3" stroke-dasharray="16 13"/>${car(470, 194, "#10b981", 0, 0.62)}${text(352, 150, "SGUARDO SULLA STRADA", "#dcebf0", 12, 800)}${text(352, 175, "TELEFONO LONTANO DALLA MANO", "#96c3d2", 10, 700)}`;
+      case "eco":
+      case "fuel":
+      case "pollution":
+      case "noise":
+        return `<path d="M86 233h588" stroke="#36576a" stroke-width="55" stroke-linecap="round"/><path d="M86 233h588" stroke="#d4e4e9" stroke-width="3" stroke-dasharray="18 15"/>${car(196, 203, "#10b981", 0, 0.8)}<path d="M392 210q37-48 77 0t77 0" fill="none" stroke="${theme === "noise" ? "#f0bc60" : "#3b82f6"}" stroke-width="4" stroke-linecap="round"/><circle cx="566" cy="143" r="38" fill="#15394a" stroke="#10b981" stroke-width="3"/><path d="M548 148q18-34 36 0v18h-36z" fill="#10b981"/><path d="M566 122v40m-20-20h40" stroke="#b3ffeb" stroke-width="3"/>${text(400, 118, theme === "noise" ? "RIDUCI IL RUMORE" : theme === "pollution" ? "MANUTENZIONE REGOLARE" : theme === "fuel" ? "PIANIFICA IL PERCORSO" : "GUIDA FLUIDA", "#dcebf0", 12, 800)}`;
+      case "checklist":
+        return `<rect x="115" y="104" width="230" height="171" rx="18" fill="#152b3b" stroke="#4a687c" stroke-width="3" filter="url(#shadow)"/>${[145, 190, 235].map((y2) => `<rect x="140" y="${y2 - 14}" width="24" height="24" rx="6" fill="#10202d" stroke="#10b981" stroke-width="3"/><path d="m145 ${y2 - 2} 7 7 11-15" fill="none" stroke="#69eed1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M179 ${y2 - 2}h130" stroke="#91aab8" stroke-width="5" stroke-linecap="round"/>`).join("")}<circle cx="512" cy="184" r="59" fill="#142b3b" stroke="#3b82f6" stroke-width="4"/><path d="m482 184 21 22 41-47" fill="none" stroke="#10b981" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>${text(512, 263, "CONTROLLO COMPLETATO", "#dcebf0", 10, 800, "middle")}`;
+      case "dashboard":
+      case "safety":
+      case "heat":
+        return `<path d="M108 233a130 130 0 0 1 260 0" fill="none" stroke="#446276" stroke-width="25" stroke-linecap="round"/><path d="M108 233a130 130 0 0 1 194-112" fill="none" stroke="${theme === "heat" ? "#f05b61" : "#10b981"}" stroke-width="9" stroke-linecap="round"/><path d="m238 225 69-72" stroke="#f4bd63" stroke-width="6" stroke-linecap="round"/><circle cx="238" cy="225" r="11" fill="#f4bd63"/><path d="M430 148h148m-148 35h108m-108 35h128" stroke="#6e8b9c" stroke-width="6" stroke-linecap="round"/><circle cx="615" cy="151" r="22" fill="${theme === "heat" ? "#ef5a63" : "#10b981"}" class="${id}-pulse"/>${text(430, 128, theme === "heat" ? "TEMPERATURA" : "SPIE E SISTEMI", "#dcebf0", 12, 800)}${text(430, 245, theme === "heat" ? "FERMATI IN SICUREZZA" : "OSSERVA · VALUTA · INTERVIENI", "#96c3d2", 10, 700)}`;
+      default:
+        return `${road}${text(80, 108, "OSSERVA · VALUTA · AGISCI", "#dcebf0", 11, 800)}`;
+    }
+  }
+  function fullSvg(lesson, compact = false) {
+    const id = String((lesson == null ? void 0 : lesson.id) ?? "u1-l1");
+    const [theme, labelIt, labelAr] = lessonVisuals[id] || ["road", "Guida sicura", "قيادة آمنة"];
+    const prefix = id.replace(/[^a-zA-Z0-9_-]/g, "-");
+    const title = (lesson == null ? void 0 : lesson.titleIt) || (lesson == null ? void 0 : lesson.heading_it) || labelIt;
+    const description = `${labelIt} — ${labelAr}`;
+    const illustration = artwork(theme, prefix).replaceAll("url(#shadow)", `url(#${prefix}-shadow)`).replaceAll("url(#glass)", `url(#${prefix}-glass)`);
+    return `<figure class="lesson-svg-figure${compact ? " is-compact" : ""}" data-lesson-visual="${xml(id)}"><svg class="lesson-svg" viewBox="0 0 760 320" width="760" height="320" font-family="sans-serif" role="img" aria-labelledby="${prefix}-title ${prefix}-desc" focusable="false" xmlns="http://www.w3.org/2000/svg"><title id="${prefix}-title">${xml(title)} · ${xml(labelAr)}</title><desc id="${prefix}-desc">${xml(description)}</desc>${defs(prefix)}<rect x="1" y="1" width="758" height="318" rx="24" fill="url(#${prefix}-bg)" stroke="#38566b" stroke-width="2"/><circle cx="662" cy="144" r="118" fill="url(#${prefix}-glow)"/><text x="30" y="35" fill="#89a9bb" font-size="10" font-weight="800" letter-spacing="1.5">PATENTE B · LEZIONE VISIVA</text><text x="30" y="64" fill="#f1f7fa" font-size="17" font-weight="800">${xml(labelIt)}</text><text x="730" y="63" fill="#8ee9d4" font-size="15" font-weight="700" text-anchor="end" direction="rtl" unicode-bidi="plaintext">${xml(labelAr)}</text>${illustration}</svg>${compact ? "" : `<figcaption><span lang="it" dir="ltr">${xml(labelIt)}</span><span lang="ar" dir="rtl">${xml(labelAr)}</span></figcaption>`}</figure>`;
+  }
+  function renderLessonVisual(lesson, { compact = false } = {}) {
+    return fullSvg(lesson, compact);
+  }
+
   // src/lesson-template.mjs
   var esc2 = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   var pair = (it2, ar2) => `<span class="language-pair lesson-pair"><span class="pair-it" lang="it" dir="ltr">${esc2(it2)}</span><span class="pair-ar" lang="ar" dir="rtl">${esc2(ar2)}</span></span>`;
+  function renderLessonVisualSection(lesson, { compact = false } = {}) {
+    return renderLessonVisual(lesson, { compact });
+  }
   function pointCards(items = [], italianWordMarkup = esc2) {
     const cards = items.map((item) => `<article class="lesson-key-point-card key-point-card"><div class="lesson-key-point-title" role="heading" aria-level="3"><div class="kp-it" lang="it" dir="ltr">${italianWordMarkup(item.it)}</div><div class="kp-ar" lang="ar" dir="rtl">${esc2(item.ar)}</div></div></article>`).join("");
     return `<section class="lesson-key-points" data-lesson-section="points"><h2>${pair("Punti importanti", "النقاط الأساسية")}</h2><div class="lesson-key-point-list key-points-list key-points-grid">${cards}</div></section>`;
   }
-  function renderLessonSections(lesson, visualMarkup = "", options = {}) {
+  function renderLessonSections(lesson, _visualMarkup = "", options = {}) {
     const italianWordMarkup = typeof options.italianWordMarkup === "function" ? options.italianWordMarkup : esc2;
     const trapMarkup = String(options.trapMarkup || "");
     const quickCheckMarkup = String(options.quickCheckMarkup || "");
     const summary = `<section class="lesson-content-block" data-lesson-section="summary"><h2>${pair("Sintesi della lezione", "خلاصة الدرس")}</h2><div class="lesson-summary-card"><div class="lesson-it-text" lang="it" dir="ltr">${italianWordMarkup(lesson.summaryIt)}</div><div class="lesson-ar-full" lang="ar" dir="rtl">${esc2(lesson.summaryAr)}</div></div></section>`;
-    return `${summary}${pointCards(lesson.keyPoints || [], italianWordMarkup)}${trapMarkup}${visualMarkup}${quickCheckMarkup}`;
+    return `${summary}${pointCards(lesson.keyPoints || [], italianWordMarkup)}${trapMarkup}${quickCheckMarkup}`;
   }
 
   // src/progress-set-edits.mjs
@@ -46652,19 +46600,23 @@ This typically indicates that your device does not have a healthy Internet conne
   var toastNode = document.querySelector("#toast");
   main.addEventListener("error", (event) => {
     const image = event.target;
-    if ((image == null ? void 0 : image.tagName) !== "IMG" || !image.matches("[data-question-figure]")) return;
-    image.hidden = true;
-    const figure = image.closest(".question-figure");
-    const caption = figure == null ? void 0 : figure.querySelector("figcaption");
-    if (caption) caption.hidden = true;
-    const fallback = figure == null ? void 0 : figure.querySelector("[data-figure-fallback]");
-    if (fallback) fallback.hidden = false;
+    if ((image == null ? void 0 : image.tagName) !== "IMG") return;
+    if (image.matches("[data-question-figure]")) {
+      image.hidden = true;
+      const figure = image.closest(".question-figure");
+      const caption = figure == null ? void 0 : figure.querySelector("figcaption");
+      if (caption) caption.hidden = true;
+      const fallback = figure == null ? void 0 : figure.querySelector("[data-figure-fallback]");
+      if (fallback) fallback.hidden = false;
+      return;
+    }
   }, true);
   var sourceDialog = document.querySelector("#sourceDialog");
   var lessonUnlockDialog = document.querySelector("#lessonUnlockDialog");
   var watchRewardedLessonButton = document.querySelector("#watchRewardedLesson");
   var privacyOptionsButton = document.querySelector("#privacyOptionsButton");
   var NativeRewardedAds = registerPlugin("RewardedAds");
+  var NativeTts = registerPlugin("NativeTts");
   var stateKey = "patente-ar-state-v1";
   var welcomeKey = "patente-b-welcome-dismissed-v37";
   var activeStateKey = stateKey;
@@ -46700,8 +46652,8 @@ This typically indicates that your device does not have a healthy Internet conne
   Object.assign(state, loadUiPreferences());
   var setEditTracker = createSetEditTracker(state);
   var speechRate = 0.8;
-  var speechController = createSpeechController({ getRate: () => speechRate, onStateChange: syncSpeechControls, onWordProgress: syncItalianSpeechHighlight });
-  document.body.dataset.audioBackend = "web-speech";
+  var speechController = createSpeechController({ nativeTts: NativeTts, isAndroidNative: () => Capacitor.isNativePlatform() && Capacitor.getPlatform() === "android", getRate: () => speechRate, onStateChange: syncSpeechControls, onWordProgress: syncItalianSpeechHighlight });
+  document.body.dataset.audioBackend = "android-native";
   var _a2;
   (_a2 = document.querySelector("#speechToggle")) == null ? void 0 : _a2.addEventListener("click", () => speechController.toggle());
   var _a3;
@@ -46833,7 +46785,7 @@ This typically indicates that your device does not have a healthy Internet conne
       progressBar.value = active ? Math.max(0, Math.min(1, Number(progress) || 0)) : 0;
       progressBar.setAttribute("aria-valuenow", String(Math.round(progressBar.value * 100)));
     }
-    if (statusNode) statusNode.textContent = failed ? error || "تعذّر تشغيل الصوت" : status === "preparing" ? "جارٍ تجهيز صوت إيطالي... انتظار تحميل الأصوات." : paused ? "الصوت متوقف مؤقتًا" : playing ? "الصوت يعمل بالإيطالية" : "";
+    if (statusNode) statusNode.textContent = failed ? error || "تعذّر تشغيل الصوت" : status === "preparing" ? "جارٍ تهيئة محرك Android للصوت الإيطالي..." : paused ? "الصوت متوقف مؤقتًا" : playing ? "الصوت يعمل بالإيطالية" : "";
     if (notice) notice.hidden = !(statusNode == null ? void 0 : statusNode.textContent);
     if (button) {
       button.classList.toggle("speaking", playing);
@@ -46967,6 +46919,9 @@ This typically indicates that your device does not have a healthy Internet conne
   }
   function findLesson(key) {
     return flatLessons().find((x2) => x2.key === key) || null;
+  }
+  function progressLessonKeys() {
+    return new Set(flatLessons().flatMap((item) => [item.key, item.lesson.id]));
   }
   function getLessonAccess() {
     if (!lessonAccess && lessonModules.length) lessonAccess = createLessonAccess(flatLessons().map((item) => item.key), FREE_LESSON_COUNT);
@@ -47145,13 +47100,8 @@ This typically indicates that your device does not have a healthy Internet conne
   function lessonReviewCount(lesson) {
     return lesson.source_check ? 1 : lessonPool(lesson).length;
   }
-  function lessonImageMarkup(lesson, compact = false) {
-    const { official, src, isOfficialImage } = resolveLessonVisual(lesson, questions);
-    if (!src) return `<div class="visual-placeholder">${pair2("Immagine non disponibile", "الصورة غير متاحة")}</div>`;
-    const alt = isOfficialImage ? `${official.it} / ${official.ar}` : `Illustrazione didattica / رسم تعليمي`;
-    const caption = isOfficialImage ? pair2(official.it, official.ar, "figure-caption-pair") : pair2("Illustrazione didattica non ufficiale.", "رسم تعليمي توضيحي غير رسمي.", "figure-caption-pair");
-    const source = isOfficialImage ? `<a class="figure-source" href="${esc3(bank.sourceUrl)}#page=${official.page}" target="_blank" rel="noopener noreferrer">${controlLabel(`PDF p. ${official.page}`, `صفحة ${official.page} من المصدر`)}</a>` : `<span class="visual-not-official">${controlLabel("Illustrazione didattica", "رسم تعليمي غير رسمي")}</span>`;
-    return `<figure class="lesson-image ${compact ? "compact" : ""}"><img src="${esc3(src)}" loading="lazy" alt="${esc3(alt)}"><figcaption>${caption}${source}</figcaption></figure>`;
+  function lessonReviewVisualMarkup(lesson, compact = false) {
+    return renderLessonVisualSection(lesson, { compact });
   }
   function courseProgress() {
     const all = flatLessons();
@@ -47207,12 +47157,12 @@ This typically indicates that your device does not have a healthy Internet conne
     if (reviewOnly && !missed) return "";
     const record = state.quickCheckSchedule[id], due = isQuickCheckDue(record, Date.now()), locked = !!record && !due;
     const feedback = locked ? `<div class="quick-check-feedback ${record.lastCorrect ? "is-correct" : "is-wrong"}" role="status"><strong>${pair2(record.lastCorrect ? "Corretto" : "Da ripassare", record.lastCorrect ? "إجابة صحيحة" : "تحتاج إلى مراجعة")}</strong><span>${pair2(`Prossimo ripasso: ${quickCheckDate(record.dueAt)}`, `موعد المراجعة التالي: ${quickCheckDate(record.dueAt)}`)}</span><p class="quick-check-explanation" lang="ar" dir="rtl">${esc3(question.explainAr)}</p></div>` : '<div class="quick-check-feedback" role="status" hidden></div>';
-    return `<article class="quick-check-card ${missed ? "is-missed" : ""}" data-quick-check data-lesson-id="${esc3(lesson.id)}" data-question-index="${index}" data-answer="${esc3(question.a)}"><p class="quick-check-question" lang="it" dir="ltr">${esc3(question.qIt)}</p><div class="quick-check-answers"><button type="button" data-quick-check-answer="VERO" ${locked ? "disabled" : ""}>VERO · صحيح</button><button type="button" data-quick-check-answer="FALSO" ${locked ? "disabled" : ""}>FALSO · خطأ</button></div>${feedback}</article>`;
+    return `<article class="quick-check-card ${missed ? "is-missed" : ""}" data-quick-check data-lesson-id="${esc3(lesson.id)}" data-question-index="${index}" data-answer="${esc3(question.a)}"><p class="quick-check-question" lang="it" dir="ltr">${esc3(question.qIt)}</p><div class="quick-check-answers"><button type="button" data-quick-check-answer="VERO" ${locked ? "disabled" : ""}>${controlLabel("Vero", "صحيح")}</button><button type="button" data-quick-check-answer="FALSO" ${locked ? "disabled" : ""}>${controlLabel("Falso", "خطأ")}</button></div>${feedback}</article>`;
   }
   function quickCheckSectionMarkup(lesson, { reviewOnly = false } = {}) {
     const cards = (lesson.quickCheck || []).map((_, index) => quickCheckCardMarkup(lesson, index, { reviewOnly })).filter(Boolean).join("");
     if (reviewOnly && !cards) return "";
-    return `<section class="quick-check-section" aria-label="Quick check"><h2>${pair2(reviewOnly ? "Ripasso Errori" : "Controllo rapido", reviewOnly ? "مراجعة الأخطاء" : "اختبار سريع")}</h2>${reviewOnly ? "" : `<p>${pair2("Rispondi alle tre affermazioni Vero/Falso.", "أجب عن العبارات الثلاث بصحيح أو خطأ.")}</p>`}<div class="quick-check-list">${cards}</div></section>`;
+    return `<section class="quick-check-section" aria-label="Controllo rapido · اختبار سريع"><h2>${pair2(reviewOnly ? "Ripasso degli errori" : "Controllo rapido", reviewOnly ? "مراجعة الأخطاء" : "اختبار سريع")}</h2>${reviewOnly ? "" : `<p>${pair2("Rispondi alle tre affermazioni Vero/Falso.", "أجب عن العبارات الثلاث بصحيح أو خطأ.")}</p>`}<div class="quick-check-list">${cards}</div></section>`;
   }
   function trapWordMarkup(lesson) {
     const trap = lesson.trapWord;
@@ -47242,24 +47192,24 @@ This typically indicates that your device does not have a healthy Internet conne
       const label = sourceLabel(source);
       return `<li><a href="${esc3(source.url)}" target="_blank" rel="noopener noreferrer">${pair2(label.it, label.ar, "source-link")}</a><small>${pair2(source.legal_reference_it || "Riferimento normativo ufficiale", source.legal_reference || "مرجع قانوني رسمي")}</small></li>`;
     }).join("");
-    return `<article class="lesson-detail-page" data-lesson-page="${esc3(key)}"><header class="lesson-detail-head"><div class="eyebrow" lang="it">UNITÀ ${String(module.order_hint).padStart(2, "0")} · LEZIONE ${String(index + 1).padStart(2, "0")}</div><h1>${pair2(lesson.heading_it, lesson.heading_ar, "detail-title")}</h1></header>
+    return `<article class="lesson-detail-page" data-lesson-page="${esc3(key)}"><header class="lesson-detail-head"><div class="eyebrow" lang="it">UNITÀ ${String(module.order_hint).padStart(2, "0")} · LEZIONE ${String(index + 1).padStart(2, "0")}</div><h1>${pair2(lesson.heading_it, lesson.heading_ar, "detail-title")}</h1>${renderLessonVisualSection(lesson)}</header>
   <div class="lesson-audio-row" role="group" aria-label="محتوى الدرس"><button class="audio-button" data-lesson-italian-audio="true" data-lesson-body-offset="${String(lesson.heading_it || "").trim().length + (lesson.body_it ? 2 : 0)}" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc3(lessonText)}">${controlLabel("Ascolta in italiano", "استمع بالإيطالية")}</button>${lessonVideoBlock(lesson, moduleId, index)}</div>
-  <div class="lesson-detail-copy">${renderLessonSections(lesson, lessonAnimationMarkup(lesson, module.module_id), { italianWordMarkup: dictionaryWordMarkup, trapMarkup: trapWordMarkup(lesson), quickCheckMarkup: quickCheckSectionMarkup(lesson) })}</div>
+  <div class="lesson-detail-copy">${renderLessonSections(lesson, "", { italianWordMarkup: dictionaryWordMarkup, trapMarkup: trapWordMarkup(lesson), quickCheckMarkup: quickCheckSectionMarkup(lesson) })}</div>
   <details class="lesson-sources" data-lesson-section="sources"><summary>${pair2("Fonti ufficiali · apri per consultarle", "مصادر رسمية · افتح لعرضها")}<span class="accordion-chevron" aria-hidden="true"></span></summary><ul>${sources}</ul></details>
   ${lessonVideoCTA(lesson, moduleId, index)}
   <nav class="lesson-footer-nav" aria-label="Navigazione tra le lezioni · التنقل بين الدروس"><button class="quiet-button" data-view="home">${controlLabel("Course home", "الرئيسية")}</button>${prev ? `<button class="quiet-button" data-open-lesson="${esc3(prev.module.module_id)}" data-lesson-index="${prev.index}">${controlLabel("← Previous lesson", `← الدرس السابق: ${prev.lesson.heading_ar}`)}</button>` : ""}${next ? `<button class="primary-button" data-open-lesson="${esc3(next.module.module_id)}" data-lesson-index="${next.index}">${controlLabel("Next lesson →", `الدرس التالي: ${next.lesson.heading_ar} ←`)}</button>` : ""}<button class="small-button" data-review-lesson="${esc3(key)}">${controlLabel("Review this lesson", "راجع هذا الدرس")}</button><button class="small-button" data-toggle-complete="${esc3(key)}">${done ? controlLabel("Completed ✓ · undo", "مكتمل ✓ · إلغاء العلامة") : controlLabel("Mark lesson complete", "علّم الدرس مكتملًا")}</button></nav></article>`;
   }
   function reviewIndexPage() {
     const progress = courseProgress();
-    const modules = lessonModules.map((m2, mi) => `<section class="review-module"><header>${pair2(`UNIT ${String(mi + 1).padStart(2, "0")} · ${m2.title_it}`, `الوحدة ${mi + 1} · ${m2.title_ar}`)}</header>${m2.lessons.map((lesson, li) => {
+    const modules = lessonModules.map((m2, mi) => `<section class="review-module"><header>${pair2(`UNITÀ ${String(mi + 1).padStart(2, "0")} · ${m2.title_it}`, `الوحدة ${mi + 1} · ${m2.title_ar}`)}</header>${m2.lessons.map((lesson, li) => {
       const key = lessonKey(m2.module_id, li), count2 = lessonReviewCount(lesson), check = lesson.source_check, stored = check ? state.sourceChecks[check.id] : null;
       const reviewed = state.reviewedLessons.has(key) || !!stored;
       const marker = check ? (stored == null ? void 0 : stored.correct) ? "✓" : stored ? "!" : "" : reviewed ? "✓" : "";
-      const countText = check ? pair2("One Ministry-source checkpoint; separate from the linked question bank.", "نقطة تحقق من مصدر الوزارة؛ مستقلة عن بنك الأسئلة المرتبط.") : pair2(`${count2.toLocaleString("it-IT")} selected official questions from linked topics`, `${count2.toLocaleString("ar")} سؤالًا رسميًا مختارًا من الموضوعات المرتبطة`);
-      const access = getLessonAccess(), accessible = (access == null ? void 0 : access.hasAccess(key)) === true, reviewLabel = accessible ? controlLabel(reviewed ? "Review again" : "Start review", reviewed ? "أعد المراجعة" : "ابدأ المراجعة") : controlLabel("Unlock with test ad", "افتح بإعلان اختباري");
-      return `<article class="review-lesson ${reviewed ? "reviewed" : ""} ${accessible ? "" : "is-locked"}">${lessonImageMarkup(lesson, true)}<div class="review-lesson-copy">${pair2(lesson.heading_it, lesson.heading_ar, "review-heading")}<small>${countText}</small></div><span class="review-mark" aria-label="${check && stored && !stored.correct ? "Needs another review" : ""}">${marker}</span><button class="primary-button" data-review-lesson="${esc3(key)}">${reviewLabel}</button></article>`;
+      const countText = check ? pair2("Punto di verifica ministeriale; separato dal gruppo di quiz collegati.", "نقطة تحقق من مصدر الوزارة؛ مستقلة عن مجموعة الأسئلة المرتبطة.") : pair2(`${count2.toLocaleString("it-IT")} domande del PDF ufficiale selezionate dagli argomenti collegati`, `${count2.toLocaleString("ar")} سؤالًا من ملف الوزارة مختارًا من الموضوعات المرتبطة`);
+      const access = getLessonAccess(), accessible = (access == null ? void 0 : access.hasAccess(key)) === true, reviewLabel = accessible ? controlLabel(reviewed ? "Ripeti la revisione" : "Avvia la revisione", reviewed ? "أعد المراجعة" : "ابدأ المراجعة") : controlLabel("Sblocca con annuncio di prova", "افتح بإعلان اختباري");
+      return `<article class="review-lesson ${reviewed ? "reviewed" : ""} ${accessible ? "" : "is-locked"}">${lessonReviewVisualMarkup(lesson, true)}<div class="review-lesson-copy">${pair2(lesson.heading_it, lesson.heading_ar, "review-heading")}<small>${countText}</small></div><span class="review-mark" aria-label="${check && stored && !stored.correct ? "Da rivedere · تحتاج إلى مراجعة" : ""}">${marker}</span><button class="primary-button" data-review-lesson="${esc3(key)}">${reviewLabel}</button></article>`;
     }).join("")}</section>`).join("");
-    return `<div class="page-heading"><div>${pair2("REVIEW · ONE LESSON AT A TIME", "المراجعة · درس مستقل في كل مرة", "eyebrow-pair")}<h1>${pair2("Check what you understood", "اختبر فهمك لكل درس")}</h1><p>${pair2("Choose a lesson; answer questions selected from its linked Ministry topics, then see the correction. The 2024 update lesson has a separate Ministry-source check.", "اختر درسًا وأجب عن أسئلة منتقاة من موضوعات الوزارة المرتبطة به، ثم شاهد التصحيح. ولدرس تحديث 2024 نقطة تحقق مستقلة من مصدر الوزارة.")}</p></div><span class="lesson-progress-label">${pair2(`${state.reviewedLessons.size} reviewed`, `راجعت ${state.reviewedLessons.size.toLocaleString("ar")} درسًا`)}</span></div><div class="review-module-list">${modules}</div><div class="notice-banner">${pair2("Bank-based reviews use the official Italian statements and recorded Vero/Falso answers. The Ministry-source checkpoint for the 2024 law is separate; it does not establish the question bank’s release date or whether later changes are reflected.", "تعتمد المراجعات المأخوذة من البنك على العبارات الإيطالية الرسمية وإجاباتها المسجلة. أما نقطة التحقق المستندة إلى الوزارة بشأن قانون 2024 فهي تدريب مستقل؛ ولا تثبت تاريخ إصدار بنك الأسئلة أو مدى تغطيته للتعديلات اللاحقة.")}</div>`;
+    return `<div class="page-heading"><div>${pair2("RIPASSO · UNA LEZIONE ALLA VOLTA", "المراجعة · درس مستقل في كل مرة", "eyebrow-pair")}<h1>${pair2("Verifica la tua comprensione", "تحقق مما فهمته")}</h1><p>${pair2("Scegli una lezione, rispondi ai quiz collegati agli argomenti del Ministero e consulta le correzioni. La lezione sugli aggiornamenti del 2024 include un controllo ministeriale separato.", "اختر درسًا وأجب عن الأسئلة المرتبطة بموضوعات الوزارة، ثم راجع التصحيح. يتضمن درس تحديثات 2024 نقطة تحقق مستقلة من مصدر الوزارة.")}</p></div><span class="lesson-progress-label">${pair2(`${state.reviewedLessons.size} lezioni ripassate`, `راجعت ${state.reviewedLessons.size.toLocaleString("ar")} درسًا`)}</span></div><div class="review-module-list">${modules}</div><div class="notice-banner">${pair2("Le revisioni basate sulla banca usano le affermazioni italiane del PDF e le risposte Vero/Falso registrate. Il controllo ministeriale sulla legge del 2024 è un’attività distinta: non certifica la data di rilascio della banca né l’eventuale recepimento delle modifiche successive.", "تعتمد المراجعات المأخوذة من البنك على العبارات الإيطالية الرسمية وإجاباتها المسجلة. أما نقطة التحقق المستندة إلى الوزارة بشأن قانون 2024 فهي تدريب مستقل؛ ولا تثبت تاريخ إصدار بنك الأسئلة أو مدى تغطيته للتعديلات اللاحقة.")}</div>`;
   }
   function bankIndexPage() {
     const topics = orderedTopics(), used = /* @__PURE__ */ new Set(), topicOptions = topics.map((t2) => `<option value="${esc3(t2)}">${esc3(topicLabel(t2).it)} · ${esc3(topicLabel(t2).ar)}</option>`).join("");
@@ -47271,21 +47221,21 @@ This typically indicates that your device does not have a healthy Internet conne
       }
       return `<section class="bank-unit"><header class="bank-unit-title"><span class="course-unit-number">${String(mi + 1).padStart(2, "0")}</span>${pair2(m2.title_it, m2.title_ar, "unit-title")}</header><div class="bank-topic-list">${moduleTopics.map((t2) => {
         const label = topicLabel(t2), count2 = topicCount(t2), correct = state.topicCorrect[t2] || 0, total = state.topicTotal[t2] || 0;
-        return `<article class="bank-topic-row"><button class="topic-open" data-bank-topic="${esc3(t2)}">${pair2(label.it, label.ar, "bank-topic-name")}<small>${pair2(`${count2.toLocaleString("it-IT")} questions · ${correct}/${total} correct`, `${count2.toLocaleString("ar")} سؤال · ${correct.toLocaleString("ar")} من ${total.toLocaleString("ar")} صحيحة`)}</small></button><button class="small-button" data-practice-topic="${esc3(t2)}">${controlLabel("Practice", "تدرّب")}</button></article>`;
+        return `<article class="bank-topic-row"><button class="topic-open" data-bank-topic="${esc3(t2)}">${pair2(label.it, label.ar, "bank-topic-name")}<small>${pair2(`${count2.toLocaleString("it-IT")} quesiti · ${correct}/${total} corretti`, `${count2.toLocaleString("ar")} سؤال · ${correct.toLocaleString("ar")} من ${total.toLocaleString("ar")} صحيحة`)}</small></button><button class="small-button" data-practice-topic="${esc3(t2)}">${controlLabel("Esercitati", "تدرّب")}</button></article>`;
       }).join("")}</div></section>`;
     }).join("");
-    return `<section class="bank-hero"><div>${pair2("PATENTE AB · QUESTION BANK SOURCE", "مصدر بنك أسئلة Patente AB", "eyebrow-pair")}<h1>${pair2("Browse the Patente AB source questions by course unit", "تصفح أسئلة ملف Patente AB وفق وحدات المنهج")}</h1><p>${pair2(`${bank.count.toLocaleString("it-IT")} statements attributed to the PDF linked from the official portal · ${topics.length} ordered subjects · PDF metadata date: ${bank.sourcePdfDate}. Verify wording, answers, and figures in the original file; this app does not certify every record individually. Check current law through the linked Ministry sources.`, `${bank.count.toLocaleString("ar")} سؤال من الملف المرتبط بالبوابة الرسمية · ${topics.length.toLocaleString("ar")} موضوعًا مرتبًا · تاريخ بيانات PDF: ${bank.sourcePdfDate}. تحقق من نص السؤال وإجابته وشكله في الملف الأصلي؛ فالتطبيق لا يصادق على المطابقة الفردية لكل سجل. راجع مصادر الوزارة للتعديلات النافذة.`)}</p></div><div class="bank-actions"><button class="primary-button" data-action="exam">${controlLabel("Final exam simulation", "محاكاة الامتحان النهائي")}</button><button class="quiet-button" data-view="bank" data-all-bank="true">${controlLabel("Browse all questions", "تصفح جميع الأسئلة")}</button><button class="quiet-button" data-view="similar-groups">${controlLabel(`Similar wordings · ${similarQuestionGroups.length}`, `صياغات متقاربة · ${similarQuestionGroups.length.toLocaleString("ar")}`)}</button></div></section><div class="notice-banner bank-scope-note">${pair2("This app uses the Ministry-linked Patente AB PDF for categories A and B. Questions are not separated by license category, so this is not a B-only question filter; check the current official B syllabus.", "يعتمد هذا التطبيق على ملف Patente AB المرتبط بالوزارة (الفئتان A وB). لا تُفرز الأسئلة بحسب الفئة؛ لذلك لا تمثل هذه القائمة مجموعة مخصصة لفئة B وحدها. راجع المصدر الرسمي للمنهج النافذ.")}</div><div class="bank-tool-row"><form class="search-row" id="searchForm"><input id="searchInput" placeholder="Cerca in italiano o arabo" aria-label="Search the question bank · البحث في بنك الأسئلة"><button type="submit">${controlLabel("Search", "بحث")}</button></form><div class="field-hint">${pair2("Cerca in italiano o in arabo", "يمكنك البحث بالإيطالية أو بالعربية")}</div><div class="bank-utility-buttons"><button class="quiet-button" data-action="smart-practice">${controlLabel("Personalized practice · 10 questions", "تدريب ذكي · 10 أسئلة")}</button><button class="quiet-button" data-practice-count="5">${controlLabel("Quick practice · 5", "تدريب سريع · 5")}</button><button class="quiet-button" data-practice-count="10">${controlLabel("Quick practice · 10", "تدريب سريع · 10")}</button><button class="quiet-button" data-practice-count="20">${controlLabel("Quick practice · 20", "تدريب سريع · 20")}</button><button class="quiet-button" data-action="mistakes">${controlLabel(`Review errors (${state.wrong.size})`, `مراجعة الأخطاء (${state.wrong.size.toLocaleString("ar")})`)}</button><button class="quiet-button" data-action="favorites">${controlLabel(`Saved (${state.favorites.size})`, `المحفوظات (${state.favorites.size.toLocaleString("ar")})`)}</button><button class="quiet-button" data-show-all-bank="true">${controlLabel("All " + bank.count.toLocaleString("it-IT") + " questions", "كل الأسئلة الـ" + bank.count.toLocaleString("ar"))}</button></div><form id="customPracticeForm" class="practice-builder"><div class="practice-builder-title">${pair2("Build a focused study set", "أنشئ مجموعة تدريب مخصصة")}</div><label><span>${pair2("Topic", "الموضوع")}</span><select id="customTopic"><option value="">All topics · كل الموضوعات</option>${topicOptions}</select></label><label><span>${pair2("Focus", "نوع الأسئلة")}</span><select id="customFocus"><option value="all">Mixed questions · متنوعة</option><option value="unanswered">Not answered yet · لم تُحل بعد</option><option value="mistakes">Questions I missed · أخطائي</option></select></label><label><span>${pair2("Questions", "عدد الأسئلة")}</span><input id="customCount" type="number" min="1" max="50" value="15" inputmode="numeric"></label><button class="primary-button" type="submit">${controlLabel("Start this session", "ابدأ الجلسة")}</button></form><button class="quiet-button visual-challenge" data-action="sign-challenge">${controlLabel("Visual road-sign challenge · 10 questions", "تحدي بصري لإشارات الطريق · 10 أسئلة")}</button></div><div class="section-title-row"><div>${pair2("TOPICS IN COURSE ORDER", "الموضوعات بترتيب المنهج", "section-title")}</div><span>${pair2("Open a topic to browse every question", "افتح الموضوع لتصفح جميع أسئلته")}</span></div>${moduleSections}<button class="exam-banner" data-action="exam">${pair2("Ready? Start a timed final simulation: 30 questions · 20 minutes · up to 3 errors.", "هل أنت مستعد؟ ابدأ محاكاة نهائية محددة الوقت: 30 سؤالًا · 20 دقيقة · حتى 3 أخطاء.")}</button>`;
+    return `<section class="bank-hero"><div>${pair2("BANCA DATI UFFICIALE · PATENTE AB", "مصدر بنك أسئلة Patente AB", "eyebrow-pair")}<h1>${pair2("Consulta i quesiti della Patente AB per unità didattica", "تصفح أسئلة ملف Patente AB وفق وحدات المنهج")}</h1><p>${pair2(`${bank.count.toLocaleString("it-IT")} quesiti attribuiti al PDF collegato al portale ufficiale · ${topics.length} argomenti in ordine · data del PDF: ${bank.sourcePdfDate}. Confronta testo, risposte e figure con il PDF originale; l’app non certifica ogni singolo quesito. Per la normativa vigente, consulta le fonti ministeriali collegate.`, `${bank.count.toLocaleString("ar")} سؤال من الملف المرتبط بالبوابة الرسمية · ${topics.length.toLocaleString("ar")} موضوعًا مرتبًا · تاريخ بيانات PDF: ${bank.sourcePdfDate}. تحقق من نص السؤال وإجابته وشكله في الملف الأصلي؛ فالتطبيق لا يصادق على المطابقة الفردية لكل سجل. راجع مصادر الوزارة للتعديلات النافذة.`)}</p></div><div class="bank-actions"><button class="primary-button" data-action="exam">${controlLabel("Simulazione d’esame", "محاكاة الامتحان النهائي")}</button><button class="quiet-button" data-view="bank" data-all-bank="true">${controlLabel("Sfoglia tutti i quesiti", "تصفح جميع الأسئلة")}</button><button class="quiet-button" data-view="similar-groups">${controlLabel(`Formulazioni simili · ${similarQuestionGroups.length}`, `صياغات متقاربة · ${similarQuestionGroups.length.toLocaleString("ar")}`)}</button></div></section><div class="notice-banner bank-scope-note">${pair2("L’app usa il PDF Patente AB collegato al portale ministeriale per le categorie A e B. I quesiti non sono separati per categoria: questa schermata non è un filtro esclusivo per la patente B. Consulta il programma ufficiale aggiornato.", "يعتمد هذا التطبيق على ملف Patente AB المرتبط بالوزارة (الفئتان A وB). لا تُفرز الأسئلة بحسب الفئة؛ لذلك لا تمثل هذه القائمة مجموعة مخصصة لفئة B وحدها. راجع المصدر الرسمي للمنهج النافذ.")}</div><div class="bank-tool-row"><form class="search-row" id="searchForm"><input id="searchInput" placeholder="Cerca in italiano o arabo" aria-label="Cerca nel banco dei quiz · البحث في بنك الأسئلة"><button type="submit">${controlLabel("Cerca", "بحث")}</button></form><div class="field-hint">${pair2("Cerca in italiano o in arabo", "يمكنك البحث بالإيطالية أو بالعربية")}</div><div class="bank-utility-buttons"><button class="quiet-button" data-action="smart-practice">${controlLabel("Esercitazione mirata · 10 quesiti", "تدريب ذكي · 10 أسئلة")}</button><button class="quiet-button" data-practice-count="5">${controlLabel("Esercitazione rapida · 5 quesiti", "تدريب سريع · 5")}</button><button class="quiet-button" data-practice-count="10">${controlLabel("Esercitazione rapida · 10 quesiti", "تدريب سريع · 10")}</button><button class="quiet-button" data-practice-count="20">${controlLabel("Esercitazione rapida · 20 quesiti", "تدريب سريع · 20")}</button><button class="quiet-button" data-action="mistakes">${controlLabel(`Rivedi errori (${state.wrong.size})`, `مراجعة الأخطاء (${state.wrong.size.toLocaleString("ar")})`)}</button><button class="quiet-button" data-action="favorites">${controlLabel(`Preferiti (${state.favorites.size})`, `المحفوظات (${state.favorites.size.toLocaleString("ar")})`)}</button><button class="quiet-button" data-show-all-bank="true">${controlLabel(bank.count.toLocaleString("it-IT") + " quesiti totali", "كل الأسئلة الـ" + bank.count.toLocaleString("ar"))}</button></div><form id="customPracticeForm" class="practice-builder"><div class="practice-builder-title">${pair2("Crea un gruppo di studio mirato", "أنشئ مجموعة تدريب مخصصة")}</div><label><span>${pair2("Argomento", "الموضوع")}</span><select id="customTopic"><option value="">Tutti gli argomenti · كل الموضوعات</option>${topicOptions}</select></label><label><span>${pair2("Obiettivo", "نوع الأسئلة")}</span><select id="customFocus"><option value="all">Domande miste · متنوعة</option><option value="unanswered">Non ancora risposte · لم تُحل بعد</option><option value="mistakes">Errori commessi · أخطائي</option></select></label><label><span>${pair2("Numero di domande", "عدد الأسئلة")}</span><input id="customCount" type="number" min="1" max="50" value="15" inputmode="numeric"></label><button class="primary-button" type="submit">${controlLabel("Avvia sessione", "ابدأ الجلسة")}</button></form><button class="quiet-button visual-challenge" data-action="sign-challenge">${controlLabel("Sfida visiva sui segnali · 10 quesiti", "تحدي بصري لإشارات الطريق · 10 أسئلة")}</button></div><div class="section-title-row"><div>${pair2("ARGOMENTI NELL’ORDINE DEL CORSO", "الموضوعات بترتيب المنهج", "section-title")}</div><span>${pair2("Apri un argomento per vedere tutti i quesiti", "افتح الموضوع لتصفح جميع أسئلته")}</span></div>${moduleSections}<button class="exam-banner" data-action="exam">${pair2("Pronto? Avvia una simulazione a tempo: 30 quesiti · 20 minuti · massimo 3 errori.", "هل أنت مستعد؟ ابدأ محاكاة نهائية محددة الوقت: 30 سؤالًا · 20 دقيقة · حتى 3 أخطاء.")}</button>`;
   }
   function sourceAnchor(q) {
-    if (q.source_url) return `<a href="${esc3(q.source_url)}" target="_blank" rel="noopener noreferrer">${controlLabel(q.source_label_it || "Official ministry source", q.source_label_ar || "مصدر وزاري رسمي")}</a>`;
-    return `<a href="${esc3(bank.sourceUrl)}#page=${q.page}" target="_blank" rel="noopener noreferrer">${controlLabel(`Source page ${q.page}`, `صفحة المصدر ${q.page}`)}</a>`;
+    if (q.source_url) return `<a href="${esc3(q.source_url)}" target="_blank" rel="noopener noreferrer">${controlLabel(q.source_label_it || "Fonte ufficiale del Ministero", q.source_label_ar || "مصدر وزاري رسمي")}</a>`;
+    return `<a href="${esc3(bank.sourceUrl)}#page=${q.page}" target="_blank" rel="noopener noreferrer">${controlLabel(`Pagina del PDF ${q.page}`, `صفحة المصدر ${q.page}`)}</a>`;
   }
   function questionAudio(q, answered = false) {
-    const buttons = `<button class="audio-button" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc3(q.it)}">${controlLabel("Listen to the question", "استمع إلى السؤال")}</button>`;
+    const buttons = `<button class="audio-button" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc3(q.it)}">${controlLabel("Ascolta la domanda", "استمع إلى السؤال")}</button>`;
     if (!answered) return `<div class="audio-controls">${buttons}</div>`;
     const isTrue = q.answer === "VERO";
     const it2 = `${q.it} Risposta corretta: ${isTrue ? "Vero" : "Falso"}.${q.explanation_it ? ` Spiegazione: ${q.explanation_it}` : ""}`;
-    return `<div class="audio-controls">${buttons}<button class="audio-button" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc3(it2)}">${controlLabel("Listen to the answer and explanation", "استمع إلى الإجابة والتفسير")}</button></div>`;
+    return `<div class="audio-controls">${buttons}<button class="audio-button" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc3(it2)}">${controlLabel("Ascolta la risposta e la spiegazione", "استمع إلى الإجابة والتفسير")}</button></div>`;
   }
   function questionListRow(q) {
     const saved = state.favorites.has(q.id);
@@ -47554,7 +47504,7 @@ This typically indicates that your device does not have a healthy Internet conne
         const css = marked ? "is-flagged" : hasAnswer ? "is-answered" : "is-blank";
         return `<button type="button" class="exam-review-cell ${css}" data-action="goto-question" data-index="${index}" aria-labelledby="exam-review-label-${index}"><strong>${(index + 1).toLocaleString("ar")}</strong><small>${pair2(statusIt, statusAr)}</small><span class="visually-hidden" id="exam-review-label-${index}"><span lang="it" dir="ltr">Domanda ${index + 1}: ${statusIt}</span><span lang="ar" dir="rtl">السؤال ${(index + 1).toLocaleString("ar")}: ${statusAr}</span></span></button>`;
       }).join("");
-      main.innerHTML = `<div class="quiz-shell"><div class="quiz-topline"><button class="quiet-button" data-action="quit">${controlLabel("Exit session", "إنهاء الجلسة")}</button><span class="quiz-mode">${pair2("EXAM REVIEW SHEET", "مراجعة ورقة الامتحان")}</span><span class="exam-clock" id="examClock">${formatTime(quiz.remaining)}</span></div><div class="progress-track"><div class="progress-fill" style="width:100%"></div></div><article class="quiz-card exam-review-card"><h1>${pair2("Review your answers before correction", "راجع إجاباتك قبل التصحيح")}</h1><p>${pair2(`${answered2} of ${quiz.questions.length} answered · ${flagged} marked for review`, `${answered2.toLocaleString("ar")} من ${quiz.questions.length.toLocaleString("ar")} أُجيب عنها · ${flagged.toLocaleString("ar")} للمراجعة`)}</p><div class="exam-review-grid">${cells}</div><div class="quiz-controls"><button class="quiet-button" data-action="back-to-current">${controlLabel("Return to last question", "العودة إلى آخر سؤال")}</button><button class="primary-button" data-action="submit-exam">${controlLabel("Submit and correct exam", "سلّم الورقة واعرض التصحيح")}</button></div></article></div>`;
+      main.innerHTML = `<div class="quiz-shell"><div class="quiz-topline"><button class="quiet-button" data-action="quit">${controlLabel("Termina la sessione", "إنهاء الجلسة")}</button><span class="quiz-mode">${pair2("SCHEDA DI REVISIONE", "ورقة مراجعة الإجابات")}</span><span class="exam-clock" id="examClock">${formatTime(quiz.remaining)}</span></div><div class="progress-track"><div class="progress-fill" style="width:100%"></div></div><article class="quiz-card exam-review-card"><h1>${pair2("Rivedi le risposte prima della correzione", "راجع إجاباتك قبل التصحيح")}</h1><p>${pair2(`${answered2} risposte date · ${flagged} da rivedere`, `${answered2.toLocaleString("ar")} من ${quiz.questions.length.toLocaleString("ar")} أُجيب عنها · ${flagged.toLocaleString("ar")} للمراجعة`)}</p><div class="exam-review-grid">${cells}</div><div class="quiz-controls"><button class="quiet-button" data-action="back-to-current">${controlLabel("Torna all’ultima domanda", "العودة إلى آخر سؤال")}</button><button class="primary-button" data-action="submit-exam">${controlLabel("Consegna e correggi la simulazione", "سلّم الورقة واعرض التصحيح")}</button></div></article></div>`;
       if (firstUnanswered >= 0) {
         const shortcut = document.createElement("button");
         shortcut.type = "button";
@@ -47569,15 +47519,15 @@ This typically indicates that your device does not have a healthy Internet conne
     const label = q.lesson_check ? { it: q.topic_it, ar: q.topic_ar } : topicLabel(q.topic), correct = q.answer === "VERO";
     const answerLabel = q.lesson_check ? { it: "Risposta verificata nella fonte ministeriale", ar: "الإجابة وفق مصدر الوزارة" } : { it: "Risposta corretta registrata nel PDF ufficiale", ar: "الإجابة الصحيحة المسجلة في ملف الوزارة" };
     const feedback = isExam ? "" : answered === null || answered === void 0 ? "" : `<div class="feedback ${answered === correct ? "good" : "bad"}" role="status"><strong>${pair2(answered === correct ? "Risposta corretta" : "Risposta da rivedere", answered === correct ? "إجابتك صحيحة" : "إجابتك تحتاج إلى مراجعة")}</strong>${pair2(`${answerLabel.it}: ${correct ? "Vero" : "Falso"}`, `${answerLabel.ar}: ${correct ? "صحيح" : "خطأ"}`)}${q.explanation_it ? `<div class="quiz-explanation">${pair2(q.explanation_it, q.explanation_ar || "")}</div>` : ""}${questionAudio(q, true)}</div>`;
-    const figure = q.image ? `<figure class="quiz-figure"><img src="${esc3(q.image)}" loading="lazy" alt="${esc3(q.it)}"><figcaption>${pair2("Original figure from the official quiz PDF.", "الرسم الأصلي الوارد مع سؤال الوزارة.")}${sourceAnchor(q)}</figcaption></figure>` : q.hasFigureRef ? `<div class="figure-panel">${pair2("The statement refers to a figure; open the cited PDF page.", "يشير السؤال إلى شكل؛ افتح صفحة ملف المصدر المشار إليها.")}</div>` : "";
-    const questionId = q.lesson_check ? `<span class="quiz-id">${controlLabel("MINISTRY SOURCE CHECK", "فحص من مصدر الوزارة")}</span>` : `<span class="quiz-id">#${q.id}</span>`;
-    const bookmarkButton = q.lesson_check ? "" : `<button class="bookmark-button ${state.favorites.has(q.id) ? "saved" : ""}" data-action="bookmark">${pair2(state.favorites.has(q.id) ? "★ Saved" : "☆ Save question", state.favorites.has(q.id) ? "★ محفوظ" : "☆ احفظ السؤال")}</button>`;
+    const figure = questionFigureMarkup(q, { sourceMarkup: sourceAnchor(q) });
+    const questionId = q.lesson_check ? `<span class="quiz-id">${controlLabel("Verifica da fonte ministeriale", "تحقق من مصدر الوزارة")}</span>` : "";
+    const bookmarkButton = q.lesson_check ? "" : `<button class="bookmark-button ${state.favorites.has(q.id) ? "saved" : ""}" data-action="bookmark">${pair2(state.favorites.has(q.id) ? "★ Salvata" : "☆ Salva la domanda", state.favorites.has(q.id) ? "★ محفوظة" : "☆ احفظ السؤال")}</button>`;
     const trueClass = `${answered === true ? "selected-choice" : ""}${!isExam && answered !== null && answered !== void 0 && correct ? " correct-choice" : ""}`.trim();
     const falseClass = `${answered === false ? "selected-choice" : ""}${!isExam && answered !== null && answered !== void 0 && !correct ? " correct-choice" : ""}`.trim();
     const locked = !isExam && answered !== null && answered !== void 0;
-    const title = quiz.mode === "visual" ? pair2("VISUAL ROAD-SIGN PRACTICE", "تدريب بصري على الإشارات") : pair2(isExam ? "FINAL EXAM SIMULATION" : quiz.mode === "lesson-review" ? "LESSON REVIEW" : quiz.mode === "due" ? "RIPASSO PROGRAMMATO" : quiz.mode === "smart" ? "PERSONALIZED PRACTICE" : quiz.mode === "custom" ? "CUSTOM PRACTICE" : "PRACTICE", isExam ? "محاكاة الامتحان النهائي" : quiz.mode === "lesson-review" ? "مراجعة الدرس" : quiz.mode === "due" ? "مراجعة مستحقة" : quiz.mode === "smart" ? "تدريب ذكي" : quiz.mode === "custom" ? "تدريب مخصص" : "تدريب");
-    const examControls = isExam ? `<button class="quiet-button ${quiz.flagged[quiz.index] ? "is-flagged" : ""}" data-action="flag">${controlLabel(quiz.flagged[quiz.index] ? "Marked for review" : "Mark for review", quiz.flagged[quiz.index] ? "معلّم للمراجعة" : "علّم للمراجعة")}</button><button class="quiet-button" data-action="skip">${controlLabel("Skip unanswered", "تخطَّ بلا إجابة")}</button><button class="primary-button" data-action="exam-next">${controlLabel(quiz.index === quiz.questions.length - 1 ? "Review answers" : "Next →", quiz.index === quiz.questions.length - 1 ? "مراجعة الإجابات" : "التالي ←")}</button>` : `<button class="primary-button" data-action="next" ${answered === null || answered === void 0 ? "disabled" : ""}>${controlLabel(quiz.index === quiz.questions.length - 1 ? "Show result" : "Next question →", quiz.index === quiz.questions.length - 1 ? "عرض النتيجة" : "السؤال التالي ←")}</button>`;
-    main.innerHTML = `<div class="quiz-shell"><div class="quiz-topline"><button class="quiet-button" data-action="quit">${controlLabel("Exit session", "إنهاء الجلسة")}</button><span class="quiz-mode">${title}</span><span class="quiz-index">${(quiz.index + 1).toLocaleString("ar")} / ${quiz.questions.length.toLocaleString("ar")}</span></div><div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div><article class="quiz-card"><div class="quiz-tags"><span class="topic-tag">${pair2(label.it, label.ar)}</span>${questionId}${isExam ? `<span class="exam-clock" id="examClock">${formatTime(quiz.remaining)}</span>` : ""}</div><p class="italian-question" lang="it" dir="ltr">${esc3(q.it)}</p><p class="arabic-question" lang="ar" dir="rtl">${esc3(q.ar || "")}</p>${questionAudio(q)}${figure}<div class="answer-area"><p class="answer-instruction">${pair2("La frase è vera o falsa?", "هل العبارة صحيحة أم خاطئة؟")}</p><div class="answer-buttons"><button class="answer-button true-choice ${trueClass}" data-answer="true" aria-pressed="${answered === true}" ${locked ? "disabled" : ""}>${pair2("Vero", "صحيح")}</button><button class="answer-button false-choice ${falseClass}" data-answer="false" aria-pressed="${answered === false}" ${locked ? "disabled" : ""}>${pair2("Falso", "خطأ")}</button></div>${feedback}</div><div class="quiz-controls">${bookmarkButton}<button class="quiet-button" data-action="prev" ${quiz.index === 0 ? "disabled" : ""}>${controlLabel("Previous", "السابق")}</button>${examControls}</div></article></div>`;
+    const title = quiz.mode === "visual" ? pair2("ESERCITAZIONE VISIVA SUI SEGNALI", "تدريب بصري على الإشارات") : pair2(isExam ? "SIMULAZIONE D’ESAME" : quiz.mode === "lesson-review" ? "RIPASSO DELLA LEZIONE" : quiz.mode === "due" ? "RIPASSO PROGRAMMATO" : quiz.mode === "smart" ? "ESERCITAZIONE PERSONALIZZATA" : quiz.mode === "custom" ? "ESERCITAZIONE PERSONALIZZATA" : "ESERCITAZIONE", isExam ? "محاكاة الامتحان النهائي" : quiz.mode === "lesson-review" ? "مراجعة الدرس" : quiz.mode === "due" ? "مراجعة مستحقة" : quiz.mode === "smart" ? "تدريب ذكي" : quiz.mode === "custom" ? "تدريب مخصص" : "تدريب");
+    const examControls = isExam ? `<button class="quiet-button ${quiz.flagged[quiz.index] ? "is-flagged" : ""}" data-action="flag">${controlLabel(quiz.flagged[quiz.index] ? "Contrassegnata da rivedere" : "Contrassegna per rivedere", quiz.flagged[quiz.index] ? "معلّم للمراجعة" : "علّم للمراجعة")}</button><button class="quiet-button" data-action="skip">${controlLabel("Salta senza rispondere", "تخطَّ بلا إجابة")}</button><button class="primary-button" data-action="exam-next">${controlLabel(quiz.index === quiz.questions.length - 1 ? "Rivedi le risposte" : "Avanti →", quiz.index === quiz.questions.length - 1 ? "مراجعة الإجابات" : "التالي ←")}</button>` : `<button class="primary-button" data-action="next" ${answered === null || answered === void 0 ? "disabled" : ""}>${controlLabel(quiz.index === quiz.questions.length - 1 ? "Mostra il risultato" : "Domanda successiva →", quiz.index === quiz.questions.length - 1 ? "عرض النتيجة" : "السؤال التالي ←")}</button>`;
+    main.innerHTML = `<div class="quiz-shell"><div class="quiz-topline"><button class="quiet-button" data-action="quit">${controlLabel("Termina la sessione", "إنهاء الجلسة")}</button><span class="quiz-mode">${title}</span><span class="quiz-index">${(quiz.index + 1).toLocaleString("ar")} / ${quiz.questions.length.toLocaleString("ar")}</span></div><div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div><article class="quiz-card" data-question-id="${esc3(q.id)}"><div class="quiz-tags"><span class="topic-tag">${pair2(label.it, label.ar)}</span>${questionId}${isExam ? `<span class="exam-clock" id="examClock">${formatTime(quiz.remaining)}</span>` : ""}</div><p class="italian-question" lang="it" dir="ltr">${esc3(q.it)}</p><p class="arabic-question" lang="ar" dir="rtl">${esc3(q.ar || "")}</p>${questionAudio(q)}${figure}<div class="answer-area"><p class="answer-instruction">${pair2("La frase è vera o falsa?", "هل العبارة صحيحة أم خاطئة؟")}</p><div class="answer-buttons"><button class="answer-button true-choice ${trueClass}" data-answer="true" aria-pressed="${answered === true}" ${locked ? "disabled" : ""}>${pair2("Vero", "صحيح")}</button><button class="answer-button false-choice ${falseClass}" data-answer="false" aria-pressed="${answered === false}" ${locked ? "disabled" : ""}>${pair2("Falso", "خطأ")}</button></div>${feedback}</div><div class="quiz-controls">${bookmarkButton}<button class="quiet-button" data-action="prev" ${quiz.index === 0 ? "disabled" : ""}>${controlLabel("Indietro", "السابق")}</button>${examControls}</div></article></div>`;
   }
   function updateQuestionMemory(q, correct) {
     if (q.lesson_check) return;
@@ -47695,8 +47645,8 @@ This typically indicates that your device does not have a healthy Internet conne
     main.innerHTML = `<section class="result-card"><div class="eyebrow"><span lang="it">${result.isExam ? "ESITO DELLA SIMULAZIONE" : "SESSIONE DI STUDIO"}</span><small lang="ar">${result.isExam ? "نتيجة المحاكاة" : "نتيجة جلسة الدراسة"}</small></div><div class="result-seal ${result.isExam && !passed ? "fail" : ""}">${result.isExam ? passed ? "✓" : "×" : `${result.right}/${result.total}`}</div><h1>${pair2(result.isExam ? examTitle : "Sessione completata", result.isExam ? examTitleAr : "انتهت الجلسة")}</h1><p>${pair2(result.isExam ? "Simulazione didattica; l’esame ufficiale si svolge in italiano." : "Rivedi le risposte e continua con calma.", result.isExam ? result.endedByFourthError ? "توقفت المحاكاة فور تسجيل الخطأ الرابع." : "هذه محاكاة تعليمية؛ الامتحان الرسمي باللغة الإيطالية." : "راجع الإجابات وواصل التعلّم بهدوء.")}</p>${result.isExam ? `<div class="result-score"><div>${pair2("Correct", "صحيحة")}<strong>${result.right}</strong></div><div>${pair2("Wrong", "خاطئة")}<strong>${result.wrong}</strong></div><div>${pair2("Blank", "بلا إجابة")}<strong>${result.total - result.answered}</strong></div></div><p class="exam-criteria">${pair2(result.answered < result.total ? "Answer every question to complete the simulation." : result.wrong <= 3 ? "Within the published threshold: no more than three errors." : "More than three errors; review and try again.", result.answered < result.total ? "المحاكاة غير مكتملة: أجب عن جميع الأسئلة." : result.wrong <= 3 ? "ضمن الحد المنشور: ثلاثة أخطاء كحد أقصى." : "تجاوزت ثلاثة أخطاء؛ راجع الأسئلة وأعد المحاولة.")}</p>` : ""}${result.label ? `<p>${pair2("Lesson review", "مراجعة الدرس")}: ${pair2(result.label, (lessonLabel == null ? void 0 : lessonLabel.heading_ar) || result.label)}</p>` : ""}<div class="hero-actions" style="justify-content:center"><button class="primary-button" data-action="practice">${controlLabel("New practice", "تدريب جديد")}</button>${result.isExam ? `<button class="quiet-button" data-view="bank">${controlLabel("Back to the bank", "العودة إلى البنك")}</button>` : `<button class="quiet-button" data-view="review">${controlLabel("Review another lesson", "راجع درسًا آخر")}</button>`}</div><div class="review-list"><div class="section-head"><h2>${pair2(errors.length ? "Review these answers" : "Review your answers", errors.length ? "راجع هذه الإجابات" : "راجع إجاباتك")}</h2></div>${rows}</div></section>`;
     main.focus({ preventScroll: true });
   }
-  function speak(text, locale, button) {
-    const value = String(text || "").trim();
+  function speak(text2, locale, button) {
+    const value = String(text2 || "").trim();
     if (!value) return Promise.resolve(false);
     return speechController.speak(value, locale, button);
   }
@@ -47751,8 +47701,8 @@ This typically indicates that your device does not have a healthy Internet conne
     const stages = ((_a12 = lesson.visual_script) == null ? void 0 : _a12.stages) || [];
     const intros = ["Idea principale:", "Esempio:", "Attenzione all’errore comune:"];
     const fallback = [lesson.core_it || lesson.body_it, lesson.example_it, ((_c = (_b = lesson.common_mistakes) == null ? void 0 : _b[0]) == null ? void 0 : _c.mistake_it) || lesson.pitfall_it];
-    const visualStageExcerpt = (text, max = 190) => {
-      const value = String(text || "").trim();
+    const visualStageExcerpt = (text2, max = 190) => {
+      const value = String(text2 || "").trim();
       if (value.length <= max) return value;
       const boundary = value.slice(0, max).lastIndexOf(" ");
       return `${value.slice(0, boundary > max * 0.55 ? boundary : max).trim()}…`;
@@ -47887,8 +47837,8 @@ This typically indicates that your device does not have a healthy Internet conne
     offlineCacheStats = { imageCached: data.imageCached, imageTotal: data.imageTotal, coreCached: data.coreCached, coreTotal: data.coreTotal };
     updateConnectivity();
   });
-  function dictionaryWordMarkup(text, baseOffset = 0) {
-    const value = String(text);
+  function dictionaryWordMarkup(text2, baseOffset = 0) {
+    const value = String(text2);
     let cursor = 0, html = "";
     for (const match of value.matchAll(/[\p{L}\p{M}]+(?:[’'`][\p{L}\p{M}]+)*/gu)) {
       html += esc3(value.slice(cursor, match.index));
@@ -47899,11 +47849,11 @@ This typically indicates that your device does not have a healthy Internet conne
     }
     return html + esc3(value.slice(cursor));
   }
-  function vocabularyMarkup(text, baseOffset = 0) {
-    return dictionaryWordMarkup(text, baseOffset);
+  function vocabularyMarkup(text2, baseOffset = 0) {
+    return dictionaryWordMarkup(text2, baseOffset);
   }
-  function lessonSentenceMarkup(text) {
-    const value = String(text), sentences = splitSentences(value);
+  function lessonSentenceMarkup(text2) {
+    const value = String(text2), sentences = splitSentences(value);
     if (!sentences.length) return vocabularyMarkup(value);
     let cursor = 0, html = "";
     for (const sentence of sentences) {
@@ -48001,9 +47951,9 @@ This typically indicates that your device does not have a healthy Internet conne
   function enhanceLessonVocabulary() {
     var _a12;
     for (const node of main.querySelectorAll(".lesson-it-text:not([data-vocabulary-ready])")) {
-      const text = node.textContent || "";
-      node.dataset.rawText = text;
-      node.innerHTML = lessonSentenceMarkup(text);
+      const text2 = node.textContent || "";
+      node.dataset.rawText = text2;
+      node.innerHTML = lessonSentenceMarkup(text2);
       node.dataset.vocabularyReady = "true";
       node.dataset.translationTappable = "true";
       node.tabIndex = 0;
@@ -48017,13 +47967,13 @@ This typically indicates that your device does not have a healthy Internet conne
     var _a12;
     for (const button of ((_a12 = root == null ? void 0 : root.querySelectorAll) == null ? void 0 : _a12.call(root, "button")) || []) {
       if (button.hasAttribute("aria-label") || button.hasAttribute("aria-labelledby")) continue;
-      const text = (button.textContent || button.title || "").replace(/\s+/gu, " ").trim();
-      if (text) button.setAttribute("aria-label", text);
+      const text2 = (button.textContent || button.title || "").replace(/\s+/gu, " ").trim();
+      if (text2) button.setAttribute("aria-label", text2);
     }
   }
   function syncDynamicStudyFeatures() {
     if (currentView === "lesson") {
-      const marks = [[".lesson-detail-head", "title"], [".lesson-audio-row", "listen"], [".lesson-animation", "visualNotice"], [".lesson-it-text", "italian"], [".lesson-ar-full", "translation"], [".lesson-mistakes", "errors"], [".lesson-sources", "source"], [".lesson-footer-nav", "buttons"]];
+      const marks = [[".lesson-detail-head", "title"], [".lesson-audio-row", "listen"], [".lesson-svg-figure", "visualNotice"], [".lesson-it-text", "italian"], [".lesson-ar-full", "translation"], [".lesson-mistakes", "errors"], [".lesson-sources", "source"], [".lesson-footer-nav", "buttons"]];
       for (const [selector, name4] of marks) {
         const node = main.querySelector(selector);
         if (node) node.dataset.lessonSection = name4;
@@ -48629,7 +48579,7 @@ This typically indicates that your device does not have a healthy Internet conne
       })) throw new Error("Course content incomplete / المنهج غير مكتمل");
       const expectedTopics = new Set(questions.map((q) => q.topic));
       if (expectedTopics.size !== 25 || Object.keys(topicLabels).length !== 25 || [...expectedTopics].some((t2) => !topicLabels[t2])) throw new Error("Topic index incomplete / فهرس الموضوعات غير مكتمل");
-      const lessonList = flatLessons(), wordCount = (text) => (String(text || "").match(/[\p{L}\p{M}]+(?:[’'][\p{L}\p{M}]+)*/gu) || []).length;
+      const lessonList = flatLessons(), wordCount = (text2) => (String(text2 || "").match(/[\p{L}\p{M}]+(?:[’'][\p{L}\p{M}]+)*/gu) || []).length;
       if (lessonModules.length !== 11 || lessonList.length !== 50 || lessonList.some((x2) => {
         var _a13, _b2;
         const l2 = x2.lesson, n2 = wordCount(l2.body_it);
@@ -48654,11 +48604,11 @@ This typically indicates that your device does not have a healthy Internet conne
         applyFontSize();
         applyThemeMode();
         return persistState();
-      }, getContext: () => ({ questionIds: new Set(questions.map((q) => Number(q.id))), lessonKeys: new Set(flatLessons().map((x2) => x2.key)), sourceCheckIds: new Set(lessonModules.flatMap((m2) => m2.lessons.map((l2) => {
+      }, getContext: () => ({ questionIds: new Set(questions.map((q) => Number(q.id))), lessonKeys: progressLessonKeys(), sourceCheckIds: new Set(lessonModules.flatMap((m2) => m2.lessons.map((l2) => {
         var _a13;
         return (_a13 = l2.source_check) == null ? void 0 : _a13.id;
       }).filter(Boolean))), topics: new Set(Object.keys(topicLabels)) }), onImported: () => render("home") });
-      accountService = createAccountService({ firebaseConfig, getState: () => state, replaceState: applySyncedProgress, getContext: () => ({ questionIds: new Set(questions.map((q) => Number(q.id))), lessonKeys: new Set(flatLessons().map((x2) => x2.key)), sourceCheckIds: new Set(lessonModules.flatMap((m2) => m2.lessons.map((l2) => {
+      accountService = createAccountService({ firebaseConfig, getState: () => state, replaceState: applySyncedProgress, getContext: () => ({ questionIds: new Set(questions.map((q) => Number(q.id))), lessonKeys: progressLessonKeys(), sourceCheckIds: new Set(lessonModules.flatMap((m2) => m2.lessons.map((l2) => {
         var _a13;
         return (_a13 = l2.source_check) == null ? void 0 : _a13.id;
       }).filter(Boolean))), topics: new Set(Object.keys(topicLabels)) }), onOwnerChanged: setStudyOwner, getGuestState: () => loadState(stateKey), onAccountDeleted: (uid) => {

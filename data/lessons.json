@@ -13,7 +13,7 @@
         "أعيدت مراجعة ملخصات دروس هذه الوحدة مقابل المصادر الإيطالية الرسمية المدرجة لكل درس حتى 22 نوفمبر 2026؛ لا يثبت ذلك استبعاد تغييرات خارج نطاق الملخص، لذلك تحقق من النص النافذ في Normattiva عند التطبيق.",
         "صياغة التعريفات بالعربية تلخيص تعليمي وليست ترجمة رسمية أو اقتباسًا حرفيًا؛ للحسم القانوني يُرجع إلى النص الإيطالي."
       ],
-      "intro_ar": "تعرّف في هذه الوحدة المصطلحات الأساسية التي يستخدمها قانون المرور الإيطالي، وكيف تُصنّف المركبات، وما الذي يُنتظر من السائق أثناء السير. المرجع التشريعي هو قانون الطرق الإيطالي (Codice della strada) بصيغته المنشورة في Normattiva؛ ويشير موقع وزارة البنية التحتية والنقل إلى مراجعة دخلت حيز النفاذ في 14 ديسمبر 2024 بموجب القانون رقم 177/2024. هذا شرح مبسّط لا يحل محل النص القانوني.",
+      "intro_ar": "تعرّف الوحدة المصطلحات الأساسية وتصنيف المركبات ومسؤولية السائق وفق قانون الطرق الإيطالي المنشور في Normattiva. دخل القانون 177/2024 حيز النفاذ في 14 ديسمبر 2024. هذا شرح مبسّط لا يحل محل النص القانوني.",
       "lessons": [
         {
           "id": "u1-l1",
@@ -315,7 +315,7 @@
       "previous_module_id": null,
       "next_module_id": "signs",
       "title_it": "Fondamenti della strada, del veicolo e della responsabilità del conducente",
-      "intro_it": "In questa unità conoscerai i termini fondamentali utilizzati dal Codice della strada italiano, come vengono classificati i veicoli e che cosa ci si aspetta dal conducente durante la circolazione. Il riferimento legislativo è il Codice della strada italiano nella versione pubblicata su Normattiva; il sito del Ministero delle Infrastrutture e dei Trasporti segnala una revisione entrata in vigore il 14 dicembre 2024 in base alla legge n. 177/2024. Questa è una spiegazione semplificata che non sostituisce il testo di legge.",
+      "intro_it": "Questa unità presenta i termini del Codice della strada, la classificazione dei veicoli e i doveri del conducente. Riferimento: testo vigente su Normattiva; la legge 177/2024 è in vigore dal 14 dicembre 2024. La sintesi non sostituisce la legge.",
       "objectives_it": [
         "Distinguere la strada pubblica dalle sue parti fondamentali, come la corsia e la carreggiata.",
         "Spiegare il significato giuridico generale di veicolo e distinguere le sue categorie principali.",
@@ -337,7 +337,7 @@
         "لم أدرج أرقام مسافات أو مدد أو غرامات أو تفاصيل استثناءات مرتبطة بعلامات بعينها؛ يلزم الرجوع إلى رمز العلامة واللوحة والنص التنظيمي التفصيلي في الحالة المحددة.",
         "لا يصح فهم الأمثلة التبسيطية على أنها قواعد قانونية شاملة؛ واجب السائق يتحدد من العلامة الفعلية، ولوحتها التكميلية، وظروف الطريق والإشارات ذات الأولوية."
       ],
-      "intro_ar": "تساعدك هذه الوحدة على التعرّف إلى وظيفة مجموعات الإشارات وقراءة ما تطلبه منك في الطريق. الإطار القانوني هو قانون السير الإيطالي (D.Lgs. 285/1992) ولائحته التنفيذية (D.P.R. 495/1992). يذكر MIT أن قانون 177/2024 دخل حيز النفاذ في 14 ديسمبر 2024؛ راجعت النسخة النافذة التي يبين Normattiva أنها محدثة حتى 24 أبريل 2026. تميّز الدروس بين مضمون القانون وبين وسيلة حفظ تعليمية مبسطة.",
+      "intro_ar": "تشرح الوحدة مجموعات الإشارات وفق قانون السير D.Lgs. 285/1992 ولائحته D.P.R. 495/1992. دخل القانون 177/2024 حيز النفاذ في 14 ديسمبر 2024؛ والنسخة المشار إليها في Normattiva محدثة حتى 24 أبريل 2026. التبسيط وسيلة تعليمية لا نص قانوني.",
       "lessons": [
         {
           "id": "u2-l1",
@@ -620,7 +620,7 @@
       "previous_module_id": "road-basics",
       "next_module_id": "signals-markings",
       "title_it": "Leggere i segnali stradali italiani",
-      "intro_it": "Questa unità ti aiuta a riconoscere la funzione dei gruppi di segnali e a capire che cosa ti richiedono sulla strada. Il quadro normativo è costituito dal Codice della strada italiano (D.Lgs. 285/1992) e dal suo regolamento di esecuzione (D.P.R. 495/1992). Il MIT indica che la legge 177/2024 è entrata in vigore il 14 dicembre 2024; ho consultato il testo vigente che Normattiva indica come aggiornato fino al 24 aprile 2026. Le lezioni distinguono il contenuto della legge da un metodo didattico semplificato per memorizzarlo.",
+      "intro_it": "Questa unità tratta i gruppi di segnali e le loro prescrizioni secondo il Codice della strada (D.Lgs. 285/1992) e il regolamento (D.P.R. 495/1992). La legge 177/2024 è in vigore dal 14 dicembre 2024; Normattiva indica l’aggiornamento al 24 aprile 2026. Le semplificazioni non sono testo di legge.",
       "objectives_it": [
         "Distinguere tra segnali di pericolo, segnali di prescrizione e segnali di indicazione.",
         "Comprendere la differenza tra dare la precedenza, fermarsi e poi darla, e seguire una direzione obbligatoria.",
@@ -937,7 +937,7 @@
       "previous_module_id": "signs",
       "next_module_id": "priority-intersections",
       "title_it": "Segnaletica orizzontale, segnali luminosi e lavori stradali",
-      "intro_it": "Questa unità spiega come leggere la segnaletica tracciata sulla strada, che cosa significano le luci dei semafori e gli ordini degli agenti del traffico e come comportarsi in presenza di segnali di ostacoli e cantieri. Il riferimento normativo per l'analisi è il Codice della strada italiano e i relativi regolamenti; le frasi da memorizzare sono invece semplificazioni didattiche, non testi di legge.",
+      "intro_it": "Questa unità tratta segnaletica orizzontale, semafori, ordini degli agenti, ostacoli e cantieri. Riferimento: Codice della strada e regolamenti; le frasi mnemoniche sono semplificazioni didattiche, non testi di legge.",
       "objectives_it": [
         "Distinguere la striscia continua da quella discontinua e comprendere la funzione della linea di arresto e dell'attraversamento pedonale.",
         "Applicare il significato delle luci rossa, gialla e verde, compresi i casi particolari delle frecce e delle luci lampeggianti.",
@@ -945,15 +945,15 @@
         "Leggere la sequenza generale di preavviso di un cantiere e di regolazione temporanea del traffico, senza presumere che ogni pannello autorizzi il passaggio."
       ],
       "caveats_it": [
-        "Sono stati consultati il testo della legge del 1992 su Normattiva e le pagine ufficiali ACI aggiornate al 20 ottobre 2026; tuttavia, lo strumento di visualizzazione non ha estratto integralmente gli articoli 38–43 direttamente dalla pagina di Normattiva. Per i testi degli articoli sono state quindi utilizzate le pagine ACI, insieme alla fonte Normattiva per verificare la legge e la data di entrata in vigore.",
-        "La legge 25 novembre 2024, n. 177, è entrata in vigore il 14 dicembre 2024 ed è comparsa su Normattiva con un aggiornamento pubblicato il 1 ottobre 2026. Dalla verifica non è emerso che gli argomenti fondamentali di questa unità siano stati modificati dalla riforma, ma ciò non consente di concludere che non vi siano altri aggiornamenti in articoli o regolamenti di attuazione non esaminati.",
+        "Per gli artt. 38–43 sono stati consultati il testo Normattiva e le pagine ACI aggiornate al 20 ottobre 2026. Poiché la visualizzazione Normattiva non ha estratto integralmente gli articoli, per il testo dettagliato si è fatto riferimento ad ACI e a Normattiva per la legge e la decorrenza.",
+        "La legge 177/2024 è in vigore dal 14 dicembre 2024; Normattiva indicava un aggiornamento al 1 ottobre 2026. La verifica non ha rilevato modifiche ai temi fondamentali dell’unità, ma non esclude aggiornamenti di altre norme o regolamenti non esaminati.",
         "I valori tecnici relativi alla segnaletica orizzontale temporanea sono tratti dal decreto MIT del 2002, e il limite temporale si riferisce ai giorni lavorativi, non ai giorni di calendario; sono stati mantenuti soltanto i limitati dettagli tecnici che è stato possibile verificare, senza inserire sanzioni pecuniarie o altre durate."
       ],
       "course_visual_src": null
     },
     {
       "caveats_ar": [
-        "التعديل الشامل بموجب القانون 177/2024 دخل حيز النفاذ في 14 ديسمبر 2024. شملت إضافات المادة 145 قواعد خاصة بالدراجات في الفقرتين 4-bis و4-ter؛ لا تعني هذه الإضافات استبدال قاعدة أولوية اليمين العامة. سجل Normattiva لقانون الطرق ظاهر بآخر تحديث منشور 24 أبريل 2026، وسجل اللائحة التنفيذية بآخر تحديث منشور 24 فبراير 2025؛ لم أتحقق من نص لاحق منفصل يغير أحكام الأولوية حتى تاريخ هذا التحقق.",
+        "دخل القانون 177/2024 حيز النفاذ في 14 ديسمبر 2024؛ وأضافت المادة 145 قواعد للدراجات في 4-bis و4-ter دون استبدال أولوية اليمين. يظهر تحديث Normattiva للقانون في 24 أبريل 2026 ولائحته في 24 فبراير 2025؛ ولم أتحقق من تعديل لاحق لأحكام الأولوية.",
         "اللائحة التنفيذية الرسمية على Gazzetta Ufficiale متاحة كرابط إلى سجل التشريع الكامل، لكن استخراج النص التفصيلي للمواد 105–107 من عرض الصفحة تعذر؛ استخدمت الإحالة المحددة لهذه المواد مع نسخة ACI القانونية المساعدة حيث أمكن، ولم أعتمد على مقتطف نتيجة بحث.",
         "لم تُدرج مبالغ الغرامات أو العقوبات، لأنها ليست لازمة لتحقيق أهداف الدرس. الأمثلة وعبارة «افحص اليمين أولاً» تبسيط تعليمي؛ النص الملزم هو المواد المشار إليها وشروطها."
       ],
@@ -1252,7 +1252,7 @@
       "previous_module_id": "signals-markings",
       "next_module_id": "movement-overtaking",
       "title_it": "Precedenza e incroci nella guida in Italia",
-      "intro_it": "Quando ti avvicini a un incrocio, riduci l'attenzione e leggi prima i segnali: la legge stabilisce la precedenza a destra come regola generale in assenza di un segnale diverso, ma impone anche di fermarsi in casi specifici e vieta di entrare in un incrocio che non puoi liberare. La spiegazione seguente distingue tra disposizioni di legge e un espediente didattico per ricordarle, e rispecchia i testi disponibili fino a ottobre 2026.",
+      "intro_it": "Agli incroci, la precedenza a destra è la regola generale salvo diversa segnalazione; occorre fermarsi nei casi previsti e non entrare se non si può liberare l’incrocio. La spiegazione distingue norme e promemoria didattico e riflette le fonti disponibili fino a ottobre 2026.",
       "objectives_it": [
         "Individuare la precedenza in un incrocio non regolato secondo la regola di chi proviene da destra.",
         "Distinguere gli effetti dei segnali luminosi, verticali e orizzontali e delle segnalazioni dell'agente.",
@@ -1260,8 +1260,8 @@
         "Applicare l'obbligo di precedenza nei casi dei veicoli su rotaia e degli sbocchi di strade private o di percorsi individuati dalla legge."
       ],
       "caveats_it": [
-        "La riforma complessiva introdotta dalla legge 177/2024 è entrata in vigore il 14 dicembre 2024. Le integrazioni all'articolo 145 hanno incluso regole specifiche per le biciclette nei commi 4-bis e 4-ter; queste integrazioni non sostituiscono la regola generale della precedenza a destra. La scheda del Codice della strada su Normattiva riporta come ultimo aggiornamento pubblicato il 24 aprile 2026, mentre quella del regolamento di esecuzione riporta il 24 febbraio 2025; non ho verificato un successivo testo separato che modifichi le disposizioni sulla precedenza fino alla data di questa verifica.",
-        "Il regolamento di esecuzione ufficiale sulla Gazzetta Ufficiale è disponibile tramite un collegamento alla scheda dell'intero provvedimento, ma non è stato possibile estrarre il testo dettagliato degli articoli 105–107 dalla visualizzazione della pagina; ho utilizzato il riferimento specifico a questi articoli insieme alla versione giuridica di supporto dell'ACI, ove possibile, e non mi sono basato su un estratto di un risultato di ricerca.",
+        "La legge 177/2024, in vigore dal 14 dicembre 2024, ha aggiunto all’art. 145 regole per le biciclette (commi 4-bis e 4-ter), senza sostituire la precedenza generale a destra. Normattiva indica aggiornamenti al 24 aprile 2026 per il Codice e al 24 febbraio 2025 per il regolamento; non è stata verificata una modifica successiva sulla precedenza.",
+        "Il regolamento ufficiale è collegato alla scheda completa in Gazzetta Ufficiale. Non è stato possibile estrarre gli artt. 105–107; sono stati usati i riferimenti normativi e il supporto ACI, senza basarsi su estratti dei risultati di ricerca.",
         "Non sono stati inclusi gli importi delle multe né le sanzioni, perché non sono necessari per raggiungere gli obiettivi della lezione. Gli esempi e la frase «controlla prima a destra» sono una semplificazione didattica; il testo vincolante è costituito dagli articoli citati e dalle loro condizioni."
       ],
       "course_visual_src": null
@@ -1569,7 +1569,7 @@
       "previous_module_id": "priority-intersections",
       "next_module_id": "speed-stopping-highways",
       "title_it": "Circolazione stradale, manovre, sorpasso e distanza di sicurezza",
-      "intro_it": "Questa unità illustra le principali regole italiane di circolazione relative alla posizione del veicolo, ai cambiamenti di direzione o di corsia, al sorpasso e al mantenimento di una distanza che eviti le collisioni. Il riferimento normativo principale è il Codice della strada italiano (decreto legislativo 285/1992), nel testo vigente; la fonte ufficiale del Ministero delle Infrastrutture e dei Trasporti indica che la modifica introdotta dalla legge 177/2024 è entrata in vigore il 14 dicembre 2024. [1][2]",
+      "intro_it": "Questa unità tratta posizione, cambi di direzione o corsia, sorpasso e distanza di sicurezza secondo il Codice della strada (D.Lgs. 285/1992). La legge 177/2024 è in vigore dal 14 dicembre 2024. [1][2]",
       "objectives_it": [
         "Individuare la corretta posizione del veicolo durante la marcia e comprendere l'obbligo di evitare pericoli e intralci alla circolazione.",
         "Spiegare le fasi del cambio di corsia e della svolta in sicurezza, tenendo conto degli altri utenti della strada.",
@@ -1579,7 +1579,7 @@
       "caveats_it": [
         "Non sono stati inclusi gli importi delle sanzioni pecuniarie, la durata delle sanzioni o valori indicativi della distanza di arresto, perché non sono necessari in questa unità.",
         "Il limite laterale di 1.5 metri relativo al sorpasso delle biciclette è subordinato alla possibilità di mantenere tale distanza, secondo la formulazione dell'articolo 148; non va trasformato in un'autorizzazione a sorpassare quando non è possibile farlo in sicurezza.",
-        "Le modifiche del 2024 sono entrate in vigore il 14 dicembre 2024. La pagina di Normattiva consultata indica un aggiornamento pubblicato fino al 24 aprile 2026 e nelle fonti ufficiali consultate non è emersa alcuna modifica successiva alle disposizioni trattate nella lezione; pertanto non sono state attribuite loro modifiche del 2025–2026 non verificate.",
+        "La legge 177/2024 è in vigore dal 14 dicembre 2024; Normattiva indicava aggiornamento al 24 aprile 2026. Nelle fonti ufficiali consultate non risultano modifiche successive agli articoli trattati; non si attribuiscono variazioni 2025–2026 non verificate.",
         "Qualsiasi espediente mnemonico, come aumentare la distanza in caso di pioggia, è una semplificazione didattica; l'obbligo legale consiste invece nel rispettare il criterio di una distanza sufficiente in base alle condizioni di circolazione."
       ],
       "course_visual_src": null
@@ -1953,7 +1953,7 @@
       "previous_module_id": "movement-overtaking",
       "next_module_id": "vehicle-safety",
       "title_it": "Velocità, fermata, emergenze e autostrade",
-      "intro_it": "Questa unità spiega come scegliere una velocità adeguata senza superare i limiti, come distinguere la fermata volontaria dalla sosta e dall'arresto imposto dalle circostanze, che cosa fare in caso di pericolo, guasto o attraversamento di un passaggio a livello e quali sono le regole specifiche per l'autostrada. I valori numerici e gli obblighi legali riportati di seguito si basano sugli articoli citati del Codice della strada italiano; ogni formula abbreviata per la memorizzazione è presentata come ausilio mnemonico, non come testo di legge.",
+      "intro_it": "Questa unità tratta scelta della velocità, limiti, fermata, sosta, arresto forzato, emergenze, passaggi a livello e autostrade. Obblighi e valori si basano sugli articoli citati; le formule mnemoniche sono ausili didattici, non testi di legge.",
       "objectives_it": [
         "Individuare il principio della velocità adeguata e i limiti generali per una normale autovettura, e comprendere l'effetto della segnaletica stradale e delle condizioni sulla velocità.",
         "Distinguere fermata, sosta e arresto in base alla causa, alla durata e alla natura dell'interruzione della marcia.",
@@ -2310,7 +2310,7 @@
       "previous_module_id": "speed-stopping-highways",
       "next_module_id": "documents-liability",
       "title_it": "Sicurezza del veicolo, dotazioni e luci",
-      "intro_it": "Questa unità spiega come la sicurezza della guida sia legata alle condizioni del veicolo e come utilizzare le dotazioni di protezione, le luci e i dispositivi di segnalazione. Il riferimento normativo è il testo degli articoli citati del Codice della strada italiano; gli esempi per aiutare la memoria sono invece strumenti didattici, non testi di legge.",
+      "intro_it": "Questa unità tratta sicurezza del veicolo, protezioni, luci e segnalazione secondo gli articoli citati del Codice della strada. Gli esempi mnemonici sono strumenti didattici, non testi di legge.",
       "objectives_it": [
         "Distinguere i componenti del veicolo che influiscono sulla sua sicurezza e spiegare l'obbligo di mantenerli in condizioni di efficienza adeguate alla circolazione.",
         "Collegare il controllo del veicolo, le sue condizioni, il suo carico e le condizioni della strada alla velocità sicura e alla stabilità.",
@@ -2319,7 +2319,7 @@
         "Comprendere che le spie di avvertimento richiedono di consultare il significato del simbolo nel manuale del veicolo, senza presumere un significato giuridico uniforme per tutti i veicoli."
       ],
       "caveats_it": [
-        "Le pagine ufficiali degli articoli consultate riportano le ultime modifiche visualizzate per gli articoli 79, 171, 172 e 152 fino al 2020 e non mostrano modifiche successive a queste disposizioni negli articoli trattati nell'unità. Non sono state incluse presunte modifiche per gli anni 2024–2026 prive di uno specifico riscontro testuale; quando si utilizza il materiale al di fuori del contesto della lezione, occorre consultare la versione vigente su Normattiva.",
+        "Le pagine ufficiali consultate riportavano modifiche agli artt. 79, 171, 172 e 152 fino al 2020, senza successive variazioni nei testi esaminati. Non si includono modifiche 2024–2026 non documentate; verificare il testo vigente su Normattiva.",
         "Non sono stati indicati gli importi delle multe né le sanzioni, perché non sono necessari per gli obiettivi didattici dell'unità.",
         "Non sono stati elencati in dettaglio i significati dei simboli del quadro strumenti; i simboli e il comportamento richiesto variano a seconda del veicolo e negli articoli citati non è stata verificata l'esistenza di un repertorio giuridico uniforme al riguardo. Occorre consultare il manuale del veicolo.",
         "Le esenzioni dall'uso della cintura e del casco sono soggette alle condizioni previste dagli articoli 171 e 172; gli esempi non eliminano le altre condizioni o categorie previste dalla legge."
@@ -2334,7 +2334,7 @@
         "المادة 2054 من القانون المدني تُذكر هنا كقاعدة عامة للمسؤولية المدنية، ولا يغني هذا العرض عن النظر في وقائع الحادث أو الأحكام الأخرى المنطبقة.",
         "لا تُنسب فقرة التأمين إلى تعديل 2024 ما لم يثبت نص المادة المعدِّلة؛ راجع المادة 193 ومصدرها المباشر أدناه."
       ],
-      "intro_ar": "تشرح هذه الوحدة كيف يثبت السائق حقه في القيادة، وما الوثائق المرتبطة بالمركبة، وكيف يتعامل مع موظفي الرقابة، وما الفرق بين المسؤولية المدنية والجنائية والإدارية. كما تميّز بين التأمين الإلزامي للمسؤولية المدنية تجاه الغير والتغطيات التأمينية الأخرى. النصوص أدناه راجعت في قانون السير الإيطالي الموحّد المنشور على Normattiva، الذي يُظهر تحديثاً منشوراً في 24 أبريل 2026؛ ودخلت تعديلات القانون رقم 177 لسنة 2024 حيز النفاذ في 14 ديسمبر 2024. [1][2]",
+      "intro_ar": "تتناول الوحدة صلاحية القيادة ووثائق المركبة والتفتيش وأنواع المسؤولية، وتفرّق بين التأمين الإلزامي تجاه الغير والتغطيات الأخرى. راجعنا قانون السير على Normattiva (تحديث 24 أبريل 2026)؛ ودخل القانون 177/2024 حيز النفاذ في 14 ديسمبر 2024. [1][2]",
       "lessons": [
         {
           "id": "u8-l1",
@@ -2676,7 +2676,7 @@
       "previous_module_id": "vehicle-safety",
       "next_module_id": "driver-health-environment",
       "title_it": "Patenti, documenti, assicurazione, responsabilità e sanzioni",
-      "intro_it": "Questa unità spiega come il conducente dimostra il proprio diritto a guidare, quali documenti sono legati al veicolo, come comportarsi con gli addetti ai controlli e qual è la differenza tra responsabilità civile, penale e amministrativa. Distingue inoltre l'assicurazione obbligatoria per la responsabilità civile verso terzi dalle altre coperture assicurative. I testi seguenti sono stati verificati sul testo consolidato del Codice della strada italiano pubblicato su Normattiva, che riporta un aggiornamento pubblicato il 24 aprile 2026; le modifiche introdotte dalla legge n. 177 del 2024 sono entrate in vigore il 14 dicembre 2024. [1][2]",
+      "intro_it": "Questa unità tratta diritto di guida, documenti, controlli e responsabilità civile, penale e amministrativa; distingue l’assicurazione obbligatoria verso terzi dalle altre coperture. Riferimento: Codice consolidato su Normattiva, aggiornato al 24 aprile 2026; la legge 177/2024 è in vigore dal 14 dicembre 2024. [1][2]",
       "objectives_it": [
         "Distinguere la validità della patente di guida e la sua adeguatezza alla categoria del veicolo dal semplice possesso di un documento di guida.",
         "Individuare i documenti che il conducente deve esibire su richiesta e comprendere l'obbligo di collaborare con gli addetti ai controlli stradali.",
@@ -2699,177 +2699,259 @@
         "إرشادات الإسعاف الأولي الواردة هي خطوات حماية عامة وليست بروتوكولًا طبيًا أو نقلًا حرفيًا للقانون؛ عند الحالة الطارئة تُتبع تعليمات خدمات الطوارئ.",
         "الإحالات إلى المواد 15 و140 و141 و186 و187 و189 تخص قانون الطرق؛ لم تُفصل أحكام التخلص من النفايات خارج الطريق أو التنظيمات المحلية للانبعاثات والضوضاء."
       ],
-      "intro_ar": "تشرح هذه الوحدة كيف تؤثر الحالة الجسدية والنفسية والمواد على القيادة، وما يجب فعله للوقاية من الحوادث والتصرف عند وقوعها، وكيف تحد القيادة الرشيدة من استهلاك الوقود والأثر البيئي. يعرض المحتوى الأحكام وفق قانون الطرق الإيطالي المنشور بنصه النافذ، مع التنبيه إلى تعديل القانون رقم 177 لسنة 2024 الذي دخل حيز التنفيذ في 14 ديسمبر 2024؛ ولا تعني وسائل التبسيط أنها نص قانوني.",
+      "intro_ar": "تشرح الوحدة أثر الحالة الجسدية والنفسية والمواد على القيادة، والوقاية والتصرف عند الحوادث والقيادة البيئية. تستند إلى النص النافذ لقانون الطرق؛ ودخل القانون 177/2024 حيز التنفيذ في 14 ديسمبر 2024. التبسيط ليس نصاً قانونياً.",
       "lessons": [
         {
           "id": "u9-l1",
-          "titleIt": "Conducente e idoneità: attenzione, alcol e sostanze",
-          "titleAr": "السائق والقدرة على القيادة: التركيز والكحول والمواد المخدرة",
-          "summaryIt": "Stanchezza, malessere, stati emotivi o farmaci possono ridurre attenzione e tempo di reazione; se il controllo è compromesso, non guidare e verifica le avvertenze dei medicinali. Gli artt. 186 e 187 riguardano rispettivamente la guida in stato di ebbrezza alcolica e dopo l’assunzione di sostanze stupefacenti o psicotrope.",
-          "summaryAr": "قد يقلل التعب أو المرض أو الحالة النفسية أو الأدوية الانتباه وزمن الاستجابة (tempo di reazione)؛ إذا تأثر التحكم فلا تقد، وراجع تحذيرات الدواء. تتناول المادتان 186 و187 القيادة في حالة سُكر بسبب الكحول والقيادة بعد تناول مواد مخدرة أو مؤثرة نفسيًا، على الترتيب.",
+          "titleIt": "Alcol e guida",
+          "titleAr": "الكحول والقيادة",
+          "summaryIt": "L’alcol può ridurre attenzione, coordinazione e capacità di valutare i rischi. La scelta più sicura è non guidare dopo aver bevuto.",
+          "summaryAr": "قد يضعف الكحول الانتباه (attenzione) والتناسق وتقدير المخاطر؛ الخيار الأكثر أمانًا هو عدم القيادة بعد شربه.",
           "keyPoints": [
             {
-              "it": "Guidare richiede attenzione, percezione e controllo del veicolo.",
-              "ar": "تتطلب القيادة الانتباه والإدراك والتحكم في المركبة."
+              "it": "alcol",
+              "ar": "الكحول"
             },
             {
-              "it": "Stanchezza, emozioni e farmaci possono ridurre attenzione e tempi di reazione.",
-              "ar": "قد يقلل التعب والحالة النفسية والأدوية الانتباه وسرعة الاستجابة."
+              "it": "attenzione",
+              "ar": "الانتباه"
             },
             {
-              "it": "L’art. 186 riguarda la guida in stato di ebbrezza da alcol.",
-              "ar": "تتناول المادة 186 القيادة في حالة سُكر بسبب الكحول."
+              "it": "coordinazione",
+              "ar": "التناسق الحركي"
             },
             {
-              "it": "L’art. 187 riguarda la guida dopo l’assunzione di sostanze stupefacenti o psicotrope.",
-              "ar": "تتناول المادة 187 القيادة بعد تناول مواد مخدرة أو مؤثرة نفسيًا."
+              "it": "capacità di reazione",
+              "ar": "سرعة الاستجابة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La stanchezza che compromette il controllo può rendere insicura la guida.",
+              "qIt": "L’alcol può ridurre la capacità di reazione.",
               "a": "VERO",
-              "explainAr": "إذا تأثر التحكم، فلا ينبغي مواصلة القيادة."
+              "explainAr": "نعم، يؤثر الكحول في سرعة الاستجابة."
             },
             {
-              "qIt": "L’art. 186 riguarda la guida dopo l’assunzione di sostanze psicotrope.",
+              "qIt": "Dopo aver bevuto, la guida è sicura se il conducente si sente bene.",
               "a": "FALSO",
-              "explainAr": "تتناول المادة 186 السُكر بسبب الكحول؛ وتتناول المادة 187 المواد المخدرة أو المؤثرة نفسيًا."
+              "explainAr": "قد يتأثر الحكم والاستجابة حتى إن شعر الشخص بأنه بخير."
             },
             {
-              "qIt": "Farmaci e condizioni personali possono influire sull’idoneità alla guida.",
+              "qIt": "Non guidare dopo aver bevuto è la scelta più sicura.",
               "a": "VERO",
-              "explainAr": "راجع التحذيرات واستشر مختصًا صحيًا عند الحاجة."
+              "explainAr": "نعم، تجنب القيادة بعد الشرب يحميك ويحمي الآخرين."
             }
           ]
         },
         {
           "id": "u9-l2",
-          "titleIt": "Prevenire gli incidenti: velocità e prudenza",
-          "titleAr": "الوقاية من الحوادث: السرعة والحذر",
-          "summaryIt": "La velocità deve essere adeguata alle caratteristiche del veicolo, della strada, del traffico e alle condizioni visibili. Il conducente deve mantenere il controllo e poter arrestare il veicolo entro il proprio campo di visibilità.",
-          "summaryAr": "يجب ملاءمة السرعة للمركبة والطريق والمرور والظروف المرئية (velocità adeguata). وعلى السائق الحفاظ على السيطرة والقدرة على إيقاف المركبة ضمن مجال الرؤية (campo di visibilità).",
+          "titleIt": "Droghe e medicinali",
+          "titleAr": "المخدرات والأدوية",
+          "summaryIt": "Sostanze stupefacenti e alcuni medicinali possono alterare attenzione, percezione e riflessi. Si controllano gli effetti dei farmaci e non si guida se compromettono l’idoneità.",
+          "summaryAr": "قد تؤثر المخدرات وبعض الأدوية في الانتباه والإدراك وردود الفعل (riflessi)؛ اقرأ التحذيرات ولا تقد إذا تأثرت قدرتك.",
           "keyPoints": [
             {
-              "it": "La circolazione deve svolgersi senza creare pericolo o intralcio.",
-              "ar": "يجب أن تجري حركة المرور من دون التسبب في خطر أو عرقلة."
+              "it": "sostanza stupefacente",
+              "ar": "مادة مخدرة"
             },
             {
-              "it": "La velocità va adeguata alle condizioni della circolazione.",
-              "ar": "تُلاءم السرعة مع ظروف حركة المرور."
+              "it": "medicinale",
+              "ar": "دواء"
             },
             {
-              "it": "Il conducente deve mantenere il controllo del veicolo.",
-              "ar": "على السائق الحفاظ على السيطرة على المركبة."
+              "it": "riflessi",
+              "ar": "ردود الفعل"
             },
             {
-              "it": "Il conducente deve poter arrestare il veicolo entro il campo visibile.",
-              "ar": "يجب أن يتمكن السائق من إيقاف المركبة ضمن المجال المرئي."
+              "it": "idoneità alla guida",
+              "ar": "القدرة على القيادة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La velocità va adeguata alle condizioni della circolazione.",
+              "qIt": "Alcuni medicinali possono influire sulla guida.",
               "a": "VERO",
-              "explainAr": "تؤكد نقاط الدرس ضرورة ملاءمة السرعة للظروف."
+              "explainAr": "نعم، بعض الأدوية تؤثر في الانتباه أو النعاس أو رد الفعل."
             },
             {
-              "qIt": "Il conducente può rinunciare al controllo del veicolo se la strada è libera.",
+              "qIt": "Le indicazioni sui medicinali non sono importanti per chi guida.",
               "a": "FALSO",
-              "explainAr": "يشترط الدرس أن يحافظ السائق على السيطرة على المركبة."
+              "explainAr": "يجب قراءة التحذيرات واتباع نصيحة الطبيب أو الصيدلي."
             },
             {
-              "qIt": "Il conducente deve poter arrestare il veicolo entro il campo visibile.",
+              "qIt": "Non si dovrebbe guidare se una sostanza compromette i riflessi.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس وجوب القدرة على إيقاف المركبة ضمن مجال الرؤية."
+              "explainAr": "نعم، ضعف ردود الفعل يجعل القيادة خطرًا."
             }
           ]
         },
         {
           "id": "u9-l3",
-          "titleIt": "Incidente: fermarsi, assistere e collaborare",
-          "titleAr": "الحادث: الوقوف وتقديم المساعدة والتعاون",
-          "summaryIt": "Negli incidenti riconducibili al proprio comportamento, fermati e presta l’assistenza necessaria alle persone ferite; proteggi la circolazione e scambia i dati dovuti. Se un animale domestico, da reddito o protetto è ferito, fermati e adotta misure per un soccorso tempestivo.",
-          "summaryAr": "في الحوادث المرتبطة بتصرفك، توقف وقدّم المساعدة (assistenza) اللازمة للمصابين؛ واحمِ حركة المرور وتبادل البيانات المطلوبة. وإذا أُصيب حيوان أليف أو حيوان منتج أو محمي، فتوقف واتخذ ما يلزم لضمان إنقاذه سريعًا.",
+          "titleIt": "Stanchezza e sonnolenza",
+          "titleAr": "التعب والنعاس",
+          "summaryIt": "La stanchezza riduce attenzione e prontezza. Se compaiono sonnolenza o difficoltà a concentrarsi, è necessario fermarsi in un luogo sicuro e riposare.",
+          "summaryAr": "يقلل التعب (stanchezza) الانتباه وسرعة الاستجابة؛ إذا شعرت بالنعاس أو صعوبة التركيز، توقف في مكان آمن واسترح.",
           "keyPoints": [
             {
-              "it": "Fermarsi negli incidenti riconducibili al proprio comportamento.",
-              "ar": "التوقف في الحوادث المرتبطة بتصرف الشخص."
+              "it": "stanchezza",
+              "ar": "التعب"
             },
             {
-              "it": "Prestare assistenza necessaria ai feriti e proteggere la circolazione.",
-              "ar": "تقديم المساعدة اللازمة للمصابين وحماية حركة المرور."
+              "it": "sonnolenza",
+              "ar": "النعاس"
             },
             {
-              "it": "Fornire generalità e informazioni utili alle persone danneggiate.",
-              "ar": "تقديم البيانات الشخصية والمعلومات المفيدة للمتضررين."
+              "it": "concentrazione",
+              "ar": "التركيز"
             },
             {
-              "it": "Se è ferito un animale domestico, da reddito o protetto, fermarsi e favorire soccorso tempestivo.",
-              "ar": "إذا أُصيب حيوان أليف أو منتج أو محمي، فتوقف وساعد على إنقاذه سريعًا."
+              "it": "pausa",
+              "ar": "استراحة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Negli incidenti riconducibili al proprio comportamento, il conducente deve fermarsi.",
+              "qIt": "La stanchezza può diminuire l’attenzione durante la guida.",
               "a": "VERO",
-              "explainAr": "هذا واجب تذكره المادة 189."
+              "explainAr": "نعم، التعب يضعف الانتباه والتركيز."
             },
             {
-              "qIt": "Se è ferito un animale protetto, l’utente coinvolto può allontanarsi senza intervenire.",
+              "qIt": "La sonnolenza si supera sempre aprendo il finestrino.",
               "a": "FALSO",
-              "explainAr": "توجب القاعدة التوقف واتخاذ تدابير لضمان الإنقاذ العاجل."
+              "explainAr": "فتح النافذة لا يعوض الراحة؛ توقف في مكان آمن واسترح."
             },
             {
-              "qIt": "I conducenti coinvolti forniscono le informazioni utili alle persone danneggiate.",
+              "qIt": "Se si ha sonno, è prudente fermarsi in sicurezza.",
               "a": "VERO",
-              "explainAr": "يدخل تبادل المعلومات ضمن الواجبات المقررة."
+              "explainAr": "نعم، التوقف الآمن أفضل من مواصلة القيادة مع النعاس."
             }
           ]
         },
         {
           "id": "u9-l4",
-          "titleIt": "Consumi, rumore e tutela dell’ambiente",
-          "titleAr": "استهلاك الوقود والضوضاء وحماية البيئة",
-          "summaryIt": "Una guida regolare e la manutenzione aiutano a contenere consumi ed emissioni; i dispositivi antinquinamento e di silenziamento devono restare efficienti. Il Codice vieta i rumori molesti e limita l’uso dei segnali acustici ai casi consentiti.",
-          "summaryAr": "تساعد القيادة المنتظمة والصيانة على الحد من استهلاك الوقود والانبعاثات (emissioni)؛ ويجب الحفاظ على كفاءة أجهزة الحد من التلوث وكواتم الصوت. ويحظر القانون الضوضاء المزعجة ويقصر استخدام أجهزة التنبيه الصوتي على الحالات المسموح بها.",
+          "titleIt": "Distrazioni e telefono",
+          "titleAr": "التشتت والهاتف",
+          "summaryIt": "Usare il telefono o svolgere attività che distolgono lo sguardo e l’attenzione aumenta il rischio. Durante la guida ci si concentra sulla strada.",
+          "summaryAr": "استخدام الهاتف (telefono) أو الانشغال بأمور أخرى يشتت النظر والانتباه ويزيد الخطر؛ ركز على الطريق أثناء القيادة.",
           "keyPoints": [
             {
-              "it": "Una guida regolare e la manutenzione aiutano a ridurre consumi ed emissioni.",
-              "ar": "تساعد القيادة المنتظمة والصيانة على خفض الاستهلاك والانبعاثات."
+              "it": "distrazione",
+              "ar": "تشتت"
             },
             {
-              "it": "I dispositivi antinquinamento e di silenziamento devono restare efficienti.",
-              "ar": "يجب الحفاظ على كفاءة أجهزة الحد من التلوث وكواتم الصوت."
+              "it": "telefono",
+              "ar": "الهاتف"
             },
             {
-              "it": "L’art. 155 vieta i rumori molesti.",
-              "ar": "تحظر المادة 155 الضوضاء المزعجة."
-            },
-            {
-              "it": "I segnali acustici si usano soltanto nei casi consentiti.",
-              "ar": "لا تُستخدم أجهزة التنبيه الصوتي إلا في الحالات المسموح بها."
+              "it": "attenzione alla strada",
+              "ar": "الانتباه للطريق"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La manutenzione e una guida regolare possono aiutare a ridurre consumi ed emissioni.",
+              "qIt": "Una distrazione può aumentare il rischio di incidente.",
               "a": "VERO",
-              "explainAr": "هما من السلوكيات العملية التي تساعد على الحد من الاستهلاك والانبعاثات."
+              "explainAr": "نعم، التشتت يقلل قدرة السائق على ملاحظة الأخطار."
             },
             {
-              "qIt": "È consentito circolare con dispositivi antinquinamento o di silenziamento non efficienti.",
+              "qIt": "Guardare il telefono durante la guida non modifica l’attenzione.",
               "a": "FALSO",
-              "explainAr": "يجب الحفاظ على كفاءة الأجهزة المتعلقة بالتلوث والضوضاء."
+              "explainAr": "النظر إلى الهاتف يصرف الانتباه عن الطريق."
             },
             {
-              "qIt": "L’art. 155 riguarda i rumori molesti.",
+              "qIt": "Durante la guida è importante mantenere l’attenzione sulla strada.",
               "a": "VERO",
-              "explainAr": "تتناول المادة 155 الضوضاء المزعجة."
+              "explainAr": "نعم، التركيز على الطريق أساسي للقيادة الآمنة."
+            }
+          ]
+        },
+        {
+          "id": "u9-l5",
+          "titleIt": "Emozioni e comportamento del conducente",
+          "titleAr": "المشاعر وسلوك السائق",
+          "summaryIt": "Rabbia, stress o forte agitazione possono influenzare le decisioni. Il conducente guida con calma e rinvia la partenza se non riesce a concentrarsi.",
+          "summaryAr": "قد يؤثر الغضب أو الضغط النفسي (stress) في القرارات؛ اهدأ قبل القيادة وأجّل الرحلة إذا لم تستطع التركيز.",
+          "keyPoints": [
+            {
+              "it": "stress",
+              "ar": "ضغط نفسي"
+            },
+            {
+              "it": "rabbia",
+              "ar": "غضب"
+            },
+            {
+              "it": "decisione",
+              "ar": "قرار"
+            },
+            {
+              "it": "calma",
+              "ar": "هدوء"
+            }
+          ],
+          "trapWord": null,
+          "quickCheck": [
+            {
+              "qIt": "Lo stress può influenzare le decisioni del conducente.",
+              "a": "VERO",
+              "explainAr": "نعم، الضغط قد يضعف الحكم على المواقف."
+            },
+            {
+              "qIt": "La rabbia aiuta sempre a guidare con maggiore prudenza.",
+              "a": "FALSO",
+              "explainAr": "الغضب قد يؤدي إلى قرارات متسرعة وخطرة."
+            },
+            {
+              "qIt": "Se non si riesce a concentrarsi, è prudente rinviare la partenza.",
+              "a": "VERO",
+              "explainAr": "نعم، أجّل القيادة حتى تصبح قادرًا على التركيز."
+            }
+          ]
+        },
+        {
+          "id": "u9-l6",
+          "titleIt": "Proteggere gli utenti vulnerabili",
+          "titleAr": "حماية مستخدمي الطريق الأكثر عرضة للخطر",
+          "summaryIt": "Pedoni, ciclisti, bambini e persone con mobilità ridotta possono essere più esposti ai pericoli. Il conducente rallenta e lascia spazio adeguato.",
+          "summaryAr": "المشاة (pedone) وراكبو الدراجات والأطفال وذوو الحركة المحدودة أكثر عرضة للخطر؛ خفف السرعة واترك لهم مساحة كافية.",
+          "keyPoints": [
+            {
+              "it": "utente vulnerabile",
+              "ar": "مستخدم طريق أكثر عرضة للخطر"
+            },
+            {
+              "it": "pedone",
+              "ar": "مشاة"
+            },
+            {
+              "it": "ciclista",
+              "ar": "راكب دراجة"
+            },
+            {
+              "it": "distanza laterale",
+              "ar": "مسافة جانبية"
+            }
+          ],
+          "trapWord": null,
+          "quickCheck": [
+            {
+              "qIt": "Il conducente deve prestare particolare attenzione ai pedoni.",
+              "a": "VERO",
+              "explainAr": "نعم، المشاة معرضون للإصابة ويحتاجون إلى انتباه خاص."
+            },
+            {
+              "qIt": "È sicuro passare vicino a un ciclista senza lasciare spazio.",
+              "a": "FALSO",
+              "explainAr": "يجب ترك مسافة جانبية مناسبة لتجنب تعريض راكب الدراجة للخطر."
+            },
+            {
+              "qIt": "Rallentare può aiutare a proteggere gli utenti vulnerabili.",
+              "a": "VERO",
+              "explainAr": "نعم، خفض السرعة يمنح وقتًا أكبر للاستجابة."
             }
           ]
         }
@@ -3031,7 +3113,7 @@
       "previous_module_id": "documents-liability",
       "next_module_id": null,
       "title_it": "Condizioni del conducente, incidenti, primo soccorso e ambiente",
-      "intro_it": "Questa unità spiega come le condizioni fisiche e psicologiche e le sostanze influiscono sulla guida, che cosa fare per prevenire gli incidenti e come comportarsi quando si verificano, e come una guida responsabile riduca il consumo di carburante e l'impatto ambientale. Il contenuto presenta le disposizioni del Codice della strada italiano pubblicato nel testo vigente, richiamando l'attenzione sulla modifica introdotta dalla legge n. 177 del 2024, entrata in vigore il 14 dicembre 2024; le semplificazioni non costituiscono un testo di legge.",
+      "intro_it": "Questa unità tratta condizioni del conducente, sostanze, prevenzione e gestione degli incidenti e guida a basso impatto. Si basa sul Codice della strada vigente; la legge 177/2024 è in vigore dal 14 dicembre 2024. Le semplificazioni non sono testo di legge.",
       "objectives_it": [
         "Distinguere gli effetti della stanchezza, della malattia, delle variazioni dello stato di vigilanza e delle sostanze che influiscono sulla capacità di guidare.",
         "Comprendere il quadro giuridico relativo ad alcol, sostanze stupefacenti e farmaci, senza dedurre valori numerici non verificati.",
@@ -3039,7 +3121,7 @@
         "Collegare lo stile di guida e l'uso del veicolo alla riduzione dei consumi e dell'inquinamento e al rispetto dell'ambiente."
       ],
       "caveats_it": [
-        "La ricerca ha verificato la legge 177/2024, in vigore dal 14 dicembre 2024, e pagine ufficiali aggiornate fino a dicembre 2024; non è emersa una fonte ufficiale affidabile che attesti ulteriori modifiche su questi argomenti nel periodo 2025–2026, pertanto è opportuno consultare il testo vigente su Normattiva prima di un successivo utilizzo didattico.",
+        "La verifica ha incluso la legge 177/2024 e fonti ufficiali aggiornate fino a dicembre 2024; non sono state trovate conferme affidabili di ulteriori modifiche 2025–2026. Prima di riutilizzare il materiale, consultare il testo vigente su Normattiva.",
         "Non sono stati inseriti limiti numerici relativi all'alcol, importi delle sanzioni pecuniarie o durate delle sanzioni, per evitare di riportare un valore non verificato nel testo vigente di dettaglio.",
         "Le indicazioni di primo soccorso riportate sono misure generali di protezione, non un protocollo medico né una trascrizione letterale della legge; in caso di emergenza si seguono le istruzioni dei servizi di emergenza.",
         "I riferimenti agli articoli 15, 140, 141, 186, 187 e 189 riguardano il Codice della strada; non sono state illustrate in dettaglio le disposizioni sullo smaltimento dei rifiuti fuori dalla strada né le regolamentazioni locali sulle emissioni e sul rumore."
@@ -3114,255 +3196,165 @@
       "lessons": [
         {
           "id": "u10-l1",
-          "titleIt": "Osservare per tempo e reagire con prudenza",
-          "titleAr": "راقب بدري واتصرف بحذر",
-          "summaryIt": "L’osservazione continua della strada e degli utenti aiuta ad anticipare i pericoli. Il conducente deve mantenere il controllo del veicolo e poterlo arrestare tempestivamente entro il campo visibile, davanti agli ostacoli prevedibili.",
-          "summaryAr": "تساعد المراقبة المستمرة للطريق ومستخدميه على توقّع المخاطر. ويجب على السائق الحفاظ على السيطرة على المركبة والقدرة على إيقافها في الوقت المناسب ضمن مجال الرؤية، أمام العوائق المتوقعة. (controllo del veicolo)",
+          "titleIt": "Guida attenta all’ambiente",
+          "titleAr": "القيادة المراعية للبيئة",
+          "summaryIt": "Una guida regolare, con accelerazioni e frenate contenute, può ridurre consumi e emissioni. La manutenzione contribuisce al buon funzionamento del veicolo.",
+          "summaryAr": "القيادة الهادئة وتجنب التسارع والكبح غير الضروريين قد يقللان الاستهلاك (consumo) والانبعاثات، كما تساعد الصيانة على كفاءة المركبة.",
           "keyPoints": [
             {
-              "it": "Osservare continuamente la strada e gli utenti.",
-              "ar": "مراقبة الطريق ومستخدميه باستمرار."
+              "it": "consumo",
+              "ar": "استهلاك الوقود"
             },
             {
-              "it": "L’osservazione aiuta ad anticipare i pericoli.",
-              "ar": "تساعد المراقبة على توقّع المخاطر مبكرًا."
+              "it": "emissione",
+              "ar": "انبعاث"
             },
             {
-              "it": "Durante la reazione, il veicolo continua a muoversi.",
-              "ar": "تستمر المركبة في الحركة أثناء الاستجابة."
+              "it": "guida regolare",
+              "ar": "قيادة سلسة"
             },
             {
-              "it": "Il conducente deve mantenere il controllo e poter arrestare il veicolo tempestivamente entro il campo visibile.",
-              "ar": "يجب أن يحافظ السائق على السيطرة وأن يتمكن من إيقاف المركبة في الوقت المناسب ضمن مجال الرؤية."
+              "it": "manutenzione",
+              "ar": "صيانة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "L’osservazione continua della strada aiuta ad anticipare i pericoli.",
+              "qIt": "Una guida regolare può contribuire a ridurre i consumi.",
               "a": "VERO",
-              "explainAr": "المراقبة المستمرة تساعد على توقّع المخاطر."
+              "explainAr": "نعم، القيادة السلسة قد تقلل استهلاك الوقود."
             },
             {
-              "qIt": "Durante la reazione, il veicolo è già fermo.",
+              "qIt": "Accelerazioni e frenate brusche migliorano sempre l’efficienza.",
               "a": "FALSO",
-              "explainAr": "يذكر الدرس أن المركبة تستمر في الحركة أثناء الاستجابة."
+              "explainAr": "التسارع والكبح المفاجئان قد يزيدان الاستهلاك ويؤثران في السلامة."
             },
             {
-              "qIt": "Il conducente deve poter arrestare il veicolo entro il campo visibile.",
+              "qIt": "La manutenzione può contribuire al buon funzionamento del veicolo.",
               "a": "VERO",
-              "explainAr": "يشترط الدرس القدرة على إيقاف المركبة ضمن مجال الرؤية."
+              "explainAr": "نعم، الصيانة المنتظمة تساعد على عمل المركبة بصورة أفضل."
             }
           ]
         },
         {
           "id": "u10-l2",
-          "titleIt": "Spazio di arresto e aderenza",
-          "titleAr": "مسافة التوقف والتماسك",
-          "summaryIt": "Lo spazio di arresto comprende lo spazio percorso durante la reazione e quello percorso durante la frenata. La distanza di sicurezza va adeguata alle condizioni per consentire un arresto tempestivo.",
-          "summaryAr": "تشمل مسافة التوقف (spazio di arresto) المسافة المقطوعة أثناء استجابة السائق (spazio di reazione) وأثناء الفرملة (spazio di frenata). تُكيَّف مسافة الأمان (distanza di sicurezza) مع الظروف بما يتيح التوقف في الوقت المناسب.",
+          "titleIt": "Rumore e rispetto degli utenti della strada",
+          "titleAr": "الضوضاء واحترام مستخدمي الطريق",
+          "summaryIt": "Rumori inutili e comportamenti imprudenti possono disturbare o mettere in pericolo residenti, pedoni e altri utenti. Evita l’uso superfluo del clacson e mantieni il veicolo in buone condizioni.",
+          "summaryAr": "قد تزعج الضوضاء (rumore) غير الضرورية والتصرفات غير الحذرة السكان والمشاة ومستخدمي الطريق أو تعرضهم للخطر. تجنب استعمال البوق بلا حاجة وحافظ على المركبة بحالة جيدة.",
           "keyPoints": [
             {
-              "it": "Lo spazio di arresto comprende lo spazio di reazione.",
-              "ar": "تشمل مسافة التوقف مسافة الاستجابة."
+              "it": "rumore",
+              "ar": "ضوضاء"
             },
             {
-              "it": "Lo spazio di arresto comprende lo spazio di frenata.",
-              "ar": "تشمل مسافة التوقف مسافة الفرملة."
+              "it": "clacson",
+              "ar": "بوق المركبة"
             },
             {
-              "it": "La distanza di sicurezza va adeguata alle condizioni.",
-              "ar": "ينبغي تكييف مسافة الأمان مع الظروف."
+              "it": "rispetto di residenti e utenti della strada",
+              "ar": "احترام السكان ومستخدمي الطريق"
             },
             {
-              "it": "La velocità va regolata in base alla strada e al traffico.",
-              "ar": "تُضبط السرعة بحسب الطريق وحركة المرور."
+              "it": "manutenzione del veicolo",
+              "ar": "صيانة المركبة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Lo spazio di arresto comprende lo spazio percorso durante la reazione e quello di frenata.",
+              "qIt": "L’uso inutile del clacson può disturbare chi vive o cammina vicino alla strada.",
               "a": "VERO",
-              "explainAr": "مسافة التوقف تضم المسافة المقطوعة أثناء الاستجابة وأثناء الفرملة."
+              "explainAr": "نعم، استعمال البوق دون حاجة قد يزعج السكان والمارة."
             },
             {
-              "qIt": "La distanza di sicurezza può essere scelta senza considerare le condizioni.",
+              "qIt": "Il rumore inutile non può influire sulla qualità della vita delle persone.",
               "a": "FALSO",
-              "explainAr": "يذكر الدرس أن مسافة الأمان تُكيَّف مع الظروف."
+              "explainAr": "قد تؤثر الضوضاء غير الضرورية في راحة السكان والبيئة المحيطة."
             },
             {
-              "qIt": "Secondo la lezione, la velocità va regolata in base alla strada e al traffico.",
+              "qIt": "Il conducente dovrebbe evitare comportamenti che disturbano o mettono in pericolo gli altri utenti.",
               "a": "VERO",
-              "explainAr": "تذكر نقاط الدرس ضبط السرعة بحسب الطريق وحركة المرور."
+              "explainAr": "نعم، ينبغي مراعاة السكان والمشاة وجميع مستخدمي الطريق."
             }
           ]
         },
         {
           "id": "u10-l3",
-          "titleIt": "Strade e gallerie: guida secondo il tratto",
-          "titleAr": "الطرق والأنفاق: قيادة تناسب الطريق",
-          "summaryIt": "Adatta la guida alla strada, alla segnaletica e alle condizioni del tratto. In galleria mantieni attenzione e distanza adeguata e segui le indicazioni di emergenza; i divieti degli artt. 175–176 si applicano nel loro specifico ambito stradale.",
-          "summaryAr": "كيّف القيادة مع الطريق وعلاماته وظروف المقطع. في النفق حافظ على الانتباه ومسافة أمان مناسبة، واتبع إرشادات الطوارئ؛ وتسري محظورات المادتين 175–176 ضمن نطاقهما المحدد للطرق. (galleria)",
+          "titleIt": "Inquinamento e manutenzione",
+          "titleAr": "التلوث والصيانة",
+          "summaryIt": "Un veicolo mantenuto correttamente può funzionare meglio e contenere emissioni evitabili. Perdite o anomalie richiedono attenzione e verifica.",
+          "summaryAr": "تساعد صيانة المركبة (manutenzione) على عملها بصورة سليمة والحد من الانبعاثات غير الضرورية؛ عالج التسربات والأعطال عند ظهورها.",
           "keyPoints": [
             {
-              "it": "Adatta la guida alla strada, alla segnaletica e alle condizioni del tratto.",
-              "ar": "كيّف القيادة مع الطريق وعلاماته وظروف المقطع."
+              "it": "emissioni",
+              "ar": "انبعاثات"
             },
             {
-              "it": "In galleria mantieni attenzione e distanza adeguata.",
-              "ar": "في النفق حافظ على الانتباه ومسافة أمان مناسبة."
+              "it": "perdita",
+              "ar": "تسرب"
             },
             {
-              "it": "In caso di emergenza segui le indicazioni previste.",
-              "ar": "عند الطوارئ اتبع الإرشادات المقررة."
-            },
-            {
-              "it": "I divieti degli artt. 175–176 valgono nel loro specifico ambito stradale.",
-              "ar": "تسري محظورات المادتين 175–176 ضمن نطاق الطرق المحدد لهما."
+              "it": "controllo del veicolo",
+              "ar": "فحص المركبة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La guida va adattata alla strada, alla segnaletica e alle condizioni del tratto.",
+              "qIt": "Le perdite del veicolo dovrebbero essere controllate.",
               "a": "VERO",
-              "explainAr": "ينص الدرس على تكييف القيادة مع الطريق وعلاماته وظروفه."
+              "explainAr": "نعم، التسرب قد يشير إلى عطل ويضر بالبيئة أو السلامة."
             },
             {
-              "qIt": "In galleria non è necessario mantenere una distanza adeguata.",
+              "qIt": "La manutenzione non ha alcun rapporto con le emissioni.",
               "a": "FALSO",
-              "explainAr": "يذكر الدرس ضرورة الحفاظ على مسافة مناسبة في النفق."
+              "explainAr": "حالة المركبة وصيانتها قد تؤثران في الانبعاثات."
             },
             {
-              "qIt": "I divieti degli articoli 175–176 si applicano automaticamente a ogni galleria.",
-              "a": "FALSO",
-              "explainAr": "يحدد الدرس أن هذه المحظورات تسري ضمن نطاق الطرق المحدد قانوناً، لا تلقائياً على كل نفق."
+              "qIt": "Un’anomalia del veicolo merita una verifica.",
+              "a": "VERO",
+              "explainAr": "نعم، افحص أي خلل بدل تجاهله."
             }
           ]
         },
         {
           "id": "u10-l4",
-          "titleIt": "Pedoni, ciclisti e motociclisti: attenzione reciproca",
-          "titleAr": "المشاة وراكبو الدراجات والموتوسيكلات: انتباه متبادل",
-          "summaryIt": "Ai passaggi pedonali dà precedenza a chi attraversa o si accinge ad attraversare; proteggi con particolare prudenza bambini, anziani e persone con mobilità ridotta. Prima di svoltare controlla specchi e angoli ciechi per ciclisti e motociclisti; per prudenza, chi ha poca esperienza dovrebbe mantenere margini di sicurezza più ampi.",
-          "summaryAr": "عند ممر المشاة، أعطِ الأولوية لمن يعبر أو يستعد للعبور؛ واحذر خصوصًا على الأطفال وكبار السن وذوي الحركة المحدودة. قبل الانعطاف افحص المرايا والنقاط العمياء (angoli ciechi) لراكبي الدراجات والنارية؛ ومن باب الاحتياط، يُستحسن لقليل الخبرة ترك هامش أمان أوسع.",
+          "titleIt": "Consumo responsabile e pianificazione",
+          "titleAr": "الاستهلاك المسؤول وتخطيط الرحلة",
+          "summaryIt": "Pianificare il percorso e guidare senza accelerazioni inutili può rendere il viaggio più efficiente. Il conducente sceglie un ritmo compatibile con sicurezza e condizioni stradali.",
+          "summaryAr": "يساعد تخطيط المسار والقيادة دون تسارع غير لازم على كفاءة الرحلة؛ لكن السلامة (sicurezza) وظروف الطريق تظلان الأولوية.",
           "keyPoints": [
             {
-              "it": "Dare precedenza ai pedoni che attraversano o si accingono ad attraversare nei casi previsti.",
-              "ar": "أعطِ الأولوية للمشاة الذين يعبرون أو يستعدون للعبور في الحالات المقررة."
+              "it": "pianificazione del percorso",
+              "ar": "تخطيط المسار"
             },
             {
-              "it": "Rallentare e proteggere bambini, anziani e persone con mobilità ridotta.",
-              "ar": "خفف السرعة واحمِ الأطفال وكبار السن وذوي الحركة المحدودة."
+              "it": "consumo responsabile",
+              "ar": "استهلاك مسؤول"
             },
             {
-              "it": "Prima delle manovre controllare specchi e angoli ciechi per ciclisti e motociclisti.",
-              "ar": "قبل المناورة افحص المرايا والنقاط العمياء لراكبي الدراجات والنارية."
-            },
-            {
-              "it": "Sorpasso dei velocipedi: distanza laterale adeguata a velocità e ingombro; almeno 1,5 m ove le condizioni lo consentano.",
-              "ar": "تجاوز الدراجات الهوائية: مسافة جانبية تناسب السرعة وحجم المركبة؛ لا تقل عن 1.5 متر إذا سمحت ظروف الطريق."
+              "it": "sicurezza",
+              "ar": "السلامة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Nei casi previsti, si dà precedenza ai pedoni che attraversano o si accingono ad attraversare.",
+              "qIt": "Pianificare il percorso può aiutare a evitare tragitti inutili.",
               "a": "VERO",
-              "explainAr": "هذه هي الأولوية التي تنص عليها المادة 191 في الحالات المحددة."
+              "explainAr": "نعم، التخطيط يقلل احتمال الدوران أو قطع مسافات غير ضرورية."
             },
             {
-              "qIt": "Prima di svoltare non occorre controllare gli angoli ciechi per ciclisti e motociclisti.",
+              "qIt": "Per risparmiare carburante è sempre corretto ignorare le condizioni stradali.",
               "a": "FALSO",
-              "explainAr": "افحص المرايا ومسار المركبة قبل المناورة."
+              "explainAr": "لا يجوز تقديم التوفير على السلامة وظروف الطريق."
             },
             {
-              "qIt": "Nel sorpasso dei velocipedi si tiene conto di velocità e ingombro e, se le condizioni lo consentono, si mantiene almeno 1,5 m.",
+              "qIt": "La sicurezza resta importante anche nella guida efficiente.",
               "a": "VERO",
-              "explainAr": "تشترط المادة 148 مسافة جانبية مناسبة للسرعة وحجم المركبة، وحدًا أدنى 1.5 متر متى سمحت ظروف الطريق."
-            }
-          ]
-        },
-        {
-          "id": "u10-l5",
-          "titleIt": "Campo visivo e punti ciechi",
-          "titleAr": "مجال الرؤية والنقاط العمياء",
-          "summaryIt": "Gli specchi non mostrano sempre tutte le zone: prima di cambiare corsia o svoltare, controlla lo spazio non visibile senza distogliere a lungo lo sguardo dalla strada.",
-          "summaryAr": "لا تُظهر المرايا دائمًا كل المناطق؛ افحص المساحة غير المرئية قبل تغيير المسار أو الانعطاف، من دون إبعاد نظرك عن الطريق طويلًا. (spazio non visibile)",
-          "keyPoints": [
-            {
-              "it": "Gli specchi non eliminano tutti i punti ciechi.",
-              "ar": "لا تلغي المرايا جميع النقاط العمياء."
-            },
-            {
-              "it": "Controlla lo spazio non visibile prima di cambiare corsia o svoltare.",
-              "ar": "افحص المساحة غير المرئية قبل تغيير المسار أو الانعطاف."
-            },
-            {
-              "it": "Non distogliere a lungo lo sguardo dalla strada durante il controllo.",
-              "ar": "لا تُبعد نظرك عن الطريق مدة طويلة أثناء الفحص."
-            }
-          ],
-          "trapWord": null,
-          "quickCheck": [
-            {
-              "qIt": "Gli specchi mostrano sempre tutte le zone intorno al veicolo.",
-              "a": "FALSO",
-              "explainAr": "قد لا تُظهر المرايا جميع المناطق، لذلك تبقى نقاط عمياء."
-            },
-            {
-              "qIt": "Prima di cambiare corsia o svoltare, si controlla lo spazio non visibile.",
-              "a": "VERO",
-              "explainAr": "ينص الدرس على فحص المساحة غير المرئية قبل تغيير المسار أو الانعطاف."
-            },
-            {
-              "qIt": "Per controllare lo spazio non visibile, è opportuno distogliere a lungo lo sguardo dalla strada.",
-              "a": "FALSO",
-              "explainAr": "يؤكد الدرس ضرورة عدم إبعاد النظر عن الطريق مدة طويلة."
-            }
-          ]
-        },
-        {
-          "id": "u10-l6",
-          "titleIt": "Superfici scivolose e traiettoria regolare",
-          "titleAr": "الأسطح الزلقة وخط السير الثابت",
-          "summaryIt": "Metallo, segnaletica, binari e residui possono rendere scivolosa la strada, soprattutto sul bagnato; pioggia e passaggio dal giorno alla notte cambiano aderenza e visibilità. In pratica, riduci la velocità prima del tratto e attraversalo con traiettoria regolare, evitando manovre brusche.",
-          "summaryAr": "قد تجعل الأسطح المعدنية والعلامات والسكك والبقايا الطريق زلقًا، خصوصًا عند البلل؛ كما يؤثر المطر والانتقال من النهار إلى الليل في التماسك (aderenza) والرؤية. عمليًا، خفّف السرعة قبل الجزء الزلق واعبره بخط سير منتظم، وتجنب المناورات المفاجئة.",
-          "keyPoints": [
-            {
-              "it": "Riconoscere in anticipo superfici potenzialmente scivolose.",
-              "ar": "تعرف مسبقًا إلى الأسطح التي قد تكون زلقة."
-            },
-            {
-              "it": "Pioggia e passaggio dal giorno alla notte possono ridurre aderenza o visibilità.",
-              "ar": "قد يقلل المطر والانتقال من النهار إلى الليل التماسك أو الرؤية."
-            },
-            {
-              "it": "Adattare la velocità prima di raggiungere il tratto.",
-              "ar": "اضبط السرعة قبل الوصول إلى الجزء."
-            },
-            {
-              "it": "Attraversare con traiettoria regolare, evitando comandi bruschi.",
-              "ar": "اعبر بخط سير ثابت وتجنب الأوامر المفاجئة."
-            }
-          ],
-          "trapWord": null,
-          "quickCheck": [
-            {
-              "qIt": "Metallo, binari e residui possono rendere scivolosa la strada.",
-              "a": "VERO",
-              "explainAr": "هذه أمثلة على أسطح أو ظروف يجب الانتباه إليها."
-            },
-            {
-              "qIt": "Il passaggio dal giorno alla notte può incidere sulla visibilità.",
-              "a": "VERO",
-              "explainAr": "تتغير الرؤية ويجب إعادة تقديرها وفق الظروف."
-            },
-            {
-              "qIt": "È meglio frenare bruscamente proprio sopra una superficie scivolosa.",
-              "a": "FALSO",
-              "explainAr": "اضبط السرعة قبلها واعبر بخط سير ثابت."
+              "explainAr": "نعم، الكفاءة لا تبرر قيادة غير آمنة."
             }
           ]
         }
@@ -3511,216 +3503,212 @@
       "lessons": [
         {
           "id": "u11-l1",
-          "titleIt": "Documenti a bordo e titolo di guida",
-          "titleAr": "وثائق المركبة ورخصة القيادة",
-          "summaryIt": "Prima di circolare, verifica che la patente sia valida per la categoria e di avere i documenti richiesti. Gli obblighi dipendono dal veicolo e dal suo impiego.",
-          "summaryAr": "قبل السير، تحقّق من صلاحية رخصة القيادة للفئة ومن وجود الوثائق المطلوبة. تختلف المتطلبات بحسب المركبة وطريقة استخدامها. (patente)",
+          "titleIt": "Controlli prima della partenza",
+          "titleAr": "الفحوصات قبل الانطلاق",
+          "summaryIt": "Prima del viaggio il conducente controlla visivamente pneumatici, luci e condizioni generali del veicolo. Un difetto che compromette la sicurezza va risolto prima di partire.",
+          "summaryAr": "قبل الرحلة افحص الإطارات (pneumatici) والأضواء والحالة العامة للمركبة، وعالج أي خلل يؤثر في السلامة قبل الانطلاق.",
           "keyPoints": [
             {
-              "it": "Patente valida per la categoria",
-              "ar": "رخصة قيادة صالحة لفئة المركبة"
+              "it": "controllo visivo",
+              "ar": "فحص بصري"
             },
             {
-              "it": "Documento di circolazione previsto per il veicolo",
-              "ar": "وثيقة السير المقررة للمركبة"
+              "it": "pneumatici",
+              "ar": "إطارات"
             },
             {
-              "it": "Certificato di assicurazione obbligatoria",
-              "ar": "شهادة التأمين الإلزامي"
+              "it": "luci",
+              "ar": "أضواء"
             },
             {
-              "it": "Autorizzazioni o attestati, quando prescritti",
-              "ar": "تصاريح أو شهادات عند اشتراطها"
+              "it": "sicurezza del veicolo",
+              "ar": "سلامة المركبة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "La patente deve essere valida per la categoria del veicolo.",
+              "qIt": "Prima di partire è utile controllare le luci e i pneumatici.",
               "a": "VERO",
-              "explainAr": "يشترط الدرس أن تكون رخصة القيادة صالحة لفئة المركبة."
+              "explainAr": "نعم، الفحص البسيط يساعد على اكتشاف مشكلات واضحة."
             },
             {
-              "qIt": "Gli obblighi documentali sono identici per ogni veicolo e per ogni impiego.",
+              "qIt": "Un difetto che compromette la sicurezza può essere ignorato per un breve viaggio.",
               "a": "FALSO",
-              "explainAr": "يوضح الدرس أن المتطلبات تعتمد على المركبة وطريقة استخدامها."
+              "explainAr": "لا ينبغي بدء الرحلة مع خلل يؤثر في السلامة."
             },
             {
-              "qIt": "Tra i documenti indicati figurano il documento di circolazione previsto e il certificato di assicurazione obbligatoria.",
+              "qIt": "Il conducente dovrebbe conoscere le condizioni generali del veicolo.",
               "a": "VERO",
-              "explainAr": "كلاهما وارد ضمن نقاط الدرس المتعلقة بالوثائق."
+              "explainAr": "نعم، معرفة حالة المركبة تساعد على تجنب الأعطال والمخاطر."
             }
           ]
         },
         {
           "id": "u11-l2",
-          "titleIt": "Aprire la portiera e uscire con attenzione",
-          "titleAr": "فتح الباب والنزول بحذر",
-          "summaryIt": "Prima di aprire la portiera o scendere dal veicolo, il conducente deve verificare che non vi siano pericoli o intralci per gli altri utenti della strada. Deve richiudere la porta senza indugio.",
-          "summaryAr": "قبل فتح باب المركبة أو النزول منها، على السائق التحقق من عدم وجود خطر أو إعاقة لمستخدمي الطريق الآخرين، ثم إغلاق الباب دون تأخير. (apertura della portiera)",
+          "titleIt": "Spie e anomalie del veicolo",
+          "titleAr": "مؤشرات التحذير وأعطال المركبة",
+          "summaryIt": "Le spie e i segnali di anomalia avvertono che un sistema può richiedere attenzione. Il conducente consulta le istruzioni del veicolo e si ferma in sicurezza quando necessario.",
+          "summaryAr": "قد تنبهك مؤشرات لوحة القيادة (spia) إلى خلل؛ اتبع تعليمات المركبة وتوقف بأمان إذا تطلب الأمر.",
           "keyPoints": [
             {
-              "it": "Prima di aprire la portiera, verifica che non vi siano pericoli.",
-              "ar": "تحقّق من عدم وجود خطر قبل فتح الباب."
+              "it": "spia",
+              "ar": "مؤشر تحذير"
             },
             {
-              "it": "Osserva gli specchi e la strada prima di scendere.",
-              "ar": "افحص المرايا والطريق قبل النزول."
+              "it": "anomalia",
+              "ar": "خلل"
             },
             {
-              "it": "Evita di creare pericolo o intralcio agli altri utenti.",
-              "ar": "تجنّب تعريض مستخدمي الطريق الآخرين للخطر أو إعاقتهم."
-            },
-            {
-              "it": "Richiudi la porta senza indugio.",
-              "ar": "أغلق الباب دون تأخير."
+              "it": "manuale del veicolo",
+              "ar": "دليل المركبة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Prima di aprire la portiera, occorre verificare che non vi siano pericoli o intralci per gli altri utenti.",
+              "qIt": "Una spia può segnalare un’anomalia del veicolo.",
               "a": "VERO",
-              "explainAr": "ينص الدرس على التحقق قبل فتح الباب من عدم وجود خطر أو إعاقة للآخرين."
+              "explainAr": "نعم، قد تشير لمبة التحذير إلى مشكلة تحتاج إلى فحص."
             },
             {
-              "qIt": "Controllare gli specchi e la strada non aiuta a verificare la sicurezza prima di scendere.",
+              "qIt": "Ogni spia può essere ignorata senza consultare le istruzioni.",
               "a": "FALSO",
-              "explainAr": "يذكر الدرس أن فحص المرايا والطريق يساعد على التحقق من السلامة."
+              "explainAr": "ينبغي فهم دلالة المؤشر وفق دليل المركبة والتصرف المناسب."
             },
             {
-              "qIt": "Dopo essere scesi, la porta va richiusa senza indugio.",
+              "qIt": "Se serve fermarsi, occorre scegliere un luogo sicuro.",
               "a": "VERO",
-              "explainAr": "من نقاط الدرس إغلاق الباب دون تأخير."
+              "explainAr": "نعم، أوقف المركبة في مكان آمن بعيدًا عن حركة المرور."
             }
           ]
         },
         {
           "id": "u11-l3",
-          "titleIt": "Trasportare persone e sistemare il carico",
-          "titleAr": "نقل الركاب وترتيب الحمولة",
-          "summaryIt": "Il numero dei passeggeri non supera quello indicato sulla carta di circolazione; i passeggeri non devono ostacolare i movimenti o la visibilità del conducente. Fissa il carico senza compromettere stabilità, luci o targa e rispetta i limiti delle sporgenze.",
-          "summaryAr": "لا يتجاوز عدد الركاب العدد المدون في وثيقة التسجيل (carta di circolazione)، ولا يعيقون حركة السائق أو رؤيته. ثبّت الحمولة من دون الإضرار بالثبات أو حجب الأضواء واللوحة، والتزم بحدود البروز.",
+          "titleIt": "Sistemi di sicurezza del veicolo",
+          "titleAr": "أنظمة أمان المركبة",
+          "summaryIt": "Cinture, poggiatesta e sistemi di ritenuta contribuiscono a ridurre le conseguenze di un urto. Il loro uso corretto integra, ma non sostituisce, una guida prudente.",
+          "summaryAr": "تساعد أحزمة الأمان (cintura) ومساند الرأس وأنظمة التثبيت على تقليل آثار الاصطدام، لكنها لا تغني عن القيادة الحذرة.",
           "keyPoints": [
             {
-              "it": "Non superare il numero di passeggeri indicato sulla carta di circolazione.",
-              "ar": "لا تتجاوز عدد الركاب المدون في وثيقة التسجيل."
+              "it": "cintura",
+              "ar": "حزام الأمان"
             },
             {
-              "it": "I passeggeri non ostacolano il conducente né ne riducono la visibilità.",
-              "ar": "لا يعيق الركاب السائق ولا يحجبون رؤيته."
+              "it": "poggiatesta",
+              "ar": "مسند الرأس"
             },
             {
-              "it": "Fissare il carico senza compromettere stabilità, visibilità, luci o targa.",
-              "ar": "ثبّت الحمولة دون الإضرار بالثبات أو الرؤية أو الأضواء أو اللوحة."
+              "it": "sistema di ritenuta",
+              "ar": "نظام تثبيت"
             },
             {
-              "it": "Rispettare regole e segnalazione previste per le sporgenze.",
-              "ar": "التزم بالقواعد والعلامات المقررة للحمولة البارزة."
+              "it": "guida prudente",
+              "ar": "قيادة حذرة"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Il numero dei passeggeri non deve superare quello indicato sulla carta di circolazione.",
+              "qIt": "I sistemi di sicurezza possono ridurre le conseguenze di un urto.",
               "a": "VERO",
-              "explainAr": "هذا هو الحد الذي تحدده المادة 169."
+              "explainAr": "نعم، تساعد أنظمة الحماية على تقليل الإصابات."
             },
             {
-              "qIt": "I passeggeri possono limitare la visibilità del conducente se sono seduti.",
+              "qIt": "Usare la cintura rende inutile guidare con prudenza.",
               "a": "FALSO",
-              "explainAr": "يجب ألا يحدوا من حركة السائق أو رؤيته."
+              "explainAr": "الحزام لا يمنع الحوادث ولا يعوض القيادة الحذرة."
             },
             {
-              "qIt": "Il carico deve essere fissato senza coprire luci o targa.",
+              "qIt": "I dispositivi di sicurezza vanno usati correttamente.",
               "a": "VERO",
-              "explainAr": "يجب ألا تضر الحمولة بالثبات أو الرؤية أو الأجهزة."
+              "explainAr": "نعم، الاستخدام الصحيح ضروري للاستفادة من الحماية."
             }
           ]
         },
         {
           "id": "u11-l4",
-          "titleIt": "Controllare il veicolo e riconoscere i guasti",
-          "titleAr": "فحص المركبة والتعرف إلى الأعطال",
-          "summaryIt": "Prima di partire, controlla gli elementi che incidono sulla sicurezza, come ruote, pneumatici, luci, specchi e vetri. Spie, perdite, rumori o vibrazioni possono indicare un’anomalia, ma non ne identificano da soli la causa: valutala con prudenza e, se necessario, rivolgiti a personale qualificato.",
-          "summaryAr": "قبل الانطلاق، افحص العناصر المؤثرة في سلامة المركبة، مثل العجلات والإطارات والأضواء والمرايا والزجاج. قد تشير اللمبات أو التسربات أو الأصوات أو الاهتزازات إلى خلل، لكنها لا تحدد سببه وحدها؛ قيّمه بحذر واستعن بفني مؤهل عند الحاجة. (anomalia)",
+          "titleIt": "Surriscaldamento e guasto",
+          "titleAr": "ارتفاع الحرارة والعطل",
+          "summaryIt": "Se il veicolo mostra segnali di surriscaldamento o guasto, il conducente evita di proseguire in condizioni pericolose. Si ferma in sicurezza e richiede assistenza se necessario.",
+          "summaryAr": "إذا ظهرت علامات ارتفاع الحرارة (surriscaldamento) أو العطل، لا تواصل القيادة في وضع خطر؛ توقف بأمان واطلب المساعدة عند الحاجة.",
           "keyPoints": [
             {
-              "it": "Controlla ruote, pneumatici, luci, specchi e vetri.",
-              "ar": "افحص العجلات والإطارات والأضواء والمرايا والزجاج."
+              "it": "surriscaldamento",
+              "ar": "ارتفاع الحرارة"
             },
             {
-              "it": "Presta attenzione a freni, sterzo, sospensioni e scarico.",
-              "ar": "انتبه إلى الفرامل والتوجيه والتعليق والعادم."
+              "it": "guasto",
+              "ar": "عطل"
             },
             {
-              "it": "Spie, perdite, rumori e vibrazioni possono segnalare un’anomalia; il sintomo non identifica da solo la causa.",
-              "ar": "قد تشير اللمبات والتسربات والأصوات والاهتزازات إلى خلل، لكن العَرَض لا يحدد سببه وحده."
+              "it": "arresto sicuro",
+              "ar": "توقف آمن"
             },
             {
-              "it": "Durante la circolazione, i veicoli e i rimorchi devono essere efficienti.",
-              "ar": "يجب أن تكون المركبات ومقطوراتها كفؤة أثناء السير."
+              "it": "assistenza",
+              "ar": "مساعدة فنية"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Prima di partire, è opportuno controllare ruote, pneumatici, luci, specchi e vetri.",
+              "qIt": "Un segnale di guasto può richiedere di fermarsi in sicurezza.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس هذه العناصر ضمن ما ينبغي فحصه قبل الانطلاق."
+              "explainAr": "نعم، إذا كان استمرار القيادة خطرًا فتوقف في مكان آمن."
             },
             {
-              "qIt": "Un rumore permette sempre di identificare da solo la causa dell’anomalia.",
+              "qIt": "In caso di surriscaldamento è sempre sicuro continuare il viaggio.",
               "a": "FALSO",
-              "explainAr": "العَرَض، مثل الصوت، لا يحدد السبب وحده."
+              "explainAr": "قد يؤدي الاستمرار إلى خطر أو ضرر أكبر؛ اتبع تعليمات المركبة."
             },
             {
-              "qIt": "Tra gli elementi da sorvegliare ci sono freni, sterzo, sospensioni e scarico.",
+              "qIt": "Si può richiedere assistenza quando il veicolo non è sicuro da usare.",
               "a": "VERO",
-              "explainAr": "يسرد الدرس هذه المكونات ضمن العناصر التي تستدعي الانتباه."
+              "explainAr": "نعم، اطلب المساعدة بدل قيادة مركبة غير آمنة."
             }
           ]
         },
         {
           "id": "u11-l5",
-          "titleIt": "Cinture e sistemi di ritenuta per bambini",
-          "titleAr": "أحزمة الأمان وأنظمة تثبيت الأطفال",
-          "summaryIt": "Nei veicoli e nei casi previsti, le cinture di sicurezza e i sistemi di ritenuta devono essere usati e mantenuti efficienti. Per i bambini di statura inferiore a 1,50 m occorre un sistema omologato e adeguato al peso; il seggiolino rivolto contro il senso di marcia richiede l’airbag frontale disattivato.",
-          "summaryAr": "في المركبات والحالات المشمولة، يجب استخدام أحزمة الأمان وأنظمة تثبيت الأطفال (sistemi di ritenuta) والمحافظة على كفاءتها. ويحتاج الطفل الذي يقل طوله عن 1.50 متر إلى نظام معتمد يناسب وزنه؛ وإذا كان المقعد موجّهًا عكس اتجاه السير (contro il senso di marcia)، فيجب تعطيل الوسادة الهوائية الأمامية.",
+          "titleIt": "Conduzione sicura con carico e passeggeri",
+          "titleAr": "القيادة الآمنة مع الحمولة والركاب",
+          "summaryIt": "Il conducente assicura che passeggeri e carico siano sistemati senza ostacolare i comandi o la visuale. La guida si adatta al peso e all’equilibrio del veicolo.",
+          "summaryAr": "تأكد من جلوس الركاب (passeggero) وتثبيت الحمولة دون إعاقة الرؤية أو أدوات التحكم، وعدّل قيادتك بما يناسب وزن المركبة.",
           "keyPoints": [
             {
-              "it": "Le cinture si usano nei veicoli e nei casi previsti.",
-              "ar": "تُستخدم أحزمة الأمان في المركبات والحالات المشمولة."
+              "it": "passeggero",
+              "ar": "راكب"
             },
             {
-              "it": "Cinture e sistemi di ritenuta devono essere mantenuti efficienti.",
-              "ar": "يجب المحافظة على كفاءة أحزمة الأمان وأنظمة التثبيت."
+              "it": "carico fissato",
+              "ar": "حمولة مثبتة"
             },
             {
-              "it": "Per i bambini sotto 1,50 m serve un sistema omologato e adeguato al peso.",
-              "ar": "يحتاج الطفل دون 1.50 متر إلى نظام معتمد ومناسب لوزنه."
+              "it": "equilibrio del veicolo",
+              "ar": "توازن المركبة"
             },
             {
-              "it": "Con il seggiolino contro il senso di marcia, l’airbag frontale va disattivato.",
-              "ar": "عند استخدام مقعد موجّه عكس اتجاه السير، يجب تعطيل الوسادة الهوائية الأمامية."
+              "it": "comandi",
+              "ar": "أدوات التحكم"
             }
           ],
           "trapWord": null,
           "quickCheck": [
             {
-              "qIt": "Le cinture e i sistemi di ritenuta devono essere mantenuti efficienti.",
+              "qIt": "Il carico non deve ostacolare la visuale o i comandi.",
               "a": "VERO",
-              "explainAr": "يذكر الدرس وجوب استخدام الأحزمة وأنظمة التثبيت والمحافظة على كفاءتها."
+              "explainAr": "نعم، يجب إبقاء الرؤية وأدوات التحكم دون عائق."
             },
             {
-              "qIt": "Per un bambino sotto 1,50 m è sufficiente un sistema non omologato, purché sia adatto al peso.",
+              "qIt": "Il peso del carico non può influire sul comportamento del veicolo.",
               "a": "FALSO",
-              "explainAr": "يشترط الدرس نظامًا معتمدًا ومناسبًا للوزن."
+              "explainAr": "قد يؤثر الوزن والتوازن في حركة المركبة واستجابتها."
             },
             {
-              "qIt": "Il seggiolino contro il senso di marcia richiede l’airbag frontale disattivato.",
+              "qIt": "Passeggeri e bagagli devono essere sistemati in sicurezza.",
               "a": "VERO",
-              "explainAr": "ينص الدرس على تعطيل الوسادة الهوائية الأمامية مع المقعد الموجّه عكس اتجاه السير."
+              "explainAr": "نعم، يجب ترتيب الركاب والأمتعة وتثبيتها بأمان."
             }
           ]
         }
@@ -3791,7 +3779,7 @@
         "title_ar": "مخاطر حالة الطريق والطقس والانتقال من النهار إلى الليل",
         "lesson_refs": [
           "exam-supplement-driver.1",
-          "exam-supplement-driver.5"
+          "speed-stopping-highways.0"
         ]
       },
       {
@@ -3825,7 +3813,7 @@
         "title_it": "Rischi della manovra con diversi veicoli e campo visivo del conducente",
         "title_ar": "مخاطر المناورة بمركبات مختلفة ومجال رؤية السائق",
         "lesson_refs": [
-          "exam-supplement-driver.4"
+          "movement-overtaking.0"
         ]
       },
       {
@@ -3915,7 +3903,7 @@
         "title_it": "Rischi di superfici scivolose: tombini, segnaletica orizzontale e binari",
         "title_ar": "مخاطر الأسطح الزلقة: أغطية التصريف والعلامات الأفقية والسكك",
         "lesson_refs": [
-          "exam-supplement-driver.5",
+          "vehicle-safety.0",
           "signals-markings.2"
         ]
       },
