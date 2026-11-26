@@ -1,10 +1,9 @@
-// Local test-build placeholder. Empty values keep Firebase Auth and Firestore
-// initialization disabled; this configuration is not connected to any project.
-// Add a deliberately approved project config only in a separate release build.
+// Public Firebase Web SDK configuration from the existing registered Web app.
+// Contains client identifiers only; never place service-account credentials here.
 export const firebaseConfig = Object.freeze({
-  apiKey: '',
-  authDomain: '',
-  projectId: '',
-  messagingSenderId: '',
-  appId: ''
+  apiKey: "AIzaSyDmzQ6VjkTAuApNvrt04s0UCZSb1cFxBAU",
+  authDomain: "patente-b-arabic.firebaseapp.com",
+  projectId: "patente-b-arabic",
+  messagingSenderId: "268043467624",
+  appId: "1:268043467624:web:d60a94ce9f15fd08edf4dd"
 });

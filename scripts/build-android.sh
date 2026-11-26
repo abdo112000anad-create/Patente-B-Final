@@ -79,5 +79,6 @@ fi
 cd "$ANDROID_ROOT"
 ./gradlew "${GRADLE_ARGS[@]}" clean :app:assembleDebug :app:testDebugUnitTest
 
+bash "$SOURCE_ROOT/scripts/verify-apk-certificate.sh" "$ANDROID_APP/build/outputs/apk/debug/app-debug.apk"
 echo "Debug APK: $ANDROID_APP/build/outputs/apk/debug/app-debug.apk"
 echo "No release variant, release signing, upload, or publication was requested or performed."

@@ -113,7 +113,7 @@ test('Pausing stops the native utterance and resume safely restarts its current 
 
 test('Native Android engine enforces locale, rate, pitch, progress, cancellation, timeout and release', () => {
   const java = read('native/android/src/main/java/it/patenteb/sideload/v29/NativeTtsPlugin.java');
-  assert.match(java, /ITALIAN_LOCALE = "it-IT"/u);
+  assert.match(java, /ITALIAN_LOCALE = NativeTtsPolicy\.ITALIAN_LOCALE/u);
   assert.match(java, /ITALIAN_RATE = 0\.8f/u);
   assert.match(java, /ITALIAN_PITCH = 1\.0f/u);
   assert.match(java, /setLanguage\(Locale\.forLanguageTag\(ITALIAN_LOCALE\)\)/u);

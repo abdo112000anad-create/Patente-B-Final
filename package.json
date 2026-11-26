@@ -5,7 +5,8 @@
   "scripts": {
     "build": "node scripts/build-pwa.cjs",
     "start": "node server.js",
-    "test": "npm run build && node --test tests/*.test.cjs"
+    "test": "npm run build && node --test tests/*.test.cjs",
+    "check:firebase:production": "node scripts/check-firebase-production.cjs"
   },
   "devDependencies": {
     "@capacitor/cli": "8.6.2",

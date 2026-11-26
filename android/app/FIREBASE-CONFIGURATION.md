@@ -1,0 +1,5 @@
+# Firebase configuration status
+
+`google-services.json` configures the Android client for Firebase project `patente-b-arabic` and package `it.patenteb.sideload.v29`. `../../src/firebase-config.mjs` now contains only the public Firebase Web SDK client fields from the existing registered Web app in that same project. The Web project ID and sender ID were verified against the Android configuration. No service-account credentials or private keys were used or copied.
+
+The app's Firebase Auth and Firestore client initialization is no longer skipped for lack of configuration. This change does not enable or alter any Firebase Auth provider, OAuth setting, Firestore service, or Firestore security rule. The configuration check validates client-config shape and project/package consistency only; it does not prove that sign-in or cloud sync works at runtime or that backend permissions are safe. Those behaviors still depend on the existing Firebase service/provider/rule settings and were not exercised against a phone or emulator.

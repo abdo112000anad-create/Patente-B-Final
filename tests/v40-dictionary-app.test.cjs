@@ -193,3 +193,20 @@ test('local word-lookup loader serves a single isolated word and never presents 
   assert.match(draft.note, /مسودة ترجمة آلية غير مراجعة/u);
   assert.equal(draft.confidence, null);
 });
+
+test('high-impact traffic obligation and prohibition terms have corrected Arabic without clearing review flags', () => {
+  const dictionary = json('data/italian_arabic_dictionary_lookup.json');
+  const byWord = new Map(dictionary.entries.map(row => [row.word, row]));
+  for (const [word, arabic] of [
+    ['obbligo', 'التزام'],
+    ['divieti', 'محظورات / إشارات منع'],
+  ]) {
+    const row = byWord.get(word);
+    assert.equal(row.translation_ar, arabic);
+    assert.equal(row.ui_fallback_ar, '');
+    assert.equal(row.status, 'machine_draft_needs_review');
+    assert.equal(row.review_required, 1);
+    assert.equal(row.confidence, null);
+    assert.match(row.note, /سياق.*مرور/u);
+  }
+});

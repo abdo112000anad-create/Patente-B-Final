@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-25T16:02:08+00:00",
+    "generated_at_utc": "2026-11-26T07:01:22+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5277,
@@ -19274,13 +19274,13 @@
     },
     {
       "word": "divieti",
-      "translation_ar": "مُنْفَذ",
+      "translation_ar": "محظورات / إشارات منع",
       "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
       "provider": "opus-mt-local",
       "confidence": null,
       "status": "machine_draft_needs_review",
       "review_required": 1,
-      "note": "",
+      "note": "تصحيح مقترح للمسودة الآلية، ما زال يحتاج مراجعة: جمع divieto؛ في سياق المرور يدل على المحظورات أو إشارات المنع، وليس «مُنْفَذ».",
       "translation_kind": "machine_translation",
       "ui_fallback_ar": ""
     },
@@ -37682,13 +37682,13 @@
     },
     {
       "word": "obbligo",
-      "translation_ar": "التحدي",
+      "translation_ar": "التزام",
       "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
       "provider": "opus-mt-local",
       "confidence": null,
       "status": "machine_draft_needs_review",
       "review_required": 1,
-      "note": "",
+      "note": "تصحيح مقترح للمسودة الآلية، ما زال يحتاج مراجعة: في سياق قواعد المرور يعني الالتزام بما يجب على السائق فعله أو الامتناع عنه، وليس «التحدي».",
       "translation_kind": "machine_translation",
       "ui_fallback_ar": ""
     },

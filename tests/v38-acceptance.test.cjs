@@ -184,16 +184,34 @@ test('the unified v50 dark palette keeps readable lesson copy and mobile sizing'
   assert.match(updated, /lesson-animation-svg/u);
 });
 
-test('local debug build still avoids real Firebase sign-in credentials', () => {
+test('Firebase Web and Android configs match the v66 project and package', () => {
   const config = json('android/app/google-services.json');
-  assert.match(JSON.stringify(config), /REPLACE_WITH_FIREBASE|PLACEHOLDER|YOUR_/iu);
-  assert.match(read('src/app.js'), /Firebase.*not configured|placeholder|not available/iu);
+  const gradle = read('android/app/build.gradle');
+  const packageName = gradle.match(/^\s*applicationId\s+["']([^"']+)["']/mu)?.[1];
+  assert.equal(packageName, 'it.patenteb.sideload.v29');
+  assert.match(gradle, /versionCode\s+66/u);
+  assert.equal(config.project_info.project_id, 'patente-b-arabic');
+  const matchingClients = config.client.filter(client => client.client_info?.android_client_info?.package_name === packageName);
+  assert.equal(matchingClients.length, 1);
+  assert.equal(matchingClients[0].client_info.mobilesdk_app_id, '1:268043467624:android:fbc12e96aa0f2fa3edf4dd');
+  const webSource = read('src/firebase-config.mjs');
+  const webValue = name => webSource.match(new RegExp(`\\b${name}:\\s*["']([^"']+)["']`))?.[1] || '';
+  assert.ok(webValue('apiKey'), 'Firebase Web client API key should be configured');
+  assert.equal(webValue('authDomain'), 'patente-b-arabic.firebaseapp.com');
+  assert.equal(webValue('projectId'), config.project_info.project_id);
+  assert.equal(webValue('messagingSenderId'), config.project_info.project_number);
+  assert.equal(webValue('appId'), '1:268043467624:web:d60a94ce9f15fd08edf4dd');
+  const account = read('src/firebase-account.mjs');
+  assert.match(account, /import\('firebase\/app'\)/u);
+  assert.match(account, /initializeApp\(firebaseConfig,appName\)/u);
 });
 
-test('Android sample ads and the Firebase placeholder are retained', () => {
+test('Android sample ads remain and Firebase Services selects the registered v29 package', () => {
   const native = read('android/app/src/main/AndroidManifest.xml');
   assert.match(native, /ca-app-pub-3940256099942544/iu);
-  assert.match(JSON.stringify(json('android/app/google-services.json')), /REPLACE_WITH_FIREBASE|PLACEHOLDER|YOUR_/iu);
+  const config = json('android/app/google-services.json');
+  assert.equal(config.project_info.project_id, 'patente-b-arabic');
+  assert.ok(config.client.some(client => client.client_info?.android_client_info?.package_name === 'it.patenteb.sideload.v29'));
 });
 
 test('app shell retains translation, legal, and driving-safety disclaimers', () => {

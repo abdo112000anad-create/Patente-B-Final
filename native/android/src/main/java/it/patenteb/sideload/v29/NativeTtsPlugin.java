@@ -20,7 +20,7 @@ import java.util.UUID;
 /** Bridges Android's selected system TTS engine to the Italian-only learning UI. */
 @CapacitorPlugin(name = "NativeTts")
 public class NativeTtsPlugin extends Plugin {
-    private static final String ITALIAN_LOCALE = "it-IT";
+    private static final String ITALIAN_LOCALE = NativeTtsPolicy.ITALIAN_LOCALE;
     private static final float ITALIAN_RATE = 0.8f;
     private static final float ITALIAN_PITCH = 1.0f;
 
@@ -161,11 +161,11 @@ public class NativeTtsPlugin extends Plugin {
     public void speak(PluginCall call) {
         String text = call.getString("text", "");
         String locale = call.getString("locale", "");
-        if (text == null || text.trim().isEmpty()) {
+        if (!NativeTtsPolicy.hasSpeakableText(text)) {
             call.reject("empty-text");
             return;
         }
-        if (!ITALIAN_LOCALE.equals(locale)) {
+        if (!NativeTtsPolicy.supportsLocale(locale)) {
             call.reject("unsupported-locale");
             return;
         }
@@ -192,7 +192,7 @@ public class NativeTtsPlugin extends Plugin {
                 finishActiveCallLocked(false, true, null);
                 activeSpeakCall = call;
                 activeUtteranceId = utteranceId;
-                long timeoutMs = Math.max(20000L, Math.min(120000L, text.length() * 350L));
+                long timeoutMs = NativeTtsPolicy.timeoutMillisForTextLength(text.length());
                 activeTimeout = () -> {
                     finishUtterance(timeoutUtteranceId, false, "tts-playback-timeout");
                     try { if (textToSpeech != null) textToSpeech.stop(); } catch (RuntimeException ignored) {}
@@ -226,7 +226,7 @@ public class NativeTtsPlugin extends Plugin {
 
     private void finishUtterance(String utteranceId, boolean completed, String error) {
         synchronized (lock) {
-            if (activeSpeakCall == null || !utteranceId.equals(activeUtteranceId)) return;
+            if (activeSpeakCall == null || !NativeTtsPolicy.matchesUtterance(activeUtteranceId, utteranceId)) return;
             finishActiveCallLocked(completed, !completed && error == null, error);
         }
     }

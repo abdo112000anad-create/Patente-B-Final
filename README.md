@@ -19,3 +19,10 @@ bash ./scripts/build-android.sh
 ```
 
 ينتج البناء المحلي APK تشخيصيًا موقّعًا بمفتاح debug، وليس حزمة نشر Play موقعة. يرفع GitHub Actions الـ APK كـ artifact باسم `patente-b-v66-debug-apk` بعد نجاح اختبارات JavaScript وAndroid والتحقق من إعلان خدمة TTS في manifest. يتضمن هذا المصدر إضافة Android الأصلية في `native/android/src/main/java/it/patenteb/sideload/v29/NativeTtsPlugin.java`؛ ينسخها سكربت البناء إلى مشروع Android قبل التجميع.
+
+يفحص سكربت البناء وCI بصمة شهادة APK ويمنعان تمرير نسخة تختلف عن شهادة v64/v65. يستخدم البناء المحلي مفتاح Android debug المتاح، أو مفتاحاً يحدده `PATENTE_DEBUG_KEYSTORE` مع متغيرات كلمة المرور والاسم الموضحة في إعداد Gradle؛ لا تضع ملف المفتاح أو كلمات مروره في المستودع. لا تتوفر تلقائيًا مفاتيح الجهاز على runner جديد: يفشل CI قبل رفع artifact إذا كانت شهادته مختلفة، إلى أن يُهيَّأ له المفتاح المطابق بطريقة آمنة. لا يعني اجتياز فحص الشهادة نجاح Firebase أو اختبار التشغيل.
+
+### تحقق Firebase قبل إصدار سحابي فعّال (اختياري)
+يتضمن `android/app/google-services.json` الإعداد الرسمي للمشروع `patente-b-arabic` وعميل Android للحزمة `it.patenteb.sideload.v29`. كما يحتوي `src/firebase-config.mjs` إعداد SDK العام لتطبيق Web مسجّل في المشروع نفسه؛ أُدرجت حقول العميل العامة فقط، من دون بيانات حساب خدمة أو مفاتيح خاصة. شغّل `npm run check:firebase:production` لفحص شكل الإعدادات وتطابق المشروع ورقم المرسل والحزمة. نجاح الفحص لا يفعّل خدمات Firebase ولا يغيّر موفري المصادقة أو قواعد Firestore.
+
+هذا فحص اتساق شكلي فقط، وليس إثباتاً لاتصال Firebase أو جاهزية نشر: لا يتحقق من إعداد OAuth أو نطاقات/معرّفات العملاء أو تفعيل Firebase Authentication وموفريه، ولا يراجع Firestore Security Rules أو اختبارها. لا يغيّر هذا الأمر بناء الضيف أو CI؛ يبقيان debug فقط، ولا يجوز اعتبار نجاحه وحده موافقة إصدار أو دليلاً على سلامة قواعد الوصول.
