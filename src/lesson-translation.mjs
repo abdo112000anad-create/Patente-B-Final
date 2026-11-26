@@ -106,7 +106,9 @@ export function translateTappedWord(word = '', entries = []) {
   const selected = String(word).trim().replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, '');
   const match = lookupOfflineWord(selected, entries);
   const status = match?.status || 'missing';
-  const fallbackNote = status === 'machine_draft_needs_review'
+  const fallbackNote = status === 'contextual_candidate_needs_review'
+    ? 'اقتراح تصحيح سياقي أولي غير معتمد؛ يلزم فحصه ومراجعته بشريًا.'
+    : status === 'machine_draft_needs_review'
     ? 'مسودة ترجمة آلية غير مراجعة؛ قد يختلف المعنى بحسب السياق.'
     : status === 'legacy_glossary_needs_review'
       ? 'مدخل من القاموس المحلي يحتاج إلى مراجعة.'

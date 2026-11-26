@@ -191,7 +191,7 @@ function validJsonPayload(pathname, data) {
     return data.entries.every(entry => {
       if (!entry || typeof entry.word !== 'string' || !entry.word || words.has(entry.word) ||
         typeof entry.source !== 'string' || !entry.source || typeof entry.provider !== 'string' || !entry.provider ||
-        !['reviewed_override', 'legacy_glossary_needs_review', 'machine_draft_needs_review', 'contextual_override_v49', 'needs_translation'].includes(entry.status) ||
+        !['reviewed_override', 'legacy_glossary_needs_review', 'machine_draft_needs_review', 'contextual_override_v49', 'contextual_candidate_needs_review', 'needs_translation'].includes(entry.status) ||
         ![0, 1].includes(entry.review_required) || !(entry.confidence === null || Number.isFinite(entry.confidence)) ||
         !(entry.translation_ar === null || typeof entry.translation_ar === 'string') || !(entry.ui_fallback_ar === null || typeof entry.ui_fallback_ar === 'string') || (entry.status === 'needs_translation' && !entry.ui_fallback_ar)) return false;
       words.add(entry.word);

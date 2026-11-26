@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 JSON_PATH = ROOT / "data/italian_arabic_dictionary_lookup.json"
 DB_PATH = ROOT / "android/app/src/main/assets/dictionary.db"
-APP_VERSION = 63
+APP_VERSION = 64
 EXPECTED_WORD_COUNT = 5336
 
 # User-requested standalone lemma, kept separate from question-bank extraction.
@@ -146,6 +146,31 @@ QUESTION_BANK_AUDIT_OVERRIDES = {"prescrive", "rotatoria", "riservata", "retrovi
 PROJECT_ADDITIONS = {**REQUESTED_LEMMA_ADDITIONS, **VIDEO_CONTEXT_ADDITIONS, **LESSON_DICTIONARY_ADDITIONS}
 PROJECT_ADDITION_SOURCES = {**REQUESTED_LEMMA_SOURCES, **VIDEO_CONTEXT_SOURCES, **LESSON_DICTIONARY_SOURCES}
 
+# Contextual corrections grounded in the official question-bank examples and open dictionaries.
+# These remain explicit review candidates; they are not represented as human-approved translations.
+QUESTION_BANK_CONTEXTUAL_CANDIDATES = {
+    "frenare": (
+        "يفرمل / يكبح",
+        "contextual_translation_draft",
+        "اقتراح تصحيح سياقي أولي: frenare فعل بمعنى كبح المركبة أو إبطائها، كما في frenare bruscamente. يوافق معنى Cambridge (to brake) وسياق بنك أسئلة القيادة؛ لم يخضع لمراجعة بشرية مستقلة.",
+    ),
+    "abbagliante": (
+        "الضوء العالي / مُبهِر",
+        "contextual_translation_draft",
+        "اقتراح تصحيح سياقي أولي: في أسئلة المركبات تشير luci/fari/proiettori abbaglianti إلى الأضواء العالية؛ وتبقى دلالة مُبهِر في الاستعمال العام. تؤيد أمثلة القاموس معنى high-beam headlamp؛ لم يخضع المدخل لمراجعة بشرية مستقلة.",
+    ),
+    "abbagliamento": (
+        "الإبهار الضوئي / وهج يعيق الرؤية",
+        "contextual_translation_draft",
+        "اقتراح تصحيح سياقي أولي: في أسئلة القيادة يعني abbagliamento glare/إبهار البصر بسبب الشمس أو الطائرات، لا مجرد التوهج؛ لم يخضع المدخل لمراجعة بشرية مستقلة.",
+    ),
+}
+QUESTION_BANK_CONTEXTUAL_CANDIDATE_SOURCES = {
+    "frenare": "question-bank-context-audit-v64; Cambridge Italian-English; Ministero delle Infrastrutture e dei Trasporti",
+    "abbagliante": "question-bank-context-audit-v64; Reverso Italian-English; Ministero delle Infrastrutture e dei Trasporti",
+    "abbagliamento": "question-bank-context-audit-v64; Translate.com Italian-English; Ministero delle Infrastrutture e dei Trasporti",
+}
+
 # Owner-supplied, explicitly approved corrections from the v42 review.
 # Each tuple is (Arabic display text, translation kind, explanatory note).
 OWNER_CORRECTIONS = {
@@ -205,7 +230,7 @@ def normalized_word(value: object) -> str:
 
 
 def write_json_atomically(payload: dict) -> None:
-    fd, temp_name = tempfile.mkstemp(prefix="dictionary-v63-", suffix=".json", dir=JSON_PATH.parent)
+    fd, temp_name = tempfile.mkstemp(prefix="dictionary-v64-", suffix=".json", dir=JSON_PATH.parent)
     os.close(fd)
     try:
         Path(temp_name).write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -275,6 +300,19 @@ def main() -> int:
                 "review_required": 0,
                 "note": note,
             })
+        elif key in QUESTION_BANK_CONTEXTUAL_CANDIDATES:
+            translation, kind, note = QUESTION_BANK_CONTEXTUAL_CANDIDATES[key]
+            row.update({
+                "translation_ar": translation,
+                "ui_fallback_ar": "",
+                "translation_kind": kind,
+                "source": QUESTION_BANK_CONTEXTUAL_CANDIDATE_SOURCES[key],
+                "provider": "project-contextual-audit",
+                "confidence": None,
+                "status": "contextual_candidate_needs_review",
+                "review_required": 1,
+                "note": note,
+            })
         if not str(row.get("translation_ar") or "").strip():
             raise SystemExit(f"Dictionary translation is empty after corrections: {word!r}")
         filtered_rows.append(row)
@@ -287,6 +325,9 @@ def main() -> int:
     missing_project_additions = set(PROJECT_ADDITIONS) - {row["word"].casefold() for row in filtered_rows}
     if missing_project_additions:
         raise SystemExit(f"Project addition terms are missing: {sorted(missing_project_additions)}")
+    missing_context_candidates = set(QUESTION_BANK_CONTEXTUAL_CANDIDATES) - {row["word"].casefold() for row in filtered_rows}
+    if missing_context_candidates:
+        raise SystemExit(f"Contextual candidate terms are missing: {sorted(missing_context_candidates)}")
 
     rows = filtered_rows
     statuses = Counter(str(row.get("status") or "needs_review") for row in rows)
@@ -312,7 +353,8 @@ def main() -> int:
         "entries_with_safe_ui_fallback": 0,
         "owner_approved_corrections": len(OWNER_CORRECTIONS),
         "excluded_single_letter_artifacts": sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS),
-        "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts; v42 owner corrections, v47/v51/v61 requested terms, v54 video-context terms, and v61/v62/v63 lesson-audit additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+        "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. Three v64 question-bank context corrections are provisional contextual_candidate_needs_review entries, not human-approved translations. Only the documented v42 owner corrections and requested/video/lesson additions are marked reviewed_override. The lookup omits isolated single-letter extraction artifacts.",
+        "question_bank_context_correction_candidates": len(QUESTION_BANK_CONTEXTUAL_CANDIDATES),
         "requested_lemma_additions": len(REQUESTED_LEMMA_ADDITIONS),
         "video_context_additions": len(VIDEO_CONTEXT_ADDITIONS),
         "lesson_dictionary_audit_additions": len(LESSON_DICTIONARY_ADDITIONS),
@@ -368,9 +410,10 @@ def main() -> int:
             "requested_lemma_addition_rows": str(len(REQUESTED_LEMMA_ADDITIONS)),
             "video_context_addition_rows": str(len(VIDEO_CONTEXT_ADDITIONS)),
             "lesson_dictionary_audit_rows": str(len(LESSON_DICTIONARY_ADDITIONS)),
+            "contextual_candidate_rows_needing_review": str(len(QUESTION_BANK_CONTEXTUAL_CANDIDATES)),
             "unresolved_rows_given_transparent_fallback": "0",
             "excluded_single_letter_artifacts": ",".join(sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS)),
-            "translation_notice": "Automatic translations remain drafts unless status is reviewed_override; reviewed overrides include requested v47/v51/v61 lemmas, v54 video-context translations, and v61/v62/v63 lesson-audit terms.",
+            "translation_notice": "Automatic translations remain drafts unless status is reviewed_override. The v64 context-audit corrections are provisional contextual_candidate_needs_review entries and still require human review.",
             "fallback_notice": "The v42 lookup excludes isolated single-letter extraction artifacts and includes owner-approved corrections.",
         }
         db.executemany("INSERT INTO Metadata(Key, Value) VALUES (?, ?)", sorted(sqlite_metadata.items()))
@@ -379,9 +422,10 @@ def main() -> int:
         count = db.execute("SELECT COUNT(*) FROM Dictionary").fetchone()[0]
         empty = db.execute("SELECT COUNT(*) FROM Dictionary WHERE trim(Arabic_Translation) = ''").fetchone()[0]
         approved_db_rows = db.execute("SELECT COUNT(*) FROM Dictionary WHERE Source = 'owner-approved-correction-v42' AND Status = 'reviewed_override' AND Review_Required = 0").fetchone()[0]
+        contextual_candidate_db_rows = db.execute("SELECT COUNT(*) FROM Dictionary WHERE Source LIKE 'question-bank-context-audit-v64;%' AND Status = 'contextual_candidate_needs_review' AND Review_Required = 1 AND Translation_Kind = 'contextual_translation_draft'").fetchone()[0]
         excluded_db_rows = db.execute("SELECT COUNT(*) FROM Dictionary WHERE lower(Italian_Word) IN ('b','f','g','h','p','v','x')").fetchone()[0]
-        if integrity != "ok" or count != EXPECTED_WORD_COUNT or empty != 0 or approved_db_rows != len(OWNER_CORRECTIONS) or excluded_db_rows != 0:
-            raise SystemExit(f"SQLite validation failed: integrity={integrity}, rows={count}, empty={empty}, approved={approved_db_rows}, excluded={excluded_db_rows}")
+        if integrity != "ok" or count != EXPECTED_WORD_COUNT or empty != 0 or approved_db_rows != len(OWNER_CORRECTIONS) or contextual_candidate_db_rows != len(QUESTION_BANK_CONTEXTUAL_CANDIDATES) or excluded_db_rows != 0:
+            raise SystemExit(f"SQLite validation failed: integrity={integrity}, rows={count}, empty={empty}, approved={approved_db_rows}, contextual_candidates={contextual_candidate_db_rows}, excluded={excluded_db_rows}")
         project_addition_db_rows = sum(
             db.execute(
                 "SELECT COUNT(*) FROM Dictionary WHERE Italian_Word = ? AND Arabic_Translation = ? AND Source = ? AND Status = 'reviewed_override' AND Review_Required = 0",

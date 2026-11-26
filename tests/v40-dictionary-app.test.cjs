@@ -9,12 +9,12 @@ const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const json = file => JSON.parse(read(file));
 
-test('v63 app dictionary contains auditable rows and excludes isolated letter artifacts', () => {
+test('v64 app dictionary contains auditable rows and excludes isolated letter artifacts', () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const questions = json('data/questions.json');
   assert.equal(dictionary.schema_version, 1);
   assert.equal(dictionary.metadata.source_question_count, questions.questions.length);
-  assert.equal(dictionary.metadata.app_release, 63);
+  assert.equal(dictionary.metadata.app_release, 64);
   assert.equal(dictionary.metadata.unique_question_bank_terms, 5277);
   assert.equal(dictionary.metadata.total_entries, 5336);
   assert.equal(dictionary.entries.length, 5336);
@@ -23,11 +23,49 @@ test('v63 app dictionary contains auditable rows and excludes isolated letter ar
     assert.ok(row.word);
     assert.ok(row.source);
     assert.ok(row.provider);
-    assert.ok(['reviewed_override', 'legacy_glossary_needs_review', 'machine_draft_needs_review', 'contextual_override_v49'].includes(row.status));
+    assert.ok(['reviewed_override', 'legacy_glossary_needs_review', 'machine_draft_needs_review', 'contextual_override_v49', 'contextual_candidate_needs_review'].includes(row.status));
     assert.ok(row.confidence === null || Number.isFinite(row.confidence));
     assert.ok(row.review_required === 0 || row.review_required === 1);
   }
   assert.equal(dictionary.metadata.counts_by_status.contextual_override_v49, 9);
+});
+
+test('v64 context corrections are traceable candidates and remain flagged for human review', async () => {
+  const dictionary = json('data/italian_arabic_dictionary_lookup.json');
+  const questions = json('data/questions.json');
+  const byWord = new Map(dictionary.entries.map(row => [row.word, row]));
+  assert.match(questions.source, /Ministero delle Infrastrutture e dei Trasporti/u);
+  assert.equal(questions.questions.filter(row => /\bfrenare\b/iu.test(row.it)).length, 15);
+  assert.equal(questions.questions.filter(row => /\babbagliante\b/iu.test(row.it)).length, 28);
+  assert.equal(questions.questions.filter(row => /\babbagliant\w*/iu.test(row.it)).length, 38);
+  assert.equal(questions.questions.filter(row => /\banabbagliant\w*/iu.test(row.it)).length, 37);
+  assert.equal(questions.questions.filter(row => /\babbagliamento\b/iu.test(row.it)).length, 2);
+  assert.equal(dictionary.metadata.question_bank_context_correction_candidates, 3);
+  assert.equal(dictionary.metadata.counts_by_status.contextual_candidate_needs_review, 3);
+  assert.equal(dictionary.metadata.review_required_entries, 5253);
+  const expected = {
+    frenare: { arabic: 'يفرمل / يكبح', source: /Cambridge/u },
+    abbagliante: { arabic: 'الضوء العالي / مُبهِر', source: /Reverso/u },
+    abbagliamento: { arabic: 'الإبهار الضوئي / وهج يعيق الرؤية', source: /Translate\.com/u },
+  };
+  const translation = await import(path.join(root, 'src/lesson-translation.mjs'));
+  translation.setGeneratedDictionary(dictionary.entries);
+  for (const [word, expectedRow] of Object.entries(expected)) {
+    const row = byWord.get(word);
+    assert.equal(row.translation_ar, expectedRow.arabic, word);
+    assert.equal(row.status, 'contextual_candidate_needs_review', word);
+    assert.equal(row.review_required, 1, word);
+    assert.equal(row.ui_fallback_ar, '', word);
+    assert.equal(row.confidence, null, word);
+    assert.equal(row.provider, 'project-contextual-audit', word);
+    assert.match(row.source, expectedRow.source, word);
+    assert.match(row.note, /اقتراح.*مراجعة بشرية/u, word);
+    const result = translation.translateTappedWord(word, []);
+    assert.equal(result.arabic, row.translation_ar, word);
+    assert.equal(result.status, 'contextual_candidate_needs_review', word);
+    assert.equal(result.note, row.note, word);
+    assert.equal(result.hasLexicalTranslation, true, word);
+  }
 });
 
 test('existing and Abdul-approved v42 corrections plus the v47 lemma are reviewed; model drafts need review', () => {

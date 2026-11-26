@@ -1,9 +1,9 @@
 {
   "version": 66,
   "entry": "/app.bundle.js?v=66",
-  "bundleSha256": "5c856babe82b41cd0ac433a9c95aa218b27e4c4f9bb1ccd35465792fa66eafb9",
+  "bundleSha256": "2957eb4ca3823ddcb4900ef01a52b79bc1779d5d9d01e4a4ee60a6a0f926e746",
   "lessonsSha256": "7f91d6cdd6cca92d750287d9b90737e91b8e5763d1f5922824ffc187afe9c4dd",
   "lessonSupportSha256": "717c4d5eb435239cbb43b323b20718c395b0b70664275721386b1e24431d3222",
   "questionBankSha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
-  "dictionarySha256": "ac4addb2c85b4d041c6db9dbb440c97d9f32ed40fe4916674d723f67f7335c6b"
+  "dictionarySha256": "1e557e2a2e79e56d28350ca310b32f8544e0921937c3a1f9f6c0101cd875f270"
 }
