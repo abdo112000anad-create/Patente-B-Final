@@ -1116,6 +1116,72 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
     "tonnellate": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Reverso Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/tonnellata; Treccani: https://www.treccani.it/vocabolario/tonnellata/; full official-question context corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
 })
 
+# Batch twenty: source-backed contextual gloss corrections.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "spazi": (
+        "أماكن، مساحات",
+        "contextual_translation",
+        "19 question-token occurrences in 18 distinct paired question contexts and no matching lesson records. The reviewed traffic uses consistently mean concrete allocated places or areas, including parking bays, bus/tram stops, taxi stands, accessible-vehicle spaces, emergency areas, and marked spaces. Reverso and Glosbe support مكان/مساحة, while Treccani defines usable or bounded space; فراغ does not fit these concrete uses. Questions 23722 and 23725 also exposed mistranslated stalli/stallo in parentheses.",
+    ),
+    "sorpassato": (
+        "المركبة التي تمّ تجاوزها؛ قديم / متقادِم (للوصف)",
+        "contextual_translation",
+        "13 question-token occurrences in 13 distinct paired question contexts and no matching lesson records. Most app uses are the participle/adjective for the vehicle being overtaken; a small number retain the ordinary adjective sense old/outdated. Treccani defines sorpassato as the participle of sorpassare and covers both traffic overtaking and outdated senses; Reverso examples support تجاوز and قديم. The gloss preserves both reviewed senses rather than applying the old adjective gloss to every context.",
+    ),
+    "possono": (
+        "يمكن / قد",
+        "contextual_translation",
+        "203 question-token occurrences in 202 distinct paired contexts plus 18 lesson-text occurrences across 13 lesson records. App contexts use possono for ability/permission and possibility; the fixed subject-specific يمكنهم is too narrow and misses قد. The opened exact-form Reverso entry lists both يمكن and قد; Treccani describes capacity, possibility, permission, and probability/supposition senses of potere. Arabic question-level polarity/modality issues in 23968 and 24012 were separately corrected without changing Italian wording or answers.",
+    ),
+    "devono": (
+        "يجب أن / يجب على",
+        "contextual_translation",
+        "133 question-token occurrences in 132 distinct paired contexts plus 6 lesson-text occurrences across 5 lesson records. The app uses the third-person plural modal for obligation, including impersonal si devono; يجب عليهم ذلك adds a fixed subject and object that do not fit all contexts. Reverso's opened example uses يجب على ... and Treccani defines dovere as obligation/necessity. Paired Arabic wording in 22512, 24471, 24472, 24800, and 24801 was separately corrected; Italian text and answers were preserved.",
+    ),
+    "autovetture": (
+        "سيارات الركوب",
+        "contextual_translation",
+        "76 question-token occurrences in 76 distinct paired contexts and one matching lesson record. Every reviewed use concerns the passenger-car vehicle category; lesson u1-l2 distinguishes autovettura from the broader autoveicolo and translates it as عربية ركوب. The opened bilingual Reverso page directly pairs سيارات الركوب with autovetture, and Treccani defines the category as motor vehicles for private passenger transport. The broader المسودة السيارات is less precise.",
+    ),
+    "comporta": (
+        "ينطوي على؛ يستلزم / يقتضي؛ يترتب عليه / يؤدي إلى",
+        "contextual_translation",
+        "74 question-token occurrences in 72 distinct paired contexts and no matching lesson records. The app uses comporta for what a sign/rule requires and for results or consequences such as penalties, risks, and effects; the draft تنشئ does not cover these uses. Reverso examples support ينطوي على and يتضمن; Treccani defines comportare as carrying with it or requiring as a consequence. The alternatives retain the context-dependent senses.",
+    ),
+    "massima": (
+        "أقصى / قصوى؛ الحدّ الأقصى",
+        "contextual_translation",
+        "69 question-token occurrences in 67 distinct paired contexts plus 4 lesson-text occurrences in one matching lesson. The app predominantly uses feminine massima as the maximum/upper-bound modifier (speed, mass, dimensions, duration, and similar limits), and also for maximum caution/concentration. Reverso examples directly support السرعة القصوى and الحد الأقصى; Treccani identifies massima as the feminine form of massimo. The standalone الأقصى is not a safe general gloss for the adjective.",
+    ),
+    "norma": (
+        "قاعدة؛ عادةً (في di norma)",
+        "contextual_translation",
+        "67 question-token occurrences in 67 distinct paired contexts plus one lesson-text occurrence in one matching lesson. Most app contexts use di norma to mean usually/as a rule; two are the noun rule in traffic-code contexts, and lesson u8-l5 uses norma vigente. Reverso's opened entry supports قاعدة for the noun and its phrase examples render di norma as عادةً/في العادة; Treccani distinguishes rule from habitual usage. The existing adjective-like عادي is unsuitable.",
+    ),
+    "passare": (
+        "يمرّ / يعبر (بحسب السياق)",
+        "contextual_translation",
+        "66 question-token occurrences in 66 distinct paired contexts plus one lesson-text occurrence in one matching lesson. The app uses passare as a verb for passing through, past or around a place/vehicle and for proceeding in turn; the noun-only gloss مرور obscures that function. Reverso examples list Arabic verb equivalents مَرَّ and عَبَرَ and show المرور عبر in a phrase; Treccani and Corriere confirm transit, crossing, and passing-by senses. The paired examples show context-sensitive constructions, so alternatives are retained.",
+    ),
+    "prossimità": (
+        "قُرب؛ بالقرب من",
+        "contextual_translation",
+        "66 question-token occurrences in 66 distinct paired contexts plus one lesson-text occurrence in one matching lesson. App uses are spatial, especially in prossimità di for near/close to a location or road feature. Reverso examples render prossimità as قرب/على مقربة من; Treccani defines it as grande vicinanza and in prossimità di as vicino/presso. The current imperative اقترب is not the noun or prepositional phrase used in the app.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "spazi": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Italian-Arabic: https://dictionary.reverso.net/italian-arabic/spazio; Glosbe: https://glosbe.com/it/ar/spazio; Treccani: https://www.treccani.it/vocabolario/spazio/",
+    "sorpassato": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Context Italian-Arabic: https://context.reverso.net/الترجمة/الإيطالية-العربية/e+sorpassati; Treccani: https://www.treccani.it/vocabolario/sorpassare/; Cambridge: https://dictionary.cambridge.org/us/dictionary/italian-english/sorpassato",
+    "possono": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Context Italian-Arabic: https://context.reverso.net/translation/italian-arabic/possono; Treccani, potere: https://www.treccani.it/vocabolario/potere-2/",
+    "devono": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/dovere; Treccani, dovere: https://www.treccani.it/vocabolario/dovere/",
+    "autovetture": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Context Arabic-Italian: https://context.reverso.net/الترجمة/العربية-الإيطالية/سيارات+الركوب; Treccani: https://www.treccani.it/vocabolario/autovettura/; Glosbe Arabic-Italian: https://it.glosbe.com/ar/it/%D8%B3%D9%8A%D8%A7%D8%B1%D8%A9",
+    "comporta": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Context Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/comporta; Treccani, comportare: https://www.treccani.it/vocabolario/comportare/",
+    "massima": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Context Italian-Arabic, velocità massima: https://context.reverso.net/translation/italian-arabic/velocit%C3%A0+massima; Treccani: https://www.treccani.it/vocabolario/massima1/",
+    "norma": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/norma; Reverso Context, di norma: https://context.reverso.net/الترجمة/الإيطالية-العربية/di+norma+non; Treccani: https://www.treccani.it/vocabolario/norma/",
+    "passare": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Context Italian-Arabic: https://context.reverso.net/translation/italian-arabic/passare; Treccani: https://www.treccani.it/vocabolario/passare/; Corriere Dizionario: https://dizionari.corriere.it/dizionario_italiano/P/passare.shtml",
+    "prossimità": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Context Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/prossimit%C3%A0; Treccani: https://www.treccani.it/vocabolario/prossimita/",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 
