@@ -59,6 +59,7 @@ function normalizeDailyGoal(value) {
 }
 
 function normalizeThemeMode(value) { return value === 'dark' ? 'dark' : 'system'; }
+function normalizeLanguageOrder(value) { return value === 'ar' ? 'ar' : 'it'; }
 
 function validTimestamp(value) {
   const number = Number(value);
@@ -183,6 +184,7 @@ export function createProgressBackup(state, exportedAt = new Date().toISOString(
     sessions: state.sessions || [],
     dailyGoal: normalizeDailyGoal(state.dailyGoal),
     themeMode: normalizeThemeMode(state.themeMode),
+    languageOrder: normalizeLanguageOrder(state.languageOrder),
     fontSize: [16, 18, 20, 22].includes(Number(state.fontSize)) ? Number(state.fontSize) : 16
   };
   return JSON.stringify({ format: FORMAT, version: VERSION, exportedAt, progress }, null, 2);
@@ -220,6 +222,7 @@ export function restoreProgressBackup(payload, context) {
     sessions: normalizeSessions(progress.sessions, allowedLessons),
     dailyGoal: normalizeDailyGoal(progress.dailyGoal),
     themeMode: normalizeThemeMode(progress.themeMode),
+    languageOrder: normalizeLanguageOrder(progress.languageOrder),
     activeQuiz: null,
     fontSize: [16, 18, 20, 22].includes(Number(progress.fontSize)) ? Number(progress.fontSize) : 16
   };

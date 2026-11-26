@@ -41759,6 +41759,9 @@ This typically indicates that your device does not have a healthy Internet conne
   function normalizeThemeMode(value) {
     return value === "dark" ? "dark" : "system";
   }
+  function normalizeLanguageOrder(value) {
+    return value === "ar" ? "ar" : "it";
+  }
   function validTimestamp(value) {
     const number = Number(value);
     return Number.isFinite(number) && number >= 0 && number <= 99999999999999 ? Math.trunc(number) : 0;
@@ -41879,6 +41882,7 @@ This typically indicates that your device does not have a healthy Internet conne
       sessions: state2.sessions || [],
       dailyGoal: normalizeDailyGoal(state2.dailyGoal),
       themeMode: normalizeThemeMode(state2.themeMode),
+      languageOrder: normalizeLanguageOrder(state2.languageOrder),
       fontSize: [16, 18, 20, 22].includes(Number(state2.fontSize)) ? Number(state2.fontSize) : 16
     };
     return JSON.stringify({ format: FORMAT, version: VERSION, exportedAt, progress }, null, 2);
@@ -41913,6 +41917,7 @@ This typically indicates that your device does not have a healthy Internet conne
       sessions: normalizeSessions(progress.sessions, allowedLessons),
       dailyGoal: normalizeDailyGoal(progress.dailyGoal),
       themeMode: normalizeThemeMode(progress.themeMode),
+      languageOrder: normalizeLanguageOrder(progress.languageOrder),
       activeQuiz: null,
       fontSize: [16, 18, 20, 22].includes(Number(progress.fontSize)) ? Number(progress.fontSize) : 16
     };
@@ -45659,6 +45664,7 @@ This typically indicates that your device does not have a healthy Internet conne
     const progress = backup.progress;
     delete progress.fontSize;
     delete progress.themeMode;
+    delete progress.languageOrder;
     const envelope = { format: FORMAT2, version: VERSION2, exportedAt, progress };
     if (state2.syncSetEdits !== void 0) envelope.setEdits = state2.syncSetEdits;
     return JSON.stringify(envelope);
@@ -47628,6 +47634,7 @@ This typically indicates that your device does not have a healthy Internet conne
     state.activeQuiz = null;
     const results = session.questions.map((q, i2) => ({ q, chosen: session.answers[i2], correct: session.answers[i2] !== null && session.answers[i2] === (q.answer === "VERO"), skipped: session.answers[i2] === null }));
     showResult({ isExam: false, total, right, wrong: total - right, results, label: session.mode === "lesson-review" ? session.lessonTitle : "", returnView: session.returnView });
+    quiz = null;
   }
   function finishExam(byTime = false, explicitSubmit = false, endedByFourthError = false) {
     if (!quiz) return;
@@ -47648,6 +47655,7 @@ This typically indicates that your device does not have a healthy Internet conne
     persistState();
     showResult({ isExam: true, byTime, endedByFourthError, total: session.questions.length, answered, right, wrong, results, returnView: session.returnView, studyAdjusted: !!session.studyAdjusted, timerMinutes: session.timerMinutes || 20 });
     if (explicitSubmit && !byTime && !session.studyAdjusted) void showExamInterstitial();
+    quiz = null;
   }
   function recordExamAnswer(q, correct) {
     state.practiceCount++;
@@ -48652,7 +48660,10 @@ This typically indicates that your device does not have a healthy Internet conne
       }, getContext: () => ({ questionIds: new Set(questions.map((q) => Number(q.id))), lessonKeys: progressLessonKeys(), sourceCheckIds: new Set(lessonModules.flatMap((m2) => m2.lessons.map((l2) => {
         var _a13;
         return (_a13 = l2.source_check) == null ? void 0 : _a13.id;
-      }).filter(Boolean))), topics: new Set(Object.keys(topicLabels)) }), onImported: () => render("home") });
+      }).filter(Boolean))), topics: new Set(Object.keys(topicLabels)) }), onImported: () => {
+        applyLanguageOrder();
+        render("home");
+      } });
       accountService = createAccountService({ firebaseConfig, getState: () => state, replaceState: applySyncedProgress, getContext: () => ({ questionIds: new Set(questions.map((q) => Number(q.id))), lessonKeys: progressLessonKeys(), sourceCheckIds: new Set(lessonModules.flatMap((m2) => m2.lessons.map((l2) => {
         var _a13;
         return (_a13 = l2.source_check) == null ? void 0 : _a13.id;

@@ -48,6 +48,7 @@ export function createCloudProgress(state, exportedAt = new Date().toISOString()
   const progress = backup.progress;
   delete progress.fontSize;
   delete progress.themeMode;
+  delete progress.languageOrder;
   const envelope = { format: FORMAT, version: VERSION, exportedAt, progress };
   if (state.syncSetEdits !== undefined) envelope.setEdits = state.syncSetEdits;
   return JSON.stringify(envelope);
