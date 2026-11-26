@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-26T16:31:47+00:00",
+    "generated_at_utc": "2026-11-26T23:27:33+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5277,
@@ -10,13 +10,13 @@
       "contextual_candidate_needs_review": 2,
       "contextual_override_v49": 8,
       "legacy_glossary_needs_review": 33,
-      "machine_draft_needs_review": 5085,
-      "reviewed_override": 208
+      "machine_draft_needs_review": 5079,
+      "reviewed_override": 214
     },
     "total_entries": 5336,
     "translated_entries": 5336,
-    "review_required_entries": 5128,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. Two v64 question-bank candidates remain flagged. 48 frequent question-bank translations were corrected and 77 existing glosses were confirmed unchanged using app contexts and Italian-Arabic sources; these project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+    "review_required_entries": 5122,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. Two v64 question-bank candidates remain flagged. 51 frequent question-bank translations were corrected and 80 existing glosses were confirmed unchanged using app contexts and Italian-Arabic sources; these project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
     "app_release": 64,
     "terms_with_lookup_entry": 5336,
     "entries_with_arabic_translation": 5336,
@@ -36,8 +36,8 @@
     "video_context_additions": 3,
     "lesson_dictionary_audit_additions": 64,
     "question_bank_context_correction_candidates": 2,
-    "question_bank_verified_contextual_corrections": 48,
-    "question_bank_verified_contextual_gloss_confirmations": 77
+    "question_bank_verified_contextual_corrections": 51,
+    "question_bank_verified_contextual_gloss_confirmations": 80
   },
   "entries": [
     {
@@ -27954,15 +27954,15 @@
     },
     {
       "word": "indossare",
-      "translation_ar": "البس",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "ارتداء",
+      "source": "question-bank-context-audit-2026-11; Reverso Context Italian-Arabic, indossare: https://context.reverso.net/traduzione/italiano-arabo/indossare; Glosbe Italian-Arabic, indossare: https://it.glosbe.com/it/ar/indossare; official question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "18 lemma-family tokens across 17 paired question records (indossare 10, indossato 3, indossando 1, indossate 2, indossa 2), plus 2 lesson-text occurrences in one record (u7-l5: summaryIt and quickChecks[2].qIt, both indossato). The current machine gloss البس is imperative; the reviewed infinitive and inflected contexts describe wearing/putting on and support ارتداء / يرتدي. Reverso and Glosbe Italian-Arabic examples support the wearing sense.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "ارتداء"
     },
     {
       "word": "indossate",
@@ -42222,15 +42222,15 @@
     },
     {
       "word": "preavvisa",
-      "translation_ar": "تحذير مسبق",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "يُنبّه مسبقًا / يُشير مسبقًا إلى",
+      "source": "question-bank-context-audit-2026-11; Reverso Context Italian-Arabic, preavviso: https://context.reverso.net/traduzione/italiano-arabo/preavviso; Treccani, preavvisare: https://www.treccani.it/vocabolario/preavvisare/; full official-question context corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "84 question-token occurrences in 84 distinct paired question contexts and no lesson matches. In the traffic-sign contexts the sign informs or points to an upcoming border, turn, roadworks, signal or prohibition, not invariably a danger warning. Treccani defines preavvisare as informing beforehand and Reverso supports the advance-notice element.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "يُنبّه مسبقًا / يُشير مسبقًا إلى"
     },
     {
       "word": "preavvisare",
@@ -43891,14 +43891,14 @@
     {
       "word": "proseguire",
       "translation_ar": "تابع",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "source": "question-bank-context-confirmation-2026-11; Reverso Italian-Arabic: https://context.reverso.net/%D8%A7%D9%84%D8%AA%D8%B1%D8%AC%D9%85%D8%A9/%D8%A7%D9%84%D8%A5%D9%8A%D8%B7%D8%A7%D9%84%D9%8A%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9/proseguire; Treccani: https://www.treccani.it/vocabolario/proseguire/; full official-question context corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "88 question-token occurrences in 88 distinct paired question contexts plus 2 lesson-text occurrences across 2 lesson records. Every reviewed app use means continue/proceed; Reverso Italian-Arabic and Treccani support the verb sense. Existing gloss confirmed unchanged for the reviewed contexts.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "تابع"
     },
     {
       "word": "proseguono",
@@ -58675,14 +58675,14 @@
     {
       "word": "tonnellate",
       "translation_ar": "أطنان",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "source": "question-bank-context-confirmation-2026-11; Reverso Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/tonnellata; Treccani: https://www.treccani.it/vocabolario/tonnellata/; full official-question context corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "80 question-token occurrences in 79 distinct paired question contexts and no lesson matches. The reviewed uses refer to vehicle or vehicle-load mass; Reverso Italian-Arabic and Treccani support the tonne/ton sense. Existing plural gloss confirmed unchanged.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "أطنان"
     },
     {
       "word": "torace",
@@ -59970,15 +59970,15 @@
     },
     {
       "word": "trova",
-      "translation_ar": "ابحث",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "يوجد؛ يقع (في صيغة si trova)",
+      "source": "question-bank-context-audit-2026-11; Reverso Context Italian-Arabic, si trova: https://context.reverso.net/traduzione/italiano-arabo/si+trova; Glosbe, trovare: https://glosbe.com/it/ar/trovare; Treccani, trovare: https://www.treccani.it/vocabolario/trovare/; full official-question context corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "108 question-token occurrences in 107 distinct paired question contexts and no lesson matches. The reviewed uses are principally si trova = exists/is situated, not the imperative ‘search’; questions 21814, 21429 and 22838 show the location/state sense. Reverso, Glosbe and Treccani support يجد/يوجد/يقع according to context; the gloss explicitly scopes the two Arabic equivalents to si trova.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "يوجد؛ يقع (في صيغة si trova)"
     },
     {
       "word": "trovandosi",
@@ -62551,14 +62551,14 @@
     {
       "word": "vietata",
       "translation_ar": "ممنوع",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "source": "question-bank-context-confirmation-2026-11; Reverso Context Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/vietata; Treccani, vietare: https://www.treccani.it/vocabolario/vietare/; full official-question context corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "91 question-token occurrences in 90 distinct paired question contexts and no lesson matches. The reviewed contexts use vietata for prohibited/forbidden road actions or access; Reverso Italian-Arabic and Treccani's vietare entry support the existing general gloss ممنوع. Existing gloss confirmed unchanged.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "ممنوع"
     },
     {
       "word": "vietate",

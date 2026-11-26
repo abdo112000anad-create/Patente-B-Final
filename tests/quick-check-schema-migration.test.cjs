@@ -86,8 +86,8 @@ function serviceWorker() {
   return sandbox;
 }
 
-function cacheResponse(data) {
-  const raw = Buffer.from(JSON.stringify(data));
+function cacheResponse(data, rawText) {
+  const raw = Buffer.from(rawText === undefined ? JSON.stringify(data) : rawText);
   return {
     ok: true,
     headers: {get: () => 'application/json'},
@@ -108,7 +108,13 @@ function offlineCache({canonical = canonicalLessons, legacy = legacyLessons, sim
     '/data/similar-groups.json': similar,
     '/data/italian_arabic_dictionary_lookup.json': readJson('data/italian_arabic_dictionary_lookup.json')
   };
-  return {match: async key => payloads[key] === undefined ? undefined : cacheResponse(payloads[key])};
+  return {
+    match: async key => {
+      if (payloads[key] === undefined) return undefined;
+      const rawText = key === '/data/questions.json' ? readText('data/questions.json') : undefined;
+      return cacheResponse(payloads[key], rawText);
+    }
+  };
 }
 
 test('canonical source retains exactly 50 ordered lessons and three ordered checks each', async () => {

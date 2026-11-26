@@ -1070,6 +1070,52 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
     "direzioni": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Arabdict Italian-Arabic: https://www.arabdict.com/fr/italian-arabic/direzione; Patente.it Codice della Strada, art. 40: https://www.patente.it/normativa/articolo-40-cds?idc=299; Reverso Context Italian-Arabic: https://context.reverso.net/%D8%A7%D9%84%D8%AA%D8%B1%D8%AC%D9%85%D8%A9/%D8%A7%D9%84%D8%A5%D9%8A%D8%B7%D8%A7%D9%84%D9%8A%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9/direzione; full paired contexts: /workspace/patente_b_dictionary_audit/batch18_inputs/batch18_direzioni.json",
 })
 
+# Batch-nineteen source-backed corrections and unchanged-gloss confirmations.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "trova": (
+        "يوجد؛ يقع (في صيغة si trova)",
+        "contextual_translation",
+        "108 question-token occurrences in 107 distinct paired question contexts and no lesson matches. The reviewed uses are principally si trova = exists/is situated, not the imperative ‘search’; questions 21814, 21429 and 22838 show the location/state sense. Reverso, Glosbe and Treccani support يجد/يوجد/يقع according to context; the gloss explicitly scopes the two Arabic equivalents to si trova.",
+    ),
+    "preavvisa": (
+        "يُنبّه مسبقًا / يُشير مسبقًا إلى",
+        "contextual_translation",
+        "84 question-token occurrences in 84 distinct paired question contexts and no lesson matches. In the traffic-sign contexts the sign informs or points to an upcoming border, turn, roadworks, signal or prohibition, not invariably a danger warning. Treccani defines preavvisare as informing beforehand and Reverso supports the advance-notice element.",
+    ),
+    "indossare": (
+        "ارتداء",
+        "contextual_translation",
+        "18 lemma-family tokens across 17 paired question records (indossare 10, indossato 3, indossando 1, indossate 2, indossa 2), plus 2 lesson-text occurrences in one record (u7-l5: summaryIt and quickChecks[2].qIt, both indossato). The current machine gloss البس is imperative; the reviewed infinitive and inflected contexts describe wearing/putting on and support ارتداء / يرتدي. Reverso and Glosbe Italian-Arabic examples support the wearing sense.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "trova": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Context Italian-Arabic, si trova: https://context.reverso.net/traduzione/italiano-arabo/si+trova; Glosbe, trovare: https://glosbe.com/it/ar/trovare; Treccani, trovare: https://www.treccani.it/vocabolario/trovare/; full official-question context corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+    "preavvisa": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Context Italian-Arabic, preavviso: https://context.reverso.net/traduzione/italiano-arabo/preavviso; Treccani, preavvisare: https://www.treccani.it/vocabolario/preavvisare/; full official-question context corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+    "indossare": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Context Italian-Arabic, indossare: https://context.reverso.net/traduzione/italiano-arabo/indossare; Glosbe Italian-Arabic, indossare: https://it.glosbe.com/it/ar/indossare; official question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS.update({
+    "vietata": (
+        "ممنوع",
+        "contextual_translation",
+        "91 question-token occurrences in 90 distinct paired question contexts and no lesson matches. The reviewed contexts use vietata for prohibited/forbidden road actions or access; Reverso Italian-Arabic and Treccani's vietare entry support the existing general gloss ممنوع. Existing gloss confirmed unchanged.",
+    ),
+    "proseguire": (
+        "تابع",
+        "contextual_translation",
+        "88 question-token occurrences in 88 distinct paired question contexts plus 2 lesson-text occurrences across 2 lesson records. Every reviewed app use means continue/proceed; Reverso Italian-Arabic and Treccani support the verb sense. Existing gloss confirmed unchanged for the reviewed contexts.",
+    ),
+    "tonnellate": (
+        "أطنان",
+        "contextual_translation",
+        "80 question-token occurrences in 79 distinct paired question contexts and no lesson matches. The reviewed uses refer to vehicle or vehicle-load mass; Reverso Italian-Arabic and Treccani support the tonne/ton sense. Existing plural gloss confirmed unchanged.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
+    "vietata": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Reverso Context Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/vietata; Treccani, vietare: https://www.treccani.it/vocabolario/vietare/; full official-question context corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+    "proseguire": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Reverso Italian-Arabic: https://context.reverso.net/%D8%A7%D9%84%D8%AA%D8%B1%D8%AC%D9%85%D8%A9/%D8%A7%D9%84%D8%A5%D9%8A%D8%B7%D8%A7%D9%84%D9%8A%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9/proseguire; Treccani: https://www.treccani.it/vocabolario/proseguire/; full official-question context corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+    "tonnellate": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Reverso Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/tonnellata; Treccani: https://www.treccani.it/vocabolario/tonnellata/; full official-question context corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 

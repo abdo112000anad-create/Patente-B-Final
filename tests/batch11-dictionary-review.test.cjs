@@ -59,12 +59,12 @@ test('batch eleven confirms five supported glosses and retains three uncertain t
   };
 
   assert.equal(questionsIt.count, 7020);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 48);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 77);
-  assert.equal(dictionary.metadata.review_required_entries, 5128);
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5128);
-  assert.equal(dictionary.metadata.counts_by_status.machine_draft_needs_review, 5085);
-  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 208);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 51);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 80);
+  assert.equal(dictionary.metadata.review_required_entries, 5122);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5122);
+  assert.equal(dictionary.metadata.counts_by_status.machine_draft_needs_review, 5079);
+  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 214);
 
   for (const [word, item] of Object.entries(expected)) {
     const row = byWord.get(word);
