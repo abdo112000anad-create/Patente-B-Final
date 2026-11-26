@@ -31,6 +31,7 @@ import {isQuickCheckDue, quickCheckId, scheduleQuickCheckAnswer} from './quick-c
 import {createLessonAccess, FREE_LESSON_COUNT} from './lesson-access.mjs';
 import {createAccountService} from './firebase-account.mjs';
 import {initializeAccountUI} from './account-ui.mjs';
+import {initializeWelcomeAccount} from './welcome-account.mjs';
 import {firebaseConfig} from './firebase-config.mjs';
 import {referenceData} from './reference-data.mjs';
 import {renderReferencePage} from './reference-pages.mjs';
@@ -859,7 +860,8 @@ async function boot(){
     initializeProgressBackup({readState:()=>state,replaceState:next=>{const active=state.activeQuiz;Object.assign(state,next);state.activeQuiz=active;applyFontSize();applyThemeMode();return persistState();},getContext:()=>({questionIds:new Set(questions.map(q=>Number(q.id))),lessonKeys:progressLessonKeys(),sourceCheckIds:new Set(lessonModules.flatMap(m=>m.lessons.map(l=>l.source_check?.id).filter(Boolean))),topics:new Set(Object.keys(topicLabels))}),onImported:()=>{applyLanguageOrder();render('home')}});
     accountService=createAccountService({firebaseConfig,getState:()=>state,replaceState:applySyncedProgress,getContext:()=>({questionIds:new Set(questions.map(q=>Number(q.id))),lessonKeys:progressLessonKeys(),sourceCheckIds:new Set(lessonModules.flatMap(m=>m.lessons.map(l=>l.source_check?.id).filter(Boolean))),topics:new Set(Object.keys(topicLabels))}),onOwnerChanged:setStudyOwner,getGuestState:()=>loadState(stateKey),onAccountDeleted:uid=>{const key=`patente-ar-account-v1:${uid}`;if(activeStateKey===key)setStudyOwner(null,{discardCurrent:true});try{localStorage.removeItem(key);}catch{}}});
     initializeAccountUI({service:accountService});
-    render('home');window.dispatchEvent(new Event('patente:ready'));requestOfflineContentCache();try{if(localStorage.getItem(welcomeKey)!=='1'&&welcomeDialog&&!welcomeDialog.open)welcomeDialog.showModal();}catch{if(welcomeDialog&&!welcomeDialog.open)welcomeDialog.showModal();}
+    const welcomeAccount=initializeWelcomeAccount({service:accountService,dialog:welcomeDialog,button:document.querySelector('#welcomeGoogle'),note:document.querySelector('#welcomeGoogleNote')});
+    render('home');window.dispatchEvent(new Event('patente:ready'));requestOfflineContentCache();try{if(localStorage.getItem(welcomeKey)!=='1'&&!welcomeAccount.isSignedIn()&&welcomeDialog&&!welcomeDialog.open)welcomeDialog.showModal();}catch{if(!welcomeAccount.isSignedIn()&&welcomeDialog&&!welcomeDialog.open)welcomeDialog.showModal();}
   }catch(error){window.dispatchEvent(new Event('patente:failed'));console.error(error);main.innerHTML=`<div class="empty-state"><strong>${pair('Unable to load the course','تعذّر تحميل المنهج')}</strong><p>${esc(error.message)}</p><button class="quiet-button" data-action="reload">${controlLabel('Try again','أعد المحاولة')}</button></div>`;}
 }
 registerServiceWorker();boot();

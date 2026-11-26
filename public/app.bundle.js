@@ -46175,7 +46175,8 @@ This typically indicates that your device does not have a healthy Internet conne
     confirmDelete: "نعم، احذف الحساب نهائيًا",
     cancel: "إلغاء",
     offline: "يمكنك متابعة الدراسة محليًا دون حساب. الحساب اختياري ولا يمنع الدروس.",
-    privacy: "في نسخة الاختبار المحلية، تسجيل الدخول والمزامنة مع Firebase معطّلان؛ لا تُرسل بيانات حساب إلى Firebase. يبقى تقدمك على هذا الجهاز ويمكنك نسخه احتياطيًا محليًا. لا توجد إعلانات حية.",
+    privacyConfigured: "الحساب اختياري. عند تسجيل الدخول، قد تُرسل بيانات الحساب والتقدم إلى Firebase للمزامنة. يمكنك أيضًا الدراسة محليًا ونسخ التقدم احتياطيًا.",
+    privacyUnavailable: "تسجيل الدخول والمزامنة غير مهيّأين في هذا البناء. يبقى تقدمك على هذا الجهاز ويمكنك نسخه احتياطيًا محليًا.",
     free: "أنت تستخدم التطبيق دون حساب؛ يُحفظ التقدم محليًا على هذا الجهاز."
   };
   function element(tag, attrs = {}, text2 = "") {
@@ -46187,6 +46188,9 @@ This typically indicates that your device does not have a healthy Internet conne
     }
     if (text2) node.textContent = text2;
     return node;
+  }
+  function accountPrivacyMessage(isConfigured) {
+    return LABEL.offline + " " + (isConfigured === false ? LABEL.privacyUnavailable : LABEL.privacyConfigured);
   }
   function initializeAccountUI({ service } = {}) {
     if (!service || typeof service.subscribe !== "function") throw new TypeError("account service with subscribe() is required");
@@ -46215,7 +46219,7 @@ This typically indicates that your device does not have a healthy Internet conne
     const register = element("button", { type: "button", className: "quiet-button account-action" }, LABEL.register);
     const reset = element("button", { type: "button", className: "quiet-button account-action" }, LABEL.reset);
     form.append(emailLabel, passLabel, login, register, reset);
-    const explanation = element("p", { className: "account-privacy" }, LABEL.offline + " " + LABEL.privacy);
+    const explanation = element("p", { className: "account-privacy" }, accountPrivacyMessage(service.isConfigured));
     const actions = element("div", { className: "account-actions" });
     const confirmed = element("div", { className: "account-delete-confirm", hidden: true });
     const confirmText = element("p", {}, "سيُحذف حساب Firebase وتقدمه السحابي ونسخة الحساب المحلية على هذا الجهاز. يبقى تقدم الزائر منفصلًا، ولا تُمسح تلقائيًا النسخ المحلية في الأجهزة الأخرى. لا يمكن التراجع عن الحذف السحابي.");
@@ -46266,7 +46270,7 @@ This typically indicates that your device does not have a healthy Internet conne
       } else {
         detail.append(element("p", {}, LABEL.free));
         detail.append(element("p", { className: "account-sync-state" }, state2.phase === "offline" ? "أنت غير متصل؛ ستبقى الدراسة محلية." : "الحساب اختياري؛ لا يلزم لتعلّم الدروس."));
-        if (service.isConfigured === false) detail.append(element("p", { className: "account-sync-state" }, "تسجيل الدخول والمزامنة غير متاحين في نسخة الاختبار المحلية."));
+        if (service.isConfigured === false) detail.append(element("p", { className: "account-sync-state" }, "تسجيل الدخول والمزامنة غير متاحين لأن إعداد Firebase غير متوفر في هذا البناء."));
       }
       announce(state2.message || "");
       if (busy) allButtons().forEach((control) => {
@@ -46330,6 +46334,49 @@ This typically indicates that your device does not have a healthy Internet conne
       trigger.remove();
       dialog.remove();
     } };
+  }
+
+  // src/welcome-account.mjs
+  var configuredNote = "Puoi continuare con Google o studiare come ospite. يمكنك المتابعة باستخدام Google أو الدراسة كضيف.";
+  var unavailableNote = "Accesso non configurato in questa build. تسجيل الدخول غير مهيّأ في هذا البناء.";
+  var workingNote = "Accesso in corso… جارٍ تسجيل الدخول…";
+  var verifyingNote = "Richiesta inviata; verifica dell’account… أُرسِل طلب الدخول؛ جارٍ التحقق من الحساب…";
+  function initializeWelcomeAccount({ service, dialog, button, note }) {
+    if (!service || !dialog || !button || !note) return { isSignedIn: () => false, destroy() {
+    } };
+    let busy = false;
+    let signedIn = false;
+    function render2(state2 = {}) {
+      signedIn = !!state2.user;
+      button.disabled = busy || !service.isConfigured || signedIn;
+      button.hidden = signedIn;
+      if (!busy) note.textContent = service.isConfigured ? configuredNote : unavailableNote;
+      if (signedIn && dialog.open) dialog.close();
+    }
+    const unsubscribe = service.subscribe(render2);
+    async function signIn() {
+      if (busy || !service.isConfigured || signedIn) return;
+      busy = true;
+      button.disabled = true;
+      note.textContent = workingNote;
+      try {
+        await service.signInGoogle();
+        if (!signedIn) note.textContent = verifyingNote;
+      } catch (error) {
+        note.textContent = error instanceof Error ? error.message : "تعذر تسجيل الدخول. يمكنك المحاولة مجددًا أو المتابعة كضيف.";
+      } finally {
+        busy = false;
+        button.disabled = !service.isConfigured || signedIn;
+      }
+    }
+    button.addEventListener("click", signIn);
+    return {
+      isSignedIn: () => signedIn,
+      destroy() {
+        unsubscribe == null ? void 0 : unsubscribe();
+        button.removeEventListener("click", signIn);
+      }
+    };
   }
 
   // src/firebase-config.mjs
@@ -48676,13 +48723,14 @@ This typically indicates that your device does not have a healthy Internet conne
         }
       } });
       initializeAccountUI({ service: accountService });
+      const welcomeAccount = initializeWelcomeAccount({ service: accountService, dialog: welcomeDialog, button: document.querySelector("#welcomeGoogle"), note: document.querySelector("#welcomeGoogleNote") });
       render("home");
       window.dispatchEvent(new Event("patente:ready"));
       requestOfflineContentCache();
       try {
-        if (localStorage.getItem(welcomeKey) !== "1" && welcomeDialog && !welcomeDialog.open) welcomeDialog.showModal();
+        if (localStorage.getItem(welcomeKey) !== "1" && !welcomeAccount.isSignedIn() && welcomeDialog && !welcomeDialog.open) welcomeDialog.showModal();
       } catch {
-        if (welcomeDialog && !welcomeDialog.open) welcomeDialog.showModal();
+        if (!welcomeAccount.isSignedIn() && welcomeDialog && !welcomeDialog.open) welcomeDialog.showModal();
       }
     } catch (error) {
       window.dispatchEvent(new Event("patente:failed"));

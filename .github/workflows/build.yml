@@ -26,12 +26,13 @@ jobs:
           npm ci
           npm run build
           npm test
-      - name: Sync Capacitor and build debug APK
+      - name: Sync Capacitor
         run: |
           npx cap sync android
-          cd android
-          chmod +x gradlew
-          ./gradlew --no-daemon :app:assembleDebug :app:testDebugUnitTest
+      - name: Build debug APK with matching signing key
+        env:
+          PATENTE_DEBUG_KEYSTORE_B64: ${{ secrets.PATENTE_DEBUG_KEYSTORE_B64 }}
+        run: bash scripts/ci-assemble-debug.sh
       - name: Verify Android TTS service is declared
         run: |
           merged_manifest="$(find android/app/build/intermediates -type f -name AndroidManifest.xml -path '*/merged_manifest*/debug/*' -print -quit)"

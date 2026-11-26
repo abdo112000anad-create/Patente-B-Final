@@ -6,7 +6,8 @@ const LABEL = {
   verify: 'إرسال رسالة التحقق', signout: 'تسجيل الخروج', delete: 'حذف الحساب',
   confirmDelete: 'نعم، احذف الحساب نهائيًا', cancel: 'إلغاء',
   offline: 'يمكنك متابعة الدراسة محليًا دون حساب. الحساب اختياري ولا يمنع الدروس.',
-  privacy: 'في نسخة الاختبار المحلية، تسجيل الدخول والمزامنة مع Firebase معطّلان؛ لا تُرسل بيانات حساب إلى Firebase. يبقى تقدمك على هذا الجهاز ويمكنك نسخه احتياطيًا محليًا. لا توجد إعلانات حية.',
+  privacyConfigured: 'الحساب اختياري. عند تسجيل الدخول، قد تُرسل بيانات الحساب والتقدم إلى Firebase للمزامنة. يمكنك أيضًا الدراسة محليًا ونسخ التقدم احتياطيًا.',
+  privacyUnavailable: 'تسجيل الدخول والمزامنة غير مهيّأين في هذا البناء. يبقى تقدمك على هذا الجهاز ويمكنك نسخه احتياطيًا محليًا.',
   free: 'أنت تستخدم التطبيق دون حساب؛ يُحفظ التقدم محليًا على هذا الجهاز.'
 };
 
@@ -19,6 +20,10 @@ function element(tag, attrs = {}, text = '') {
   }
   if (text) node.textContent = text;
   return node;
+}
+
+export function accountPrivacyMessage(isConfigured) {
+  return LABEL.offline + ' ' + (isConfigured === false ? LABEL.privacyUnavailable : LABEL.privacyConfigured);
 }
 
 export function initializeAccountUI({ service } = {}) {
@@ -48,7 +53,7 @@ export function initializeAccountUI({ service } = {}) {
   const register = element('button', { type: 'button', className: 'quiet-button account-action' }, LABEL.register);
   const reset = element('button', { type: 'button', className: 'quiet-button account-action' }, LABEL.reset);
   form.append(emailLabel, passLabel, login, register, reset);
-  const explanation = element('p', { className: 'account-privacy' }, LABEL.offline + ' ' + LABEL.privacy);
+  const explanation = element('p', { className: 'account-privacy' }, accountPrivacyMessage(service.isConfigured));
   const actions = element('div', { className: 'account-actions' });
   const confirmed = element('div', { className: 'account-delete-confirm', hidden: true });
   const confirmText = element('p', {}, 'سيُحذف حساب Firebase وتقدمه السحابي ونسخة الحساب المحلية على هذا الجهاز. يبقى تقدم الزائر منفصلًا، ولا تُمسح تلقائيًا النسخ المحلية في الأجهزة الأخرى. لا يمكن التراجع عن الحذف السحابي.');
@@ -94,7 +99,7 @@ export function initializeAccountUI({ service } = {}) {
     } else {
       detail.append(element('p', {}, LABEL.free));
       detail.append(element('p', { className: 'account-sync-state' }, state.phase === 'offline' ? 'أنت غير متصل؛ ستبقى الدراسة محلية.' : 'الحساب اختياري؛ لا يلزم لتعلّم الدروس.'));
-      if (service.isConfigured === false) detail.append(element('p', { className: 'account-sync-state' }, 'تسجيل الدخول والمزامنة غير متاحين في نسخة الاختبار المحلية.'));
+      if (service.isConfigured === false) detail.append(element('p', { className: 'account-sync-state' }, 'تسجيل الدخول والمزامنة غير متاحين لأن إعداد Firebase غير متوفر في هذا البناء.'));
     }
     announce(state.message || '');
     if (busy) allButtons().forEach(control => { control.disabled = true; });
