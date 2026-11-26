@@ -46379,6 +46379,48 @@ This typically indicates that your device does not have a healthy Internet conne
 
   // src/lesson-visuals.mjs
   var xml = (value) => String(value ?? "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" })[ch]);
+  var prioritySvg = `<svg class="lesson-svg" viewBox="0 0 800 600" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); border-radius: 20px;">
+  <defs>
+    <linearGradient id="road" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#334155"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+    <linearGradient id="carGreen" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#34d399"/><stop offset="100%" stop-color="#047857"/></linearGradient>
+    <linearGradient id="carOrange" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#b45309"/></linearGradient>
+    <filter id="shadow3d" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="20" stdDeviation="15" flood-color="#000" flood-opacity="0.9"/></filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="6" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>
+      @keyframes driveOrange { 0% { transform: translate(0, 0); } 80% { transform: translate(200px, 0); } 100% { transform: translate(200px, 0); } }
+      @keyframes driveGreen { 0% { transform: translate(0, 0); } 40% { transform: translate(0, -200px); } 100% { transform: translate(0, -200px); } }
+      @keyframes pulseArrow { 0%, 100% { opacity: 0.3; stroke-width: 6; } 50% { opacity: 1; stroke-width: 10; } }
+      .car-anim-orange { animation: driveOrange 4s infinite; }
+      .car-anim-green { animation: driveGreen 4s infinite; }
+      .arrow-pulse { animation: pulseArrow 1.5s infinite; }
+    </style>
+  </defs>
+  <g transform="matrix(0.866, 0.5, -0.866, 0.5, 400, 100)">
+    <rect x="-250" y="-250" width="500" height="500" fill="url(#road)" stroke="#475569" stroke-width="4" rx="30"/>
+    <line x1="-250" y1="0" x2="250" y2="0" stroke="#94a3b8" stroke-width="8" stroke-dasharray="20 20" opacity="0.5"/>
+    <line x1="0" y1="-250" x2="0" y2="250" stroke="#94a3b8" stroke-width="8" stroke-dasharray="20 20" opacity="0.5"/>
+  </g>
+  <text x="150" y="350" fill="#94a3b8" font-size="18" font-weight="bold" transform="rotate(-30, 150, 350)">STRADA PRINCIPALE</text>
+  <text x="600" y="150" fill="#94a3b8" font-size="18" font-weight="bold" transform="rotate(30, 600, 150)">STRADA SECONDARIA</text>
+  <g class="car-anim-orange" transform="translate(250, 350)">
+    <g filter="url(#shadow3d)" transform="matrix(0.866, 0.5, -0.866, 0.5, 0, 0)">
+      <path d="M 0 0 L 80 0 L 90 20 L 80 40 L 0 40 L -10 20 Z" fill="url(#carOrange)"/>
+      <path d="M 10 0 L 30 -20 L 60 -20 L 80 0 Z" fill="#fde68a"/>
+      <circle cx="20" cy="40" r="12" fill="#000"/><circle cx="70" cy="40" r="12" fill="#000"/>
+    </g>
+  </g>
+  <g class="car-anim-green" transform="translate(550, 250)">
+    <g filter="url(#shadow3d)" transform="matrix(0.866, 0.5, -0.866, 0.5, 0, 0)">
+      <path d="M 0 0 L 80 0 L 90 20 L 80 40 L 0 40 L -10 20 Z" fill="url(#carGreen)"/>
+      <path d="M 10 0 L 30 -20 L 60 -20 L 80 0 Z" fill="#a7f3d0"/>
+      <circle cx="20" cy="40" r="12" fill="#000"/><circle cx="70" cy="40" r="12" fill="#000"/>
+    </g>
+  </g>
+  <g transform="translate(400, 250)">
+    <path d="M 100 0 L -100 0" stroke="#10b981" stroke-width="8" fill="none" filter="url(#glow)" class="arrow-pulse" marker-end="url(#arrowhead)"/>
+    <defs><marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#10b981" /></marker></defs>
+  </g>
+</svg>`;
   var lessonVisuals = {
     "u1-l1": ["road", "Parti della strada", "أجزاء الطريق"],
     "u1-l2": ["vehicle", "Categorie di veicoli", "فئات المركبات"],
@@ -46531,6 +46573,9 @@ This typically indicates that your device does not have a healthy Internet conne
     const prefix = id.replace(/[^a-zA-Z0-9_-]/g, "-");
     const title = (lesson == null ? void 0 : lesson.titleIt) || (lesson == null ? void 0 : lesson.heading_it) || labelIt;
     const description = `${labelIt} — ${labelAr}`;
+    if (id === "u4-l1") {
+      return `<figure class="lesson-svg-figure${compact ? " is-compact" : ""}" data-lesson-visual="${xml(id)}">${prioritySvg}${compact ? "" : `<figcaption><span lang="it" dir="ltr">${xml(labelIt)}</span><span lang="ar" dir="rtl">${xml(labelAr)}</span></figcaption>`}</figure>`;
+    }
     const illustration = artwork(theme, prefix).replaceAll("url(#shadow)", `url(#${prefix}-shadow)`).replaceAll("url(#glass)", `url(#${prefix}-glass)`);
     return `<figure class="lesson-svg-figure${compact ? " is-compact" : ""}" data-lesson-visual="${xml(id)}"><svg class="lesson-svg" viewBox="0 0 760 320" width="760" height="320" font-family="sans-serif" role="img" aria-labelledby="${prefix}-title ${prefix}-desc" focusable="false" xmlns="http://www.w3.org/2000/svg"><title id="${prefix}-title">${xml(title)} · ${xml(labelAr)}</title><desc id="${prefix}-desc">${xml(description)}</desc>${defs(prefix)}<rect x="1" y="1" width="758" height="318" rx="24" fill="url(#${prefix}-bg)" stroke="#38566b" stroke-width="2"/><circle cx="662" cy="144" r="118" fill="url(#${prefix}-glow)"/><text x="30" y="35" fill="#89a9bb" font-size="10" font-weight="800" letter-spacing="1.5">PATENTE B · LEZIONE VISIVA</text><text x="30" y="64" fill="#f1f7fa" font-size="17" font-weight="800">${xml(labelIt)}</text><text x="730" y="63" fill="#8ee9d4" font-size="15" font-weight="700" text-anchor="end" direction="rtl" unicode-bidi="plaintext">${xml(labelAr)}</text>${illustration}</svg>${compact ? "" : `<figcaption><span lang="it" dir="ltr">${xml(labelIt)}</span><span lang="ar" dir="rtl">${xml(labelAr)}</span></figcaption>`}</figure>`;
   }

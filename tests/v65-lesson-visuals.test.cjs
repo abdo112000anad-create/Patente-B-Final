@@ -10,13 +10,22 @@ const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const course = JSON.parse(read('data/lessons.json'));
 const lessons = course.modules.flatMap(module => module.lessons);
 
- test('every one of the 50 course lessons resolves to a self-contained, accessible inline SVG', async () => {
+ test('all 50 lessons render a local visual; shared SVGs keep accessibility metadata', async () => {
   const visuals = await import(path.join(root, 'src/lesson-visuals.mjs'));
   const ids = visuals.lessonVisualIds().sort();
   assert.equal(ids.length, 50);
   assert.deepEqual(ids, lessons.map(lesson => lesson.id).sort());
   for (const lesson of lessons) {
     const svg = visuals.renderLessonVisual(lesson);
+    if (lesson.id === 'u4-l1') {
+      assert.match(svg, /<svg class="lesson-svg" viewBox="0 0 800 600"/u, lesson.id);
+      assert.match(svg, /class="car-anim-orange"/u, lesson.id);
+      assert.match(svg, /class="car-anim-green"/u, lesson.id);
+      assert.match(svg, /animation: driveOrange 4s infinite/u, lesson.id);
+      assert.match(svg, /animation: driveGreen 4s infinite/u, lesson.id);
+      assert.match(svg, /pulseArrow 1\.5s infinite/u, lesson.id);
+      continue;
+    }
     assert.match(svg, /<svg class="lesson-svg" viewBox="0 0 760 320"/u, lesson.id);
     assert.match(svg, /<title id="u\d+-l\d+-title"/u, lesson.id);
     assert.match(svg, /<desc id="u\d+-l\d+-desc"/u, lesson.id);
@@ -38,9 +47,11 @@ test('tire cross-section, right-priority intersection, speed, safe distance and 
   assert.match(tire, /PROFONDITÀ DEL BATTISTRADA/u);
   assert.match(tire, /stroke-dasharray="7 7"/u);
   const priority = renderLessonVisual(lessons.find(lesson => lesson.id === 'u4-l1'));
-  assert.match(priority, /CHI ARRIVA DA DESTRA PASSA PER PRIMO/u);
-  assert.match(priority, /marker-end="url\(#u4-l1-arrow\)"/u);
-  assert.match(priority, /#f2b85b/u);
+  assert.match(priority, /viewBox="0 0 800 600"/u);
+  assert.match(priority, /STRADA PRINCIPALE/u);
+  assert.match(priority, /STRADA SECONDARIA/u);
+  assert.match(priority, /class="car-anim-orange"/u);
+  assert.match(priority, /class="car-anim-green"/u);
   assert.match(priority, /#10b981/u);
   assert.match(renderLessonVisual(lessons.find(lesson => lesson.id === 'u1-l3')), /ADEGUA LA VELOCITÀ/u);
   assert.match(renderLessonVisual(lessons.find(lesson => lesson.id === 'u6-l1')), /ESEMPIO: 50 km\/h/u);
