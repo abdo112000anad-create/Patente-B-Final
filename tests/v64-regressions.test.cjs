@@ -59,8 +59,8 @@ test('versioned build accepts already-current asset URLs and service worker neve
   const index = read('index.html');
   assert.match(build, /if \(!pattern\.test\(index\)\) throw new Error/u);
   assert.doesNotMatch(build, /next === index/u);
-  assert.match(index, /href="\/manifest\.webmanifest\?v=64"/u);
-  assert.match(sw, /const CACHE_NAME = 'patente-ar-v65-/u);
+  assert.match(index, /href="\/manifest\.webmanifest\?v=66"/u);
+  assert.match(sw, /const CACHE_NAME = 'patente-ar-v66-/u);
   assert.match(sw, /const cached = await cachedResponse\(cache, request\)/u);
   assert.doesNotMatch(sw, /caches\.match\(\s*request/u);
   assert.match(sw, /key\.startsWith\('patente-ar-'\)\s*&&\s*key !== CACHE_NAME/u);

@@ -5,7 +5,7 @@
   cross-origin-opener-policy: same-origin-allow-popups
   permissions-policy: camera=(), geolocation=(), microphone=()
   x-frame-options: DENY
-  x-app-version: 65
+  x-app-version: 66
   cache-control: no-cache
 
 /manifest.webmanifest

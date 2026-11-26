@@ -1,6 +1,6 @@
-# Patente B بالعربي — v65
+# Patente B بالعربي — v66
 
-تطبيق Capacitor لتعلّم منهج رخصة القيادة الإيطالية B بالإيطالية مع شرح وترجمة عربية. رقم Android لهذه النسخة هو `versionCode 65` (`65.0.0`). تحافظ النسخة على المنهج المحدّث ذي 50 درسًا، وتضم رسوماً تعليمية SVG داخلية لكل درس، وتحوّل تشغيل الصوت في تطبيق Android إلى محرك تحويل النص إلى كلام الذي اختاره نظام الهاتف.
+تطبيق Capacitor لتعلّم منهج رخصة القيادة الإيطالية B بالإيطالية مع شرح وترجمة عربية. رقم Android لهذه النسخة هو `versionCode 66` (`66.0.0`). تحافظ النسخة على المنهج المحدّث ذي 50 درسًا، وتضم رسوماً تعليمية SVG داخلية لكل درس، وتحوّل تشغيل الصوت في تطبيق Android إلى محرك تحويل النص إلى كلام الذي اختاره نظام الهاتف.
 
 ## الصوت والترجمة
 
@@ -18,4 +18,4 @@ npm test
 bash ./scripts/build-android.sh
 ```
 
-ينتج البناء المحلي APK تشخيصيًا موقّعًا بمفتاح debug، وليس حزمة نشر Play موقعة. يرفع GitHub Actions الـ APK كـ artifact باسم `patente-b-v65-debug-apk` بعد نجاح اختبارات JavaScript وAndroid والتحقق من إعلان خدمة TTS في manifest. يتضمن هذا المصدر إضافة Android الأصلية في `native/android/src/main/java/it/patenteb/sideload/v29/NativeTtsPlugin.java`؛ ينسخها سكربت البناء إلى مشروع Android قبل التجميع.
+ينتج البناء المحلي APK تشخيصيًا موقّعًا بمفتاح debug، وليس حزمة نشر Play موقعة. يرفع GitHub Actions الـ APK كـ artifact باسم `patente-b-v66-debug-apk` بعد نجاح اختبارات JavaScript وAndroid والتحقق من إعلان خدمة TTS في manifest. يتضمن هذا المصدر إضافة Android الأصلية في `native/android/src/main/java/it/patenteb/sideload/v29/NativeTtsPlugin.java`؛ ينسخها سكربت البناء إلى مشروع Android قبل التجميع.

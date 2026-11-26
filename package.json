@@ -1,6 +1,6 @@
 {
   "name": "patente-b-bilingual",
-  "version": "65.0.0",
+  "version": "66.0.0",
   "private": true,
   "scripts": {
     "build": "node scripts/build-pwa.cjs",
