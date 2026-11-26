@@ -13,7 +13,7 @@ const SECURITY_HEADERS = makeSecurityHeaders(fs.readFileSync(path.join(DIST, 'in
 const PORT = Number(process.env.PORT || 3000);
 const PUBLIC_FILES = new Set(['favicon.svg', 'app-icon-192.png', 'app-icon-512.png', 'app-icon-maskable-512.png', 'manifest.webmanifest', 'sw.js', 'manus-routes.json', 'offline-assets.json', 'app.bundle.js', 'release.json', 'runtime-config.js']);
 const STATIC_SOURCE_FILES = new Set(['app.js', 'styles.css', 'rebuild.css', 'v24.css', 'progress-backup.mjs', 'session-recovery.mjs', 'startup.mjs', 'boot-guard.js', 'account-ui.css', 'theme-dark.css', 'v29-theme.css', 'refactor-v38.css', 'v40-audio.css', 'v50-contrast.css', 'v52-dark-overhaul.css', 'v53-mobile-nav.css', 'v57-learning-path.css', 'v64-ui-fixes.css']);
-const STATIC_DATA_FILES = new Set(['questions.json', 'lessons.json', 'lesson-support.json', 'topic-labels.json', 'similar-groups.json', 'italian_arabic_dictionary_lookup.json']);
+const STATIC_DATA_FILES = new Set(['questions.json', 'lessons.json', 'lessons-v2.json', 'lesson-support.json', 'topic-labels.json', 'similar-groups.json', 'italian_arabic_dictionary_lookup.json']);
 const STATIC_FONT_FILES = new Set(['Cairo-Variable.ttf', 'OFL.txt']);
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8',

@@ -16,7 +16,7 @@ test('batch eleven confirms five supported glosses and retains three uncertain t
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const questionsIt = json('data/questions.it.json');
   const questionsAr = json('data/questions.json');
-  const lessons = json('data/lessons.json');
+  const lessons = json('data/lessons-v2.json');
   const byWord = new Map(dictionary.entries.map(row => [row.word, row]));
   const italianQuestions = new Map(questionsIt.questions.map(row => [row.id, row]));
   const arabicQuestions = new Map(questionsAr.questions.map(row => [row.id, row]));
@@ -29,7 +29,7 @@ test('batch eleven confirms five supported glosses and retains three uncertain t
       for (const lesson of module.lessons || []) {
         const fields = [lesson.titleIt, lesson.summaryIt, lesson.trapWord];
         for (const item of lesson.keyPoints || []) fields.push(item?.it);
-        for (const item of lesson.quickCheck || []) fields.push(item?.qIt);
+        for (const item of lesson.quickChecks || []) fields.push(item?.qIt);
         const hits = fields.reduce((sum, value) => sum + exactCount(value, word), 0);
         occurrences += hits;
         if (hits) records += 1;

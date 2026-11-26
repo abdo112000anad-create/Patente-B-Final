@@ -9,11 +9,17 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
       controller.abort();
     }, timeoutMs);
   });
-  const paths = ['/data/questions.json', '/data/lessons.json', '/data/topic-labels.json', '/data/similar-groups.json', '/data/lesson-support.json'];
-  const requests = Promise.all(paths.map(async path => {
+  const fetchJsonFile = async path => {
     const response = await fetchImpl(path, {signal: controller.signal, credentials: 'same-origin', cache: 'no-store'});
     if (response.headers.get('cf-mitigated') === 'challenge' || response.status === 403) {
-      throw new Error('La protezione del sito ha bloccato un file. Completa la verifica e riprova. / حجبت حماية الموقع أحد الملفات. أكمل التحقق ثم أعد المحاولة.');
+      const error = new Error('La protezione del sito ha bloccato un file. Completa la verifica e riprova. / حجبت حماية الموقع أحد الملفات. أكمل التحقق ثم أعد المحاولة.');
+      error.code = 'course_challenge';
+      throw error;
+    }
+    if (response.status === 404) {
+      const error = new Error(`File del corso non disponibile (HTTP ${response.status}). / ملف المنهج غير متاح (HTTP ${response.status}).`);
+      error.code = 'course_endpoint_unavailable';
+      throw error;
     }
     if (!response.ok) throw new Error(`File del corso non disponibile (HTTP ${response.status}). / ملف المنهج غير متاح (HTTP ${response.status}).`);
     if (!/^(application\/(?:[a-z0-9.+-]*\+)?json)(?:\s*;|$)/i.test(response.headers.get('content-type') || '')) {
@@ -26,7 +32,22 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
       if (controller.signal.aborted) throw error;
       throw new Error('Dati del corso non validi. Riprova tra poco. / بيانات المنهج غير صالحة. أعد المحاولة بعد قليل.');
     }
-  }));
+  };
+  const fetchLessons = async () => {
+    try {
+      return await fetchJsonFile('/data/lessons-v2.json');
+    } catch (error) {
+      if (error.code !== 'course_endpoint_unavailable' && (error.code || error.name !== 'TypeError')) throw error;
+      return fetchJsonFile('/data/lessons.json');
+    }
+  };
+  const requests = Promise.all([
+    fetchJsonFile('/data/questions.json'),
+    fetchLessons(),
+    fetchJsonFile('/data/topic-labels.json'),
+    fetchJsonFile('/data/similar-groups.json'),
+    fetchJsonFile('/data/lesson-support.json')
+  ]);
   try {
     const loaded = await Promise.race([requests, timeout]);
     const [bankFile, lessonFile, labelsFile, similarFile, supportFile] = loaded;
@@ -45,7 +66,11 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
       error.code = 'course_integrity';
       throw error;
     }
-    const lessonKeys = 'id,titleIt,titleAr,summaryIt,summaryAr,keyPoints,trapWord,quickCheck';
+    const lessonKeys = {
+      legacy: 'id,titleIt,titleAr,summaryIt,summaryAr,keyPoints,trapWord,quickCheck',
+      canonical: 'id,titleIt,titleAr,summaryIt,summaryAr,keyPoints,trapWord,quickChecks'
+    };
+    const legacyLessonPayload = lessonFile.path === '/data/lessons.json';
     const pointKeys = 'it,ar';
     const trapWordKeys = 'word,reasonAr';
     const quickCheckKeys = 'qIt,a,explainAr';
@@ -61,10 +86,16 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
         const lesson = module.lessons[index];
         const expectedId = `u${module.order_hint}-l${index + 1}`;
         const validTrapWord = lesson?.trapWord === null || (lesson?.trapWord && typeof lesson.trapWord === 'object' && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(',') === trapWordKeys && typeof lesson.trapWord.word === 'string' && lesson.trapWord.word.trim() && typeof lesson.trapWord.reasonAr === 'string' && lesson.trapWord.reasonAr.trim());
-        const validQuickCheck = Array.isArray(lesson?.quickCheck) && lesson.quickCheck.length === 3 && lesson.quickCheck.every(item =>
+        const hasLegacyQuickCheck = Object.prototype.hasOwnProperty.call(lesson || {}, 'quickCheck');
+        const hasCanonicalQuickChecks = Object.prototype.hasOwnProperty.call(lesson || {}, 'quickChecks');
+        const quickChecks = hasLegacyQuickCheck ? lesson.quickCheck : lesson?.quickChecks;
+        const validQuickCheck = hasLegacyQuickCheck !== hasCanonicalQuickChecks &&
+          (legacyLessonPayload ? hasLegacyQuickCheck : hasCanonicalQuickChecks) &&
+          Array.isArray(quickChecks) && quickChecks.length === 3 && quickChecks.every(item =>
           item && typeof item === 'object' && !Array.isArray(item) && Object.keys(item).join(',') === quickCheckKeys &&
           typeof item.qIt === 'string' && item.qIt.trim() && ['VERO', 'FALSO'].includes(item.a) && typeof item.explainAr === 'string' && item.explainAr.trim());
-        if (!lesson || Object.keys(lesson).join(',') !== lessonKeys || lesson.id !== expectedId || expectedIds.has(lesson.id) ||
+        const lessonKeyShape = hasLegacyQuickCheck ? lessonKeys.legacy : lessonKeys.canonical;
+        if (!lesson || Object.keys(lesson).join(',') !== lessonKeyShape || lesson.id !== expectedId || expectedIds.has(lesson.id) ||
             !['titleIt', 'titleAr', 'summaryIt', 'summaryAr'].every(key => typeof lesson[key] === 'string' && lesson[key].trim()) ||
             !Array.isArray(lesson.keyPoints) || lesson.keyPoints.length < 3 || lesson.keyPoints.length > 4 || !validTrapWord || !validQuickCheck ||
             !lesson.keyPoints.every(point => point && Object.keys(point).join(',') === pointKeys && typeof point.it === 'string' && point.it.trim() && typeof point.ar === 'string' && point.ar.trim())) {
@@ -85,12 +116,16 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
       ...lessons,
       modules: lessons.modules.map(module => ({
         ...module,
-        lessons: module.lessons.map(lesson => ({
-          ...lesson,
-          ...(support.lessons[lesson.id] || {}),
-          heading_it: lesson.titleIt,
-          heading_ar: lesson.titleAr
-        }))
+        lessons: module.lessons.map(lesson => {
+          const {quickCheck, ...canonicalLesson} = lesson;
+          return {
+            ...canonicalLesson,
+            ...(quickCheck ? {quickChecks: quickCheck} : {}),
+            ...(support.lessons[lesson.id] || {}),
+            heading_it: lesson.titleIt,
+            heading_ar: lesson.titleAr
+          };
+        })
       }))
     };
     if (!globalThis.crypto?.subtle || typeof TextEncoder !== 'function') {

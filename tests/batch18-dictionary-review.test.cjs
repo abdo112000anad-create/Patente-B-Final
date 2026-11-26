@@ -17,7 +17,7 @@ test('batch eighteen applies only source-backed decisions and retains cambio fla
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const questionsIt = json('data/questions.it.json');
   const questionsAr = json('data/questions.json');
-  const lessons = json('data/lessons.json');
+  const lessons = json('data/lessons-v2.json');
   const byWord = new Map(dictionary.entries.map(row => [row.word, row]));
   const arabicById = new Map(questionsAr.questions.map(row => [row.id, row]));
   const questionOccurrences = word => questionsIt.questions.reduce((sum, question) => sum + exactCount(question.it, word), 0);
@@ -29,7 +29,7 @@ test('batch eighteen applies only source-backed decisions and retains cambio fla
       for (const lesson of module.lessons || []) {
         const fields = [lesson.titleIt, lesson.summaryIt, lesson.trapWord];
         for (const point of lesson.keyPoints || []) fields.push(point?.it);
-        for (const check of lesson.quickCheck || []) fields.push(check?.qIt);
+        for (const check of lesson.quickChecks || []) fields.push(check?.qIt);
         const hits = fields.reduce((sum, value) => sum + exactCount(value, word), 0);
         occurrences += hits;
         if (hits) records += 1;

@@ -71,6 +71,7 @@ test('phone UI stylesheet and Cairo font are served directly with correct types 
   assert.equal(resolveStaticFile('/src/v64-ui-fixes.css'), path.join(root, 'src/v64-ui-fixes.css'));
   assert.equal(resolveStaticFile('/fonts/Cairo-Variable.ttf'), path.join(root, 'public/fonts/Cairo-Variable.ttf'));
   assert.equal(resolveStaticFile('/data/lessons.json'), path.join(root, 'data/lessons.json'));
+  assert.equal(resolveStaticFile('/data/lessons-v2.json'), path.join(root, 'data/lessons-v2.json'));
   await new Promise((resolve, reject) => {
     server.once('error', reject);
     server.listen(0, '127.0.0.1', resolve);
@@ -87,7 +88,14 @@ test('phone UI stylesheet and Cairo font are served directly with correct types 
   assert.ok(Number(font.headers.get('content-length')) > 300_000);
   const lessons = await fetch(`${base}/data/lessons.json`);
   assert.equal(lessons.status, 200);
-  const payload = await lessons.json();
-  assert.equal(payload.modules.length, 11);
-  assert.equal(payload.modules.reduce((n, unit) => n + unit.lessons.length, 0), 50);
+  const legacyPayload = await lessons.json();
+  assert.equal(legacyPayload.modules.length, 11);
+  assert.equal(legacyPayload.modules.reduce((n, unit) => n + unit.lessons.length, 0), 50);
+  assert.ok(legacyPayload.modules.every(module => module.lessons.every(lesson => Array.isArray(lesson.quickCheck) && !Object.hasOwn(lesson, 'quickChecks'))));
+  const canonicalResponse = await fetch(`${base}/data/lessons-v2.json`);
+  assert.equal(canonicalResponse.status, 200);
+  const canonicalPayload = await canonicalResponse.json();
+  assert.equal(canonicalPayload.modules.length, 11);
+  assert.equal(canonicalPayload.modules.reduce((n, unit) => n + unit.lessons.length, 0), 50);
+  assert.ok(canonicalPayload.modules.every(module => module.lessons.every(lesson => Array.isArray(lesson.quickChecks) && !Object.hasOwn(lesson, 'quickCheck'))));
 });

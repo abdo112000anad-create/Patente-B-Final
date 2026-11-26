@@ -13,11 +13,13 @@ const sha256 = file => crypto.createHash('sha256').update(fs.readFileSync(path.j
 const DAY = 86_400_000;
 
 test('v62 contains exactly 50 ordered lesson records with the eight required fields', () => {
-  const course = json('data/lessons.json');
+  const course = json('data/lessons-v2.json');
   const serviceWorker = read('public/sw.js');
   assert.equal(course.schema_version, 4);
   assert.equal(course.modules.length, 11);
-  assert.match(serviceWorker, /const lessonKeys = \['id', 'titleIt'/u);
+  assert.match(serviceWorker, /validLessonPayload\(data, 'legacy'\)/u);
+  assert.match(serviceWorker, /validLessonPayload\(data, 'canonical'\)/u);
+  assert.match(serviceWorker, /const quickCheckProperty = shape === 'legacy' \? 'quickCheck' : 'quickChecks'/u);
   assert.match(serviceWorker, /lesson\.keyPoints\.length <= 4/u);
   assert.match(read('.github/workflows/build.yml'), /npm run build[\s\S]*npx cap sync android/u);
   const all = course.modules.flatMap(module => module.lessons);
@@ -25,7 +27,7 @@ test('v62 contains exactly 50 ordered lesson records with the eight required fie
   assert.equal(new Set(all.map(lesson => lesson.id)).size, 50);
   for (const module of course.modules) {
     for (const [index, lesson] of module.lessons.entries()) {
-      assert.deepEqual(Object.keys(lesson), ['id', 'titleIt', 'titleAr', 'summaryIt', 'summaryAr', 'keyPoints', 'trapWord', 'quickCheck']);
+      assert.deepEqual(Object.keys(lesson), ['id', 'titleIt', 'titleAr', 'summaryIt', 'summaryAr', 'keyPoints', 'trapWord', 'quickChecks']);
       assert.equal(lesson.id, `u${module.order_hint}-l${index + 1}`);
       for (const field of ['titleIt', 'titleAr', 'summaryIt', 'summaryAr']) assert.ok(lesson[field].trim(), `${lesson.id} ${field}`);
       const sentences = lesson.summaryIt.split(/(?<=[.!?])\s+(?=[A-ZÀÈÉÌÒÙ])/u).filter(Boolean);
@@ -33,8 +35,8 @@ test('v62 contains exactly 50 ordered lesson records with the eight required fie
       assert.match(lesson.summaryAr, /\([^()]*[A-Za-zÀ-ÿ][^()]*\)/u, `${lesson.id} should include an Italian term in parentheses`);
       assert.ok(lesson.keyPoints.length >= 3 && lesson.keyPoints.length <= 4, `${lesson.id} key-point count`);
       assert.ok(lesson.keyPoints.every(point => Object.keys(point).join(',') === 'it,ar' && point.it.trim() && point.ar.trim()));
-      assert.ok(lesson.quickCheck.length === 3, `${lesson.id} quick-check count`);
-      assert.ok(lesson.quickCheck.every(question => Object.keys(question).join(',') === 'qIt,a,explainAr' && question.qIt.trim() && ['VERO', 'FALSO'].includes(question.a) && question.explainAr.trim()));
+      assert.ok(lesson.quickChecks.length === 3, `${lesson.id} quick-check count`);
+      assert.ok(lesson.quickChecks.every(question => Object.keys(question).join(',') === 'qIt,a,explainAr' && question.qIt.trim() && ['VERO', 'FALSO'].includes(question.a) && question.explainAr.trim()));
       assert.ok(lesson.trapWord === null || (Object.keys(lesson.trapWord).join(',') === 'word,reasonAr' && lesson.trapWord.word.trim() && lesson.trapWord.reasonAr.trim()));
       assert.doesNotMatch(JSON.stringify(lesson), /<\/?[a-z][^>]*>/iu, `${lesson.id} must not contain HTML`);
     }
@@ -70,13 +72,15 @@ test('illustrated lessons render all supported SVG scene types', async () => {
 test('GitHub Actions builds the current PWA consumed by Capacitor before Android sync', () => {
   const workflow = read('.github/workflows/build.yml');
   const release = json('dist/release.json');
-  const lessonHash = sha256('data/lessons.json');
+  const lessonHash = sha256('data/lessons-v2.json');
+  const legacyLessonHash = sha256('data/lessons.json');
   assert.equal(json('package.json').scripts.build, 'node scripts/build-pwa.cjs');
   assert.equal(json('capacitor.config.json').webDir, 'dist');
   assert.match(workflow, /npm run build[\s\S]*npx cap sync android/u);
   assert.equal(release.version, 66);
   assert.equal(release.lessonsSha256, lessonHash);
-  assert.equal(sha256('dist/data/lessons.json'), lessonHash);
+  assert.equal(sha256('dist/data/lessons-v2.json'), lessonHash);
+  assert.equal(sha256('dist/data/lessons.json'), legacyLessonHash);
   assert.equal(sha256('dist/app.bundle.js'), release.bundleSha256);
   assert.equal(sha256('public/app.bundle.js'), release.bundleSha256);
 });

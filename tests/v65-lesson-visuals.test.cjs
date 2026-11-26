@@ -7,7 +7,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 
-const course = JSON.parse(read('data/lessons.json'));
+const course = JSON.parse(read('data/lessons-v2.json'));
 const lessons = course.modules.flatMap(module => module.lessons);
 
  test('all 50 lessons render a local visual; shared SVGs keep accessibility metadata', async () => {

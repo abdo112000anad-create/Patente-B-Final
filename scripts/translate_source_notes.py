@@ -10,7 +10,7 @@ from pathlib import Path
 from translate_lessons_it import atomic_write, set_path, translate_chunk
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "data" / "lessons.json"
+SOURCE = ROOT / "data" / "lessons-v2.json"
 CHUNK_SIZE = 8
 
 

@@ -50,7 +50,8 @@ def normalize_core(value) -> str:
         lines = [' '.join(words[:midpoint]), ' '.join(words[midpoint:])]
     return '\n'.join(lines)
 
-course = read_json(DATA / 'lessons.json')
+course = read_json(DATA / 'lessons-v2.json')
+support = read_json(DATA / 'lesson-support.json')
 module_payloads = {p.stem: read_json(p) for p in sorted((RAW / 'modules').glob('*.json'))}
 if len(module_payloads) != 11:
     raise ValueError(f'Expected 11 generated modules, got {len(module_payloads)}')
@@ -68,7 +69,10 @@ for module in course['modules']:
     if len(old_lessons) != len(new_lessons):
         raise ValueError(f'{mid}: expected {len(old_lessons)} lessons, got {len(new_lessons)}')
     module_sources: dict[str, dict] = {}
-    for index, (old, new) in enumerate(zip(old_lessons, new_lessons)):
+    for index, (compact, new) in enumerate(zip(old_lessons, new_lessons)):
+        old = support['lessons'].get(compact['id'])
+        if old is None:
+            raise ValueError(f'{mid}:{index+1}: missing support record for {compact["id"]}')
         if int(new.get('lesson_order', index + 1)) != index + 1:
             raise ValueError(f'{mid}:{index+1}: lesson order mismatch')
         n = lesson_word_count(str(new.get('body_it', '')))
@@ -120,7 +124,7 @@ for module in course['modules']:
 # Restore the statutory general and precipitation limits directly in the lesson
 # text and number cards, with the currently checked ACI Article 142 source.
 speed_module = next(module for module in course['modules'] if module['module_id'] == 'speed-stopping-highways')
-speed = speed_module['lessons'][0]
+speed = support['lessons'][speed_module['lessons'][0]['id']]
 speed['body_it'] = ('L’articolo 141 impone di adeguare la velocità a veicolo, carico, strada, traffico, visibilità e altre circostanze. '
     'Il conducente deve mantenere il controllo e potersi fermare entro il proprio campo visivo davanti a ostacoli prevedibili. '
     'L’articolo 142 indica massimi ordinari: 50 km/h nei centri abitati, 90 sulle strade extraurbane secondarie e locali, '
@@ -147,7 +151,8 @@ if not 80 <= lesson_word_count(speed['body_it']) <= 120:
     raise ValueError(f'Speed lesson Italian body has {lesson_word_count(speed["body_it"])} words')
 
 course['legal_check_date'] = '2026-11-15'
-write_json(DATA / 'lessons.json', course)
+write_json(DATA / 'lessons-v2.json', course)
+write_json(DATA / 'lesson-support.json', support)
 
 # Preserve the original reference-page interface while mapping the researched sources.
 traps = read_json(RAW / 'references' / 'traps.json')['entries']

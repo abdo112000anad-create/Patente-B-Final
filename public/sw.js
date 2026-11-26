@@ -33,6 +33,7 @@ const SHELL = [
   '/lessons/lesson-vulnerable-road-users.svg'
 ];
 const OFFLINE_DATA = [
+  '/data/lessons-v2.json',
   '/data/lessons.json',
   '/data/lesson-support.json',
   '/data/questions.json',
@@ -61,6 +62,7 @@ const NETWORK_FIRST = new Set([
   '/src/v64-ui-fixes.css',
   '/app.bundle.js',
   '/manifest.webmanifest',
+  '/data/lessons-v2.json',
   '/data/lessons.json',
   '/data/lesson-support.json',
   '/data/questions.json',
@@ -70,7 +72,17 @@ const NETWORK_FIRST = new Set([
 ]);
 
 async function cachedResponse(cache, request) {
-  return (await cache.match(request, { ignoreSearch: true })) || undefined;
+  const requestUrl = typeof request === 'string' ? request : request.url;
+  const pathname = new URL(requestUrl, self.location.origin).pathname;
+  const current = await cache.match(request, { ignoreSearch: true });
+  if (current && await safeToCache(current, pathname)) return current;
+  const older = (await caches.keys()).filter(key => key.startsWith('patente-ar-') && key !== CACHE_NAME).reverse();
+  for (const key of older) {
+    const previous = await caches.open(key);
+    const response = await previous.match(request, { ignoreSearch: true });
+    if (response && await safeToCache(response, pathname)) return response;
+  }
+  return undefined;
 }
 
 async function cacheUrl(cache, url) {
@@ -146,22 +158,8 @@ function validJsonPayload(pathname, data) {
       return true;
     });
   }
-  if (pathname === '/data/lessons.json') {
-    const lessonKeys = ['id', 'titleIt', 'titleAr', 'summaryIt', 'summaryAr', 'keyPoints', 'trapWord', 'quickCheck'].join(',');
-    const pointKeys = ['it', 'ar'].join(',');
-    const quickCheckKeys = ['qIt', 'a', 'explainAr'].join(',');
-    const trapWordKeys = ['word', 'reasonAr'].join(',');
-    return !!data && data.schema_version === 4 && Array.isArray(data.modules) && data.modules.length === 11 && data.module_count === data.modules.length &&
-      data.modules.every(module => module?.title_it && module?.title_ar && Array.isArray(module.lessons) && module.lessons.length > 0 &&
-        Array.isArray(module.sources) && module.sources.length > 0 && module.lessons.every((lesson, index) => lesson &&
-          Object.keys(lesson).join(',') === lessonKeys && lesson.id === `u${module.order_hint}-l${index + 1}` &&
-          ['titleIt', 'titleAr', 'summaryIt', 'summaryAr'].every(key => typeof lesson[key] === 'string' && lesson[key].trim()) &&
-          Array.isArray(lesson.keyPoints) && lesson.keyPoints.length >= 3 && lesson.keyPoints.length <= 4 &&
-          lesson.keyPoints.every(point => point && Object.keys(point).join(',') === pointKeys && typeof point.it === 'string' && point.it.trim() && typeof point.ar === 'string' && point.ar.trim()) &&
-          (lesson.trapWord === null || lesson.trapWord && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(',') === trapWordKeys && typeof lesson.trapWord.word === 'string' && lesson.trapWord.word.trim() && typeof lesson.trapWord.reasonAr === 'string' && lesson.trapWord.reasonAr.trim()) &&
-          Array.isArray(lesson.quickCheck) && lesson.quickCheck.length === 3 && lesson.quickCheck.every(item => item && !Array.isArray(item) && Object.keys(item).join(',') === quickCheckKeys && typeof item.qIt === 'string' && item.qIt.trim() && ['VERO', 'FALSO'].includes(item.a) && typeof item.explainAr === 'string' && item.explainAr.trim()))) &&
-      data.modules.reduce((count, module) => count + module.lessons.length, 0) === 50;
-  }
+  if (pathname === '/data/lessons-v2.json') return validLessonPayload(data, 'canonical');
+  if (pathname === '/data/lessons.json') return validLessonPayload(data, 'legacy');
   if (pathname === '/data/lesson-support.json') {
     return !!data && data.schema_version === 1 && !!data.lessons && typeof data.lessons === 'object' && !Array.isArray(data.lessons) &&
       Object.keys(data.lessons).length === 50 && Object.entries(data.lessons).every(([id, metadata]) => /^u(?:[1-9]|1[01])-l[1-9][0-9]*$/.test(id) && metadata && typeof metadata === 'object' && !Array.isArray(metadata));
@@ -201,29 +199,74 @@ function validJsonPayload(pathname, data) {
   return data !== null && typeof data === 'object';
 }
 
+function validLessonPayload(data, shape) {
+  const quickCheckProperty = shape === 'legacy' ? 'quickCheck' : 'quickChecks';
+  const lessonKeys = ['id', 'titleIt', 'titleAr', 'summaryIt', 'summaryAr', 'keyPoints', 'trapWord', quickCheckProperty].join(',');
+  const pointKeys = ['it', 'ar'].join(',');
+  const quickCheckKeys = ['qIt', 'a', 'explainAr'].join(',');
+  const trapWordKeys = ['word', 'reasonAr'].join(',');
+  return !!data && data.schema_version === 4 && Array.isArray(data.modules) && data.modules.length === 11 && data.module_count === data.modules.length &&
+    data.modules.every(module => module?.title_it && module?.title_ar && Array.isArray(module.lessons) && module.lessons.length > 0 &&
+      Array.isArray(module.sources) && module.sources.length > 0 && module.lessons.every((lesson, index) => {
+        const hasLegacyQuickCheck = Object.prototype.hasOwnProperty.call(lesson || {}, 'quickCheck');
+        const hasCanonicalQuickChecks = Object.prototype.hasOwnProperty.call(lesson || {}, 'quickChecks');
+        const hasExpectedShape = shape === 'legacy'
+          ? hasLegacyQuickCheck && !hasCanonicalQuickChecks
+          : hasCanonicalQuickChecks && !hasLegacyQuickCheck;
+        const quickChecks = lesson?.[quickCheckProperty];
+        return lesson && hasExpectedShape && Object.keys(lesson).join(',') === lessonKeys && lesson.id === `u${module.order_hint}-l${index + 1}` &&
+        ['titleIt', 'titleAr', 'summaryIt', 'summaryAr'].every(key => typeof lesson[key] === 'string' && lesson[key].trim()) &&
+        Array.isArray(lesson.keyPoints) && lesson.keyPoints.length >= 3 && lesson.keyPoints.length <= 4 &&
+        lesson.keyPoints.every(point => point && Object.keys(point).join(',') === pointKeys && typeof point.it === 'string' && point.it.trim() && typeof point.ar === 'string' && point.ar.trim()) &&
+        (lesson.trapWord === null || lesson.trapWord && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(',') === trapWordKeys && typeof lesson.trapWord.word === 'string' && lesson.trapWord.word.trim() && typeof lesson.trapWord.reasonAr === 'string' && lesson.trapWord.reasonAr.trim()) &&
+        Array.isArray(quickChecks) && quickChecks.length === 3 && quickChecks.every(item => item && !Array.isArray(item) && Object.keys(item).join(',') === quickCheckKeys && typeof item.qIt === 'string' && item.qIt.trim() && ['VERO', 'FALSO'].includes(item.a) && typeof item.explainAr === 'string' && item.explainAr.trim());
+      })) &&
+    data.modules.reduce((count, module) => count + module.lessons.length, 0) === 50;
+}
+
 async function sha256Hex(response) {
   const digest = await crypto.subtle.digest('SHA-256', await response.clone().arrayBuffer());
   return [...new Uint8Array(digest)].map(value => value.toString(16).padStart(2, '0')).join('');
 }
 
+function lessonPayloadsMatch(canonical, legacy) {
+  const normalize = payload => ({
+    ...payload,
+    modules: payload.modules.map(module => ({
+      ...module,
+      lessons: module.lessons.map(lesson => {
+        const {quickCheck, quickChecks, ...content} = lesson;
+        return {...content, quickChecks: quickChecks || quickCheck};
+      })
+    }))
+  });
+  return JSON.stringify(normalize(canonical)) === JSON.stringify(normalize(legacy));
+}
+
 async function hasCompatibleOfflineData(cache) {
   try {
-    const [bankResponse, lessonResponse, supportResponse, labelsResponse, similarResponse, dictionaryResponse] = await Promise.all([
-      cache.match('/data/questions.json'), cache.match('/data/lessons.json'),
+    const [bankResponse, canonicalLessonResponse, legacyLessonResponse, supportResponse, labelsResponse, similarResponse, dictionaryResponse] = await Promise.all([
+      cache.match('/data/questions.json'), cache.match('/data/lessons-v2.json'), cache.match('/data/lessons.json'),
       cache.match('/data/lesson-support.json'), cache.match('/data/topic-labels.json'), cache.match('/data/similar-groups.json'),
       cache.match('/data/italian_arabic_dictionary_lookup.json')
     ]);
-    if (![bankResponse, lessonResponse, supportResponse, labelsResponse, similarResponse, dictionaryResponse].every(Boolean)) return false;
-    const [bank, lessons, support, labels, similar, dictionary] = await Promise.all([
-      bankResponse.clone().json(), lessonResponse.clone().json(), supportResponse.clone().json(), labelsResponse.clone().json(), similarResponse.clone().json(), dictionaryResponse.clone().json()
+    if (![bankResponse, canonicalLessonResponse, legacyLessonResponse, supportResponse, labelsResponse, similarResponse, dictionaryResponse].every(Boolean)) return false;
+    const [bank, canonicalLessons, legacyLessons, support, labels, similar, dictionary] = await Promise.all([
+      bankResponse.clone().json(),
+      canonicalLessonResponse.clone().json().catch(() => null),
+      legacyLessonResponse.clone().json().catch(() => null),
+      supportResponse.clone().json(), labelsResponse.clone().json(), similarResponse.clone().json(), dictionaryResponse.clone().json()
     ]);
-    if (!validJsonPayload('/data/questions.json', bank) || !validJsonPayload('/data/lessons.json', lessons) ||
+    if (!validJsonPayload('/data/questions.json', bank) ||
+        !validJsonPayload('/data/lessons-v2.json', canonicalLessons) ||
+        !validJsonPayload('/data/lessons.json', legacyLessons) ||
+        !lessonPayloadsMatch(canonicalLessons, legacyLessons) ||
         !validJsonPayload('/data/lesson-support.json', support) ||
         !validJsonPayload('/data/topic-labels.json', labels) || !validJsonPayload('/data/similar-groups.json', similar) ||
         !validJsonPayload('/data/italian_arabic_dictionary_lookup.json', dictionary) ||
         similar.question_count !== bank.count || await sha256Hex(bankResponse) !== similar.question_bank_sha256) return false;
-    const lessonIds = lessons.modules.flatMap(module => module.lessons.map(lesson => lesson.id));
-    if (lessonIds.length !== 50 || new Set(lessonIds).size !== 50 || lessonIds.some(id => !Object.hasOwn(support.lessons, id))) return false;
+    const lessonIds = canonicalLessons.modules.flatMap(module => module.lessons.map(lesson => lesson.id));
+    if (lessonIds.length !== 50 || new Set(lessonIds).size !== 50 || lessonIds.some(id => !Object.prototype.hasOwnProperty.call(support.lessons, id))) return false;
     const byId = new Map(bank.questions.map(question => [Number(question.id), question]));
     const groupedIds = new Set();
     for (const group of similar.groups) {
@@ -268,21 +311,26 @@ self.addEventListener('message', event => {
   event.waitUntil((async () => {
     let status = 'partial';
     let coreCached = 0;
+    const lessonEndpoints = ['/data/lessons-v2.json', '/data/lessons.json'];
+    const otherOfflineData = OFFLINE_DATA.filter(url => !lessonEndpoints.includes(url));
+    const coreTotal = SHELL.length + otherOfflineData.length + 1;
     let imageCached = 0;
     let imageTotal = 0;
     try {
       const cache = await caches.open(CACHE_NAME);
-      const coreResults = await Promise.all([...SHELL, ...OFFLINE_DATA].map(url => cacheUrl(cache, url)));
-      coreCached = coreResults.filter(Boolean).length;
+      const [coreResults, lessonResults] = await Promise.all([
+        Promise.all([...SHELL, ...otherOfflineData].map(url => cacheUrl(cache, url))),
+        Promise.all(lessonEndpoints.map(url => cacheUrl(cache, url)))
+      ]);
+      coreCached = coreResults.filter(Boolean).length + Number(lessonResults.every(Boolean));
       const dataCompatible = await hasCompatibleOfflineData(cache);
       if (!dataCompatible) {
-        await Promise.all(OFFLINE_DATA.map(url => cache.delete(url).catch(() => {})));
-        coreCached = coreResults.slice(0, SHELL.length).filter(Boolean).length;
+        // Keep already-cached compatible files; older clients may still need the legacy endpoint.
       }
       const figures = await cacheQuizFigures(cache);
       imageCached = figures.imageCached;
       imageTotal = figures.imageTotal;
-      const complete = dataCompatible && coreCached === coreResults.length && figures.failed === 0 && imageTotal > 0 && imageCached === imageTotal;
+      const complete = dataCompatible && coreCached === coreTotal && figures.failed === 0 && imageTotal > 0 && imageCached === imageTotal;
       if (complete) {
         status = 'ready';
         const older = (await caches.keys()).filter(key => key.startsWith('patente-ar-') && key !== CACHE_NAME);
@@ -291,7 +339,7 @@ self.addEventListener('message', event => {
     } catch {
       status = 'unavailable';
     }
-    event.source?.postMessage({ type: 'OFFLINE_CACHE_STATUS', status, coreCached, coreTotal: SHELL.length + OFFLINE_DATA.length, imageCached, imageTotal });
+    event.source?.postMessage({ type: 'OFFLINE_CACHE_STATUS', status, coreCached, coreTotal, imageCached, imageTotal });
   })());
 });
 

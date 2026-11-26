@@ -2,7 +2,7 @@
 """Translate Patente B course text into Italian without changing the Arabic source.
 
 Run --pilot first to translate one module and review the output; then --apply to
-translate or reuse the remaining modules and atomically update data/lessons.json.
+translate or reuse the remaining modules and atomically update data/lessons-v2.json.
 """
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ from typing import Any
 from openai import OpenAI
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "data" / "lessons.json"
+SOURCE = ROOT / "data" / "lessons-v2.json"
 PROGRESS = Path(tempfile.gettempdir()) / "patente-it-translation-progress.json"
 MODEL = "gpt-6.1-sol"
 WORKERS = 3
@@ -60,8 +60,14 @@ def module_items(module: dict[str, Any]) -> list[dict[str, Any]]:
     for i, text in enumerate(module.get("caveats_ar", [])):
         add(items, f"{mid}.caveat.{i}", ["caveats_it", i], text)
     for li, lesson in enumerate(module.get("lessons", [])):
-        for field in ("heading", "body", "example", "pitfall"):
-            add(items, f"{mid}.lesson.{li}.{field}", ["lessons", li, f"{field}_it"], lesson.get(f"{field}_ar", ""))
+        if "titleAr" in lesson:
+            add(items, f"{mid}.lesson.{li}.title", ["lessons", li, "titleIt"], lesson.get("titleAr", ""))
+            add(items, f"{mid}.lesson.{li}.summary", ["lessons", li, "summaryIt"], lesson.get("summaryAr", ""))
+            for pi, point in enumerate(lesson.get("keyPoints", [])):
+                add(items, f"{mid}.lesson.{li}.keyPoint.{pi}", ["lessons", li, "keyPoints", pi, "it"], point.get("ar", ""))
+        else:
+            for field in ("heading", "body", "example", "pitfall"):
+                add(items, f"{mid}.lesson.{li}.{field}", ["lessons", li, f"{field}_it"], lesson.get(f"{field}_ar", ""))
     for qi, quiz in enumerate(module.get("quiz", [])):
         for field in ("prompt", "explanation"):
             add(items, f"{mid}.quiz.{qi}.{field}", ["quiz", qi, f"{field}_it"], quiz.get(f"{field}_ar", ""))
@@ -222,7 +228,6 @@ def main() -> int:
         by_id = saved["translations"]
         for item in items:
             set_path(module, item["path"], by_id[item["id"]])
-    source["schema_version"] = 2
     source["content_language_order"] = ["it", "ar"]
     source["translation_note_it"] = "Traduzione didattica assistita dall'IA; non è una traduzione ufficiale. In caso di dubbio, fa fede il testo italiano vigente e la fonte ufficiale collegata."
     atomic_write(SOURCE, source)

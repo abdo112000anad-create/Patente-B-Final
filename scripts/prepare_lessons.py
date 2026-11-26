@@ -7,7 +7,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RAW = Path('/home/ubuntu/.manus-jobs/8d01679318aa/output.txt')
 raw_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_RAW
-out_path = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / 'data/lessons.json'
+# This script creates a rich research intermediate, not the compact runtime schema.
+# Keep its default output outside both the canonical v2 endpoint and the legacy alias.
+out_path = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / 'data/generated-v37/lessons-prepared.json'
 raw = json.loads(raw_path.read_text(encoding='utf-8'))
 if raw.get('failures'):
     raise SystemExit(f"Research failures must be resolved: {raw['failures']}")

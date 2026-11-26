@@ -8,7 +8,8 @@ from math import log, sqrt
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
-LESSONS=ROOT/'data/lessons.json'
+LESSONS=ROOT/'data/lessons-v2.json'
+SUPPORT=ROOT/'data/lesson-support.json'
 QUESTIONS=ROOT/'data/questions.json'
 LABELS=ROOT/'data/topic-labels.json'
 
@@ -116,21 +117,23 @@ def _char_grams(text):
   for i in range(len(text)-n+1): counts[text[i:i+n]]+=1
  return counts
 
-def attach_review_question_ids(module, all_questions):
- """Rank official statements by lesson wording within the linked official topics."""
- module_topics={t for lesson in module['lessons'] for t in lesson['bank_topics']}
+def attach_review_question_ids(module, all_questions, support_lessons):
+ """Rank official statements and save per-lesson metadata outside compact lessons."""
+ details=[support_lessons.get(lesson['id']) for lesson in module['lessons']]
+ if any(detail is None for detail in details): raise SystemExit(f"missing lesson-support record in {module['module_id']}")
+ module_topics={topic for detail in details for topic in detail.get('bank_topics',[])}
  candidates=[q for q in all_questions if q['topic'] in module_topics]
- lesson_texts=[' '.join(str(lesson.get(k,'')) for k in ('heading_it','body_it','example_it','pitfall_it')) for lesson in module['lessons']]
+ lesson_texts=[' '.join(str(detail.get(k,'')) for k in ('heading_it','body_it','example_it','pitfall_it')) for detail in details]
  docs=[q['it'] for q in candidates]+lesson_texts
  vectors=[_char_grams(text) for text in docs]
  df=Counter(g for vector in vectors for g in vector)
  idf={g:log(1+len(vectors)/(count+1)) for g,count in df.items()}
  weighted=[{g:count*idf[g] for g,count in vector.items()} for vector in vectors]
  norms=[sqrt(sum(value*value for value in vector.values())) for vector in weighted]
- for lesson_index,lesson in enumerate(module['lessons']):
+ for lesson_index,detail in enumerate(details):
   lesson_vector=weighted[len(candidates)+lesson_index]
   lesson_norm=norms[len(candidates)+lesson_index]
-  allowed=set(lesson['bank_topics'])
+  allowed=set(detail['bank_topics'])
   ranked=[]
   for q_index,q in enumerate(candidates):
    if q['topic'] not in allowed: continue
@@ -138,12 +141,14 @@ def attach_review_question_ids(module, all_questions):
    score=sum(value*qv.get(gram,0) for gram,value in lesson_vector.items())/denom if denom else 0
    ranked.append((score,int(q['id'])))
   ranked.sort(key=lambda row:(-row[0],row[1]))
-  lesson['review_question_ids']=[qid for _,qid in ranked[:60]]
-  lesson['review_match_score']=round(ranked[0][0],3) if ranked else 0
+  detail['review_question_ids']=[qid for _,qid in ranked[:60]]
+  detail['review_match_score']=round(ranked[0][0],3) if ranked else 0
 
 
 def main():
  data=json.loads(LESSONS.read_text(encoding='utf8'))
+ support_data=json.loads(SUPPORT.read_text(encoding='utf8'))
+ support_lessons=support_data.get('lessons',{})
  qs=json.loads(QUESTIONS.read_text(encoding='utf8'))['questions']
  by_id={int(q['id']):q for q in qs}
  actual_topics={q['topic'] for q in qs}
@@ -155,24 +160,26 @@ def main():
   mid=module['module_id']; entries=LESSON_MAP[mid]
   if len(entries)!=len(module['lessons']): raise SystemExit(f'{mid}: lesson count mismatch')
   for lesson,(topics,visual) in zip(module['lessons'],entries):
-   if any(topic not in actual_topics for topic in topics): raise SystemExit(f'{mid}: unknown topic for {lesson["heading_ar"]}')
+   metadata=support_lessons.get(lesson['id'])
+   if metadata is None: raise SystemExit(f'{mid}: missing support record for {lesson["id"]}')
+   if any(topic not in actual_topics for topic in topics): raise SystemExit(f'{mid}: unknown topic for {lesson.get("titleAr",lesson["id"])}')
    if isinstance(visual,int):
     q=by_id.get(visual)
     if not q or not q.get('image') or not (ROOT/'public'/q['image'].lstrip('/')).is_file():
      raise SystemExit(f'missing official figure {visual} for {mid}')
-    lesson['visual_question_id']=visual
-    lesson.pop('visual_src',None)
+    metadata['visual_question_id']=visual
+    metadata.pop('visual_src',None)
    elif isinstance(visual,str) and visual.startswith('/lessons/'):
-    lesson['visual_src']=visual
-    lesson.pop('visual_question_id',None)
+    metadata['visual_src']=visual
+    metadata.pop('visual_question_id',None)
    elif visual=='local':
-    lesson['visual_src']=VISUAL_ASSETS[mid]
-    lesson.pop('visual_question_id',None)
-   lesson['bank_topics']=topics
-  attach_review_question_ids(module,qs)
+    metadata['visual_src']=VISUAL_ASSETS[mid]
+    metadata.pop('visual_question_id',None)
+   metadata['bank_topics']=topics
+  attach_review_question_ids(module,qs,support_lessons)
   if mid=='road-basics':
-   lesson=module['lessons'][3]
-   lesson['source_check']={
+   lesson_id=module['lessons'][3]['id']
+   support_lessons[lesson_id]['source_check']={
     'id':'mit-law-177-2024-effective-date',
     'lesson_check':True,
     'topic_it':'Aggiornamento normativo · 2024',
@@ -190,7 +197,9 @@ def main():
  data['topic_label_file']='topic-labels.json'
  data['course_order']='module.order_hint, lesson array order'
  LESSONS.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+ SUPPORT.write_text(json.dumps(support_data,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
  print('Mapped',sum(len(v) for v in LESSON_MAP.values()),'lessons to',len(actual_topics),'official topics; unique official figures',sum(isinstance(v,int) for group in LESSON_MAP.values() for _,v in group))
  print('Ranked official questions individually for each lesson; MIT source check added for the 2024 update lesson.')
- print('Topics not directly assigned to lesson:',sorted(actual_topics-set(t for m in data['modules'] for l in m['lessons'] for t in l['bank_topics'])))
+ assigned={topic for module in data['modules'] for lesson in module['lessons'] for topic in support_lessons[lesson['id']]['bank_topics']}
+ print('Topics not directly assigned to lesson:',sorted(actual_topics-assigned))
 if __name__=='__main__': main()

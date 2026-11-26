@@ -45,7 +45,7 @@ test('progress backup exports and restores spaced quick-check state, filtering i
   assert.deepEqual({...restored.quickCheckSchedule['u1-l1::q1']}, wrong.schedule['u1-l1::q1']);
   assert.equal(Object.hasOwn(restored.quickCheckSchedule, 'u99-l1::q1'), false);
 
-  const course = JSON.parse(read('data/lessons.json'));
+  const course = JSON.parse(read('data/lessons-v2.json'));
   const appLessonKeys = new Set(course.modules.flatMap(module => module.lessons.flatMap((lesson, index) => [`${module.module_id}.${index}`, lesson.id])));
   assert.ok(appLessonKeys.has('road-basics.0'));
   assert.ok(appLessonKeys.has('u1-l1'));

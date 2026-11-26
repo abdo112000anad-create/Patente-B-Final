@@ -261,7 +261,7 @@ function quickCheckDate(timestamp){
   return new Date(Number(timestamp)||0).toLocaleDateString('ar-IT',{day:'numeric',month:'short'});
 }
 function quickCheckCardMarkup(lesson,index,{reviewOnly=false}={}){
-  const question=lesson.quickCheck?.[index];if(!question)return '';
+  const question=lesson.quickChecks?.[index];if(!question)return '';
   const id=quickCheckId(lesson.id,index);if(!id)return '';
   const missed=state.wrongAnswers.includes(id);if(reviewOnly&&!missed)return '';
   const record=state.quickCheckSchedule[id],due=isQuickCheckDue(record,Date.now()),locked=!!record&&!due;
@@ -269,7 +269,7 @@ function quickCheckCardMarkup(lesson,index,{reviewOnly=false}={}){
   return `<article class="quick-check-card ${missed?'is-missed':''}" data-quick-check data-lesson-id="${esc(lesson.id)}" data-question-index="${index}" data-answer="${esc(question.a)}"><p class="quick-check-question" lang="it" dir="ltr">${esc(question.qIt)}</p><div class="quick-check-answers"><button type="button" data-quick-check-answer="VERO" ${locked?'disabled':''}>${controlLabel('Vero','صحيح')}</button><button type="button" data-quick-check-answer="FALSO" ${locked?'disabled':''}>${controlLabel('Falso','خطأ')}</button></div>${feedback}</article>`;
 }
 function quickCheckSectionMarkup(lesson,{reviewOnly=false}={}){
-  const cards=(lesson.quickCheck||[]).map((_,index)=>quickCheckCardMarkup(lesson,index,{reviewOnly})).filter(Boolean).join('');
+  const cards=(lesson.quickChecks||[]).map((_,index)=>quickCheckCardMarkup(lesson,index,{reviewOnly})).filter(Boolean).join('');
   if(reviewOnly&&!cards)return '';
   return `<section class="quick-check-section" aria-label="Controllo rapido · اختبار سريع"><h2>${pair(reviewOnly?'Ripasso degli errori':'Controllo rapido',reviewOnly?'مراجعة الأخطاء':'اختبار سريع')}</h2>${reviewOnly?'':`<p>${pair('Rispondi alle tre affermazioni Vero/Falso.','أجب عن العبارات الثلاث بصحيح أو خطأ.')}</p>`}<div class="quick-check-list">${cards}</div></section>`;
 }
@@ -281,7 +281,7 @@ function quickErrorReviewPage(){
   const all=flatLessons(),entries=state.wrongAnswers.map(id=>{
     const match=/^(u\d+-l\d+)::q(\d+)$/.exec(id);if(!match)return null;
     const item=all.find(candidate=>candidate.lesson.id===match[1]);if(!item)return null;
-    const index=Number(match[2])-1,question=item.lesson.quickCheck?.[index];return question?{item,index}:null;
+    const index=Number(match[2])-1,question=item.lesson.quickChecks?.[index];return question?{item,index}:null;
   }).filter(Boolean);
   if(!entries.length)return `<section class="quick-errors-page"><button class="quiet-button" data-view="home">${controlLabel('Back to the path','العودة إلى المسار')}</button><div class="empty-state"><strong>لا توجد أسئلة أخطأت فيها</strong><p>سجّل اختبار الدرس الأسئلة الخاطئة هنا لتراجعها.</p></div></section>`;
   return `<section class="quick-errors-page"><header class="quick-errors-heading"><button class="quiet-button" data-view="home">${controlLabel('Back to the path','العودة إلى المسار')}</button><h1>${pair('Ripasso Errori','مراجعة الأخطاء')}</h1></header><div class="quick-check-list">${entries.map(({item,index})=>`<article class="quick-error-item"><small>${pair(item.lesson.titleIt,item.lesson.titleAr)}</small>${quickCheckCardMarkup(item.lesson,index,{reviewOnly:true})}</article>`).join('')}</div></section>`;
