@@ -1241,6 +1241,34 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
     "durante": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, Vocabolario: https://www.treccani.it/vocabolario/durante/; Al-Maany Arabic-English, during: https://www.almaany.com/ar/dict/ar-en/during/; full context coverage: docs/dictionary-audit-batch28-2026-11-27.md",
 })
 
+# Batch-thirty contextual correction and unchanged-gloss confirmations from complete app contexts.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "accesa": (
+        "مُضاء / مُضاءة",
+        "contextual_translation",
+        "71 question-token occurrences in 71 distinct paired question contexts and no lesson matches. Every supplied use is the feminine participial/adjectival form in a literal light, lamp, indicator, arrow, or illuminated-strip context; no figurative 'heated' use appears. The machine draft شغّل is a verb/imperative and does not fit these adjective contexts. Treccani and De Mauro define acceso as the participle/adjective from accendere and document the light-emitting sense; ACI Article 41 confirms the traffic-signal-light context, while Reverso Arabic examples are supplementary and non-standard. The paired Arabic form allows gender agreement. No question, paired Arabic text, or answer key was changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "accesa": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, acceso (Italian semantics): https://www.treccani.it/vocabolario/acceso/; De Mauro, acceso (Italian semantics): https://dizionario.internazionale.it/parola/acceso; ACI Codice della Strada, art. 41 (traffic-light context only): https://aci.gov.it/codice-della-strada/art-41/; Reverso Context Italian-Arabic (supplementary, non-standard examples): https://context.reverso.net/traduzione/italiano-arabo/accesa",
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS.update({
+    "responsabilità": (
+        "المسؤولية",
+        "contextual_translation",
+        "66 question-token occurrences in 59 distinct paired question contexts and 4 lesson-text occurrences in 1 matching lesson record (u8-l3, mirrored in current and legacy lesson files). App uses cover general responsibility and civil, criminal, and administrative responsibility, including motor third-party liability and responsibility for damage. Treccani supports the relevant Italian senses; ACI Article 193 establishes only the compulsory motor-liability context; Reverso bilingual examples are supplementary, not legal authority. The existing gloss is supported for all reviewed app uses and is confirmed unchanged. Project-reviewed, not owner-approved.",
+    ),
+    "laterale": (
+        "جانبي",
+        "contextual_translation",
+        "64 question-token occurrences in 61 distinct paired question contexts and 2 lesson-text occurrences across 2 matching lesson records (u5-l2 and u9-l6, mirrored in current and legacy lesson files). All app uses are spatial/directional: road, mirror, barrier, distance, surface, visibility, body side, or wind from the side; the unrelated figurative sense 'secondary' is not present. Treccani and De Mauro support the spatial sense; ACI Article 148 supports the traffic phrase distanza laterale but not Arabic wording; Reverso is a supplementary non-standard bilingual witness. The existing gloss is confirmed unchanged, with Arabic gender adapted in sentences. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
+    "responsabilità": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, responsabilità (Italian semantics): https://www.treccani.it/vocabolario/responsabilita/; ACI Codice della Strada, art. 193 (motor-liability context only): https://aci.gov.it/codice-della-strada/art-193/; Reverso Context Italian-Arabic (supplementary): https://context.reverso.net/traduzione/italiano-arabo/responsabilit%C3%A0; Reverso Arabic-Italian مسؤولية (supplementary): https://dizionario.reverso.net/arabo-italiano/%D9%85%D8%B3%D8%A4%D9%88%D9%84%D9%8A%D8%A9",
+    "laterale": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, laterale (Italian semantics): https://www.treccani.it/vocabolario/laterale/; De Mauro, laterale (Italian semantics): https://dizionario.internazionale.it/parola/laterale; ACI Codice della Strada, art. 148 (traffic context only): https://www.aci.it/fileadmin/cds/art-148.php; Reverso Italian-Arabic (supplementary, non-standard): https://dizionario.reverso.net/italiano-arabo/laterale",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 

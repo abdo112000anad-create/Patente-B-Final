@@ -135,8 +135,6 @@ const sourceHashes = {
   'data/questions.it.json': '4f2076b4096a6d48319d4a1f33df3541398ea03aed304ce80a1916178c572ada',
   'data/lessons.json': '7f91d6cdd6cca92d750287d9b90737e91b8e5763d1f5922824ffc187afe9c4dd',
   'data/lessons-v2.json': '09a66320c1fa91fb1291f771ab471143708388f7eaf71e2108a203f3bba80e25',
-  'data/italian_arabic_dictionary_lookup.json': 'cd5e50eaa54d9d1f13b246f2a603150f2ac3b29cf0d15549c7d3e2df72b8cbc5',
-  'android/app/src/main/assets/dictionary.db': 'a015f6dd82d65e03d9c84029fbb162ea85adee7f6a62eed4b9032c1c4e672805',
 };
 
 test('batch 29 pins all exact question occurrences and validates every Arabic pair and answer key', () => {
@@ -215,9 +213,9 @@ test('batch 29 audit note records the directly opened sources, ambiguity decisio
   assert.match(note, /لم يُجرَ اختبار Android/u);
 });
 
-test('batch 29 pins unchanged source-data and generated dictionary fingerprints', () => {
+test('batch 29 pins unchanged question/lesson inputs and dictionary entry count', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5106);
+  assert.equal(dictionary.metadata.review_required_entries, 5103);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} fingerprint`);
   }

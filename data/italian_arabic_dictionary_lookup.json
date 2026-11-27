@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-27T01:48:31+00:00",
+    "generated_at_utc": "2026-11-27T02:16:43+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5277,
@@ -10,13 +10,13 @@
       "contextual_candidate_needs_review": 3,
       "contextual_override_v49": 8,
       "legacy_glossary_needs_review": 33,
-      "machine_draft_needs_review": 5062,
-      "reviewed_override": 230
+      "machine_draft_needs_review": 5059,
+      "reviewed_override": 233
     },
     "total_entries": 5336,
     "translated_entries": 5336,
-    "review_required_entries": 5106,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 66 frequent question-bank translations were corrected and 81 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+    "review_required_entries": 5103,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 67 frequent question-bank translations were corrected and 83 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
     "app_release": 64,
     "terms_with_lookup_entry": 5336,
     "entries_with_arabic_translation": 5336,
@@ -36,8 +36,8 @@
     "video_context_additions": 3,
     "lesson_dictionary_audit_additions": 64,
     "question_bank_context_correction_candidates": 3,
-    "question_bank_verified_contextual_corrections": 66,
-    "question_bank_verified_contextual_gloss_confirmations": 81
+    "question_bank_verified_contextual_corrections": 67,
+    "question_bank_verified_contextual_gloss_confirmations": 83
   },
   "entries": [
     {
@@ -714,15 +714,15 @@
     },
     {
       "word": "accesa",
-      "translation_ar": "شغّل",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "مُضاء / مُضاءة",
+      "source": "question-bank-context-audit-2026-11; Treccani, acceso (Italian semantics): https://www.treccani.it/vocabolario/acceso/; De Mauro, acceso (Italian semantics): https://dizionario.internazionale.it/parola/acceso; ACI Codice della Strada, art. 41 (traffic-light context only): https://aci.gov.it/codice-della-strada/art-41/; Reverso Context Italian-Arabic (supplementary, non-standard examples): https://context.reverso.net/traduzione/italiano-arabo/accesa",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "71 question-token occurrences in 71 distinct paired question contexts and no lesson matches. Every supplied use is the feminine participial/adjectival form in a literal light, lamp, indicator, arrow, or illuminated-strip context; no figurative 'heated' use appears. The machine draft شغّل is a verb/imperative and does not fit these adjective contexts. Treccani and De Mauro define acceso as the participle/adjective from accendere and document the light-emitting sense; ACI Article 41 confirms the traffic-signal-light context, while Reverso Arabic examples are supplementary and non-standard. The paired Arabic form allows gender agreement. No question, paired Arabic text, or answer key was changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "مُضاء / مُضاءة"
     },
     {
       "word": "accese",
@@ -32347,14 +32347,14 @@
     {
       "word": "laterale",
       "translation_ar": "جانبي",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "source": "question-bank-context-confirmation-2026-11; Treccani, laterale (Italian semantics): https://www.treccani.it/vocabolario/laterale/; De Mauro, laterale (Italian semantics): https://dizionario.internazionale.it/parola/laterale; ACI Codice della Strada, art. 148 (traffic context only): https://www.aci.it/fileadmin/cds/art-148.php; Reverso Italian-Arabic (supplementary, non-standard): https://dizionario.reverso.net/italiano-arabo/laterale",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "64 question-token occurrences in 61 distinct paired question contexts and 2 lesson-text occurrences across 2 matching lesson records (u5-l2 and u9-l6, mirrored in current and legacy lesson files). All app uses are spatial/directional: road, mirror, barrier, distance, surface, visibility, body side, or wind from the side; the unrelated figurative sense 'secondary' is not present. Treccani and De Mauro support the spatial sense; ACI Article 148 supports the traffic phrase distanza laterale but not Arabic wording; Reverso is a supplementary non-standard bilingual witness. The existing gloss is confirmed unchanged, with Arabic gender adapted in sentences. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "جانبي"
     },
     {
       "word": "laterali",
@@ -46507,14 +46507,14 @@
     {
       "word": "responsabilità",
       "translation_ar": "المسؤولية",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "source": "question-bank-context-confirmation-2026-11; Treccani, responsabilità (Italian semantics): https://www.treccani.it/vocabolario/responsabilita/; ACI Codice della Strada, art. 193 (motor-liability context only): https://aci.gov.it/codice-della-strada/art-193/; Reverso Context Italian-Arabic (supplementary): https://context.reverso.net/traduzione/italiano-arabo/responsabilit%C3%A0; Reverso Arabic-Italian مسؤولية (supplementary): https://dizionario.reverso.net/arabo-italiano/%D9%85%D8%B3%D8%A4%D9%88%D9%84%D9%8A%D8%A9",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "66 question-token occurrences in 59 distinct paired question contexts and 4 lesson-text occurrences in 1 matching lesson record (u8-l3, mirrored in current and legacy lesson files). App uses cover general responsibility and civil, criminal, and administrative responsibility, including motor third-party liability and responsibility for damage. Treccani supports the relevant Italian senses; ACI Article 193 establishes only the compulsory motor-liability context; Reverso bilingual examples are supplementary, not legal authority. The existing gloss is supported for all reviewed app uses and is confirmed unchanged. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "المسؤولية"
     },
     {
       "word": "resta",
