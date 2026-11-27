@@ -4,6 +4,8 @@ buildscript {
 
     repositories {
         google()
+        // Use Google's public Maven Central mirror first to avoid CI failures from Central throttling.
+        maven { url 'https://maven-central.storage-download.googleapis.com/maven2/' }
         mavenCentral()
     }
     dependencies {
@@ -20,6 +22,8 @@ apply from: "variables.gradle"
 allprojects {
     repositories {
         google()
+        // Keep Maven Central as a fallback if the mirror is unavailable.
+        maven { url 'https://maven-central.storage-download.googleapis.com/maven2/' }
         mavenCentral()
     }
 }
