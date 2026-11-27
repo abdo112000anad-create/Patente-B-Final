@@ -68,13 +68,19 @@ test('v53 applies the same legible dark palette in every theme preference', () =
   assert.match(dark, /\.feedback\.bad/u);
 });
 
-test('audio bar and fixed 0.8x rate are visible, labelled, and above mobile navigation', () => {
+test('audio controls keep labelled play and stop actions, reserve space, and contain status text', () => {
+  const safetyCss = read('src/v64-ui-fixes.css');
   assert.match(index, /class="speech-rate-value" aria-label="سرعة الصوت الإيطالي">0\.8×/);
   assert.match(index, /class="speech-rate-language" aria-hidden="true">سرعة<\/span>/);
+  assert.match(index, /id="speechToggle"[^>]*aria-label="تشغيل الصوت"/u);
+  assert.match(index, /id="speechStop"[^>]*aria-label="إيقاف الصوت"/u);
   assert.match(read('src/v57-learning-path.css'), /\.speech-rate-value\s*\{[^}]*font-weight:\s*800/s);
-  assert.match(playerCss, /\.speech-playback-bar:not\(\[hidden\]\)\s*\{[^}]*flex-wrap:\s*nowrap\s*!important/s);
+  assert.match(safetyCss, /\.speech-playback-bar:not\(\[hidden\]\)\s*\{[^}]*height:\s*auto\s*!important/s);
+  assert.match(safetyCss, /flex-wrap:\s*wrap\s*!important/u);
+  assert.match(safetyCss, /\.speech-playback-notice:not\(\[hidden\]\)\s*\{[^}]*position:\s*static\s*!important/s);
+  assert.match(safetyCss, /--speech-player-clearance:\s*160px/u);
   assert.match(playerCss, /inset-block-end:\s*calc\(var\(--v50-mobile-nav-clearance\) \+ 12px\)/);
-  assert.match(playerCss, /body\.audio-player-open #main\s*\{[^}]*var\(--v50-player-height\)/s);
+  assert.match(safetyCss, /body\.audio-player-open #main\s*\{[^}]*var\(--speech-player-clearance\)/s);
   assert.match(playerCss, /--v50-mobile-nav-clearance:\s*calc\(66px \+ max\(7px, env\(safe-area-inset-bottom\)\)\)/);
   assert.match(app, /classList\.toggle\('audio-player-open',active\)/);
   assert.match(playerCss, /@media \(max-width: 760px\) and \(max-height: 560px\)/);

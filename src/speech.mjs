@@ -27,6 +27,20 @@ export function splitSpeechText(text, maxLength = 120) {
 export const ITALIAN_TTS_LOCALE = 'it-IT';
 const ITALIAN_TTS_RATE = 0.8;
 const ITALIAN_TTS_PITCH = 1.0;
+const DEFAULT_TTS_INITIALIZATION_TIMEOUT_MS = 15000;
+
+function normalizeTtsLocale(locale) {
+  const requested = String(locale || ITALIAN_TTS_LOCALE).trim();
+  try { return Intl.getCanonicalLocales(requested)[0] || ''; } catch { return ''; }
+}
+
+function withTimeout(promise, timeoutMs, message) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error(message)), Math.max(1, Number(timeoutMs) || DEFAULT_TTS_INITIALIZATION_TIMEOUT_MS));
+  });
+  return Promise.race([Promise.resolve(promise), timeout]).finally(() => clearTimeout(timer));
+}
 
 export function buildLessonSpeechTexts(lesson = {}) {
   const headingIt = String(lesson.titleIt || lesson.heading_it || '').trim();
@@ -38,14 +52,19 @@ function serviceMessage() {
   return 'خدمة النطق الأصلية غير متاحة. افتح التطبيق على Android وتأكد من تفعيل محرك تحويل النص إلى كلام في إعدادات الهاتف.';
 }
 
-function languageMessage() {
-  return 'لا توجد حزمة صوت إيطالية it-IT على محرك الهاتف. نزّل الصوت الإيطالي من إعدادات تحويل النص إلى كلام، ثم أعد المحاولة.';
+function languageMessage(locale = ITALIAN_TTS_LOCALE) {
+  const requested = String(locale || ITALIAN_TTS_LOCALE);
+  if (requested.toLowerCase() === ITALIAN_TTS_LOCALE.toLowerCase()) {
+    return 'لا توجد حزمة صوت إيطالية it-IT على محرك الهاتف. نزّل الصوت الإيطالي من إعدادات تحويل النص إلى كلام، ثم أعد المحاولة.';
+  }
+  return `لا توجد حزمة صوت ${requested} على محرك الهاتف. نزّل الصوت المطابق من إعدادات تحويل النص إلى كلام، ثم أعد المحاولة.`;
 }
 
 export function createSpeechController({
   nativeTts = null,
   isAndroidNative = () => false,
   getRate = () => ITALIAN_TTS_RATE,
+  initializationTimeoutMs = DEFAULT_TTS_INITIALIZATION_TIMEOUT_MS,
   onStateChange = () => {},
   onProgress = () => {},
   onWordProgress = () => {}
@@ -54,6 +73,7 @@ export function createSpeechController({
   let activeTask = null;
   let errorTimer = null;
   let nativeReadyPromise = null;
+  let nativeReadyLocale = '';
   let progressListenerPromise = null;
 
   const notify = (status, task = activeTask, error = '', extra = {}) => {
@@ -103,13 +123,13 @@ export function createSpeechController({
   function ensureProgressListener() {
     if (progressListenerPromise) return progressListenerPromise;
     if (typeof nativeTts?.addListener !== 'function') return Promise.resolve();
-    progressListenerPromise = Promise.resolve(nativeTts.addListener('progress', event => {
+    progressListenerPromise = withTimeout(Promise.resolve().then(() => nativeTts.addListener('progress', event => {
       const task = activeTask;
-      if (!task || task.token !== sequence || task.paused || event?.locale !== ITALIAN_TTS_LOCALE) return;
+      if (!task || task.token !== sequence || task.paused || event?.locale !== task.locale) return;
       const localIndex = Number(event?.start);
       if (!Number.isFinite(localIndex)) return;
       reportWordProgress(task, task.currentChunkOffset + localIndex, Number(event?.end) - localIndex);
-    })).catch(error => {
+    })), initializationTimeoutMs, 'tts-progress-listener-timeout').catch(error => {
       progressListenerPromise = null;
       throw error;
     });
@@ -121,8 +141,10 @@ export function createSpeechController({
       throw new Error('native-tts-plugin-unavailable');
     }
     if (typeof isAndroidNative !== 'function' || !isAndroidNative()) throw new Error('android-native-runtime-required');
-    if (!nativeReadyPromise) {
-      nativeReadyPromise = Promise.resolve().then(() => nativeTts.initialize({locale: ITALIAN_TTS_LOCALE}))
+    if (!nativeReadyPromise || nativeReadyLocale !== task.locale) {
+      const requestedLocale = task.locale;
+      nativeReadyLocale = requestedLocale;
+      nativeReadyPromise = withTimeout(Promise.resolve().then(() => nativeTts.initialize({locale: requestedLocale})), initializationTimeoutMs, 'tts-engine-initialization-timeout')
         .then(result => {
           if (result?.ready === false) {
             if (result?.languageAvailable === false || /language|locale|voice/iu.test(String(result?.error || ''))) throw new Error('language-unavailable');
@@ -131,7 +153,10 @@ export function createSpeechController({
           if (result?.languageAvailable === false) throw new Error('language-unavailable');
           return result || {};
         }).catch(error => {
-          nativeReadyPromise = null;
+          if (nativeReadyLocale === requestedLocale) {
+            nativeReadyPromise = null;
+            nativeReadyLocale = '';
+          }
           throw error;
         });
     }
@@ -141,7 +166,7 @@ export function createSpeechController({
   }
 
   async function stopNativeEngine() {
-    try { await nativeTts?.stop?.(); } catch {}
+    try { await withTimeout(Promise.resolve(nativeTts?.stop?.()), 2000, 'tts-stop-timeout'); } catch {}
   }
 
   function stop() {
@@ -150,9 +175,8 @@ export function createSpeechController({
     const previous = activeTask;
     activeTask = null;
     if (previous) setButtonState(previous.button, 'idle');
-    void stopNativeEngine();
     notify('idle', previous);
-    return Promise.resolve();
+    return stopNativeEngine();
   }
 
   async function waitUntilResumed(task) {
@@ -203,7 +227,7 @@ export function createSpeechController({
   }
 
   async function speakNative(task, text) {
-    const result = await nativeTts.speak({text, locale: ITALIAN_TTS_LOCALE, rate: rateFor(), pitch: ITALIAN_TTS_PITCH});
+    const result = await nativeTts.speak({text, locale: task.locale, rate: rateFor(), pitch: ITALIAN_TTS_PITCH});
     return result?.completed !== false && result?.cancelled !== true && task.token === sequence;
   }
 
@@ -219,7 +243,8 @@ export function createSpeechController({
   }
 
   async function runSegments(segments, locale, button, onSegment = null, kind = 'speech') {
-    if (String(locale || '').toLowerCase() !== ITALIAN_TTS_LOCALE.toLowerCase()) {
+    const requestedLocale = normalizeTtsLocale(locale);
+    if (!requestedLocale) {
       await stop();
       return false;
     }
@@ -244,7 +269,7 @@ export function createSpeechController({
     if (!totalCharacters) return false;
     const task = {
       token,
-      locale: ITALIAN_TTS_LOCALE,
+      locale: requestedLocale,
       button,
       kind,
       voiceName: 'Android system voice',
@@ -263,8 +288,8 @@ export function createSpeechController({
     try {
       if (!(await ensureNativeEngine(task)) || task.token !== sequence) return false;
       task.enginePrepared = true;
-      setButtonState(task.button, 'playing');
-      notify('playing', task);
+      setButtonState(task.button, task.paused ? 'paused' : 'playing');
+      notify(task.paused ? 'paused' : 'playing', task);
 
       for (let segmentIndex = 0; segmentIndex < prepared.length; segmentIndex += 1) {
         if (task.token !== sequence || !(await waitUntilResumed(task))) return false;
@@ -280,7 +305,7 @@ export function createSpeechController({
           } catch (error) {
             if (task.token !== sequence) return false;
             const languageUnavailable = /language-unavailable|voice-unavailable|language not available|missing language data/iu.test(String(error?.message || error));
-            showError(task, error, languageUnavailable ? languageMessage() : serviceMessage());
+            showError(task, error, languageUnavailable ? languageMessage(task.locale) : serviceMessage());
             return false;
           }
           if (task.token !== sequence) return false;
@@ -293,7 +318,7 @@ export function createSpeechController({
     } catch (error) {
       if (task.token !== sequence) return false;
       const languageUnavailable = /language-unavailable|voice-unavailable|language not available|missing language data/iu.test(String(error?.message || error));
-      showError(task, error, languageUnavailable ? languageMessage() : serviceMessage());
+      showError(task, error, languageUnavailable ? languageMessage(task.locale) : serviceMessage());
       return false;
     } finally {
       if (task.token === sequence && !task.failed) {
@@ -304,10 +329,10 @@ export function createSpeechController({
     }
   }
 
-  function speak(text, locale, button) {
+  function speak(text, locale = ITALIAN_TTS_LOCALE, button) {
     return runSegments([{text: String(text || '')}], locale, button);
   }
-  function speakSequence(segments, locale, button, onSegment) {
+  function speakSequence(segments, locale = ITALIAN_TTS_LOCALE, button, onSegment) {
     return runSegments(segments, locale, button, onSegment, 'lesson-explainer');
   }
 

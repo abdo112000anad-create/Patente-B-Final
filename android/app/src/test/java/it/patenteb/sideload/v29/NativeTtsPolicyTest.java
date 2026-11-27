@@ -13,13 +13,21 @@ public class NativeTtsPolicyTest {
         assertTrue(NativeTtsPolicy.hasSpeakableText(" ciao "));
     }
 
-    @Test public void acceptsOnlyExactItalianLocaleTag() {
+    @Test public void acceptsValidLanguageTagsAndRejectsMalformedValues() {
         assertTrue(NativeTtsPolicy.supportsLocale("it-IT"));
+        assertTrue(NativeTtsPolicy.supportsLocale("it-it"));
+        assertTrue(NativeTtsPolicy.supportsLocale("en-US"));
+        assertTrue(NativeTtsPolicy.supportsLocale("ar-EG"));
+        assertTrue(NativeTtsPolicy.supportsLocale("it"));
         assertFalse(NativeTtsPolicy.supportsLocale(null));
         assertFalse(NativeTtsPolicy.supportsLocale(""));
-        assertFalse(NativeTtsPolicy.supportsLocale("it-it"));
-        assertFalse(NativeTtsPolicy.supportsLocale("it"));
-        assertFalse(NativeTtsPolicy.supportsLocale("en-US"));
+        assertFalse(NativeTtsPolicy.supportsLocale(" "));
+        assertFalse(NativeTtsPolicy.supportsLocale("it_IT"));
+        assertFalse(NativeTtsPolicy.supportsLocale("not-a-locale!"));
+    }
+
+    @Test public void initializationHasAFiniteTimeout() {
+        assertEquals(15000L, NativeTtsPolicy.initializationTimeoutMillis());
     }
 
     @Test public void timeoutIsClampedAndScalesAtBoundaries() {

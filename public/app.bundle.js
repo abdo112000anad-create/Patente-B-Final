@@ -42246,6 +42246,22 @@ This typically indicates that your device does not have a healthy Internet conne
   var ITALIAN_TTS_LOCALE = "it-IT";
   var ITALIAN_TTS_RATE = 0.8;
   var ITALIAN_TTS_PITCH = 1;
+  var DEFAULT_TTS_INITIALIZATION_TIMEOUT_MS = 15e3;
+  function normalizeTtsLocale(locale) {
+    const requested = String(locale || ITALIAN_TTS_LOCALE).trim();
+    try {
+      return Intl.getCanonicalLocales(requested)[0] || "";
+    } catch {
+      return "";
+    }
+  }
+  function withTimeout(promise, timeoutMs, message) {
+    let timer;
+    const timeout = new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error(message)), Math.max(1, Number(timeoutMs) || DEFAULT_TTS_INITIALIZATION_TIMEOUT_MS));
+    });
+    return Promise.race([Promise.resolve(promise), timeout]).finally(() => clearTimeout(timer));
+  }
   function buildLessonSpeechTexts(lesson = {}) {
     const headingIt = String(lesson.titleIt || lesson.heading_it || "").trim();
     const bodyIt = String(lesson.summaryIt || lesson.body_it || "").trim();
@@ -42254,13 +42270,18 @@ This typically indicates that your device does not have a healthy Internet conne
   function serviceMessage() {
     return "خدمة النطق الأصلية غير متاحة. افتح التطبيق على Android وتأكد من تفعيل محرك تحويل النص إلى كلام في إعدادات الهاتف.";
   }
-  function languageMessage() {
-    return "لا توجد حزمة صوت إيطالية it-IT على محرك الهاتف. نزّل الصوت الإيطالي من إعدادات تحويل النص إلى كلام، ثم أعد المحاولة.";
+  function languageMessage(locale = ITALIAN_TTS_LOCALE) {
+    const requested = String(locale || ITALIAN_TTS_LOCALE);
+    if (requested.toLowerCase() === ITALIAN_TTS_LOCALE.toLowerCase()) {
+      return "لا توجد حزمة صوت إيطالية it-IT على محرك الهاتف. نزّل الصوت الإيطالي من إعدادات تحويل النص إلى كلام، ثم أعد المحاولة.";
+    }
+    return `لا توجد حزمة صوت ${requested} على محرك الهاتف. نزّل الصوت المطابق من إعدادات تحويل النص إلى كلام، ثم أعد المحاولة.`;
   }
   function createSpeechController({
     nativeTts = null,
     isAndroidNative = () => false,
     getRate = () => ITALIAN_TTS_RATE,
+    initializationTimeoutMs = DEFAULT_TTS_INITIALIZATION_TIMEOUT_MS,
     onStateChange = () => {
     },
     onProgress = () => {
@@ -42272,6 +42293,7 @@ This typically indicates that your device does not have a healthy Internet conne
     let activeTask = null;
     let errorTimer = null;
     let nativeReadyPromise = null;
+    let nativeReadyLocale = "";
     let progressListenerPromise = null;
     const notify = (status, task = activeTask, error = "", extra = {}) => {
       try {
@@ -42334,13 +42356,13 @@ This typically indicates that your device does not have a healthy Internet conne
     function ensureProgressListener() {
       if (progressListenerPromise) return progressListenerPromise;
       if (typeof (nativeTts == null ? void 0 : nativeTts.addListener) !== "function") return Promise.resolve();
-      progressListenerPromise = Promise.resolve(nativeTts.addListener("progress", (event) => {
+      progressListenerPromise = withTimeout(Promise.resolve().then(() => nativeTts.addListener("progress", (event) => {
         const task = activeTask;
-        if (!task || task.token !== sequence || task.paused || (event == null ? void 0 : event.locale) !== ITALIAN_TTS_LOCALE) return;
+        if (!task || task.token !== sequence || task.paused || (event == null ? void 0 : event.locale) !== task.locale) return;
         const localIndex = Number(event == null ? void 0 : event.start);
         if (!Number.isFinite(localIndex)) return;
         reportWordProgress(task, task.currentChunkOffset + localIndex, Number(event == null ? void 0 : event.end) - localIndex);
-      })).catch((error) => {
+      })), initializationTimeoutMs, "tts-progress-listener-timeout").catch((error) => {
         progressListenerPromise = null;
         throw error;
       });
@@ -42351,8 +42373,10 @@ This typically indicates that your device does not have a healthy Internet conne
         throw new Error("native-tts-plugin-unavailable");
       }
       if (typeof isAndroidNative !== "function" || !isAndroidNative()) throw new Error("android-native-runtime-required");
-      if (!nativeReadyPromise) {
-        nativeReadyPromise = Promise.resolve().then(() => nativeTts.initialize({ locale: ITALIAN_TTS_LOCALE })).then((result) => {
+      if (!nativeReadyPromise || nativeReadyLocale !== task.locale) {
+        const requestedLocale = task.locale;
+        nativeReadyLocale = requestedLocale;
+        nativeReadyPromise = withTimeout(Promise.resolve().then(() => nativeTts.initialize({ locale: requestedLocale })), initializationTimeoutMs, "tts-engine-initialization-timeout").then((result) => {
           if ((result == null ? void 0 : result.ready) === false) {
             if ((result == null ? void 0 : result.languageAvailable) === false || /language|locale|voice/iu.test(String((result == null ? void 0 : result.error) || ""))) throw new Error("language-unavailable");
             throw new Error(String((result == null ? void 0 : result.error) || "native-tts-initialization-failed"));
@@ -42360,7 +42384,10 @@ This typically indicates that your device does not have a healthy Internet conne
           if ((result == null ? void 0 : result.languageAvailable) === false) throw new Error("language-unavailable");
           return result || {};
         }).catch((error) => {
-          nativeReadyPromise = null;
+          if (nativeReadyLocale === requestedLocale) {
+            nativeReadyPromise = null;
+            nativeReadyLocale = "";
+          }
           throw error;
         });
       }
@@ -42371,7 +42398,7 @@ This typically indicates that your device does not have a healthy Internet conne
     async function stopNativeEngine() {
       var _a12;
       try {
-        await ((_a12 = nativeTts == null ? void 0 : nativeTts.stop) == null ? void 0 : _a12.call(nativeTts));
+        await withTimeout(Promise.resolve((_a12 = nativeTts == null ? void 0 : nativeTts.stop) == null ? void 0 : _a12.call(nativeTts)), 2e3, "tts-stop-timeout");
       } catch {
       }
     }
@@ -42384,9 +42411,8 @@ This typically indicates that your device does not have a healthy Internet conne
       const previous = activeTask;
       activeTask = null;
       if (previous) setButtonState(previous.button, "idle");
-      void stopNativeEngine();
       notify("idle", previous);
-      return Promise.resolve();
+      return stopNativeEngine();
     }
     async function waitUntilResumed(task) {
       while (task.paused && task.token === sequence) {
@@ -42438,7 +42464,7 @@ This typically indicates that your device does not have a healthy Internet conne
       }, 5e3);
     }
     async function speakNative(task, text2) {
-      const result = await nativeTts.speak({ text: text2, locale: ITALIAN_TTS_LOCALE, rate: rateFor(), pitch: ITALIAN_TTS_PITCH });
+      const result = await nativeTts.speak({ text: text2, locale: task.locale, rate: rateFor(), pitch: ITALIAN_TTS_PITCH });
       return (result == null ? void 0 : result.completed) !== false && (result == null ? void 0 : result.cancelled) !== true && task.token === sequence;
     }
     async function speakChunk(task, text2) {
@@ -42452,7 +42478,8 @@ This typically indicates that your device does not have a healthy Internet conne
       return false;
     }
     async function runSegments(segments, locale, button, onSegment = null, kind = "speech") {
-      if (String(locale || "").toLowerCase() !== ITALIAN_TTS_LOCALE.toLowerCase()) {
+      const requestedLocale = normalizeTtsLocale(locale);
+      if (!requestedLocale) {
         await stop();
         return false;
       }
@@ -42475,7 +42502,7 @@ This typically indicates that your device does not have a healthy Internet conne
       if (!totalCharacters) return false;
       const task = {
         token,
-        locale: ITALIAN_TTS_LOCALE,
+        locale: requestedLocale,
         button,
         kind,
         voiceName: "Android system voice",
@@ -42494,8 +42521,8 @@ This typically indicates that your device does not have a healthy Internet conne
       try {
         if (!await ensureNativeEngine(task) || task.token !== sequence) return false;
         task.enginePrepared = true;
-        setButtonState(task.button, "playing");
-        notify("playing", task);
+        setButtonState(task.button, task.paused ? "paused" : "playing");
+        notify(task.paused ? "paused" : "playing", task);
         for (let segmentIndex = 0; segmentIndex < prepared.length; segmentIndex += 1) {
           if (task.token !== sequence || !await waitUntilResumed(task)) return false;
           task.currentSegmentIndex = segmentIndex;
@@ -42513,7 +42540,7 @@ This typically indicates that your device does not have a healthy Internet conne
             } catch (error) {
               if (task.token !== sequence) return false;
               const languageUnavailable = /language-unavailable|voice-unavailable|language not available|missing language data/iu.test(String((error == null ? void 0 : error.message) || error));
-              showError(task, error, languageUnavailable ? languageMessage() : serviceMessage());
+              showError(task, error, languageUnavailable ? languageMessage(task.locale) : serviceMessage());
               return false;
             }
             if (task.token !== sequence) return false;
@@ -42526,7 +42553,7 @@ This typically indicates that your device does not have a healthy Internet conne
       } catch (error) {
         if (task.token !== sequence) return false;
         const languageUnavailable = /language-unavailable|voice-unavailable|language not available|missing language data/iu.test(String((error == null ? void 0 : error.message) || error));
-        showError(task, error, languageUnavailable ? languageMessage() : serviceMessage());
+        showError(task, error, languageUnavailable ? languageMessage(task.locale) : serviceMessage());
         return false;
       } finally {
         if (task.token === sequence && !task.failed) {
@@ -42536,10 +42563,10 @@ This typically indicates that your device does not have a healthy Internet conne
         }
       }
     }
-    function speak2(text2, locale, button) {
+    function speak2(text2, locale = ITALIAN_TTS_LOCALE, button) {
       return runSegments([{ text: String(text2 || "") }], locale, button);
     }
-    function speakSequence(segments, locale, button, onSegment) {
+    function speakSequence(segments, locale = ITALIAN_TTS_LOCALE, button, onSegment) {
       return runSegments(segments, locale, button, onSegment, "lesson-explainer");
     }
     return {
@@ -46926,16 +46953,18 @@ This typically indicates that your device does not have a healthy Internet conne
     if (status === "idle" || status === "error") clearLessonWordHighlight(button);
     const bar = document.querySelector("#speechPlaybackBar");
     if (!bar) return;
-    const active = status !== "idle", playing = status === "playing", paused = status === "paused", failed = status === "error";
+    const active = status !== "idle", playing = status === "playing", paused = status === "paused", preparing = status === "preparing", failed = status === "error";
     bar.hidden = !active;
     document.body.classList.toggle("audio-player-open", active);
     const toggle = document.querySelector("#speechToggle"), playIcon = document.querySelector("#speechIconPlay"), pauseIcon = document.querySelector("#speechIconPause"), progressBar = document.querySelector("#speechProgress"), statusNode = document.querySelector("#speechPlaybackStatus"), notice = document.querySelector("#speechPlaybackNotice");
     if (toggle) {
+      toggle.disabled = failed;
       toggle.setAttribute("aria-pressed", String(playing));
-      toggle.setAttribute("aria-label", paused ? "استئناف الصوت" : playing ? "إيقاف الصوت مؤقتًا" : "تشغيل الصوت");
+      toggle.setAttribute("aria-label", failed ? "تعذّر تشغيل الصوت" : paused ? "استئناف الصوت" : playing || preparing ? "إيقاف الصوت مؤقتًا" : "تشغيل الصوت");
+      toggle.title = toggle.getAttribute("aria-label");
     }
-    if (playIcon) playIcon.hidden = playing;
-    if (pauseIcon) pauseIcon.hidden = !playing;
+    if (playIcon) playIcon.hidden = playing || preparing;
+    if (pauseIcon) pauseIcon.hidden = !(playing || preparing);
     if (progressBar) {
       progressBar.value = active ? Math.max(0, Math.min(1, Number(progress) || 0)) : 0;
       progressBar.setAttribute("aria-valuenow", String(Math.round(progressBar.value * 100)));

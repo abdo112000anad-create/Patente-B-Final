@@ -106,13 +106,13 @@ function showToast(it,ar){toastNode.innerHTML=pair(it,ar,'toast-pair');toastNode
 function syncSpeechControls({status='idle',button=null,locale='',progress=0,voiceName='',error=''}={}){
   if(status==='idle'||status==='error')clearLessonWordHighlight(button);
   const bar=document.querySelector('#speechPlaybackBar');if(!bar)return;
-  const active=status!=='idle',playing=status==='playing',paused=status==='paused',failed=status==='error';
+  const active=status!=='idle',playing=status==='playing',paused=status==='paused',preparing=status==='preparing',failed=status==='error';
   bar.hidden=!active;
   document.body.classList.toggle('audio-player-open',active);
   const toggle=document.querySelector('#speechToggle'),playIcon=document.querySelector('#speechIconPlay'),pauseIcon=document.querySelector('#speechIconPause'),progressBar=document.querySelector('#speechProgress'),statusNode=document.querySelector('#speechPlaybackStatus'),notice=document.querySelector('#speechPlaybackNotice');
-  if(toggle){toggle.setAttribute('aria-pressed',String(playing));toggle.setAttribute('aria-label',paused?'استئناف الصوت':playing?'إيقاف الصوت مؤقتًا':'تشغيل الصوت');}
-  if(playIcon)playIcon.hidden=playing;
-  if(pauseIcon)pauseIcon.hidden=!playing;
+  if(toggle){toggle.disabled=failed;toggle.setAttribute('aria-pressed',String(playing));toggle.setAttribute('aria-label',failed?'تعذّر تشغيل الصوت':paused?'استئناف الصوت':playing||preparing?'إيقاف الصوت مؤقتًا':'تشغيل الصوت');toggle.title=toggle.getAttribute('aria-label');}
+  if(playIcon)playIcon.hidden=playing||preparing;
+  if(pauseIcon)pauseIcon.hidden=!(playing||preparing);
   if(progressBar){progressBar.value=active?Math.max(0,Math.min(1,Number(progress)||0)):0;progressBar.setAttribute('aria-valuenow',String(Math.round(progressBar.value*100)));}
   if(statusNode)statusNode.textContent=failed?(error||'تعذّر تشغيل الصوت'):status==='preparing'?'جارٍ تهيئة محرك Android للصوت الإيطالي...':paused?'الصوت متوقف مؤقتًا':playing?'الصوت يعمل بالإيطالية':'';
   if(notice)notice.hidden=!statusNode?.textContent;

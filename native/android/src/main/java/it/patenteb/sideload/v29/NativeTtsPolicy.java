@@ -1,8 +1,11 @@
 package it.patenteb.sideload.v29;
 
+import java.util.Locale;
+
 /** Pure policy decisions shared by the native TTS bridge and JVM unit tests. */
 final class NativeTtsPolicy {
     static final String ITALIAN_LOCALE = "it-IT";
+    private static final long INITIALIZATION_TIMEOUT_MS = 15000L;
     private static final long MIN_TIMEOUT_MS = 20000L;
     private static final long MAX_TIMEOUT_MS = 120000L;
     private static final long TIMEOUT_PER_CHARACTER_MS = 350L;
@@ -14,7 +17,15 @@ final class NativeTtsPolicy {
     }
 
     static boolean supportsLocale(String locale) {
-        return ITALIAN_LOCALE.equals(locale);
+        if (locale == null || locale.isEmpty() || !locale.equals(locale.trim())) return false;
+        Locale parsed = Locale.forLanguageTag(locale);
+        String canonical = parsed.toLanguageTag();
+        return !parsed.getLanguage().isEmpty() && !"und".equalsIgnoreCase(canonical)
+            && canonical.equalsIgnoreCase(locale);
+    }
+
+    static long initializationTimeoutMillis() {
+        return INITIALIZATION_TIMEOUT_MS;
     }
 
     static long timeoutMillisForTextLength(int textLength) {

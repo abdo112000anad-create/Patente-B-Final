@@ -6,7 +6,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 
-test('lesson and quiz audio route through the shared Android Native TTS controller in Italian', () => {
+test('lesson and quiz audio stay Italian while the shared Android Native TTS controller honors requested locales', () => {
   const app = read('src/app.js');
   const speech = read('src/speech.mjs');
   assert.match(app, /registerPlugin\('NativeTts'\)/u);
@@ -14,7 +14,7 @@ test('lesson and quiz audio route through the shared Android Native TTS controll
   assert.match(app, /Capacitor\.getPlatform\(\)==='android'/u);
   assert.match(app, /speak\(lessonItalianAudio\.dataset\.ttsText\|\|''\s*,\s*ITALIAN_TTS_LOCALE\s*,\s*lessonItalianAudio\)/u);
   assert.match(app, /speakSequence\(segments,ITALIAN_TTS_LOCALE/u);
-  assert.match(speech, /nativeTts\.speak\(\{text, locale: ITALIAN_TTS_LOCALE, rate: rateFor\(\), pitch: ITALIAN_TTS_PITCH\}\)/u);
+  assert.match(speech, /nativeTts\.speak\(\{text, locale: task\.locale, rate: rateFor\(\), pitch: ITALIAN_TTS_PITCH\}\)/u);
   assert.doesNotMatch(`${app}\n${speech}`, /speechSynthesis|SpeechSynthesisUtterance/iu);
 });
 

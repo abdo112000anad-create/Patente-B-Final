@@ -297,6 +297,67 @@ body,
   height: auto;
 }
 
+/* Keep the persistent speech controls and their live status inside reserved page space. */
+:root {
+  --speech-player-clearance: 160px;
+}
+
+.speech-playback-bar:not([hidden]) {
+  height: auto !important;
+  min-height: var(--v50-player-height, 60px) !important;
+  flex-wrap: wrap !important;
+  padding-block: 7px !important;
+}
+
+.speech-playback-notice:not([hidden]) {
+  position: static !important;
+  inset: auto !important;
+  order: 5;
+  flex: 1 0 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 5px 6px 0 !important;
+  border: 0 !important;
+  border-top: 1px solid #397887 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.speech-playback-notice [role="status"] {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+#speechToggle:disabled {
+  cursor: not-allowed;
+  opacity: .68;
+}
+
+@media (max-width: 760px) {
+  body.audio-player-open #main {
+    padding-bottom: calc(var(--v53-mobile-nav-height) + var(--speech-player-clearance) + 24px) !important;
+  }
+
+  body.audio-player-open .back-to-top,
+  body.audio-player-open .toast {
+    inset-block-end: calc(var(--v53-mobile-nav-height) + var(--speech-player-clearance) + 22px) !important;
+  }
+
+  body.audio-player-open .word-translation-tooltip {
+    inset-block-end: calc(var(--v53-mobile-nav-height) + var(--speech-player-clearance) + 10px) !important;
+  }
+}
+
+@media (min-width: 761px) {
+  body.audio-player-open #main {
+    padding-bottom: calc(var(--speech-player-clearance) + 32px) !important;
+  }
+
+  body.audio-player-open .word-translation-tooltip {
+    inset-block-end: calc(var(--speech-player-clearance) + 10px) !important;
+  }
+}
+
 @media (max-width: 430px) {
   #main .review-lesson {
     grid-template-columns: minmax(64px, 72px) minmax(0, 1fr) auto;
