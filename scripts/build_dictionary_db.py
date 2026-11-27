@@ -1421,10 +1421,16 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS.update({
         "contextual_translation",
         "59 exact question-token occurrences in 59 paired question records (58 unique Italian texts; 59 unique Italian-Arabic pairs) and no Italian lesson-field matches. All reviewed app uses mean waiting for a vehicle, tram, or other traffic to pass. Treccani lists aspettare as a sense of attendere and also documents other senses outside this context; Reverso Italian-Arabic supports انتظار/انتظر in waiting examples. The existing gloss is confirmed for these traffic contexts only; no question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
     ),
+    "carburante": (
+        "الوقود",
+        "contextual_translation",
+        "45 exact question-token occurrences in 45 paired question records (45 unique Italian texts; 45 unique Italian-Arabic pairs) and 1 Italian lesson-field occurrence in each current and legacy lesson file. All reviewed uses refer to motor fuel: fuel stations/refuelling, fuel in a vehicle tank, or fuel transport; paired Arabic question contexts repeatedly use وقود/الوقود. Treccani defines carburante as combustibile used to power internal-combustion engines and names gasoline and diesel; Reverso Italian-Arabic directly renders carburante as وقود in relevant examples. Existing gloss الوقود confirmed unchanged for these app contexts; no question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
 })
 QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
     "rosso": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, rosso: https://www.treccani.it/vocabolario/rosso/; Glosbe Italian-Arabic, rosso: https://ar.glosbe.com/it/ar/rosso; full paired app contexts and lessons: docs/dictionary-audit-batch38-2026-11-27.md",
     "attendere": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, attendere: https://www.treccani.it/vocabolario/attendere/; Reverso Italian-Arabic, attendere: https://dizionario.reverso.net/italiano-arabo/attendere; full paired app contexts: docs/dictionary-audit-batch38-2026-11-27.md",
+    "carburante": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, carburante: https://www.treccani.it/vocabolario/carburante/; Reverso Italian-Arabic, carburante: https://dizionario.reverso.net/italiano-arabo/carburante; full paired app contexts and lessons: docs/dictionary-audit-batch40-2026-11-27.md",
 })
 
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.

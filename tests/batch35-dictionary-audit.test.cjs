@@ -150,9 +150,9 @@ const sourceHashes = {
 };
 
 const generatedHashes = {
-  'android/app/src/main/assets/dictionary.db': '9fc28a74593c0cf87a9882f271dd0125382b2c2fe6d8145d9659289219b5e3e3',
+  'android/app/src/main/assets/dictionary.db': '2701026f43adb73d2f01de465b2a3ca21105c1d63544486c9657aa0c5c83c4b5',
   'public/app.bundle.js': 'e4d827dfa7fd305ffaafd80a3386e546a8a29cd4fbc6836b4b4506e93a45e685',
-  'public/release.json': '012c5fb49258184a00571acc25316b5885a99c1ebf0b89450cb653e68cc2ca3a',
+  'public/release.json': 'c3312bebb43c54421a80fcaf15cafa1c64dddf5efe3b0d814327dcf5bb3dfcc6',
 };
 
 test('batch 35 pins paired question contexts, Arabic text, answers, and exact ID sets', () => {
@@ -228,17 +228,17 @@ test('batch 35 audit memo cites opened lexical and road-code sources and records
 
 test('batch 35 pins dictionary totals and proves source question/lesson files stayed unchanged', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5085);
+  assert.equal(dictionary.metadata.review_required_entries, 5084);
   assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 82);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 86);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 87);
   assert.deepEqual(dictionary.metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 31,
-    machine_draft_needs_review: 5043,
-    reviewed_override: 251,
+    machine_draft_needs_review: 5042,
+    reviewed_override: 252,
   });
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5085);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5084);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} fingerprint`);
   }
