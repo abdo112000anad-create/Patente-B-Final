@@ -189,15 +189,15 @@ test('batch 28 records sources, ambiguity decisions, and source limitations in i
 
 test('batch 28 pins its reviewed terms, current dictionary totals, and unchanged question/lesson inputs', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5099);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 71);
+  assert.equal(dictionary.metadata.review_required_entries, 5097);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 73);
   assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 83);
   assert.deepEqual(dictionary.metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 33,
-    machine_draft_needs_review: 5055,
-    reviewed_override: 237,
+    machine_draft_needs_review: 5053,
+    reviewed_override: 239,
   });
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} fingerprint`);

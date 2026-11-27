@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-27T02:33:27+00:00",
+    "generated_at_utc": "2026-11-27T02:46:13+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5277,
@@ -10,13 +10,13 @@
       "contextual_candidate_needs_review": 3,
       "contextual_override_v49": 8,
       "legacy_glossary_needs_review": 33,
-      "machine_draft_needs_review": 5055,
-      "reviewed_override": 237
+      "machine_draft_needs_review": 5053,
+      "reviewed_override": 239
     },
     "total_entries": 5336,
     "translated_entries": 5336,
-    "review_required_entries": 5099,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 71 frequent question-bank translations were corrected and 83 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+    "review_required_entries": 5097,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 73 frequent question-bank translations were corrected and 83 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
     "app_release": 64,
     "terms_with_lookup_entry": 5336,
     "entries_with_arabic_translation": 5336,
@@ -36,7 +36,7 @@
     "video_context_additions": 3,
     "lesson_dictionary_audit_additions": 64,
     "question_bank_context_correction_candidates": 3,
-    "question_bank_verified_contextual_corrections": 71,
+    "question_bank_verified_contextual_corrections": 73,
     "question_bank_verified_contextual_gloss_confirmations": 83
   },
   "entries": [
@@ -19290,15 +19290,15 @@
     },
     {
       "word": "divieto",
-      "translation_ar": "ممنوع",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "حظر؛ منع",
+      "source": "question-bank-context-audit-2026-11; Treccani, divieto: https://www.treccani.it/vocabolario/divieto/; Treccani, Sinonimi e Contrari, divieto: https://www.treccani.it/vocabolario/divieto_(Sinonimi-e-Contrari)/; Reverso Context Italian-Arabic, divieto (supplementary, non-standard): https://context.reverso.net/traduzione/italiano-arabo/divieto",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "107 exact question-token occurrences in 106 paired question contexts and 14 lesson-text occurrences (7 fields in each of the current and legacy files). App contexts use divieto as a noun for prohibitions, including divieto di sosta, transito, sorpasso, and svolta, and as the class of prohibition signs. Treccani defines it as proibizione/legal impediment and gives the traffic constructions; Reverso is a supplementary, non-standard Italian-Arabic witness for حظر/منع. The machine draft ممنوع is adjectival and does not fit the noun entry. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "حظر؛ منع"
     },
     {
       "word": "divisa",
@@ -36018,15 +36018,15 @@
     },
     {
       "word": "motocicli",
-      "translation_ar": "درّاجات",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "دراجات نارية",
+      "source": "question-bank-context-audit-2026-11; ACI Codice della Strada, art. 53: https://aci.gov.it/codice-della-strada/art-53/; Treccani, motociclo: https://www.treccani.it/vocabolario/motociclo/; Glosbe Italian-Arabic, motociclo (supplementary, non-standard): https://ar.glosbe.com/it/ar/motociclo; Reverso Context Italian-Arabic, motociclo (supplementary, non-standard): https://context.reverso.net/traduzione/italiano-arabo/motociclo",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "119 exact question-token occurrences in 119 paired question contexts and 4 lesson-text occurrences (2 fields mirrored in current and legacy files). All reviewed app uses refer to two-wheel motor vehicles, including contexts that distinguish motocicli from ciclomotori. ACI Codice della Strada art. 53 and Treccani define the Italian vehicle class; Glosbe and Reverso provide supplementary, non-standard Italian-Arabic witnesses for دراجة نارية. The machine draft درّاجات is too broad. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "دراجات نارية"
     },
     {
       "word": "motociclista",

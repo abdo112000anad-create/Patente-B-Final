@@ -1299,6 +1299,24 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
     "purché": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, Purché (Italian syntax and meaning): https://www.treccani.it/vocabolario/purche/; Reverso Context Italian-Arabic (supplementary, non-standard): https://context.reverso.net/translation/italian-arabic/purch%C3%A9",
 })
 
+# Batch thirty-two source-backed contextual corrections from complete app contexts.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "motocicli": (
+        "دراجات نارية",
+        "contextual_translation",
+        "119 exact question-token occurrences in 119 paired question contexts and 4 lesson-text occurrences (2 fields mirrored in current and legacy files). All reviewed app uses refer to two-wheel motor vehicles, including contexts that distinguish motocicli from ciclomotori. ACI Codice della Strada art. 53 and Treccani define the Italian vehicle class; Glosbe and Reverso provide supplementary, non-standard Italian-Arabic witnesses for دراجة نارية. The machine draft درّاجات is too broad. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "divieto": (
+        "حظر؛ منع",
+        "contextual_translation",
+        "107 exact question-token occurrences in 106 paired question contexts and 14 lesson-text occurrences (7 fields in each of the current and legacy files). App contexts use divieto as a noun for prohibitions, including divieto di sosta, transito, sorpasso, and svolta, and as the class of prohibition signs. Treccani defines it as proibizione/legal impediment and gives the traffic constructions; Reverso is a supplementary, non-standard Italian-Arabic witness for حظر/منع. The machine draft ممنوع is adjectival and does not fit the noun entry. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "motocicli": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " ACI Codice della Strada, art. 53: https://aci.gov.it/codice-della-strada/art-53/; Treccani, motociclo: https://www.treccani.it/vocabolario/motociclo/; Glosbe Italian-Arabic, motociclo (supplementary, non-standard): https://ar.glosbe.com/it/ar/motociclo; Reverso Context Italian-Arabic, motociclo (supplementary, non-standard): https://context.reverso.net/traduzione/italiano-arabo/motociclo",
+    "divieto": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, divieto: https://www.treccani.it/vocabolario/divieto/; Treccani, Sinonimi e Contrari, divieto: https://www.treccani.it/vocabolario/divieto_(Sinonimi-e-Contrari)/; Reverso Context Italian-Arabic, divieto (supplementary, non-standard): https://context.reverso.net/traduzione/italiano-arabo/divieto",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 
