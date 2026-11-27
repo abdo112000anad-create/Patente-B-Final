@@ -97,7 +97,7 @@ test('GitHub Actions builds the current PWA consumed by Capacitor before Android
   assert.equal(json('package.json').scripts.build, 'node scripts/build-pwa.cjs');
   assert.equal(json('capacitor.config.json').webDir, 'dist');
   assert.match(workflow, /npm run build[\s\S]*npx cap sync android/u);
-  assert.equal(release.version, 66);
+  assert.equal(release.version, 68);
   assert.equal(release.lessonsSha256, lessonHash);
   assert.equal(sha256('dist/data/lessons.json'), lessonHash);
   assert.equal(sha256('dist/app.bundle.js'), release.bundleSha256);

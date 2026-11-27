@@ -35,11 +35,11 @@ test('v54 dictionary includes contextual translations for the three words in the
   }
 });
 
-test('v66 release metadata agrees across the PWA and Android package', () => {
-  assert.equal(json('package.json').version, '66.0.0');
-  assert.equal(json('package-lock.json').version, '66.0.0');
-  assert.equal(json('public/release.json').version, 66);
-  assert.match(read('android/app/build.gradle'), /versionCode 66/u);
-  assert.match(read('android/app/build.gradle'), /versionName "66\.0\.0"/u);
-  assert.match(read('.github/workflows/build.yml'), /patente-b-v66-debug-apk/u);
+test('v68 release metadata agrees across the PWA and Android package', () => {
+  assert.equal(json('package.json').version, '68.0.0');
+  assert.equal(json('package-lock.json').version, '68.0.0');
+  assert.equal(json('public/release.json').version, 68);
+  assert.match(read('android/app/build.gradle'), /versionCode 68/u);
+  assert.match(read('android/app/build.gradle'), /versionName "68\.0\.0"/u);
+  assert.match(read('.github/workflows/build.yml'), /patente-b-v68-debug-apk/u);
 });
