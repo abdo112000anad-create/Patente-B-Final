@@ -162,12 +162,12 @@ test('batch 25 leaves the mixed-sense guida entry unchanged and flagged', () => 
 
 test('batch 25 global dictionary counts match the reviewed rows and unresolved draft', () => {
   assert.equal(dictionary.metadata.total_entries, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5089);
+  assert.equal(dictionary.metadata.review_required_entries, 5085);
   assert.equal(dictionary.metadata.question_bank_context_correction_candidates, 3);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 80);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 82);
   assert.equal(dictionary.metadata.counts_by_status.contextual_candidate_needs_review, 3);
-  assert.equal(dictionary.metadata.counts_by_status.machine_draft_needs_review, 5047);
-  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 247);
+  assert.equal(dictionary.metadata.counts_by_status.machine_draft_needs_review, 5043);
+  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 251);
 });
 
 test('batch 25 preserves both paired question files and all official wording/answer keys', () => {

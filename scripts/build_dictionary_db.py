@@ -1393,6 +1393,40 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
     "strade": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, strada: https://www.treccani.it/vocabolario/strada/; Glosbe Italian-Arabic, strada: https://glosbe.com/it/ar/strada; full paired app contexts and lessons: docs/dictionary-audit-batch37-2026-11-27.md",
 })
 
+# Batch thirty-eight: road-edge and decrease senses, plus unchanged color/waiting glosses.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "margine": (
+        "حافة",
+        "contextual_translation",
+        "63 exact question-token occurrences in 63 paired question records and no Italian lesson-field matches. Every audited use is the spatial edge/limit of the carreggiata or road. Treccani defines the edge sense and explicitly includes margine della strada; ACI Codice della Strada arts. 143 and 3 anchor the road context; Reverso Italian-Arabic supports حافة for this spatial sense while هامش remains appropriate in book/figurative contexts. The draft هامش is not sufficiently precise as the only lookup gloss for these traffic uses; حافة is scoped to the reviewed contexts, not every sense of margine. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "diminuire": (
+        "يُقَلِّل؛ يَقِلّ / ينخفض",
+        "contextual_translation",
+        "60 exact question-token occurrences in 60 paired question records (59 unique Italian texts; 60 unique Italian-Arabic pairs) and 2 Italian lesson-field occurrences in each current and legacy lesson file. App contexts include the transitive use diminuire la velocità / diminuire la distanza di sicurezza and the intransitive use può diminuire l'aderenza / può diminuire l'inquinamento. Treccani and De Mauro distinguish rendere minore (transitive) from diventare minore (intransitive); Reverso Italian-Arabic examples support يقلّل/يخفض and يقلّ/ينخفض respectively. The machine draft قلّص does not cover the intransitive app uses; the sense-qualified gloss records both reviewed constructions without changing any question, paired Arabic text, lesson text, or answer key. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "margine": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, margine: https://www.treccani.it/vocabolario/margine/; ACI Codice della Strada, art. 143: https://aci.gov.it/codice-della-strada/art-143/; ACI Codice della Strada, art. 3: https://www.aci.it/fileadmin/cds/art-3.php; Reverso Context Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/margine; full paired app contexts: docs/dictionary-audit-batch38-2026-11-27.md",
+    "diminuire": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, diminuire: https://www.treccani.it/vocabolario/diminuire/; Nuovo De Mauro, diminuire: https://dizionario.internazionale.it/parola/diminuire; Reverso Context Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/diminuire; full paired app contexts and lessons: docs/dictionary-audit-batch38-2026-11-27.md",
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS.update({
+    "rosso": (
+        "أحمر",
+        "contextual_translation",
+        "63 exact question-token occurrences in 63 paired question records (58 unique Italian texts; 62 unique Italian-Arabic pairs) and 1 Italian lesson-field occurrence in each current and legacy lesson file. Reviewed app uses describe the red colour, including the red traffic signal/disc and other red objects; Arabic gender and syntax can require أحمر/حمراء or the noun الأحمر in a sentence. Treccani defines the Italian colour and the red traffic signal; Glosbe Italian-Arabic directly supports أحمر/الأحمر and feminine حمراء. The existing concise gloss is confirmed unchanged; no question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "attendere": (
+        "انتظر",
+        "contextual_translation",
+        "59 exact question-token occurrences in 59 paired question records (58 unique Italian texts; 59 unique Italian-Arabic pairs) and no Italian lesson-field matches. All reviewed app uses mean waiting for a vehicle, tram, or other traffic to pass. Treccani lists aspettare as a sense of attendere and also documents other senses outside this context; Reverso Italian-Arabic supports انتظار/انتظر in waiting examples. The existing gloss is confirmed for these traffic contexts only; no question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
+    "rosso": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, rosso: https://www.treccani.it/vocabolario/rosso/; Glosbe Italian-Arabic, rosso: https://ar.glosbe.com/it/ar/rosso; full paired app contexts and lessons: docs/dictionary-audit-batch38-2026-11-27.md",
+    "attendere": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, attendere: https://www.treccani.it/vocabolario/attendere/; Reverso Italian-Arabic, attendere: https://dizionario.reverso.net/italiano-arabo/attendere; full paired app contexts: docs/dictionary-audit-batch38-2026-11-27.md",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 
