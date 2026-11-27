@@ -125,7 +125,7 @@ const sourceHashes = {
 const generatedHashes = {
   'android/app/src/main/assets/dictionary.db': '9fc28a74593c0cf87a9882f271dd0125382b2c2fe6d8145d9659289219b5e3e3',
   'public/app.bundle.js': 'e4d827dfa7fd305ffaafd80a3386e546a8a29cd4fbc6836b4b4506e93a45e685',
-  'public/release.json': '3329d62d2eb6b47776ae5b5929c8469d0e751b43872197ffb17deb54d7cde5c2',
+  'public/release.json': '012c5fb49258184a00571acc25316b5885a99c1ebf0b89450cb653e68cc2ca3a',
 };
 
 test('batch 36 counts complete question contexts and exact paired IDs', () => {

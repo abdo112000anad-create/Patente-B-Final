@@ -238,9 +238,9 @@ test('batch 38 pins aggregate dictionary counts and proves unchanged question an
   const releaseBytes = fs.readFileSync(path.join(ROOT, 'public/release.json'));
   const release = JSON.parse(releaseBytes.toString('utf8'));
   assert.equal(sha256(database), '9fc28a74593c0cf87a9882f271dd0125382b2c2fe6d8145d9659289219b5e3e3');
-  assert.equal(sha256(dictionaryBytes), 'cd07cf6b4926268ff829c915e9f316d0312ca4e5f07d94614b8ec7f5af42144e');
+  assert.equal(sha256(dictionaryBytes), '2fc2d1d37a6acd41de5f569985b888d4c5d265774c04e90b1018f74218477dd1');
   assert.equal(sha256(bundle), 'e4d827dfa7fd305ffaafd80a3386e546a8a29cd4fbc6836b4b4506e93a45e685');
-  assert.equal(sha256(releaseBytes), '3329d62d2eb6b47776ae5b5929c8469d0e751b43872197ffb17deb54d7cde5c2');
+  assert.equal(sha256(releaseBytes), '012c5fb49258184a00571acc25316b5885a99c1ebf0b89450cb653e68cc2ca3a');
   assert.equal(release.dictionarySha256, sha256(dictionaryBytes));
   assert.equal(release.bundleSha256, sha256(bundle));
   for (const [relative, digest] of Object.entries(sourceHashes)) {
