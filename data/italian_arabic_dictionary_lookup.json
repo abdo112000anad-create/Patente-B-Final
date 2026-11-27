@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-27T06:21:56+00:00",
+    "generated_at_utc": "2026-11-27T06:40:10+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5277,
@@ -10,13 +10,13 @@
       "contextual_candidate_needs_review": 3,
       "contextual_override_v49": 8,
       "legacy_glossary_needs_review": 31,
-      "machine_draft_needs_review": 5029,
-      "reviewed_override": 265
+      "machine_draft_needs_review": 5025,
+      "reviewed_override": 269
     },
     "total_entries": 5336,
     "translated_entries": 5336,
-    "review_required_entries": 5071,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 88 frequent question-bank translations were corrected and 94 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+    "review_required_entries": 5067,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 91 frequent question-bank translations were corrected and 95 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
     "app_release": 64,
     "terms_with_lookup_entry": 5336,
     "entries_with_arabic_translation": 5336,
@@ -36,8 +36,8 @@
     "video_context_additions": 3,
     "lesson_dictionary_audit_additions": 64,
     "question_bank_context_correction_candidates": 3,
-    "question_bank_verified_contextual_corrections": 88,
-    "question_bank_verified_contextual_gloss_confirmations": 94
+    "question_bank_verified_contextual_corrections": 91,
+    "question_bank_verified_contextual_gloss_confirmations": 95
   },
   "entries": [
     {
@@ -25218,15 +25218,15 @@
     },
     {
       "word": "giungendo",
-      "translation_ar": "\"قادمة\"",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "عند الوصول (إلى)؛ وفي سياق الاقتراب من التقاطع: عند الاقتراب (من)",
+      "source": "question-bank-context-audit-2026-11; Treccani, giungere (arrivare): https://www.treccani.it/vocabolario/giungere/; Treccani, gerundio: https://www.treccani.it/enciclopedia/gerundio/; Reverso Context Italiano-Arabo, giungendo: https://context.reverso.net/traduzione/italiano-arabo/giungendo; full paired app contexts: docs/dictionary-audit-batch45-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "46 exact question-token occurrences in 46 paired question records (45 unique Italian texts; 46 unique Italian-Arabic pairs) and no Italian lesson-field matches. Nearly all contexts concern reaching or approaching an intersection; paired Arabic versions use both عند الوصول إلى التقاطع and عند الاقتراب من التقاطع, depending on the full sentence. Treccani defines giungere in its common intransitive use as arrivare; its gerund reference describes the temporal and other subordinate-clause functions, and Reverso identifies giungendo as an inflected form of giungere. The two context-qualified Arabic renderings avoid treating one wording as universal. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "عند الوصول (إلى)؛ وفي سياق الاقتراب من التقاطع: عند الاقتراب (من)"
     },
     {
       "word": "giungono",
@@ -32478,15 +32478,15 @@
     },
     {
       "word": "lavori",
-      "translation_ar": "الوظائف",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "أعمال (جمع lavoro؛ يتحدد المقابل بحسب السياق)",
+      "source": "question-bank-context-audit-2026-11; Treccani, lavoro (plural technical works and roadworks): https://www.treccani.it/vocabolario/lavoro/; Reverso Context Italiano-Arabo, lavori: https://context.reverso.net/traduzione/italiano-arabo/lavori; full paired app contexts and lessons: docs/dictionary-audit-batch45-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "37 exact question-token occurrences in 37 paired question records (34 unique Italian texts; 36 unique Italian-Arabic pairs) and 3 Italian lesson-field occurrences in each current and legacy lesson file. App contexts predominantly use lavori for work being carried out, including roadworks and other technical or agricultural work; this plural is broader than employment/jobs alone. Treccani explicitly gives lavori as technical works and includes strada chiusa al traffico per lavori in corso; Reverso Italian-Arabic examples support أعمال الطرق as well as other context-sensitive senses. The corrected gloss records the dominant work/works sense and does not force one phrase-level equivalent. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "أعمال (جمع lavoro؛ يتحدد المقابل بحسب السياق)"
     },
     {
       "word": "lavoro",
@@ -42907,14 +42907,14 @@
     {
       "word": "pressione",
       "translation_ar": "الضغط",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "source": "question-bank-context-confirmation-2026-11; Treccani, pressione: https://www.treccani.it/vocabolario/pressione/; Reverso Context Italiano-Arabo, pressione: https://context.reverso.net/traduzione/italiano-arabo/pressione; full paired app contexts and lessons: docs/dictionary-audit-batch45-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "36 exact question-token occurrences in 35 paired question records (35 unique Italian texts; 35 unique Italian-Arabic pairs) and 3 Italian lesson-field occurrences in each current and legacy lesson file. App uses include tyre and oil pressure, pressure applied to a wound or brake pedal, and pressure of air or tyres. Treccani defines both the action of exerting force and the physical quantity and explicitly illustrates tyre pressure; Reverso Italian-Arabic examples directly use ضغط/الضغط. The existing gloss is confirmed for these app contexts, while phrase-level Arabic remains sentence-dependent. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "الضغط"
     },
     {
       "word": "presso",
@@ -58554,15 +58554,15 @@
     },
     {
       "word": "titolare",
-      "translation_ar": "الميّال",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "حامل (الرخصة/الوثيقة/الحق)؛ وفي هذه المجموعة: حامل رخصة القيادة",
+      "source": "question-bank-context-audit-2026-11; Reverso Italian-Arabic dictionary, titolare (holder/owner examples): https://dizionario.reverso.net/italiano-arabo/titolare; Reverso Context Italiano-Arabo: https://context.reverso.net/traduzione/italiano-arabo/titolare; full paired app contexts: docs/dictionary-audit-batch45-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "37 exact question-token occurrences in 37 paired question records (37 unique Italian texts; 37 unique Italian-Arabic pairs) and no Italian lesson-field matches. All reviewed app uses describe the holder of a driving licence or licence category; paired Arabic questions use حامل/حامل رخصة القيادة. Reverso's opened Italian-Arabic headword examples support حامل for ticket, policy, and card holders and صاحب/مالك in account or copyright contexts, confirming that the machine draft الميّال is unrelated while the Arabic phrase should match its object. The display gloss remains sense-qualified and does not claim a standardized legal Arabic term. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "حامل (الرخصة/الوثيقة/الحق)؛ وفي هذه المجموعة: حامل رخصة القيادة"
     },
     {
       "word": "titolari",

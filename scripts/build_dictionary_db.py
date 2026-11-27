@@ -1547,6 +1547,40 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
     "provenienti": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, provenire: https://www.treccani.it/vocabolario/provenire/; Nuovo De Mauro, provenienza: https://dizionario.internazionale.it/parola/provenienza; Reverso Context Italian-Arabic, proveniente: https://context.reverso.net/traduzione/italiano-arabo/proveniente; full paired app contexts: docs/dictionary-audit-batch44-2026-11-27.md",
 })
 
+# Batch forty-five: contextual corrections, one unchanged-gloss confirmation, and a flagged ambiguity.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "lavori": (
+        "أعمال (جمع lavoro؛ يتحدد المقابل بحسب السياق)",
+        "contextual_translation",
+        "37 exact question-token occurrences in 37 paired question records (34 unique Italian texts; 36 unique Italian-Arabic pairs) and 3 Italian lesson-field occurrences in each current and legacy lesson file. App contexts predominantly use lavori for work being carried out, including roadworks and other technical or agricultural work; this plural is broader than employment/jobs alone. Treccani explicitly gives lavori as technical works and includes strada chiusa al traffico per lavori in corso; Reverso Italian-Arabic examples support أعمال الطرق as well as other context-sensitive senses. The corrected gloss records the dominant work/works sense and does not force one phrase-level equivalent. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "titolare": (
+        "حامل (الرخصة/الوثيقة/الحق)؛ وفي هذه المجموعة: حامل رخصة القيادة",
+        "contextual_translation",
+        "37 exact question-token occurrences in 37 paired question records (37 unique Italian texts; 37 unique Italian-Arabic pairs) and no Italian lesson-field matches. All reviewed app uses describe the holder of a driving licence or licence category; paired Arabic questions use حامل/حامل رخصة القيادة. Reverso's opened Italian-Arabic headword examples support حامل for ticket, policy, and card holders and صاحب/مالك in account or copyright contexts, confirming that the machine draft الميّال is unrelated while the Arabic phrase should match its object. The display gloss remains sense-qualified and does not claim a standardized legal Arabic term. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "giungendo": (
+        "عند الوصول (إلى)؛ وفي سياق الاقتراب من التقاطع: عند الاقتراب (من)",
+        "contextual_translation",
+        "46 exact question-token occurrences in 46 paired question records (45 unique Italian texts; 46 unique Italian-Arabic pairs) and no Italian lesson-field matches. Nearly all contexts concern reaching or approaching an intersection; paired Arabic versions use both عند الوصول إلى التقاطع and عند الاقتراب من التقاطع, depending on the full sentence. Treccani defines giungere in its common intransitive use as arrivare; its gerund reference describes the temporal and other subordinate-clause functions, and Reverso identifies giungendo as an inflected form of giungere. The two context-qualified Arabic renderings avoid treating one wording as universal. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "lavori": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, lavoro (plural technical works and roadworks): https://www.treccani.it/vocabolario/lavoro/; Reverso Context Italiano-Arabo, lavori: https://context.reverso.net/traduzione/italiano-arabo/lavori; full paired app contexts and lessons: docs/dictionary-audit-batch45-2026-11-27.md",
+    "titolare": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Italian-Arabic dictionary, titolare (holder/owner examples): https://dizionario.reverso.net/italiano-arabo/titolare; Reverso Context Italiano-Arabo: https://context.reverso.net/traduzione/italiano-arabo/titolare; full paired app contexts: docs/dictionary-audit-batch45-2026-11-27.md",
+    "giungendo": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, giungere (arrivare): https://www.treccani.it/vocabolario/giungere/; Treccani, gerundio: https://www.treccani.it/enciclopedia/gerundio/; Reverso Context Italiano-Arabo, giungendo: https://context.reverso.net/traduzione/italiano-arabo/giungendo; full paired app contexts: docs/dictionary-audit-batch45-2026-11-27.md",
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS.update({
+    "pressione": (
+        "الضغط",
+        "contextual_translation",
+        "36 exact question-token occurrences in 35 paired question records (35 unique Italian texts; 35 unique Italian-Arabic pairs) and 3 Italian lesson-field occurrences in each current and legacy lesson file. App uses include tyre and oil pressure, pressure applied to a wound or brake pedal, and pressure of air or tyres. Treccani defines both the action of exerting force and the physical quantity and explicitly illustrates tyre pressure; Reverso Italian-Arabic examples directly use ضغط/الضغط. The existing gloss is confirmed for these app contexts, while phrase-level Arabic remains sentence-dependent. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
+    "pressione": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, pressione: https://www.treccani.it/vocabolario/pressione/; Reverso Context Italiano-Arabo, pressione: https://context.reverso.net/traduzione/italiano-arabo/pressione; full paired app contexts and lessons: docs/dictionary-audit-batch45-2026-11-27.md",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 

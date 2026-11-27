@@ -70,12 +70,12 @@ test('batch fourteen applies only supported contextual decisions and clears 18 r
   assert.equal(Object.keys(expected).length, 18);
   assert.equal(questionsIt.count, 7020);
   assert.equal(questionsAr.questions.length, 7020);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 88);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 94);
-  assert.equal(dictionary.metadata.review_required_entries, 5071);
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5071);
-  assert.equal(dictionary.metadata.counts_by_status.machine_draft_needs_review, 5029);
-  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 265);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 91);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 95);
+  assert.equal(dictionary.metadata.review_required_entries, 5067);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5067);
+  assert.equal(dictionary.metadata.counts_by_status.machine_draft_needs_review, 5025);
+  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 269);
 
   for (const [word, item] of Object.entries(expected)) {
     const row = byWord.get(word);

@@ -180,15 +180,15 @@ test('dictionary decisions, conservative flags, and reconciled counts are explic
 
   const metadata = dictionary.metadata;
   assert.equal(metadata.total_entries, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5071);
-  assert.equal(metadata.question_bank_verified_contextual_corrections, 88);
-  assert.equal(metadata.question_bank_verified_contextual_gloss_confirmations, 94);
+  assert.equal(dictionary.metadata.review_required_entries, 5067);
+  assert.equal(metadata.question_bank_verified_contextual_corrections, 91);
+  assert.equal(metadata.question_bank_verified_contextual_gloss_confirmations, 95);
   assert.deepEqual(metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 31,
-    machine_draft_needs_review: 5029,
-    reviewed_override: 265,
+    machine_draft_needs_review: 5025,
+    reviewed_override: 269,
   });
   assert.equal(metadata.source_sha256, historicalDictionarySourceSha256);
   assert.equal(metadata.source_question_count, 7020);

@@ -233,18 +233,18 @@ test('batch 44 audit note includes all opened-source links and documents scope l
 
 test('batch 44 pins cumulative dictionary metadata and protects question/lesson sources', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5071);
+  assert.equal(dictionary.metadata.review_required_entries, 5067);
   assert.equal(dictionary.metadata.question_bank_context_correction_candidates, 3);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 88);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 94);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 91);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 95);
   assert.deepEqual(dictionary.metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 31,
-    machine_draft_needs_review: 5029,
-    reviewed_override: 265,
+    machine_draft_needs_review: 5025,
+    reviewed_override: 269,
   });
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5071);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5067);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} source fingerprint`);
   }
