@@ -123,7 +123,7 @@ test('batch 20 counts all exact-token paired question and lesson contexts', () =
   assert.equal(questionsAr.length, 7020);
 });
 
-test('batch 20 dictionary corrections, source provenance, and conservative flags are explicit', () => {
+test('batch 20 corrections, unresolved flags, and current dictionary totals are explicit', () => {
   for (const [term, translation] of Object.entries(expectedCorrections)) {
     const row = entries.get(term);
     assert.ok(row, `Missing dictionary row ${term}`);
@@ -151,15 +151,15 @@ test('batch 20 dictionary corrections, source provenance, and conservative flags
 
   const metadata = dictionary.metadata;
   assert.equal(metadata.total_entries, 5336);
-  assert.equal(metadata.review_required_entries, 5112);
-  assert.equal(metadata.question_bank_verified_contextual_corrections, 61);
+  assert.equal(metadata.review_required_entries, 5109);
+  assert.equal(metadata.question_bank_verified_contextual_corrections, 64);
   assert.equal(metadata.question_bank_verified_contextual_gloss_confirmations, 80);
   assert.deepEqual(metadata.counts_by_status, {
     contextual_candidate_needs_review: 2,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 33,
-    machine_draft_needs_review: 5069,
-    reviewed_override: 224,
+    machine_draft_needs_review: 5066,
+    reviewed_override: 227,
   });
   assert.equal(metadata.source_sha256, historicalDictionarySourceSha256);
   assert.equal(metadata.source_question_count, 7020);

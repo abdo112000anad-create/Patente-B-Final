@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-27T00:02:30+00:00",
+    "generated_at_utc": "2026-11-27T00:53:44+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5277,
@@ -10,13 +10,13 @@
       "contextual_candidate_needs_review": 2,
       "contextual_override_v49": 8,
       "legacy_glossary_needs_review": 33,
-      "machine_draft_needs_review": 5069,
-      "reviewed_override": 224
+      "machine_draft_needs_review": 5066,
+      "reviewed_override": 227
     },
     "total_entries": 5336,
     "translated_entries": 5336,
-    "review_required_entries": 5112,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. Two v64 question-bank candidates remain flagged. 61 frequent question-bank translations were corrected and 80 existing glosses were confirmed unchanged using app contexts and Italian-Arabic sources; these project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+    "review_required_entries": 5109,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. Two v64 question-bank candidates remain flagged. 64 frequent question-bank translations were corrected and 80 existing glosses were confirmed unchanged using app contexts and Italian-Arabic sources; these project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
     "app_release": 64,
     "terms_with_lookup_entry": 5336,
     "entries_with_arabic_translation": 5336,
@@ -36,7 +36,7 @@
     "video_context_additions": 3,
     "lesson_dictionary_audit_additions": 64,
     "question_bank_context_correction_candidates": 2,
-    "question_bank_verified_contextual_corrections": 61,
+    "question_bank_verified_contextual_corrections": 64,
     "question_bank_verified_contextual_gloss_confirmations": 80
   },
   "entries": [
@@ -6714,15 +6714,15 @@
     },
     {
       "word": "avverte",
-      "translation_ar": "تحذير",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "يُنَبِّهُ",
+      "source": "question-bank-context-audit-2026-11; Treccani, avvertire, sense 3: https://www.treccani.it/vocabolario/avvertire/; Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/avvertire; official MIT question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "4 exact lemma-token occurrences: 3 question tokens in Q21791/Q19031/Q19048 and 1 lesson-text token in u2-l2. The app uses are active warnings/alerts about potholes or the closing of railway barriers. Treccani’s avvertire sense 3 includes drawing attention, informing, and warning; Reverso Italian-Arabic supports the warning/alert sense and lists تنبيه. The verb يُنَبِّهُ fits these contexts better than the machine-draft noun تحذير; project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "يُنَبِّهُ"
     },
     {
       "word": "avvertimenti",
@@ -27822,15 +27822,15 @@
     },
     {
       "word": "indifferentemente",
-      "translation_ar": "بلا مبالاة",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "دون تفضيل؛ بحسب السياق: على حدّ سواء",
+      "source": "question-bank-context-audit-2026-11; De Mauro/Internazionale: https://dizionario.internazionale.it/parola/indifferentemente; Collins Italian-English: https://www.collinsdictionary.com/us/dictionary/italian-english/indifferentemente; Reverso Italian-Arabic contexts: https://context.reverso.net/traduzione/italiano-arabo/indifferentemente; official MIT question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "3 exact lemma-token occurrences in Q23122/Q18319/Q23535 and no lesson matches. In these app contexts the word means without distinction/no preference (vehicles pass first equally; overtaking is described as possible from either side), not emotional indifference. De Mauro defines sense 1 as ‘senza differenza, allo stesso modo’; Collins supports ‘without distinction’ and ‘either one would do’. The qualified Arabic gloss avoids the unrelated affective sense بلا مبالاة; project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "دون تفضيل؛ بحسب السياق: على حدّ سواء"
     },
     {
       "word": "indipendente",
@@ -48042,15 +48042,15 @@
     },
     {
       "word": "ripartire",
-      "translation_ar": "ابدأ",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "يستأنف السير",
+      "source": "question-bank-context-audit-2026-11; Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/ripartire; Reverso Italian-English context: https://context.reverso.net/translation/italian-english/di+ripartire; Al-Maany restarted: https://www.almaany.com/en/dict/ar-en/restarted/; official MIT question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "5 exact lemma-token occurrences: 3 question tokens in Q20976/Q20790/Q24009 and 2 lesson-text tokens in u6-l2. Each app use concerns a vehicle or road user setting off/resuming movement. Reverso Italian-Arabic lists الانطلاق and gives a resume-after-break example; Reverso Italian-English supports ‘to start again/to leave again’; Al-Maany’s restarted entry includes استئناف. يستأنف السير is a context-specific active verb correction, not owner-approved wording.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "يستأنف السير"
     },
     {
       "word": "ripartito",

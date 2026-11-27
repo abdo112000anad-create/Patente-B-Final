@@ -1182,6 +1182,30 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
     "prossimità": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Context Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/prossimit%C3%A0; Treccani: https://www.treccani.it/vocabolario/prossimita/",
 })
 
+# Batch twenty-four source-backed contextual corrections.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "ripartire": (
+        "يستأنف السير",
+        "contextual_translation",
+        "5 exact lemma-token occurrences: 3 question tokens in Q20976/Q20790/Q24009 and 2 lesson-text tokens in u6-l2. Each app use concerns a vehicle or road user setting off/resuming movement. Reverso Italian-Arabic lists الانطلاق and gives a resume-after-break example; Reverso Italian-English supports ‘to start again/to leave again’; Al-Maany’s restarted entry includes استئناف. يستأنف السير is a context-specific active verb correction, not owner-approved wording.",
+    ),
+    "avverte": (
+        "يُنَبِّهُ",
+        "contextual_translation",
+        "4 exact lemma-token occurrences: 3 question tokens in Q21791/Q19031/Q19048 and 1 lesson-text token in u2-l2. The app uses are active warnings/alerts about potholes or the closing of railway barriers. Treccani’s avvertire sense 3 includes drawing attention, informing, and warning; Reverso Italian-Arabic supports the warning/alert sense and lists تنبيه. The verb يُنَبِّهُ fits these contexts better than the machine-draft noun تحذير; project-reviewed, not owner-approved.",
+    ),
+    "indifferentemente": (
+        "دون تفضيل؛ بحسب السياق: على حدّ سواء",
+        "contextual_translation",
+        "3 exact lemma-token occurrences in Q23122/Q18319/Q23535 and no lesson matches. In these app contexts the word means without distinction/no preference (vehicles pass first equally; overtaking is described as possible from either side), not emotional indifference. De Mauro defines sense 1 as ‘senza differenza, allo stesso modo’; Collins supports ‘without distinction’ and ‘either one would do’. The qualified Arabic gloss avoids the unrelated affective sense بلا مبالاة; project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "ripartire": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/ripartire; Reverso Italian-English context: https://context.reverso.net/translation/italian-english/di+ripartire; Al-Maany restarted: https://www.almaany.com/en/dict/ar-en/restarted/; official MIT question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+    "avverte": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, avvertire, sense 3: https://www.treccani.it/vocabolario/avvertire/; Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/avvertire; official MIT question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+    "indifferentemente": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " De Mauro/Internazionale: https://dizionario.internazionale.it/parola/indifferentemente; Collins Italian-English: https://www.collinsdictionary.com/us/dictionary/italian-english/indifferentemente; Reverso Italian-Arabic contexts: https://context.reverso.net/traduzione/italiano-arabo/indifferentemente; official MIT question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 
