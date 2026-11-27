@@ -116,7 +116,6 @@ const unresolved = {
   raffigurato: 'مُصوّر',
   rappresentato: 'ممثّل',
   posto: 'المكان',
-  strade: 'الشوارع',
 };
 
 const questionHashes = {
@@ -150,8 +149,8 @@ test('batch 27 exhaustively scans Italian lesson text in legacy and canonical fi
   }
 });
 
-test('batch 27 keeps all five ambiguous entries as unchanged machine drafts', () => {
-  assert.deepEqual(Object.keys(unresolved).sort(), terms.slice().sort());
+test('batch 27 keeps four ambiguous entries flagged and recognizes the later batch 37 strade correction', () => {
+  assert.deepEqual(Object.keys(unresolved).sort(), terms.filter(term => term !== 'strade').sort());
   for (const [term, translation] of Object.entries(unresolved)) {
     const row = entries.get(term);
     assert.ok(row, `dictionary row exists for ${term}`);
@@ -163,6 +162,11 @@ test('batch 27 keeps all five ambiguous entries as unchanged machine drafts', ()
     assert.equal(row.provider, 'opus-mt-local', `${term} retains original provider provenance`);
     assert.equal(row.source, 'Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4', `${term} retains original source provenance`);
   }
+  const strade = entries.get('strade');
+  assert.equal(strade.translation_ar, 'الطرق');
+  assert.equal(strade.status, 'reviewed_override');
+  assert.equal(strade.review_required, 0);
+  assert.equal(strade.provider, 'project-contextual-audit');
 });
 
 test('batch 27 audit note records directly opened sources and explains the evidence limits', () => {

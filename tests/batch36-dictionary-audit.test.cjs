@@ -123,9 +123,9 @@ const sourceHashes = {
 };
 
 const generatedHashes = {
-  'android/app/src/main/assets/dictionary.db': 'c966eb69dbeb183e6070e2d7a79733e585c6df6dd359e3efc6f8cf295c221e36',
+  'android/app/src/main/assets/dictionary.db': '90257434f90de831da2b21f977e5381bb84e1e6cd888439cf86da0696dee9563',
   'public/app.bundle.js': 'e4d827dfa7fd305ffaafd80a3386e546a8a29cd4fbc6836b4b4506e93a45e685',
-  'public/release.json': '491aa6d6bf02d3e86b4f7cae12bb2997ccd550b668012f68ce258397d93cfb33',
+  'public/release.json': 'd7fe857a522ef148c3f719675d3e1b2ec1da07ef88254caae198d17d6f9d99b9',
 };
 
 test('batch 36 counts complete question contexts and exact paired IDs', () => {
@@ -210,17 +210,17 @@ test('batch 36 memo cites direct sources, records ambiguity limits, and makes no
 
 test('batch 36 pins dictionary totals and proves source and generated artifact fingerprints', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5090);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 79);
+  assert.equal(dictionary.metadata.review_required_entries, 5089);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 80);
   assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 84);
   assert.deepEqual(dictionary.metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 31,
-    machine_draft_needs_review: 5048,
-    reviewed_override: 246,
+    machine_draft_needs_review: 5047,
+    reviewed_override: 247,
   });
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5090);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5089);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} source fingerprint`);
   }

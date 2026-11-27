@@ -1381,6 +1381,18 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
     "vietato": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, vietare: https://www.treccani.it/vocabolario/vietare/; Reverso Context Italian-Arabic, vietato: https://context.reverso.net/traduzione/italiano-arabo/vietato; ACI Codice della Strada, art. 15: https://aci.gov.it/codice-della-strada/art-15/; ACI Codice della Strada, art. 39: https://aci.gov.it/codice-della-strada/art-39/; full paired app contexts: docs/dictionary-audit-batch36-2026-11-27.md",
 })
 
+# Batch thirty-seven: the app's road-traffic uses of strade.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "strade": (
+        "الطرق",
+        "contextual_translation",
+        "290 exact question-token occurrences in 290 paired question records (285 unique Italian texts; 287 unique Italian-Arabic pairs) and 8 Italian lesson-field occurrences in each current and legacy lesson file. All audited uses are literal traffic-road contexts, including urban and extraurban routes, principal and secondary roads, mountain roads, one-way roads, intersections, and road operations. Treccani defines strada for routes used by pedestrians and vehicles inside and outside inhabited areas; Glosbe Italian-Arabic directly provides both شارع and طريق. Existing paired app Arabic also renders strade as الطرق in questions 21811, 21234, 21240, 21423, and 22260. In this app's reviewed traffic contexts, الطرق is broader and more accurate than the machine draft الشوارع; this contextual correction does not claim to cover figurative or non-traffic senses of strada. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "strade": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, strada: https://www.treccani.it/vocabolario/strada/; Glosbe Italian-Arabic, strada: https://glosbe.com/it/ar/strada; full paired app contexts and lessons: docs/dictionary-audit-batch37-2026-11-27.md",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 
