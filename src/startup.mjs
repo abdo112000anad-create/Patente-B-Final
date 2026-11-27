@@ -45,7 +45,7 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
       error.code = 'course_integrity';
       throw error;
     }
-    const lessonKeys = 'id,titleIt,titleAr,summaryIt,summaryAr,keyPoints,trapWord,quickCheck';
+    const lessonKeys = 'id,titleIt,titleAr,summaryIt,summaryAr,keyPoints,trapWord,quickChecks';
     const pointKeys = 'it,ar';
     const trapWordKeys = 'word,reasonAr';
     const quickCheckKeys = 'qIt,a,explainAr';
@@ -60,13 +60,13 @@ export async function loadCourseData({fetchImpl = globalThis.fetch, timeoutMs = 
       for (let index = 0; index < module.lessons.length; index += 1) {
         const lesson = module.lessons[index];
         const expectedId = `u${module.order_hint}-l${index + 1}`;
-        const validTrapWord = lesson?.trapWord === null || (lesson?.trapWord && typeof lesson.trapWord === 'object' && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(',') === trapWordKeys && typeof lesson.trapWord.word === 'string' && lesson.trapWord.word.trim() && typeof lesson.trapWord.reasonAr === 'string' && lesson.trapWord.reasonAr.trim());
-        const validQuickCheck = Array.isArray(lesson?.quickCheck) && lesson.quickCheck.length === 3 && lesson.quickCheck.every(item =>
+        const validTrapWord = lesson?.trapWord && typeof lesson.trapWord === 'object' && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(',') === trapWordKeys && typeof lesson.trapWord.word === 'string' && typeof lesson.trapWord.reasonAr === 'string' && ((lesson.trapWord.word === '' && lesson.trapWord.reasonAr === '') || (lesson.trapWord.word.trim() && lesson.trapWord.reasonAr.trim()));
+        const validQuickChecks = Array.isArray(lesson?.quickChecks) && lesson.quickChecks.length === 3 && lesson.quickChecks.every(item =>
           item && typeof item === 'object' && !Array.isArray(item) && Object.keys(item).join(',') === quickCheckKeys &&
           typeof item.qIt === 'string' && item.qIt.trim() && ['VERO', 'FALSO'].includes(item.a) && typeof item.explainAr === 'string' && item.explainAr.trim());
         if (!lesson || Object.keys(lesson).join(',') !== lessonKeys || lesson.id !== expectedId || expectedIds.has(lesson.id) ||
             !['titleIt', 'titleAr', 'summaryIt', 'summaryAr'].every(key => typeof lesson[key] === 'string' && lesson[key].trim()) ||
-            !Array.isArray(lesson.keyPoints) || lesson.keyPoints.length < 3 || lesson.keyPoints.length > 4 || !validTrapWord || !validQuickCheck ||
+            !Array.isArray(lesson.keyPoints) || lesson.keyPoints.length < 3 || lesson.keyPoints.length > 4 || !validTrapWord || !validQuickChecks ||
             !lesson.keyPoints.every(point => point && Object.keys(point).join(',') === pointKeys && typeof point.it === 'string' && point.it.trim() && typeof point.ar === 'string' && point.ar.trim())) {
           const error = new Error('Il formato di una lezione non è valido. / تنسيق أحد الدروس غير صالح.');
           error.code = 'course_integrity';

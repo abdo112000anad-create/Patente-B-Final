@@ -21,14 +21,15 @@ test('v62 keeps exactly 50 lessons with the ordered eight-field bilingual schema
   assert.equal(course.modules.reduce((count, module) => count + module.lessons.length, 0), 50);
   assert.deepEqual(course.modules.map(module => module.order_hint), [...course.modules.map(module => module.order_hint)].sort((a, b) => a - b));
   for (const module of course.modules) for (const lesson of module.lessons) {
-    assert.deepEqual(Object.keys(lesson), ['id', 'titleIt', 'titleAr', 'summaryIt', 'summaryAr', 'keyPoints', 'trapWord', 'quickCheck']);
+    assert.deepEqual(Object.keys(lesson), ['id', 'titleIt', 'titleAr', 'summaryIt', 'summaryAr', 'keyPoints', 'trapWord', 'quickChecks']);
     assert.equal(lesson.id, `u${module.order_hint}-l${module.lessons.indexOf(lesson) + 1}`);
     assert.ok(lesson.titleIt && lesson.titleAr && lesson.summaryIt && lesson.summaryAr);
     assert.ok(Array.isArray(lesson.keyPoints) && lesson.keyPoints.length >= 3 && lesson.keyPoints.length <= 4);
     assert.ok(lesson.keyPoints.every(point => Object.keys(point).sort().join(',') === 'ar,it' && point.it && point.ar));
-    assert.ok(lesson.trapWord === null || (Object.keys(lesson.trapWord).join(',') === 'word,reasonAr' && lesson.trapWord.word && lesson.trapWord.reasonAr));
-    assert.equal(lesson.quickCheck.length, 3);
-    assert.ok(lesson.quickCheck.every(question => Object.keys(question).join(',') === 'qIt,a,explainAr' && question.qIt && ['VERO','FALSO'].includes(question.a) && question.explainAr));
+    assert.deepEqual(Object.keys(lesson.trapWord), ['word', 'reasonAr']);
+    assert.ok((lesson.trapWord.word === '' && lesson.trapWord.reasonAr === '') || (lesson.trapWord.word.trim() && lesson.trapWord.reasonAr.trim()));
+    assert.equal(lesson.quickChecks.length, 3);
+    assert.ok(lesson.quickChecks.every(question => Object.keys(question).join(',') === 'qIt,a,explainAr' && question.qIt && ['VERO','FALSO'].includes(question.a) && question.explainAr));
   }
 });
 

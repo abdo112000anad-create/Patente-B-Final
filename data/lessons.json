@@ -39,8 +39,11 @@
               "ar": "رصيف المشاة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La carreggiata è destinata alla circolazione dei veicoli.",
               "a": "VERO",
@@ -82,8 +85,11 @@
               "ar": "مقطورة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "L’autovettura è una categoria di veicolo.",
               "a": "VERO",
@@ -125,8 +131,11 @@
               "ar": "مدى الرؤية"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La velocità va adeguata anche alla visibilità.",
               "a": "VERO",
@@ -168,8 +177,11 @@
               "ar": "مصدر رسمي"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La data di pubblicazione coincide sempre con quella di entrata in vigore.",
               "a": "FALSO",
@@ -363,8 +375,11 @@
               "ar": "الإشارات التكميلية"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La segnaletica stradale comprende anche segnali luminosi.",
               "a": "VERO",
@@ -406,8 +421,11 @@
               "ar": "تعليمات ملزمة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Un segnale di pericolo avverte di un rischio.",
               "a": "VERO",
@@ -449,8 +467,11 @@
               "ar": "خط التوقف"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Il segnale STOP richiede di arrestarsi.",
               "a": "VERO",
@@ -492,8 +513,11 @@
               "ar": "نطاق السريان"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "I segnali di indicazione possono fornire informazioni su luoghi e servizi.",
               "a": "VERO",
@@ -667,8 +691,11 @@
               "ar": "معبر"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La segnaletica orizzontale comprende anche frecce e attraversamenti.",
               "a": "VERO",
@@ -710,8 +737,11 @@
               "ar": "الضوء الأصفر الوامض"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Con la luce rossa occorre arrestarsi.",
               "a": "VERO",
@@ -753,8 +783,11 @@
               "ar": "عائق"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Le indicazioni dell’agente possono prevalere sugli altri segnali.",
               "a": "VERO",
@@ -796,8 +829,11 @@
               "ar": "حاجز"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "In un cantiere occorre seguire il percorso temporaneo indicato.",
               "a": "VERO",
@@ -983,8 +1019,11 @@
               "ar": "إشارة أو تعليمات مخالفة للقاعدة العامة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "In un incrocio non regolato vale sempre solo la precedenza da destra.",
               "a": "FALSO",
@@ -1026,8 +1065,11 @@
               "ar": "سرعة معتدلة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Prima di entrare in una rotatoria si verifica la precedenza indicata e la sicurezza della manovra.",
               "a": "VERO",
@@ -1069,8 +1111,11 @@
               "ar": "مناورة حذرة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Ai passaggi pedonali il conducente deve fare attenzione ai pedoni.",
               "a": "VERO",
@@ -1112,8 +1157,11 @@
               "ar": "إفساح الطريق"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Una corsia riservata può essere usata da ogni veicolo.",
               "a": "FALSO",
@@ -1299,8 +1347,11 @@
               "ar": "إشارة الاتجاه"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Prima di cambiare corsia è utile controllare gli specchi.",
               "a": "VERO",
@@ -1342,8 +1393,11 @@
               "ar": "العودة إلى الحارة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Il sorpasso può essere effettuato anche con scarsa visibilità.",
               "a": "FALSO",
@@ -1385,8 +1439,11 @@
               "ar": "حركة المرور"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La distanza di sicurezza può essere ridotta in caso di pioggia.",
               "a": "FALSO",
@@ -1428,8 +1485,11 @@
               "ar": "المشاة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La retromarcia deve essere effettuata lentamente.",
               "a": "VERO",
@@ -1616,8 +1676,11 @@
               "ar": "الظروف الصعبة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Rispettare il limite significa sempre guidare alla stessa velocità massima.",
               "a": "FALSO",
@@ -1659,8 +1722,11 @@
               "ar": "منع الوقوف: لا تترك المركبة واقفة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Nel Codice della strada, l’arresto può dipendere dalle esigenze della circolazione.",
               "a": "VERO",
@@ -1702,8 +1768,11 @@
               "ar": "الرؤية المحدودة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La fermata e la sosta sono vietate in corrispondenza di curve e dossi.",
               "a": "VERO",
@@ -1745,8 +1814,11 @@
               "ar": "ترتيب استخدام الحارات"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La corsia di emergenza può essere usata come corsia normale.",
               "a": "FALSO",
@@ -1788,8 +1860,11 @@
               "ar": "حارة الطوارئ ليست للسير أو التجاوز؛ ولا يُتوقف فيها إلا في الحالات المسموح بها."
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Per entrare si usa la corsia di accelerazione e si dà precedenza ai veicoli già in marcia.",
               "a": "VERO",
@@ -1996,8 +2071,11 @@
               "ar": "التآكل"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Pneumatici usurati possono ridurre l’aderenza.",
               "a": "VERO",
@@ -2035,8 +2113,11 @@
               "ar": "الفحص الفني"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "I freni devono essere efficienti per arrestare il veicolo.",
               "a": "VERO",
@@ -2074,8 +2155,11 @@
               "ar": "مدى الرؤية"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Le luci aiutano a rendere visibile il veicolo.",
               "a": "VERO",
@@ -2117,8 +2201,11 @@
               "ar": "مقطورة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Il carico va fissato in modo sicuro; con un rimorchio si controllano anche aggancio e collegamenti.",
               "a": "VERO",
@@ -2160,8 +2247,11 @@
               "ar": "فحوص ما قبل الانطلاق"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La cintura di sicurezza contribuisce a proteggere gli occupanti.",
               "a": "VERO",
@@ -2356,8 +2446,11 @@
               "ar": "قيد أو شرط"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La patente deve essere valida per il veicolo guidato.",
               "a": "VERO",
@@ -2395,8 +2488,11 @@
               "ar": "الالتزام بالوثائق المطلوبة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "I documenti del veicolo servono anche a identificarlo.",
               "a": "VERO",
@@ -2434,8 +2530,11 @@
               "ar": "المسؤولية"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Il conducente dovrebbe verificare che la copertura assicurativa richiesta sia valida.",
               "a": "VERO",
@@ -2477,8 +2576,11 @@
               "ar": "الجهات المختصة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Dopo un incidente, la sicurezza delle persone è una priorità.",
               "a": "VERO",
@@ -2516,8 +2618,11 @@
               "ar": "قاعدة نافذة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Le violazioni delle regole stradali possono avere conseguenze legali.",
               "a": "VERO",
@@ -2725,8 +2830,11 @@
               "ar": "سرعة الاستجابة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "L’alcol può ridurre la capacità di reazione.",
               "a": "VERO",
@@ -2768,8 +2876,11 @@
               "ar": "القدرة على القيادة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Alcuni medicinali possono influire sulla guida.",
               "a": "VERO",
@@ -2811,8 +2922,11 @@
               "ar": "استراحة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "La stanchezza può diminuire l’attenzione durante la guida.",
               "a": "VERO",
@@ -2850,8 +2964,11 @@
               "ar": "الانتباه للطريق"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Una distrazione può aumentare il rischio di incidente.",
               "a": "VERO",
@@ -2893,8 +3010,11 @@
               "ar": "هدوء"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Lo stress può influenzare le decisioni del conducente.",
               "a": "VERO",
@@ -2936,8 +3056,11 @@
               "ar": "مسافة جانبية"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Il conducente deve prestare particolare attenzione ai pedoni.",
               "a": "VERO",
@@ -3218,8 +3341,11 @@
               "ar": "صيانة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Una guida regolare può contribuire a ridurre i consumi.",
               "a": "VERO",
@@ -3261,8 +3387,11 @@
               "ar": "صيانة المركبة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "L’uso inutile del clacson può disturbare chi vive o cammina vicino alla strada.",
               "a": "VERO",
@@ -3300,8 +3429,11 @@
               "ar": "فحص المركبة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Le perdite del veicolo dovrebbero essere controllate.",
               "a": "VERO",
@@ -3339,8 +3471,11 @@
               "ar": "السلامة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Pianificare il percorso può aiutare a evitare tragitti inutili.",
               "a": "VERO",
@@ -3525,8 +3660,11 @@
               "ar": "سلامة المركبة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Prima di partire è utile controllare le luci e i pneumatici.",
               "a": "VERO",
@@ -3564,8 +3702,11 @@
               "ar": "دليل المركبة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Una spia può segnalare un’anomalia del veicolo.",
               "a": "VERO",
@@ -3607,8 +3748,11 @@
               "ar": "قيادة حذرة"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "I sistemi di sicurezza possono ridurre le conseguenze di un urto.",
               "a": "VERO",
@@ -3650,8 +3794,11 @@
               "ar": "مساعدة فنية"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Un segnale di guasto può richiedere di fermarsi in sicurezza.",
               "a": "VERO",
@@ -3693,8 +3840,11 @@
               "ar": "أدوات التحكم"
             }
           ],
-          "trapWord": null,
-          "quickCheck": [
+          "trapWord": {
+            "word": "",
+            "reasonAr": ""
+          },
+          "quickChecks": [
             {
               "qIt": "Il carico non deve ostacolare la visuale o i comandi.",
               "a": "VERO",

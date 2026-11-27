@@ -25,7 +25,7 @@ test('v62 contains exactly 50 ordered lesson records with the eight required fie
   assert.equal(new Set(all.map(lesson => lesson.id)).size, 50);
   for (const module of course.modules) {
     for (const [index, lesson] of module.lessons.entries()) {
-      assert.deepEqual(Object.keys(lesson), ['id', 'titleIt', 'titleAr', 'summaryIt', 'summaryAr', 'keyPoints', 'trapWord', 'quickCheck']);
+      assert.deepEqual(Object.keys(lesson), ['id', 'titleIt', 'titleAr', 'summaryIt', 'summaryAr', 'keyPoints', 'trapWord', 'quickChecks']);
       assert.equal(lesson.id, `u${module.order_hint}-l${index + 1}`);
       for (const field of ['titleIt', 'titleAr', 'summaryIt', 'summaryAr']) assert.ok(lesson[field].trim(), `${lesson.id} ${field}`);
       const sentences = lesson.summaryIt.split(/(?<=[.!?])\s+(?=[A-ZÀÈÉÌÒÙ])/u).filter(Boolean);
@@ -33,12 +33,35 @@ test('v62 contains exactly 50 ordered lesson records with the eight required fie
       assert.match(lesson.summaryAr, /\([^()]*[A-Za-zÀ-ÿ][^()]*\)/u, `${lesson.id} should include an Italian term in parentheses`);
       assert.ok(lesson.keyPoints.length >= 3 && lesson.keyPoints.length <= 4, `${lesson.id} key-point count`);
       assert.ok(lesson.keyPoints.every(point => Object.keys(point).join(',') === 'it,ar' && point.it.trim() && point.ar.trim()));
-      assert.ok(lesson.quickCheck.length === 3, `${lesson.id} quick-check count`);
-      assert.ok(lesson.quickCheck.every(question => Object.keys(question).join(',') === 'qIt,a,explainAr' && question.qIt.trim() && ['VERO', 'FALSO'].includes(question.a) && question.explainAr.trim()));
-      assert.ok(lesson.trapWord === null || (Object.keys(lesson.trapWord).join(',') === 'word,reasonAr' && lesson.trapWord.word.trim() && lesson.trapWord.reasonAr.trim()));
+      assert.ok(lesson.quickChecks.length === 3, `${lesson.id} quick-check count`);
+      assert.ok(lesson.quickChecks.every(question => Object.keys(question).join(',') === 'qIt,a,explainAr' && question.qIt.trim() && ['VERO', 'FALSO'].includes(question.a) && question.explainAr.trim()));
+      assert.deepEqual(Object.keys(lesson.trapWord), ['word', 'reasonAr']);
+      assert.ok((lesson.trapWord.word === '' && lesson.trapWord.reasonAr === '') || (lesson.trapWord.word.trim() && lesson.trapWord.reasonAr.trim()));
       assert.doesNotMatch(JSON.stringify(lesson), /<\/?[a-z][^>]*>/iu, `${lesson.id} must not contain HTML`);
     }
   }
+});
+
+test('startup and service worker accept quickChecks and empty trapWord records', async () => {
+  const files = new Map([
+    ['/data/questions.json', 'data/questions.json'],
+    ['/data/lessons.json', 'data/lessons.json'],
+    ['/data/topic-labels.json', 'data/topic-labels.json'],
+    ['/data/similar-groups.json', 'data/similar-groups.json'],
+    ['/data/lesson-support.json', 'data/lesson-support.json'],
+  ]);
+  const {loadCourseData} = await import(path.join(root, 'src/startup.mjs'));
+  const [, course] = await loadCourseData({fetchImpl: async url => ({
+    ok: true,
+    status: 200,
+    headers: {get: name => name === 'content-type' ? 'application/json' : null},
+    text: async () => read(files.get(url)),
+  })});
+  assert.equal(course.modules.flatMap(module => module.lessons).length, 50);
+  const vm = require('node:vm');
+  const sandbox = {self: {addEventListener() {}}};
+  vm.runInNewContext(`${read('public/sw.js')}\nglobalThis.__validateJsonPayload = validJsonPayload;`, sandbox);
+  assert.equal(sandbox.__validateJsonPayload('/data/lessons.json', json('data/lessons.json')), true);
 });
 
 test('illustrated lessons render all supported SVG scene types', async () => {

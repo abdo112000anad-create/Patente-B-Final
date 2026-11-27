@@ -147,7 +147,7 @@ function validJsonPayload(pathname, data) {
     });
   }
   if (pathname === '/data/lessons.json') {
-    const lessonKeys = ['id', 'titleIt', 'titleAr', 'summaryIt', 'summaryAr', 'keyPoints', 'trapWord', 'quickCheck'].join(',');
+    const lessonKeys = ['id', 'titleIt', 'titleAr', 'summaryIt', 'summaryAr', 'keyPoints', 'trapWord', 'quickChecks'].join(',');
     const pointKeys = ['it', 'ar'].join(',');
     const quickCheckKeys = ['qIt', 'a', 'explainAr'].join(',');
     const trapWordKeys = ['word', 'reasonAr'].join(',');
@@ -158,8 +158,8 @@ function validJsonPayload(pathname, data) {
           ['titleIt', 'titleAr', 'summaryIt', 'summaryAr'].every(key => typeof lesson[key] === 'string' && lesson[key].trim()) &&
           Array.isArray(lesson.keyPoints) && lesson.keyPoints.length >= 3 && lesson.keyPoints.length <= 4 &&
           lesson.keyPoints.every(point => point && Object.keys(point).join(',') === pointKeys && typeof point.it === 'string' && point.it.trim() && typeof point.ar === 'string' && point.ar.trim()) &&
-          (lesson.trapWord === null || lesson.trapWord && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(',') === trapWordKeys && typeof lesson.trapWord.word === 'string' && lesson.trapWord.word.trim() && typeof lesson.trapWord.reasonAr === 'string' && lesson.trapWord.reasonAr.trim()) &&
-          Array.isArray(lesson.quickCheck) && lesson.quickCheck.length === 3 && lesson.quickCheck.every(item => item && !Array.isArray(item) && Object.keys(item).join(',') === quickCheckKeys && typeof item.qIt === 'string' && item.qIt.trim() && ['VERO', 'FALSO'].includes(item.a) && typeof item.explainAr === 'string' && item.explainAr.trim()))) &&
+          (lesson.trapWord && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(',') === trapWordKeys && typeof lesson.trapWord.word === 'string' && typeof lesson.trapWord.reasonAr === 'string' && ((lesson.trapWord.word === '' && lesson.trapWord.reasonAr === '') || (lesson.trapWord.word.trim() && lesson.trapWord.reasonAr.trim()))) &&
+          Array.isArray(lesson.quickChecks) && lesson.quickChecks.length === 3 && lesson.quickChecks.every(item => item && !Array.isArray(item) && Object.keys(item).join(',') === quickCheckKeys && typeof item.qIt === 'string' && item.qIt.trim() && ['VERO', 'FALSO'].includes(item.a) && typeof item.explainAr === 'string' && item.explainAr.trim()))) &&
       data.modules.reduce((count, module) => count + module.lessons.length, 0) === 50;
   }
   if (pathname === '/data/lesson-support.json') {

@@ -42142,7 +42142,7 @@ This typically indicates that your device does not have a healthy Internet conne
         error.code = "course_integrity";
         throw error;
       }
-      const lessonKeys = "id,titleIt,titleAr,summaryIt,summaryAr,keyPoints,trapWord,quickCheck";
+      const lessonKeys = "id,titleIt,titleAr,summaryIt,summaryAr,keyPoints,trapWord,quickChecks";
       const pointKeys = "it,ar";
       const trapWordKeys = "word,reasonAr";
       const quickCheckKeys = "qIt,a,explainAr";
@@ -42157,9 +42157,9 @@ This typically indicates that your device does not have a healthy Internet conne
         for (let index = 0; index < module.lessons.length; index += 1) {
           const lesson = module.lessons[index];
           const expectedId = `u${module.order_hint}-l${index + 1}`;
-          const validTrapWord = (lesson == null ? void 0 : lesson.trapWord) === null || (lesson == null ? void 0 : lesson.trapWord) && typeof lesson.trapWord === "object" && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(",") === trapWordKeys && typeof lesson.trapWord.word === "string" && lesson.trapWord.word.trim() && typeof lesson.trapWord.reasonAr === "string" && lesson.trapWord.reasonAr.trim();
-          const validQuickCheck = Array.isArray(lesson == null ? void 0 : lesson.quickCheck) && lesson.quickCheck.length === 3 && lesson.quickCheck.every((item) => item && typeof item === "object" && !Array.isArray(item) && Object.keys(item).join(",") === quickCheckKeys && typeof item.qIt === "string" && item.qIt.trim() && ["VERO", "FALSO"].includes(item.a) && typeof item.explainAr === "string" && item.explainAr.trim());
-          if (!lesson || Object.keys(lesson).join(",") !== lessonKeys || lesson.id !== expectedId || expectedIds.has(lesson.id) || !["titleIt", "titleAr", "summaryIt", "summaryAr"].every((key) => typeof lesson[key] === "string" && lesson[key].trim()) || !Array.isArray(lesson.keyPoints) || lesson.keyPoints.length < 3 || lesson.keyPoints.length > 4 || !validTrapWord || !validQuickCheck || !lesson.keyPoints.every((point) => point && Object.keys(point).join(",") === pointKeys && typeof point.it === "string" && point.it.trim() && typeof point.ar === "string" && point.ar.trim())) {
+          const validTrapWord = (lesson == null ? void 0 : lesson.trapWord) && typeof lesson.trapWord === "object" && !Array.isArray(lesson.trapWord) && Object.keys(lesson.trapWord).join(",") === trapWordKeys && typeof lesson.trapWord.word === "string" && typeof lesson.trapWord.reasonAr === "string" && (lesson.trapWord.word === "" && lesson.trapWord.reasonAr === "" || lesson.trapWord.word.trim() && lesson.trapWord.reasonAr.trim());
+          const validQuickChecks = Array.isArray(lesson == null ? void 0 : lesson.quickChecks) && lesson.quickChecks.length === 3 && lesson.quickChecks.every((item) => item && typeof item === "object" && !Array.isArray(item) && Object.keys(item).join(",") === quickCheckKeys && typeof item.qIt === "string" && item.qIt.trim() && ["VERO", "FALSO"].includes(item.a) && typeof item.explainAr === "string" && item.explainAr.trim());
+          if (!lesson || Object.keys(lesson).join(",") !== lessonKeys || lesson.id !== expectedId || expectedIds.has(lesson.id) || !["titleIt", "titleAr", "summaryIt", "summaryAr"].every((key) => typeof lesson[key] === "string" && lesson[key].trim()) || !Array.isArray(lesson.keyPoints) || lesson.keyPoints.length < 3 || lesson.keyPoints.length > 4 || !validTrapWord || !validQuickChecks || !lesson.keyPoints.every((point) => point && Object.keys(point).join(",") === pointKeys && typeof point.it === "string" && point.it.trim() && typeof point.ar === "string" && point.ar.trim())) {
             const error = new Error("Il formato di una lezione non è valido. / تنسيق أحد الدروس غير صالح.");
             error.code = "course_integrity";
             throw error;
@@ -47304,7 +47304,7 @@ This typically indicates that your device does not have a healthy Internet conne
   }
   function quickCheckCardMarkup(lesson, index, { reviewOnly = false } = {}) {
     var _a12;
-    const question = (_a12 = lesson.quickCheck) == null ? void 0 : _a12[index];
+    const question = (_a12 = lesson.quickChecks) == null ? void 0 : _a12[index];
     if (!question) return "";
     const id = quickCheckId(lesson.id, index);
     if (!id) return "";
@@ -47315,13 +47315,13 @@ This typically indicates that your device does not have a healthy Internet conne
     return `<article class="quick-check-card ${missed ? "is-missed" : ""}" data-quick-check data-lesson-id="${esc3(lesson.id)}" data-question-index="${index}" data-answer="${esc3(question.a)}"><p class="quick-check-question" lang="it" dir="ltr">${esc3(question.qIt)}</p><div class="quick-check-answers"><button type="button" data-quick-check-answer="VERO" ${locked ? "disabled" : ""}>${controlLabel("Vero", "صحيح")}</button><button type="button" data-quick-check-answer="FALSO" ${locked ? "disabled" : ""}>${controlLabel("Falso", "خطأ")}</button></div>${feedback}</article>`;
   }
   function quickCheckSectionMarkup(lesson, { reviewOnly = false } = {}) {
-    const cards = (lesson.quickCheck || []).map((_, index) => quickCheckCardMarkup(lesson, index, { reviewOnly })).filter(Boolean).join("");
+    const cards = (lesson.quickChecks || []).map((_, index) => quickCheckCardMarkup(lesson, index, { reviewOnly })).filter(Boolean).join("");
     if (reviewOnly && !cards) return "";
     return `<section class="quick-check-section" aria-label="Controllo rapido · اختبار سريع"><h2>${pair2(reviewOnly ? "Ripasso degli errori" : "Controllo rapido", reviewOnly ? "مراجعة الأخطاء" : "اختبار سريع")}</h2>${reviewOnly ? "" : `<p>${pair2("Rispondi alle tre affermazioni Vero/Falso.", "أجب عن العبارات الثلاث بصحيح أو خطأ.")}</p>`}<div class="quick-check-list">${cards}</div></section>`;
   }
   function trapWordMarkup(lesson) {
     const trap = lesson.trapWord;
-    if (!trap) return "";
+    if (!trap || typeof trap.word !== "string" || typeof trap.reasonAr !== "string" || !trap.word.trim() || !trap.reasonAr.trim()) return "";
     return `<aside class="trap-word-card" role="note"><strong>${pair2("Parola-trappola", "كلمة امتحانية خادعة")}</strong><p class="trap-word-term" lang="it" dir="ltr">${dictionaryWordMarkup(trap.word)}</p><p lang="ar" dir="rtl">${esc3(trap.reasonAr)}</p></aside>`;
   }
   function quickErrorReviewPage() {
@@ -47331,7 +47331,7 @@ This typically indicates that your device does not have a healthy Internet conne
       if (!match) return null;
       const item = all.find((candidate) => candidate.lesson.id === match[1]);
       if (!item) return null;
-      const index = Number(match[2]) - 1, question = (_a12 = item.lesson.quickCheck) == null ? void 0 : _a12[index];
+      const index = Number(match[2]) - 1, question = (_a12 = item.lesson.quickChecks) == null ? void 0 : _a12[index];
       return question ? { item, index } : null;
     }).filter(Boolean);
     if (!entries.length) return `<section class="quick-errors-page"><button class="quiet-button" data-view="home">${controlLabel("Back to the path", "العودة إلى المسار")}</button><div class="empty-state"><strong>لا توجد أسئلة أخطأت فيها</strong><p>سجّل اختبار الدرس الأسئلة الخاطئة هنا لتراجعها.</p></div></section>`;
