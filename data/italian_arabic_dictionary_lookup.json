@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-27T03:26:33+00:00",
+    "generated_at_utc": "2026-11-27T03:37:57+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5277,
@@ -10,13 +10,13 @@
       "contextual_candidate_needs_review": 3,
       "contextual_override_v49": 8,
       "legacy_glossary_needs_review": 31,
-      "machine_draft_needs_review": 5050,
-      "reviewed_override": 244
+      "machine_draft_needs_review": 5048,
+      "reviewed_override": 246
     },
     "total_entries": 5336,
     "translated_entries": 5336,
-    "review_required_entries": 5092,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 78 frequent question-bank translations were corrected and 83 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+    "review_required_entries": 5090,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 79 frequent question-bank translations were corrected and 84 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
     "app_release": 64,
     "terms_with_lookup_entry": 5336,
     "entries_with_arabic_translation": 5336,
@@ -36,8 +36,8 @@
     "video_context_additions": 3,
     "lesson_dictionary_audit_additions": 64,
     "question_bank_context_correction_candidates": 3,
-    "question_bank_verified_contextual_corrections": 78,
-    "question_bank_verified_contextual_gloss_confirmations": 83
+    "question_bank_verified_contextual_corrections": 79,
+    "question_bank_verified_contextual_gloss_confirmations": 84
   },
   "entries": [
     {
@@ -14430,15 +14430,15 @@
     },
     {
       "word": "corrispondenza",
-      "translation_ar": "تطابق",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "عند",
+      "source": "question-bank-context-audit-2026-11; Treccani, corrispondenza: https://www.treccani.it/vocabolario/corrispondenza/; Reverso Context Italian-Arabic, in corrispondenza di: https://context.reverso.net/traduzione/italiano-arabo/in+corrispondenza+di; ACI Codice della Strada, art. 3: https://aci.gov.it/codice-della-strada/art-3/; ACI Codice della Strada, art. 158: https://aci.gov.it/codice-della-strada/art-158/; full paired app contexts and lessons: docs/dictionary-audit-batch36-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "117 exact question-token occurrences in 117 paired question records (114 unique Italian texts; 115 unique Italian-Arabic pairs) and 2 Italian lesson-field occurrences in each current and legacy lesson file. Every audited question-bank use is the spatial construction in corrispondenza di, referring to the location of a sign, crossing, intersection, road feature, vehicle part, or load. Treccani describes the relevant spatial relation; direct Reverso Italian-Arabic examples render the phrase as عند/إلى جوار in location or occurrence contexts, while its examples are noisy and supplementary. ACI Articles 3 and 158 use the phrase in traffic/location rules and distinguish at a location from nearby. The machine draft تطابق does not fit these app contexts; عند is a context-specific lookup gloss, not a universal translation of every sense of corrispondenza. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "عند"
     },
     {
       "word": "corrosivi",
@@ -62587,14 +62587,14 @@
     {
       "word": "vietato",
       "translation_ar": "ممنوع",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "source": "question-bank-context-confirmation-2026-11; Treccani, vietare: https://www.treccani.it/vocabolario/vietare/; Reverso Context Italian-Arabic, vietato: https://context.reverso.net/traduzione/italiano-arabo/vietato; ACI Codice della Strada, art. 15: https://aci.gov.it/codice-della-strada/art-15/; ACI Codice della Strada, art. 39: https://aci.gov.it/codice-della-strada/art-39/; full paired app contexts: docs/dictionary-audit-batch36-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "121 exact question-token occurrences in 121 paired question records, with no Italian lesson-field matches. App contexts prohibit using a mobile phone, vehicle transit or parking, overtaking, or proceeding straight. Treccani defines vietato as not permitted and documents prohibition-sign use; ACI Articles 15 and 39 provide official prohibited-act and traffic-sign contexts; Reverso Italian-Arabic supplies supplementary examples for ممنوع/محظور. The existing gloss ممنوع fits the audited traffic contexts and is confirmed unchanged. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "ممنوع"
     },
     {
       "word": "vieti",

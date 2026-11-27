@@ -150,9 +150,9 @@ const sourceHashes = {
 };
 
 const generatedHashes = {
-  'android/app/src/main/assets/dictionary.db': '3e0d0193dc6a3b807c1ae3aac2ec541aade7fe3a7f7f834c40bb026928387c0e',
+  'android/app/src/main/assets/dictionary.db': 'c966eb69dbeb183e6070e2d7a79733e585c6df6dd359e3efc6f8cf295c221e36',
   'public/app.bundle.js': 'e4d827dfa7fd305ffaafd80a3386e546a8a29cd4fbc6836b4b4506e93a45e685',
-  'public/release.json': '0d2921fbb9d29b39250b4728e43b27fc8892afcd0bf25f85dca93ed83c11cb86',
+  'public/release.json': '491aa6d6bf02d3e86b4f7cae12bb2997ccd550b668012f68ce258397d93cfb33',
 };
 
 test('batch 35 pins paired question contexts, Arabic text, answers, and exact ID sets', () => {
@@ -228,17 +228,17 @@ test('batch 35 audit memo cites opened lexical and road-code sources and records
 
 test('batch 35 pins dictionary totals and proves source question/lesson files stayed unchanged', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5092);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 78);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 83);
+  assert.equal(dictionary.metadata.review_required_entries, 5090);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 79);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 84);
   assert.deepEqual(dictionary.metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 31,
-    machine_draft_needs_review: 5050,
-    reviewed_override: 244,
+    machine_draft_needs_review: 5048,
+    reviewed_override: 246,
   });
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5092);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5090);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} fingerprint`);
   }

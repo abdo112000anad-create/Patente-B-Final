@@ -1359,6 +1359,28 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
     "diritto": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, diritto1: https://www.treccani.it/vocabolario/diritto1/; Treccani, diritto2: https://www.treccani.it/vocabolario/diritto2/; Accademia della Crusca: https://accademiadellacrusca.it/it/consulenza/diritto-di-o-diritto-a-e-si-pu%C3%B2-andare-a-dritto/2907; Reverso Italian-Arabic, proseguire diritto: https://context.reverso.net/traduzione/italiano-arabo/proseguire+diritto; Reverso Italian-Arabic, diritto di precedenza: https://dizionario.reverso.net/italiano-arabo/diritto+di+precedenza; ACI Codice della Strada, art. 145: https://aci.gov.it/codice-della-strada/art-145/; full paired app contexts and lessons: docs/dictionary-audit-batch34-2026-11-27.md",
 })
 
+# Batch thirty-six: spatial corrispondenza and a confirmed unchanged prohibition gloss.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "corrispondenza": (
+        "عند",
+        "contextual_translation",
+        "117 exact question-token occurrences in 117 paired question records (114 unique Italian texts; 115 unique Italian-Arabic pairs) and 2 Italian lesson-field occurrences in each current and legacy lesson file. Every audited question-bank use is the spatial construction in corrispondenza di, referring to the location of a sign, crossing, intersection, road feature, vehicle part, or load. Treccani describes the relevant spatial relation; direct Reverso Italian-Arabic examples render the phrase as عند/إلى جوار in location or occurrence contexts, while its examples are noisy and supplementary. ACI Articles 3 and 158 use the phrase in traffic/location rules and distinguish at a location from nearby. The machine draft تطابق does not fit these app contexts; عند is a context-specific lookup gloss, not a universal translation of every sense of corrispondenza. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "corrispondenza": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, corrispondenza: https://www.treccani.it/vocabolario/corrispondenza/; Reverso Context Italian-Arabic, in corrispondenza di: https://context.reverso.net/traduzione/italiano-arabo/in+corrispondenza+di; ACI Codice della Strada, art. 3: https://aci.gov.it/codice-della-strada/art-3/; ACI Codice della Strada, art. 158: https://aci.gov.it/codice-della-strada/art-158/; full paired app contexts and lessons: docs/dictionary-audit-batch36-2026-11-27.md",
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS.update({
+    "vietato": (
+        "ممنوع",
+        "contextual_translation",
+        "121 exact question-token occurrences in 121 paired question records, with no Italian lesson-field matches. App contexts prohibit using a mobile phone, vehicle transit or parking, overtaking, or proceeding straight. Treccani defines vietato as not permitted and documents prohibition-sign use; ACI Articles 15 and 39 provide official prohibited-act and traffic-sign contexts; Reverso Italian-Arabic supplies supplementary examples for ممنوع/محظور. The existing gloss ممنوع fits the audited traffic contexts and is confirmed unchanged. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
+    "vietato": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, vietare: https://www.treccani.it/vocabolario/vietare/; Reverso Context Italian-Arabic, vietato: https://context.reverso.net/traduzione/italiano-arabo/vietato; ACI Codice della Strada, art. 15: https://aci.gov.it/codice-della-strada/art-15/; ACI Codice della Strada, art. 39: https://aci.gov.it/codice-della-strada/art-39/; full paired app contexts: docs/dictionary-audit-batch36-2026-11-27.md",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 
