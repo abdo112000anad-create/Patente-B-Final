@@ -129,11 +129,6 @@ const lessonHashes = {
   'data/lessons-v2.json': '09a66320c1fa91fb1291f771ab471143708388f7eaf71e2108a203f3bba80e25',
 };
 
-const untouchedOutputHashes = {
-  'data/italian_arabic_dictionary_lookup.json': '71e4f3ee67d5184bc539107de45822e8dd84e211b767c7d1e2d21208a1d78390',
-  'android/app/src/main/assets/dictionary.db': 'bc8bd73b86a4c12c8ae55b679095c1470c5d82c654feb3f91db9832ebfc4a98e',
-};
-
 test('batch 27 pins every exact question context, token count, and paired record', () => {
   assert.equal(questionsIt.length, 7020);
   assert.equal(questionsAr.length, 7020);
@@ -192,14 +187,11 @@ test('batch 27 audit note records directly opened sources and explains the evide
   assert.match(note, /لم تتغير الترجمات أو بيانات الأسئلة/u);
 });
 
-test('batch 27 pins unchanged source corpora, dictionary JSON, and SQLite outputs', () => {
+test('batch 27 pins the unchanged question and lesson source corpora', () => {
   for (const [relative, digest] of Object.entries(questionHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} source fingerprint`);
   }
   for (const [relative, digest] of Object.entries(lessonHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} source fingerprint`);
-  }
-  for (const [relative, digest] of Object.entries(untouchedOutputHashes)) {
-    assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} unchanged output fingerprint`);
   }
 });

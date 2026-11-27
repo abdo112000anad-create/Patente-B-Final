@@ -42,7 +42,7 @@ test('v64 context candidates retain their flags while frenare is source-confirme
   assert.equal(questions.questions.filter(row => /\babbagliamento\b/iu.test(row.it)).length, 2);
   assert.equal(dictionary.metadata.question_bank_context_correction_candidates, 3);
   assert.equal(dictionary.metadata.counts_by_status.contextual_candidate_needs_review, 3);
-  assert.equal(dictionary.metadata.review_required_entries, 5107);
+  assert.equal(dictionary.metadata.review_required_entries, 5106);
   const expected = {
     abbagliante: { arabic: 'الضوء العالي / مُبهِر', source: /Reverso/u },
     abbagliamento: { arabic: 'الإبهار الضوئي / وهج يعيق الرؤية', source: /Translate\.com/u },
@@ -256,7 +256,7 @@ test('frequent question-bank dictionary corrections are backed by exact contexts
   assert.equal(questionsIt.count, 7020);
   assert.match(questionsIt.sourceUrl, /ilportaledellautomobilista\.it/u);
   assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 66);
-  assert.equal(dictionary.metadata.review_required_entries, 5107);
+  assert.equal(dictionary.metadata.review_required_entries, 5106);
   for (const [word, item] of Object.entries(expected)) {
     const row = byWord.get(word);
     assert.equal(questionsIt.questions.reduce((count, question) => count + (question.it.match(new RegExp(`\\b${word}\\b`, 'giu')) || []).length, 0), item.count, word);
@@ -298,7 +298,7 @@ test('source-backed presenza is corrected while mixed-sense senso remains flagge
   const byWord = new Map(dictionary.entries.map(row => [row.word, row]));
   const arabicById = new Map(questionsAr.questions.map(row => [row.id, row]));
   assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 66);
-  assert.equal(dictionary.metadata.review_required_entries, 5107);
+  assert.equal(dictionary.metadata.review_required_entries, 5106);
   assert.equal(questionsIt.questions.reduce((count, question) => count + (question.it.match(/\bpresenza\b/giu) || []).length, 0), 475);
   assert.equal(questionsIt.questions.reduce((count, question) => count + (question.it.match(/\bsenso\b/giu) || []).length, 0), 333);
 
@@ -405,7 +405,7 @@ test('source-backed vieta and occorre corrections match contexts; unresolved ter
     return count;
   };
   assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 66);
-  assert.equal(dictionary.metadata.review_required_entries, 5107);
+  assert.equal(dictionary.metadata.review_required_entries, 5106);
   assert.equal(questionOccurrences('vieta'), 202);
   assert.equal(questionOccurrences('occorre'), 129);
   assert.equal(countLessonWord('vieta'), 0);
@@ -498,7 +498,7 @@ test('source-backed km and traffico corrections match app contexts; six batch-fi
   };
   assert.equal(questionsIt.count, 7020);
   assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 66);
-  assert.equal(dictionary.metadata.review_required_entries, 5107);
+  assert.equal(dictionary.metadata.review_required_entries, 5106);
 
   const km = byWord.get('km');
   assert.equal(questionOccurrences('km'), 176);
@@ -566,7 +566,7 @@ test('source-backed consente correction matches app contexts and leaves other ba
   const arabicById = new Map(questionsAr.questions.map(row => [row.id, row]));
   const row = byWord.get('consente');
   assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 66);
-  assert.equal(dictionary.metadata.review_required_entries, 5107);
+  assert.equal(dictionary.metadata.review_required_entries, 5106);
   assert.equal(questionsIt.questions.reduce((count, question) => count + (question.it.match(/\bconsente\b/giu) || []).length, 0), 235);
   const question = questionsIt.questions.find(candidate => candidate.id === 21907);
   assert.match(question.it, /uno svincolo che consente l'inversione di marcia/u);
@@ -644,9 +644,9 @@ test('batch-six confirms supported existing glosses unchanged and retains unreso
   };
 
   assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 66);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 80);
-  assert.equal(dictionary.metadata.review_required_entries, 5107);
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5107);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 81);
+  assert.equal(dictionary.metadata.review_required_entries, 5106);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5106);
   for (const [word, expected] of Object.entries(confirmed)) {
     const row = byWord.get(word);
     assert.equal(questionsIt.questions.reduce((count, question) => count + exactCount(question.it, word), 0), expected.occurrences, word);
@@ -715,9 +715,9 @@ test('batch-seven contextual reviews correct two obligation glosses, confirm fou
   };
 
   assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 66);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 80);
-  assert.equal(dictionary.metadata.review_required_entries, 5107);
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5107);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 81);
+  assert.equal(dictionary.metadata.review_required_entries, 5106);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5106);
   for (const [word, expected] of Object.entries(reviewed)) {
     assert.equal(questionOccurrences(word), expected.questions, word);
     assert.equal(distinctQuestionContexts(word), expected.contexts, word);
@@ -786,9 +786,9 @@ test('batch-nine corrects two supported glosses, confirms four, and retains two 
   };
 
   assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 66);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 80);
-  assert.equal(dictionary.metadata.review_required_entries, 5107);
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5107);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 81);
+  assert.equal(dictionary.metadata.review_required_entries, 5106);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5106);
   for (const [word, expected] of Object.entries(reviewed)) {
     const row = byWord.get(word);
     assert.ok(row, word);
@@ -855,9 +855,9 @@ test('batch-eight confirms six supported glosses and keeps figura and pedoni fla
   };
 
   assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 66);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 80);
-  assert.equal(dictionary.metadata.review_required_entries, 5107);
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5107);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 81);
+  assert.equal(dictionary.metadata.review_required_entries, 5106);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5106);
   for (const [word, expected] of Object.entries(confirmed)) {
     const row = byWord.get(word);
     assert.equal(questionOccurrences(word), expected.occurrences, word);
@@ -938,9 +938,9 @@ test('batch ten confirms three supported glosses and retains five uncertain flag
   };
 
   assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 66);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 80);
-  assert.equal(dictionary.metadata.review_required_entries, 5107);
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5107);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 81);
+  assert.equal(dictionary.metadata.review_required_entries, 5106);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5106);
   for (const [word, expected] of Object.entries(reviewed)) {
     const row = byWord.get(word);
     assert.ok(row, word);

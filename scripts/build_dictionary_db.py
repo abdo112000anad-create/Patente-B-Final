@@ -1230,6 +1230,17 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
     "tratto": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani: https://www.treccani.it/vocabolario/tratto2/; ACI Codice della Strada, art. 3: https://aci.gov.it/codice-della-strada/art-3/; Al-Maany, جزء: https://www.almaany.com/ar/dict/ar-ar/%D8%AC%D8%B2%D8%A1/; Al-Maany, المسافة: https://www.almaany.com/ar/dict/ar-ar/%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D9%81%D8%A9/; official MIT question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
 })
 
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS.update({
+    "durante": (
+        "خلال",
+        "contextual_translation",
+        "174 question-token occurrences in 174 distinct paired contexts and 8 lesson-text occurrences across 6 lesson records. Every matched app use is temporal: during driving, a maneuver, a period, market hours, or another activity/time span. Treccani defines durante as a temporal preposition equivalent to nel tempo di; Al-Maany’s Arabic-English entry maps during to خلال and أثناء and defines it over the course/duration of. The existing gloss خلال fits the full app contexts and is confirmed unchanged. The Arabic source is English-Arabic rather than a direct Italian-Arabic entry; this evidence limit is disclosed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
+    "durante": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, Vocabolario: https://www.treccani.it/vocabolario/durante/; Al-Maany Arabic-English, during: https://www.almaany.com/ar/dict/ar-en/during/; full context coverage: docs/dictionary-audit-batch28-2026-11-27.md",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 
@@ -1396,7 +1407,7 @@ def main() -> int:
         "entries_with_safe_ui_fallback": 0,
         "owner_approved_corrections": len(OWNER_CORRECTIONS),
         "excluded_single_letter_artifacts": sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS),
-        "accuracy_note": f"Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS)} frequent question-bank translations were corrected and {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS)} existing glosses were confirmed unchanged using app contexts and Italian-Arabic sources; these project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+        "accuracy_note": f"Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS)} frequent question-bank translations were corrected and {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS)} existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
         "question_bank_context_correction_candidates": len(QUESTION_BANK_CONTEXTUAL_CANDIDATES),
         "question_bank_verified_contextual_corrections": len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS),
         "question_bank_verified_contextual_gloss_confirmations": len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS),
