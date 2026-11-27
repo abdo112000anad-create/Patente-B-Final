@@ -123,9 +123,9 @@ const sourceHashes = {
 };
 
 const generatedHashes = {
-  'android/app/src/main/assets/dictionary.db': 'dfea4c47abe39ed15998e4e849be365c6746a4365d6a16a017f58c4c92fc8ad7',
+  'android/app/src/main/assets/dictionary.db': '6ff22561e3322f12cf61c122b20f47b140551ade36e0a0a56f0120af58321d2f',
   'public/app.bundle.js': 'e4d827dfa7fd305ffaafd80a3386e546a8a29cd4fbc6836b4b4506e93a45e685',
-  'public/release.json': 'cb1a89497909d94811a57ce7a02473a7e885a8010cf45804ed65953171c7eba4',
+  'public/release.json': 'b5abdaf1a52afd092c1db289e4554fac722d642dd0068763a96ec020aeaf10e5',
 };
 
 test('batch 36 counts complete question contexts and exact paired IDs', () => {
@@ -210,17 +210,17 @@ test('batch 36 memo cites direct sources, records ambiguity limits, and makes no
 
 test('batch 36 pins dictionary totals and proves source and generated artifact fingerprints', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5078);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 83);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 92);
+  assert.equal(dictionary.metadata.review_required_entries, 5075);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 85);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 93);
   assert.deepEqual(dictionary.metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 31,
-    machine_draft_needs_review: 5036,
-    reviewed_override: 258,
+    machine_draft_needs_review: 5033,
+    reviewed_override: 261,
   });
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5078);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5075);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} source fingerprint`);
   }

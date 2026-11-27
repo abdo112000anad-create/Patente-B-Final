@@ -1485,6 +1485,34 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
     "colore": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, colore: https://www.treccani.it/vocabolario/colore/; ACI Codice della Strada, art. 39: https://aci.gov.it/codice-della-strada/art-39/; Reverso Italian-Arabic, colore: https://dizionario.reverso.net/italiano-arabo/colore; Glosbe Italian-Arabic, colore: https://glosbe.com/it/ar/colore; full paired app contexts: docs/dictionary-audit-batch41-2026-11-27.md",
 })
 
+# Batch forty-three: source-supported corrections and context-only confirmation.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "prescrizione": (
+        "وصفة طبية؛ تعليمات أو قيود مرورية ملزمة",
+        "contextual_translation",
+        "38 exact question-token occurrences in 38 paired question records (13 unique Italian texts; 29 unique Italian-Arabic pairs) and 7 Italian lesson-field occurrences in each current and legacy lesson file. App contexts include road-sign prescriptions and genuine medical prescriptions. ACI Article 39 defines traffic prescription signs through obligations, prohibitions, and limitations; Treccani distinguishes regulatory instructions from medical prescriptions. The previous one-sense gloss وصفة omitted the traffic use. Corrected to the sense-qualified project gloss وصفة طبية؛ تعليمات أو قيود مرورية ملزمة. This is descriptive Arabic for the app's contexts, not a standardized legal Arabic term. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "danni": (
+        "أضرار",
+        "contextual_translation",
+        "45 exact question-token occurrences in 42 paired question records (42 unique Italian texts and 42 unique Italian-Arabic pairs) and 1 Italian lesson-field occurrence in each current and legacy lesson file. Contexts include vehicle/component/property damage, physical harm, and liability. Treccani defines harm or damage; Arabita directly pairs plural danni with أضرار, and Reverso provides additional contextual examples. Corrected the singular machine gloss الضرر to the plural أضرار; phrase-level wording such as إصابات in injury contexts remains unchanged. No standardized legal Arabic equivalent is asserted. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "prescrizione": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, prescrizione: https://www.treccani.it/vocabolario/prescrizione/; ACI Codice della Strada, art. 39: https://aci.gov.it/codice-della-strada/art-39/; full paired app contexts and lessons: docs/dictionary-audit-batch43-2026-11-27.md",
+    "danni": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, danno: https://www.treccani.it/vocabolario/danno/; Arabita, plural danni: https://arabita.news/dizionario/1663; Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/danno; Reverso Arabic-Italian, أضرار: https://dizionario.reverso.net/arabo-italiano/%D8%A3%D8%B6%D8%B1%D8%A7%D8%B1; full paired app contexts and lessons: docs/dictionary-audit-batch43-2026-11-27.md",
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS.update({
+    "infortunato": (
+        "مصاب",
+        "contextual_translation",
+        "39 exact question-token occurrences in 38 paired question records (38 unique Italian texts and 38 unique Italian-Arabic pairs) and no Italian lesson-field matches. Every reviewed use refers to an injured road user or person; in the supplied contexts the masculine singular is used as a noun or participial adjective. Treccani identifies infortunato as a participle and gives ferito as a synonym; Arabdict and Reverso Context provide Italian-Arabic examples supporting مصاب/المصاب. The existing gloss مصاب is confirmed for these app contexts; sentence-level Arabic wording is outside this glossary decision. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
+    "infortunato": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, infortunato: https://www.treccani.it/vocabolario/infortunato_(Sinonimi-e-Contrari)/; Arabdict Italian-Arabic: https://www.arabdict.com/en/italian-arabic/infortunato; Reverso Context Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/infortunato; full paired app contexts: docs/dictionary-audit-batch43-2026-11-27.md",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 

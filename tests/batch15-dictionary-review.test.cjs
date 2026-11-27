@@ -63,14 +63,14 @@ test('batch fifteen applies only source-supported decisions and retains four unc
   assert.equal(Object.keys(expected).length, 18);
   assert.equal(questionsIt.count, 7020);
   assert.equal(questionsAr.questions.length, 7020);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 83);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 92);
-  assert.equal(dictionary.metadata.review_required_entries, 5078);
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5078);
-  assert.equal(dictionary.metadata.counts_by_status.machine_draft_needs_review, 5036);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 85);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 93);
+  assert.equal(dictionary.metadata.review_required_entries, 5075);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5075);
+  assert.equal(dictionary.metadata.counts_by_status.machine_draft_needs_review, 5033);
   assert.equal(dictionary.metadata.counts_by_status.legacy_glossary_needs_review, 31);
   assert.equal(dictionary.metadata.counts_by_status.contextual_candidate_needs_review, 3);
-  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 258);
+  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 261);
   assert.equal(Object.values(expected).filter(item => item.decision !== 'retained').length, 14);
   assert.equal(Object.values(expected).filter(item => item.decision === 'retained').length, 4);
 
