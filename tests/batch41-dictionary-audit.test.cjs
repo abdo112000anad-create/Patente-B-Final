@@ -209,27 +209,27 @@ test('batch 41 memo cites direct sources, records source limitations, and makes 
 test('batch 41 and 42 pin cumulative dictionary outputs and unchanged question/lesson sources', () => {
   // Batch 42 confirms simbolo without changing any question or lesson source.
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5075);
+  assert.equal(dictionary.metadata.review_required_entries, 5071);
   assert.equal(dictionary.metadata.question_bank_context_correction_candidates, 3);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 85);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 93);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 88);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 94);
   assert.deepEqual(dictionary.metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 31,
-    machine_draft_needs_review: 5033,
-    reviewed_override: 261,
+    machine_draft_needs_review: 5029,
+    reviewed_override: 265,
   });
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5075);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5071);
   const database = fs.readFileSync(path.join(ROOT, 'android/app/src/main/assets/dictionary.db'));
   const dictionaryBytes = fs.readFileSync(path.join(ROOT, 'data/italian_arabic_dictionary_lookup.json'));
   const bundle = fs.readFileSync(path.join(ROOT, 'public/app.bundle.js'));
   const releaseBytes = fs.readFileSync(path.join(ROOT, 'public/release.json'));
   const release = JSON.parse(releaseBytes.toString('utf8'));
-  assert.equal(sha256(database), '6ff22561e3322f12cf61c122b20f47b140551ade36e0a0a56f0120af58321d2f');
-  assert.equal(sha256(dictionaryBytes), '01a439fca1fc074c5eb0f4655694193dfb1613e0ca8d3a77fa3cf8d4944ebf7d');
+  assert.equal(sha256(database), '800de67187a759fd51083feb8089e6687e604521530349c795d2f6845b4230f5');
+  assert.equal(sha256(dictionaryBytes), 'ee4cfa6bae0aec69fd85b4986efd18706f3d8044e122b069c1f92e2882cb8ecb');
   assert.equal(sha256(bundle), 'e4d827dfa7fd305ffaafd80a3386e546a8a29cd4fbc6836b4b4506e93a45e685');
-  assert.equal(sha256(releaseBytes), 'b5abdaf1a52afd092c1db289e4554fac722d642dd0068763a96ec020aeaf10e5');
+  assert.equal(sha256(releaseBytes), '42e5cdb6e8ec465caa10aa40784e56ca00b13312eab86d3a8361b1e90cb1e45e');
   assert.equal(release.dictionarySha256, sha256(dictionaryBytes));
   assert.equal(release.bundleSha256, sha256(bundle));
   for (const [relative, digest] of Object.entries(sourceHashes)) {

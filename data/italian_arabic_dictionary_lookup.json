@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-27T06:02:45+00:00",
+    "generated_at_utc": "2026-11-27T06:21:56+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5277,
@@ -10,13 +10,13 @@
       "contextual_candidate_needs_review": 3,
       "contextual_override_v49": 8,
       "legacy_glossary_needs_review": 31,
-      "machine_draft_needs_review": 5033,
-      "reviewed_override": 261
+      "machine_draft_needs_review": 5029,
+      "reviewed_override": 265
     },
     "total_entries": 5336,
     "translated_entries": 5336,
-    "review_required_entries": 5075,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 85 frequent question-bank translations were corrected and 93 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+    "review_required_entries": 5071,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 88 frequent question-bank translations were corrected and 94 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
     "app_release": 64,
     "terms_with_lookup_entry": 5336,
     "entries_with_arabic_translation": 5336,
@@ -36,8 +36,8 @@
     "video_context_additions": 3,
     "lesson_dictionary_audit_additions": 64,
     "question_bank_context_correction_candidates": 3,
-    "question_bank_verified_contextual_corrections": 85,
-    "question_bank_verified_contextual_gloss_confirmations": 93
+    "question_bank_verified_contextual_corrections": 88,
+    "question_bank_verified_contextual_gloss_confirmations": 94
   },
   "entries": [
     {
@@ -5862,15 +5862,15 @@
     },
     {
       "word": "aumenta",
-      "translation_ar": "زيادة",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "يزيد / تزداد (بحسب الفاعل)",
+      "source": "question-bank-context-audit-2026-11; Treccani, aumentare: https://www.treccani.it/vocabolario/aumentare/; Reverso Arabic-Italian examples for يزيد: https://dizionario.reverso.net/arabo-italiano/%D9%8A%D8%B2%D9%8A%D8%AF; Cambridge English-Arabic, increase: https://dictionary.cambridge.org/dictionary/english-arabic/increase; full paired app contexts and lessons: docs/dictionary-audit-batch44-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "44 exact question-token occurrences in 43 paired question records (41 unique Italian texts; 41 unique Italian-Arabic pairs) and 2 Italian lesson-field occurrences in each current and legacy lesson file. Contexts describe an increase in distance, risk, consumption, noise, pollution, adhesion, and related quantities; Arabic agreement varies with the subject, e.g. تزداد المسافة / يزداد الخطر. Treccani defines the transitive sense as making greater and the intransitive sense as growing; Reverso examples support يزيد for aumenta, while Cambridge English-Arabic distinguishes the verb يزيد/يزداد from the noun زيادة but is not direct Italian-Arabic evidence. The noun machine gloss زيادة does not fit the verb form. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "يزيد / تزداد (بحسب الفاعل)"
     },
     {
       "word": "aumentando",
@@ -43182,15 +43182,15 @@
     },
     {
       "word": "principali",
-      "translation_ar": "رئيسي",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "رئيسية",
+      "source": "question-bank-context-audit-2026-11; Treccani, principale: https://www.treccani.it/vocabolario/principale/; ACI Codice della Strada, art. 2: https://aci.gov.it/codice-della-strada/art-2/; Glosbe Arabic-Italian, رئيسي: https://it.glosbe.com/arz/it/%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A; Arabdict Italian-Arabic: https://www.arabdict.com/it/italian-arabic/%D9%85%D9%81%D8%AA%D8%A7%D8%AD%20%D8%A7%D9%84%D8%A5%D8%B6%D8%A7%D8%A1%D8%A9%20%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A; full paired app contexts and lessons: docs/dictionary-audit-batch44-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "80 exact question-token occurrences in 80 paired question records (80 unique Italian texts and 80 unique Italian-Arabic pairs) and 9 Italian lesson-field occurrences in each current and legacy lesson file. In questions, 78 uses are the technical Italian class strade extraurbane principali, one is elliptical for that class, and one describes principali cause; lessons also use categorie principali. Treccani supports the general adjective meaning and Glosbe/Arabdict support رئيسي; ACI Article 2 defines the Italian road class but does not establish an Arabic legal name. The machine gloss رئيسي is masculine singular and does not agree with the predominant feminine plural nouns; رئيسية is a descriptive form, not a certified legal translation of the road class. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "رئيسية"
     },
     {
       "word": "principalmente",
@@ -44167,14 +44167,14 @@
     {
       "word": "provenienti",
       "translation_ar": "قادم",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "source": "question-bank-context-confirmation-2026-11; Treccani, provenire: https://www.treccani.it/vocabolario/provenire/; Nuovo De Mauro, provenienza: https://dizionario.internazionale.it/parola/provenienza; Reverso Context Italian-Arabic, proveniente: https://context.reverso.net/traduzione/italiano-arabo/proveniente; full paired app contexts: docs/dictionary-audit-batch44-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "47 exact question-token occurrences in 46 paired question records (45 unique Italian texts; 46 unique Italian-Arabic pairs) and no Italian lesson-field matches. The reviewed contexts describe people or vehicles coming from a direction, road, place, or source. Treccani defines provenire as coming/arriving from a place or direction, De Mauro supports the source/provenance sense, and Reverso examples support قادم/القادمة for proveniente. The existing concise headword قادم is semantically supported; sentence-level Arabic should agree in gender and number (e.g. المركبات القادمة). Existing gloss confirmed unchanged for these app contexts only. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "قادم"
     },
     {
       "word": "provenire",
@@ -47226,15 +47226,15 @@
     },
     {
       "word": "ridurre",
-      "translation_ar": "قلّص",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "يقلّل / يخفض",
+      "source": "question-bank-context-audit-2026-11; Treccani, ridurre: https://www.treccani.it/vocabolario/ridurre/; Nuovo De Mauro, ridurre: https://dizionario.internazionale.it/parola/ridurre; Arabdict Italian-Arabic: https://www.arabdict.com/it/italian-arabic/ridurre; full paired app contexts and lessons: docs/dictionary-audit-batch44-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "46 exact question-token occurrences in 46 paired question records (46 unique Italian texts; 46 unique Italian-Arabic pairs) and 8 Italian lesson-field occurrences in each current and legacy lesson file. Every audited use means making something less or decreasing it, including speed, risk, noise, pollution, consumption, attention, ability, pressure, and heat. Treccani and De Mauro distinguish reducing quantity from lowering/decreasing and include reducing vehicle speed; Arabdict lists قلّل and خفض among Arabic equivalents. The machine gloss قلّص is related but less suitable as a broad transitive gloss; the infinitive-form gloss يقلّل / يخفض is used here, while a whole phrase may call for wording such as خفّض السرعة. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "يقلّل / يخفض"
     },
     {
       "word": "riduzione",

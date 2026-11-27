@@ -1513,6 +1513,40 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
     "infortunato": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, infortunato: https://www.treccani.it/vocabolario/infortunato_(Sinonimi-e-Contrari)/; Arabdict Italian-Arabic: https://www.arabdict.com/en/italian-arabic/infortunato; Reverso Context Italian-Arabic: https://context.reverso.net/traduzione/italiano-arabo/infortunato; full paired app contexts: docs/dictionary-audit-batch43-2026-11-27.md",
 })
 
+# Batch forty-four: contextual verb/adjective forms and a confirmed participle.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "ridurre": (
+        "يقلّل / يخفض",
+        "contextual_translation",
+        "46 exact question-token occurrences in 46 paired question records (46 unique Italian texts; 46 unique Italian-Arabic pairs) and 8 Italian lesson-field occurrences in each current and legacy lesson file. Every audited use means making something less or decreasing it, including speed, risk, noise, pollution, consumption, attention, ability, pressure, and heat. Treccani and De Mauro distinguish reducing quantity from lowering/decreasing and include reducing vehicle speed; Arabdict lists قلّل and خفض among Arabic equivalents. The machine gloss قلّص is related but less suitable as a broad transitive gloss; the infinitive-form gloss يقلّل / يخفض is used here, while a whole phrase may call for wording such as خفّض السرعة. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "aumenta": (
+        "يزيد / تزداد (بحسب الفاعل)",
+        "contextual_translation",
+        "44 exact question-token occurrences in 43 paired question records (41 unique Italian texts; 41 unique Italian-Arabic pairs) and 2 Italian lesson-field occurrences in each current and legacy lesson file. Contexts describe an increase in distance, risk, consumption, noise, pollution, adhesion, and related quantities; Arabic agreement varies with the subject, e.g. تزداد المسافة / يزداد الخطر. Treccani defines the transitive sense as making greater and the intransitive sense as growing; Reverso examples support يزيد for aumenta, while Cambridge English-Arabic distinguishes the verb يزيد/يزداد from the noun زيادة but is not direct Italian-Arabic evidence. The noun machine gloss زيادة does not fit the verb form. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "principali": (
+        "رئيسية",
+        "contextual_translation",
+        "80 exact question-token occurrences in 80 paired question records (80 unique Italian texts and 80 unique Italian-Arabic pairs) and 9 Italian lesson-field occurrences in each current and legacy lesson file. In questions, 78 uses are the technical Italian class strade extraurbane principali, one is elliptical for that class, and one describes principali cause; lessons also use categorie principali. Treccani supports the general adjective meaning and Glosbe/Arabdict support رئيسي; ACI Article 2 defines the Italian road class but does not establish an Arabic legal name. The machine gloss رئيسي is masculine singular and does not agree with the predominant feminine plural nouns; رئيسية is a descriptive form, not a certified legal translation of the road class. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "ridurre": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, ridurre: https://www.treccani.it/vocabolario/ridurre/; Nuovo De Mauro, ridurre: https://dizionario.internazionale.it/parola/ridurre; Arabdict Italian-Arabic: https://www.arabdict.com/it/italian-arabic/ridurre; full paired app contexts and lessons: docs/dictionary-audit-batch44-2026-11-27.md",
+    "aumenta": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, aumentare: https://www.treccani.it/vocabolario/aumentare/; Reverso Arabic-Italian examples for يزيد: https://dizionario.reverso.net/arabo-italiano/%D9%8A%D8%B2%D9%8A%D8%AF; Cambridge English-Arabic, increase: https://dictionary.cambridge.org/dictionary/english-arabic/increase; full paired app contexts and lessons: docs/dictionary-audit-batch44-2026-11-27.md",
+    "principali": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, principale: https://www.treccani.it/vocabolario/principale/; ACI Codice della Strada, art. 2: https://aci.gov.it/codice-della-strada/art-2/; Glosbe Arabic-Italian, رئيسي: https://it.glosbe.com/arz/it/%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A; Arabdict Italian-Arabic: https://www.arabdict.com/it/italian-arabic/%D9%85%D9%81%D8%AA%D8%A7%D8%AD%20%D8%A7%D9%84%D8%A5%D8%B6%D8%A7%D8%A1%D8%A9%20%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A; full paired app contexts and lessons: docs/dictionary-audit-batch44-2026-11-27.md",
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS.update({
+    "provenienti": (
+        "قادم",
+        "contextual_translation",
+        "47 exact question-token occurrences in 46 paired question records (45 unique Italian texts; 46 unique Italian-Arabic pairs) and no Italian lesson-field matches. The reviewed contexts describe people or vehicles coming from a direction, road, place, or source. Treccani defines provenire as coming/arriving from a place or direction, De Mauro supports the source/provenance sense, and Reverso examples support قادم/القادمة for proveniente. The existing concise headword قادم is semantically supported; sentence-level Arabic should agree in gender and number (e.g. المركبات القادمة). Existing gloss confirmed unchanged for these app contexts only. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
+    "provenienti": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, provenire: https://www.treccani.it/vocabolario/provenire/; Nuovo De Mauro, provenienza: https://dizionario.internazionale.it/parola/provenienza; Reverso Context Italian-Arabic, proveniente: https://context.reverso.net/traduzione/italiano-arabo/proveniente; full paired app contexts: docs/dictionary-audit-batch44-2026-11-27.md",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 
