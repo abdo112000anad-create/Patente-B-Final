@@ -185,12 +185,12 @@ test('the unified v50 dark palette keeps readable lesson copy and mobile sizing'
   assert.match(updated, /lesson-animation-svg/u);
 });
 
-test('Firebase Web and Android configs match the v68 project and package', () => {
+test('Firebase Web and Android configs match the v69 project and package', () => {
   const config = json('android/app/google-services.json');
   const gradle = read('android/app/build.gradle');
   const packageName = gradle.match(/^\s*applicationId\s+["']([^"']+)["']/mu)?.[1];
   assert.equal(packageName, 'it.patenteb.sideload.v29');
-  assert.match(gradle, /versionCode\s+68/u);
+  assert.match(gradle, /versionCode\s+69/u);
   assert.equal(config.project_info.project_id, 'patente-b-arabic');
   const matchingClients = config.client.filter(client => client.client_info?.android_client_info?.package_name === packageName);
   assert.equal(matchingClients.length, 1);
@@ -236,8 +236,8 @@ test('offline cache includes local lessons, questions, dictionary, and v50 style
   assert.match(serviceWorker, /v52-dark-overhaul\.css/u);
   assert.match(serviceWorker, /italian_arabic_dictionary_lookup\.json/u);
   assert.match(read('scripts/build-pwa.cjs'), /italian_arabic_dictionary_lookup\.json/u);
-  assert.match(serviceWorker, /patente-ar-v68-native-tts/u);
-  assert.match(index, /data-app-version="68"/u);
+  assert.match(serviceWorker, /patente-ar-v69-native-tts/u);
+  assert.match(index, /data-app-version="69"/u);
 });
 
 test('v62 home contains the vertical 50-lesson learning path and no legacy dashboard sections', () => {
@@ -257,7 +257,7 @@ test('Glossary controls fit the single-column mobile layout', () => {
   assert.match(css, /\.glossary-controls > label \{ min-width: 0; \}/u);
 });
 
-test('Android build script remains debug-only and uses v68 metadata', () => {
+test('Android build script remains debug-only and uses v69 metadata', () => {
   const build = read('scripts/build-android.sh');
   const gradleCommand = build.match(/^\.\/gradlew .*$/mu)?.[0] || '';
   assert.match(gradleCommand, /\bclean\b/u);
@@ -265,11 +265,11 @@ test('Android build script remains debug-only and uses v68 metadata', () => {
   assert.match(gradleCommand, /:app:testDebugUnitTest/u);
   assert.doesNotMatch(gradleCommand, /assembleRelease|bundleRelease|publish|upload/iu);
   const gradle = read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+68/u);
-  assert.match(gradle, /versionName\s+"68\.0\.0"/u);
+  assert.match(gradle, /versionCode\s+69/u);
+  assert.match(gradle, /versionName\s+"69\.0\.0"/u);
   assert.match(gradle, /abiFilters\s+'arm64-v8a',\s*'armeabi-v7a'/u);
   assert.match(read('android/variables.gradle'), /minSdkVersion\s*=\s*24/u);
-  assert.equal(json('package.json').version, '68.0.0');
-  assert.equal(json('package-lock.json').packages[''].version, '68.0.0');
-  assert.equal(json('public/release.json').version, 68);
+  assert.equal(json('package.json').version, '69.0.0');
+  assert.equal(json('package-lock.json').packages[''].version, '69.0.0');
+  assert.equal(json('public/release.json').version, 69);
 });

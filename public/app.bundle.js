@@ -46516,46 +46516,126 @@ This typically indicates that your device does not have a healthy Internet conne
 
   // src/lesson-visuals.mjs
   var xml = (value) => String(value ?? "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" })[ch]);
-  var prioritySvg = `<svg class="lesson-svg" viewBox="0 0 800 600" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); border-radius: 20px;">
+  var prioritySvg = `<svg class="lesson-svg" viewBox="0 0 1000 800" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: block; margin: 0 auto;">
   <defs>
-    <linearGradient id="road" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#334155"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
-    <linearGradient id="carGreen" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#34d399"/><stop offset="100%" stop-color="#047857"/></linearGradient>
-    <linearGradient id="carOrange" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#b45309"/></linearGradient>
-    <filter id="shadow3d" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="20" stdDeviation="15" flood-color="#000" flood-opacity="0.9"/></filter>
-    <filter id="glow"><feGaussianBlur stdDeviation="6" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <!-- تدرجات الطريق -->
+    <linearGradient id="roadGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    
+    <!-- تدرجات السيارة الخضراء (3D) -->
+    <linearGradient id="carGreenTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6ee7b7"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <linearGradient id="carGreenSide" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+
+    <!-- تدرجات السيارة البرتقالية (3D) -->
+    <linearGradient id="carOrangeTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="carOrangeSide" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+
+    <!-- ظلال وتوهج -->
+    <filter id="shadowHeavy" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="25" stdDeviation="20" flood-color="#000" flood-opacity="0.8"/>
+    </filter>
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- حركات -->
     <style>
-      @keyframes driveOrange { 0% { transform: translate(0, 0); } 80% { transform: translate(200px, 0); } 100% { transform: translate(200px, 0); } }
-      @keyframes driveGreen { 0% { transform: translate(0, 0); } 40% { transform: translate(0, -200px); } 100% { transform: translate(0, -200px); } }
-      @keyframes pulseArrow { 0%, 100% { opacity: 0.3; stroke-width: 6; } 50% { opacity: 1; stroke-width: 10; } }
-      .car-anim-orange { animation: driveOrange 4s infinite; }
-      .car-anim-green { animation: driveGreen 4s infinite; }
+      @keyframes driveOrange { 
+        0% { transform: translate(0, 0); } 
+        80% { transform: translate(300px, 0); } 
+        100% { transform: translate(300px, 0); } 
+      }
+      @keyframes driveGreen { 
+        0% { transform: translate(0, 0); } 
+        40% { transform: translate(0, -300px); } 
+        100% { transform: translate(0, -300px); } 
+      }
+      @keyframes pulseArrow { 
+        0%, 100% { opacity: 0.4; stroke-width: 8; } 
+        50% { opacity: 1; stroke-width: 14; } 
+      }
+      .car-anim-orange { animation: driveOrange 5s infinite; }
+      .car-anim-green { animation: driveGreen 5s infinite; }
       .arrow-pulse { animation: pulseArrow 1.5s infinite; }
     </style>
   </defs>
-  <g transform="matrix(0.866, 0.5, -0.866, 0.5, 400, 100)">
-    <rect x="-250" y="-250" width="500" height="500" fill="url(#road)" stroke="#475569" stroke-width="4" rx="30"/>
-    <line x1="-250" y1="0" x2="250" y2="0" stroke="#94a3b8" stroke-width="8" stroke-dasharray="20 20" opacity="0.5"/>
-    <line x1="0" y1="-250" x2="0" y2="250" stroke="#94a3b8" stroke-width="8" stroke-dasharray="20 20" opacity="0.5"/>
+
+  <!-- منظور الطريق Isometric -->
+  <g transform="matrix(1, 0.5, -1, 0.5, 500, 100)">
+    <rect x="-300" y="-300" width="600" height="600" fill="url(#roadGrad)" stroke="#94a3b8" stroke-width="6" rx="40"/>
+    <!-- خطوط الطريق -->
+    <line x1="-300" y1="0" x2="300" y2="0" stroke="#cbd5e1" stroke-width="10" stroke-dasharray="30 30" opacity="0.4"/>
+    <line x1="0" y1="-300" x2="0" y2="300" stroke="#cbd5e1" stroke-width="10" stroke-dasharray="30 30" opacity="0.4"/>
   </g>
-  <text x="150" y="350" fill="#94a3b8" font-size="18" font-weight="bold" transform="rotate(-30, 150, 350)">STRADA PRINCIPALE</text>
-  <text x="600" y="150" fill="#94a3b8" font-size="18" font-weight="bold" transform="rotate(30, 600, 150)">STRADA SECONDARIA</text>
-  <g class="car-anim-orange" transform="translate(250, 350)">
-    <g filter="url(#shadow3d)" transform="matrix(0.866, 0.5, -0.866, 0.5, 0, 0)">
-      <path d="M 0 0 L 80 0 L 90 20 L 80 40 L 0 40 L -10 20 Z" fill="url(#carOrange)"/>
-      <path d="M 10 0 L 30 -20 L 60 -20 L 80 0 Z" fill="#fde68a"/>
-      <circle cx="20" cy="40" r="12" fill="#000"/><circle cx="70" cy="40" r="12" fill="#000"/>
+
+  <!-- تسميات الشوارع -->
+  <text x="200" y="500" fill="#94a3b8" font-size="24" font-weight="bold" transform="rotate(-26, 200, 500)">STRADA PRINCIPALE</text>
+  <text x="750" y="200" fill="#94a3b8" font-size="24" font-weight="bold" transform="rotate(26, 750, 200)">STRADA SECONDARIA</text>
+
+  <!-- السيارة البرتقالية (3D) -->
+  <g class="car-anim-orange" transform="translate(300, 500)">
+    <g filter="url(#shadowHeavy)" transform="matrix(1, 0.5, -1, 0.5, 0, 0)">
+      <!-- الجانب -->
+      <rect x="0" y="10" width="100" height="40" fill="url(#carOrangeSide)" rx="10"/>
+      <!-- السقف -->
+      <polygon points="15,10 40,-20 80,-20 95,10" fill="url(#carOrangeTop)"/>
+      <!-- الزجاج -->
+      <polygon points="25,5 40,-15 70,-15 85,5" fill="#bae6fd" opacity="0.8"/>
+      <!-- العجلات -->
+      <circle cx="25" cy="50" r="15" fill="#111827"/><circle cx="75" cy="50" r="15" fill="#111827"/>
     </g>
   </g>
-  <g class="car-anim-green" transform="translate(550, 250)">
-    <g filter="url(#shadow3d)" transform="matrix(0.866, 0.5, -0.866, 0.5, 0, 0)">
-      <path d="M 0 0 L 80 0 L 90 20 L 80 40 L 0 40 L -10 20 Z" fill="url(#carGreen)"/>
-      <path d="M 10 0 L 30 -20 L 60 -20 L 80 0 Z" fill="#a7f3d0"/>
-      <circle cx="20" cy="40" r="12" fill="#000"/><circle cx="70" cy="40" r="12" fill="#000"/>
+
+  <!-- السيارة الخضراء (3D) -->
+  <g class="car-anim-green" transform="translate(700, 300)">
+    <g filter="url(#shadowHeavy)" transform="matrix(1, 0.5, -1, 0.5, 0, 0)">
+      <!-- الجانب -->
+      <rect x="0" y="10" width="100" height="40" fill="url(#carGreenSide)" rx="10"/>
+      <!-- السقف -->
+      <polygon points="15,10 40,-20 80,-20 95,10" fill="url(#carGreenTop)"/>
+      <!-- الزجاج -->
+      <polygon points="25,5 40,-15 70,-15 85,5" fill="#bae6fd" opacity="0.8"/>
+      <!-- العجلات -->
+      <circle cx="25" cy="50" r="15" fill="#111827"/><circle cx="75" cy="50" r="15" fill="#111827"/>
     </g>
   </g>
-  <g transform="translate(400, 250)">
-    <path d="M 100 0 L -100 0" stroke="#10b981" stroke-width="8" fill="none" filter="url(#glow)" class="arrow-pulse" marker-end="url(#arrowhead)"/>
-    <defs><marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#10b981" /></marker></defs>
+
+  <!-- سهم الأولوية (متوهج ونابض) -->
+  <g transform="translate(500, 400)">
+    <path d="M 150 0 L -150 0" stroke="#10b981" stroke-width="12" fill="none" filter="url(#neonGlow)" class="arrow-pulse" marker-end="url(#arrowhead)"/>
+    <defs>
+      <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto">
+        <polygon points="0 0, 12 4, 0 8" fill="#10b981" />
+      </marker>
+    </defs>
+  </g>
+
+  <!-- التسميات التوضيحية المدمجة -->
+  <g transform="translate(700, 550)" filter="url(#shadowHeavy)">
+    <rect x="0" y="0" width="200" height="60" fill="#10b981" rx="12"/>
+    <text x="100" y="38" fill="#fff" font-size="24" font-weight="900" text-anchor="middle">PRECEDENZA</text>
+  </g>
+  <g transform="translate(100, 650)" filter="url(#shadowHeavy)">
+    <rect x="0" y="0" width="200" height="60" fill="#ef4444" rx="12"/>
+    <text x="100" y="38" fill="#fff" font-size="24" font-weight="900" text-anchor="middle">DEVE FERMARSI</text>
   </g>
 </svg>`;
   var lessonVisuals = {

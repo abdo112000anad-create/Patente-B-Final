@@ -265,7 +265,52 @@ body,
 }
 
 #main .lesson-svg-figure[data-lesson-visual="u4-l1"] .lesson-svg {
-  aspect-ratio: 4 / 3;
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  aspect-ratio: 5 / 4;
+  overflow: visible;
+}
+
+#main .lesson-svg-figure[data-lesson-visual="u4-l1"] {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  overflow: visible;
+  margin-top: 120px;
+}
+
+/* Preserve the original SVG transforms while keeping its animated cars in their intended lanes. */
+@keyframes u4l1DriveOrangeVisible {
+  0% { transform: translate(300px, 500px); }
+  80% { transform: translate(600px, 500px); }
+  100% { transform: translate(600px, 500px); }
+}
+
+@keyframes u4l1DriveGreenVisible {
+  0% { transform: translate(700px, 300px); }
+  40% { transform: translate(700px, 0); }
+  100% { transform: translate(700px, 0); }
+}
+
+#main .lesson-svg-figure[data-lesson-visual="u4-l1"] .car-anim-orange {
+  animation-name: u4l1DriveOrangeVisible !important;
+}
+
+#main .lesson-svg-figure[data-lesson-visual="u4-l1"] .car-anim-green {
+  animation-name: u4l1DriveGreenVisible !important;
+}
+
+#main .lesson-svg-figure[data-lesson-visual="u4-l1"] .arrow-pulse {
+  filter: drop-shadow(0 0 8px #10b981) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main .lesson-svg-figure[data-lesson-visual="u4-l1"] .car-anim-orange,
+  #main .lesson-svg-figure[data-lesson-visual="u4-l1"] .car-anim-green,
+  #main .lesson-svg-figure[data-lesson-visual="u4-l1"] .arrow-pulse {
+    animation: none !important;
+  }
 }
 
 #main .lesson-svg-figure figcaption {
@@ -370,5 +415,11 @@ body,
 
   #main .lesson-detail-head > .lesson-svg-figure {
     border-radius: 17px;
+  }
+}
+
+@media (max-width: 430px) {
+  #main .lesson-svg-figure[data-lesson-visual="u4-l1"] .lesson-svg {
+    width: 82%;
   }
 }
