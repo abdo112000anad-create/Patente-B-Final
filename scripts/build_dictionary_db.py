@@ -53,6 +53,18 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES = {
     "semaforo": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Glosbe Italiano-Arabo: https://ar.glosbe.com/it/ar/semaforo; Reverso Context Italiano-Arabo: https://context.reverso.net/traduzione/italiano-arabo/semaforo; ACI Codice della Strada, art. 41: https://aci.gov.it/codice-della-strada/art-41/",
 }
 
+# Batch forty-two: confirm the existing general gloss only in the app's symbol contexts.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS.update({
+    "simbolo": (
+        "رمز",
+        "contextual_translation",
+        "70 exact question-token occurrences in 70 paired question records (61 unique Italian texts; 68 unique Italian-Arabic pairs) and 2 Italian lesson-field occurrences in each current and legacy lesson file. Reviewed app uses concern depicted symbols/icons, especially dashboard controls and indicator lights; paired Arabic examples use forms such as الرمز الموضح. Treccani defines a symbol as a representative sign or element, and Reverso Italian-Arabic directly supports رمز while also showing علامة as a contextual alternative. ACI Article 38 classifies road signage but does not define simbolo or make رمز a universal translation for legal signs. Existing gloss رمز is confirmed for these app contexts only; no question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
+    "simbolo": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, Vocabolario: Sìmbolo: https://www.treccani.it/vocabolario/simbolo/; Reverso Context Italiano-Arabo: https://context.reverso.net/traduzione/italiano-arabo/simbolo; ACI Codice della Strada, art. 38 (signage classification only): https://aci.gov.it/codice-della-strada/art-38/; full paired app contexts: docs/dictionary-audit-batch42-2026-11-27.md",
+})
+
 # User-requested standalone lemma, kept separate from question-bank extraction.
 REQUESTED_LEMMA_ADDITIONS = {
     "riconoscere": (
