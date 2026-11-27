@@ -1317,6 +1317,24 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
     "divieto": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, divieto: https://www.treccani.it/vocabolario/divieto/; Treccani, Sinonimi e Contrari, divieto: https://www.treccani.it/vocabolario/divieto_(Sinonimi-e-Contrari)/; Reverso Context Italian-Arabic, divieto (supplementary, non-standard): https://context.reverso.net/traduzione/italiano-arabo/divieto",
 })
 
+# Batch thirty-three source-backed contextual corrections from complete app contexts.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "sosta": (
+        "توقف / وقوف",
+        "contextual_translation",
+        "313 exact question-token occurrences in 300 paired question records and 16 lesson-token occurrences across 14 Italian fields in each current and legacy lesson file. Most uses refer to stopping/parking vehicles, including divieto di sosta and area/piazzola di sosta; the reviewed corpus also contains emergency-stop terminology and one pedestrian-waiting context, so the previous gloss وقوف ممتد was too narrow as a general lookup gloss. ACI Codice della Strada art. 157 defines ordinary vehicle sosta as an interruption prolonged in time with possible departure by the driver and separately defines emergency sosta; Treccani records both the transport/parking and broader pause sense. Reverso Italian-Arabic directly lists توقف, استراحة, and وقف. The broad gloss preserves the lexical range; phrase wording remains context-dependent. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "fermata": (
+        "توقف مؤقت / موقف",
+        "contextual_translation",
+        "145 exact question-token occurrences in 143 paired question records and 13 lesson-text occurrences in 13 Italian fields in each current and legacy lesson file. App uses cover the temporary vehicle stop and designated bus/tram stop place; the previous gloss توقف مؤقت covered only the action sense. ACI Codice della Strada art. 157 defines fermata as temporary suspension with the driver present and ready to resume; Treccani defines both the act of stopping and the place where public buses/trams stop. Reverso Italian-Arabic directly shows توقف, موقف, and محطة; Glosbe independently supports محطة حافلات for fermata dell'autobus. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "sosta": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " ACI Codice della Strada, art. 157: https://aci.gov.it/codice-della-strada/art-157/; Treccani, sosta: https://www.treccani.it/vocabolario/sosta/; Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/sosta; MIT official quiz corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+    "fermata": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " ACI Codice della Strada, art. 157: https://aci.gov.it/codice-della-strada/art-157/; Treccani, fermata: https://www.treccani.it/vocabolario/fermata/; Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/fermata; Glosbe, fermata dell'autobus: https://glosbe.com/it/ar/fermata%20dell'autobus; MIT official quiz corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 

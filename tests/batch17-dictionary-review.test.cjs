@@ -13,7 +13,7 @@ const exactCount = (text, word) => {
   return (normalized.match(pattern) || []).length;
 };
 
-test('batch seventeen applies only supported decisions and retains five ambiguous entries flagged', () => {
+test('batch seventeen applies supported decisions and retains three ambiguous entries flagged', () => {
   const dictionary = json('data/italian_arabic_dictionary_lookup.json');
   const questionsIt = json('data/questions.it.json');
   const questionsAr = json('data/questions.json');
@@ -52,9 +52,9 @@ test('batch seventeen applies only supported decisions and retains five ambiguou
     'velocità': {old:'السرعة', arabic:'السرعة', questions:496, contexts:494, lessons:20, lessonRecords:5, decision:'confirmed', sources:['glosbe.com/it/ar/velocit%C3%A0','treccani.it/vocabolario/velocita/']},
     precedenza: {old:'أولوية المرور', arabic:'أولوية المرور', questions:465, contexts:449, lessons:22, lessonRecords:5, decision:'confirmed', sources:['arabdict.com/en/italian-arabic/precedenza','treccani.it/vocabolario/precedenza/']},
     circolazione: {old:'حركة المرور', arabic:'حركة المرور', questions:320, contexts:312, lessons:8, lessonRecords:5, decision:'retained', status:'legacy_glossary_needs_review'},
-    sosta: {old:'وقوف ممتد', arabic:'وقوف ممتد', questions:313, contexts:300, lessons:12, lessonRecords:3, decision:'retained', status:'legacy_glossary_needs_review'},
+    sosta: {old:'وقوف ممتد', arabic:'توقف / وقوف', questions:313, contexts:300, lessons:12, lessonRecords:3, decision:'corrected', sources:['aci.gov.it/codice-della-strada/art-157/','treccani.it/vocabolario/sosta/','dizionario.reverso.net/italiano-arabo/sosta']},
     guida: {old:'مرشد', arabic:'مرشد', questions:269, contexts:261, lessons:22, lessonRecords:11, decision:'retained', status:'machine_draft_needs_review'},
-    fermata: {old:'توقف مؤقت', arabic:'توقف مؤقت', questions:145, contexts:143, lessons:7, lessonRecords:2, decision:'retained', status:'legacy_glossary_needs_review'},
+    fermata: {old:'توقف مؤقت', arabic:'توقف مؤقت / موقف', questions:145, contexts:143, lessons:7, lessonRecords:2, decision:'corrected', sources:['aci.gov.it/codice-della-strada/art-157/','treccani.it/vocabolario/fermata/','dizionario.reverso.net/italiano-arabo/fermata','glosbe.com/it/ar/fermata%20dell\'autobus']},
   };
 
   const totals = Object.values(expected).reduce((sum, item) => ({
@@ -69,19 +69,19 @@ test('batch seventeen applies only supported decisions and retains five ambiguou
   assert.equal(questionsIt.count, 7020);
   assert.equal(questionsAr.questions.length, 7020);
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 73);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 75);
   assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 83);
   assert.equal(dictionary.metadata.question_bank_context_correction_candidates, 3);
-  assert.equal(dictionary.metadata.review_required_entries, 5097);
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5097);
+  assert.equal(dictionary.metadata.review_required_entries, 5095);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5095);
   assert.equal(dictionary.metadata.counts_by_status.machine_draft_needs_review, 5053);
-  assert.equal(dictionary.metadata.counts_by_status.legacy_glossary_needs_review, 33);
+  assert.equal(dictionary.metadata.counts_by_status.legacy_glossary_needs_review, 31);
   assert.equal(dictionary.metadata.counts_by_status.contextual_candidate_needs_review, 3);
-  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 239);
+  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 241);
   assert.equal(dictionary.metadata.counts_by_status.contextual_override_v49, 8);
-  assert.equal(Object.values(expected).filter(item => item.decision === 'corrected').length, 3);
+  assert.equal(Object.values(expected).filter(item => item.decision === 'corrected').length, 5);
   assert.equal(Object.values(expected).filter(item => item.decision === 'confirmed').length, 8);
-  assert.equal(Object.values(expected).filter(item => item.decision === 'retained').length, 5);
+  assert.equal(Object.values(expected).filter(item => item.decision === 'retained').length, 3);
 
   for (const [word, item] of Object.entries(expected)) {
     const row = byWord.get(word);
@@ -116,7 +116,7 @@ test('batch seventeen applies only supported decisions and retains five ambiguou
       ? /question-bank-context-audit-2026-11;/u
       : /question-bank-context-confirmation-2026-11;/u;
     assert.match(row.source, sourcePrefix, word);
-    assert.match(row.note, new RegExp(`${item.questions} question-token occurrence`, 'u'), word);
+    assert.match(row.note, new RegExp(`${item.questions} (?:exact )?question-token occurrence`, 'u'), word);
     for (const source of item.sources) assert.ok(row.source.includes(source), `${word} opened source ${source}`);
     if (item.decision === 'corrected') assert.notEqual(row.translation_ar, item.old, `${word} supported correction`);
     else assert.equal(row.translation_ar, item.old, `${word} unchanged confirmation`);

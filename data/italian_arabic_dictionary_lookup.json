@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-27T02:46:13+00:00",
+    "generated_at_utc": "2026-11-27T02:57:08+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5277,
@@ -9,14 +9,14 @@
     "counts_by_status": {
       "contextual_candidate_needs_review": 3,
       "contextual_override_v49": 8,
-      "legacy_glossary_needs_review": 33,
+      "legacy_glossary_needs_review": 31,
       "machine_draft_needs_review": 5053,
-      "reviewed_override": 239
+      "reviewed_override": 241
     },
     "total_entries": 5336,
     "translated_entries": 5336,
-    "review_required_entries": 5097,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 73 frequent question-bank translations were corrected and 83 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+    "review_required_entries": 5095,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 75 frequent question-bank translations were corrected and 83 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
     "app_release": 64,
     "terms_with_lookup_entry": 5336,
     "entries_with_arabic_translation": 5336,
@@ -36,7 +36,7 @@
     "video_context_additions": 3,
     "lesson_dictionary_audit_additions": 64,
     "question_bank_context_correction_candidates": 3,
-    "question_bank_verified_contextual_corrections": 73,
+    "question_bank_verified_contextual_corrections": 75,
     "question_bank_verified_contextual_gloss_confirmations": 83
   },
   "entries": [
@@ -22854,15 +22854,15 @@
     },
     {
       "word": "fermata",
-      "translation_ar": "توقف مؤقت",
-      "source": "PatenteB legacy local glossary; not re-reviewed by this generator",
-      "provider": "project-local-glossary",
+      "translation_ar": "توقف مؤقت / موقف",
+      "source": "question-bank-context-audit-2026-11; ACI Codice della Strada, art. 157: https://aci.gov.it/codice-della-strada/art-157/; Treccani, fermata: https://www.treccani.it/vocabolario/fermata/; Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/fermata; Glosbe, fermata dell'autobus: https://glosbe.com/it/ar/fermata%20dell'autobus; MIT official quiz corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "legacy_glossary_needs_review",
-      "review_required": 1,
-      "note": "تعليق قصير مع استعداد السائق للمواصلة.",
-      "translation_kind": "legacy_glossary",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "145 exact question-token occurrences in 143 paired question records and 13 lesson-text occurrences in 13 Italian fields in each current and legacy lesson file. App uses cover the temporary vehicle stop and designated bus/tram stop place; the previous gloss توقف مؤقت covered only the action sense. ACI Codice della Strada art. 157 defines fermata as temporary suspension with the driver present and ready to resume; Treccani defines both the act of stopping and the place where public buses/trams stop. Reverso Italian-Arabic directly shows توقف, موقف, and محطة; Glosbe independently supports محطة حافلات for fermata dell'autobus. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "توقف مؤقت / موقف"
     },
     {
       "word": "fermate",
@@ -53886,15 +53886,15 @@
     },
     {
       "word": "sosta",
-      "translation_ar": "وقوف ممتد",
-      "source": "PatenteB legacy local glossary; not re-reviewed by this generator",
-      "provider": "project-local-glossary",
+      "translation_ar": "توقف / وقوف",
+      "source": "question-bank-context-audit-2026-11; ACI Codice della Strada, art. 157: https://aci.gov.it/codice-della-strada/art-157/; Treccani, sosta: https://www.treccani.it/vocabolario/sosta/; Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/sosta; MIT official quiz corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "legacy_glossary_needs_review",
-      "review_required": 1,
-      "note": "تعليق السير مع إمكانية ابتعاد السائق.",
-      "translation_kind": "legacy_glossary",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "313 exact question-token occurrences in 300 paired question records and 16 lesson-token occurrences across 14 Italian fields in each current and legacy lesson file. Most uses refer to stopping/parking vehicles, including divieto di sosta and area/piazzola di sosta; the reviewed corpus also contains emergency-stop terminology and one pedestrian-waiting context, so the previous gloss وقوف ممتد was too narrow as a general lookup gloss. ACI Codice della Strada art. 157 defines ordinary vehicle sosta as an interruption prolonged in time with possible departure by the driver and separately defines emergency sosta; Treccani records both the transport/parking and broader pause sense. Reverso Italian-Arabic directly lists توقف, استراحة, and وقف. The broad gloss preserves the lexical range; phrase wording remains context-dependent. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "توقف / وقوف"
     },
     {
       "word": "sostanze",
