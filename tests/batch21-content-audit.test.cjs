@@ -29,6 +29,8 @@ const targetArabic = {
   '21947': 'المحدد الظاهر يقسم الجزء المخصص لسير المركبات من الطريق إلى مسارات',
 };
 const targetIds = new Set(Object.keys(targetArabic));
+const subsequentBatchTargets = new Set(['22497', '22730', '22745', '24666']);
+const auditedTargetsAcrossBatches = new Set([...targetIds, ...subsequentBatchTargets]);
 
 function nonArabicFingerprint(questions) {
   const projection = questions.map(question => Object.fromEntries(
@@ -62,12 +64,12 @@ test('batch 21 changes only the 15 reviewed Arabic question fields in both paire
   }
 
   const untouchedArabic = arabicQuestions
-    .filter(question => !targetIds.has(String(question.id)))
+    .filter(question => !auditedTargetsAcrossBatches.has(String(question.id)))
     .map(question => [String(question.id), question.ar]);
   const untouchedItalian = italianQuestions
-    .filter(question => !targetIds.has(String(question.id)))
+    .filter(question => !auditedTargetsAcrossBatches.has(String(question.id)))
     .map(question => [String(question.id), question.ar]);
-  const expectedUntouchedHash = '7ff1a0c22d2c8f6159a327ad6d7999924ce9f1157e3f3dc657d8536571f09078';
+  const expectedUntouchedHash = 'f609f8feb45008b3807693b6444cdb40ca9c906e7f3c5f7fb0d8275327091a0e';
   assert.equal(sha256(JSON.stringify(untouchedArabic)), expectedUntouchedHash);
   assert.equal(sha256(JSON.stringify(untouchedItalian)), expectedUntouchedHash);
 
