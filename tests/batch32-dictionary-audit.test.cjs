@@ -197,7 +197,7 @@ const sourceHashes = {
   'data/questions.it.json': '4f2076b4096a6d48319d4a1f33df3541398ea03aed304ce80a1916178c572ada',
   'data/lessons.json': '7f91d6cdd6cca92d750287d9b90737e91b8e5763d1f5922824ffc187afe9c4dd',
   'data/lessons-v2.json': '09a66320c1fa91fb1291f771ab471143708388f7eaf71e2108a203f3bba80e25',
-  'android/app/src/main/assets/dictionary.db': '7b61ea2f5160e85a7cd7879374e8482e4f2f3a041fe483dd83f98f866c3f983f',
+  'android/app/src/main/assets/dictionary.db': '5ed8e75008984ce471384c9aa32190eceb6d66267795f6d5b401f2d324a970d8',
 };
 
 test('batch 32 pins complete question contexts, paired Arabic text, and answer keys', () => {
@@ -226,7 +226,7 @@ test('batch 32 scans every matching Italian field in current and legacy lesson f
   }
 });
 
-test('batch 32 applies only the two supported corrections and leaves three ambiguous entries flagged', () => {
+test('batch 32 decisions remain covered while later supported reviews are reflected and manovra remains flagged', () => {
   const corrections = {
     motocicli: 'دراجات نارية',
     divieto: 'حظر؛ منع',
@@ -243,10 +243,24 @@ test('batch 32 applies only the two supported corrections and leaves three ambig
     assert.match(row.source, /^question-bank-context-audit-2026-11;/u);
   }
 
+  const reviewedInLaterBatches = {
+    norme: 'قواعد؛ معايير',
+    diritto: 'حق؛ مستقيم/مباشرة',
+  };
+  for (const [term, translation] of Object.entries(reviewedInLaterBatches)) {
+    const row = entries.get(term);
+    assert.ok(row, `dictionary row exists for ${term}`);
+    assert.equal(row.translation_ar, translation, `${term} later source-backed correction`);
+    assert.equal(row.ui_fallback_ar, translation, `${term} reviewed gloss is the UI fallback`);
+    assert.equal(row.translation_kind, 'contextual_translation', `${term} translation kind`);
+    assert.equal(row.status, 'reviewed_override', `${term} reviewed status`);
+    assert.equal(row.review_required, 0, `${term} no longer flagged`);
+    assert.equal(row.provider, 'project-contextual-audit');
+    assert.match(row.source, /^question-bank-context-audit-2026-11;/u);
+  }
+
   const unresolvedDrafts = {
-    norme: 'المقاييس',
     manovra: 'المناورة',
-    diritto: 'مستقيم',
   };
   for (const [term, draft] of Object.entries(unresolvedDrafts)) {
     const row = entries.get(term);
@@ -288,10 +302,10 @@ test('batch 32 note cites opened sources and records ambiguity and validation li
 
 test('batch 32 pins dictionary counts and proves source questions and lessons were preserved', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5095);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 75);
+  assert.equal(dictionary.metadata.review_required_entries, 5093);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 77);
   assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 83);
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5095);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5093);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} fingerprint`);
   }

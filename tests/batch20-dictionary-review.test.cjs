@@ -151,15 +151,15 @@ test('batch 20 corrections, unresolved flags, and current dictionary totals are 
 
   const metadata = dictionary.metadata;
   assert.equal(metadata.total_entries, 5336);
-  assert.equal(metadata.review_required_entries, 5095);
-  assert.equal(metadata.question_bank_verified_contextual_corrections, 75);
+  assert.equal(metadata.review_required_entries, 5093);
+  assert.equal(metadata.question_bank_verified_contextual_corrections, 77);
   assert.equal(metadata.question_bank_verified_contextual_gloss_confirmations, 83);
   assert.deepEqual(metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 31,
-    machine_draft_needs_review: 5053,
-    reviewed_override: 241,
+    machine_draft_needs_review: 5051,
+    reviewed_override: 243,
   });
   assert.equal(metadata.source_sha256, historicalDictionarySourceSha256);
   assert.equal(metadata.source_question_count, 7020);

@@ -1335,6 +1335,24 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
     "fermata": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " ACI Codice della Strada, art. 157: https://aci.gov.it/codice-della-strada/art-157/; Treccani, fermata: https://www.treccani.it/vocabolario/fermata/; Reverso Italian-Arabic: https://dizionario.reverso.net/italiano-arabo/fermata; Glosbe, fermata dell'autobus: https://glosbe.com/it/ar/fermata%20dell'autobus; MIT official quiz corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
 })
 
+# Batch thirty-four sense-qualified glosses from complete app contexts.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "norme": (
+        "قواعد؛ معايير",
+        "contextual_translation",
+        "143 exact question-token occurrences in 143 paired question records and 6 Italian lesson-field occurrences in each current and legacy lesson file. App contexts use norme for conduct/circulation rules and legal provisions, while the motorcycle-boot question uses norme internazionali for technical standards. Treccani distinguishes behavioral/legal rules from technical standardization; the direct Glosbe norme entry supports القواعد, and Reverso's direct Arabic examples for norme di sicurezza include both قواعد and معايير. The sense-qualified gloss corrects the machine draft المقاييس for both audited app senses. No question, paired Arabic text, lesson wording, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "diritto": (
+        "حق؛ مستقيم/مباشرة",
+        "contextual_translation",
+        "120 exact question-token occurrences in 120 paired question records and 3 Italian lesson-field occurrences in each current and legacy lesson file. The app has two relevant senses: right/entitlement in diritto di precedenza and diritto di guidare, and straight/straight ahead in proseguire diritto. Treccani diritto1 defines the adjective/adverbial sense and diritto2 the substantive right; Accademia della Crusca distinguishes the substantive prerogative from the adverbial in-linea-retta sense. Reverso Arabic examples support حق الأسبقية for diritto di precedenza and directly render proseguire diritto as مباشرة/بخط مستقيم. The sense-qualified gloss covers both audited senses, replacing the incomplete machine draft مستقيم. No question, paired Arabic text, lesson wording, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "norme": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, norma: https://www.treccani.it/vocabolario/norma/; Glosbe Italian-Arabic, norme: https://glosbe.com/it/ar/norme; Reverso Italian-Arabic, norme di sicurezza: https://dizionario.reverso.net/italiano-arabo/norme+di+sicurezza; full paired app contexts and lessons: docs/dictionary-audit-batch34-2026-11-27.md",
+    "diritto": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, diritto1: https://www.treccani.it/vocabolario/diritto1/; Treccani, diritto2: https://www.treccani.it/vocabolario/diritto2/; Accademia della Crusca: https://accademiadellacrusca.it/it/consulenza/diritto-di-o-diritto-a-e-si-pu%C3%B2-andare-a-dritto/2907; Reverso Italian-Arabic, proseguire diritto: https://context.reverso.net/traduzione/italiano-arabo/proseguire+diritto; Reverso Italian-Arabic, diritto di precedenza: https://dizionario.reverso.net/italiano-arabo/diritto+di+precedenza; ACI Codice della Strada, art. 145: https://aci.gov.it/codice-della-strada/art-145/; full paired app contexts and lessons: docs/dictionary-audit-batch34-2026-11-27.md",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-27T02:57:08+00:00",
+    "generated_at_utc": "2026-11-27T03:12:04+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5277,
@@ -10,13 +10,13 @@
       "contextual_candidate_needs_review": 3,
       "contextual_override_v49": 8,
       "legacy_glossary_needs_review": 31,
-      "machine_draft_needs_review": 5053,
-      "reviewed_override": 241
+      "machine_draft_needs_review": 5051,
+      "reviewed_override": 243
     },
     "total_entries": 5336,
     "translated_entries": 5336,
-    "review_required_entries": 5095,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 75 frequent question-bank translations were corrected and 83 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+    "review_required_entries": 5093,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 77 frequent question-bank translations were corrected and 83 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
     "app_release": 64,
     "terms_with_lookup_entry": 5336,
     "entries_with_arabic_translation": 5336,
@@ -36,7 +36,7 @@
     "video_context_additions": 3,
     "lesson_dictionary_audit_additions": 64,
     "question_bank_context_correction_candidates": 3,
-    "question_bank_verified_contextual_corrections": 75,
+    "question_bank_verified_contextual_corrections": 77,
     "question_bank_verified_contextual_gloss_confirmations": 83
   },
   "entries": [
@@ -18234,15 +18234,15 @@
     },
     {
       "word": "diritto",
-      "translation_ar": "مستقيم",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "حق؛ مستقيم/مباشرة",
+      "source": "question-bank-context-audit-2026-11; Treccani, diritto1: https://www.treccani.it/vocabolario/diritto1/; Treccani, diritto2: https://www.treccani.it/vocabolario/diritto2/; Accademia della Crusca: https://accademiadellacrusca.it/it/consulenza/diritto-di-o-diritto-a-e-si-pu%C3%B2-andare-a-dritto/2907; Reverso Italian-Arabic, proseguire diritto: https://context.reverso.net/traduzione/italiano-arabo/proseguire+diritto; Reverso Italian-Arabic, diritto di precedenza: https://dizionario.reverso.net/italiano-arabo/diritto+di+precedenza; ACI Codice della Strada, art. 145: https://aci.gov.it/codice-della-strada/art-145/; full paired app contexts and lessons: docs/dictionary-audit-batch34-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "120 exact question-token occurrences in 120 paired question records and 3 Italian lesson-field occurrences in each current and legacy lesson file. The app has two relevant senses: right/entitlement in diritto di precedenza and diritto di guidare, and straight/straight ahead in proseguire diritto. Treccani diritto1 defines the adjective/adverbial sense and diritto2 the substantive right; Accademia della Crusca distinguishes the substantive prerogative from the adverbial in-linea-retta sense. Reverso Arabic examples support حق الأسبقية for diritto di precedenza and directly render proseguire diritto as مباشرة/بخط مستقيم. The sense-qualified gloss covers both audited senses, replacing the incomplete machine draft مستقيم. No question, paired Arabic text, lesson wording, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "حق؛ مستقيم/مباشرة"
     },
     {
       "word": "disabile",
@@ -37278,15 +37278,15 @@
     },
     {
       "word": "norme",
-      "translation_ar": "المقاييس",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "قواعد؛ معايير",
+      "source": "question-bank-context-audit-2026-11; Treccani, norma: https://www.treccani.it/vocabolario/norma/; Glosbe Italian-Arabic, norme: https://glosbe.com/it/ar/norme; Reverso Italian-Arabic, norme di sicurezza: https://dizionario.reverso.net/italiano-arabo/norme+di+sicurezza; full paired app contexts and lessons: docs/dictionary-audit-batch34-2026-11-27.md",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "143 exact question-token occurrences in 143 paired question records and 6 Italian lesson-field occurrences in each current and legacy lesson file. App contexts use norme for conduct/circulation rules and legal provisions, while the motorcycle-boot question uses norme internazionali for technical standards. Treccani distinguishes behavioral/legal rules from technical standardization; the direct Glosbe norme entry supports القواعد, and Reverso's direct Arabic examples for norme di sicurezza include both قواعد and معايير. The sense-qualified gloss corrects the machine draft المقاييس for both audited app senses. No question, paired Arabic text, lesson wording, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "قواعد؛ معايير"
     },
     {
       "word": "nostra",
