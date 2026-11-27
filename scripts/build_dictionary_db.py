@@ -230,6 +230,11 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS = {
         "contextual_translation",
         "سؤال الوزارة 21343: vieta il transito ai veicoli؛ المعنى منع مرور المركبات. أمثلة Reverso الإيطالي-العربي تترجم traffico di transito إلى «حركة المرور العابر» وتورد «عبور/مرور»؛ «نقل» يضلل في هذا السياق.",
     ),
+    "transita": (
+        "يمرّ؛ يعبر (بحسب السياق)",
+        "contextual_translation",
+        "50 occurrences in 50 distinct paired Italian-Arabic question records (49 unique Italian texts) and no lesson occurrences. Most uses describe vehicles or trams passing through intersections; one concerns passing through a tunnel. Paired Arabic questions use يمرّ/تمرّ and تعبر for the same verb. Treccani defines transitare as passing along a road or railway; Reverso's Italian-Arabic entry lists عَبَرَ and العبور. The two Arabic verbs are retained as context-dependent glosses, not a claim that one fits every sentence.",
+    ),
     "consente": (
         "يسمح / يتيح",
         "contextual_translation",
@@ -292,6 +297,7 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES = {
     "indica": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Italiano-Arabo: https://dizionario.reverso.net/italiano-arabo/indica; MIT quiz PDF: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
     "preannuncia": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Italiano-Arabo: https://dizionario.reverso.net/italiano-arabo/preannunciare; MIT quiz PDF: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
     "transito": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Italiano-Arabo: https://dizionario.reverso.net/italiano-arabo/transito; MIT quiz PDF: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+    "transita": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, transitare: https://www.treccani.it/vocabolario/transitare/; Reverso Italiano-Arabo: https://dizionario.reverso.net/italiano-arabo/transitare; ACI Codice della Strada, art. 145 (intersection and railway/tram precedence context): https://aci.gov.it/codice-della-strada/art-145/",
     "consente": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Italiano-Arabo: https://dictionary.reverso.net/italian-arabic/consentire; MIT quiz PDF: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
     "presenza": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Italiano-Arabo: https://dizionario.reverso.net/italiano-arabo/presenza; WordReference Italiano-Arabo: https://www.wordreference.com/itar/presenza; MIT quiz PDF: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
     "vieta": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Reverso Italiano-Arabo: https://dizionario.reverso.net/italiano-arabo/vietare; Reverso Context: https://context.reverso.net/traduzione/italiano-arabo/vietare; MIT quiz PDF: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",

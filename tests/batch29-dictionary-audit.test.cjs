@@ -215,7 +215,7 @@ test('batch 29 audit note records the directly opened sources, ambiguity decisio
 
 test('batch 29 pins unchanged question/lesson inputs and dictionary entry count', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5093);
+  assert.equal(dictionary.metadata.review_required_entries, 5092);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} fingerprint`);
   }

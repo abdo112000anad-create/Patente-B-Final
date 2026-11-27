@@ -238,17 +238,17 @@ test('batch 34 memo cites opened Italian and bilingual sources for each decision
 
 test('batch 34 pins dictionary totals and proves questions/lessons stayed unchanged', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5093);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 77);
+  assert.equal(dictionary.metadata.review_required_entries, 5092);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 78);
   assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 83);
   assert.deepEqual(dictionary.metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 31,
-    machine_draft_needs_review: 5051,
-    reviewed_override: 243,
+    machine_draft_needs_review: 5050,
+    reviewed_override: 244,
   });
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5093);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5092);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} fingerprint`);
   }
