@@ -195,10 +195,16 @@ QUESTION_BANK_CONTEXTUAL_CANDIDATES = {
         "contextual_translation_draft",
         "اقتراح تصحيح سياقي أولي: في أسئلة القيادة يعني abbagliamento glare/إبهار البصر بسبب الشمس أو الطائرات، لا مجرد التوهج؛ لم يخضع المدخل لمراجعة بشرية مستقلة.",
     ),
+    "extraurbane": (
+        "خارج المناطق المأهولة",
+        "contextual_translation_draft",
+        "مقترح مؤقت: وردت extraurbane في 135 سياقًا من أسئلة التطبيق و3 مواضع في الدرس u6-l5. تحدد المادة 3 من قانون المرور الطريق خارج المركز المأهول المحدد قانونًا، ويشرح Treccani المعنى بأنه خارج المدينة أو النطاق العمراني. يتبع المقابل العربي الصياغة الغالبة في الأسئلة، لكن لا يتوفر مصدر عربي قانوني مباشر يثبت دقته؛ لذلك يبقى المدخل قيد المراجعة ولا يُعد تصحيحًا معتمدًا.",
+    ),
 }
 QUESTION_BANK_CONTEXTUAL_CANDIDATE_SOURCES = {
     "abbagliante": "question-bank-context-audit-v64; Reverso Italian-English; Ministero delle Infrastrutture e dei Trasporti",
     "abbagliamento": "question-bank-context-audit-v64; Translate.com Italian-English; Ministero delle Infrastrutture e dei Trasporti",
+    "extraurbane": "question-bank-context-audit-v65; ACI Codice della Strada, art. 3: https://aci.gov.it/codice-della-strada/art-3/; Treccani, extraurbano: https://www.treccani.it/vocabolario/extraurbano/; Reverso Italian-Arabic examples: https://dizionario.reverso.net/italiano-arabo/extraurbano; official MIT question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
 }
 
 # Source- and context-verified corrections for frequent question-bank terms.
@@ -1206,6 +1212,24 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
     "indifferentemente": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " De Mauro/Internazionale: https://dizionario.internazionale.it/parola/indifferentemente; Collins Italian-English: https://www.collinsdictionary.com/us/dictionary/italian-english/indifferentemente; Reverso Italian-Arabic contexts: https://context.reverso.net/traduzione/italiano-arabo/indifferentemente; official MIT question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
 })
 
+# Batch twenty-five source-backed contextual corrections.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "integrativo": (
+        "تكميلي",
+        "contextual_translation",
+        "190 exact question-token occurrences in 190 paired records: 189 use pannello integrativo and one (Q24536) uses esame teorico integrativo; 3 lesson-text tokens occur in u2-l4. D.P.R. 495/1992 Article 83 describes supplementary panels as adding or clarifying information about the principal sign; Treccani defines integrativo as serving to add/complete and includes esame integrativo. The paired Arabic contexts use تكميلي; project-reviewed, not owner-approved.",
+    ),
+    "tratto": (
+        "جزء من الطريق؛ وقد تعني «مسافة/امتدادًا» بحسب السياق",
+        "contextual_translation",
+        "131 exact question-token occurrences in 131 paired records and no lesson matches. Most uses refer to a road portion/section (including tratto di strada and named road stretches); constructions such as per un tratto sufficiente mean distance or extent. Treccani defines both road-portion and extended distance senses; ACI Article 3 uses tratto di strada for a roadway portion; Al-Maany supports جزء for a part and مسافة for distance. The qualified gloss preserves both app senses; project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "integrativo": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " D.P.R. 16 December 1992 no. 495, art. 83, Gazzetta Ufficiale: https://www.gazzettaufficiale.it/atto/serie_generale/caricaArticolo?art.versione=1&art.idGruppo=12&art.flagTipoArticolo=0&art.codiceRedazionale=092G0531&art.idArticolo=83&art.idSottoArticolo=1&art.idSottoArticolo1=10&art.dataPubblicazioneGazzetta=1992-12-28&art.progressivo=0; Treccani: https://www.treccani.it/vocabolario/integrativo/; official MIT question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+    "tratto": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani: https://www.treccani.it/vocabolario/tratto2/; ACI Codice della Strada, art. 3: https://aci.gov.it/codice-della-strada/art-3/; Al-Maany, جزء: https://www.almaany.com/ar/dict/ar-ar/%D8%AC%D8%B2%D8%A1/; Al-Maany, المسافة: https://www.almaany.com/ar/dict/ar-ar/%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D9%81%D8%A9/; official MIT question corpus: https://www.ilportaledellautomobilista.it/documents/56611/57319/210926_Conseguimento+A-B+italiano.pdf/07091bb8-a16b-4fa1-b921-4fd21fa5b650",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 
@@ -1372,7 +1396,7 @@ def main() -> int:
         "entries_with_safe_ui_fallback": 0,
         "owner_approved_corrections": len(OWNER_CORRECTIONS),
         "excluded_single_letter_artifacts": sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS),
-        "accuracy_note": f"Automatic model and legacy glossary entries remain unreviewed drafts. Two v64 question-bank candidates remain flagged. {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS)} frequent question-bank translations were corrected and {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS)} existing glosses were confirmed unchanged using app contexts and Italian-Arabic sources; these project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+        "accuracy_note": f"Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS)} frequent question-bank translations were corrected and {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS)} existing glosses were confirmed unchanged using app contexts and Italian-Arabic sources; these project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
         "question_bank_context_correction_candidates": len(QUESTION_BANK_CONTEXTUAL_CANDIDATES),
         "question_bank_verified_contextual_corrections": len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS),
         "question_bank_verified_contextual_gloss_confirmations": len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS),
@@ -1437,7 +1461,7 @@ def main() -> int:
             "verified_question_bank_context_gloss_confirmation_rows": str(len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS)),
             "unresolved_rows_given_transparent_fallback": "0",
             "excluded_single_letter_artifacts": ",".join(sorted(EXCLUDED_SINGLE_LETTER_ARTIFACTS)),
-            "translation_notice": f"Automatic translations remain drafts unless status is reviewed_override. Two v64 context-audit candidates remain flagged. {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS)} frequent context-audit corrections and {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS)} unchanged-gloss confirmations are tied to app contexts and Italian-Arabic sources; they are project-reviewed, not owner-approved.",
+            "translation_notice": f"Automatic translations remain drafts unless status is reviewed_override. The two v64 context-audit candidates and the batch-25 extraurbane wording remain flagged. {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS)} frequent context-audit corrections and {len(QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS)} unchanged-gloss confirmations are tied to app contexts and Italian-Arabic sources; they are project-reviewed, not owner-approved.",
             "fallback_notice": "The v42 lookup excludes isolated single-letter extraction artifacts and includes owner-approved corrections.",
         }
         db.executemany("INSERT INTO Metadata(Key, Value) VALUES (?, ?)", sorted(sqlite_metadata.items()))
@@ -1446,7 +1470,7 @@ def main() -> int:
         count = db.execute("SELECT COUNT(*) FROM Dictionary").fetchone()[0]
         empty = db.execute("SELECT COUNT(*) FROM Dictionary WHERE trim(Arabic_Translation) = ''").fetchone()[0]
         approved_db_rows = db.execute("SELECT COUNT(*) FROM Dictionary WHERE Source = 'owner-approved-correction-v42' AND Status = 'reviewed_override' AND Review_Required = 0").fetchone()[0]
-        contextual_candidate_db_rows = db.execute("SELECT COUNT(*) FROM Dictionary WHERE Source LIKE 'question-bank-context-audit-v64;%' AND Status = 'contextual_candidate_needs_review' AND Review_Required = 1 AND Translation_Kind = 'contextual_translation_draft'").fetchone()[0]
+        contextual_candidate_db_rows = db.execute("SELECT COUNT(*) FROM Dictionary WHERE Source LIKE 'question-bank-context-audit-v%' AND Status = 'contextual_candidate_needs_review' AND Review_Required = 1 AND Translation_Kind = 'contextual_translation_draft'").fetchone()[0]
         verified_contextual_db_rows = db.execute("SELECT COUNT(*) FROM Dictionary WHERE Source LIKE 'question-bank-context-audit-2026-11;%' AND Status = 'reviewed_override' AND Review_Required = 0").fetchone()[0]
         verified_contextual_confirmation_db_rows = db.execute("SELECT COUNT(*) FROM Dictionary WHERE Source LIKE 'question-bank-context-confirmation-2026-11;%' AND Status = 'reviewed_override' AND Review_Required = 0").fetchone()[0]
         excluded_db_rows = db.execute("SELECT COUNT(*) FROM Dictionary WHERE lower(Italian_Word) IN ('b','f','g','h','p','v','x')").fetchone()[0]
