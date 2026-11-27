@@ -226,17 +226,17 @@ test('batch 37 memo cites direct sources, records remaining ambiguity, and makes
 
 test('batch 37 pins aggregate counts and proves source and generated asset fingerprints', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5084);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 82);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 87);
+  assert.equal(dictionary.metadata.review_required_entries, 5079);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 83);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 91);
   assert.deepEqual(dictionary.metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 31,
-    machine_draft_needs_review: 5042,
-    reviewed_override: 252,
+    machine_draft_needs_review: 5037,
+    reviewed_override: 257,
   });
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5084);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5079);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} source fingerprint`);
   }

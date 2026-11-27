@@ -178,7 +178,7 @@ const sourceHashes = {
   'data/questions.it.json': '4f2076b4096a6d48319d4a1f33df3541398ea03aed304ce80a1916178c572ada',
   'data/lessons.json': '7f91d6cdd6cca92d750287d9b90737e91b8e5763d1f5922824ffc187afe9c4dd',
   'data/lessons-v2.json': '09a66320c1fa91fb1291f771ab471143708388f7eaf71e2108a203f3bba80e25',
-  'android/app/src/main/assets/dictionary.db': '2701026f43adb73d2f01de465b2a3ca21105c1d63544486c9657aa0c5c83c4b5',
+  'android/app/src/main/assets/dictionary.db': '4e26121dc56a33ed42657eff774c6ab038c9209377935e763e20fdd8bb39dd38',
 };
 
 test('batch 33 pins complete paired question contexts, Arabic text, and answer keys', () => {
@@ -257,17 +257,17 @@ test('batch 33 memo cites opened legal and bilingual sources and records the unr
 
 test('batch 33 pins dictionary totals and proves questions/lessons remained unchanged', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5084);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 82);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 87);
+  assert.equal(dictionary.metadata.review_required_entries, 5079);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 83);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 91);
   assert.deepEqual(dictionary.metadata.counts_by_status, {
     contextual_candidate_needs_review: 3,
     contextual_override_v49: 8,
     legacy_glossary_needs_review: 31,
-    machine_draft_needs_review: 5042,
-    reviewed_override: 252,
+    machine_draft_needs_review: 5037,
+    reviewed_override: 257,
   });
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5084);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5079);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} fingerprint`);
   }

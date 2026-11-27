@@ -135,7 +135,7 @@ const sourceHashes = {
   'data/questions.it.json': '4f2076b4096a6d48319d4a1f33df3541398ea03aed304ce80a1916178c572ada',
   'data/lessons.json': '7f91d6cdd6cca92d750287d9b90737e91b8e5763d1f5922824ffc187afe9c4dd',
   'data/lessons-v2.json': '09a66320c1fa91fb1291f771ab471143708388f7eaf71e2108a203f3bba80e25',
-  'android/app/src/main/assets/dictionary.db': '2701026f43adb73d2f01de465b2a3ca21105c1d63544486c9657aa0c5c83c4b5',
+  'android/app/src/main/assets/dictionary.db': '4e26121dc56a33ed42657eff774c6ab038c9209377935e763e20fdd8bb39dd38',
 };
 
 test('batch 30 pins all occurrences and validates every paired Arabic context and answer key', () => {
@@ -228,9 +228,9 @@ test('batch 30 note records source evidence, ambiguity, coverage limits, and no 
 
 test('batch 30 preserves question and lesson inputs and pins the regenerated SQLite artifact', () => {
   assert.equal(dictionary.entries.length, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5084);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 82);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 87);
+  assert.equal(dictionary.metadata.review_required_entries, 5079);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 83);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 91);
   for (const [relative, digest] of Object.entries(sourceHashes)) {
     assert.equal(sha256(fs.readFileSync(path.join(ROOT, relative))), digest, `${relative} fingerprint`);
   }

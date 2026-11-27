@@ -1433,6 +1433,46 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
     "carburante": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, carburante: https://www.treccani.it/vocabolario/carburante/; Reverso Italian-Arabic, carburante: https://dizionario.reverso.net/italiano-arabo/carburante; full paired app contexts and lessons: docs/dictionary-audit-batch40-2026-11-27.md",
 })
 
+# Batch forty-one: a vehicle-class correction and app-context gloss confirmations.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "quadricicli": (
+        "مركبات رباعية العجلات",
+        "contextual_translation",
+        "40 exact question-token occurrences in 40 paired question records (38 unique Italian texts; 39 unique Italian-Arabic pairs) and no Italian lesson-field matches in current or legacy files. All reviewed uses refer to four-wheeled vehicle classes, with qualifiers such as motor, pedal, light, or non-light. The machine draft الدّورات الدّائرية is unrelated and incorrect. Treccani and ACI Article 47 establish the Italian vehicle-class meaning; direct Reverso Italian-Arabic examples offer variable forms such as دراجة رباعية/سيارة رباعية rather than one official legal Arabic label. Paired app Arabic uses مركبات/الرباعيات ذات أربع عجلات. Use the descriptive gloss مركبات رباعية العجلات only for these app traffic contexts; no standardized official Arabic equivalent was established, and qualifiers remain context-dependent. No question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "quadricicli": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, quadriciclo: https://www.treccani.it/vocabolario/quadriciclo/; ACI Codice della Strada, art. 47: https://aci.gov.it/codice-della-strada/art-47/; Reverso Italian-Arabic, quadriciclo: https://dizionario.reverso.net/italiano-arabo/quadriciclo; full paired app contexts: docs/dictionary-audit-batch41-2026-11-27.md",
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATIONS.update({
+    "tram": (
+        "الترام",
+        "contextual_translation",
+        "51 exact question-token occurrences in 50 paired question records (50 unique Italian texts; 50 unique Italian-Arabic pairs) and no Italian lesson-field matches. Reviewed uses concern the urban rail vehicle, its priority, boarding/alighting, and rails. Treccani defines tram as a passenger vehicle running on rails; ACI Article 148 supplies official traffic overtaking contexts; direct Arabic dictionary and ESCWA sources support الترام/الترامواي. The existing gloss الترام is confirmed for these app contexts; no question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "polizia": (
+        "الشرطة",
+        "contextual_translation",
+        "51 exact question-token occurrences in 50 paired question records (49 unique Italian texts; 50 unique Italian-Arabic pairs) and 1 Italian lesson-field occurrence in each current and legacy lesson file. Reviewed uses refer to police forces, officers, road police, a checkpoint, or a police station. Treccani defines the institutional/person senses; Arabdict directly supports الشرطة; ACI Article 38 establishes the traffic-police context. The existing gloss الشرطة is confirmed for these app uses; no question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "passeggeri": (
+        "الركاب",
+        "contextual_translation",
+        "37 exact question-token occurrences in 37 paired question records (37 unique Italian texts; 37 unique Italian-Arabic pairs) and 6 Italian lesson-field occurrences in each current and legacy lesson file. All app uses are the plural noun for people carried by vehicles, including seating, restraints, boarding/alighting, and passenger limits; paired Arabic uses consistently support ركاب. Treccani defines the passenger noun and distinguishes an unrelated adjective sense; Reverso Italian-Arabic directly supports ركاب in transport examples, with Almaany's automotive English-Arabic entry as corroboration. The existing gloss الركاب is confirmed for these app contexts; no question, paired Arabic text, lesson text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "colore": (
+        "اللون",
+        "contextual_translation",
+        "70 exact question-token occurrences in 70 paired question records (66 unique Italian texts; 69 unique Italian-Arabic pairs) and no Italian lesson-field matches. Every reviewed app use describes a visible colour, such as a sign, road marking, flag, or indicator. Treccani and ACI Article 39 support the colour sense; Reverso and Glosbe Italian-Arabic directly support لون/اللون. The word has other senses outside these app contexts, so the existing gloss اللون is confirmed only for these traffic-question contexts, not as a universal translation. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
+    "tram": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, tram: https://www.treccani.it/vocabolario/tram/; ACI Codice della Strada, art. 148: https://aci.gov.it/codice-della-strada/art-148/; Reverso Italian-Arabic, tram: https://dizionario.reverso.net/italiano-arabo/tram; Almaany Arabic, tram: https://www.almaany.com/ar/dict/ar-ar/%D8%A7%D9%84%D8%AA%D8%B1%D8%A7%D9%85/; ESCWA, tram/urban rail: https://www.unescwa.org/ar/sd-glossary/%D8%A7%D9%84%D8%AA%D8%B1%D8%A7%D9%85-%D8%A7%D9%84%D8%AA%D8%B1%D8%A7%D9%85%D9%88%D8%A7%D9%8A; full paired app contexts: docs/dictionary-audit-batch41-2026-11-27.md",
+    "polizia": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, polizia: https://www.treccani.it/vocabolario/polizia/; Arabdict Italian-Arabic, polizia: https://www.arabdict.com/it/italian-arabic/polizia; ACI Codice della Strada, art. 38: https://aci.gov.it/codice-della-strada/art-38/; full paired app contexts and lessons: docs/dictionary-audit-batch41-2026-11-27.md",
+    "passeggeri": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, passeggero: https://www.treccani.it/vocabolario/passeggero/; Reverso Italian-Arabic, passeggeri: https://dizionario.reverso.net/italiano-arabo/passeggeri; Reverso Context, passeggeri: https://context.reverso.net/traduzione/italiano-arabo/passeggeri; Almaany automotive English-Arabic: https://www.almaany.com/en/dict/ar-en/passenger/; full paired app contexts and lessons: docs/dictionary-audit-batch41-2026-11-27.md",
+    "colore": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, colore: https://www.treccani.it/vocabolario/colore/; ACI Codice della Strada, art. 39: https://aci.gov.it/codice-della-strada/art-39/; Reverso Italian-Arabic, colore: https://dizionario.reverso.net/italiano-arabo/colore; Glosbe Italian-Arabic, colore: https://glosbe.com/it/ar/colore; full paired app contexts: docs/dictionary-audit-batch41-2026-11-27.md",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 

@@ -110,10 +110,10 @@ test('batch 24 corrections match exact app contexts and retain source provenance
   }
 
   assert.equal(dictionary.metadata.total_entries, 5336);
-  assert.equal(dictionary.metadata.review_required_entries, 5084);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 82);
-  assert.equal(dictionary.metadata.counts_by_status.machine_draft_needs_review, 5042);
-  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 252);
+  assert.equal(dictionary.metadata.review_required_entries, 5079);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 83);
+  assert.equal(dictionary.metadata.counts_by_status.machine_draft_needs_review, 5037);
+  assert.equal(dictionary.metadata.counts_by_status.reviewed_override, 257);
 });
 
 test('batch 24 leaves unresolved Arabic terms explicitly flagged as machine drafts', () => {
