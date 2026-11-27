@@ -1269,6 +1269,36 @@ QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_SOURCES.update({
     "laterale": QUESTION_BANK_VERIFIED_CONTEXTUAL_CONFIRMATION_PREFIX + " Treccani, laterale (Italian semantics): https://www.treccani.it/vocabolario/laterale/; De Mauro, laterale (Italian semantics): https://dizionario.internazionale.it/parola/laterale; ACI Codice della Strada, art. 148 (traffic context only): https://www.aci.it/fileadmin/cds/art-148.php; Reverso Italian-Arabic (supplementary, non-standard): https://dizionario.reverso.net/italiano-arabo/laterale",
 })
 
+# Batch thirty-one source-backed contextual corrections from complete app contexts.
+QUESTION_BANK_VERIFIED_CONTEXTUAL_CORRECTIONS.update({
+    "inizio": (
+        "بداية",
+        "contextual_translation",
+        "78 exact question-token occurrences in 78 paired question contexts and 1 lesson-text occurrence in u6-l5 in both current and legacy lesson files. All app uses are nominal: a beginning or starting point for a route, area, restriction, or process; no imperative use appears. Treccani defines inizio as a masculine noun meaning the act/point of beginning; Glosbe supports بداية as a supplementary, non-standard Italian-Arabic witness. The paired Arabic contexts use بداية/نقطة بداية. Corrected the unrelated imperative draft ابدأ. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "bianca": (
+        "أبيض / بيضاء",
+        "contextual_translation",
+        "61 exact question-token occurrences in 61 paired contexts and no Italian lesson matches in either lesson file. All reviewed uses are the color adjective in traffic lights, road markings, a police paddle, and a vehicle-plate light. Treccani supports the white-color adjective; Glosbe lists both أبيض and بيضاء as Italian-Arabic equivalents, supplementary and non-standard. Arabic adjective form follows the gender of the Arabic noun, which does not always match Italian bianca; the paired alternatives preserve this. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "pedonali": (
+        "للمشاة / خاص بالمشاة",
+        "contextual_translation",
+        "45 exact question-token occurrences in 45 paired contexts and 1 lesson-text occurrence in u4-l3 in both current and legacy lesson files. All uses are the adjective relating to or reserved for pedestrians: 33 crossings/paths and 12 pedestrian areas. Treccani and De Mauro define pedonale as dei pedoni or riservato ai pedoni; Almaany's English-Arabic pedestrian entry supports the Arabic concept المشاة/للمشاة but is disclosed as an English-Arabic bridge, not a direct Italian-Arabic authority. The machine draft متجول means wandering and is unrelated. Phrase translations adapt to Arabic syntax. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+    "purché": (
+        "بشرط أن",
+        "contextual_translation",
+        "60 exact question-token occurrences in 60 paired contexts and no Italian lesson matches in either lesson file. Every full app context uses purché conditionally, not for temporal duration; paired Arabic sentences use بشرط أن/شريطة أن. Treccani defines the conjunction as a patto che/alla condizione che; Reverso Context provides supplementary, non-standard Arabic examples including بشرط أن. This avoids the potentially temporal reading of the machine draft طالما. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+    ),
+})
+QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCES.update({
+    "inizio": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, Inizio (Italian semantics): https://www.treccani.it/vocabolario/inizio/; Glosbe Italian-Arabic (supplementary, non-standard): https://ar.glosbe.com/it/ar/inizio",
+    "bianca": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, Bianco (Italian color adjective): https://www.treccani.it/vocabolario/bianco/; Glosbe Italian-Arabic, bianco (supplementary, non-standard): https://glosbe.com/it/ar/bianco",
+    "pedonali": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, Pedonale (Italian semantics): https://www.treccani.it/vocabolario/pedonale/; De Mauro, pedonale (Italian semantics): https://dizionario.internazionale.it/parola/pedonale; Almaany English-Arabic, pedestrian (supplementary bridge, not direct Italian-Arabic): https://www.almaany.com/en/dict/ar-en/pedestrian/",
+    "purché": QUESTION_BANK_VERIFIED_CONTEXTUAL_SOURCE_PREFIX + " Treccani, Purché (Italian syntax and meaning): https://www.treccani.it/vocabolario/purche/; Reverso Context Italian-Arabic (supplementary, non-standard): https://context.reverso.net/translation/italian-arabic/purch%C3%A9",
+})
+
 # Isolated single-letter tokens are extraction artifacts rather than dictionary words.
 EXCLUDED_SINGLE_LETTER_ARTIFACTS = {"b", "f", "g", "h", "p", "v", "x"}
 

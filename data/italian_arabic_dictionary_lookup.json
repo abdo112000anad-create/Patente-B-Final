@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metadata": {
-    "generated_at_utc": "2026-11-27T02:16:43+00:00",
+    "generated_at_utc": "2026-11-27T02:33:27+00:00",
     "source_sha256": "0b092118291a1e2d08f8a6c39cc2d80bb4cd3341830b09a359e07a698f7bd45d",
     "source_question_count": 7020,
     "unique_question_bank_terms": 5277,
@@ -10,13 +10,13 @@
       "contextual_candidate_needs_review": 3,
       "contextual_override_v49": 8,
       "legacy_glossary_needs_review": 33,
-      "machine_draft_needs_review": 5059,
-      "reviewed_override": 233
+      "machine_draft_needs_review": 5055,
+      "reviewed_override": 237
     },
     "total_entries": 5336,
     "translated_entries": 5336,
-    "review_required_entries": 5103,
-    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 67 frequent question-bank translations were corrected and 83 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
+    "review_required_entries": 5099,
+    "accuracy_note": "Automatic model and legacy glossary entries remain unreviewed drafts. The two v64 question-bank candidates and the batch-25 extraurbane wording remain flagged. 71 frequent question-bank translations were corrected and 83 existing glosses were confirmed unchanged using app contexts and open Italian/Arabic lexical sources; some confirmations use an explicitly disclosed English-Arabic bridge. These project contextual reviews are not owner-approved. The documented v42 owner corrections and requested/video/lesson additions remain separately traceable. The lookup omits isolated single-letter extraction artifacts.",
     "app_release": 64,
     "terms_with_lookup_entry": 5336,
     "entries_with_arabic_translation": 5336,
@@ -36,7 +36,7 @@
     "video_context_additions": 3,
     "lesson_dictionary_audit_additions": 64,
     "question_bank_context_correction_candidates": 3,
-    "question_bank_verified_contextual_corrections": 67,
+    "question_bank_verified_contextual_corrections": 71,
     "question_bank_verified_contextual_gloss_confirmations": 83
   },
   "entries": [
@@ -7602,15 +7602,15 @@
     },
     {
       "word": "bianca",
-      "translation_ar": "أبيض",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "أبيض / بيضاء",
+      "source": "question-bank-context-audit-2026-11; Treccani, Bianco (Italian color adjective): https://www.treccani.it/vocabolario/bianco/; Glosbe Italian-Arabic, bianco (supplementary, non-standard): https://glosbe.com/it/ar/bianco",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "61 exact question-token occurrences in 61 paired contexts and no Italian lesson matches in either lesson file. All reviewed uses are the color adjective in traffic lights, road markings, a police paddle, and a vehicle-plate light. Treccani supports the white-color adjective; Glosbe lists both أبيض and بيضاء as Italian-Arabic equivalents, supplementary and non-standard. Arabic adjective form follows the gender of the Arabic noun, which does not always match Italian bianca; the paired alternatives preserve this. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "أبيض / بيضاء"
     },
     {
       "word": "bianche",
@@ -28482,15 +28482,15 @@
     },
     {
       "word": "inizio",
-      "translation_ar": "ابدأ",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "بداية",
+      "source": "question-bank-context-audit-2026-11; Treccani, Inizio (Italian semantics): https://www.treccani.it/vocabolario/inizio/; Glosbe Italian-Arabic (supplementary, non-standard): https://ar.glosbe.com/it/ar/inizio",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "78 exact question-token occurrences in 78 paired question contexts and 1 lesson-text occurrence in u6-l5 in both current and legacy lesson files. All app uses are nominal: a beginning or starting point for a route, area, restriction, or process; no imperative use appears. Treccani defines inizio as a masculine noun meaning the act/point of beginning; Glosbe supports بداية as a supplementary, non-standard Italian-Arabic witness. The paired Arabic contexts use بداية/نقطة بداية. Corrected the unrelated imperative draft ابدأ. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "بداية"
     },
     {
       "word": "innaffiatrici",
@@ -39954,15 +39954,15 @@
     },
     {
       "word": "pedonali",
-      "translation_ar": "متجول",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "للمشاة / خاص بالمشاة",
+      "source": "question-bank-context-audit-2026-11; Treccani, Pedonale (Italian semantics): https://www.treccani.it/vocabolario/pedonale/; De Mauro, pedonale (Italian semantics): https://dizionario.internazionale.it/parola/pedonale; Almaany English-Arabic, pedestrian (supplementary bridge, not direct Italian-Arabic): https://www.almaany.com/en/dict/ar-en/pedestrian/",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "45 exact question-token occurrences in 45 paired contexts and 1 lesson-text occurrence in u4-l3 in both current and legacy lesson files. All uses are the adjective relating to or reserved for pedestrians: 33 crossings/paths and 12 pedestrian areas. Treccani and De Mauro define pedonale as dei pedoni or riservato ai pedoni; Almaany's English-Arabic pedestrian entry supports the Arabic concept المشاة/للمشاة but is disclosed as an English-Arabic bridge, not a direct Italian-Arabic authority. The machine draft متجول means wandering and is unrelated. Phrase translations adapt to Arabic syntax. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "للمشاة / خاص بالمشاة"
     },
     {
       "word": "pedone",
@@ -44754,15 +44754,15 @@
     },
     {
       "word": "purché",
-      "translation_ar": "طالما",
-      "source": "Helsinki-NLP/opus-mt-it-ar@11004c1520b360d6955a0b52c85db0c2e2e696f4",
-      "provider": "opus-mt-local",
+      "translation_ar": "بشرط أن",
+      "source": "question-bank-context-audit-2026-11; Treccani, Purché (Italian syntax and meaning): https://www.treccani.it/vocabolario/purche/; Reverso Context Italian-Arabic (supplementary, non-standard): https://context.reverso.net/translation/italian-arabic/purch%C3%A9",
+      "provider": "project-contextual-audit",
       "confidence": null,
-      "status": "machine_draft_needs_review",
-      "review_required": 1,
-      "note": "",
-      "translation_kind": "machine_translation",
-      "ui_fallback_ar": ""
+      "status": "reviewed_override",
+      "review_required": 0,
+      "note": "60 exact question-token occurrences in 60 paired contexts and no Italian lesson matches in either lesson file. Every full app context uses purché conditionally, not for temporal duration; paired Arabic sentences use بشرط أن/شريطة أن. Treccani defines the conjunction as a patto che/alla condizione che; Reverso Context provides supplementary, non-standard Arabic examples including بشرط أن. This avoids the potentially temporal reading of the machine draft طالما. No question, paired Arabic text, or answer key changed. Project-reviewed, not owner-approved.",
+      "translation_kind": "contextual_translation",
+      "ui_fallback_ar": "بشرط أن"
     },
     {
       "word": "può",

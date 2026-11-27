@@ -61,10 +61,10 @@ test('batch twelve confirms four supported glosses, corrects obbliga, and retain
 
   assert.equal(questionsIt.count, 7020);
   assert.equal(questionsAr.questions.length, 7020);
-  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 67);
+  assert.equal(dictionary.metadata.question_bank_verified_contextual_corrections, 71);
   assert.equal(dictionary.metadata.question_bank_verified_contextual_gloss_confirmations, 83);
-  assert.equal(dictionary.metadata.review_required_entries, 5103);
-  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5103);
+  assert.equal(dictionary.metadata.review_required_entries, 5099);
+  assert.equal(dictionary.entries.filter(row => row.review_required === 1).length, 5099);
 
   for (const [word, item] of Object.entries(expected)) {
     const row = byWord.get(word);
