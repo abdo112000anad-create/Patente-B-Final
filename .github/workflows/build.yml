@@ -1,4 +1,4 @@
-name: Build Patente B v69 Android APK
+name: Build Patente B v73 Android APK
 on: [push, workflow_dispatch]
 permissions:
   contents: read
@@ -42,6 +42,6 @@ jobs:
         run: bash scripts/verify-apk-certificate.sh android/app/build/outputs/apk/debug/app-debug.apk
       - uses: actions/upload-artifact@v4
         with:
-          name: patente-b-v69-debug-apk
+          name: patente-b-v73-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'patente-ar-v69-native-tts-1';
+const CACHE_NAME = 'patente-ar-v73-native-tts-1';
 const FETCH_TIMEOUT_MS = 10000;
 const SHELL = [
   '/',

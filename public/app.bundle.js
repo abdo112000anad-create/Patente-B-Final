@@ -46245,9 +46245,9 @@ This typically indicates that your device does not have a healthy Internet conne
     const header2 = element("header", { className: "account-header" });
     const mark = element("span", { className: "account-brand-mark", "aria-hidden": "true" });
     const headingBlock = element("div", { className: "account-heading-block" });
-    const heading = element("h2", { id: "accountTitle" }, LABEL.title);
+    const heading2 = element("h2", { id: "accountTitle" }, LABEL.title);
     const subtitle = element("p", { className: "account-subtitle" }, LABEL.subtitle);
-    headingBlock.append(heading, subtitle);
+    headingBlock.append(heading2, subtitle);
     const close = element("button", { type: "button", className: "account-close", "aria-label": LABEL.close }, "×");
     header2.append(mark, headingBlock, close);
     const content = element("div", { className: "account-content" });
@@ -46291,8 +46291,8 @@ This typically indicates that your device does not have a healthy Internet conne
       status.textContent = message;
       error.textContent = err;
     }
-    function button(label, fn2, cls = "account-secondary") {
-      const b2 = element("button", { type: "button", className: cls }, label);
+    function button(label2, fn2, cls = "account-secondary") {
+      const b2 = element("button", { type: "button", className: cls }, label2);
       b2.addEventListener("click", () => run(fn2));
       actions.append(b2);
       return b2;
@@ -46696,9 +46696,9 @@ This typically indicates that your device does not have a healthy Internet conne
   var defs = (id) => `<defs><linearGradient id="${id}-bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#20384b"/><stop offset="1" stop-color="#101c29"/></linearGradient><linearGradient id="${id}-mint" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#39e4c3"/><stop offset="1" stop-color="#10b981"/></linearGradient><linearGradient id="${id}-blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#76c6ff"/><stop offset="1" stop-color="#3b82f6"/></linearGradient><linearGradient id="${id}-glass" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#8eeaff"/><stop offset="1" stop-color="#285d81"/></linearGradient><linearGradient id="${id}-rubber" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#556b7c"/><stop offset=".5" stop-color="#1b2a39"/><stop offset="1" stop-color="#41586b"/></linearGradient><linearGradient id="${id}-road" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#30495b"/><stop offset="1" stop-color="#1b2d3c"/></linearGradient><radialGradient id="${id}-glow"><stop stop-color="#10b981" stop-opacity=".26"/><stop offset="1" stop-color="#10b981" stop-opacity="0"/></radialGradient><marker id="${id}-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M0 0 10 5 0 10z" fill="#10b981"/></marker><filter id="${id}-shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="7" stdDeviation="6" flood-color="#050c13" flood-opacity=".62"/></filter><filter id="${id}-soft"><feGaussianBlur stdDeviation="7"/></filter><style>@keyframes ${id}-pulse{0%,100%{opacity:.5}50%{opacity:1}}@keyframes ${id}-flow{from{stroke-dashoffset:42}to{stroke-dashoffset:0}}.${id}-pulse{animation:${id}-pulse 2.2s ease-in-out infinite}.${id}-flow{stroke-dasharray:9 9;animation:${id}-flow 1.8s linear infinite}@media(prefers-reduced-motion:reduce){.${id}-pulse,.${id}-flow{animation:none!important}}</style></defs>`;
   function artwork(theme, id) {
     const road = `<rect x="38" y="124" width="684" height="137" rx="23" fill="url(#${id}-road)" stroke="#436176" stroke-width="2"/><path d="M52 191h656" stroke="#c6e9ef" stroke-width="3" stroke-dasharray="18 15" opacity=".75"/><path d="M60 137h640M60 249h640" stroke="#10b981" stroke-width="2" opacity=".75"/>${car(166, 166, "#10b981", 0, 0.88)}${text(548, 158, "CORSIA", "#9ed9e9", 11, 800)}`;
-    const sign = (x2, y2, color, label, shape = "circle") => {
+    const sign = (x2, y2, color, label2, shape = "circle") => {
       const symbol = shape === "triangle" ? `<path d="M${x2} ${y2 - 39} ${x2 + 39} ${y2 + 29} ${x2 - 39} ${y2 + 29}Z" fill="#f4f7f9" stroke="${color}" stroke-width="7"/><path d="M${x2} ${y2 - 19}v25m0 10v2" stroke="#e25555" stroke-width="6" stroke-linecap="round"/>` : shape === "oct" ? `<path d="M${x2 - 23} ${y2 - 38}h46l15 15v46l-15 15h-46l-15-15v-46z" fill="#f5f8f8" stroke="${color}" stroke-width="8"/>` : `<circle cx="${x2}" cy="${y2}" r="35" fill="#f5f8f8" stroke="${color}" stroke-width="8"/>`;
-      const labelMarkup = shape === "triangle" ? "" : text(x2, y2 + 6, label, "#172b3a", shape === "oct" ? 14 : 18, 900, "middle");
+      const labelMarkup = shape === "triangle" ? "" : text(x2, y2 + 6, label2, "#172b3a", shape === "oct" ? 14 : 18, 900, "middle");
       return `<g filter="url(#shadow)">${symbol}${labelMarkup}</g>`;
     };
     switch (theme) {
@@ -46800,11 +46800,388 @@ This typically indicates that your device does not have a healthy Internet conne
     return fullSvg(lesson, compact);
   }
 
+  // src/visuals-engine.mjs
+  var SVG_NS = "http://www.w3.org/2000/svg";
+  var visualSequence = 0;
+  var escapeXml = (value = "") => String(value).replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&apos;"
+  })[char]);
+  var makeId = (prefix) => `${prefix}-${++visualSequence}`;
+  function commonDefs(id) {
+    return `
+    <defs>
+      <linearGradient id="${id}-road" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#455469"/>
+        <stop offset="1" stop-color="#253244"/>
+      </linearGradient>
+      <linearGradient id="${id}-green" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#b8ff9b"/>
+        <stop offset=".5" stop-color="#39c879"/>
+        <stop offset="1" stop-color="#137747"/>
+      </linearGradient>
+      <linearGradient id="${id}-orange" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ffe29a"/>
+        <stop offset=".48" stop-color="#ff9940"/>
+        <stop offset="1" stop-color="#d34c28"/>
+      </linearGradient>
+      <linearGradient id="${id}-glass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#e2fbff"/>
+        <stop offset=".55" stop-color="#8fc8d9"/>
+        <stop offset="1" stop-color="#38596d"/>
+      </linearGradient>
+      <linearGradient id="${id}-metal" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e5edf5"/>
+        <stop offset=".45" stop-color="#8493a3"/>
+        <stop offset="1" stop-color="#414d5d"/>
+      </linearGradient>
+      <linearGradient id="${id}-blue" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#77dcff"/>
+        <stop offset="1" stop-color="#2587d8"/>
+      </linearGradient>
+      <linearGradient id="${id}-amber" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffe38b"/>
+        <stop offset="1" stop-color="#ef8a22"/>
+      </linearGradient>
+      <filter id="${id}-shadow" x="-60%" y="-70%" width="220%" height="250%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
+        <feOffset in="blur" dx="2" dy="7" result="offset"/>
+        <feComponentTransfer>
+          <feFuncA type="linear" slope=".45"/>
+        </feComponentTransfer>
+        <feMerge>
+          <feMergeNode/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      <filter id="${id}-glow" x="-100%" y="-100%" width="300%" height="300%">
+        <feGaussianBlur stdDeviation="5" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      <filter id="${id}-soft-shadow" x="-40%" y="-40%" width="180%" height="200%">
+        <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#000" flood-opacity=".35"/>
+      </filter>
+      <marker id="${id}-arrow" markerWidth="12" markerHeight="12"
+              refX="9" refY="6" orient="auto" markerUnits="strokeWidth">
+        <path d="M1 1 L10 6 L1 11 Z" fill="#a6ff83"/>
+      </marker>
+    </defs>`;
+  }
+  function commonStyles(id) {
+    return `
+    <style>
+      @keyframes ${id}-pulse {
+        0%, 100% { opacity: .7; transform: scale(.96); }
+        50% { opacity: 1; transform: scale(1.04); }
+      }
+      @keyframes ${id}-drive {
+        0%, 15% { transform: translateX(0); }
+        72%, 100% { transform: translateX(42px); }
+      }
+      @keyframes ${id}-brake {
+        0%, 18% { transform: translateY(28px); }
+        35%, 100% { transform: translateY(0); }
+      }
+      @keyframes ${id}-needle {
+        0%, 10% { transform: rotate(-55deg); }
+        55% { transform: rotate(28deg); }
+        100% { transform: rotate(-18deg); }
+      }
+      @keyframes ${id}-level {
+        0%, 10% { transform: translateY(52px); }
+        60% { transform: translateY(0); }
+        100% { transform: translateY(25px); }
+      }
+      @keyframes ${id}-measure {
+        0%, 100% { stroke-dashoffset: 0; }
+        50% { stroke-dashoffset: 18; }
+      }
+      .${id}-pulse { transform-box: fill-box; transform-origin: center; animation: ${id}-pulse 1.8s ease-in-out infinite; }
+      .${id}-drive { animation: ${id}-drive 5s ease-in-out infinite alternate; }
+      .${id}-brake { animation: ${id}-brake 5s ease-in-out infinite; }
+      .${id}-needle { transform-box: view-box; transform-origin: 400px 320px; animation: ${id}-needle 4s ease-in-out infinite alternate; }
+      .${id}-level { animation: ${id}-level 4s ease-in-out infinite alternate; }
+      .${id}-measure { animation: ${id}-measure 2.4s linear infinite; }
+      .${id}-label { font: 700 19px system-ui, sans-serif; letter-spacing: .7px; }
+      .${id}-small { font: 600 14px system-ui, sans-serif; }
+      .${id}-arabic { font: 600 16px system-ui, sans-serif; }
+      .${id}-wheel { fill: #101923; stroke: #8d9aa8; stroke-width: 3; }
+      .${id}-rim { fill: #c3ced8; stroke: #394858; stroke-width: 2; }
+      @media (prefers-reduced-motion: reduce) {
+        .${id}-pulse, .${id}-drive, .${id}-brake, .${id}-needle, .${id}-level, .${id}-measure {
+          animation-duration: 12s;
+        }
+      }
+    </style>`;
+  }
+  function label(x2, y2, text2, className, fill = "#f4f8fc", anchor = "middle") {
+    return `<text x="${x2}" y="${y2}" text-anchor="${anchor}" fill="${fill}" class="${className}">${escapeXml(text2)}</text>`;
+  }
+  function car2(id, x2, y2, paint, { rotation = 0, className = "" } = {}) {
+    const safeClass = className ? `class="${className}"` : "";
+    return `
+    <g transform="translate(${x2} ${y2}) rotate(${rotation})" ${safeClass} filter="url(#${id}-shadow)">
+      <ellipse cx="0" cy="31" rx="66" ry="18" fill="#0b121a" opacity=".42"/>
+      <g transform="matrix(1 .18 -.34 .82 0 0)">
+        <path d="M-58 0 L-45-20 L-25-37 L26-37 L47-19 L60 0 L55 17 L-51 17 Z"
+              fill="url(#${id}-${paint})" stroke="#13242d" stroke-width="2"/>
+        <path d="M-24-34 L-15-51 L20-51 L34-34 Z"
+              fill="url(#${id}-${paint})" stroke="#13242d" stroke-width="2"/>
+        <path d="M-16-47 L-21-35 L-1-35 L-1-47 Z"
+              fill="url(#${id}-glass)" stroke="#345366" stroke-width="2"/>
+        <path d="M3-47 L3-35 L29-35 L19-47 Z"
+              fill="url(#${id}-glass)" stroke="#345366" stroke-width="2"/>
+        <path d="M-48-15 L-29-34 L-23-34 L-28-15 Z" fill="#fff3c4" opacity=".88"/>
+        <path d="M42-14 L53-7 L55 2 L45 1 Z" fill="#fff0b0"/>
+        <path d="M-54 7 L-46 6 L-43 13 L-53 13 Z" fill="#ff5c58"/>
+        <path d="M44 8 L54 8 L52 14 L43 14 Z" fill="#ff5c58"/>
+        <rect x="-40" y="12" width="17" height="12" rx="5" class="${id}-wheel"/>
+        <rect x="28" y="12" width="17" height="12" rx="5" class="${id}-wheel"/>
+        <circle cx="-31.5" cy="18" r="4" class="${id}-rim"/>
+        <circle cx="36.5" cy="18" r="4" class="${id}-rim"/>
+        <path d="M-22-5 H31" stroke="#fff" stroke-opacity=".35" stroke-width="2"/>
+      </g>
+    </g>`;
+  }
+  function svgDocument(id, title, description, body) {
+    return `<svg xmlns="${SVG_NS}" viewBox="0 0 800 600" width="100%" role="img"
+    aria-labelledby="${id}-title ${id}-desc" preserveAspectRatio="xMidYMid meet">
+    <title id="${id}-title">${escapeXml(title)}</title>
+    <desc id="${id}-desc">${escapeXml(description)}</desc>
+    ${commonDefs(id)}
+    ${commonStyles(id)}
+    <rect width="800" height="600" rx="28" fill="#172330"/>
+    <path d="M0 450 Q190 400 380 450 T800 430 V600 H0Z" fill="#1e3d39"/>
+    ${body}
+  </svg>`;
+  }
+  function heading(id, italian, arabic) {
+    return `
+    <g filter="url(#${id}-soft-shadow)">
+      <rect x="32" y="26" width="736" height="80" rx="22" fill="#223244" stroke="#486078"/>
+      ${label(400, 59, italian, `${id}-label`, "#eaf4ff")}
+      ${label(400, 87, arabic, `${id}-arabic`, "#b9d1e4")}
+    </g>`;
+  }
+  function isometricRoad(id) {
+    return `
+    <path d="M95 300 L335 170 L705 340 L465 500 Z" fill="url(#${id}-road)" stroke="#8190a0" stroke-width="3"/>
+    <path d="M95 300 L465 500 M335 170 L705 340" stroke="#d8e1e9" stroke-opacity=".64" stroke-width="3" stroke-dasharray="14 12"/>
+    <path d="M274 397 L438 307" stroke="#f4f7fa" stroke-opacity=".75" stroke-width="4" stroke-dasharray="11 10"/>
+    <path d="M423 420 L587 330" stroke="#f4f7fa" stroke-opacity=".75" stroke-width="4" stroke-dasharray="11 10"/>`;
+  }
+  function renderPriorityLesson(options = {}) {
+    const id = makeId("priority");
+    const title = options.title ?? "Precedenza a destra";
+    const body = `
+    ${heading(id, "PRECEDENZA", "الأولوية في التقاطع")}
+    ${isometricRoad(id)}
+    <g transform="matrix(1 .28 -.55 .62 0 0)" opacity=".5">
+      <path d="M185 350 H585" stroke="#d5dde5" stroke-width="3" stroke-dasharray="12 10"/>
+    </g>
+    <g class="${id}-pulse" filter="url(#${id}-glow)">
+      <path d="M574 300 C520 269 474 258 424 264" fill="none" stroke="#9dff83"
+            stroke-width="9" stroke-linecap="round" marker-end="url(#${id}-arrow)"/>
+    </g>
+    <g class="${id}-drive">${car2(id, 544, 274, "green", { rotation: -24 })}</g>
+    <g class="${id}-brake">${car2(id, 390, 385, "orange", { rotation: 66 })}</g>
+    <g filter="url(#${id}-soft-shadow)">
+      <rect x="530" y="165" width="205" height="44" rx="15" fill="#174a39" stroke="#67df9a"/>
+      ${label(632, 194, "PRECEDENZA", `${id}-small`, "#bfffd0")}
+      <rect x="66" y="437" width="250" height="44" rx="15" fill="#603324" stroke="#ffae69"/>
+      ${label(191, 466, "DEVO FERMARMI", `${id}-small`, "#ffe0bd")}
+    </g>
+    ${label(400, 545, options.note ?? "Esempio didattico: verifica sempre segnali e precedenze.", `${id}-small`, "#d8e3ec")}
+  `;
+    return svgDocument(id, title, "تقاطع توضيحي بسيارتين وسهم يبين أولوية المرور، مع التنبيه إلى ضرورة مراعاة الإشارات.", body);
+  }
+  function renderTireLesson(options = {}) {
+    const id = makeId("tire");
+    const title = options.title ?? "Pneumatici · battistrada";
+    const body = `
+    ${heading(id, "PNEUMATICI", "الإطارات وعمق النقشة")}
+    <ellipse cx="405" cy="338" rx="226" ry="144" fill="#0a1119" opacity=".45"/>
+    <g filter="url(#${id}-shadow)">
+      <path d="M200 301 C225 208 304 158 406 158 C514 158 585 211 608 305
+               L572 386 C550 314 490 274 407 274 C324 274 258 316 239 389 Z"
+            fill="#131b24" stroke="#8c9aaa" stroke-width="6"/>
+      <path d="M239 389 C258 316 324 274 407 274 C490 274 550 314 572 386
+               L540 428 C518 365 470 335 407 335 C343 335 297 368 278 431 Z"
+            fill="url(#${id}-metal)" stroke="#263442" stroke-width="5"/>
+      <path d="M286 431 C303 371 347 340 407 340 C467 340 511 372 528 430
+               L494 450 C478 407 449 386 407 386 C365 386 335 408 320 451 Z"
+            fill="#26313d" stroke="#a9b5c1" stroke-width="4"/>
+      <path d="M205 300 L239 310 M225 246 L258 262 M264 202 L286 231 M320 174 L333 207
+               M389 161 L391 202 M458 170 L446 208 M520 199 L496 233 M573 249 L540 267
+               M600 303 L565 312"
+            stroke="#bdc7d0" stroke-width="9" stroke-linecap="round"/>
+      <path d="M266 322 L294 332 M312 292 L332 312 M367 277 L374 305 M436 276 L432 305
+               M493 294 L473 316 M541 324 L512 336"
+            stroke="#53616f" stroke-width="8" stroke-linecap="round"/>
+    </g>
+    <path d="M248 272 C292 210 345 189 406 188" fill="none" stroke="#73d9ff" stroke-width="7"
+          stroke-linecap="round" marker-end="url(#${id}-arrow)" class="${id}-pulse"/>
+    <g filter="url(#${id}-soft-shadow)">
+      <rect x="506" y="168" width="234" height="70" rx="18" fill="#223244" stroke="#72cfff"/>
+      ${label(623, 197, "BATTISTRADA", `${id}-small`, "#d8f4ff")}
+      ${label(623, 222, "MINIMO: 1,6 mm*", `${id}-small`, "#a9e8ff")}
+      <rect x="62" y="427" width="260" height="60" rx="18" fill="#223244" stroke="#64788d"/>
+      ${label(192, 453, "Controllo della profondità", `${id}-small`, "#f2f7fb")}
+      ${label(192, 475, "*Verificare norma e categoria", `${id}-small`, "#b9c9d8")}
+    </g>
+  `;
+    return svgDocument(id, title, "Rappresentazione tridimensionale schematica di un pneumatico e della zona di battistrada.", body);
+  }
+  function renderSpeedLesson(options = {}) {
+    const id = makeId("speed");
+    const title = options.title ?? "Limiti di velocità";
+    const body = `
+    ${heading(id, "LIMITI DI VELOCITÀ", "حدود السرعة تتبع الطريق والإشارات")}
+    <path d="M190 410 A220 220 0 0 1 610 410 L565 410 A174 174 0 0 0 235 410 Z"
+          fill="url(#${id}-metal)" stroke="#d0dae4" stroke-width="5" filter="url(#${id}-shadow)"/>
+    <path d="M226 405 A184 184 0 0 1 574 405" fill="none" stroke="#182431" stroke-width="18"/>
+    <path d="M240 396 A170 170 0 0 1 560 396" fill="none" stroke="#72d8ff" stroke-width="4"
+          stroke-dasharray="4 18"/>
+    <g class="${id}-needle">
+      <path d="M400 320 L390 398 L400 388 L410 398 Z" fill="#ff675c" stroke="#7b2929" stroke-width="2"/>
+    </g>
+    <circle cx="400" cy="399" r="15" fill="#dbe4ed" stroke="#273647" stroke-width="5"/>
+    <g class="${id}-small" fill="#f3f7fb" text-anchor="middle">
+      <text x="255" y="350">0</text>
+      <text x="286" y="284">50</text>
+      <text x="400" y="245">90</text>
+      <text x="514" y="284">110</text>
+      <text x="545" y="350">130</text>
+    </g>
+    <g filter="url(#${id}-soft-shadow)">
+      <rect x="258" y="440" width="284" height="55" rx="18" fill="#1b2b3a" stroke="#61c9f3"/>
+      ${label(400, 474, "km/h · valori illustrativi", `${id}-small`, "#c9edff")}
+      <rect x="104" y="172" width="592" height="50" rx="17" fill="#26374a" stroke="#536b83"/>
+      ${label(400, 204, options.note ?? "Adegua la velocità alle condizioni e ai segnali.", `${id}-small`, "#edf5fc")}
+    </g>
+    <g transform="translate(400 320)" opacity=".22">
+      <circle r="170" fill="none" stroke="#8edfff" stroke-width="2"/>
+    </g>
+  `;
+    return svgDocument(id, title, "عداد سرعة متحرك بقيم توضيحية وليست بديلاً عن حدود السرعة المنشورة على الطريق.", body);
+  }
+  function renderAlcoholLesson(options = {}) {
+    const id = makeId("alcohol");
+    const title = options.title ?? "Alcol e guida";
+    const body = `
+    ${heading(id, "ALCOL · GUIDA SICURA", "الكحول والقيادة")}
+    <path d="M250 182 H550 L518 430 Q515 458 490 466 H310 Q285 458 282 430 Z"
+          fill="#203647" fill-opacity=".72" stroke="#c8e8f4" stroke-width="8"
+          filter="url(#${id}-shadow)"/>
+    <path d="M271 299 H529 L512 430 Q510 446 489 451 H311 Q290 446 288 430 Z"
+          fill="url(#${id}-amber)" opacity=".92"/>
+    <path d="M271 299 Q399 280 529 299" fill="none" stroke="#fff1b6" stroke-width="6"/>
+    <g class="${id}-level">
+      <path d="M272 349 Q400 331 526 349 L518 430 Q515 454 490 460 H310 Q285 454 282 430 Z"
+            fill="#ffb342" opacity=".87"/>
+      <path d="M272 349 Q400 331 526 349" fill="none" stroke="#fff0bd" stroke-width="5"/>
+    </g>
+    <path d="M400 466 V512 M340 514 H460" stroke="#c6d3df" stroke-width="12" stroke-linecap="round"/>
+    <g filter="url(#${id}-soft-shadow)">
+      <rect x="78" y="245" width="160" height="62" rx="18" fill="#27394c" stroke="#ffcf73"/>
+      ${label(158, 273, "0,5 g/l", `${id}-label`, "#ffe3a2")}
+      ${label(158, 295, "limite generale*", `${id}-small`, "#d8e5ee")}
+      <rect x="550" y="330" width="185" height="62" rx="18" fill="#26374a" stroke="#80cfff"/>
+      ${label(642, 357, "NON GUIDARE", `${id}-small`, "#d8f2ff")}
+      ${label(642, 380, "dopo aver bevuto", `${id}-small`, "#b9d1e4")}
+      ${label(400, 550, options.note ?? "*Eccezioni e regole da verificare su fonti ufficiali.", `${id}-small`, "#e0e9f1")}
+    </g>
+    <path d="M237 276 H296" stroke="#ffd774" stroke-width="5" stroke-dasharray="8 7"
+          class="${id}-measure"/>
+  `;
+    return svgDocument(id, title, "Bicchiere schematico con indicatore animato e richiamo al limite generale, con avvertenza sulle eccezioni.", body);
+  }
+  function renderSafeDistanceLesson(options = {}) {
+    const id = makeId("distance");
+    const body = `
+    ${heading(id, "DISTANZA DI SICUREZZA", "اترك مسافة تتناسب مع السرعة والظروف")}
+    <path d="M70 355 L400 220 L730 355 L400 495 Z" fill="url(#${id}-road)" stroke="#8292a3" stroke-width="4"/>
+    <path d="M155 355 L400 255 M645 355 L400 455" stroke="#dce4eb" stroke-width="4" stroke-dasharray="15 13"/>
+    <path d="M400 271 V439" stroke="#f4f7fa" stroke-width="4" stroke-dasharray="13 12"/>
+    <g transform="translate(0 0)">
+      ${car2(id, 396, 292, "green", { rotation: 0 })}
+      ${car2(id, 202, 375, "orange", { rotation: 0 })}
+    </g>
+    <path d="M285 328 L365 295" fill="none" stroke="#a6ff83" stroke-width="7"
+          stroke-dasharray="12 8" marker-start="url(#${id}-arrow)" marker-end="url(#${id}-arrow)"
+          class="${id}-measure" filter="url(#${id}-glow)"/>
+    <g filter="url(#${id}-soft-shadow)">
+      <rect x="270" y="175" width="260" height="54" rx="18" fill="#223244" stroke="#79d9ff"/>
+      ${label(400, 209, options.distanceLabel ?? "Spazio variabile · esempio", `${id}-small`, "#dbf5ff")}
+      <rect x="522" y="435" width="220" height="48" rx="16" fill="#1d4638" stroke="#70d69b"/>
+      ${label(632, 465, "MANTIENI LA DISTANZA", `${id}-small`, "#c9ffdc")}
+      ${label(400, 550, options.note ?? "Più velocità o meno aderenza: aumenta lo spazio necessario.", `${id}-small`, "#e3ebf2")}
+    </g>
+  `;
+    return svgDocument(
+      id,
+      options.title ?? "Distanza di sicurezza",
+      "Due auto in prospettiva isometrica mostrano che la distanza di sicurezza deve variare in base a velocità e condizioni.",
+      body
+    );
+  }
+  var lessonVisuals2 = Object.freeze({
+    priority: renderPriorityLesson,
+    precedenza: renderPriorityLesson,
+    tires: renderTireLesson,
+    pneumatici: renderTireLesson,
+    speed: renderSpeedLesson,
+    velocita: renderSpeedLesson,
+    alcohol: renderAlcoholLesson,
+    alcol: renderAlcoholLesson,
+    safeDistance: renderSafeDistanceLesson,
+    distanza: renderSafeDistanceLesson
+  });
+  function renderLessonVisual2(type, options = {}) {
+    const renderer = lessonVisuals2[String(type ?? "").trim()];
+    return renderer ? renderer(options) : "";
+  }
+  function getLessonVisualTypes() {
+    return Object.keys(lessonVisuals2);
+  }
+  var visuals_engine_default = Object.freeze({
+    renderLessonVisual: renderLessonVisual2,
+    renderPriorityLesson,
+    renderTireLesson,
+    renderSpeedLesson,
+    renderAlcoholLesson,
+    renderSafeDistanceLesson,
+    getLessonVisualTypes
+  });
+
   // src/lesson-template.mjs
   var esc2 = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   var pair = (it2, ar2) => `<span class="language-pair lesson-pair"><span class="pair-it" lang="it" dir="ltr">${esc2(it2)}</span><span class="pair-ar" lang="ar" dir="rtl">${esc2(ar2)}</span></span>`;
+  var engineVisualsByLesson = Object.freeze({
+    "u1-l3": renderSpeedLesson,
+    "u4-l1": renderPriorityLesson,
+    "u5-l3": renderSafeDistanceLesson,
+    "u6-l1": renderSpeedLesson,
+    "u7-l1": renderTireLesson,
+    "u9-l1": renderAlcoholLesson
+  });
+  function renderEngineVisual(lesson, renderer, compact) {
+    const id = String((lesson == null ? void 0 : lesson.id) ?? "");
+    const titleIt = (lesson == null ? void 0 : lesson.titleIt) ?? (lesson == null ? void 0 : lesson.heading_it) ?? "Lezione visiva";
+    const titleAr = (lesson == null ? void 0 : lesson.titleAr) ?? (lesson == null ? void 0 : lesson.heading_ar) ?? "";
+    const svg = renderer({ title: titleIt }).replace("<svg xmlns=", '<svg class="lesson-svg" xmlns=');
+    const caption = compact ? "" : `<figcaption><span lang="it" dir="ltr">${esc2(titleIt)}</span><span lang="ar" dir="rtl">${esc2(titleAr)}</span></figcaption>`;
+    return `<figure class="lesson-svg-figure is-engine-visual${compact ? " is-compact" : ""}" data-lesson-visual="${esc2(id)}">${svg}${caption}</figure>`;
+  }
   function renderLessonVisualSection(lesson, { compact = false } = {}) {
-    return renderLessonVisual(lesson, { compact });
+    const renderer = engineVisualsByLesson[String((lesson == null ? void 0 : lesson.id) ?? "")];
+    return renderer ? renderEngineVisual(lesson, renderer, compact) : renderLessonVisual(lesson, { compact });
   }
   function pointCards(items = [], italianWordMarkup = esc2) {
     const cards = items.map((item) => `<article class="lesson-key-point-card key-point-card"><div class="lesson-key-point-title" role="heading" aria-level="3"><div class="kp-it" lang="it" dir="ltr">${italianWordMarkup(item.it)}</div><div class="kp-ar" lang="ar" dir="rtl">${esc2(item.ar)}</div></div></article>`).join("");
@@ -47453,8 +47830,8 @@ This typically indicates that your device does not have a healthy Internet conne
     const { italian: lessonText } = buildLessonSpeechTexts(lesson);
     const sourceList = [...module.sources || [], ...lesson.sources || []].filter((item, index2, all2) => (item == null ? void 0 : item.url) && all2.findIndex((other) => other.url === item.url) === index2);
     const sources = sourceList.map((source) => {
-      const label = sourceLabel(source);
-      return `<li><a href="${esc3(source.url)}" target="_blank" rel="noopener noreferrer">${pair2(label.it, label.ar, "source-link")}</a><small>${pair2(source.legal_reference_it || "Riferimento normativo ufficiale", source.legal_reference || "مرجع قانوني رسمي")}</small></li>`;
+      const label2 = sourceLabel(source);
+      return `<li><a href="${esc3(source.url)}" target="_blank" rel="noopener noreferrer">${pair2(label2.it, label2.ar, "source-link")}</a><small>${pair2(source.legal_reference_it || "Riferimento normativo ufficiale", source.legal_reference || "مرجع قانوني رسمي")}</small></li>`;
     }).join("");
     return `<article class="lesson-detail-page" data-lesson-page="${esc3(key)}"><header class="lesson-detail-head"><div class="eyebrow" lang="it">UNITÀ ${String(module.order_hint).padStart(2, "0")} · LEZIONE ${String(index + 1).padStart(2, "0")}</div><h1>${pair2(lesson.heading_it, lesson.heading_ar, "detail-title")}</h1>${renderLessonVisualSection(lesson)}</header>
   <div class="lesson-audio-row" role="group" aria-label="محتوى الدرس"><button class="audio-button" data-lesson-italian-audio="true" data-lesson-body-offset="${String(lesson.heading_it || "").trim().length + (lesson.body_it ? 2 : 0)}" data-tts-locale="${ITALIAN_TTS_LOCALE}" data-tts-text="${esc3(lessonText)}">${controlLabel("Ascolta in italiano", "استمع بالإيطالية")}</button>${lessonVideoBlock(lesson, moduleId, index)}</div>
@@ -47484,8 +47861,8 @@ This typically indicates that your device does not have a healthy Internet conne
         moduleTopics.push(t2);
       }
       return `<section class="bank-unit"><header class="bank-unit-title"><span class="course-unit-number">${String(mi + 1).padStart(2, "0")}</span>${pair2(m2.title_it, m2.title_ar, "unit-title")}</header><div class="bank-topic-list">${moduleTopics.map((t2) => {
-        const label = topicLabel(t2), count2 = topicCount(t2), correct = state.topicCorrect[t2] || 0, total = state.topicTotal[t2] || 0;
-        return `<article class="bank-topic-row"><button class="topic-open" data-bank-topic="${esc3(t2)}">${pair2(label.it, label.ar, "bank-topic-name")}<small>${pair2(`${count2.toLocaleString("it-IT")} quesiti · ${correct}/${total} corretti`, `${count2.toLocaleString("ar")} سؤال · ${correct.toLocaleString("ar")} من ${total.toLocaleString("ar")} صحيحة`)}</small></button><button class="small-button" data-practice-topic="${esc3(t2)}">${controlLabel("Esercitati", "تدرّب")}</button></article>`;
+        const label2 = topicLabel(t2), count2 = topicCount(t2), correct = state.topicCorrect[t2] || 0, total = state.topicTotal[t2] || 0;
+        return `<article class="bank-topic-row"><button class="topic-open" data-bank-topic="${esc3(t2)}">${pair2(label2.it, label2.ar, "bank-topic-name")}<small>${pair2(`${count2.toLocaleString("it-IT")} quesiti · ${correct}/${total} corretti`, `${count2.toLocaleString("ar")} سؤال · ${correct.toLocaleString("ar")} من ${total.toLocaleString("ar")} صحيحة`)}</small></button><button class="small-button" data-practice-topic="${esc3(t2)}">${controlLabel("Esercitati", "تدرّب")}</button></article>`;
       }).join("")}</div></section>`;
     }).join("");
     return `<section class="bank-hero"><div>${pair2("BANCA DATI UFFICIALE · PATENTE AB", "مصدر بنك أسئلة Patente AB", "eyebrow-pair")}<h1>${pair2("Consulta i quesiti della Patente AB per unità didattica", "تصفح أسئلة ملف Patente AB وفق وحدات المنهج")}</h1><p>${pair2(`${bank.count.toLocaleString("it-IT")} quesiti attribuiti al PDF collegato al portale ufficiale · ${topics.length} argomenti in ordine · data del PDF: ${bank.sourcePdfDate}. Confronta testo, risposte e figure con il PDF originale; l’app non certifica ogni singolo quesito. Per la normativa vigente, consulta le fonti ministeriali collegate.`, `${bank.count.toLocaleString("ar")} سؤال من الملف المرتبط بالبوابة الرسمية · ${topics.length.toLocaleString("ar")} موضوعًا مرتبًا · تاريخ بيانات PDF: ${bank.sourcePdfDate}. تحقق من نص السؤال وإجابته وشكله في الملف الأصلي؛ فالتطبيق لا يصادق على المطابقة الفردية لكل سجل. راجع مصادر الوزارة للتعديلات النافذة.`)}</p></div><div class="bank-actions"><button class="primary-button" data-action="exam">${controlLabel("Simulazione d’esame", "محاكاة الامتحان النهائي")}</button><button class="quiet-button" data-view="bank" data-all-bank="true">${controlLabel("Sfoglia tutti i quesiti", "تصفح جميع الأسئلة")}</button><button class="quiet-button" data-view="similar-groups">${controlLabel(`Formulazioni simili · ${similarQuestionGroups.length}`, `صياغات متقاربة · ${similarQuestionGroups.length.toLocaleString("ar")}`)}</button></div></section><div class="notice-banner bank-scope-note">${pair2("L’app usa il PDF Patente AB collegato al portale ministeriale per le categorie A e B. I quesiti non sono separati per categoria: questa schermata non è un filtro esclusivo per la patente B. Consulta il programma ufficiale aggiornato.", "يعتمد هذا التطبيق على ملف Patente AB المرتبط بالوزارة (الفئتان A وB). لا تُفرز الأسئلة بحسب الفئة؛ لذلك لا تمثل هذه القائمة مجموعة مخصصة لفئة B وحدها. راجع المصدر الرسمي للمنهج النافذ.")}</div><div class="bank-tool-row"><form class="search-row" id="searchForm"><input id="searchInput" placeholder="Cerca in italiano o arabo" aria-label="Cerca nel banco dei quiz · البحث في بنك الأسئلة"><button type="submit">${controlLabel("Cerca", "بحث")}</button></form><div class="field-hint">${pair2("Cerca in italiano o in arabo", "يمكنك البحث بالإيطالية أو بالعربية")}</div><div class="bank-utility-buttons"><button class="quiet-button" data-action="smart-practice">${controlLabel("Esercitazione mirata · 10 quesiti", "تدريب ذكي · 10 أسئلة")}</button><button class="quiet-button" data-practice-count="5">${controlLabel("Esercitazione rapida · 5 quesiti", "تدريب سريع · 5")}</button><button class="quiet-button" data-practice-count="10">${controlLabel("Esercitazione rapida · 10 quesiti", "تدريب سريع · 10")}</button><button class="quiet-button" data-practice-count="20">${controlLabel("Esercitazione rapida · 20 quesiti", "تدريب سريع · 20")}</button><button class="quiet-button" data-action="mistakes">${controlLabel(`Rivedi errori (${state.wrong.size})`, `مراجعة الأخطاء (${state.wrong.size.toLocaleString("ar")})`)}</button><button class="quiet-button" data-action="favorites">${controlLabel(`Preferiti (${state.favorites.size})`, `المحفوظات (${state.favorites.size.toLocaleString("ar")})`)}</button><button class="quiet-button" data-show-all-bank="true">${controlLabel(bank.count.toLocaleString("it-IT") + " quesiti totali", "كل الأسئلة الـ" + bank.count.toLocaleString("ar"))}</button></div><form id="customPracticeForm" class="practice-builder"><div class="practice-builder-title">${pair2("Crea un gruppo di studio mirato", "أنشئ مجموعة تدريب مخصصة")}</div><label><span>${pair2("Argomento", "الموضوع")}</span><select id="customTopic"><option value="">Tutti gli argomenti · كل الموضوعات</option>${topicOptions}</select></label><label><span>${pair2("Obiettivo", "نوع الأسئلة")}</span><select id="customFocus"><option value="all">Domande miste · متنوعة</option><option value="unanswered">Non ancora risposte · لم تُحل بعد</option><option value="mistakes">Errori commessi · أخطائي</option></select></label><label><span>${pair2("Numero di domande", "عدد الأسئلة")}</span><input id="customCount" type="number" min="1" max="50" value="15" inputmode="numeric"></label><button class="primary-button" type="submit">${controlLabel("Avvia sessione", "ابدأ الجلسة")}</button></form><button class="quiet-button visual-challenge" data-action="sign-challenge">${controlLabel("Sfida visiva sui segnali · 10 quesiti", "تحدي بصري لإشارات الطريق · 10 أسئلة")}</button></div><div class="section-title-row"><div>${pair2("ARGOMENTI NELL’ORDINE DEL CORSO", "الموضوعات بترتيب المنهج", "section-title")}</div><span>${pair2("Apri un argomento per vedere tutti i quesiti", "افتح الموضوع لتصفح جميع أسئلته")}</span></div>${moduleSections}<button class="exam-banner" data-action="exam">${pair2("Pronto? Avvia una simulazione a tempo: 30 quesiti · 20 minuti · massimo 3 errori.", "هل أنت مستعد؟ ابدأ محاكاة نهائية محددة الوقت: 30 سؤالًا · 20 دقيقة · حتى 3 أخطاء.")}</button>`;
@@ -47587,8 +47964,8 @@ This typically indicates that your device does not have a healthy Internet conne
     filtered.sort((a, b2) => Number(a.id) - Number(b2.id));
     const pageSize = 24, maxPage = Math.max(0, Math.ceil(filtered.length / pageSize) - 1);
     browsePage = Math.max(0, Math.min(browsePage, maxPage));
-    const visible = filtered.slice(browsePage * pageSize, (browsePage + 1) * pageSize), label = topic ? topicLabel(topic) : null, scopedPractice = Array.isArray(opts.groupQuestionIds) && opts.groupQuestionIds.length > 0;
-    return `<div class="page-heading"><div>${pair2(kind === "bank" ? "BANCA UFFICIALE" : "RIPASSO PERSONALE", kind === "bank" ? "بنك الأسئلة الرسمي" : "مراجعة شخصية", "eyebrow-pair")}<h1>${label ? pair2(label.it, label.ar) : pair2(titleIt, titleAr)}</h1><p>${pair2(subIt, subAr)}</p></div><button class="primary-button" data-action="${scopedPractice ? "practice-group" : kind === "favorites" ? "favorites" : kind === "mistakes" ? "mistakes" : "practice"}" ${scopedPractice ? `data-practice-group="${opts.groupQuestionIds.map(Number).join(",")}"` : ""}>${scopedPractice ? controlLabel("Practice this group", "تدرّب على المجموعة") : controlLabel("Start random practice", "ابدأ تدريبًا عشوائيًا")}</button></div><form class="search-row" id="searchForm"><input id="searchInput" value="${esc3(query2)}" placeholder="Cerca la domanda" aria-label="Search · بحث"><button type="submit">${controlLabel("Search", "بحث")}</button></form><div class="field-hint">${pair2("Cerca in italiano o in arabo", "يمكنك البحث بالإيطالية أو العربية")}</div><div class="filters"><span class="list-meta">${pair2(`${filtered.length.toLocaleString("it-IT")} results`, `النتائج ${filtered.length.toLocaleString("ar")}`)}</span>${topic ? `<button class="quiet-button" data-view="bank">${controlLabel("Back to subjects", "العودة للموضوعات")}</button>` : ""}</div>${visible.length ? `<div class="question-list">${visible.map(questionListRow).join("")}</div><div class="pager"><button class="quiet-button" data-page="prev" ${browsePage === 0 ? "disabled" : ""}>${controlLabel("Previous", "السابق")}</button><span>${pair2(`${browsePage + 1} / ${Math.max(1, Math.ceil(filtered.length / pageSize))}`, `${(browsePage + 1).toLocaleString("ar")} / ${Math.max(1, Math.ceil(filtered.length / pageSize)).toLocaleString("ar")}`)}</span><button class="quiet-button" data-page="next" ${browsePage >= maxPage ? "disabled" : ""}>${controlLabel("Next", "التالي")}</button></div>` : `<div class="empty-state">${pair2(kind === "favorites" ? "No saved questions yet." : "No matching question.", "لا توجد أسئلة مطابقة حاليًا.")}</div>`}`;
+    const visible = filtered.slice(browsePage * pageSize, (browsePage + 1) * pageSize), label2 = topic ? topicLabel(topic) : null, scopedPractice = Array.isArray(opts.groupQuestionIds) && opts.groupQuestionIds.length > 0;
+    return `<div class="page-heading"><div>${pair2(kind === "bank" ? "BANCA UFFICIALE" : "RIPASSO PERSONALE", kind === "bank" ? "بنك الأسئلة الرسمي" : "مراجعة شخصية", "eyebrow-pair")}<h1>${label2 ? pair2(label2.it, label2.ar) : pair2(titleIt, titleAr)}</h1><p>${pair2(subIt, subAr)}</p></div><button class="primary-button" data-action="${scopedPractice ? "practice-group" : kind === "favorites" ? "favorites" : kind === "mistakes" ? "mistakes" : "practice"}" ${scopedPractice ? `data-practice-group="${opts.groupQuestionIds.map(Number).join(",")}"` : ""}>${scopedPractice ? controlLabel("Practice this group", "تدرّب على المجموعة") : controlLabel("Start random practice", "ابدأ تدريبًا عشوائيًا")}</button></div><form class="search-row" id="searchForm"><input id="searchInput" value="${esc3(query2)}" placeholder="Cerca la domanda" aria-label="Search · بحث"><button type="submit">${controlLabel("Search", "بحث")}</button></form><div class="field-hint">${pair2("Cerca in italiano o in arabo", "يمكنك البحث بالإيطالية أو العربية")}</div><div class="filters"><span class="list-meta">${pair2(`${filtered.length.toLocaleString("it-IT")} results`, `النتائج ${filtered.length.toLocaleString("ar")}`)}</span>${topic ? `<button class="quiet-button" data-view="bank">${controlLabel("Back to subjects", "العودة للموضوعات")}</button>` : ""}</div>${visible.length ? `<div class="question-list">${visible.map(questionListRow).join("")}</div><div class="pager"><button class="quiet-button" data-page="prev" ${browsePage === 0 ? "disabled" : ""}>${controlLabel("Previous", "السابق")}</button><span>${pair2(`${browsePage + 1} / ${Math.max(1, Math.ceil(filtered.length / pageSize))}`, `${(browsePage + 1).toLocaleString("ar")} / ${Math.max(1, Math.ceil(filtered.length / pageSize)).toLocaleString("ar")}`)}</span><button class="quiet-button" data-page="next" ${browsePage >= maxPage ? "disabled" : ""}>${controlLabel("Next", "التالي")}</button></div>` : `<div class="empty-state">${pair2(kind === "favorites" ? "No saved questions yet." : "No matching question.", "لا توجد أسئلة مطابقة حاليًا.")}</div>`}`;
   }
   function glossaryPage() {
     const cards = glossaryEntries.map((entry) => {
@@ -47780,7 +48157,7 @@ This typically indicates that your device does not have a healthy Internet conne
       return;
     }
     const q = currentQ(), answered = quiz.answers[quiz.index], pct = quiz.index / quiz.questions.length * 100;
-    const label = q.lesson_check ? { it: q.topic_it, ar: q.topic_ar } : topicLabel(q.topic), correct = q.answer === "VERO";
+    const label2 = q.lesson_check ? { it: q.topic_it, ar: q.topic_ar } : topicLabel(q.topic), correct = q.answer === "VERO";
     const answerLabel = q.lesson_check ? { it: "Risposta verificata nella fonte ministeriale", ar: "الإجابة وفق مصدر الوزارة" } : { it: "Risposta corretta registrata nel PDF ufficiale", ar: "الإجابة الصحيحة المسجلة في ملف الوزارة" };
     const feedback = isExam ? "" : answered === null || answered === void 0 ? "" : `<div class="feedback ${answered === correct ? "good" : "bad"}" role="status"><strong>${pair2(answered === correct ? "Risposta corretta" : "Risposta da rivedere", answered === correct ? "إجابتك صحيحة" : "إجابتك تحتاج إلى مراجعة")}</strong>${pair2(`${answerLabel.it}: ${correct ? "Vero" : "Falso"}`, `${answerLabel.ar}: ${correct ? "صحيح" : "خطأ"}`)}${q.explanation_it ? `<div class="quiz-explanation">${pair2(q.explanation_it, q.explanation_ar || "")}</div>` : ""}${questionAudio(q, true)}</div>`;
     const figure = questionFigureMarkup(q, { sourceMarkup: sourceAnchor(q) });
@@ -47791,7 +48168,7 @@ This typically indicates that your device does not have a healthy Internet conne
     const locked = !isExam && answered !== null && answered !== void 0;
     const title = quiz.mode === "visual" ? pair2("ESERCITAZIONE VISIVA SUI SEGNALI", "تدريب بصري على الإشارات") : pair2(isExam ? "SIMULAZIONE D’ESAME" : quiz.mode === "lesson-review" ? "RIPASSO DELLA LEZIONE" : quiz.mode === "due" ? "RIPASSO PROGRAMMATO" : quiz.mode === "smart" ? "ESERCITAZIONE PERSONALIZZATA" : quiz.mode === "custom" ? "ESERCITAZIONE PERSONALIZZATA" : "ESERCITAZIONE", isExam ? "محاكاة الامتحان النهائي" : quiz.mode === "lesson-review" ? "مراجعة الدرس" : quiz.mode === "due" ? "مراجعة مستحقة" : quiz.mode === "smart" ? "تدريب ذكي" : quiz.mode === "custom" ? "تدريب مخصص" : "تدريب");
     const examControls = isExam ? `<button class="quiet-button ${quiz.flagged[quiz.index] ? "is-flagged" : ""}" data-action="flag">${controlLabel(quiz.flagged[quiz.index] ? "Contrassegnata da rivedere" : "Contrassegna per rivedere", quiz.flagged[quiz.index] ? "معلّم للمراجعة" : "علّم للمراجعة")}</button><button class="quiet-button" data-action="skip">${controlLabel("Salta senza rispondere", "تخطَّ بلا إجابة")}</button><button class="primary-button" data-action="exam-next">${controlLabel(quiz.index === quiz.questions.length - 1 ? "Rivedi le risposte" : "Avanti →", quiz.index === quiz.questions.length - 1 ? "مراجعة الإجابات" : "التالي ←")}</button>` : `<button class="primary-button" data-action="next" ${answered === null || answered === void 0 ? "disabled" : ""}>${controlLabel(quiz.index === quiz.questions.length - 1 ? "Mostra il risultato" : "Domanda successiva →", quiz.index === quiz.questions.length - 1 ? "عرض النتيجة" : "السؤال التالي ←")}</button>`;
-    main.innerHTML = `<div class="quiz-shell"><div class="quiz-topline"><button class="quiet-button" data-action="quit">${controlLabel("Termina la sessione", "إنهاء الجلسة")}</button><span class="quiz-mode">${title}</span><span class="quiz-index">${(quiz.index + 1).toLocaleString("ar")} / ${quiz.questions.length.toLocaleString("ar")}</span></div><div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div><article class="quiz-card" data-question-id="${esc3(q.id)}"><div class="quiz-tags"><span class="topic-tag">${pair2(label.it, label.ar)}</span>${questionId}${isExam ? `<span class="exam-clock" id="examClock">${formatTime(quiz.remaining)}</span>` : ""}</div><p class="italian-question" lang="it" dir="ltr">${esc3(q.it)}</p><p class="arabic-question" lang="ar" dir="rtl">${esc3(q.ar || "")}</p>${questionAudio(q)}${figure}<div class="answer-area"><p class="answer-instruction">${pair2("La frase è vera o falsa?", "هل العبارة صحيحة أم خاطئة؟")}</p><div class="answer-buttons"><button class="answer-button true-choice ${trueClass}" data-answer="true" aria-pressed="${answered === true}" ${locked ? "disabled" : ""}>${pair2("Vero", "صحيح")}</button><button class="answer-button false-choice ${falseClass}" data-answer="false" aria-pressed="${answered === false}" ${locked ? "disabled" : ""}>${pair2("Falso", "خطأ")}</button></div>${feedback}</div><div class="quiz-controls">${bookmarkButton}<button class="quiet-button" data-action="prev" ${quiz.index === 0 ? "disabled" : ""}>${controlLabel("Indietro", "السابق")}</button>${examControls}</div></article></div>`;
+    main.innerHTML = `<div class="quiz-shell"><div class="quiz-topline"><button class="quiet-button" data-action="quit">${controlLabel("Termina la sessione", "إنهاء الجلسة")}</button><span class="quiz-mode">${title}</span><span class="quiz-index">${(quiz.index + 1).toLocaleString("ar")} / ${quiz.questions.length.toLocaleString("ar")}</span></div><div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div><article class="quiz-card" data-question-id="${esc3(q.id)}"><div class="quiz-tags"><span class="topic-tag">${pair2(label2.it, label2.ar)}</span>${questionId}${isExam ? `<span class="exam-clock" id="examClock">${formatTime(quiz.remaining)}</span>` : ""}</div><p class="italian-question" lang="it" dir="ltr">${esc3(q.it)}</p><p class="arabic-question" lang="ar" dir="rtl">${esc3(q.ar || "")}</p>${questionAudio(q)}${figure}<div class="answer-area"><p class="answer-instruction">${pair2("La frase è vera o falsa?", "هل العبارة صحيحة أم خاطئة؟")}</p><div class="answer-buttons"><button class="answer-button true-choice ${trueClass}" data-answer="true" aria-pressed="${answered === true}" ${locked ? "disabled" : ""}>${pair2("Vero", "صحيح")}</button><button class="answer-button false-choice ${falseClass}" data-answer="false" aria-pressed="${answered === false}" ${locked ? "disabled" : ""}>${pair2("Falso", "خطأ")}</button></div>${feedback}</div><div class="quiz-controls">${bookmarkButton}<button class="quiet-button" data-action="prev" ${quiz.index === 0 ? "disabled" : ""}>${controlLabel("Indietro", "السابق")}</button>${examControls}</div></article></div>`;
   }
   function updateQuestionMemory(q, correct) {
     if (q.lesson_check) return;
@@ -47944,11 +48321,11 @@ This typically indicates that your device does not have a healthy Internet conne
     }
     const play = scene.querySelector("[data-play-explainer]");
     if (play) {
-      const label = playing ? { it: "Pausa", ar: "إيقاف مؤقت" } : paused ? { it: "Riprendi", ar: "استئناف" } : { it: "Avvia la spiegazione", ar: "شغّل الشرح المرئي" };
+      const label2 = playing ? { it: "Pausa", ar: "إيقاف مؤقت" } : paused ? { it: "Riprendi", ar: "استئناف" } : { it: "Avvia la spiegazione", ar: "شغّل الشرح المرئي" };
       const icon = playing ? '<path d="M7 5h4v14H7zM15 5h4v14h-4z"/>' : '<path d="M8 5v14l11-7z"/>';
       play.dataset.playbackState = status;
-      play.setAttribute("aria-label", `${label.it} · ${label.ar}`);
-      play.innerHTML = `<span class="lesson-animation-play-icon" aria-hidden="true"><svg viewBox="0 0 24 24">${icon}</svg></span><span class="lesson-animation-play-label"><span lang="it">${label.it}</span><small lang="ar" dir="rtl">${label.ar}</small></span>`;
+      play.setAttribute("aria-label", `${label2.it} · ${label2.ar}`);
+      play.innerHTML = `<span class="lesson-animation-play-icon" aria-hidden="true"><svg viewBox="0 0 24 24">${icon}</svg></span><span class="lesson-animation-play-label"><span lang="it">${label2.it}</span><small lang="ar" dir="rtl">${label2.ar}</small></span>`;
     }
   }
   function playLessonExplainer(button) {
@@ -48226,8 +48603,8 @@ This typically indicates that your device does not have a healthy Internet conne
       node.setAttribute("role", "group");
       node.setAttribute("aria-label", "Testo italiano della lezione. Premi Invio per mostrare la traduzione araba · نص الدرس بالإيطالية؛ اضغط Enter لإظهار ترجمته العربية");
     }
-    const heading = main.querySelector(".lesson-content-block h2");
-    if (heading && !((_a12 = heading.nextElementSibling) == null ? void 0 : _a12.classList.contains("inline-vocabulary-hint"))) heading.insertAdjacentHTML("afterend", `<p class="inline-vocabulary-hint">${pair2("Tocca una parola per tradurre", "انقر على الكلمة للترجمة")}</p>`);
+    const heading2 = main.querySelector(".lesson-content-block h2");
+    if (heading2 && !((_a12 = heading2.nextElementSibling) == null ? void 0 : _a12.classList.contains("inline-vocabulary-hint"))) heading2.insertAdjacentHTML("afterend", `<p class="inline-vocabulary-hint">${pair2("Tocca una parola per tradurre", "انقر على الكلمة للترجمة")}</p>`);
   }
   function ensureButtonAccessibleNames(root = main) {
     var _a12;

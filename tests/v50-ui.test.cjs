@@ -46,17 +46,17 @@ function isDisallowed(token) {
   return nearWhite || yellow;
 }
 
-test('v69 identity is consistent across the PWA and Android package', () => {
-  assert.match(index, /data-app-version="69"/);
-  assert.match(read('package.json'), /"version": "69\.0\.0"/);
-  assert.match(read('package-lock.json'), /"version": "69\.0\.0"/);
-  assert.match(read('android/app/build.gradle'), /versionCode 69/);
-  assert.match(read('android/app/build.gradle'), /versionName "69.0.0"/);
+test('v73 identity is consistent across the PWA and Android package', () => {
+  assert.match(index, /data-app-version="73"/);
+  assert.match(read('package.json'), /"version": "73\.0\.0"/);
+  assert.match(read('package-lock.json'), /"version": "73\.0\.0"/);
+  assert.match(read('android/app/build.gradle'), /versionCode 73/);
+  assert.match(read('android/app/build.gradle'), /versionName "73.0.0"/);
   assert.match(read('android/app/build.gradle'), /applicationId "it\.patenteb\.sideload\.v29"/);
   assert.match(read('android/app/build.gradle'), /System\.getenv\('PATENTE_DEBUG_STORE_PASSWORD'\)/);
   assert.match(read('android/app/build.gradle'), /System\.getenv\('PATENTE_DEBUG_KEY_ALIAS'\)/);
   assert.match(read('android/app/build.gradle'), /System\.getenv\('PATENTE_DEBUG_KEY_PASSWORD'\)/);
-  assert.match(read('public/sw.js'), /patente-ar-v69-native-tts-1/);
+  assert.match(read('public/sw.js'), /patente-ar-v73-native-tts-1/);
 });
 
 test('v53 applies the same legible dark palette in every theme preference', () => {

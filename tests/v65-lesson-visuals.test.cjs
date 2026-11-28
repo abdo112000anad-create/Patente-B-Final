@@ -82,7 +82,7 @@ test('tire cross-section, right-priority intersection, speed, safe distance and 
 test('lesson template renders inline SVG immediately after the bilingual heading and review uses the same art', async () => {
   const template = await import(path.join(root, 'src/lesson-template.mjs'));
   const lesson = lessons.find(item => item.id === 'u7-l1');
-  assert.match(template.renderLessonVisualSection(lesson), /<svg class="lesson-svg"/u);
+  assert.match(template.renderLessonVisualSection(lesson), /<svg class="lesson-svg" xmlns="http:\/\/www\.w3\.org\/2000\/svg" viewBox="0 0 800 600"/u);
   assert.match(template.renderLessonVisualSection(lesson, {compact: true}), /is-compact/u);
   const app = read('src/app.js');
   assert.match(app, /<h1>\$\{pair\(lesson\.heading_it,lesson\.heading_ar,'detail-title'\)\}<\/h1>\$\{renderLessonVisualSection\(lesson\)\}<\/header>/u);

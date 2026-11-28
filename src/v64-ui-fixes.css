@@ -423,3 +423,35 @@ body,
     width: 82%;
   }
 }
+
+
+/* Keep imported lesson-engine SVGs in their native 4:3 canvas without changing their markup. */
+#main .lesson-svg-figure.is-engine-visual {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  max-height: none;
+  margin: 12px 0 0;
+  overflow: hidden;
+}
+
+#main .lesson-svg-figure.is-engine-visual .lesson-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main .lesson-svg-figure.is-engine-visual,
+  #main .lesson-svg-figure.is-engine-visual *,
+  #main .lesson-svg-figure.is-engine-visual *::before,
+  #main .lesson-svg-figure.is-engine-visual *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
